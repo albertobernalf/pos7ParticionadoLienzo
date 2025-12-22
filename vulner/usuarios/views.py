@@ -21,7 +21,7 @@ from cartera.models import TiposPagos, TiposNotas, TiposGlosas, FormasPagos,Esta
 from cirugia.models import EstadosCirugias, EstadosProgramacion, EstadosSalas,FinalidadCirugia, GravedadCirugia, IntervencionCirugias, OrganosCirugias, RegionesOperatorias, TiposAnestesia, TiposCirugia, TiposHeridasOperatorias, ViasDeAcceso, ZonasCirugia
 from clinico.models import CausasExterna, Eps, EstadosSalida, Enfermedades, EstadoExamenes, Ips, NivelesClinica, Regimenes, TipoDietas, EstadosInterconsulta, CodigosAtc, Diagnosticos, Especialidades, Examenes, EstadosInterconsulta
 from clinico.models import ExamenesRasgos, FormasFarmaceuticas, FrecuenciasAplicacion, NivelesRegimenes, PrincipiosActivos, Recomendaciones, RevisionSistemas, TipoOxigenacion, TiposAntecedente, TiposCotizante, TiposDiagnostico, TiposExamen, TiposFolio, TiposIncapacidad, TiposInterconsulta, TiposRadiologia, TiposSalidas, TiposTriage, UnidadesDeMedidaDosis,  ViasAdministracion, ViasIngreso
-from enfermeria.models import EnfermeriaTipoMovimiento, EnfermeriaTipoOrigen
+from enfermeria.models import EnfermeriaTipoMovimiento, EnfermeriaTipoOrigen, EnfermeriaTipoOrigen
 from farmacia.models import FarmaciaEstados
 from planta.models import TiposPlanta
 
@@ -29,7 +29,7 @@ from tarifarios.models import TiposHonorarios, GruposQx, Estancias, GruposQx, Mi
 from rips.models import RipsTipoOtrosServicios, RipsViasAdministracion, RipsConceptoRecaudo, RipsDestinoEgreso,RipsEstados, RipsFinalidadConsulta, RipsFormaFarmaceutica, RipsGrupoServicios,RipsModalidadAtencion, RipsMunicipios, RipsPaises, RipsServicios, RipsTipoMedicamento, RipsTipos, RipsTiposDocumento, RipsTiposNotas, RipsTiposPagoModerador, RipsTipoUsuario, RipsUmm, RipsUnidadUpr, RipsViasIngresoSalud, RipsZonaTerritorial, RipsCums, RipsMunicipios, RipsTiposDocumento
 from facturacion.models import TiposSuministro, Conceptos, ConceptosAfacturar, RegimenesTipoPago, SalariosLegales, SalariosMinimosLegales, TiposEmpresa, Suministros, Empresas
 from sitios.models import Paises, Departamentos, Municipios, SedesClinica, Ciudades, Ubicaciones, TiposSalas, Salas, Bodegas, Centros, Dependencias, DependenciasTipo, Localidades, ServiciosAdministrativos, ServiciosSedes
-from usuarios.models import TiposDocumento
+from usuarios.models import TiposDocumento, TiposUsuario
 from seguridad.models import Modulos, ModulosElementos,Perfiles, ModulosElementosDef, PerfilesClinica, PerfilesGralUsu, PerfilesOpciones, PerfilesUsu
 
 
@@ -2145,7 +2145,7 @@ def import_datos_global_1(request):
 
     enfermeriaTipoOrigen = EnfermeriaTipoOrigen.objects.count()
 
-    if (enfermeriaTipoMovimiento == 0):
+    if (enfermeriaTipoOrigen == 0):
 
         with open(file_path, 'r') as f:
             reader = csv.reader(f, delimiter=';')
@@ -3349,6 +3349,58 @@ def import_datos_global_1(request):
                     print("Error al crear : {e}")
                     return JsonResponse({'success': False, 'Mensaje': e})
 
+    file_path = 'C:\EntornosPython\pos7ParticionadoLienzo/vulner\CargueInicial\FormasFarmaceuticas.csv'
+    print("file_path", file_path)
+
+
+    formasFarmaceuticas = FormasFarmaceuticas.objects.count()
+
+    if (formasFarmaceuticas == 0  ):
+
+        with open(file_path, 'r') as f:
+            reader = csv.reader(f, delimiter=';')
+            next(reader)
+
+            for row in reader:
+                try:
+                    print("row nombre = ", row[1])
+                    formasFarmaceuticas = FormasFarmaceuticas.objects.create(
+                        nombre=row[1],
+                        # fechaRegistro=row[2],
+                        estadoReg=row[3],
+                    )
+                except (valueError, IndexError) as e:
+
+                    print("Error al crear : {e}")
+                    return JsonResponse({'success': False, 'Mensaje': e})
+
+
+    file_path = 'C:\EntornosPython\pos7ParticionadoLienzo/vulner\CargueInicial\FrecuenciasAplicacion.csv'
+    print("file_path", file_path)
+
+
+    frecuenciasAplicacion = FrecuenciasAplicacion.objects.count()
+
+    if (frecuenciasAplicacion == 0  ):
+
+        with open(file_path, 'r') as f:
+            reader = csv.reader(f, delimiter=';')
+            next(reader)
+
+            for row in reader:
+                try:
+                    print("row nombre = ", row[1])
+                    frecuenciasAplicacion = FrecuenciasAplicacion.objects.create(
+                        descripcion=row[1],
+                        # fechaRegistro=row[2],
+                        estadoReg=row[3],
+                        numeroHoras=row[4],
+                    )
+                except (valueError, IndexError) as e:
+
+                    print("Error al crear : {e}")
+                    return JsonResponse({'success': False, 'Mensaje': e})
+
 
 
 
@@ -3503,7 +3555,7 @@ def import_datos_global_2(request):
     print("file_path", file_path)
     examenes= Examenes.objects.count()
 
-    if (examenes == 0  ):
+    if (examenes == 1  ):
 
         with open(file_path, 'r') as f:
             reader = csv.reader(f, delimiter=';')
@@ -3512,40 +3564,41 @@ def import_datos_global_2(request):
             for row in reader:
                 try:
                     print("row nombre = ", row[1])
-                    examenes = Examenes.objects.create(
-                        nombre=row[1],
-                        TiposExamen_id=row[2],
-                        requiereAutorizacion=row[3],
-                        citaControl=row[4],
-                        codigoCups=row[5],
-                        codigoRips=row[6],
-                        concepto_id=row[7],
-                        edadFin = row[8],
-                        edadIni = row[9],
-                        estadoReg=row[10],
-                        tipoRadiologia_id=row[11],
-                        solicitaEnfermeria=row[12],
-                        centroCosto=row[13],
-                        cita1Vez=row[14],
-                        consentimientoInformado=row[15],
-                        cuentaContable=row[16],
-                        cupsCategoria=row[17],
-                        cupsGrupo=row[18],
-                        cupsSubgrupo=row[19],
-                        distribucionTerceros=row[20],
-                        duracion=row[21],
-                        finalidad=row[22],
-                        manejaInterfaz=row[23],
-                        nivelAtencion=row[24],
-                        resolucion1132=row[25],
-                        grupoQx_id=row[26],
-                        cantidadUvr=row[27],
-                        honorarios=row[28],
-                        cupsSubCategoria=row[29],
-                        #uvrAño=row[30],
-                        tipoHonorario_id=row[30],
+                    if (row[1] != 'SOMATOMEDINA C [FACTOR I DE CRECIMIENTO SIMILAR A LA INSULINA O IGF-1]' and row[1] != 'APICOGRAMA'):
 
-                    )
+                        examenes = Examenes.objects.create(
+                            nombre=row[1],
+                            TiposExamen_id=row[2],
+                            requiereAutorizacion=row[3],
+                            citaControl=row[4],
+                            codigoCups=row[5],
+                            codigoRips=row[6],
+                            concepto_id=row[7],
+                            edadFin = row[8],
+                            edadIni = row[9],
+                            estadoReg=row[10],
+                            tipoRadiologia_id=row[11],
+                            solicitaEnfermeria=row[12],
+                            centroCosto=row[13],
+                            cita1Vez=row[14],
+                            consentimientoInformado=row[15],
+                            cuentaContable=row[16],
+                            cupsCategoria=row[17],
+                            cupsGrupo=row[18],
+                            cupsSubgrupo=row[19],
+                            distribucionTerceros=row[20],
+                            duracion=row[21],
+                            finalidad=row[22],
+                            manejaInterfaz=row[23],
+                            nivelAtencion=row[24],
+                            resolucion1132=row[25],
+                            grupoQx_id=row[26],
+                            cantidadUvr=row[27],
+                            honorarios=row[28],
+                            cupsSubCategoria=row[29],
+                            #uvrAño=row[30],
+                            tipoHonorario_id=row[30],
+                        )
                 except (valueError, IndexError) as e:
 
                     print("Error al crear : {e}")

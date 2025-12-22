@@ -3324,6 +3324,32 @@ def import_datos_global_1(request):
                     return JsonResponse({'success': False, 'Mensaje': e})
 
 
+    file_path = 'C:\EntornosPython\pos7ParticionadoLienzo/vulner\CargueInicial\TiposUsuario.csv'
+    print("file_path", file_path)
+
+
+    tiposUsuario = TiposUsuario.objects.count()
+
+    if (tiposUsuario == 0  ):
+
+        with open(file_path, 'r') as f:
+            reader = csv.reader(f, delimiter=';')
+            next(reader)
+
+            for row in reader:
+                try:
+                    print("row nombre = ", row[1])
+                    tiposUsuario = TiposUsuario.objects.create(
+                        nombre=row[1],
+                        # fechaRegistro=row[2],
+                        estadoReg=row[3],
+                    )
+                except (valueError, IndexError) as e:
+
+                    print("Error al crear : {e}")
+                    return JsonResponse({'success': False, 'Mensaje': e})
+
+
 
 
     return JsonResponse({'success': True, 'Mensaje': 'Los datos se importaron correctamente ¡'})
@@ -3881,32 +3907,32 @@ def import_datos_global_2(request):
                     return JsonResponse({'success': False, 'Mensaje': e})
 
 
-    file_path = 'C:\EntornosPython\pos7ParticionadoLienzo/vulner\CargueInicial/PerfilesClinica.csv'
-    print("file_path", file_path)
+    #file_path = 'C:\EntornosPython\pos7ParticionadoLienzo/vulner\CargueInicial/PerfilesClinica.csv'
+    #print("file_path", file_path)
 
-    perfilesClinica = PerfilesClinica.objects.count()
+    #perfilesClinica = PerfilesClinica.objects.count()
 
-    if (perfilesClinica == 0):
+    #if (perfilesClinica == 0):
 
-        with open(file_path, 'r') as f:
-            reader = csv.reader(f, delimiter=';')
-            next(reader)
+            #    with open(file_path, 'r') as f:
+            #reader = csv.reader(f, delimiter=';')
+            #next(reader)
 
-            for row in reader:
-                try:
-                    print("row nombre = ", row[1])
+            #for row in reader:
+                    #    try:
+                    #print("row nombre = ", row[1])
 
-                    perfilesClinica = PerfilesClinica.objects.create(
-                        nombre=row[1],
-                        estadoReg=row[2],
-                        modulosId_id=row[3],
-                        sedesClinica_id=row[4],
+                    #        perfilesClinica = PerfilesClinica.objects.create(
+                    #   nombre=row[1],
+                    #    estadoReg=row[2],
+                    #   modulosId_id=row[3],
+                    #   sedesClinica_id=row[4],
 
-                    )
-                except (valueError, IndexError) as e:
+                    #)
+                    #except (valueError, IndexError) as e:
 
-                    print("Error al crear : {e}")
-                    return JsonResponse({'success': False, 'Mensaje': e})
+                    #print("Error al crear : {e}")
+                    #return JsonResponse({'success': False, 'Mensaje': e})
 
 
     #file_path = 'C:\EntornosPython\pos7ParticionadoLienzo/vulner\CargueInicial/PerfilesGralUsu.csv'
@@ -4194,32 +4220,32 @@ def import_datos_global_2(request):
                     return JsonResponse({'success': False, 'Mensaje': e})
 
 
-    file_path = 'C:\EntornosPython\pos7ParticionadoLienzo/vulner\CargueInicial/ServiciosSedes.csv'
-    print("file_path", file_path)
+    #file_path = 'C:\EntornosPython\pos7ParticionadoLienzo/vulner\CargueInicial/ServiciosSedes.csv'
+    #print("file_path", file_path)
 
-    serviciosSedes = ServiciosSedes.objects.count()
+    #serviciosSedes = ServiciosSedes.objects.count()
 
-    if (serviciosSedes == 0):
+    #if (serviciosSedes == 0):
 
-        with open(file_path, 'r') as f:
-            reader = csv.reader(f, delimiter=';')
-            next(reader)
+    #    with open(file_path, 'r') as f:
+    #        reader = csv.reader(f, delimiter=';')
+    #        next(reader)
 
-            for row in reader:
-                try:
-                    print("row nombre = ", row[1])
+    #        for row in reader:
+    #            try:
+    #                print("row nombre = ", row[1])
 
-                    serviciosSedes = ServiciosSedes.objects.create(
-                        nombre=row[1],
-                        descripcion=row[2],
-                        estadoReg=row[3],
-                        sedesClinica_id=row[4],
-                        servicios_id=row[5],
-                    )
-                except (valueError, IndexError) as e:
+    #                serviciosSedes = ServiciosSedes.objects.create(
+    #                    nombre=row[1],
+    #                    descripcion=row[2],
+    #                    estadoReg=row[3],
+    #                    sedesClinica_id=row[4],
+    #                    servicios_id=row[5],
+    #                )
+    #            except (valueError, IndexError) as e:
 
-                    print("Error al crear : {e}")
-                    return JsonResponse({'success': False, 'Mensaje': e})
+    #                print("Error al crear : {e}")
+    #                return JsonResponse({'success': False, 'Mensaje': e})
 
 
     file_path = 'C:\EntornosPython\pos7ParticionadoLienzo/vulner\CargueInicial/TarifariosDescripcion.csv'

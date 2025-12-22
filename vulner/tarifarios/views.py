@@ -227,7 +227,7 @@ def CrearTarifarioProcedimientos(request):
     estadoReg = 'A'
     fechaRegistro = datetime.datetime.now()
 
-    conceptoId =  Conceptos.objects.get(nombre='PROCEDIMIENTOS')
+    conceptoId =  Conceptos.objects.get(nombre='PROCEDIMIENTOS NO QX')
     productoId = TiposTarifaProducto.objects.get(nombre='PROCEDIMIENTOS')
     descripcion = TiposTarifa.objects.get(id=tiposTarifa_id ,tiposTarifaProducto_id=productoId.id)
 
@@ -248,7 +248,7 @@ def CrearTarifarioProcedimientos(request):
 
             # Aqui Rutina carga archivo Excel
 
-            archivo_excel = 'c:\\Entornospython\\Pos6\\JSONCLINICA\\CargaProcedimientos\\datosParticular.xlsx'
+            archivo_excel = 'c:\\Entornospython\\Pos7Particionado\\vulner\\JSONCLINICA\\CargaProcedimientos\\datos1.xlsx'
             df = pd.read_excel(archivo_excel)
 
 
@@ -758,7 +758,7 @@ def CrearTarifarioSuministros(request):
             cur3.execute(comando)
             # Aqui Rutina carga archivo Excel
 
-            archivo_excel = 'c:\\Entornospython\\Pos3\\vulner\\JSONCLINICA\\CargaSuministros\\datos2.xlsx'
+            archivo_excel = 'c:\\Entornospython\\Pos7ParticionadoLienzo\\vulner\\JSONCLINICA\\CargaSuministros\\particular.xlsx'
             df = pd.read_excel(archivo_excel)
 
 

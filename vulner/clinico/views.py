@@ -1991,6 +1991,8 @@ def crearHistoriaClinica(request):
                                         'traceback': traceback.format_exc()
                                     }
                                     columnaALeerPropia = ''
+                                    #columnaALeerPropia = convenioParticular.columna
+
                                     # response = JsonResponse({"error": 'No hay definicion Convenio TarifarioDescripcion'})
                                     # response.status_code = 403 # To announce that the user isn't allowed to publish
                                     # Sreturn response
@@ -2005,8 +2007,12 @@ def crearHistoriaClinica(request):
 
                                 ## Fin busco columna a leer
 
+                                if (columnaALeerPropia != ''):	
 
-                                comando = 'SELECT conv.convenio_id id ,exa.cums cums, sum."' + str(columnaALeer.columna) + '"' + ' tarifaValor FROM facturacion_conveniospacienteingresos conv, tarifarios_tarifariosdescripcion des, tarifarios_tarifariossuministros sum, facturacion_suministros exa, contratacion_convenios conv1 , tarifarios_tipostarifa tiptar WHERE conv."tipoDoc_id" = ' + "'" + str(tipoDocId.id) + "'" + ' AND conv.documento_id = ' + "'" + str(documentoId.id) + "'" + ' AND conv."consecAdmision" = ' + "'" + str(ingresoPaciente) + "'" + ' AND conv.convenio_id = conv1.id AND des.id = conv1."tarifariosDescripcionSum_id" AND sum."codigoCum_id" = exa.id  And exa.id = ' + "'" + str(medicamentos) + "'" + ' AND des."tiposTarifa_id" = tiptar.id and sum."tiposTarifa_id" = tiptar.id'
+                                	comando = 'SELECT conv.convenio_id id ,exa.cums cums, sum."' + str(columnaALeer.columna) + '"' + ' tarifaValor FROM facturacion_conveniospacienteingresos conv, tarifarios_tarifariosdescripcion des, tarifarios_tarifariossuministros sum, facturacion_suministros exa, contratacion_convenios conv1 , tarifarios_tipostarifa tiptar WHERE conv."tipoDoc_id" = ' + "'" + str(tipoDocId.id) + "'" + ' AND conv.documento_id = ' + "'" + str(documentoId.id) + "'" + ' AND conv."consecAdmision" = ' + "'" + str(ingresoPaciente) + "'" + ' AND conv.convenio_id = conv1.id AND des.id = conv1."tarifariosDescripcionSum_id" AND sum."codigoCum_id" = exa.id  And exa.id = ' + "'" + str(medicamentos) + "'" + ' AND des."tiposTarifa_id" = tiptar.id and sum."tiposTarifa_id" = tiptar.id'
+				else:
+                                	comando = 'SELECT conv1.id id ,exa.cums cums, sum."' + str(convenioParticular.columna) + '"' + ' tarifaValor FROM  tarifarios_tarifariosdescripcion des, tarifarios_tarifariossuministros sum, facturacion_suministros exa, contratacion_convenios conv1 , tarifarios_tipostarifa tiptar WHERE conv1.id = ' + "'" + str(convenioParticular.id) + "'" + ' AND des.id = conv1."tarifariosDescripcionSum_id" AND sum."codigoCum_id" = exa.id  And exa.id = ' + "'" + str(medicamentos) + "'" + ' AND des."tiposTarifa_id" = tiptar.id and sum."tiposTarifa_id" = tiptar.id'
+
 
                                 print ("comando =" , comando)
 

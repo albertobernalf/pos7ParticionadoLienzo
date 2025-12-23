@@ -5146,7 +5146,7 @@ def buscarSubServicios(request):
     miConexiont =psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres", password="123456")
     curt = miConexiont.cursor()
 
-    comando = 'SELECT sub.id id ,sub.nombre nombre FROM sitios_serviciosSedes sed ,sitios_subserviciossedes sub , clinico_servicios serv Where sed."sedesClinica_id" = ' + "'" + str(Sede) + "'" + ' and sed."sedesClinica_id" = sub."sedesClinica_id" and sed.id = sub."serviciosSedes_id"  and sed.id = ' + "'" + str(Serv) + "'" + ' and sub."serviciosSedes_id" = sed.id and serv.id = sed.servicios_id'
+    comando = 'SELECT sub.id id ,sub.nombre nombre FROM sitios_serviciosSedes sed ,sitios_subserviciossedes sub , clinico_servicios serv Where sed."sedesClinica_id" = ' + "'" + str(Sede) + "'" + ' and sed."sedesClinica_id" = sub."sedesClinica_id" and sed.id = sub."serviciosSedes_id"  and serv.id = ' + "'" + str(Serv) + "'" + ' and sub."serviciosSedes_id" = sed.id and serv.id = sed.servicios_id'
     curt.execute(comando)
     print(comando)
 

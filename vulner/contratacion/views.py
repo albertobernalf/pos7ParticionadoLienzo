@@ -5,6 +5,7 @@ import cv2
 import numpy as np
 from django.core.serializers import serialize
 from django.db.models.functions import Cast, Coalesce
+from django.utils import timezone
 from django.utils.timezone import now
 from django.db.models import Avg, Max, Min
 
@@ -159,9 +160,6 @@ def EditarGuardarConvenios(request):
     if (porcTarifario==''):
         porcTarifario='null'
 
-
-
-
     porcSuministros = request.POST.get('porcSuministros')
     print("porcSuministros =", porcSuministros)
 
@@ -248,9 +246,14 @@ def EditarGuardarConvenios(request):
         serviciosAdministrativos_id = 'null'
 
 
+    particular = request.POST.get('particular')
+    print("particular =", particular)
+
     estadoReg = 'A'
 
-    fechaRegistro = datetime.datetime.now()
+    #fechaRegistro = datetime.datetime.now()
+    fechaRegistro = timezone.now()
+
 
     miConexiont = None
     try:
@@ -259,7 +262,7 @@ def EditarGuardarConvenios(request):
                                            password="123456")
         curt = miConexiont.cursor()
 
-        comando = 'UPDATE contratacion_Convenios SET nombre = ' + "'" + str(nombreConvenio) + "'," + '"vigenciaDesde" = ' + "'" + str(vigenciaDesde) + "'," + '"vigenciaHasta" = ' + "'" + str(vigenciaHasta) + "'," + '"porcTarifario" = ' + str(porcTarifario) + "," + '"porcSuministros" = ' + str(porcSuministros) + "," + '"valorOxigeno" = ' + str(valorOxigeno) + "," + '"porcEsterilizacion" = ' + str(porcEsterilizacion) + "," + '"porcMaterial" = ' + str(porcMaterial) + "," + '"hospitalario" = ' + "'" + str(hospitalario) + "'," + '"urgencias" = ' + "'" + str(urgencias) + "'," + '"ambulatorio" = ' + "'" + str(ambulatorio) + "'," + '"consultaExterna" = ' + "'" + str(consultaExterna) + "'," + '"copago" = ' + "'" + str(copago) + "'," + '"moderadora" = ' + "'" + str(moderadora) + "'," + '"tipofactura" = ' + "'" + str(tipofactura) + "'," + '"facturacionSuministros" = ' + "'" + str(facturacionSuministros) + "'," + '"facturacionCups" = ' + "'" + str(facturacionCups) + "'," + '"cuentaContable" = ' + "'" + str(cuentaContable) + "',"  + '"requisitos" = ' + "'" + str(requisitos) + "'," + '"empresa_id" = ' + "'" + str(empresa_id) + "'," + '"usuarioRegistro_id" = ' + "'" + str(usuarioRegistro_id) + "'," + '"tarifariosDescripcionProc_id" = ' + str(tarifariosDescripcionProc_id) + "," + '"tarifariosDescripcionSum_id" = ' + str(tarifariosDescripcionSum_id) + ", descripcion = " + "'" + str(descripcion) + "'," + '"tarifariosDescripcionHono_id" = '  + str(tarifariosDescripcionHono_id)  + ',"serviciosAdministrativos_id"= ' + str(serviciosAdministrativos_id)  + " WHERE id = " + "'" + str(convenioId) + "'"
+        comando = 'UPDATE contratacion_Convenios SET nombre = ' + "'" + str(nombreConvenio) + "'," + '"vigenciaDesde" = ' + "'" + str(vigenciaDesde) + "'," + '"vigenciaHasta" = ' + "'" + str(vigenciaHasta) + "'," + '"porcTarifario" = ' + str(porcTarifario) + "," + '"porcSuministros" = ' + str(porcSuministros) + "," + '"valorOxigeno" = ' + str(valorOxigeno) + "," + '"porcEsterilizacion" = ' + str(porcEsterilizacion) + "," + '"porcMaterial" = ' + str(porcMaterial) + "," + '"hospitalario" = ' + "'" + str(hospitalario) + "'," + '"urgencias" = ' + "'" + str(urgencias) + "'," + '"ambulatorio" = ' + "'" + str(ambulatorio) + "'," + '"consultaExterna" = ' + "'" + str(consultaExterna) + "'," + '"copago" = ' + "'" + str(copago) + "'," + '"moderadora" = ' + "'" + str(moderadora) + "'," + '"tipofactura" = ' + "'" + str(tipofactura) + "'," + '"facturacionSuministros" = ' + "'" + str(facturacionSuministros) + "'," + '"facturacionCups" = ' + "'" + str(facturacionCups) + "'," + '"cuentaContable" = ' + "'" + str(cuentaContable) + "',"  + '"requisitos" = ' + "'" + str(requisitos) + "'," + '"empresa_id" = ' + "'" + str(empresa_id) + "'," + '"usuarioRegistro_id" = ' + "'" + str(usuarioRegistro_id) + "'," + '"tarifariosDescripcionProc_id" = ' + str(tarifariosDescripcionProc_id) + "," + '"tarifariosDescripcionSum_id" = ' + str(tarifariosDescripcionSum_id) + ", descripcion = " + "'" + str(descripcion) + "'," + '"tarifariosDescripcionHono_id" = '  + str(tarifariosDescripcionHono_id)  + ',"serviciosAdministrativos_id"= ' + str(serviciosAdministrativos_id) + ' , particular = ' + "'" + str(particular) + "'  WHERE id = " + "'" + str(convenioId) + "'"
 
         print(comando)
         curt.execute(comando)
@@ -397,11 +400,14 @@ def CrearGuardarConvenios(request):
     descripcion = request.POST.get('descripcion')
     print("descripcion =", descripcion)
 
+    particular = request.POST.get('particular')
+    print("particular =", particular)
 
 
     estadoReg = 'A'
 
-    fechaRegistro = datetime.datetime.now()
+    #fechaRegistro = datetime.datetime.now()
+    fechaRegistro = timezone.now()
 
     miConexiont = None
     try:
@@ -411,7 +417,7 @@ def CrearGuardarConvenios(request):
                                            password="123456")
         curt = miConexiont.cursor()
 
-        comando = 'INSERT INTO contratacion_Convenios (nombre, "vigenciaDesde", "vigenciaHasta", "porcTarifario", "porcSuministros", "valorOxigeno", "porcEsterilizacion", "porcMaterial", hospitalario, urgencias, ambulatorio, "consultaExterna", copago, moderadora, tipofactura, agrupada, "facturacionSuministros", "facturacionCups", "cuentaContable", requisitos, "fechaRegistro", "estadoReg", empresa_id, "usuarioRegistro_id", descripcion, "tarifariosDescripcionProc_id", "tarifariosDescripcionHono_id", "tarifariosDescripcionSum_id", "serviciosAdministrativos_id") VALUES (' + "'" + str(nombreConvenio) + "'," + "'" + str(vigenciaDesde) + "','" + str(vigenciaHasta) + "'," + str(porcTarifario) + "," + str(porcSuministros) + "," + str(valorOxigeno) + "," + str(porcEsterilizacion) + "," + str(porcMaterial) + "," + "'" + str(hospitalario) + "'," + "'" + str(urgencias) + "'," + "'" + str(ambulatorio) + "'," + "'" + str(consultaExterna) + "'," + "'" + str(copago) + "'," + "'" + str(moderadora) + "'," + "'" + str(tipofactura) + "','" + str(agrupada) + "'," + "'" + str(facturacionSuministros) + "'," + "'" + str(facturacionCups) + "'," + "'" + str(cuentaContable) + "','"  + str(requisitos)   + "'," + "'" +  str(fechaRegistro) + "'," + "'" +  str(estadoReg) + "','" + str(empresa_id) + "',"  + str(usuarioRegistro_id) + ",'" + str(descripcion) + "',"   + str(tarifariosDescripcionProc_id) + "," + str(tarifariosDescripcionSum_id)  +  "," + str(tarifariosDescripcionHono_id) + ",'"  + str(serviciosAdministrativos_id) + "'" + ')'
+        comando = 'INSERT INTO contratacion_Convenios (nombre, "vigenciaDesde", "vigenciaHasta", "porcTarifario", "porcSuministros", "valorOxigeno", "porcEsterilizacion", "porcMaterial", hospitalario, urgencias, ambulatorio, "consultaExterna", copago, moderadora, tipofactura, agrupada, "facturacionSuministros", "facturacionCups", "cuentaContable", requisitos, "fechaRegistro", "estadoReg", empresa_id, "usuarioRegistro_id", descripcion, "tarifariosDescripcionProc_id", "tarifariosDescripcionHono_id", "tarifariosDescripcionSum_id", "serviciosAdministrativos_id", particular) VALUES (' + "'" + str(nombreConvenio) + "'," + "'" + str(vigenciaDesde) + "','" + str(vigenciaHasta) + "'," + str(porcTarifario) + "," + str(porcSuministros) + "," + str(valorOxigeno) + "," + str(porcEsterilizacion) + "," + str(porcMaterial) + "," + "'" + str(hospitalario) + "'," + "'" + str(urgencias) + "'," + "'" + str(ambulatorio) + "'," + "'" + str(consultaExterna) + "'," + "'" + str(copago) + "'," + "'" + str(moderadora) + "'," + "'" + str(tipofactura) + "','" + str(agrupada) + "'," + "'" + str(facturacionSuministros) + "'," + "'" + str(facturacionCups) + "'," + "'" + str(cuentaContable) + "','"  + str(requisitos)   + "'," + "'" +  str(fechaRegistro) + "'," + "'" +  str(estadoReg) + "','" + str(empresa_id) + "',"  + str(usuarioRegistro_id) + ",'" + str(descripcion) + "',"   + str(tarifariosDescripcionProc_id) + "," + str(tarifariosDescripcionSum_id)  +  "," + str(tarifariosDescripcionHono_id) + ",'"  + str(serviciosAdministrativos_id) + "'," + str(particular) + "'" + ')'
 
         print(comando)
         curt.execute(comando)
@@ -797,7 +803,8 @@ def GuardarConveniosProcedimientos( request):
 
         estadoReg= 'A'
         username_id = request.POST["username_id"]
-        fechaRegistro = datetime.datetime.now()
+        fechaRegistro = timezone.now()
+        #fechaRegistro = datetime.datetime.now()
 
      
 
@@ -878,7 +885,9 @@ def GuardarConvenio( request):
 
         estadoReg= 'A'
         username_id = request.POST["username_id"]
-        fechaRegistro = datetime.datetime.now()
+
+        #fechaRegistro = datetime.datetime.now()
+        fechaRegistro = timezone.now()
 
         #ultId = Convenios.objects.all().aggregate(maximo=Coalesce(Max('id'), 0 ))
         #ultId1 = (ultId['maximo']) + 1
@@ -976,7 +985,8 @@ def GuardarConvenio1( request):
 
         estadoReg= 'A'
         username_id = request.POST["username_id"]
-        fechaRegistro = datetime.datetime.now()
+        #fechaRegistro = datetime.datetime.now()
+        fechaRegistro = timezone.now()
 
         miConexiont = None
         try:
@@ -1258,7 +1268,8 @@ def GrabarSuministro( request):
         print("valorVariacion = ", valorVariacion)
         estadoReg= 'A'
         username_id = request.POST["username_id"]
-        fechaRegistro = datetime.datetime.now()
+        fechaRegistro = timezone.now()
+        #fechaRegistro = datetime.datetime.now()
 
         accion = request.POST["accion"]
 
@@ -1396,7 +1407,8 @@ def GrabarHonorarios( request):
 
         estadoReg= 'A'
         username_id = request.POST["username_id"]
-        fechaRegistro = datetime.datetime.now()
+        fechaRegistro = timezone.now()
+        #fechaRegistro = datetime.datetime.now()
 
         accion = request.POST["accion"]
 
@@ -1573,7 +1585,8 @@ def GuardarConveniosHonorarios( request):
 
         estadoReg= 'A'
         username_id = request.POST["username_id"]
-        fechaRegistro = datetime.datetime.now()
+        fechaRegistro = timezone.now()
+        #fechaRegistro = datetime.datetime.now()
 
      
 

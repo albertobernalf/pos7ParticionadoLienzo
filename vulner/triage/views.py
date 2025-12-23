@@ -31,7 +31,7 @@ from clinico.models import Servicios, Medicos, EspecialidadesMedicos
 from triage.viewsReportes import ImprimirAtencionInicialUrgencias, ImprimirHojaAdmision, ImprimirManilla, ImprimirTriage, ImprimirTriageParametro
 from facturacion.models import ConveniosPacienteIngresos
 from contratacion.models import Convenios
-
+from sitios.models import ServiciosSedes
 
 # Create your views here.
 
@@ -3051,6 +3051,27 @@ def guardarAdmisionTriage(request):
         print("liq = ", liq)
 
 
+        # Aqui averigiamos el serviciosSedes
+
+        try:
+            with transaction.atomic():
+
+                servicioSedeIngreso = ServiciosSedes.objects.get(sedesClinica_id=sede, servicios_id=busServicio2)
+
+                print ("LiquidacionDesdeId.id = ", liquidacionDesdeId.id)
+                liq = liquidacionDesdeId.id
+        except ObjectDoesNotExist:
+                rollo=1
+                print("No existe Id de liquidacion")
+                datos = {'messages' : 'No existe Id de liquidacion'}
+                #return JsonResponse(datos, safe=False)
+
+        finally:
+            # Este bloque se ejecutara siempre
+                print ("final")
+
+
+
         miConexion3 = None
         try:
 
@@ -3058,7 +3079,7 @@ def guardarAdmisionTriage(request):
                                            password="123456")
                 cur3 = miConexion3.cursor()
 
-                comando='INSERT INTO admisiones_ingresos ("sedesClinica_id","tipoDoc_id", documento_id, consec,"fechaIngreso",empresa_id,factura,numcita,  "serviciosIng_id","dependenciasIngreso_id", "dxIngreso_id", "medicoIngreso_id","especialidadesMedicosIngreso_id",  "serviciosActual_id", "dependenciasActual_id", "dxActual_id", "medicoActual_id", "especialidadesMedicosActual_id", "ViasIngreso_id",  "causasExterna_id", regimen_id,"tiposCotizante_id", "ipsRemite_id", "numManilla", remitido, "ripsServiciosIng_id", "ripsServiciosActual_id", "ripsmodalidadGrupoServicioTecSal_id", "ripsViaIngresoServicioSalud_id", "ripsGrupoServicios_id","ripsCondicionDestinoUsuarioEgreso_id", "ripsCausaMotivoAtencion_id", "ripsRecienNacido","ripsPesoRecienNacido", "ripsNumConsultasCPrenatal", "ripsEdadGestacional", "ripsDestinoUsuarioEgresoRecienNacido_id", "fechaRegistro", "usuarioRegistro_id","estadoReg", "serviciosAdministrativos_id","salidaClinica","salidaDefinitiva",muerte, incapacidad) VALUES (' + "'" + str(sede) + "','"  + str(idTipoDocFinal) + "','"  + str(documento_llave.id) + "','"   + str(consecAdmision) + "','"   + str(fechaIngreso) + "','"  + str(empresa) + "','"  + str(factura) + "','"   + str(numcita) + "','"   + str(busServicio2) + "','" + str(dependenciasIngreso) + "','"  + str(dxIngreso) + "','"  + str(medicoIngreso) + "','"  + str(especialidadesMedicos) + "','"  + str(busServicio2) + "','" + str(dependenciasIngreso) + "',"  + str(dxIngreso) + ",'"  + str(medicoIngreso) + "','" + str(especialidadesMedicos) + "','"  + str(viasIngreso) + "','"  + str(causasExterna) + "','"  + str(regimenes) + "','"  + str(tiposCotizante) + "','"  + str(ipsRemite) + "','"   + str(numManilla) + "','" + str(remitido) + "','" + str(ripsServiciosIng) + "','"  + str(ripsServiciosIng) + "','"   + str(ripsmodalidadGrupoServicioTecSal) + "','"   + str(ripsViaIngresoServicioSalud) + "','"   + str(ripsGrupoServicios) + "','"  + str(ripsCondicionDestinoUsuarioEgreso) + "','"  + str(ripsCausaMotivoAtencion) + "','"  + str(ripsRecienNacido) + "','"  + str(ripsPesoRecienNacido) + "','"  + str(ripsNumConsultasCPrenatal) + "','"  + str(ripsEdadGestacional) + "','"  + str(ripsDestinoUsu1.id) + "','"  + str(fechaRegistro) + "','"  + str(usernameId.id) + "','"  + str(estadoReg) + "','"   + str(servicioAdmTriage) + "','N','N','N','N') RETURNING id"
+                comando='INSERT INTO admisiones_ingresos ("sedesClinica_id","tipoDoc_id", documento_id, consec,"fechaIngreso",empresa_id,factura,numcita,  "serviciosIng_id","dependenciasIngreso_id", "dxIngreso_id", "medicoIngreso_id","especialidadesMedicosIngreso_id",  "serviciosActual_id", "dependenciasActual_id", "dxActual_id", "medicoActual_id", "especialidadesMedicosActual_id", "ViasIngreso_id",  "causasExterna_id", regimen_id,"tiposCotizante_id", "ipsRemite_id", "numManilla", remitido, "ripsServiciosIng_id", "ripsServiciosActual_id", "ripsmodalidadGrupoServicioTecSal_id", "ripsViaIngresoServicioSalud_id", "ripsGrupoServicios_id","ripsCondicionDestinoUsuarioEgreso_id", "ripsCausaMotivoAtencion_id", "ripsRecienNacido","ripsPesoRecienNacido", "ripsNumConsultasCPrenatal", "ripsEdadGestacional", "ripsDestinoUsuarioEgresoRecienNacido_id", "fechaRegistro", "usuarioRegistro_id","estadoReg", "serviciosAdministrativos_id","salidaClinica","salidaDefinitiva",muerte, incapacidad) VALUES (' + "'" + str(sede) + "','"  + str(idTipoDocFinal) + "','"  + str(documento_llave.id) + "','"   + str(consecAdmision) + "','"   + str(fechaIngreso) + "','"  + str(empresa) + "','"  + str(factura) + "','"   + str(numcita) + "','"   + str(servicioSedeIngreso.id) + "','" + str(dependenciasIngreso) + "','"  + str(dxIngreso) + "','"  + str(medicoIngreso) + "','"  + str(especialidadesMedicos) + "','"  + str(servicioSedeIngreso.id) + "','" + str(dependenciasIngreso) + "',"  + str(dxIngreso) + ",'"  + str(medicoIngreso) + "','" + str(especialidadesMedicos) + "','"  + str(viasIngreso) + "','"  + str(causasExterna) + "','"  + str(regimenes) + "','"  + str(tiposCotizante) + "','"  + str(ipsRemite) + "','"   + str(numManilla) + "','" + str(remitido) + "','" + str(ripsServiciosIng) + "','"  + str(ripsServiciosIng) + "','"   + str(ripsmodalidadGrupoServicioTecSal) + "','"   + str(ripsViaIngresoServicioSalud) + "','"   + str(ripsGrupoServicios) + "','"  + str(ripsCondicionDestinoUsuarioEgreso) + "','"  + str(ripsCausaMotivoAtencion) + "','"  + str(ripsRecienNacido) + "','"  + str(ripsPesoRecienNacido) + "','"  + str(ripsNumConsultasCPrenatal) + "','"  + str(ripsEdadGestacional) + "','"  + str(ripsDestinoUsu1.id) + "','"  + str(fechaRegistro) + "','"  + str(usernameId.id) + "','"  + str(estadoReg) + "','"   + str(servicioAdmTriage) + "','N','N','N','N') RETURNING id"
 
                 print("Voy a guardar la INFO-ADMISION-TRIAGE")
                 print(comando)

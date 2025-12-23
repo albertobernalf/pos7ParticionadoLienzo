@@ -224,6 +224,9 @@ def CrearTarifarioProcedimientos(request):
     if serviciosAdministrativos_id == '':
         serviciosAdministrativos_id = "null"
 
+    rutaArchivo = request.POST.get('rutaArchivo')
+    print ("rutaArchivo =", rutaArchivo)
+
     estadoReg = 'A'
     fechaRegistro = datetime.datetime.now()
 
@@ -248,7 +251,11 @@ def CrearTarifarioProcedimientos(request):
 
             # Aqui Rutina carga archivo Excel
 
-            archivo_excel = 'c:\\Entornospython\\Pos7Particionado\\vulner\\JSONCLINICA\\CargaProcedimientos\\datos1.xlsx'
+            #archivo_excel = 'c:\\Entornospython\\Pos7Particionado\\vulner\\JSONCLINICA\\CargaProcedimientos\\datos1.xlsx'
+            #archivo_excel = rutaArchivo + '\\particular.xlsx'
+	    ## Va con en xlsx
+            archivo_excel = rutaArchivo 
+
             df = pd.read_excel(archivo_excel)
 
 

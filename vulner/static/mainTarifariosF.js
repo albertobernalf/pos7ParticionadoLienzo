@@ -970,13 +970,16 @@ function CrearTarifarioProcedimientos()
         var tiposTarifa1_id = document.getElementById("tiposTarifa1_id").value;
 	var usuarioRegistro_id = document.getElementById("usuarioRegistro_id").value;
 	var serviciosAdministrativosC_id = document.getElementById("serviciosAdministrativosC").value;
+
+	var rutaArchivo = document.getElementById("rutaArchivo").value;
+
 	    alert( "este es eltiposTarifa1_id QUE VOY A CREAR  =" + tiposTarifa1_id) ;
 
 
             $.ajax({
 
 	        url: "/crearTarifarioProcedimientos/",
-    		data: {'tiposTarifa_id':tiposTarifa1_id,'username_id':username_id,'serviciosAdministrativosC_id':serviciosAdministrativosC_id},
+    		data: {'tiposTarifa_id':tiposTarifa1_id,'username_id':username_id,'serviciosAdministrativosC_id':serviciosAdministrativosC_id ,'rutaArchivo':rutaArchivo},
                 type: "POST",
                 dataType: 'json',
                 success: function (data2) {

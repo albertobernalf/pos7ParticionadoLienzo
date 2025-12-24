@@ -1,0 +1,10 @@
+id;nombre;descripcion;estadoReg;sedesClinica_id;servicios_id
+1;HOSPITALIZACION kenedy;HOSPITALIZACION kenedy;A;3;1
+2;URGENCIAS KENEDU;URGENCIAS KENEDU;A;3;2
+3;hospitalizacion americas;hospitalizacion americas;A;4;1
+4;TRIAGE KENEDY;TRIAGE KENEDY;A;3;5
+5;CEX AMERICAS;CEX AMERICAS;A;4;4
+6;CEX TOBERIN;CEX TOBERIN;A;5;4
+7;AMBULATORIO KENEDY;AMBULATORIO KENEDY;A;3;3
+8;triage americas;TRIAGE AMERICAS;A;4;5
+9;urgencias americas;urgencias americas;A;4;2

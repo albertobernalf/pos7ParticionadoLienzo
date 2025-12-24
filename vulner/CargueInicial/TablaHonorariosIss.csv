@@ -1,0 +1,4 @@
+id;homologado;valorUvr;fechaRegistro;estadoReg;tiposHonorarios_id;tiposTarifaProducto_id;usuarioRegistro_id
+1;S41101;127000;NULL;A;1;1;NULL
+2;S41201;96000;NULL;A;2;1;NULL
+3;S41301;36000;NULL;A;3;1;NULL

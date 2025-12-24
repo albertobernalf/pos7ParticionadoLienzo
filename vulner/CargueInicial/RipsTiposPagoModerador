@@ -1,0 +1,5 @@
+"id","codigo","nombre","codigoAplicativo"
+1,"01","Cuota Moderadora","3"
+2,"02","Copago","4"
+3,"03","Bono o vale de plan voluntario",NULL
+4,"04","No aplica pago moderador",NULL

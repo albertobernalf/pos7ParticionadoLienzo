@@ -1,0 +1,5 @@
+"id","nombre","municipioCodigoDian","fechaRegistro","estadoReg","departamento_id","ripsMunicipios_id"
+3,"SOATA","15753","2024-07-08 04:31:06.406074-05","A",2,1
+1,"MEDELLIN","05001","2024-07-08 04:27:46.847989-05","A",4,2
+2,"BOGOTA, D.C","11001","2024-07-08 04:29:33.466078-05","A",1,1
+4,"CHIA","NOSE","2025-08-14 04:42:41.272017-05","A",1,1

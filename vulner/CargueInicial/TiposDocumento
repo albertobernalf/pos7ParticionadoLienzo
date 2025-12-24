@@ -1,0 +1,8 @@
+"id","abreviatura","nombre","fechaRegistro","estadoReg","tiposDocCodigoDian","tipoDocRips_id"
+5,"RC","REGISTRO CIVIL","2024-07-08 06:08:11.472566-05","A","11",NULL
+7,"NI","NIT","2024-07-08 06:09:44.786845-05","A","31",NULL
+6,"PA","PASAPORTE","2024-07-08 06:09:29.186999-05","A","41",4
+1,"CC","Cedula de Ciudadania","2022-09-01 19:24:01.361855-05","A","13",1
+2,"TI","Tarjeta de Identidad","2022-09-01 19:24:14.398554-05","A","12",9
+3,"CE","Cedula de Extranjeria","2022-09-01 19:24:29.438571-05","A","22",7
+4,"NN","Desconocido","2022-09-01 19:24:41.49472-05","A","11",10

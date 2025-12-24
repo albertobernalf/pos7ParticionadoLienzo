@@ -1,0 +1,13 @@
+id;columna;descripcion;fechaRegistro;estadoReg;tiposTarifa_id;serviciosAdministrativos_id
+2;colValorBase;SOAT 2004;31/03/2025 11:24;A;1;4
+3;colValor1;SOAT 2004 + 10%;31/03/2025 11:24;A;1;4
+4;colValor2;SOAT 2004 + 20%;31/03/2025 11:24;A;1;4
+18;colValorBase;ECOPETROL 2025;4/04/2025 9:29;A;9;4
+19;colValor1;ECOPETROL + 20%;4/04/2025 9:33;A;9;4
+20;colValorBase;ISS 2001;7/04/2025 10:48;A;2;4
+22;colValor2;ISS 2001 + 20%;7/04/2025 10:55;A;2;4
+23;colValor1;ISS 2001 + 10%;7/04/2025 11:03;A;2;4
+30;colValorBase;ISS 2001;8/04/2025 9:09;A;4;4
+32;colValor1;Iss + 5%;8/04/2025 9:30;A;4;4
+35;colValorBase;PARTICULAR;25/08/2025 12:34;A;5;4
+36;colValorBase;Famisanar Full;12/09/2025 14:40;A;10;4

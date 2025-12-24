@@ -1,0 +1,10 @@
+"id","homologado","smldv","cruento","fechaRegistro","estadoReg","grupoQx_id","tiposTarifaProducto_id","usuarioRegistro_id","tipoHonorario_id"
+1,"39204","4.84",NULL,NULL,"A",2,2,NULL,5
+2,"39205","5.97",NULL,NULL,"A",3,2,NULL,5
+3,"39206","7.61",NULL,NULL,"A",4,2,NULL,5
+4,"39207","10.45",NULL,NULL,"A",5,2,NULL,5
+5,"39208","15.13",NULL,NULL,"A",6,2,NULL,5
+6,"39209","16.88",NULL,NULL,"A",7,2,NULL,5
+7,"39210","18.51",NULL,NULL,"A",8,2,NULL,5
+8,"39211","21.10",NULL,NULL,"A",9,2,NULL,5
+9,"39212","28.08",NULL,NULL,"A",10,2,NULL,5

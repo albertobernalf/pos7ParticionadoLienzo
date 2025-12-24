@@ -1,0 +1,9 @@
+id;codigo;nombre
+1;1;Intramural
+2;2;Extramural unidad móvil
+3;3;Extramural domiciliaria
+4;4;Extramural jornada de salud
+6;7;Telemedicina no interactiva
+7;8;Telemedicina telexperticia
+8;9;Telemedicina telemonitoreo
+5;6;Telemedicina interactiva

@@ -1,0 +1,14 @@
+"id","homologado","smldv","fechaRegistro","estadoReg","grupoQx_id","tiposHonorarios_id","tiposTarifaProducto_id","usuarioRegistro_id"
+1,"39000","2.93",NULL,"A",2,1,1,NULL
+2,"39001","3.57",NULL,"A",3,1,1,NULL
+3,"39002","4.31",NULL,"A",4,1,1,NULL
+4,"393021","4.33",NULL,"A",5,1,1,NULL
+6,"39302112","4.12",NULL,"A",5,3,1,NULL
+5,"39302111","4.27",NULL,"A",5,2,1,NULL
+7,"233333","7.12",NULL,"A",23,1,1,NULL
+8,"7,14","7.56",NULL,"A",23,2,1,NULL
+9,"789898","7.80",NULL,"A",23,3,1,NULL
+10,"121212","6.56",NULL,"A",23,5,1,NULL
+11,"3930233","5.65",NULL,"A",12,1,1,NULL
+12,"3930299","6.78",NULL,"A",12,2,1,NULL
+13,"43434","4.00",NULL,"A",12,3,1,NULL

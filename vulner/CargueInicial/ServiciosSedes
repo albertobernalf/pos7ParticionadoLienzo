@@ -1,0 +1,10 @@
+"id","nombre","descripcion","estadoReg","sedesClinica_id","servicios_id"
+1,"HOSPITALIZACION kenedy","HOSPITALIZACION kenedy","A",1,1
+2,"URGENCIAS KENEDU","URGENCIAS KENEDU","A",1,2
+3,"hospitalizacion americas","hospitalizacion americas","A",2,1
+4,"TRIAGE KENEDY","TRIAGE KENEDY","A",1,5
+5,"CEX AMERICAS","CEX AMERICAS","A",2,4
+6,"CEX TOBERIN","CEX TOBERIN","A",3,4
+7,"AMBULATORIO KENEDY","AMBULATORIO KENEDY","A",1,3
+8,"triage americas","TRIAGE AMERICAS","A",2,5
+9,"urgencias americas","urgencias americas","A",2,2

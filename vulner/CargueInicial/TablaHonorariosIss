@@ -1,0 +1,4 @@
+"id","homologado","valorUvr","fechaRegistro","estadoReg","tiposHonorarios_id","tiposTarifaProducto_id","usuarioRegistro_id"
+1,"S41101","1270.00",NULL,"A",1,1,NULL
+2,"S41201","960.00",NULL,"A",2,1,NULL
+3,"S41301","360.00",NULL,"A",3,1,NULL

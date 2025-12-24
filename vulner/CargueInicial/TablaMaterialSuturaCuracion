@@ -1,0 +1,6 @@
+"id","homologado","smldv","cruento","fechaRegistro","estadoReg","grupoQx_id","tiposTarifaProducto_id","usuarioRegistro_id","minimosLegales_id","tipoHonorario_id"
+1,"39301","2.28",NULL,NULL,"A",2,2,NULL,3,7
+2,"39301","2.28",NULL,NULL,"A",3,2,NULL,3,7
+3,"39302","4.27",NULL,NULL,"A",4,2,NULL,3,7
+4,"39302","4.27",NULL,NULL,"A",5,2,NULL,3,7
+5,"39302","4.27",NULL,NULL,"A",6,2,NULL,3,7

@@ -1,0 +1,6 @@
+"id","homologado","desdeUvr","hastaUvr","valor","fechaRegistro","estadoReg","tiposSala_id","tiposTarifaProducto_id","usuarioRegistro_id","tipoHonorario_id"
+1,"S55101","0","20","31000.00",NULL,"A",1,2,NULL,7
+2,"S55102","21","30","32005.00",NULL,"A",1,2,NULL,7
+3,"S55103","31","40","33110.00",NULL,"A",1,2,NULL,7
+4,"S55114","0","999","24270.00",NULL,"A",3,2,NULL,7
+5,"S55115","0","999","10350.00",NULL,"A",4,2,NULL,7

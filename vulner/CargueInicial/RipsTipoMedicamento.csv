@@ -1,0 +1,6 @@
+id;codigo;nombre
+1;1;Medicamento con uso con registro sanitario
+2;2;Medicamento con uso como vital no disponible definido por INVIMA
+3;3;Preparacion magistral
+4;4;Medicamento con uso no incluido en  el registro sanitario (Listado UNIRS)
+5;5;Medicamento con autorizacion sanitaria de uso emergencia ASUE

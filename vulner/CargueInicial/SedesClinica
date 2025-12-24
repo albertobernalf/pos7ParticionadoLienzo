@@ -1,0 +1,4 @@
+"id","nombre","ubicacion","direccion","telefono","contacto","fechaRegistro","estadoReg","ciudades_id","departamentos_id","nit","codigoHabilitacion"
+1,"SEDE KENEDY","CALLE 67 SUR","CALLE 67 SUR","111","ALBERTO","2022-09-01 19:27:58.401908-05","A",1,1,"830507718-8","110012215001"
+2,"SEDE AMERICAS","CARRERA 43","CARRERA 43","1212","ALBERTO","2022-09-01 19:28:18.585913-05","A",1,1,"0","110012215005"
+3,"SEDE TOBERIN","CRA","CRA","2121","SENOR X","2024-06-27 14:41:10.59628-05","A",1,1,"0","110012215007"

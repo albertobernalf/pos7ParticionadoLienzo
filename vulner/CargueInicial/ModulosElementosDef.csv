@@ -1,0 +1,17 @@
+id;nombre;descripcion;url;estadoReg;modulosElementosId_id;modulosId_id
+1;panelClinico;panelClinico;clinico/panelClinico.html;A;1;1
+2;INGRESOS CLINICOS;INGRESOS CLINICOS;/;A;2;4
+3;CREAR ADMISION;CREAR ADMISION;/;A;3;4
+4;RESPONSABLES;RESPONSABLES;/;A;3;4
+5;ABONOS;ABONOS;/;A;3;4
+6;CAMBIO DE SERVICIO;CAMBIO DE SERVICIO;/;A;3;4
+7;HABITACIONES;HABITACIONES;/;A;3;4
+8;AUTORIZACIONES;AUTORIZACIONES;/;A;3;4
+9;LABORATORIOS;Ordenar Laboratorios;/Temporal;A;2;1
+10;RADIOLOGIA;Ordenes de radiologia;/Temporal;A;2;1
+11;TERAPIAS;Ordenes Terapias;/Temporal;A;2;1
+12;DIAGNOSTICOS;Diagnosticos al paciente;/Temporal;A;2;1
+13;PROCEDIMIENTOS NO QX;Ordenes procedimientos Qx;/Temporal;A;2;1
+14;MEDICAMENTOS;Formulacion de medicamentos;/Temporal;A;2;1
+15;CAUSA EXTERNA;Causa externa;/Temporal;A;2;1
+16;CIRUGIAS;Ordenes de Cirugia;/Temporal;A;2;1

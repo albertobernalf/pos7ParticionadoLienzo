@@ -1,0 +1,3 @@
+id;nombre;ubicacion;direccion;telefono;contacto;fechaRegistro;estadoReg;ciudades_id;departamentos_id
+1;CENTRO LA MANUELITA BELTRAN;AL SUR;AL SIUR;121;SUR;27/06/2024 15:57;A;5;1
+2;HABITANTE CONDICION NORMAL;TODAS;TODAS;1;TODAS;27/06/2024 16:00;A;5;1

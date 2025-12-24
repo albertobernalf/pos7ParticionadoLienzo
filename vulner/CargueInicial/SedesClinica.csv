@@ -1,0 +1,4 @@
+id;nombre;ubicacion;direccion;telefono;contacto;fechaRegistro;estadoReg;ciudades_id;departamentos_id;nit;codigoHabilitacion
+1;SEDE KENEDY;CALLE 67 SUR;CALLE 67 SUR;111;ALBERTO;1/09/2022 19:27;A;6;1;830507718-8;1,10E+11
+2;SEDE AMERICAS;CARRERA 43;CARRERA 43;1212;ALBERTO;1/09/2022 19:28;A;6;1;0;1,10E+11
+3;SEDE TOBERIN;CRA;CRA;2121;SENOR X;27/06/2024 14:41;A;6;1;0;1,10E+11

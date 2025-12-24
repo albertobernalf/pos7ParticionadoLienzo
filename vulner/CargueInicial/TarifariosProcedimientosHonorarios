@@ -1,0 +1,3 @@
+"id","codigoHomologado","valorHonorarioAnestesiologo","valorHonorarioCirujano","valorHonorarioDobleVia","valorHonorarioPerfucionista","valorHonorarioUnicaVia","valorHonorarioViaAcceso","valorHonorarioAyudante","fechaRegistro","estadoReg","codigoCups_id","concepto_id","tiposTarifa_id","usuarioRegistro_id","serviciosAdministrativos_id"
+1,"471100","55550.0000",NULL,NULL,NULL,NULL,NULL,NULL,NULL,"A",4021,3,1,NULL,NULL
+2,"472100-01",NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,"A",1942,3,1,NULL,NULL

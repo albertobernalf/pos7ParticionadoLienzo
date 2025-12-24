@@ -1,0 +1,8 @@
+id;abreviatura;nombre;fechaRegistro;estadoReg;tiposDocCodigoDian;tipoDocRips_id
+5;RC;REGISTRO CIVIL;8/07/2024 6:08;A;11;12
+7;NI;NIT;8/07/2024 6:09;A;31;13
+6;PA;PASAPORTE;8/07/2024 6:09;A;41;4
+1;CC;Cedula de Ciudadania;1/09/2022 19:24;A;13;1
+2;TI;Tarjeta de Identidad;1/09/2022 19:24;A;12;9
+3;CE;Cedula de Extranjeria;1/09/2022 19:24;A;22;7
+4;NN;Desconocido;1/09/2022 19:24;A;11;10

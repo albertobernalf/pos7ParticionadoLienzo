@@ -1,0 +1,13 @@
+"id","columna","descripcion","fechaRegistro","estadoReg","tiposTarifa_id","serviciosAdministrativos_id"
+2,"colValorBase","SOAT 2004","2025-03-31 11:24:05-05","A",1,NULL
+3,"colValor1","SOAT 2004 + 10%","2025-03-31 11:24:27-05","A",1,NULL
+4,"colValor2","SOAT 2004 + 20%","2025-03-31 11:24:45-05","A",1,NULL
+18,"colValorBase","ECOPETROL 2025","2025-04-04 09:29:33.531497-05","A",9,NULL
+19,"colValor1","ECOPETROL + 20%","2025-04-04 09:33:03.054633-05","A",9,NULL
+20,"colValorBase","ISS 2001","2025-04-07 10:48:31.992719-05","A",2,NULL
+22,"colValor2","ISS 2001 + 20%","2025-04-07 10:55:26.168712-05","A",2,NULL
+23,"colValor1","ISS 2001 + 10%","2025-04-07 11:03:13.482302-05","A",2,NULL
+30,"colValorBase","ISS 2001","2025-04-08 09:09:40.903719-05","A",4,NULL
+32,"colValor1","Iss + 5%","2025-04-08 09:30:58.680445-05","A",4,NULL
+35,"colValorBase","PARTICULAR","2025-08-25 12:34:16.891942-05","A",5,4
+36,"colValorBase","Famisanar Full","2025-09-12 14:40:52.02781-05","A",10,4

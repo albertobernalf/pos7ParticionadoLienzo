@@ -3581,32 +3581,116 @@ def escogeAcceso(request, Sede, Username, Profesional, Documento, NombreSede, es
     if (escogeModulo == 'REPORTES'):
         print("ENTRE PERMSISO REPORTES")
         ## Aqui contexto
-        # Combo de sedes
+        print ("Entre Validacion Reporteador")
 
-        # Combo de SubServicios
+        # Sedes
 
-        miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
-                                       password="123456")
-        curt = miConexiont.cursor()
-        comando = "SELECT sed.id codreg_sede ,sed.nombre nom_sede  FROM sitios_sedesClinica sed WHERE sed.id ='" + str(Sede) + "' ORDER BY sed.nombre"
-        curt.execute(comando)
+        miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432",
+                                      user="postgres", password="123456")
+        cur = miConexion.cursor()
+        comando = "SELECT id  codreg_sede ,nombre nom_sede  FROM sitios_sedesClinica"
+        cur.execute(comando)
         print(comando)
+        context = {}
+        sedes = []
 
-        Sedes = []
-        Sedes.append({'id': '', 'nombre': ''})
+        for codreg_sede, nom_sede in cur.fetchall():
+            sedes.append({'codreg_sede': codreg_sede, 'nom_sede': nom_sede})
 
-        for codreg_sede, nom_sede in curt.fetchall():
-            subServicios.append({'codreg_sede': codreg_sede, 'nom_sede': nom_sede})
+        miConexion.close()
+        print(sedes)
 
-        miConexiont.close()
-        print(subServicios)
+        context['Sedes'] = sedes
 
-        context['Sedes'] = Sedes
+        print ("Aqui estan las sedes")
+        print (context['Sedes'])
+
+        sedeSeleccionada   = sede
+        print ("sedeSeleccionada = " , sedeSeleccionada)
+        print("username = ", username)
+
+        context['Username'] = username
+        context['SedeSeleccionada'] = sedeSeleccionada
+        context['NombreUsuario'] = profesional
+
+        print ("Asi quedo el nombre del usuario", profesional)
+
+        # Valido Permiso de ejecucion en la Sede seleccinada
+
+        miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432",
+                                      user="postgres",
+                                      password="123456")
+        cur = miConexion.cursor()
+
+        comando = 'select usuarios.cod_usuario  as usuario from "Administracion_mae_repusuarios" usuarios, sitios_sedesClinica sedes where  usuarios.estadoReg =  ' + "'" + 'A' +  "'" + ' and  usuarios.cod_usuario = ' + "'" + username + "'" + ' and usuarios.cod_sede_id = sedes.id and sedes.id = '  + "'"  + sedeSeleccionada + "'"
+        print(comando)
+        cur.execute(comando)
 
 
-        # Fin combo de sedes
+        permitido = []
 
-        return render(request, "accesoPrincipal.html", context)
+        for usuario in cur.fetchall():
+            permitido.append({'usuario': usuario})
+
+        miConexion.close()
+
+        if permitido == []:
+
+            context['Error'] = "Usuario no tiene autorizacion para la sede seleccionada y/o Reportes no asignados ! "
+            return render(request, "inicio/accesoPrincipal1.html", context)
+
+        else:
+
+            print("Paso Autenticacion")
+
+        # Le doy la informacion de los reportes a los que tiene acceso
+
+        miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432",
+                                      user="postgres",
+                                      password="123456")
+        cur = miConexion.cursor()
+        #cur.execute("set client_encoding='LATIN1';")
+
+        comando = 'select  reportes.id numreporte, usuarios.cod_usuario usuario, reportes.nom_reporte reporte,reportes.cuerpo_sql, reportes.descripcion descripcion , reportes.encabezados encabezados ,reportes.mae_gruporeportes_id grupo ,reportes.mae_subgruporeportes_id subgrupo , grupos.nom_grupo nombreGrupo, subgrupos.nom_subgrupo nombreSubgrupo from "Administracion_mae_repusuarios" as usuarios,  "Administracion_mae_reportes" as reportes , sitios_sedesClinica sedes , "Administracion_mae_gruporeportes" grupos, "Administracion_mae_subgruporeportes" subgrupos   where usuarios.cod_Usuario = ' + "'" + username + "'" + ' and  usuarios.mae_reportes_id = reportes.id  and usuarios.cod_sede_id = sedes.id and grupos.id = reportes.mae_gruporeportes_id and subgrupos.id = reportes.mae_subgruporeportes_id  and sedes.id = ' + "'" + sede + "'" + ' AND usuarios.estadoReg=' + "'A'" + ' AND reportes.estadoReg=' + "'A'"
+
+        print(comando)
+        cur.execute(comando)
+
+        reportesUsuario = []
+
+        for numreporte, usuario, reporte, cuerpo_sql, descripcion, encabezados, grupo, subgrupo, nombreGrupo, nombreSubGrupo in cur.fetchall():
+            reportesUsuario.append(
+                {'numreporte': numreporte, 'usuario': usuario, 'reporte': reporte, 'cuerpo_sql': cuerpo_sql,
+                 'descripcion': descripcion, 'encabezados':encabezados , 'grupo': grupo, 'subgrupo': subgrupo, 'nombreGrupo': nombreGrupo, 'nombreSubGrupo': nombreSubGrupo    })
+
+        miConexion.close()
+        context['ReportesUsuario'] = reportesUsuario
+
+        # Envio los grupos
+        miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432",
+                                      user="postgres",
+                                      password="123456")
+        cur = miConexion.cursor()
+        comando = 'select  id , grupos.nom_grupo nombreGrupo, grupos.logo logo  from "Administracion_mae_gruporeportes" grupos order by grupos.id'
+
+        print(comando)
+        cur.execute(comando)
+
+        grupos = []
+
+        for id, nombreGrupo, logo in cur.fetchall():
+            grupos.append(
+                {'id': id, 'nombreGrupo': nombreGrupo , 'logo':logo})
+
+        miConexion.close()
+        context['Grupos'] = grupos
+        print("pase0")
+
+    return render(request, "Reportes/PantallaGrupos.html", context)
+
+
+    return render(request, "panelVacio.html", context)
+
 
 
 

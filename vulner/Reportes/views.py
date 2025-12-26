@@ -87,7 +87,7 @@ def menuAcceso(request):
 
 def validaAcceso(request):
 
-    print ("Entre Validacion")
+    print ("Entre ValidacionR")
     context = {}
 
     # Sedes
@@ -182,8 +182,8 @@ def validaAcceso(request):
             pass
 
             # Valido Permiso de ejecucion en la Sede seleccinada
-
-   	    miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+            #
+            miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
             miConexion.set_client_encoding('LATIN1')
             cur = miConexion.cursor()
@@ -212,8 +212,8 @@ def validaAcceso(request):
                 print("Paso Autenticacion")
 
             # Le doy la informacion de los reportes a los que tiene acceso
-
-	    miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+                #
+            miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
 
             miConexion.set_client_encoding('LATIN1')
@@ -240,8 +240,8 @@ def validaAcceso(request):
 
 
             # Envio los grupos
-
-	    miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+            #
+            miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
             cur = miConexion.cursor()
             comando = 'select  id , grupos.nom_grupo nombreGrupo, grupos.logo logo  from public."Administracion_mae_gruporeportes" grupos order by grupos.id'
@@ -367,7 +367,7 @@ class Reporte1PdfView(TemplateView):
         format = fecha.strftime('%d / %m / %Y')
         print(fecha)
         print(format)
-        canvas.drawImage( "C:\EntornosPython\MedicalReportes5\MedicalReportes5\static\img/medical1.jpg", 40, 715, width=50,
+        canvas.drawImage( "C:\EntornosPython\pos7Particionado/vulner\static\img/medical1.jpg", 40, 715, width=50,
                      height=50)
         canvas.drawString(250, 750, "CLINICA MEDICAL")
         canvas.drawString(250, 735, 'NIT: 8305077188')
@@ -426,7 +426,7 @@ class Reporte1PdfView(TemplateView):
         format = fecha.strftime('%d / %m / %Y')
         print(fecha)
         print(format)
-        canvas.drawImage(  "C:\EntornosPython\MedicalReportes5\MedicalReportes5\static\img/medical1.jpg", 40, 715, width=50,
+        canvas.drawImage(  "C:\EntornosPython\pos7Particionado/vulner\static\img/medical1.jpg", 40, 715, width=50,
                  height=50)
         canvas.drawString(250, 750, "CLINICA MEDICAL")
         canvas.drawString(250, 735, 'NIT: 8305077188')
@@ -483,7 +483,7 @@ class Reporte1PdfView(TemplateView):
         sedeSeleccionada = context['sedeSeleccionada']
         numreporte = context["numreporte"]
         grupo = context["grupo"]
-
+        sede= sedeSeleccionada
         subGrupo = context["subGrupo"]
 
         print("Esta es mi Sede seleccionada =", sedeSeleccionada)
@@ -499,8 +499,8 @@ class Reporte1PdfView(TemplateView):
         print("Subgrupo = ", subGrupo)
 
         # Le doy la informacion del Reportes seleccionado
-
-    	miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+        #
+        miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
         miConexion.set_client_encoding('LATIN1')
         cur = miConexion.cursor()
@@ -532,8 +532,8 @@ class Reporte1PdfView(TemplateView):
         print ("El nombre del reporte es : ", nombreReporte)
 
         # Le doy la informacion de los Parametros del Reporte seleccionado
-
-	miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+        #
+        miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
         cur = miConexion.cursor()
 
@@ -559,8 +559,8 @@ class Reporte1PdfView(TemplateView):
 
 
         # Le doy la informacion de los reportes a los que tiene acceso
-
-  	miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+        #
+        miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
 
         miConexion.set_client_encoding('LATIN1')
@@ -569,8 +569,7 @@ class Reporte1PdfView(TemplateView):
         #comando = 'select  reportes.id numreporte, usuarios.cod_usuario usuario, reportes.nom_reporte reporte,reportes.cuerpo_sql, reportes.descripcion descripcion , reportes.encabezados encabezados from public."Administracion_mae_repusuarios" as usuarios,public."Administracion_mae_reportes" as reportes , public."Administracion_imhotep_sedesreportes" sedes  where usuarios.cod_Usuario = ' + "'" + username + "'" + ' and  usuarios.mae_reportes_id = reportes.id  and usuarios.cod_sede_id = sedes.id  and sedes.codreg_sede = ltrim(' + "'" + str(sedeSeleccionada) + "')" + ' AND usuarios.estadoReg=' + "'A'" + ' AND reportes.estadoReg=' + "'A'"
         # comando = 'select  reportes.id numreporte, usuarios.cod_usuario usuario, reportes.nom_reporte reporte,reportes.cuerpo_sql, reportes.descripcion descripcion , reportes.encabezados encabezados from public."Administracion_mae_repusuarios" as usuarios,  public."Administracion_mae_reportes" as reportes , public."Administracion_imhotep_sedesreportes" sedes  where usuarios.cod_Usuario = ' + "'" + username + "'" + ' and  usuarios.mae_reportes_id = reportes.id  and usuarios.cod_sede_id = sedes.id and sedes.codreg_sede = ' + "'" + sedeSeleccionada + "'" + ' AND usuarios.estadoReg=' + "'A'" + ' AND reportes.estadoReg=' + "'A'"
 
-        comando = 'select  reportes.id numreporte, usuarios.cod_usuario usuario, reportes.nom_reporte reporte,reportes.cuerpo_sql, reportes.descripcion descripcion , reportes.encabezados encabezados from public."Administracion_mae_repusuarios" as usuarios,public."Administracion_mae_reportes" as reportes , public."Administracion_imhotep_sedesreportes" sedes  where usuarios.cod_Usuario = ' + "'" + username + "'" + ' and  usuarios.mae_reportes_id = reportes.id  and usuarios.cod_sede_id = sedes.id  and sedes.codreg_sede = ltrim(' + "'" + str(
-            sedeSeleccionada) + "')" + ' AND usuarios.estadoReg=' + "'A'" + ' AND reportes.estadoReg=' + "'A'" + ' AND reportes.mae_gruporeportes_id= ' + str(grupo) + ' AND reportes.mae_subgruporeportes_id = ' + str(subGrupo)
+        comando = 'select  reportes.id numreporte, usuarios.cod_usuario usuario, reportes.nom_reporte reporte,reportes.cuerpo_sql, reportes.descripcion descripcion , reportes.encabezados encabezados from public."Administracion_mae_repusuarios" as usuarios,public."Administracion_mae_reportes" as reportes , sitios_sedesClinica sedes  where usuarios.cod_Usuario = ' + "'" + username + "'" + ' and  usuarios.mae_reportes_id = reportes.id  and usuarios.cod_sede_id = sedes.id  and sedes.id = ' + "'" + str(sede) + "'" + ' AND usuarios.estadoReg=' + "'A'" + ' AND reportes.estadoReg=' + "'A'" + ' AND reportes.mae_gruporeportes_id= ' + str(grupo) + ' AND reportes.mae_subgruporeportes_id = ' + str(subGrupo)
 
         print(comando)
         print("pase01")
@@ -590,29 +589,29 @@ class Reporte1PdfView(TemplateView):
         context['ReportesUsuario'] = reportesUsuario
 
         # Validacion Usuario existente
+        #
+        #miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+        #                           password="123456")
+        #cur = miConexion.cursor()
+        #comando = "SELECT cod_usuario, nom_usuario, clave_usuario  FROM imhotep_usuarios WHERE cod_Usuario = '" + username + "'"
+        #cur.execute(comando)
+        #print(comando)
 
-	miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
-                                   password="123456")
-        cur = miConexion.cursor()
-        comando = "SELECT cod_usuario, nom_usuario, clave_usuario  FROM imhotep_usuarios WHERE cod_Usuario = '" + username + "'"
-        cur.execute(comando)
-        print(comando)
+        #nombreUsuario = []
 
-        nombreUsuario = []
+        #for cod_usuario, nom_usuario, clave_usuario in cur.fetchall():
+        #    nombreUsuario.append(
+        #        {'cod_usuario': cod_usuario, 'nom_usuario': nom_usuario, 'clave_usuario': clave_usuario})
 
-        for cod_usuario, nom_usuario, clave_usuario in cur.fetchall():
-            nombreUsuario.append(
-                {'cod_usuario': cod_usuario, 'nom_usuario': nom_usuario, 'clave_usuario': clave_usuario})
+        #miConexion.close()
 
-        miConexion.close()
+        #context['NombreUsuario'] = nombreUsuario
 
-        context['NombreUsuario'] = nombreUsuario
-
-        print("Asi quedo el nombre del usuario", nombreUsuario)
+        #print("Asi quedo el nombre del usuario", nombreUsuario)
 
         # Envio los grupos
-
-	miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+        #
+        miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
 
         cur = miConexion.cursor()
@@ -631,8 +630,8 @@ class Reporte1PdfView(TemplateView):
         context['Grupos'] = grupos
 
         # Envio los Subgrupos
-
-    	miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+        #
+        miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
 
         cur = miConexion.cursor()
@@ -651,12 +650,12 @@ class Reporte1PdfView(TemplateView):
         context['SubGrupos'] = subGrupos
 
         # Consigo Nombre de la sede
-
-    	miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+        #
+        miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
 
         cur = miConexion.cursor()
-        comando = "SELECT codreg_sede, nom_sede FROM imhotep_sedes WHERE codreg_sede = '" + sedeSeleccionada + "'"
+        comando = "SELECT id codreg_sede, nombre nom_sede FROM sitios_sedesClinica WHERE id = '" + sede + "'"
         cur.execute(comando)
         print(comando)
 
@@ -697,7 +696,7 @@ class Reporte1PdfView(TemplateView):
         print("tipoArchivo = ", tipoArchivo)
         print("username = ", username)
         print("sedeSeleccionada =", sedeSeleccionada)
-
+        sede=sedeSeleccionada
         context['username'] = username
         context['sedeSeleccionada'] = sedeSeleccionada
 
@@ -706,8 +705,8 @@ class Reporte1PdfView(TemplateView):
 
 
         # Le doy la informacion del Reportes seleccionado
-
-    	miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+        #
+        miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
 
         miConexion.set_client_encoding('LATIN1')
@@ -734,8 +733,8 @@ class Reporte1PdfView(TemplateView):
         context['ReporteSeleccionado'] = reporteSeleccionado
 
         # Consigo Numero de Parametros del reporte
-
-    	miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+        #
+        miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
         cur = miConexion.cursor()
         comando = 'SELECT rep.id numeroreporte, count(*) numeroParametros FROM public."Administracion_mae_reportes" rep,   public."Administracion_mae_repparametros" parametros WHERE parametros.mae_reportes_id = rep.id and  rep.id =' + str(numReporte) + ' group by rep.id'
@@ -959,8 +958,8 @@ class Reporte1PdfView(TemplateView):
 
 
         ## Genero el Reporte Dinamico
-
-    	miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+        #
+        miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
 
         miConexion.set_client_encoding('LATIN1')
@@ -1064,8 +1063,7 @@ class Reporte1PdfView(TemplateView):
             # insert esto
 
             # Le doy la informacion de los reportes a los que tiene acceso
-
-    	    miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+            miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
 
             miConexion.set_client_encoding('LATIN1')
@@ -1073,7 +1071,7 @@ class Reporte1PdfView(TemplateView):
             cur.execute("set client_encoding='LATIN1';")
             # comando = 'select  reportes.id numreporte, usuarios.cod_usuario usuario, reportes.nom_reporte reporte,reportes.cuerpo_sql, reportes.descripcion descripcion , reportes.encabezados encabezados from public."Administracion_mae_repusuarios" as usuarios,  public."Administracion_mae_reportes" as reportes , public."Administracion_imhotep_sedesreportes" sedes  where usuarios.cod_Usuario = ' + "'" + username + "'" + ' and  usuarios.mae_reportes_id = reportes.id  and usuarios.cod_sede_id = sedes.id and sedes.codreg_sede = '  + "'"  + sedeSeleccionada + "'"
             # comando = 'select  reportes.id numreporte, usuarios.cod_usuario usuario, reportes.nom_reporte reporte,reportes.cuerpo_sql, reportes.descripcion descripcion , reportes.encabezados encabezados from public."Administracion_mae_repusuarios" as usuarios,  public."Administracion_mae_reportes" as reportes , public."Administracion_imhotep_sedesreportes" sedes  where usuarios.cod_Usuario = ' + "'" + username + "'" + ' and  usuarios.mae_reportes_id = reportes.id  and usuarios.cod_sede_id = sedes.id and sedes.codreg_sede = ' + "'" + sedeSeleccionada + "'" + ' AND usuarios.estadoReg=' +  "'A'"
-            comando = 'select  reportes.id numreporte, usuarios.cod_usuario usuario, reportes.nom_reporte reporte,reportes.cuerpo_sql, reportes.descripcion descripcion , reportes.encabezados encabezados ,reportes.mae_gruporeportes_id grupo ,reportes.mae_subgruporeportes_id subgrupo , grupos.nom_grupo nombreGrupo, subgrupos.nom_subgrupo nombreSubgrupo from public."Administracion_mae_repusuarios" as usuarios,  public."Administracion_mae_reportes" as reportes , public."Administracion_imhotep_sedesreportes" sedes ,public."Administracion_mae_gruporeportes" grupos,public."Administracion_mae_subgruporeportes" subgrupos   where usuarios.cod_Usuario = ' + "'" + username + "'" + ' and  usuarios.mae_reportes_id = reportes.id  and usuarios.cod_sede_id = sedes.id and grupos.id = reportes.mae_gruporeportes_id and grupos.id = ' + "'" + grupo + "'" + ' and subgrupos.id = reportes.mae_subgruporeportes_id  AND subgrupos.id = ' + "'" + subGrupo + "'" + ' and sedes.codreg_sede = ' + "'" + sedeSeleccionada + "'" + ' AND usuarios.estadoReg=' + "'A'" + ' AND reportes.estadoReg=' + "'A'"
+            comando = 'select  reportes.id numreporte, usuarios.cod_usuario usuario, reportes.nom_reporte reporte,reportes.cuerpo_sql, reportes.descripcion descripcion , reportes.encabezados encabezados ,reportes.mae_gruporeportes_id grupo ,reportes.mae_subgruporeportes_id subgrupo , grupos.nom_grupo nombreGrupo, subgrupos.nom_subgrupo nombreSubgrupo from public."Administracion_mae_repusuarios" as usuarios,  public."Administracion_mae_reportes" as reportes , sitios_sedesClinica sedes ,public."Administracion_mae_gruporeportes" grupos,public."Administracion_mae_subgruporeportes" subgrupos   where usuarios.cod_Usuario = ' + "'" + username + "'" + ' and  usuarios.mae_reportes_id = reportes.id  and usuarios.cod_sede_id = sedes.id and grupos.id = reportes.mae_gruporeportes_id and grupos.id = ' + "'" + grupo + "'" + ' and subgrupos.id = reportes.mae_subgruporeportes_id  AND subgrupos.id = ' + "'" + subGrupo + "'" + ' and sedes.id = ' + "'" + sede + "'" + ' AND usuarios.estadoReg=' + "'A'" + ' AND reportes.estadoReg=' + "'A'"
 
             print(comando)
             cur.execute(comando)
@@ -1094,8 +1092,8 @@ class Reporte1PdfView(TemplateView):
             ## insetto esto de los parametros
 
             # Le doy la informacion de los Parametros del Reporte seleccionado
-
-    	    miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+            #
+            miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
 
             cur = miConexion.cursor()
@@ -1122,12 +1120,12 @@ class Reporte1PdfView(TemplateView):
             ## Fin inserto esto d elos parametros
 
             # Validacion Usuario existente
-
-    	    miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+            #
+            miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
 
             cur = miConexion.cursor()
-            comando = "SELECT cod_usuario, nom_usuario, clave_usuario  FROM imhotep_usuarios WHERE cod_Usuario = '" + username + "'"
+            comando = "SELECT documento cod_usuario, nombre nom_usuario, contrasena clave_usuario  FROM planta_planta WHERE documento = '" + username + "'"
             cur.execute(comando)
             print(comando)
 
@@ -1170,8 +1168,8 @@ class Reporte1PdfView(TemplateView):
 
 
             # Envio los grupos
-
-    	    miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+            #
+            miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
             cur = miConexion.cursor()
             comando = 'select  id , grupos.nom_grupo nombreGrupo from public."Administracion_mae_gruporeportes" grupos'
@@ -1189,9 +1187,8 @@ class Reporte1PdfView(TemplateView):
             context['Grupos'] = grupos
 
             # Envio los Subgrupos
-
-
-	    miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+            #
+            miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
             cur = miConexion.cursor()
             comando = 'select  id , subgrupos.nom_subgrupo nombreSubGrupo from public."Administracion_mae_subgruporeportes" subgrupos where subgrupos.mae_gruporeportes_id= ' + str(
@@ -1210,12 +1207,12 @@ class Reporte1PdfView(TemplateView):
             context['SubGrupos'] = subGrupos
 
             # Consigo Nombre de la sede
-
-    	    miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+            #
+            miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
 
             cur = miConexion.cursor()
-            comando = "SELECT codreg_sede, nom_sede FROM imhotep_sedes WHERE codreg_sede = '" + sedeSeleccionada + "'"
+            comando = "SELECT id codreg_sede, nombre nom_sede FROM sitios_sedesClinica WHERE id = '" + sedeSeleccionada + "'"
             cur.execute(comando)
             print(comando)
 
@@ -1606,14 +1603,14 @@ class Reporte1PdfView(TemplateView):
 
 
         # Le doy la informacion de los reportes a los que tiene acceso
-
-    	miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+        #
+        miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
 
         miConexion.set_client_encoding('LATIN1')
         cur = miConexion.cursor()
         cur.execute("set client_encoding='LATIN1';")
-        comando = 'select  reportes.id numreporte, usuarios.cod_usuario usuario, reportes.nom_reporte reporte,reportes.cuerpo_sql, reportes.descripcion descripcion , reportes.encabezados encabezados from public."Administracion_mae_repusuarios" as usuarios,public."Administracion_mae_reportes" as reportes , public."Administracion_imhotep_sedesreportes" sedes  where usuarios.cod_Usuario = ' + "'" + username + "'" + ' and  usuarios.mae_reportes_id = reportes.id and sedes.codreg_sede = ltrim(' + "'" + str(sedeSeleccionada) + "')" + ' AND reportes.estadoReg=' + "'A'"
+        comando = 'select  reportes.id numreporte, usuarios.cod_usuario usuario, reportes.nom_reporte reporte,reportes.cuerpo_sql, reportes.descripcion descripcion , reportes.encabezados encabezados from public."Administracion_mae_repusuarios" as usuarios,public."Administracion_mae_reportes" as reportes , sitios_sedesClinica sedes  where usuarios.cod_Usuario = ' + "'" + username + "'" + ' and  usuarios.mae_reportes_id = reportes.id and sedes.id = ' + "'" + str(sede) + "'" + ' AND reportes.estadoReg=' + "'A'"
 
         print(comando)
         cur.execute(comando)
@@ -1716,6 +1713,7 @@ def pantallaSubgrupos(request, username, sedeSeleccionada, grupo):
     print("sedeSeleccionada = ", sedeSeleccionada)
     print("grupo = ", grupo)
 
+    sede = sedeSeleccionada
     context['Username'] = username
     context['SedeSeleccionada'] = sedeSeleccionada
     context['Grupo'] = grupo
@@ -1725,7 +1723,7 @@ def pantallaSubgrupos(request, username, sedeSeleccionada, grupo):
     miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
     cur = miConexion.cursor()
-    comando = "SELECT codreg_sede, nom_sede FROM imhotep_sedes WHERE codreg_sede = '" + sedeSeleccionada + "'"
+    comando = "SELECT id codreg_sede, nombre nom_sede FROM sitios_sedesClinica WHERE id = '" + sede + "'"
     cur.execute(comando)
     print(comando)
 
@@ -1847,7 +1845,7 @@ def combo(request, username, sedeSeleccionada, grupo, subGrupo):
     context['Grupo'] = grupo
     context['SubGrupo'] = subGrupo
     subgrupo = subGrupo
-
+    sede=sedeSeleccionada
     # Envio los grupos
 
     miConexion = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
@@ -1895,7 +1893,7 @@ def combo(request, username, sedeSeleccionada, grupo, subGrupo):
                                    password="123456")
 
     cur = miConexion.cursor()
-    comando = "SELECT codreg_sede, nom_sede FROM imhotep_sedes WHERE codreg_sede = '" + sedeSeleccionada + "'"
+    comando = "SELECT id codreg_sede, nombre nom_sede FROM sitios_sedesClinica  WHERE id = '" + sede + "'"
     cur.execute(comando)
     print(comando)
 
@@ -1916,9 +1914,7 @@ def combo(request, username, sedeSeleccionada, grupo, subGrupo):
     miConexion.set_client_encoding('LATIN1')
     cur = miConexion.cursor()
     cur.execute("set client_encoding='LATIN1';")
-    # comando = 'select  reportes.id numreporte, usuarios.cod_usuario usuario, reportes.nom_reporte reporte,reportes.cuerpo_sql, reportes.descripcion descripcion , reportes.encabezados encabezados from public."Administracion_mae_repusuarios" as usuarios,  public."Administracion_mae_reportes" as reportes , public."Administracion_imhotep_sedesreportes" sedes  where usuarios.cod_Usuario = ' + "'" + username + "'" + ' and  usuarios.mae_reportes_id = reportes.id  and usuarios.cod_sede_id = sedes.id and sedes.codreg_sede = '  + "'"  + sedeSeleccionada + "'"
-    # comando = 'select  reportes.id numreporte, usuarios.cod_usuario usuario, reportes.nom_reporte reporte,reportes.cuerpo_sql, reportes.descripcion descripcion , reportes.encabezados encabezados from public."Administracion_mae_repusuarios" as usuarios,  public."Administracion_mae_reportes" as reportes , public."Administracion_imhotep_sedesreportes" sedes  where usuarios.cod_Usuario = ' + "'" + username + "'" + ' and  usuarios.mae_reportes_id = reportes.id  and usuarios.cod_sede_id = sedes.id and sedes.codreg_sede = ' + "'" + sedeSeleccionada + "'" + ' AND usuarios.estadoReg=' +  "'A'"
-    comando = 'select  reportes.id numreporte, usuarios.cod_usuario usuario, reportes.nom_reporte reporte,reportes.cuerpo_sql, reportes.descripcion descripcion , reportes.encabezados encabezados ,reportes.mae_gruporeportes_id grupo ,reportes.mae_subgruporeportes_id subgrupo , grupos.nom_grupo nombreGrupo, subgrupos.nom_subgrupo nombreSubgrupo from public."Administracion_mae_repusuarios" as usuarios,  public."Administracion_mae_reportes" as reportes , public."Administracion_imhotep_sedesreportes" sedes ,public."Administracion_mae_gruporeportes" grupos,public."Administracion_mae_subgruporeportes" subgrupos   where usuarios.cod_Usuario = ' + "'" + username + "'" + ' and  usuarios.mae_reportes_id = reportes.id  and usuarios.cod_sede_id = sedes.id and grupos.id = reportes.mae_gruporeportes_id and grupos.id = ' + "'" + grupo + "'" + ' and subgrupos.id = reportes.mae_subgruporeportes_id  AND subgrupos.id = '  + "'" + subGrupo + "'" + ' and sedes.codreg_sede = ' + "'" + sedeSeleccionada + "'" + ' AND usuarios.estadoReg=' + "'A'" + ' AND reportes.estadoReg=' + "'A' ORDER BY reportes.id ASC"
+    comando = 'select  reportes.id numreporte, usuarios.cod_usuario usuario, reportes.nom_reporte reporte,reportes.cuerpo_sql, reportes.descripcion descripcion , reportes.encabezados encabezados ,reportes.mae_gruporeportes_id grupo ,reportes.mae_subgruporeportes_id subgrupo , grupos.nom_grupo nombreGrupo, subgrupos.nom_subgrupo nombreSubgrupo from public."Administracion_mae_repusuarios" as usuarios,  public."Administracion_mae_reportes" as reportes , sitios_sedesClinica sedes ,public."Administracion_mae_gruporeportes" grupos,public."Administracion_mae_subgruporeportes" subgrupos   where usuarios.cod_Usuario = ' + "'" + username + "'" + ' and  usuarios.mae_reportes_id = reportes.id  and usuarios.cod_sede_id = sedes.id and grupos.id = reportes.mae_gruporeportes_id and grupos.id = ' + "'" + grupo + "'" + ' and subgrupos.id = reportes.mae_subgruporeportes_id  AND subgrupos.id = '  + "'" + subGrupo + "'" + ' and sedes.id = ' + "'" + sede + "'" + ' AND usuarios.estadoReg=' + "'A'" + ' AND reportes.estadoReg=' + "'A' ORDER BY reportes.id ASC"
 
     print(comando)
     cur.execute(comando)
@@ -1934,6 +1930,8 @@ def combo(request, username, sedeSeleccionada, grupo, subGrupo):
     miConexion.close()
     context['ReportesUsuario'] = reportesUsuario
 
+    print (" reportesUsuario =", reportesUsuario)
+
     ## RUTINA AVERIGUAR EL PRIMER ID DEL REPOTE PARA COLOCARLO EN LA VARIABLE numreporte
 
     ## context['numreporte'] = 24
@@ -1942,6 +1940,8 @@ def combo(request, username, sedeSeleccionada, grupo, subGrupo):
         context['numreporte'] = ""
     else:
         context['numreporte'] = reportesUsuario[0]['numreporte']
+
+    print (" numreporte =", reportesUsuario[0]['numreporte'])
 
     ## FIN RUTINA AVERIGUAR EL PRIMER ID DEL REPOTE PARA COLOCARLO EN LA VARIABLE numreporte
 

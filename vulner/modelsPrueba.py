@@ -1029,7 +1029,10 @@ class ProgramacionCitasMedicas(models.Model):
            o sea una super-puesta a punta
         2. Crear hacer de ceros modulo de consulta externa
         3. Crear reportes, mejorar los existentes
-        4. Crear modulo medicalReport (Reporteador)
+        4. Crear modulo medicalReport (Reporteador) . En views.admisiones (crearadmisionDef) esta lo base para request de variables hidden (usernamE.id) crear context y pasar
+            al views.reportes, donde se necesite. hacer esto el 27 de Diciembre. Creando un nuevo liezo de ceros creop
+	    y que pasa si copi a pos7Particionado todo el software: administracio, Reportes y template/reportes para probar mas rapido, puede ser una opcion para no reparamtrizar todos los
+            Modulos
         5. Trabajar Tablas particionadas (Ojo en primera instancia no puede , toca con migraciones parciales)
 
 	6. A grandes modos FIN PRIMERA PARTE PROYECTO

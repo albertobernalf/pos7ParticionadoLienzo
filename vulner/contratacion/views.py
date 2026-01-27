@@ -109,12 +109,12 @@ def TraerConvenio(request):
                                    password="123456")
     cur3 = miConexion3.cursor()
 
-    comando = 'select id, nombre nombreConvenio, "vigenciaDesde", "vigenciaHasta", "porcTarifario", "porcSuministros", "valorOxigeno", "porcEsterilizacion", "porcMaterial",hospitalario, urgencias, ambulatorio, "consultaExterna", copago, moderadora, tipofactura, agrupada, "facturacionSuministros", "facturacionCups","cuentaContable", requisitos, "fechaRegistro", "estadoReg", empresa_id, "usuarioRegistro_id", descripcion,"tarifariosDescripcionProc_id", "tarifariosDescripcionHono_id", "tarifariosDescripcionSum_id" FROM contratacion_convenios WHERE id = ' + "'" + str(convenioId) + "'"
+    comando = 'select id, nombre nombreConvenio, "vigenciaDesde", "vigenciaHasta", "porcTarifario", "porcSuministros", "valorOxigeno", "porcEsterilizacion", "porcMaterial",hospitalario, urgencias, ambulatorio, "consultaExterna", copago, moderadora, tipofactura, agrupada, "facturacionSuministros", "facturacionCups","cuentaContable", requisitos, "fechaRegistro", "estadoReg", empresa_id, "usuarioRegistro_id", descripcion,"tarifariosDescripcionProc_id", "tarifariosDescripcionHono_id", "tarifariosDescripcionSum_id" , particular FROM contratacion_convenios WHERE id = ' + "'" + str(convenioId) + "'"
 
     print(comando)
     cur3.execute(comando)
 
-    for id, nombreConvenio, vigenciaDesde, vigenciaHasta, porcTarifario, porcSuministros, valorOxigeno, porcEsterilizacion, porcMaterial,	hospitalario, urgencias, ambulatorio, consultaExterna, copago, moderadora, tipofactura, agrupada, facturacionSuministros, facturacionCups,	cuentaContable, requisitos, fechaRegistro, estadoReg, empresa_id, usuarioRegistro_id, descripcion,tarifariosDescripcionProc_id, tarifariosDescripcionHono_id, tarifariosDescripcionSum_id  in cur3.fetchall():
+    for id, nombreConvenio, vigenciaDesde, vigenciaHasta, porcTarifario, porcSuministros, valorOxigeno, porcEsterilizacion, porcMaterial,	hospitalario, urgencias, ambulatorio, consultaExterna, copago, moderadora, tipofactura, agrupada, facturacionSuministros, facturacionCups,	cuentaContable, requisitos, fechaRegistro, estadoReg, empresa_id, usuarioRegistro_id, descripcion,tarifariosDescripcionProc_id, tarifariosDescripcionHono_id, tarifariosDescripcionSum_id, particular   in cur3.fetchall():
         convenio.append(
             {"model": "contratacion.convenios", "pk": id, "fields":
                 {'id': id, 'nombreConvenio': nombreConvenio, 'vigenciaDesde': vigenciaDesde, 'vigenciaHasta': vigenciaHasta, 'porcTarifario': porcTarifario
@@ -123,7 +123,7 @@ def TraerConvenio(request):
                  'tipofactura': tipofactura,'agrupada': agrupada,'facturacionSuministros': facturacionSuministros,'facturacionCups': facturacionCups,
                  'cuentaContable':cuentaContable, 'requisitos':requisitos ,'fechaRegistro': fechaRegistro, 'estadoReg':estadoReg,
                  'empresa_id':empresa_id ,'usuarioRegistro_id':usuarioRegistro_id ,'descripcion':descripcion, 'tarifariosDescripcionProc_id':tarifariosDescripcionProc_id ,
-                 'tarifariosDescripcionHono_id': tarifariosDescripcionHono_id, 'tarifariosDescripcionSum_id':tarifariosDescripcionSum_id             }})
+                 'tarifariosDescripcionHono_id': tarifariosDescripcionHono_id, 'tarifariosDescripcionSum_id':tarifariosDescripcionSum_id ,'particular':particular }})
 
     miConexion3.close()
     print(convenio)
@@ -409,6 +409,8 @@ def CrearGuardarConvenios(request):
     #fechaRegistro = datetime.datetime.now()
     fechaRegistro = timezone.now()
 
+    print ("voy a crear un Convenio")
+
     miConexiont = None
     try:
 
@@ -417,7 +419,7 @@ def CrearGuardarConvenios(request):
                                            password="123456")
         curt = miConexiont.cursor()
 
-        comando = 'INSERT INTO contratacion_Convenios (nombre, "vigenciaDesde", "vigenciaHasta", "porcTarifario", "porcSuministros", "valorOxigeno", "porcEsterilizacion", "porcMaterial", hospitalario, urgencias, ambulatorio, "consultaExterna", copago, moderadora, tipofactura, agrupada, "facturacionSuministros", "facturacionCups", "cuentaContable", requisitos, "fechaRegistro", "estadoReg", empresa_id, "usuarioRegistro_id", descripcion, "tarifariosDescripcionProc_id", "tarifariosDescripcionHono_id", "tarifariosDescripcionSum_id", "serviciosAdministrativos_id", particular) VALUES (' + "'" + str(nombreConvenio) + "'," + "'" + str(vigenciaDesde) + "','" + str(vigenciaHasta) + "'," + str(porcTarifario) + "," + str(porcSuministros) + "," + str(valorOxigeno) + "," + str(porcEsterilizacion) + "," + str(porcMaterial) + "," + "'" + str(hospitalario) + "'," + "'" + str(urgencias) + "'," + "'" + str(ambulatorio) + "'," + "'" + str(consultaExterna) + "'," + "'" + str(copago) + "'," + "'" + str(moderadora) + "'," + "'" + str(tipofactura) + "','" + str(agrupada) + "'," + "'" + str(facturacionSuministros) + "'," + "'" + str(facturacionCups) + "'," + "'" + str(cuentaContable) + "','"  + str(requisitos)   + "'," + "'" +  str(fechaRegistro) + "'," + "'" +  str(estadoReg) + "','" + str(empresa_id) + "',"  + str(usuarioRegistro_id) + ",'" + str(descripcion) + "',"   + str(tarifariosDescripcionProc_id) + "," + str(tarifariosDescripcionSum_id)  +  "," + str(tarifariosDescripcionHono_id) + ",'"  + str(serviciosAdministrativos_id) + "'," + str(particular) + "'" + ')'
+        comando = 'INSERT INTO contratacion_Convenios (nombre, "vigenciaDesde", "vigenciaHasta", "porcTarifario", "porcSuministros", "valorOxigeno", "porcEsterilizacion", "porcMaterial", hospitalario, urgencias, ambulatorio, "consultaExterna", copago, moderadora, tipofactura, agrupada, "facturacionSuministros", "facturacionCups", "cuentaContable", requisitos, "fechaRegistro", "estadoReg", empresa_id, "usuarioRegistro_id", descripcion, "tarifariosDescripcionProc_id", "tarifariosDescripcionHono_id", "tarifariosDescripcionSum_id", "serviciosAdministrativos_id", particular) VALUES (' + "'" + str(nombreConvenio) + "'," + "'" + str(vigenciaDesde) + "','" + str(vigenciaHasta) + "'," + str(porcTarifario) + "," + str(porcSuministros) + "," + str(valorOxigeno) + "," + str(porcEsterilizacion) + "," + str(porcMaterial) + "," + "'" + str(hospitalario) + "'," + "'" + str(urgencias) + "'," + "'" + str(ambulatorio) + "'," + "'" + str(consultaExterna) + "'," + "'" + str(copago) + "'," + "'" + str(moderadora) + "'," + "'" + str(tipofactura) + "','" + str(agrupada) + "'," + "'" + str(facturacionSuministros) + "'," + "'" + str(facturacionCups) + "'," + "'" + str(cuentaContable) + "','"  + str(requisitos)   + "'," + "'" +  str(fechaRegistro) + "'," + "'" +  str(estadoReg) + "','" + str(empresa_id) + "',"  + str(usuarioRegistro_id) + ",'" + str(descripcion) + "',"   + str(tarifariosDescripcionProc_id) + "," + str(tarifariosDescripcionHono_id)  +  "," + str(tarifariosDescripcionSum_id) + ",'"  + str(serviciosAdministrativos_id) + "','" + str(particular) + "'" + ')'
 
         print(comando)
         curt.execute(comando)

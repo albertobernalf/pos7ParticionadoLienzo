@@ -1043,10 +1043,8 @@ Enero 23
 
 Puesta a Punta :
 
-        OPS: el nuevo pos7ParticionadoLienzo ya tiene cambios pero no se puede PUSH a pos7ParticionadoLienzoOriginal
-	cuando se bajo de GIT, SE CAMBIO pos7ParticionadoOriginal --> pos7Particionado  OJO
         la pantalla de admisiones se modifica el "dom", propiedad del datatable tbldatos de admisiones que en lienzo esta comentariao
-        ojo que pasa con los botones de la izquirda ver el html por que no tienen cabeceras o titulos    esto en paneladmisiones.html
+        ojo que pasa con los botones de la izquierda ver el html por que no tienen cabeceras o titulos    esto en paneladmisiones.html
  
 
 Enero 26:
@@ -1054,4 +1052,7 @@ Enero 26:
 
 Enero 27:
 
-       Mañana lo primero sacar backup de pos7ParticionadoLienzo  --> subir al GIT, sacar backup IMPORTANTE
+        ops que paso con el combo lñcalidades. VERIFICAR AUNQUE  A VECES LOS TRAE, SE DESAPARECEN POR CUA??
+	Cuando crea un triage si lo CREA pero sale ERRRO server erro 500 y no devuelve a la pagina triage VERIFICAR DE NUEVO A VER SI YAP
+	cuando hago un folio de hclinica tambien se queda en la pagina y no devuelve al panelclinico OPS que pasa ?? VERIFICAR DE NUEVO A VER SI YAP
+	Ops el historial de medicamentos NOPS sale ??????

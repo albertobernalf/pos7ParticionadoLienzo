@@ -60,16 +60,19 @@ class PDF(FPDF):
         self.documentoId = documentoId
         self.consec = consec
         self.esTriage = esTriage
+        print("Entre a la def de la clase")
 
 
     def header(self):
         # Logo
-        self.image('C:/EntornosPython/Pos6/static/img/MedicalFinal.jpg', 170 ,15, 10 , 5)
+        print("Entre al HEADER")
+        self.image('C:/EntornosPython/pos7Particionado/vulner/static/img/MedicalFinal.jpg', 170 ,15, 10 , 5)
         # Arial bold 15
         self.set_font('Times', 'B', 7)
 
         # Move to the right
         #self.cell(12)
+
 
         convenioId = ConveniosPacienteIngresos.objects.filter(tipoDoc_id=self.tipoDocId,documento_id=self.documentoId,consecAdmision=self.consec).aggregate(Max('convenio_id'))
 
@@ -180,7 +183,7 @@ class PDFOrdenIncapacidad(FPDF):
 
     def header(self):
         # Logo
-        self.image('C:/EntornosPython/Pos6/static/img/MedicalFinal.jpg', 170 ,15, 10 , 5)
+        self.image('C:/EntornosPython/pos7Particionado/vulner/static/img/MedicalFinal.jpg', 170 ,15, 10 , 5)
         # Arial bold 15
         self.set_font('Times', 'B', 7)
 
@@ -342,7 +345,7 @@ class PDFOrdenLaboratorio(FPDF):
 
     def header(self):
         # Logo
-        self.image('C:/EntornosPython/Pos6/static/img/MedicalFinal.jpg', 180 ,20, 10 , 10)
+        self.image('C:/EntornosPython/pos7Particionado/vulner/static/img/MedicalFinal.jpg', 180 ,20, 10 , 10)
         # Arial bold 15
         self.set_font('Times', 'B', 7)
 
@@ -507,7 +510,7 @@ class PDFOrdenTerapia(FPDF):
 
     def header(self):
         # Logo
-        self.image('C:/EntornosPython/Pos6/static/img/MedicalFinal.jpg', 180 ,20, 10 , 10)
+        self.image('C:/EntornosPython/pos7Particionado/vulner/static/img/MedicalFinal.jpg', 180 ,20, 10 , 10)
         # Arial bold 15
         self.set_font('Times', 'B', 7)
 
@@ -670,7 +673,7 @@ class PDFOrdenRadiologia(FPDF):
 
     def header(self):
         # Logo
-        self.image('C:/EntornosPython/Pos6/static/img/MedicalFinal.jpg', 180 ,20, 10 , 10)
+        self.image('C:/EntornosPython/pos7Particionado/vulner/static/img/MedicalFinal.jpg', 180 ,20, 10 , 10)
         # Arial bold 15
         self.set_font('Times', 'B', 7)
 
@@ -832,7 +835,7 @@ class PDFOrdenMedicamentos(FPDF):
 
     def header(self):
         # Logo
-        self.image('C:/EntornosPython/Pos6/static/img/MedicalFinal.jpg', 180 ,20, 10 , 10)
+        self.image('C:/EntornosPython/pos7Particionado/vulner/static/img/MedicalFinal.jpg', 180 ,20, 10 , 10)
         # Arial bold 15
         self.set_font('Times', 'B', 7)
 
@@ -993,7 +996,7 @@ class PDFOrdenDeControl(FPDF):
 
     def header(self):
         # Logo
-        self.image('C:/EntornosPython/Pos6/static/img/MedicalFinal.jpg', 180 ,20, 10 , 10)
+        self.image('C:/EntornosPython/pos7Particionado/vulner/static/img/MedicalFinal.jpg', 180 ,20, 10 , 10)
         # Arial bold 15
         self.set_font('Times', 'B', 7)
 
@@ -1176,15 +1179,21 @@ def ImprimirHistoriaClinica(request):
     pacienteId = Usuarios.objects.get(id=documentoId)
     print("documentoPaciente = ", pacienteId.documento)
 
-
     pdf = PDF(tipoDocId,documentoId, consec, estriage)
+    print("LISTO 000")
+    pdf.add_page()
+
+    print("LISTO 1")
     pdf.alias_nb_pages()
     pdf.set_margins(left=10, top=5, right=5)
-    pdf.add_page()
+    print("LISTO 1.5")
     pdf.set_font('Times', '', 8)
+    print("LISTO 2")
     pdf.ln(5)
     linea = 5
     totalFolios = 20
+
+    print ("LISTO 3")
 
     # El propgrama debe preguntar desde que Folio hasta cual Y/O desde que fecha y hasta cual fecha
 
@@ -2300,13 +2309,13 @@ def ImprimirHistoriaClinica(request):
             # Page number
             # self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
 
-    carpeta = 'C:\EntornosPython\Pos6\JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\EntornosPython\pos7Particionado/vulner/JSONCLINICA\HistoriasClinicas/'
     print ("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + 'HistoriaClinica.pdf'
     print ("archivo =" , archivo)
 
-    #pdf.output('C:\EntornosPython\Pos6\JSONCLINICA\HistoriasClinicas/hClinica.pdf', 'F')
+    #pdf.output('C:\EntornosPython\pos7Particionado/vulner/JSONCLINICA\HistoriasClinicas/hClinica.pdf', 'F')
 
 
     try:
@@ -2418,13 +2427,13 @@ def ImprimirOrdenIncapacidad(ingresoId2, historiaId,convenioId , tipoAdmision):
        linea = linea + 4
        pdf.ln(4)
 
-    carpeta = 'C:\EntornosPython\Pos6\JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\EntornosPython\pos7Particionado/vulner/JSONCLINICA\HistoriasClinicas/'
     print ("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + str(historiaId) + 'Incapacidad.pdf'
     print ("archivo =" , archivo)
 
-    #pdf.output('C:\EntornosPython\Pos6\JSONCLINICA\HistoriasClinicas/hClinica.pdf', 'F')
+    #pdf.output('C:\EntornosPython\pos7Particionado/vulner/JSONCLINICA\HistoriasClinicas/hClinica.pdf', 'F')
 
 
     try:
@@ -2526,7 +2535,8 @@ def ImprimirOrdenTerapia(ingresoId2, historiaId, convenioId, tipoAdmision):
         linea = linea + 4
         pdf.ln(4)
 
-    carpeta = 'C:\EntornosPython\Pos6\JSONCLINICA\HistoriasClinicas/'
+    print ("POAQUI VOY A CREAR ARCHIVO")
+    carpeta = 'C:\EntornosPython\pos7Particionado/vulner/JSONCLINICA\HistoriasClinicas/'
     print ("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + str(historiaId) + 'Terapia.pdf'
@@ -2631,7 +2641,7 @@ def ImprimirOrdenLaboratorio(ingresoId2, historiaId, convenioId, tipoAdmision):
         linea = linea + 4
         pdf.ln(4)
 
-    carpeta = 'C:\EntornosPython\Pos6\JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\EntornosPython\pos7Particionado/vulner/JSONCLINICA\HistoriasClinicas/'
     print ("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + str(historiaId) + 'Laboratorio.pdf'
@@ -2736,7 +2746,7 @@ def ImprimirOrdenRadiologia(ingresoId2, historiaId, convenioId, tipoAdmision):
         linea = linea + 4
         pdf.ln(4)
 
-    carpeta = 'C:\EntornosPython\Pos6\JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\EntornosPython\pos7Particionado/vulner\JSONCLINICA\HistoriasClinicas/'
     print ("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento)+ '_' + str(historiaId)  + 'Radiologia.pdf'
@@ -2849,7 +2859,7 @@ def ImprimirOrdenMedicamentos(ingresoId2, historiaId, convenioId, tipoAdmision):
         linea = linea + 4
         pdf.ln(4)
 
-    carpeta = 'C:\EntornosPython\Pos6\JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\EntornosPython\pos7Particionado/vulner/JSONCLINICA\HistoriasClinicas/'
     print ("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + str(historiaId) + 'Medicamentos.pdf'
@@ -2954,7 +2964,7 @@ def ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision):
         linea = linea + 4
         pdf.ln(4)
 
-    carpeta = 'C:\EntornosPython\Pos6\JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\EntornosPython\pos7Particionado/vulner/JSONCLINICA\HistoriasClinicas/'
     print ("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + str(historiaId) + '_' + 'OrdenDeControl.pdf'

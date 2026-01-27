@@ -579,18 +579,17 @@ $('#estadoReg').val(info[0].fields.estadoReg);
 $('#empresa_id').val(info[0].fields.empresa_id);
 $('#usuarioRegistro_id').val(info[0].fields.usuarioRegistro_id);
 $('#descripcion').val(info[0].fields.descripcion);
+
+alert ("Esto viene de particular TRAE FINAL " + info[0].fields.particular );
+
+
+$('#particular').val(info[0].fields.particular);
 $('#tarifariosDescripcionProc_id').val(info[0].fields.tarifariosDescripcionProc_id);
 $('#tarifariosDescripcionHono_id').val(info[0].fields.tarifariosDescripcionHono_id);
 $('#tarifariosDescripcionSum_id').val(info[0].fields.tarifariosDescripcionSum_id);
 			
-
-
-
-
             $('#modelHeadingEditarConvenios').html("Convenios");
             $('#editarModelConvenios').modal('show');
-
-
 
                 },
                  error: function (request, status, error) {
@@ -638,6 +637,22 @@ function EditarGuardarConvenios()
   	var tarifariosDescripcionHono_id = document.getElementById("tarifariosDescripcionHono_id").value;
   	var serviciosAdministrativos_id = document.getElementById("serviciosAdministrativos_id").value;
 	var particular = document.getElementById("particular").value;
+
+
+	// alert( "particular ACTAUALIZADO= " +  particular);
+
+	const checkbox = document.getElementById('particular');
+    
+    // 2. Leer si está marcado (.checked) y su valor (.value)
+    if (checkbox.checked) {
+	particular='S';
+    } else {
+		particular='N';    
+    }
+
+
+	// alert( "particular ACTAUALIZADO_2 = " +  particular);
+
 
 	$.ajax({
 
@@ -749,7 +764,19 @@ function CrearGuardarConvenios()
   	var tarifariosDescripcionSum_id = document.getElementById("tarifariosDescripcionSumC_id").value;
   	var tarifariosDescripcionHono_id = document.getElementById("tarifariosDescripcionHonoC_id").value;
   	var serviciosAdministrativos = document.getElementById("serviciosAdministrativosC_id").value;
-        var particular = document.getelementById("particular");
+	var particular = document.getElementById("particular").value;
+
+	alert("particular = " +  particular);
+
+	if (particular == 'on')
+		{
+		particular='S';
+		}
+	else
+		{
+		particular='N';
+		}
+
 
 	$.ajax({
 

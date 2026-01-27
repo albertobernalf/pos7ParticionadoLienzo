@@ -131,7 +131,7 @@ class PDFAtencionInicialUrgencias(FPDF):
         self.rect(5.0, 18.0, 200.0, 185.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
         # Logo
-        self.image('C:/EntornosPython/Pos6/static/img/MedicalFinal.jpg', 7, 19, 11, 11)
+        self.image('C:/EntornosPython/Pos7Particionado/vulner/static/img/MedicalFinal.jpg', 7, 19, 11, 11)
         # Arial bold 15
         self.set_font('Times', 'B', 7)
         self.ln(3)
@@ -666,7 +666,7 @@ def ImprimirHojaAdmision(ingresoId):
     # Dibuja el borde
     pdf.rect(5.0, 18.0, 200.0, 185.0)  # Coordenadas x, y, ancho, alto
     # Logo
-    pdf.image('C:/EntornosPython/Pos6/static/img/MedicalFinal.jpg', 7, 19, 11, 11)
+    pdf.image('C:/EntornosPython/Pos7Particionado/vulner/static/img/MedicalFinal.jpg', 7, 19, 11, 11)
     # Arial bold 15
     pdf.set_font('Times', 'B', 9)
     pdf.ln(3)
@@ -712,7 +712,7 @@ def ImprimirHojaAdmision(ingresoId):
     pdf.cell(30, 30, hospitalizacion[0]['tipDoc'], 0, 0, 'L')
     pdf.cell(20, 30, hospitalizacion[0]['documento'], 0, 0, 'L')
     pdf.ln(3)
-    pdf.image('C:/EntornosPython/Pos6/static/img/CIRUGIAFINAL.JPG', 140, 45, 30, 30)
+    pdf.image('C:/EntornosPython/Pos7Particionado/vulner/static/img/CIRUGIAFINAL.JPG', 140, 45, 30, 30)
     pdf.cell(50, 31, 'Fecha de Nacimiento:', 0, 0, 'L')
     pdf.cell(20, 31, hospitalizacion[0]['nacio'], 0, 0, 'L')
     pdf.cell(8, 31, 'Edad:', 0, 0, 'L')

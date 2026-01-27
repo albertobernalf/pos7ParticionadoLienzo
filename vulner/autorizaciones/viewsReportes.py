@@ -235,7 +235,7 @@ def ImprimirAutorizaciones(request):
     pdf.cell(100, 30, 'AUTORIZACION:', 0, 0, 'C')
     pdf.set_font('Times', '', 7)
 
-    carpeta = 'C:\EntornosPython\Pos6\JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\EntornosPython\Pos7Particionado/vulner/JSONCLINICA\HistoriasClinicas/'
     print("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + 'Autorizacion.pdf'

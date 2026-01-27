@@ -137,7 +137,7 @@ class PDFFacturacion(FPDF):
         self.rect(5.0, 46.0, 200.0, 220.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
         # Logo
-        self.image('C:/EntornosPython/Pos6/static/img/MedicalFinal.jpg', 7, 5, 30, 17)
+        self.image('C:/EntornosPython/Pos7Particionado/vulner/static/img/MedicalFinal.jpg', 7, 5, 30, 17)
         # Arial bold 15
         self.set_font('Times', 'B', 7)
         self.ln(3)
@@ -693,7 +693,7 @@ def ImprimirFactura(request):
 
     miConexiont.close()
 
-    carpeta = 'C:\EntornosPython\Pos6\JSONCLINICA\Facturas/PDF/'
+    carpeta = 'C:\EntornosPython\Pos7Particionado/vulner/JSONCLINICA\Facturas/PDF/'
     print("carpeta = ", carpeta)
 
     archivo = carpeta + '' + 'Factura_' + str(facturaPaciente.id) + '.pdf'
@@ -1137,7 +1137,7 @@ def ImprimirLiquidacion(request):
 
     miConexiont.close()
 
-    carpeta = 'C:\EntornosPython\Pos6\JSONCLINICA\Facturas/PDF/'
+    carpeta = 'C:\EntornosPython\Pos7Particionado/vulner/JSONCLINICA\Facturas/PDF/'
     print("carpeta = ", carpeta)
 
     #archivo = carpeta + '' + str(pacienteId.documento) + '_' + 'Liquida.pdf'

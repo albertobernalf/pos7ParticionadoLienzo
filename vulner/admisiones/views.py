@@ -31,10 +31,6 @@ from clinico.models import Servicios,EspecialidadesMedicos, Medicos
 from django.db import transaction, IntegrityError
 from django.db.models import Q
 from admisiones.viewsReportes import ImprimirAtencionUrgencias, ImprimirHojaAdmision, ImpresionManilla
-from django.db.models import Q
-from django.db import transaction, IntegrityError
-from django.db.models import F
-from django.db.models import Q
 from django.db import transaction, IntegrityError
 from django.db.models import F
 from tarifarios.models import TiposHonorarios
@@ -77,7 +73,7 @@ def validaAcceso(request):
     print("Sede Mayuscula = ", Sede)
     print(contrase)
     print("sede= ", sede)
-    context = {}
+
     context['Documento'] = username
     context['Username'] = username
     context['Sede'] = sede
@@ -5258,7 +5254,7 @@ def buscarPaises(request):
     print ("Entre buscar  deptos del Pais    =",Pais)
 
 
-    # Combo de Medicos Especialidades
+    # Combo Departamentos
 
 
     miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres", password="123456")
@@ -5678,15 +5674,11 @@ def crearAdmisionDef(request):
             json_data = json.dumps(datosMensaje, default=str)
             return HttpResponse(json_data, content_type='application/json')
 
-
-
-
         # HASTA AQUIP TRANSACCIONALIDAD
 
         # Aqui reporte de inicial URGENCIAS, pero ojo se suspende porque tiene que tener TRIAGE
 
         #servicioUrgencias = Servicios.objects.get(id=busServicio2)
-
 
         #if servicioUrgencias.nombre == 'URGENCIAS':
         #    print("Entre imprimir inicial UREGNCIAS")
@@ -7779,9 +7771,6 @@ def GuardaAbonosAdmision(request):
         if miConexion3:
             cur3.close()
             miConexion3.close()
-
-
-
 
 def PostDeleteConveniosAdmision(request):
 

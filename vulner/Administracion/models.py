@@ -16,8 +16,8 @@ class Mae_Reportes(models.Model):
     descripcion = models.CharField(max_length=500, default='')
     cuerpo_sql = models.TextField(max_length=15000, default='', editable=True)
     encabezados = models.CharField(max_length=1000, default='', editable=True)
-    mae_gruporeportes = models.ForeignKey('Mae_GrupoReportes',blank=True,null= True, editable=True, on_delete=models.PROTECT, null=False)
-    mae_subgruporeportes = models.ForeignKey('Mae_SubGrupoReportes',blank=True,null= True, editable=True, on_delete=models.PROTECT, null=False)
+    mae_gruporeportes = models.ForeignKey('Mae_GrupoReportes',blank=True,null= True, editable=True, on_delete=models.PROTECT)
+    mae_subgruporeportes = models.ForeignKey('Mae_SubGrupoReportes',blank=True,null= True, editable=True, on_delete=models.PROTECT)
     usuario_crea = models.CharField(max_length=20, default='')
     fechaRegistro = models.DateTimeField(default=now, editable=True)
     excel = models.CharField(max_length=1, default='I', editable=True, choices=TIPO_CHOICES, )
@@ -54,7 +54,7 @@ class Mae_SubGrupoReportes(models.Model):
         (INACTIVO, 'Inactivo'),
     )
     id = models.AutoField(primary_key=True)
-    mae_gruporeportes = models.ForeignKey('Mae_GrupoReportes',blank=True,null= True, editable=True, on_delete=models.PROTECT, null=False)
+    mae_gruporeportes = models.ForeignKey('Mae_GrupoReportes',blank=True,null= True, editable=True, on_delete=models.PROTECT)
     nom_subgrupo = models.CharField(max_length=120, unique=True)
     logo = models.CharField(max_length=120, default='' ,  unique=False)
     estadoreg = models.CharField(max_length=1, default='A', editable=True ,choices=TIPO_CHOICES,)
@@ -94,10 +94,10 @@ class Mae_RepParametros(models.Model):
         (INACTIVO, 'Inactivo'),
     )
     id = models.AutoField(primary_key=True)
-    mae_reportes = models.ForeignKey('Mae_Reportes',blank=True,null= True, editable=True, on_delete=models.PROTECT, null=False)
+    mae_reportes = models.ForeignKey('Mae_Reportes',blank=True,null= True, editable=True, on_delete=models.PROTECT)
     parametro = models.IntegerField()
     parametro_texto = models.CharField(max_length=100, editable=True)
-    mae_tiposcampo = models.ForeignKey('Mae_TiposCampo',blank=True,null= True, editable=True, on_delete=models.PROTECT, null=False)
+    mae_tiposcampo = models.ForeignKey('Mae_TiposCampo',blank=True,null= True, editable=True, on_delete=models.PROTECT)
    # parametro_valor = models.CharField(max_length=30, editable=True)
     estadoreg = models.CharField(max_length=1, default='A', editable=True ,choices=TIPO_CHOICES,)
 

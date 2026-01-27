@@ -727,6 +727,62 @@ def import_datos_global_1(request):
 
 
 
+    file_path = 'C:\EntornosPython\pos7ParticionadoLienzo/vulner\CargueInicial\RipsCausaExterna.csv'
+    print("file_path", file_path)
+
+
+    ripsCausaExterna = RipsCausaExterna.objects.count()
+
+    if (ripsCausaExterna == 0  ):
+
+
+
+        with open(file_path, 'r') as f:
+            reader = csv.reader(f, delimiter=';')
+            next(reader)
+
+            for row in reader:
+                try:
+                    print("row nombre = ", row[1])
+                    ripsCausaExterna = RipsCausaExterna.objects.create(
+                        codigo=row[1],
+                        nombre=row[2],
+
+                    )
+                except (valueError, IndexError) as e:
+
+                    print("Error al crear : {e}")
+                    return JsonResponse({'success': False, 'Mensaje': e})
+
+
+    file_path = 'C:\EntornosPython\pos7ParticionadoLienzo/vulner\CargueInicial\RipsDestinoEgreso.csv'
+    print("file_path", file_path)
+
+
+    ripsDestinoEgreso = RipsDestinoEgreso.objects.count()
+
+    if (ripsDestinoEgreso == 0  ):
+
+
+
+        with open(file_path, 'r') as f:
+            reader = csv.reader(f, delimiter=';')
+            next(reader)
+
+            for row in reader:
+                try:
+                    print("row nombre = ", row[1])
+                    ripsDestinoEgreso = RipsDestinoEgreso.objects.create(
+                        codigo=row[1],
+                        nombre=row[2],
+
+                    )
+                except (valueError, IndexError) as e:
+
+                    print("Error al crear : {e}")
+                    return JsonResponse({'success': False, 'Mensaje': e})
+
+
     file_path = 'C:\EntornosPython\pos7ParticionadoLienzo/vulner\CargueInicial\Periodos.csv'
     print("file_path", file_path)
 
@@ -3551,11 +3607,11 @@ def import_datos_global_2(request):
                             print("Error al crear : {e}")
                             return JsonResponse({'success': False, 'Mensaje': e})
 
-    file_path = 'C:\EntornosPython\pos7ParticionadoLienzo/vulner\CargueInicial\Examenes.csv'
+    file_path = 'C:\EntornosPython\pos7ParticionadoLienzo/vulner\CargueInicial\Examenes_20260126_2.csv'
     print("file_path", file_path)
     examenes= Examenes.objects.count()
 
-    if (examenes == 1  ):
+    if (examenes == 0  ):
 
         with open(file_path, 'r') as f:
             reader = csv.reader(f, delimiter=';')

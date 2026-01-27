@@ -63,6 +63,11 @@ function arrancaAdmisiones(valorTabla,valorData)
              "<'row'<'col-sm-12'tr>>" +
              "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
 
+// ESTABA
+//   dom: "<'row mb-0'<'col-sm-2'B><'col-sm-1'><'col-sm-4'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
+//            "<'row'<'col-sm-12'tr>>" +
+//             "<'row mt-0'<'col-sm-4'i><'col-sm-4'p>>",
+
 
 //  dom: 'Bfrtilp',
   buttons: [

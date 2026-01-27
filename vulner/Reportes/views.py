@@ -85,7 +85,7 @@ def menuAcceso(request):
     return render(request, "accesoPrincipalAngular.html", context)
 
 
-def validaAcceso(request):
+def validaAccesoR(request):
 
     print ("Entre ValidacionR")
     context = {}

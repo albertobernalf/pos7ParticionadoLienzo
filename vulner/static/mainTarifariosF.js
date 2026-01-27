@@ -1107,13 +1107,15 @@ function CrearTarifarioSuministros()
 	var serviciosAdministrativos_id = document.getElementById("serviciosAdministrativosY").value;
 
 
-	    alert( "este es eltiposTarifa_id de Suministros QUE VOY A CREAR  =" + tiposTarifa_id) ;
+	var rutaArchivo = document.getElementById("rutaArchivoSuministros").value;
+
+	    alert( "este es eltiposTarifa1_id QUE VOY A CREAR  =" + tiposTarifa1_id) ;
 
 
             $.ajax({
 
 	        url: "/crearTarifarioSuministros/",
-    		data: {'tiposTarifa_id':tiposTarifa_id,'username_id':username_id,'serviciosAdministrativos_id':serviciosAdministrativos_id},
+    		data: {'tiposTarifa_id':tiposTarifa_id,'username_id':username_id,'serviciosAdministrativos_id':serviciosAdministrativos_id, 'rutaArchivoSuministros':rutaArchivo},
                 type: "POST",
                 dataType: 'json',
                 success: function (data2) {

@@ -1,3 +1,4 @@
+REM
 cd c:\entornospython\pos7Particionado
 cd Scripts
 call activate

@@ -258,19 +258,17 @@ def CrearTarifarioProcedimientos(request):
 
             df = pd.read_excel(archivo_excel)
 
-            print("ya lei el dataframe")
 
             # Crear una sentencia INSERT (ajustar según la estructura de la tabla)
 
             #try:
             for index, row in df.iterrows():
-                    query = 'INSERT INTO tarifarios_tarifariosprocedimientos ("codigoHomologado", "colValorBase", "fechaRegistro", "estadoReg"  ,"codigoCups_id"  ,    "tiposTarifa_id" ,"serviciosAdministrativos_id" ) VALUES (%s, %s,  %s, %s, %s, %s, %s)'
-                    valores = (row["codigoHomologado"], row["colValorBase"], row["fechaRegistro"],row["estadoReg"], row["codigoCups_id"] ,   row["tiposTarifa_id"], row["serviciosAdministrativos_id"] )
+                    query = 'INSERT INTO tarifarios_tarifariosprocedimientos ("codigoHomologado", "colValorBase", "fechaRegistro", "estadoReg"  ,"codigoCups_id"  , concepto_id,    "tiposTarifa_id" ,"serviciosAdministrativos_id" ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'
+                    valores = (row["codigoHomologado"], row["colValorBase"], row["fechaRegistro"],row["estadoReg"], row["codigoCups_id"] , row["concepto_id"] ,  row["tiposTarifa_id"], row["serviciosAdministrativos_id"] )
                     cur3.execute(query, valores)
-                    print("pase")
+
 
             # Cerrar la conexión
-            print("voy a GUARDAR")
             miConexion3.commit()
             cur3.close()
             miConexion3.close()
@@ -733,14 +731,12 @@ def CrearTarifarioSuministros(request):
     tiposTarifa_id = request.POST.get('tiposTarifa_id')
     print ("tiposTarifa_id =", tiposTarifa_id)
 
+
     serviciosAdministrativos_id = request.POST.get('serviciosAdministrativos_id')
     print ("serviciosAdministrativos_id =", serviciosAdministrativos_id)
 
     if (serviciosAdministrativos_id == ''):
         serviciosAdministrativos_id = 'null'
-
-    rutaArchivo = request.POST.get('rutaArchivoSuministros')
-    print ("rutaArchivo =", rutaArchivo)
 
     username_id = request.POST.get('username_id')
     print ("username_id =", username_id)
@@ -769,21 +765,16 @@ def CrearTarifarioSuministros(request):
             cur3.execute(comando)
             # Aqui Rutina carga archivo Excel
 
-            #archivo_excel = 'c:\\Entornospython\\Pos7ParticionadoLienzo\\vulner\\JSONCLINICA\\CargaSuministros\\particular.xlsx'
-            #df = pd.read_excel(archivo_excel)
-
-            archivo_excel = rutaArchivo
+            archivo_excel = 'c:\\Entornospython\\Pos7ParticionadoLienzo\\vulner\\JSONCLINICA\\CargaSuministros\\particular.xlsx'
             df = pd.read_excel(archivo_excel)
 
-            print ("Ya cargue dataFrame")
+
             # Crear una sentencia INSERT (ajustar según la estructura de la tabla)
 
             #try:
-
-            print("Voy a leer la data:")
             for index, row in df.iterrows():
-                    query = 'INSERT INTO tarifarios_tarifariossuministros ("codigoHomologado", "colValorBase", "fechaRegistro", "estadoReg"  ,"codigoCum_id"  ,  "tiposTarifa_id"  ) VALUES (%s, %s, %s, %s, %s, %s)'
-                    valores = (row["codigoHomologado"], row["colValorBase"], row["fechaRegistro"],row["estadoReg"], row["codigoCum_id"] ,   row["tiposTarifa_id"] )
+                    query = 'INSERT INTO tarifarios_tarifariossuministros ("codigoHomologado", "colValorBase", "fechaRegistro", "estadoReg"  ,"codigoCum_id"  , concepto_id,    "tiposTarifa_id"  ) VALUES (%s, %s, %s, %s, %s, %s, %s)'
+                    valores = (row["codigoHomologado"], row["colValorBase"], row["fechaRegistro"],row["estadoReg"], row["codigoCum_id"] , row["concepto_id"] ,  row["tiposTarifa_id"] )
                     cur3.execute(query, valores)
 
             #except DatabaseError as e:

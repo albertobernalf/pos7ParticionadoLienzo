@@ -1037,3 +1037,21 @@ class ProgramacionCitasMedicas(models.Model):
 
 	6. A grandes modos FIN PRIMERA PARTE PROYECTO
 	7. Inicio segunda parte proyecto (Inteligencia artificial + Electronica-robotica)
+
+
+Enero 23
+
+Puesta a Punta :
+
+        OPS: el nuevo pos7ParticionadoLienzo ya tiene cambios pero no se puede PUSH a pos7ParticionadoLienzoOriginal
+	cuando se bajo de GIT, SE CAMBIO pos7ParticionadoOriginal --> pos7Particionado  OJO
+        la pantalla de admisiones se modifica el "dom", propiedad del datatable tbldatos de admisiones que en lienzo esta comentariao
+        ojo que pasa con los botones de la izquirda ver el html por que no tienen cabeceras o titulos    esto en paneladmisiones.html
+ 
+
+Enero 26:
+	Ojo vrificar en tarifarioviews, no crear el servi¿cioadministrativo en cargarsuministros ?? PORCUA
+
+Enero 27:
+
+       Mañana lo primero sacar backup de pos7ParticionadoLienzo  --> subir al GIT, sacar backup IMPORTANTE

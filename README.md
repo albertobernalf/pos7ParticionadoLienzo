@@ -1,0 +1,1 @@
+"# pos7ParticionadoLienzo" 

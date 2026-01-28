@@ -1057,8 +1057,6 @@ Enero 27:
 Enero 28:
 
 	El boton refrescar de admisones. No refresca INDICADORES
-        Al crear la admision desde triage, no dice que combo de rips hace falta seleccionar controlar eso con javascript
+        Al crear la admision desde triage, no dice que combo de rips hace falta seleccionar controlar eso con javascript VERIFICAR
 	se pierde el nombre de la Aplicacion al crear admision desde triag VERIFICAR
-	En farmacia, la primera parte al suministro agregarle el codigo CUMS..., para que en el combo de abajo pueda ser escogido...
-        creat tabla tiposturnoenfermeria en cargue inicial
-	en el modulo de enfermeria cuando crea una nota de enfermeria no refresca automaticamnetb el datatable nortas, toca seleccionar de nuevo para que lo traiga
+	Contrlolar las cantiddes a despachar y no ddispensar mas de lo pedido

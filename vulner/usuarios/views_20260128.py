@@ -21,12 +21,12 @@ from cartera.models import TiposPagos, TiposNotas, TiposGlosas, FormasPagos,Esta
 from cirugia.models import EstadosCirugias, EstadosProgramacion, EstadosSalas,FinalidadCirugia, GravedadCirugia, IntervencionCirugias, OrganosCirugias, RegionesOperatorias, TiposAnestesia, TiposCirugia, TiposHeridasOperatorias, ViasDeAcceso, ZonasCirugia
 from clinico.models import CausasExterna, Eps, EstadosSalida, Enfermedades, EstadoExamenes, Ips, NivelesClinica, Regimenes, TipoDietas, EstadosInterconsulta, CodigosAtc, Diagnosticos, Especialidades, Examenes, EstadosInterconsulta
 from clinico.models import ExamenesRasgos, FormasFarmaceuticas, FrecuenciasAplicacion, NivelesRegimenes, PrincipiosActivos, Recomendaciones, RevisionSistemas, TipoOxigenacion, TiposAntecedente, TiposCotizante, TiposDiagnostico, TiposExamen, TiposFolio, TiposIncapacidad, TiposInterconsulta, TiposRadiologia, TiposSalidas, TiposTriage, UnidadesDeMedidaDosis,  ViasAdministracion, ViasIngreso
-from enfermeria.models import EnfermeriaTipoMovimiento, EnfermeriaTipoOrigen, EnfermeriaTipoOrigen, TiposTurnosEnfermeria
+from enfermeria.models import EnfermeriaTipoMovimiento, EnfermeriaTipoOrigen, EnfermeriaTipoOrigen
 from farmacia.models import FarmaciaEstados
 from planta.models import TiposPlanta
 
 from tarifarios.models import TiposHonorarios, GruposQx, Estancias, GruposQx, MinimosLegales, TablaHonorariosIss, TablaHonorariosSoat, TablaMaterialSuturaCuracion, TablaMaterialSuturaCuracionIss, TablaSalasDeCirugia, TablaSalasDeCirugiaIss, TarifariosDescripcion, TarifariosDescripcionHonorarios, TarifariosProcedimientos, TarifariosProcedimientosHonorarios, TarifariosSuministros, TiposHonorarios, TiposTarifa, TiposTarifaProducto
-from rips.models import RipsTipoOtrosServicios, RipsViasAdministracion, RipsConceptoRecaudo, RipsDestinoEgreso,RipsEstados, RipsFinalidadConsulta, RipsFormaFarmaceutica, RipsGrupoServicios,RipsModalidadAtencion, RipsMunicipios, RipsPaises, RipsServicios, RipsTipoMedicamento, RipsTipos, RipsTiposDocumento, RipsTiposNotas, RipsTiposPagoModerador, RipsTipoUsuario, RipsUmm, RipsUnidadUpr, RipsViasIngresoSalud, RipsZonaTerritorial, RipsCums, RipsMunicipios, RipsTiposDocumento, RipsCausaExterna, RipsDestinoEgreso
+from rips.models import RipsTipoOtrosServicios, RipsViasAdministracion, RipsConceptoRecaudo, RipsDestinoEgreso,RipsEstados, RipsFinalidadConsulta, RipsFormaFarmaceutica, RipsGrupoServicios,RipsModalidadAtencion, RipsMunicipios, RipsPaises, RipsServicios, RipsTipoMedicamento, RipsTipos, RipsTiposDocumento, RipsTiposNotas, RipsTiposPagoModerador, RipsTipoUsuario, RipsUmm, RipsUnidadUpr, RipsViasIngresoSalud, RipsZonaTerritorial, RipsCums, RipsMunicipios, RipsTiposDocumento
 from facturacion.models import TiposSuministro, Conceptos, ConceptosAfacturar, RegimenesTipoPago, SalariosLegales, SalariosMinimosLegales, TiposEmpresa, Suministros, Empresas
 from sitios.models import Paises, Departamentos, Municipios, SedesClinica, Ciudades, Ubicaciones, TiposSalas, Salas, Bodegas, Centros, Dependencias, DependenciasTipo, Localidades, ServiciosAdministrativos, ServiciosSedes
 from usuarios.models import TiposDocumento, TiposUsuario
@@ -724,6 +724,7 @@ def import_datos_global_1(request):
 
                     print("Error al crear : {e}")
                     return JsonResponse({'success': False, 'Mensaje': e})
+
 
 
     file_path = 'C:\EntornosPython\pos7ParticionadoLienzo/vulner\CargueInicial\RipsCausaExterna.csv'
@@ -3458,35 +3459,6 @@ def import_datos_global_1(request):
 
 
 
-    file_path = 'C:\EntornosPython\pos7ParticionadoLienzo/vulner\CargueInicial\TiposTurnosEnfermeria.csv'
-    print("file_path", file_path)
-
-
-    tiposTurnosEnfermeria = TiposTurnosEnfermeria.objects.count()
-
-    if (tiposTurnosEnfermeria == 0  ):
-
-        with open(file_path, 'r') as f:
-            reader = csv.reader(f, delimiter=';')
-            next(reader)
-
-            for row in reader:
-                try:
-                    print("row nombre = ", row[1])
-                    tiposTurnosEnfermeria = TiposTurnosEnfermeria.objects.create(
-                        nombre=row[1],
-                        horario=row[2],
-                        estadoReg=row[4],
-                        sedesClinica_id=row[5],
-                    )
-                except (valueError, IndexError) as e:
-
-                    print("Error al crear : {e}")
-                    return JsonResponse({'success': False, 'Mensaje': e})
-
-
-
-
 
     return JsonResponse({'success': True, 'Mensaje': 'Los datos se importaron correctamente ¡'})
 
@@ -3648,42 +3620,41 @@ def import_datos_global_2(request):
             for row in reader:
                 try:
                     print("row nombre = ", row[1])
-                    #if (row[1] != 'SOMATOMEDINA C [FACTOR I DE CRECIMIENTO SIMILAR A LA INSULINA O IGF-1]' and row[1] != 'APICOGRAMA'):
-                    print("Aqui voy con Examenes_2026")
+                    if (row[1] != 'SOMATOMEDINA C [FACTOR I DE CRECIMIENTO SIMILAR A LA INSULINA O IGF-1]' and row[1] != 'APICOGRAMA'):
 
-                    examenes = Examenes.objects.create(
-                        nombre=row[1],
-                        TiposExamen_id=row[2],
-                        requiereAutorizacion=row[3],
-                        citaControl=row[4],
-                        codigoCups=row[5],
-                        codigoRips=row[6],
-                        concepto_id=row[7],
-                        edadFin = row[8],
-                        edadIni = row[9],
-                        estadoReg=row[10],
-                        tipoRadiologia_id=row[11],
-                        solicitaEnfermeria=row[12],
-                        centroCosto=row[13],
-                        cita1Vez=row[14],
-                        consentimientoInformado=row[15],
-                        cuentaContable=row[16],
-                        cupsCategoria=row[17],
-                        cupsGrupo=row[18],
-                        cupsSubgrupo=row[19],
-                        distribucionTerceros=row[20],
-                        duracion=row[21],
-                        finalidad=row[22],
-                        manejaInterfaz=row[23],
-                        nivelAtencion=row[24],
-                        resolucion1132=row[25],
-                        grupoQx_id=row[26],
-                        cantidadUvr=row[27],
-                        honorarios=row[28],
-                        cupsSubCategoria=row[29],
-                        #uvrAño=row[30],
-                        tipoHonorario_id=row[30],
-                    )
+                        examenes = Examenes.objects.create(
+                            nombre=row[1],
+                            TiposExamen_id=row[2],
+                            requiereAutorizacion=row[3],
+                            citaControl=row[4],
+                            codigoCups=row[5],
+                            codigoRips=row[6],
+                            concepto_id=row[7],
+                            edadFin = row[8],
+                            edadIni = row[9],
+                            estadoReg=row[10],
+                            tipoRadiologia_id=row[11],
+                            solicitaEnfermeria=row[12],
+                            centroCosto=row[13],
+                            cita1Vez=row[14],
+                            consentimientoInformado=row[15],
+                            cuentaContable=row[16],
+                            cupsCategoria=row[17],
+                            cupsGrupo=row[18],
+                            cupsSubgrupo=row[19],
+                            distribucionTerceros=row[20],
+                            duracion=row[21],
+                            finalidad=row[22],
+                            manejaInterfaz=row[23],
+                            nivelAtencion=row[24],
+                            resolucion1132=row[25],
+                            grupoQx_id=row[26],
+                            cantidadUvr=row[27],
+                            honorarios=row[28],
+                            cupsSubCategoria=row[29],
+                            #uvrAño=row[30],
+                            tipoHonorario_id=row[30],
+                        )
                 except (valueError, IndexError) as e:
 
                     print("Error al crear : {e}")

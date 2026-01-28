@@ -2898,6 +2898,9 @@ def guardarAdmisionTriage(request):
         servicioAdmTriage = request.POST["servicioAdmTriage"]
         print(" servicioAdmTriage = ", servicioAdmTriage)
 
+        escogeModulo = request.POST["escogeModulo"]
+        print(" escogeModulo = ", escogeModulo)
+        context['EscogeModulo'] = escogeModulo
 
         # Consigo el Id del Paciente Documento
 

@@ -1,0 +1,3 @@
+"id","nombre","horario","fechaRegistro","estadoReg","sedesClinica_id","usuarioRegistro_id"
+1,"TURNO DE LA NOCHE","DE 07:00 PM HASTA EL DIA SIGUIENTE 07:00 AM",NULL,"A",1,NULL
+2,"TURNO DE LA MAÑANA","De 07:00 A 19:00 PM",NULL,"A",1,NULL

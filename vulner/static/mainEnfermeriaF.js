@@ -2358,6 +2358,12 @@ function GuardarNotasEnfermeria()
 		document.getElementById("mensajesError").innerHTML = info.Mensaje;			
 		}
 
+		alert("Voy a hacer el REFRESH");
+
+
+	     arrancaEnfermeria(9,data);
+	     dataTableNotasEnfermeriaInitialized = true;
+
 
 
     /// Aqui inicializar combos
@@ -2373,8 +2379,6 @@ function GuardarNotasEnfermeria()
             });
 
 
-	     arrancaEnfermeria(9,data);
-	     dataTableNotasEnfermeriaInitialized = true;
 
       
   };
@@ -2472,7 +2476,7 @@ function GuardarDevolucion()
 
  	      		}, // cierra function sucess
  	      	         error: function(data){
-		       		document.getElementById("mensajesError").innerHTML =  data.responseText
+		       		document.getElementById("mensajesError").innerHTML =  data.responseText;
 			        },
  // cierra error function
   	        });  // cierra ajax

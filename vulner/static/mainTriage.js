@@ -376,12 +376,24 @@ $(document).on('change', '#busDocumentoSelTriage', function(event) {
 		data: {'tipoDoc':tipoDoc,'documento':documento},
 		success: function (Usuarios) {
 
-			 alert("REGRESE DATOS MODAL2 = " + Usuarios.tipoDoc + " " +  Usuarios.documento);
+			 // alert("REGRESE DATOS MODAL222 = " + Usuarios.tipoDoc + " " +  Usuarios.documento);
 
-				
+		if (Usuarios.documento==undefined)
+					{
+					
+				$('#tipoDocTriageModal').val(tipoDoc);
+				$('#documentoTriageModal').val(documento);
+
+					}
+				else
+					{
 
 				$('#tipoDocTriageModal').val(Usuarios.tipoDoc);
 				$('#documentoTriageModal').val(Usuarios.documento);
+
+			}
+
+				
 				$('#nombre').val(Usuarios.nombre);
 				$('#primerNombre').val(Usuarios.primerNombre);
 				$('#segundoNombre').val(Usuarios.segundoNombre);
@@ -1377,11 +1389,47 @@ function guardarAdmisionTriage()
 	// alert("Voy a guardar crear adnmision TRIAGE con empresa = " + empresasT);
         alert("ripsServiciosIng = " + ripsServiciosIng);
 
-      if (ripsServiciosIng='')
+
+      if (ripsmodalidadGrupoServicioTecSal='')
 	{
-	document.getElementById("mensajesErrorModalCreaAdmisionTriage").value = 'Campo RIPS servicio de Ingreso Obligatorio'
+	document.getElementById("mensajesErrorModalCreaAdmisionTriage").value = 'Campo RIPS Modalidad Grupo Servicio Obligatorio'
        return;
 	}
+
+      if (ripsViaIngresoServicioSalud='')
+	{
+	document.getElementById("mensajesErrorModalCreaAdmisionTriage").value = 'Campo RIPS ViaIngreso Servicio Salud Obligatorio'
+       return;
+	}
+
+     if (ripsGrupoServicios='')
+	{
+	document.getElementById("mensajesErrorModalCreaAdmisionTriage").value = 'Campo RIPS Grupo Servicios Obligatorio'
+       return;
+	}
+
+    if (ripsCondicionDestinoUsuarioEgreso='')
+	{
+	document.getElementById("mensajesErrorModalCreaAdmisionTriage").value = 'Campo RIPS Condicion Destino Usuario Egreso Obligatorio'
+       return;
+	}
+    if (ripsCausaMotivoAtencion='')
+	{
+	document.getElementById("mensajesErrorModalCreaAdmisionTriage").value = 'Campo rips Causa Motivo Atencion Obligatorio'
+       return;
+	}
+    if (ripsDestinoUsuarioEgresoRecienNacido='')
+	{
+	document.getElementById("mensajesErrorModalCreaAdmisionTriage").value = 'Campo rips Destino Usuario Egreso Recien Nacido Obligatorio'
+       return;
+	}
+    if (ripsServiciosIng='')
+	{
+	document.getElementById("mensajesErrorModalCreaAdmisionTriage").value = 'Campo rips Servicios Ing Obligatorio'
+       return;
+	}
+
+
 	
 
 	alert("Voy AJAX ");
@@ -1612,8 +1660,7 @@ $(document).on('change', '#empresasTE', function(event) {
        var select = document.getElementById("empresasTE"); /*Obtener el SELECT */
        var empresaId  = select.options[select.selectedIndex].value; /* Obtener el valor */
 
-
-	alert("Entre para llamar a buscarConvenios de Empresa : " + empresaId)
+	alert("Entre para llamar a buscarConvenios de Empresa : " + empresaId);
 
         $.ajax({
 	           url: '/buscarConvenioEmpresa',

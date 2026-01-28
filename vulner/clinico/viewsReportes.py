@@ -2309,7 +2309,7 @@ def ImprimirHistoriaClinica(request):
             # Page number
             # self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
 
-    carpeta = 'C:\EntornosPython\pos7Particionado/vulner/JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\\EntornosPython\\pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'
     print ("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + 'HistoriaClinica.pdf'
@@ -2427,7 +2427,7 @@ def ImprimirOrdenIncapacidad(ingresoId2, historiaId,convenioId , tipoAdmision):
        linea = linea + 4
        pdf.ln(4)
 
-    carpeta = 'C:\EntornosPython\pos7Particionado/vulner/JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\\EntornosPython\\pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'
     print ("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + str(historiaId) + 'Incapacidad.pdf'
@@ -2536,7 +2536,7 @@ def ImprimirOrdenTerapia(ingresoId2, historiaId, convenioId, tipoAdmision):
         pdf.ln(4)
 
     print ("POAQUI VOY A CREAR ARCHIVO")
-    carpeta = 'C:\EntornosPython\pos7Particionado/vulner/JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\\EntornosPython\\pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'
     print ("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + str(historiaId) + 'Terapia.pdf'
@@ -2641,7 +2641,7 @@ def ImprimirOrdenLaboratorio(ingresoId2, historiaId, convenioId, tipoAdmision):
         linea = linea + 4
         pdf.ln(4)
 
-    carpeta = 'C:\EntornosPython\pos7Particionado/vulner/JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\\EntornosPython\\pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'
     print ("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + str(historiaId) + 'Laboratorio.pdf'
@@ -2746,7 +2746,7 @@ def ImprimirOrdenRadiologia(ingresoId2, historiaId, convenioId, tipoAdmision):
         linea = linea + 4
         pdf.ln(4)
 
-    carpeta = 'C:\EntornosPython\pos7Particionado/vulner\JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\\EntornosPython\\pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'
     print ("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento)+ '_' + str(historiaId)  + 'Radiologia.pdf'
@@ -2859,7 +2859,7 @@ def ImprimirOrdenMedicamentos(ingresoId2, historiaId, convenioId, tipoAdmision):
         linea = linea + 4
         pdf.ln(4)
 
-    carpeta = 'C:\EntornosPython\pos7Particionado/vulner/JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\\EntornosPython\\pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'
     print ("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + str(historiaId) + 'Medicamentos.pdf'
@@ -2964,7 +2964,7 @@ def ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision):
         linea = linea + 4
         pdf.ln(4)
 
-    carpeta = 'C:\EntornosPython\pos7Particionado/vulner/JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\\EntornosPython\\pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'
     print ("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + str(historiaId) + '_' + 'OrdenDeControl.pdf'

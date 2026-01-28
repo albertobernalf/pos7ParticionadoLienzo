@@ -3016,15 +3016,19 @@ def guardarAdmisionTriage(request):
         ripsViaIngresoServicioSalud = request.POST["ripsViaIngresoServicioSalud"]
         ripsGrupoServicios = request.POST["ripsGrupoServicios"]
         ripsCausaMotivoAtencion = request.POST["ripsCausaMotivoAtencion"]
+        print("Aqui voy 0.1")
         ripsRecienNacido = request.POST["ripsRecienNacido"]
         ripsPesoRecienNacido = request.POST["ripsPesoRecienNacido"]
         ripsNumConsultasCPrenatal = request.POST["ripsNumConsultasCPrenatal"]
+
         ripsEdadGestacional = request.POST["ripsEdadGestacional"]
         ripsDestinoUsuarioEgresoRecienNacido = request.POST["ripsDestinoUsuarioEgresoRecienNacido"]
-
+        print("Aqui voy 0.2")
         ripsDestinoUsu1 = RipsDestinoEgreso.objects.get(id=ripsDestinoUsuarioEgresoRecienNacido)
+        print("Aqui voy 0.3")
         ripsCondicionDestinoUsuarioEgreso = request.POST["ripsCondicionDestinoUsuarioEgreso"]
 
+        print("Aqui voy 1")
 
         # Consigo datos de la liquidacion Actual triage o sea la cuenta
         liq=0
@@ -3042,14 +3046,12 @@ def guardarAdmisionTriage(request):
                 datos = {'messages' : 'No existe Id de liquidacion'}
                 #return JsonResponse(datos, safe=False)
 
-
-
         finally:
             # Este bloque se ejecutara siempre
                 print ("final")
 
         print("liq = ", liq)
-
+        print("Aqui voy 2")
 
         # Aqui averigiamos el serviciosSedes
 
@@ -3058,8 +3060,8 @@ def guardarAdmisionTriage(request):
 
                 servicioSedeIngreso = ServiciosSedes.objects.get(sedesClinica_id=sede, servicios_id=busServicio2)
 
-                print ("LiquidacionDesdeId.id = ", liquidacionDesdeId.id)
-                liq = liquidacionDesdeId.id
+                #print ("LiquidacionDesdeId.id = ", liquidacionDesdeId.id)
+                #liq = liquidacionDesdeId.id
         except ObjectDoesNotExist:
                 rollo=1
                 print("No existe Id de liquidacion")

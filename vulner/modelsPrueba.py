@@ -1052,7 +1052,13 @@ Enero 26:
 
 Enero 27:
 
-        ops que paso con el combo lñcalidades. VERIFICAR AUNQUE  A VECES LOS TRAE, SE DESAPARECEN POR CUA??
-	Cuando crea un triage si lo CREA pero sale ERRRO server erro 500 y no devuelve a la pagina triage VERIFICAR DE NUEVO A VER SI YAP
-	cuando hago un folio de hclinica tambien se queda en la pagina y no devuelve al panelclinico OPS que pasa ?? VERIFICAR DE NUEVO A VER SI YAP
 	Ops el historial de medicamentos NOPS sale ??????
+
+Enero 28:
+
+	El boton refrescar de admisones. No refresca INDICADORES
+        Al crear la admision desde triage, no dice que combo de rips hace falta seleccionar controlar eso con javascript
+	se pierde el nombre de la Aplicacion al crear admision desde triag VERIFICAR
+	En farmacia, la primera parte al suministro agregarle el codigo CUMS..., para que en el combo de abajo pueda ser escogido...
+        creat tabla tiposturnoenfermeria en cargue inicial
+	en el modulo de enfermeria cuando crea una nota de enfermeria no refresca automaticamnetb el datatable nortas, toca seleccionar de nuevo para que lo traiga

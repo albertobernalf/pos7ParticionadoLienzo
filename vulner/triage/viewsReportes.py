@@ -590,7 +590,7 @@ def ImprimirAtencionInicialUrgencias(ingresoId2):
     linea = linea + 3
     pdf.ln(3)
 
-    carpeta = 'C:\EntornosPython\Pos6\JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\\EntornosPython\\Pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'
     print("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + 'AtencionInicialUrgencias.pdf'
@@ -878,7 +878,8 @@ def ImprimirHojaAdmision(ingresoId):
     linea = linea + 3
     pdf.ln(5)
 
-    carpeta = 'C:\EntornosPython\Pos6\JSONCLINICA\HistoriasClinicas/'
+    #carpeta = 'C:\EntornosPython\Pos7Particionado\vulner\JSONCLINICA\HistoriasClinicas\'
+    carpeta = 'C:\\EntornosPython\\Pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'
     print("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + 'HojaAdmision.pdf'
@@ -976,7 +977,7 @@ def ImprimirManilla(ingresoId):
     pdf.ln(3)
     pdf.cell(5, 35, 'Alergias:', 0, 0, 'C')
 
-    carpeta = 'C:\EntornosPython\Pos6\JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\\EntornosPython\\Pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'
     print("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + 'Manilla.pdf'
@@ -1057,7 +1058,7 @@ def ImprimirTriage(request):
     pdf.cell(100, 30, 'TRIAGE:', 0, 0, 'C')
     pdf.set_font('Times', '', 7)
 
-    carpeta = 'C:\EntornosPython\Pos6\JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\\EntornosPython\\Pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'
     print("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + 'Triage.pdf'
@@ -1136,7 +1137,7 @@ def ImprimirTriageParametro(triageId):
     pdf.cell(100, 30, 'TRIAGE:', 0, 0, 'C')
     pdf.set_font('Times', '', 7)
 
-    carpeta = 'C:\EntornosPython\Pos6\JSONCLINICA\HistoriasClinicas/'
+    carpeta = 'C:\\EntornosPython\\Pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'
     print("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + 'Triage.pdf'

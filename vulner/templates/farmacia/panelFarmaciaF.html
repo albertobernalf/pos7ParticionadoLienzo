@@ -18,7 +18,8 @@
 <div class="marco">
     <ul class="tabs">
 	<li><a href="#Farmacia"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span> Panel Farmacia </a></li>
-        <li><a href="#Despachos"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span> Crear Despachos </a></li>
+        <li><a href="#Despachos"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Despachos Pendientes </a></li>
+        <li><a href="#DespachosRealizados"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Despachos Realizados </a></li>
 	<li><a href="#ConsultaDespachos"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Dispensacion General</a></li>
         <li><a href="#Devoluciones"><span class="fa-solid fa-user-doctor-message"></span> <span  class="tab-text"> </span> Devoluciones</a></li>
 
@@ -105,22 +106,23 @@ function RefrescarPantalla() {
    			   <div class="row">
 				
                                         <table  id= "tablaPanelFarmacia" class=" display table table-striped table-sm fs-6 nowrap" style="width: 100%">
+					<caption>Ordenes de Farmacia </caption>
                                            <thead>
                                             <tr>    
 						<bold> 
 					     <th>Sel</th>    
 					     <th>Estado</th>                                                                                          
- 						  <th>id</th>                             
+ 						  <th>Orden #</th>                             
+					 <th>tipoDoc</th>                                              
+					 <th>Documento</th>                                              
+					 <th>Paciente</th>                                              
+					 <th>Servicio</th>                                              
+					 <th>Cama</th>                                             
 						 <th>tipoOrigen</th>                                        
 						 <th>tipoMovimiento</th>  
 						 <th>Servicio</th>  					
 					 <th>Historia</th>     
 					 <th>Estado</th>                                              
-					 <th>tipoDoc</th>                                              
-					 <th>Documento</th>                                              
-					 <th>Paciente</th>                                              
-					 <th>Servicio</th>                                              
-					 <th>Cama</th>                                              
 				              
 					</bold>                                  
 
@@ -375,6 +377,16 @@ function RefrescarPantalla() {
  <!-- INICIO TABLE DE  EL DATATABLE  -->
 		<div class="container my-2">
 
+			<div align="left" height="10px" width="100px">
+			Orden :  <span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="ordenFarmaciaX"></span>
+			<span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;" id="nombreTipoDocNX"></span>
+			<span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="documentoNX"></span>
+			<span  style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;" id="pacienteX"></span>
+			Ing#: <span id="consecutivoAdmisionX"></span>
+			Servicio: <span id="servicioX"></span>
+			Hab: <span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="habitacionX"></span>
+			</div>
+
 
    			   <div class="row">
 				
@@ -383,7 +395,7 @@ function RefrescarPantalla() {
                                             <tr>    
 						<bold> 
 					     <th>Sel</th>    
-					     <th>id</th>   
+					     <th>Despacho #</th>   
 						 <th>Despacho Id</th>                                                                                             
  						  <th>ServEntrega</th>                             
 						 <th>Entrega</th>                                        
@@ -407,7 +419,7 @@ function RefrescarPantalla() {
                                             <tr>    
 						<bold> 
 					     <th>Sel</th>    
-					     <th>id</th>                                                                                          
+					     <th>Despacho Dispensa Detalle #</th>                                                                                          
  						                  
 						 <th>Dosis</th>                                        
 						 <th>UMedida</th>  
@@ -467,15 +479,60 @@ function RefrescarPantalla() {
   <!-- INICIO TABLE DE  EL DATATABLE  -->
 		<div class="container my-2">
 
-		<div align="left" height="15px" width="50px">
-			TipoDoc: <span id="nombreTipoDoc"></span>
-			Doc: <span id="documento"></span>
-			Paciente: <span id="paciente"></span>
-			Ingreso: <span id="consecutivoAdmision"></span>
+		<div align="left" height="2px" width="150px">
+
+			Orden :  <span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="ordenFarmacia"></span>
+			<span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;" id="nombreTipoDocN"></span>
+			<span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="documentoN"></span>
+			<span  style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;" id="paciente"></span>
+			Ing#: <span id="consecutivoAdmision"></span>
 			Servicio: <span id="servicio"></span>
-			Hab: <span id="habitacion"></span>
-			<input type="text" id="farmaciaDetalle" name="farmaciaDetalle" value="" readonly>
+			Hab: <span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="habitacion"></span>
+			<input type="text" id="farmaciaDetalle" name="farmaciaDetalle" size="3" value="" readonly>
+
+ 							   Entrega:               
+                                                        <select  class="select-css" id="servicioAdmonEntregaF"
+                                                                name="servicioAdmonEntregaF" >
+                                                            {% for serviciosAdministrativos in ServiciosAdministrativos %}
+                                                            <option value="{{serviciosAdministrativos.id}}">
+                                                                {{serviciosAdministrativos.nombre}}
+                                                            </option>
+                                                            {% endfor %}
+                                                        </select>
+
+                                                        <select  class="select-css" id="plantaEntregaF"
+                                                                name="plantaEntregaF" >
+                                                            {% for plantaUsuarios in PlantaUsuarios %}
+                                                            <option value="{{plantaUsuarios.id}}">
+                                                                {{plantaUsuarios.nombre}}
+                                                            </option>
+                                                            {% endfor %}
+                                                        </select>
+
+							Recibe: 							                  
+                                                        <select  class="select-css"  id="servicioAdmonRecibeF"
+                                                                name="servicioAdmonRecibeF" >
+                                                            {% for serviciosAdministrativos in ServiciosAdministrativos %}
+                                                            <option value="{{serviciosAdministrativos.id}}">
+                                                                {{serviciosAdministrativos.nombre}}
+                                                            </option>
+                                                            {% endfor %}
+                                                        </select>
+
+                                                        <select class="select-css"  id="plantaRecibeF"
+                                                                name="plantaRecibeF"  >
+                                                            {% for plantaUsuarios in PlantaUsuarios %}
+                                                            <option value="{{plantaUsuarios.id}}">
+                                                                {{plantaUsuarios.nombre}}
+                                                            </option>
+                                                            {% endfor %}
+                                                        </select>
+
+
+				               <input type="button" style="height:30px;margin-left: 0 ; margin-bottom: 0;border-top-right-radius: 0;"  size="10px" id="BtnAdicionarDespachosDispensa"  name="BtnAdicionarDespachosDispensa" value="Dispensar" onclick= "AdicionarDespachosDispensa()" >				    
+
 		</div>
+
 
    			   <div class="row">
 				
@@ -483,14 +540,14 @@ function RefrescarPantalla() {
                                            <thead>
                                             <tr>    
 						<bold> 
-					     <th>Sel</th>                                               
- 						  <th>id</th>  
+					    	 <th>Sel</th>                                               
+ 						 <th>Orden Detalle #</th>  
 						 <th>Dosis</th>  
 						 <th>UnidadDosis</th>  	                           
 						 <th>Suministro</th>                                        				
 						 <th>Via</th>                                        				
 					 <th>cantidad</th>                                                 
-				              
+					 <th>Despachado</th>  
 					</bold>                                  
 
                                             </tr>
@@ -499,25 +556,19 @@ function RefrescarPantalla() {
                                             </tbody>
                                      
                                         </table>
-
-
-			<!-- Aquip van los combos de Adicionar -->
-
-
-				
+					
                                         <table  id= "tablaFarmaciaDespachosDispensa" class=" display table table-striped table-sm fs-6 nowrap" style="width: 100%">
                                            <thead>
                                             <tr>    
 						<bold> 
 					     <th>Sel</th>                                               
- 						  <th>id</th>                             
+ 						  <th>Despacho Detalle #</th>                             
 						 <th>despacho</th>                                        
 						 <th>suministro</th>  
 						 <th>dosis</th>  					
 					 <th>unidadDosis</th>                                                 
 					 <th>via</th>                                                 
-					 <th>cantidad</th>                                                 
-					                                           
+					 <th>cantidad</th>                                                 				                                           
 				              
 					</bold>                                  
 
@@ -543,11 +594,11 @@ function RefrescarPantalla() {
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="card">
-                                        <div class="card-header" style="height:70px;">
+                                        <div class="card-header" style="height:65px;">
                                             <center>
                                                 <div class="row">
                                                     
-                                                    <div class="col-sm-3">
+                                                   <div class="col-sm-3"> 
 						<!-- <label  for="medicamentos">Medicamentos:</label>   -->
                     							    
                                                         <select class="select-css" id="medicamentos"
@@ -558,15 +609,13 @@ function RefrescarPantalla() {
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
-                                                    <div class="col-sm-1">
+                                                   </div> 
+                                                    <div class="col-sm-1"> 
 					                  
                                                         <input type="text" id="dosis" name="dosis" placeholder="Dosis" value="">
-                                                    </div>
-						 <div class="col-sm-1">
-								 </div>
+                                                   </div> 
 
-                                                    <div class="col-sm-2">
+						  <div class="col-sm-2"> 
  							                  
                                                         <select class="select-css" id="uMedidaDosis"
                                                                 name="uMedidaDosis" placeholder="UMedida">
@@ -576,11 +625,11 @@ function RefrescarPantalla() {
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
+                                                   </div> 
                                                    
                                                    
 
-						 <div class="col-sm-1">
+						 <div class="col-sm-1"> 
 							                        
                                                         <select class="select-css" id="vias"
                                                                 name="vias" placeholder="Vias Adm">
@@ -590,20 +639,20 @@ function RefrescarPantalla() {
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
+                                                    </div> 
 
 
-						                            <div class="col-sm-1">
+						                           <div class="col-sm-1"> 
 							                        Cantidad:
                                                         <input type="text" id="cantidadMedicamento" name="cantidadMedicamento" value="" placeholder="Cantidad">
-                                                    </div>
-							 <div class="col-sm-1">
-								 </div>
-                                                    <div class="col-sm-1 text-end">
+                                                   </div> 
+							 <div class="col-sm-1"> 
+								 </div> 
+                                                   <div class="col-sm-1 text-end"> 
                                                         <span class="text-secondary">Adicionar</span>
                                                         <a class="btn btn-success" href="javascript:void(0)"
                                                            id="BtnAdicionarFormulacion"> <i class="fa fa-plus"></i></a>
-                                                    </div>
+                                                    </div> 
                                                 </div>
                                             </center>
                                         </div>
@@ -614,7 +663,7 @@ function RefrescarPantalla() {
                                                            class="display nowrap table table table-bordered  tablaFormulacion table-hover table-sm dtr-inline">
                                                         <thead>
                                                         <tr>
-                                                            <th style="width:5%;">Id</th>
+                                                            <th style="width:5%;"></th>
                                                             <th style="width:5%;">Medicamento</th>
                                                             <th style="width:5%;">Dosis</th>
                                                            <th style="width:1%;">UMedida</th>
@@ -639,90 +688,16 @@ function RefrescarPantalla() {
                                                         </tbody>
                                                     </table>
 
-
-
 		<div align="left" height="10px" width="30px">
-
-		 <div class="row" >
-				 <div class="col-sm-2">
-			          </div>
-
-					   <div class="col-sm-2">
- 							   Entrega:               
-                                                        <select class="select-css" id="servicioAdmonEntregaF"
-                                                                name="servicioAdmonEntregaF" >
-                                                            {% for serviciosAdministrativos in ServiciosAdministrativos %}
-                                                            <option value="{{serviciosAdministrativos.id}}">
-                                                                {{serviciosAdministrativos.nombre}}
-                                                            </option>
-                                                            {% endfor %}
-                                                        </select>
-                                                    </div>
-
-
-					   <div class="col-sm-2">
-							Funcionario: 							                  
-                                                        <select class="select-css" id="plantaEntregaF"
-                                                                name="plantaEntregaF" >
-                                                            {% for plantaUsuarios in PlantaUsuarios %}
-                                                            <option value="{{plantaUsuarios.id}}">
-                                                                {{plantaUsuarios.nombre}}
-                                                            </option>
-                                                            {% endfor %}
-                                                        </select>
-                                                    </div>
-
-
-					   <div class="col-sm-2">
-							Recibe: 							                  
-                                                        <select class="select-css" id="servicioAdmonRecibeF"
-                                                                name="servicioAdmonRecibeF" >
-                                                            {% for serviciosAdministrativos in ServiciosAdministrativos %}
-                                                            <option value="{{serviciosAdministrativos.id}}">
-                                                                {{serviciosAdministrativos.nombre}}
-                                                            </option>
-                                                            {% endfor %}
-                                                        </select>
-                                                    </div>
-
-
-					   <div class="col-sm-2">
-								Funcionario; 							                  
-                                                        <select class="select-css" id="plantaRecibeF"
-                                                                name="plantaRecibeF" >
-                                                            {% for plantaUsuarios in PlantaUsuarios %}
-                                                            <option value="{{plantaUsuarios.id}}">
-                                                                {{plantaUsuarios.nombre}}
-                                                            </option>
-                                                            {% endfor %}
-                                                        </select>
-                                                    </div>
-					   <div class="col-sm-2">
-
-				               <input type="button" style="height:30px;margin-left: 0 ; margin-bottom: 0;border-top-right-radius: 0;"  size="10px" id="BtnAdicionarDespachosDispensa"  name="BtnAdicionarDespachosDispensa" value="Dispensar" onclick= "AdicionarDespachosDispensa()" >				    
-                                                    </div>
-		</div> <!-- cierra el row -->
 
 		</div>
 
-						<!-- ojo desdde qaquip -->
-
-
-
-
-
-						<!-- ojo hasta  qaquip -->
-
-
-
-                                                  </div>  
-                                            </div> <!-- cierrra el row  -->
-
-                                        </div> <!-- cierrra el body  -->
-                                    </div> <!-- cierrra el card  -->
-
-                                </div>
-                            </div>
+                          </div>  
+                         </div> <!-- cierrra el row  -->
+                        </div> <!-- cierrra el body  -->
+                       </div> <!-- cierrra el card  -->
+                                </div> <!-- cierrra col   -->
+                            </div> <!-- cierrra row  -->
                             <!-- FIN TABLE DE  EL DATATABLE  -->
                         </form>
                     </table>
@@ -730,8 +705,9 @@ function RefrescarPantalla() {
              <!-- HASTA AQUI DATATABLE -->
 
              
-		</div>
-             </div>
+		<!-- lo borro CERRA DIV  -->
+
+             </div>     <!-- CIERRA DIV CONTAINER -->
 
 		<!-- finaliza lo que viene de clinico -->      	
 
@@ -744,8 +720,9 @@ function RefrescarPantalla() {
 
 
 
-
-
+<article id="DespachosRealizados">
+aquip
+</article>
 
 <article id="DispensacionGeneral">
         	

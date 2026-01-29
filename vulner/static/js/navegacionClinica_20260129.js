@@ -64,7 +64,7 @@
         --------------------------------------------
         --------------------------------------------*/
         $("body").on("click",".deletePostNotasEnfermeria",function(){
-		alert("Entre a borrar Notas enfermeria ");
+		alert("Entre a borrar el id laboratorio ");
       	        var rowIndex = $(this).parent().index('#tablaNotasEnfermeria tbody tr');
 	     	alert("Entre a borrar la fila #  Notas  Nro" + rowIndex );
 		var tableL = $('#tablaNotasEnfermeria').DataTable();
@@ -788,7 +788,7 @@ function tableActionsEnfermedades() {
                    "search": "Filtrar registros:",
                     },
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 scrollY: '250px',
 	            scrollX: true,
 	            scrollCollapse: true,
@@ -825,7 +825,7 @@ function tableActionsNotasEnfermeria() {
                    "search": "Filtrar registros:",
                     },
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 scrollY: '250px',
 	            scrollX: true,
 	            scrollCollapse: true,
@@ -860,7 +860,7 @@ function tableActionsLaboratorios() {
                    "search": "Filtrar registros:",
                     },
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 scrollY: '250px',
 	            scrollX: true,
 	            scrollCollapse: true,
@@ -888,6 +888,13 @@ function tableActionsLaboratorios() {
 }
 
 
+
+
+
+
+
+
+
 });  // Aquip fin del document.ready
 
 // II. RADIOLOGIA
@@ -901,7 +908,7 @@ function tableActionsRadiologia() {
                    "search": "Filtrar registros:",
                     },
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 scrollY: '130px',
 	            scrollX: true,
 	            scrollCollapse: true,
@@ -941,7 +948,7 @@ function tableActionsTerapias() {
                    "search": "Filtrar registros:",
                     },
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 scrollY: '130px',
 	            scrollX: true,
 	            scrollCollapse: true,
@@ -980,7 +987,7 @@ function tableActionsNoQx() {
                    "search": "Filtrar registros:",
                     },
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 scrollY: '130px',
 	            scrollX: true,
 	            scrollCollapse: true,
@@ -1020,7 +1027,7 @@ function tableActionsAntecedentes() {
                    "search": "Filtrar registros:",
                     },
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 scrollY: '130px',
 	            scrollX: true,
 	            scrollCollapse: true,
@@ -1058,7 +1065,7 @@ function tableActionsDiagnosticos() {
                    "search": "Filtrar registros:",
                     },
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 scrollY: '130px',
 	            scrollX: true,
 	            scrollCollapse: true,
@@ -1100,7 +1107,7 @@ function tableActionsInterconsultas() {
                    "search": "Filtrar registros:",
                     },
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 scrollY: '130px',
 	            scrollX: true,
 	            scrollCollapse: true,
@@ -1147,7 +1154,7 @@ function tableActionsRevisionSistemas() {
                    "search": "Filtrar registros:",
                     },
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 scrollY: '130px',
 	            scrollX: true,
 	            scrollCollapse: true,
@@ -1187,7 +1194,7 @@ function tableActionsFormulacion() {
                    "search": "Filtrar registros:",
                     },
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 scrollY: '130px',
 	            scrollX: true,
 	            scrollCollapse: true,
@@ -1798,6 +1805,8 @@ formHistoriaClinica.addEventListener('submit', e=>{
 
             var form_valido;
 
+  
+
       
                $.ajax({
             	   type: 'POST',
@@ -1922,7 +1931,7 @@ formHistoriaClinica.addEventListener('submit', e=>{
 		            }
 		        else
 		            {
-		           document.getElementById("mensajesError").innerHTML = data.Mensaje;
+		           document.getElementById("mensajes").innerHTML = data.Mensaje;
 
 		            }
 

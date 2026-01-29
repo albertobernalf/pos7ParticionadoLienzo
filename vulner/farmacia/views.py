@@ -140,15 +140,15 @@ def Load_dataFarmaciaDetalle(request, data):
                                    password="123456")
     curx = miConexionx.cursor()
 
-    detalle = 'select  det.id id,estados.nombre estadoNombre ,origen.nombre origenNombre, mov.nombre movNombre, sum.nombre || cums  suministro, 	det."dosisCantidad" dosis, dosis.descripcion unidadDosis,   vias.nombre via,	det."cantidadOrdenada" cantidad,  via.nombre viaAdministracion FROM farmacia_farmacia far INNER JOIN farmacia_farmaciadetalle det ON (det.farmacia_id = far.id) LEFT JOIN farmacia_farmaciaestados estados  ON (estados.id = far.estado_id) INNER JOIN enfermeria_enfermeriatipoorigen origen ON (origen.id = far."tipoOrigen_id") INNER JOIN enfermeria_enfermeriatipomovimiento mov ON (mov.id = far."tipoOrigen_id") INNER JOIN facturacion_suministros sum ON (sum.id= det.suministro_id) INNER JOIN clinico_viasadministracion vias ON (vias.id= det."viaAdministracion_id") INNER JOIN clinico_unidadesdemedidadosis dosis ON (dosis.id= det."dosisUnidad_id") INNER JOIN clinico_viasadministracion via ON (via.id= det."viaAdministracion_id")  where far.id ='  + "'" + str(farmaciaId) + "'"
+    detalle = 'select  det.id id,estados.nombre estadoNombre ,origen.nombre origenNombre, mov.nombre movNombre, sum.nombre || cums  suministro, 	det."dosisCantidad" dosis, dosis.descripcion unidadDosis,   vias.nombre via,	det."cantidadOrdenada" cantidad,  via.nombre viaAdministracion , det.despachado despachado FROM farmacia_farmacia far INNER JOIN farmacia_farmaciadetalle det ON (det.farmacia_id = far.id) LEFT JOIN farmacia_farmaciaestados estados  ON (estados.id = far.estado_id) INNER JOIN enfermeria_enfermeriatipoorigen origen ON (origen.id = far."tipoOrigen_id") INNER JOIN enfermeria_enfermeriatipomovimiento mov ON (mov.id = far."tipoOrigen_id") INNER JOIN facturacion_suministros sum ON (sum.id= det.suministro_id) INNER JOIN clinico_viasadministracion vias ON (vias.id= det."viaAdministracion_id") INNER JOIN clinico_unidadesdemedidadosis dosis ON (dosis.id= det."dosisUnidad_id") INNER JOIN clinico_viasadministracion via ON (via.id= det."viaAdministracion_id")  where far.id ='  + "'" + str(farmaciaId) + "' AND det.despachado = 'N' ORDER BY det.id"
     print(detalle)
 
     curx.execute(detalle)
 
-    for id,estadoNombre, origenNombre,movNombre,suministro, dosis, unidadDosis, via, cantidad , viaAdministracion  in curx.fetchall():
+    for id,estadoNombre, origenNombre,movNombre,suministro, dosis, unidadDosis, via, cantidad , viaAdministracion , despachado in curx.fetchall():
         farmaciaDetalle.append(
             {"model": "famacia.farmaciaDetalle", "pk": id, "fields":
-                {'id': id, 'estadoNombre':estadoNombre, 'origenNombre': origenNombre ,'movNombre':movNombre,'suministro':suministro,'dosis':dosis ,'unidadDosis':unidadDosis ,'cantidad':cantidad , 'viaAdministracion':viaAdministracion}})
+                {'id': id, 'estadoNombre':estadoNombre, 'origenNombre': origenNombre ,'movNombre':movNombre,'suministro':suministro,'dosis':dosis ,'unidadDosis':unidadDosis ,'cantidad':cantidad , 'viaAdministracion':viaAdministracion, 'despachado':despachado}})
 
     miConexionx.close()
     print(farmaciaDetalle)
@@ -186,7 +186,7 @@ def Load_dataFarmaciaDespachos(request, data):
                                    password="123456")
     curx = miConexionx.cursor()
 
-    detalle = 'select dispensa.id id, dispensa.despacho_id despacho , sum.nombre suministro, 	dispensa."dosisCantidad" dosis, dosis.descripcion unidadDosis,   vias.nombre via,	dispensa."cantidadOrdenada" cantidad FROM farmacia_farmaciadespachosdispensa dispensa INNER JOIN farmacia_farmaciaDetalle detalle ON (detalle.id = dispensa."farmaciaDetalle_id") INNER JOIN facturacion_suministros sum ON (sum.id= dispensa.suministro_id) INNER JOIN clinico_viasadministracion vias ON (vias.id= dispensa."viaAdministracion_id") INNER JOIN clinico_unidadesdemedidadosis dosis ON (dosis.id= dispensa."dosisUnidad_id") WHERE detalle.FARMACIA_ID=' + "'" + str(farmaciaId) + "'"
+    detalle = 'select dispensa.id id, dispensa.despacho_id despacho , sum.nombre suministro, 	dispensa."dosisCantidad" dosis, dosis.descripcion unidadDosis,   vias.nombre via,	dispensa."cantidadOrdenada" cantidad FROM farmacia_farmaciadespachosdispensa dispensa INNER JOIN farmacia_farmaciaDetalle detalle ON (detalle.id = dispensa."farmaciaDetalle_id") INNER JOIN facturacion_suministros sum ON (sum.id= dispensa.suministro_id) INNER JOIN clinico_viasadministracion vias ON (vias.id= dispensa."viaAdministracion_id") INNER JOIN clinico_unidadesdemedidadosis dosis ON (dosis.id= dispensa."dosisUnidad_id") WHERE detalle.FARMACIA_ID=' + "'" + str(farmaciaId) + "' ORDER BY dispensa.id"
 
     print(detalle)
 
@@ -229,7 +229,7 @@ def Load_dataFarmaciaDespachosDispensa(request, data):
                                    password="123456")
     curx = miConexionx.cursor()
 
-    detalle = 'select dispensa.id id, dispensa.despacho_id despacho , sum.nombre||' + "' '||" + ' sum.cums suministro, 	dispensa."dosisCantidad" dosis, dosis.descripcion unidadDosis,   vias.nombre via,	dispensa."cantidadOrdenada" cantidad FROM farmacia_farmaciadespachosdispensa dispensa INNER JOIN farmacia_farmaciaDetalle detalle ON (detalle.id = dispensa."farmaciaDetalle_id" ) INNER JOIN facturacion_suministros sum ON (sum.id= dispensa.suministro_id) INNER JOIN clinico_viasadministracion vias ON (vias.id= dispensa."viaAdministracion_id") INNER JOIN clinico_unidadesdemedidadosis dosis ON (dosis.id= dispensa."dosisUnidad_id") WHERE detalle.farmacia_id =' + "'" + str(farmaciaId) + "'" + ' AND detalle.id = ' + "'" + str(farmaciaDetalleId) + "'"
+    detalle = 'select dispensa.id id, dispensa.despacho_id despacho , sum.nombre||' + "' '||" + ' sum.cums suministro, 	dispensa."dosisCantidad" dosis, dosis.descripcion unidadDosis,   vias.nombre via,	dispensa."cantidadOrdenada" cantidad FROM farmacia_farmaciadespachosdispensa dispensa INNER JOIN farmacia_farmaciaDetalle detalle ON (detalle.id = dispensa."farmaciaDetalle_id" ) INNER JOIN facturacion_suministros sum ON (sum.id= dispensa.suministro_id) INNER JOIN clinico_viasadministracion vias ON (vias.id= dispensa."viaAdministracion_id") INNER JOIN clinico_unidadesdemedidadosis dosis ON (dosis.id= dispensa."dosisUnidad_id") WHERE detalle.farmacia_id =' + "'" + str(farmaciaId) + "'" + ' AND detalle.id = ' + "'" + str(farmaciaDetalleId) + "' ORDER BY dispensa.id"
 
     print(detalle)
 
@@ -285,7 +285,6 @@ def BuscaDatosPaciente(request):
 
     miConexionx.close()
     print(datosPaciente)
-
 
     # Fin Combo
 
@@ -1086,6 +1085,7 @@ def RecibirDevolucionFarmacia(request):
         detalle = 'UPDATE farmacia_farmaciadevolucion SET "serviciosAdministrativosRecibe_id" = ' + "'" + str(servicioRecibeId) + "'," + ' "usuarioRecibe_id" = ' + "'" + str(plantaRecibeId) + "'" + ' WHERE id = ' + "'" + str(devolucionFarmaciaId) + "'"
         print(detalle)
 
+        cur3.execute(detalle)
         miConexion3.commit()
         cur3.close()
         miConexion3.close()
@@ -1131,6 +1131,7 @@ def RecibirDevolucionDetalleFarmacia(request):
         detalle = 'UPDATE farmacia_farmaciadevoluciondetalle SET "cantidadDevueltaRecibida" = ' + "'" + str(cantidadDevueltaRecibida) + "'" + ' WHERE id = ' + "'" + str(devolucionDetalleFarmaciaId) + "'"
         print(detalle)
 
+        cur3.execute(detalle)
         miConexion3.commit()
         cur3.close()
         miConexion3.close()
@@ -1149,6 +1150,56 @@ def RecibirDevolucionDetalleFarmacia(request):
         if miConexion3:
             cur3.close()
             miConexion3.close()
+
+
+def DespachadoFarmaciaDetalle(request):
+    print("Entre DespachadoFarmaciaDetalle")
+
+    farmaciaDetalleId = request.POST['farmaciaDetalleId']
+    print ("farmaciaDetalleId =", farmaciaDetalleId)
+
+
+    farmaciaDetalle = FarmaciaDetalle.objects.filter(id=farmaciaDetalleId)
+    farmacia = FarmaciaDetalle.objects.filter(farmacia_id=farmaciaDetalle.farmacia_id)
+    pendientes = FarmaciaDetalle.objects.filter(farmacia_id=farmaciaDetalle.farmacia_id, despachado='N').count()
+    estadosFarmacia = FarmaciaEstados.objects.get(nombre='DESPACHADO')
+
+    miConexion3 = None
+    try:
+
+        miConexion3 = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+                                       password="123456")
+        cur3 = miConexion3.cursor()
+
+        detalle = 'UPDATE farmacia_farmaciadetalle SET despachado = ' + "'" + str('S') + "'" + ' WHERE id = ' + str(farmaciaDetalleId)
+        print(detalle)
+        cur3.execute(detalle)
+
+        if (pendientes == 0):
+                detalle = 'UPDATE farmacia_farmacia SET despachado = ' + "'" + str(estadosFarmacia.id) + "'" + ' WHERE id = ' + str(farmacia.id)
+                print(detalle)
+                cur3.execute(detalle)
+
+
+        miConexion3.commit()
+        cur3.close()
+        miConexion3.close()
+
+        return JsonResponse({'success': True, 'Mensajes': 'Item de Farmacia Despachado!'})
+
+    except psycopg2.DatabaseError as error:
+        print("Entre por rollback", error)
+        if miConexion3:
+            print("Entro ha hacer el Rollback")
+            miConexion3.rollback()
+        message_error= str(error)
+        return JsonResponse({'success': False, 'Mensajes': message_error})
+
+    finally:
+        if miConexion3:
+            cur3.close()
+            miConexion3.close()
+
 
 
 

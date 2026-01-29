@@ -11,6 +11,7 @@ let dataTableI;
 
 let dataTablePanelFarmaciaInitialized = false;
 let dataTableFarmaciaDespachosInitialized = false;
+let dataTableFarmaciaDespachosDispensaInitialized = false;
 let dataTableFarmaciaDetalleInitialized = false;
 let dataTableDespachosFarmaciaDispensaInitialized = false;
 let dataTableDespachosFarmaciaInitialized = false;
@@ -114,6 +115,7 @@ function arrancaFarmacia(valorTabla,valorData)
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
+      messageTop: 'Farmacia Ordenes' ,
     },
     {
       extend: 'print',
@@ -145,7 +147,8 @@ function arrancaFarmacia(valorTabla,valorData)
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
+		    //search: 'Buscar:',
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -187,16 +190,17 @@ function arrancaFarmacia(valorTabla,valorData)
 
 
                 { data: "fields.id"},
+                { data: "fields.tipoDoc"},
+		  { data: "fields.documento"},
+		  { data: "fields.paciente"},
+		  { data: "fields.servicio"},
+		  { data: "fields.cama"},
+
                 { data: "fields.origen"},
 		   { data: "fields.mov"}, 
                 { data: "fields.servicio"},
                 { data: "fields.historia"},
 		  { data: "fields.estado"},
-		  { data: "fields.tipoDoc"},
-		  { data: "fields.documento"},
-		  { data: "fields.paciente"},
-		  { data: "fields.servicio"},
-		  { data: "fields.cama"},
 
 
                         ]
@@ -257,7 +261,7 @@ function arrancaFarmacia(valorTabla,valorData)
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -304,10 +308,35 @@ function arrancaFarmacia(valorTabla,valorData)
     if (valorTabla == 3)
     {
         let dataTableOptionsFarmaciaDetalle  ={
+ dom: "<'row mb-0'<'col-sm-2'B><'col-sm-1'><'col-sm-4'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
+  buttons: [
+    {
+      extend: 'excelHtml5',
+      text: '<i class="fas fa-file-excel"></i> ',
+	// text: '<i class="bi bi-file-earmark-excel-fill"></i> Exportar Excel',
+      titleAttr: 'Exportar a Excel',
+      className: 'btn btn-success btn-sm',
+    },
+    {
+      extend: 'pdfHtml5',
+      text: '<i class="fas fa-file-pdf"></i> ',
+      titleAttr: 'Exportar a PDF',
+      className: 'btn btn-danger btn-sm',
+    },
+    {
+      extend: 'print',
+      text: '<i class="fa fa-print"></i> ',
+      titleAttr: 'Imprimir',
+      className: 'btn btn-info btn-sm',
+    },
+  ],
+
   lengthMenu: [2, 4, 15],
            processing: true,
             serverSide: false,
-            scrollY: '175px',
+            scrollY: '200px',
 	    scrollX: true,
 	    scrollCollapse: true,
             paging:false,
@@ -318,7 +347,7 @@ function arrancaFarmacia(valorTabla,valorData)
                     "targets": 6
                }
             ],
-	 pageLength: 3,
+	 pageLength: 20,
 	  destroy: true,
 	  language: {
 		    processing: 'Procesando...',
@@ -327,7 +356,7 @@ function arrancaFarmacia(valorTabla,valorData)
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -363,6 +392,19 @@ function arrancaFarmacia(valorTabla,valorData)
                 { data: "fields.viaAdministracion"},
                 { data: "fields.cantidad"},
 
+                	{
+	  "render": function ( data, type, row ) {
+                        var btn = '';
+
+		 btn = btn + " <input type='radio' name='despachado' style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;' class='despachado form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
+
+
+                       return btn;
+                    },
+
+	},
+
+
                         ]
             }
 	        
@@ -374,9 +416,17 @@ function arrancaFarmacia(valorTabla,valorData)
     if (valorTabla == 4)
     {
         let dataTableOptionsFarmaciaDespachosDispensa  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
+//   dom: "<'row mb-1'<'col-sm-2'B><'col-sm-1'><'col-sm-4'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
+  //           "<'row'<'col-sm-12'tr>>" +
+    //         "<'row mt-0'<'col-sm-7'i><'col-sm-5'p>>",
+
+
+   dom: "<'row mb-0'<'col-sm-2'B><'col-sm-1'><'col-sm-4'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-4'i><'col-sm-4'p>>",
+
+
+
   buttons: [
     {
       extend: 'excelHtml5',
@@ -420,7 +470,7 @@ function arrancaFarmacia(valorTabla,valorData)
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -469,10 +519,10 @@ function arrancaFarmacia(valorTabla,valorData)
     if (valorTabla == 5)
     {
         let dataTableOptionsDespachosFarmacia  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
+   dom: "<'row mb-1'<'col-sm-2'B><'col-sm-1'><'col-sm-4'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
              "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
-  buttons: [
+             "<'row mt-0'<'col-sm-7'i><'col-sm-5'p>>",
+    buttons: [
     {
       extend: 'excelHtml5',
       text: '<i class="fas fa-file-excel"></i> ',
@@ -495,7 +545,7 @@ function arrancaFarmacia(valorTabla,valorData)
   lengthMenu: [2, 4, 15],
            processing: true,
             serverSide: false,
-            scrollY: '75px',
+            scrollY: '300px',
 	    scrollX: true,
 	    scrollCollapse: true,
             paging:false,
@@ -515,7 +565,7 @@ function arrancaFarmacia(valorTabla,valorData)
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -562,10 +612,10 @@ function arrancaFarmacia(valorTabla,valorData)
     if (valorTabla == 6)
     {
         let dataTableOptionsDespachosDetalleFarmacia  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
+   dom: "<'row mb-1'<'col-sm-2'B><'col-sm-1'><'col-sm-4'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
              "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
-  buttons: [
+             "<'row mt-0'<'col-sm-7'i><'col-sm-5'p>>",
+    buttons: [
     {
       extend: 'excelHtml5',
       text: '<i class="fas fa-file-excel"></i> ',
@@ -588,7 +638,7 @@ function arrancaFarmacia(valorTabla,valorData)
   lengthMenu: [2, 4, 15],
            processing: true,
             serverSide: false,
-            scrollY: '75px',
+            scrollY: '300px',
 	    scrollX: true,
 	    scrollCollapse: true,
             paging:false,
@@ -608,7 +658,7 @@ function arrancaFarmacia(valorTabla,valorData)
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -701,7 +751,7 @@ function arrancaFarmacia(valorTabla,valorData)
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -803,7 +853,7 @@ function arrancaFarmacia(valorTabla,valorData)
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -934,13 +984,23 @@ $('#tablaPanelFarmacia tbody').on('click', '.miSelFarmacia', function() {
                 dataType: 'json',
                 success: function (info) {
 
-			
-		document.getElementById("nombreTipoDoc").innerHTML = info[0].fields.nombreTipoDoc;
-		document.getElementById("documento").innerHTML = info[0].fields.documento;
+
+        document.getElementById("ordenFarmacia").innerHTML =  farmaciaId;
+		document.getElementById("nombreTipoDocN").innerHTML = info[0].fields.nombreTipoDoc;
+		document.getElementById("documentoN").innerHTML = info[0].fields.documento;
 		document.getElementById("paciente").innerHTML = info[0].fields.paciente;
 		document.getElementById("consecutivoAdmision").innerHTML = info[0].fields.consecutivoAdmision;
 		document.getElementById("servicio").innerHTML = info[0].fields.servicio;
 		document.getElementById("habitacion").innerHTML = info[0].fields.cama;
+
+        document.getElementById("ordenFarmaciaX").innerHTML =  farmaciaId;
+		document.getElementById("nombreTipoDocNX").innerHTML = info[0].fields.nombreTipoDoc;
+		document.getElementById("documentoNX").innerHTML = info[0].fields.documento;
+		document.getElementById("pacienteX").innerHTML = info[0].fields.paciente;
+		document.getElementById("consecutivoAdmisionX").innerHTML = info[0].fields.consecutivoAdmision;
+		document.getElementById("servicioX").innerHTML = info[0].fields.servicio;
+		document.getElementById("habitacionX").innerHTML = info[0].fields.cama;
+
 
 		document.getElementById("nombreTipoDocDev").innerHTML = info[0].fields.nombreTipoDoc;
 		document.getElementById("documentoDev").innerHTML = info[0].fields.documento;
@@ -1090,6 +1150,74 @@ $('#tablaFarmaciaDetalle tbody').on('click', '.miFarmaciaDetalle', function() {
   });
 
 
+$('#tablaFarmaciaDetalle tbody').on('click', '.despachado', function() {
+
+
+
+	     var post_id = $(this).data('pk');
+	farmaciaDetalleId =   post_id;
+
+ alert("ENTRE despachado" +  farmaciaDetalleId);
+	// document.getElementById("farmaciaDetalle").value = farmaciaDetalleId;
+	// farmaciaId = document.getElementById("farmaciaId").value ;
+
+    // Aqui ajax que marca despachado (S) el detalle de farmacia
+
+         $.ajax({
+                data: {'farmaciaDetalleId':farmaciaDetalleId },
+	        url: "/despachadoFarmaciaDetalle/",
+                type: "POST",
+                dataType: 'json',
+                success: function (info) {
+
+                alert("regrese " + JSON.stringify(info));
+
+		if (info.success == true)
+			 {
+			  document.getElementById("mensajes").innerHTML = data.Mensaje;
+			 }
+			else
+			{
+			document.getElementById("mensajesError").innerHTML = data.Mensaje;
+			return;
+			}
+                },
+             	        error: function(data){
+		       		document.getElementById("mensajesError").innerHTML =  data.responseText
+			        },
+
+            });
+
+    	var sedeSeleccionada = document.getElementById("sedeSeleccionada").value;
+        var username = document.getElementById("username").value;
+        var nombreSede = document.getElementById("nombreSede").value;
+    	var sede = document.getElementById("sede").value;
+        var username_id = document.getElementById("username_id").value;
+         var data =  {}   ;
+        data['username'] = username;
+        data['sedeSeleccionada'] = sedeSeleccionada;
+        data['nombreSede'] = nombreSede;
+        data['sede'] = sede;
+        data['username_id'] = username_id;
+    	data['farmaciaDetalleId'] = farmaciaDetalleId;
+    	data['farmaciaId'] = farmaciaId;
+ 	    data = JSON.stringify(data);
+
+	     arrancaFarmacia(3,data);
+	  	dataTableFarmaciaDetalleInitialized = true;
+
+    document.getElementById("farmaciaDetalle").value = 0;
+        	data['farmaciaDetalleId'] = document.getElementById("farmaciaDetalle").value;
+ 	    data = JSON.stringify(data);
+
+	    arrancaFarmacia(4,data);
+	  	dataTableFarmaciaDespachosDispensaInitialized = true;
+
+
+  });
+
+
+
 // Cambia estado despacho implora Modal
 
 $('#tablaPanelFarmacia tbody').on('click', '.miEditaFarmaciaEstadoDespacho', function() {
@@ -1204,7 +1332,7 @@ function tableActionsFormulacion() {
                     },
                 processing: true,
                 serverSide: false,
-                scrollY: '100px',
+                scrollY: '300px',
 	            scrollX: true,
 	            scrollCollapse: true,
                 paging:false,
@@ -1233,8 +1361,6 @@ function tableActionsFormulacion() {
             ],
     });
 }
-
-
 
 // FIN MEDICAMENTOS
 
@@ -1460,7 +1586,6 @@ function RecibirDevolucionDetalleFarmacia()
 
 	  		   arrancaFarmacia(8,data);
 		     	dataTableDevolucionesDetalleFarmaciaInitialized = true;
-      
 
  	      		}, // cierra function sucess
  	      	     	        error: function(data){

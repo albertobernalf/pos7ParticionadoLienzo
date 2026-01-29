@@ -100,7 +100,7 @@ Ambulatorios:  <span id="amb" name="amb" style="color:red">{{Ambulatorios}} </sp
 		<input type="hidden" id="consec" name="consec" value="">
 	        <input type="hidden" id="tipoIng" name="tipoIng" value="{{tipoIng}}">
 
-		 <table class="table" id="tablaClinicobottom"  style="height: 1px; background-color:LightGray; border: 1px solid black; border-radius: 10px;width:95%;">
+		 <table class="table" id="tablaClinicobottom"  style="height: 1px; background-color:LightGray; border: 1px solid black; border-radius: 10px;width:95%">
                         <tr>
                             <td>
                                 <label for="espMedico" class="col-sm-3 control-label">Especialidad :</label>
@@ -132,7 +132,7 @@ Ambulatorios:  <span id="amb" name="amb" style="color:red">{{Ambulatorios}} </sp
     <!-- INICIO TABLE DE  EL DATATABLE  -->
    		<div class="container my-2">           
    			   <div class="row">
-			       <table  id="tablaClinico" class="display table table-striped nowrap" style="width: 100%";>	
+			       <table  id="tablaClinico" class="display table table-striped nowrap" style="width: 100%">	
 			       <thead>
                                 <tr>
 			       <th>Sel</th>    
@@ -172,7 +172,7 @@ Ambulatorios:  <span id="amb" name="amb" style="color:red">{{Ambulatorios}} </sp
 
  		<div class="container my-2">
    			   <div class="row">
-                                        <table  id="tablaInterConsultas" class="display nowrap table table-striped" style="width: 100%";>
+                                        <table  id="tablaInterConsultas" class="display nowrap table table-striped" style="width: 100%">
                                            <thead>
                                             <tr>    
 						<bold>      
@@ -207,23 +207,22 @@ Ambulatorios:  <span id="amb" name="amb" style="color:red">{{Ambulatorios}} </sp
                             <h4 class="modal-title" id="modelHeadingInterConsultas"></h4>
                         </div>
                         <div class="modal-body">
-                            <div class="alert alert-danger error-msg" style="display:none">
+
+                          <!--  <div class="alert alert-danger error-msg" style="display:none">
                                 <ul class="mb-0"></ul>
                             </div>
-                            <form id="postFormInterConsultas" name="postFormInterConsultas" class="form-horizontal"
-                                  novalidate>
+				-->
+                            <form id="postFormInterConsultas" name="postFormInterConsultas" class="form-horizontal" novalidate>
                                 {% csrf_token %}
-                                <input type="hidden" name="post_id" id="post_id">
-				<input type="text" name="interConsultaId" id="interConsultaId">
+                                <input type="hidden" name="post_id" id="post_id"></input>
+				<input type="text" name="interConsultaId" id="interConsultaId"></input>
                      
 				<div class="row row-cols-12" style="height=1px;">
 
 				  <div class="col">
-                                        <label for="serviciosAdministrativos" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SeviciosAdmon:</label>
+                                        <label for="serviciosAdministrativos" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ServiciosAdmon:</label>
                                         <div class="col-sm-8">
-                                            <select class="select-css h-40 w-20" id="serviciosAdministrativos"  tabindex= "0"
-                                                    name="serviciosAdministrativos"
-                                                    required>
+                                            <select class="select-css h-40 w-20" id="serviciosAdministrativos"  tabindex= "0" name="serviciosAdministrativos" required>
                                                 {% for serviciosAdministrativos in ServiciosAdministrativos %}
                                                 <option value="{{serviciosAdministrativos.id}}"> {{serviciosAdministrativos.nombre}}</option>
                                                 {% endfor %}
@@ -276,7 +275,7 @@ Ambulatorios:  <span id="amb" name="amb" style="color:red">{{Ambulatorios}} </sp
                                 <div class="col-sm-offset-2 col-sm-10 mt-2">
 			  <span id="mensajesErrorModalInterConsulta" name="mensajesErrorModalInterConsulta" style= "color:red; font-size:15px; line-height:35px; font-family: Calibri;" > </span>
 
-                                    <button type="button" class="btn btn-primary" id="saveBtnResponderInterConsulta"   value="create" onclick="ResponderInterConsulta()">Guardar </button>
+                                    <button type="button" class="btn btn-primary" id="saveBtnResponderInterConsulta"   value="create" onclick="ResponderInterConsulta()"> Guardar </button>
                                 </div>
                                 </div> <!-- CIERRA ROW 12 COLUMNAS  -->                       
                             </form>

@@ -1060,3 +1060,7 @@ Enero 28:
         Al crear la admision desde triage, no dice que combo de rips hace falta seleccionar controlar eso con javascript VERIFICAR
 	se pierde el nombre de la Aplicacion al crear admision desde triag VERIFICAR
 	Contrlolar las cantiddes a despachar y no ddispensar mas de lo pedido
+
+Enero 29
+
+	Ojo cuando borro un medicamento en farmacia, al grabar lp topma de nuevo error .No debe guardar

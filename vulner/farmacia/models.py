@@ -6,8 +6,10 @@ from psqlextra.models import PostgresPartitionedModel
 
 class Farmacia(models.Model):
 #class Farmacia(PostgresPartitionedModel):
-
-
+    FLAG_CHOICES = [
+    ('S', 'Si'),
+    ('N', 'No'),
+    ]
     ESTADOREG_CHOICES = [
         ('A', 'Activo'),
         ('I', 'Inactivo'), ]
@@ -19,6 +21,7 @@ class Farmacia(models.Model):
     tipoOrigen = models.ForeignKey('enfermeria.EnfermeriaTipoOrigen', on_delete=models.PROTECT, blank=True, null=True,  editable=True,  related_name='TipoEnfermeria04')
     tipoMovimiento = models.ForeignKey('enfermeria.EnfermeriaTipoMovimiento', on_delete=models.PROTECT, blank=True, null=True,  editable=True,  related_name='TipoEnfermeria05')
     estado = models.ForeignKey('farmacia.FarmaciaEstados', on_delete=models.PROTECT, blank=True, null=True,  editable=True,  related_name='Farmaciaestados01')
+    despachado = models.CharField(max_length=1,choices=FLAG_CHOICES,  default='N', editable=False,  blank=True, null=True,)
     fechaRegistro = models.DateTimeField(editable=True, null=True, blank=True)
     usuarioRegistro = models.ForeignKey('planta.Planta', blank=True, null=True, editable=True, on_delete=models.PROTECT   , related_name='Planta3450')
     estadoReg = models.CharField(max_length=1,choices=ESTADOREG_CHOICES,  default='A', editable=False,  blank=True, null=True,)
@@ -34,6 +37,10 @@ class FarmaciaDetalle(PostgresPartitionedModel):
         key = ["fechaRegistro"]
 
 
+    FLAG_CHOICES = [
+    ('S', 'Si'),
+    ('N', 'No'),
+    ]
     ESTADOREG_CHOICES = [
         ('A', 'Activo'),
         ('I', 'Inactivo'), ]
@@ -47,16 +54,19 @@ class FarmaciaDetalle(PostgresPartitionedModel):
     viaAdministracion = models.ForeignKey('clinico.ViasAdministracion', blank=True, null=True, editable=True,   on_delete=models.PROTECT)
     #frecuencia = models.ForeignKey('clinico.FrecuenciasAplicacion', blank=True, null=True, editable=True,               on_delete=models.PROTECT)
     cantidadOrdenada = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True, editable=True)
+    despachado = models.CharField(max_length=1, choices=FLAG_CHOICES, default='N', editable=False, blank=True,
+                                  null=True, )
     #diasTratamiento =  models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True, editable=True)
     fechaRegistro = models.DateTimeField(editable=True, null=True, blank=True)
     usuarioRegistro = models.ForeignKey('planta.Planta', blank=True, null=True, editable=True, on_delete=models.PROTECT   , related_name='Planta3451')
     estadoReg = models.CharField(max_length=1,choices=ESTADOREG_CHOICES, default='A', editable=False,  blank=True, null=True,)
 
-    class Meta:
-        unique_together = (('fechaRegistro'),)
-
+    #class Meta:
+        #   unique_together = (('fechaRegistro'),)
+        #
     def __str__(self):
         return f"Item  de {self.farmacia.usuario} en {self.fechaRegistro}"
+
 
     #def __str__(self):
     #    return str(self.id)

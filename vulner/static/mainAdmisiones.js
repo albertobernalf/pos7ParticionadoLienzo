@@ -121,7 +121,7 @@ function arrancaAdmisiones(valorTabla,valorData)
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -271,7 +271,7 @@ function arrancaAdmisiones(valorTabla,valorData)
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -354,7 +354,7 @@ function arrancaAdmisiones(valorTabla,valorData)
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -452,7 +452,7 @@ function arrancaAdmisiones(valorTabla,valorData)
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -556,7 +556,7 @@ function arrancaAdmisiones(valorTabla,valorData)
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -648,7 +648,7 @@ function arrancaAdmisiones(valorTabla,valorData)
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {

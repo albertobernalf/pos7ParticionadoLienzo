@@ -1064,3 +1064,10 @@ Enero 28:
 Enero 29
 
 	Ojo cuando borro un medicamento en farmacia, al grabar lp topma de nuevo error .No debe guardar
+
+Enero 30
+
+	Se hizo git el 30 de Enero como a las 11:35 Minutos. En la tarde solo se trato de actualizar def imprimirDespacho(request):
+	Seguir lunes por cua no carga el reporte ?
+	Ver factutaracon completo proceso imprimrFactura
+	Seguir colocar titulos a los excel, pdf, print en todos los datatables

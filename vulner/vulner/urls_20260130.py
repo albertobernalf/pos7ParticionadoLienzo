@@ -49,7 +49,7 @@ from autorizaciones import views as viewsAutorizaciones
 from autorizaciones import viewsReportes as viewsAutorizacionesReportes
 
 #from mecanicosPacientes import views as viewsmecanicosPacientes
-from farmacia import viewsReportes as viewsFarmaciaReportes
+
 
 
 urlpatterns = [
@@ -475,9 +475,7 @@ urlpatterns = [
     path('recibirDevolucionDetalleFarmacia/', viewsFarmacia.RecibirDevolucionDetalleFarmacia, name='RecibirDevolucionDetalle_Farmacia'),
     path('despachadoFarmaciaDetalle/', viewsFarmacia.DespachadoFarmaciaDetalle, name='despachado_FarmaciaDetalle'),
 
-    path('imprimirDespacho/', viewsFarmaciaReportes.ImprimirDespacho),
-    path('load_dataFarmaciaDetalleOrdenados/<str:data>', viewsFarmacia.Load_dataFarmaciaDetalleOrdenados,
-         name='load_dataFarmaciaDetalleOrdenados'),
+
     #Enfermeria
 
     path('load_dataPanelEnfermeria/<str:data>', viewsEnfermeria.Load_dataPanelEnfermeria,name='load_dataPanelEnfermeria'),

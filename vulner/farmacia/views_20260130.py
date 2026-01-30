@@ -44,7 +44,6 @@ from django.db.models import Min, Max, Avg
 from django.db.models import F
 from django.db import transaction, IntegrityError
 from autorizaciones.models import EstadosAutorizacion
-from farmacia.viewsReportes import ImprimirDespacho
 # Create your views here.
 
 
@@ -72,7 +71,7 @@ def Load_dataFarmacia(request, data):
                                    password="123456")
     curx = miConexionx.cursor()
 
-    detalle = 'select far.id id,origen.nombre origen, mov.nombre mov , serv.nombre servicio, far.historia_id historia,far."ingresoPaciente" ingreso, est.nombre estado, tipos.nombre tipoDoc, usu.documento documento, usu.nombre paciente, servicios.nombre servicio, dep.nombre cama FROM farmacia_farmacia far INNER JOIN enfermeria_enfermeriatipoorigen origen ON (origen.id =  far."tipoOrigen_id") INNER JOIN enfermeria_enfermeriatipomovimiento mov ON (mov.id= far."tipoMovimiento_id") LEFT JOIN sitios_serviciosadministrativos serv ON (serv.id = far."serviciosAdministrativos_id") INNER JOIN farmacia_farmaciaEstados est ON (est.id=far.estado_id) INNER JOIN clinico_historia hist ON (hist.id = far.historia_id) INNER JOIN admisiones_ingresos adm ON (adm."tipoDoc_id" = hist."tipoDoc_id"  AND adm.documento_id = hist.documento_id AND adm.consec = hist."consecAdmision") INNER JOIN usuarios_usuarios usu ON (usu.id = adm.documento_id ) INNER JOIN usuarios_tiposdocumento tipos ON (tipos.id = adm."tipoDoc_id")	 INNER JOIN sitios_dependencias dep ON (dep.id=adm."dependenciasActual_id")  INNER JOIN sitios_serviciossedes servicios ON servicios.id=adm."serviciosActual_id"  WHERE far."sedesClinica_id" = ' + "'" + str(sede) + "'" + ' AND far.estado_id <> ' + "'" + str('0') + "' and adm.documento_id in (select dep.documento_id from sitios_dependencias dep where dep.documento_id=adm.documento_id and dep.disponibilidad= " + "'" + str('O') + "')"  + ' UNION  select far.id id,origen.nombre origen, mov.nombre mov , serv.nombre servicio, far.historia_id historia,far."ingresoPaciente" ingreso, est.nombre estado, tipos.nombre tipoDoc, usu.documento documento, usu.nombre paciente, servicios.nombre servicio, dep.nombre cama FROM farmacia_farmacia far INNER JOIN enfermeria_enfermeriatipoorigen origen ON (origen.id =  far."tipoOrigen_id") INNER JOIN enfermeria_enfermeriatipomovimiento mov ON (mov.id= far."tipoMovimiento_id") INNER JOIN sitios_serviciosadministrativos serv ON (serv.id = far."serviciosAdministrativos_id") INNER JOIN farmacia_farmaciaEstados est ON (est.id=far.estado_id) INNER JOIN admisiones_ingresos adm ON (adm.id= far."ingresoPaciente") INNER JOIN usuarios_usuarios usu ON (usu.id = adm.documento_id ) INNER JOIN usuarios_tiposdocumento tipos ON (tipos.id = adm."tipoDoc_id") INNER JOIN sitios_dependencias dep ON (dep.id=adm."dependenciasActual_id")  INNER JOIN sitios_serviciossedes servicios ON servicios.id=adm."serviciosActual_id" WHERE far."sedesClinica_id" = ' + "'" + str(sede) + "'" + ' and far.estado_id <> ' + "'" + str('0') + "'" + ' and adm.documento_id in (select dep.documento_id from sitios_dependencias dep where dep.documento_id=adm.documento_id and dep.disponibilidad= ' + "'" + str('O') + "')" + ' UNION select far.id id,origen.nombre origen, mov.nombre mov , serv.nombre servicio, far.historia_id historia,far."ingresoPaciente" ingreso, est.nombre estado, tipos.nombre tipoDoc, usu.documento documento, usu.nombre paciente, servicios.nombre servicio, ' + "'" + str('triage') + "'" + ' cama FROM farmacia_farmacia far INNER JOIN enfermeria_enfermeriatipoorigen origen ON (origen.id =  far."tipoOrigen_id") INNER JOIN enfermeria_enfermeriatipomovimiento mov ON (mov.id= far."tipoMovimiento_id")  INNER JOIN sitios_serviciosadministrativos serv ON (serv.id = far."serviciosAdministrativos_id") INNER JOIN farmacia_farmaciaEstados est ON (est.id=far.estado_id) INNER JOIN clinico_historia hist ON (hist.id = far.historia_id) INNER JOIN triage_triage tri ON (tri."tipoDoc_id" = hist."tipoDoc_id"  AND tri.documento_id = hist.documento_id AND tri.consec = hist."consecAdmision" and tri."consecAdmision"=0) INNER JOIN usuarios_usuarios usu ON (usu.id = tri.documento_id ) INNER JOIN usuarios_tiposdocumento tipos ON (tipos.id = tri."tipoDoc_id")  INNER JOIN sitios_serviciossedes servicios ON servicios.id=tri."serviciosSedes_id"'  +  ' WHERE far."sedesClinica_id" = ' + "'" + str(sede) + "'" + '  and far.estado_id <> ' + "'" + str('0') + "' and tri.documento_id in (select dep.documento_id from sitios_dependencias dep where dep.documento_id=tri.documento_id and dep.disponibilidad=" + "'" + str('O') + "')" + ' ORDER BY 6 desc'
+    detalle = 'select far.id id,origen.nombre origen, mov.nombre mov , serv.nombre servicio, far.historia_id historia,far."ingresoPaciente" ingreso, est.nombre estado, tipos.nombre tipoDoc, usu.documento documento, usu.nombre paciente, servicios.nombre servicio, dep.nombre cama FROM farmacia_farmacia far INNER JOIN enfermeria_enfermeriatipoorigen origen ON (origen.id =  far."tipoOrigen_id") INNER JOIN enfermeria_enfermeriatipomovimiento mov ON (mov.id= far."tipoMovimiento_id") LEFT JOIN sitios_serviciosadministrativos serv ON (serv.id = far."serviciosAdministrativos_id") INNER JOIN farmacia_farmaciaEstados est ON (est.id=far.estado_id) INNER JOIN clinico_historia hist ON (hist.id = far.historia_id) INNER JOIN admisiones_ingresos adm ON (adm."tipoDoc_id" = hist."tipoDoc_id"  AND adm.documento_id = hist.documento_id AND adm.consec = hist."consecAdmision") INNER JOIN usuarios_usuarios usu ON (usu.id = adm.documento_id ) INNER JOIN usuarios_tiposdocumento tipos ON (tipos.id = adm."tipoDoc_id")	 INNER JOIN sitios_dependencias dep ON (dep.id=adm."dependenciasActual_id")  INNER JOIN sitios_serviciossedes servicios ON servicios.id=adm."serviciosActual_id"  WHERE far."sedesClinica_id" = ' + "'" + str(sede) + "'" + ' AND far.estado_id <> ' + "'" + str(despachado.id) + "' and adm.documento_id in (select dep.documento_id from sitios_dependencias dep where dep.documento_id=adm.documento_id and dep.disponibilidad= " + "'" + str('O') + "')"  + ' UNION  select far.id id,origen.nombre origen, mov.nombre mov , serv.nombre servicio, far.historia_id historia,far."ingresoPaciente" ingreso, est.nombre estado, tipos.nombre tipoDoc, usu.documento documento, usu.nombre paciente, servicios.nombre servicio, dep.nombre cama FROM farmacia_farmacia far INNER JOIN enfermeria_enfermeriatipoorigen origen ON (origen.id =  far."tipoOrigen_id") INNER JOIN enfermeria_enfermeriatipomovimiento mov ON (mov.id= far."tipoMovimiento_id") INNER JOIN sitios_serviciosadministrativos serv ON (serv.id = far."serviciosAdministrativos_id") INNER JOIN farmacia_farmaciaEstados est ON (est.id=far.estado_id) INNER JOIN admisiones_ingresos adm ON (adm.id= far."ingresoPaciente") INNER JOIN usuarios_usuarios usu ON (usu.id = adm.documento_id ) INNER JOIN usuarios_tiposdocumento tipos ON (tipos.id = adm."tipoDoc_id") INNER JOIN sitios_dependencias dep ON (dep.id=adm."dependenciasActual_id")  INNER JOIN sitios_serviciossedes servicios ON servicios.id=adm."serviciosActual_id" WHERE far."sedesClinica_id" = ' + "'" + str(sede) + "'" + ' and far.estado_id <> ' + "'" + str(despachado.id) + "'" + ' and adm.documento_id in (select dep.documento_id from sitios_dependencias dep where dep.documento_id=adm.documento_id and dep.disponibilidad= ' + "'" + str('O') + "')" + ' UNION select far.id id,origen.nombre origen, mov.nombre mov , serv.nombre servicio, far.historia_id historia,far."ingresoPaciente" ingreso, est.nombre estado, tipos.nombre tipoDoc, usu.documento documento, usu.nombre paciente, servicios.nombre servicio, ' + "'" + str('triage') + "'" + ' cama FROM farmacia_farmacia far INNER JOIN enfermeria_enfermeriatipoorigen origen ON (origen.id =  far."tipoOrigen_id") INNER JOIN enfermeria_enfermeriatipomovimiento mov ON (mov.id= far."tipoMovimiento_id")  INNER JOIN sitios_serviciosadministrativos serv ON (serv.id = far."serviciosAdministrativos_id") INNER JOIN farmacia_farmaciaEstados est ON (est.id=far.estado_id) INNER JOIN clinico_historia hist ON (hist.id = far.historia_id) INNER JOIN triage_triage tri ON (tri."tipoDoc_id" = hist."tipoDoc_id"  AND tri.documento_id = hist.documento_id AND tri.consec = hist."consecAdmision" and tri."consecAdmision"=0) INNER JOIN usuarios_usuarios usu ON (usu.id = tri.documento_id ) INNER JOIN usuarios_tiposdocumento tipos ON (tipos.id = tri."tipoDoc_id")  INNER JOIN sitios_serviciossedes servicios ON servicios.id=tri."serviciosSedes_id"'  +  ' WHERE far."sedesClinica_id" = ' + "'" + str(sede) + "'" + '  and far.estado_id <> ' + "'" + str(despachado.id) + "' and tri.documento_id in (select dep.documento_id from sitios_dependencias dep where dep.documento_id=tri.documento_id and dep.disponibilidad=" + "'" + str('O') + "')" + ' ORDER BY 6 desc'
 
     print(detalle)
 
@@ -575,8 +574,6 @@ def AdicionarDespachosDispensa(request):
 
             if key["medicamentos"] != '':
                 item = item +1
-                print("Estoy recorriendo el jsonFormulacion")
-
                 medicamentos = key["medicamentos"].strip()
                 print("medicamentos=", medicamentos)
 
@@ -598,11 +595,6 @@ def AdicionarDespachosDispensa(request):
 
                 cantidadMedicamento = key["cantidadMedicamento"].strip()
                 print("cantidadMedicamento=", cantidadMedicamento)
-
-                farmaciaDetalleId = key["farmaciaDetalleId"].strip()
-                print("farmaciaDetalleId=", farmaciaDetalleId)
-
-
                 #diasTratamiento = key["diasTratamiento"]
                 #print("diasTratamiento=", diasTratamiento)
 
@@ -822,13 +814,6 @@ def AdicionarDespachosDispensa(request):
         cur3.close()
         miConexion3.close()
 
-        # Por ultimo imprime el Despacho
-
-        print("Entre imprimir despacho salida", despachoId)
-        ImprimirDespacho(farmaciaId, despachoId)
-
-        print("Ya imprimi orden de control")
-
         return JsonResponse({'success': True, 'Mensajes': 'Despacho creado satisfactoriamente!' })
 
     except psycopg2.DatabaseError as error:
@@ -844,6 +829,14 @@ def AdicionarDespachosDispensa(request):
         if miConexion3:
             cur3.close()
             miConexion3.close()
+
+    ##Hasta aquip actualiza detalle totales
+
+
+
+    # Guarda en Enfermeriarecibe
+
+    # Guarda en la cuenta del paciente facturacion_liquidaciondetalle
 
 
     # Creo eso es todop
@@ -905,7 +898,6 @@ def Load_dataDespachosFarmacia(request, data):
     username_id = d['username_id']
 
     nombreSede = d['nombreSede']
-    farmaciaId = d['farmaciaId']
     print("sede:", sede)
     print("username:", username)
     print("username_id:", username_id)
@@ -928,8 +920,7 @@ def Load_dataDespachosFarmacia(request, data):
                                    password="123456")
     curx = miConexionx.cursor()
 
-    #detalle = 'select desp.id id, desp.id despacho,serv1.nombre servEntrega ,  pla1.nombre entrega , serv2.nombre servRecibe, pla2.nombre recibe FROM farmacia_farmaciadespachos desp INNER JOIN farmacia_farmacia far ON (far.id = desp.farmacia_id and far."sedesClinica_id" = ' + "'" + str(sede) + "'" + ')  LEFT JOIN sitios_serviciosadministrativos serv1 ON (serv1.id = desp."serviciosAdministrativosEntrega_id") LEFT JOIN sitios_serviciosadministrativos serv2 ON (serv2.id = desp."serviciosAdministrativosRecibe_id") LEFT JOIN planta_planta pla1 ON (pla1.id = desp."usuarioEntrega_id") LEFT JOIN planta_planta pla2 ON (pla2.id = desp."usuarioRecibe_id") WHERE desp."fechaRegistro" >= ' + "'" + str(haceUnMes) + "'"
-    detalle = 'select desp.id id, desp.id despacho,serv1.nombre servEntrega ,  pla1.nombre entrega , serv2.nombre servRecibe, pla2.nombre recibe FROM farmacia_farmaciadespachos desp INNER JOIN farmacia_farmacia far ON (far.id = desp.farmacia_id and far."sedesClinica_id" = ' + "'" + str(sede) + "'" + ')  LEFT JOIN sitios_serviciosadministrativos serv1 ON (serv1.id = desp."serviciosAdministrativosEntrega_id") LEFT JOIN sitios_serviciosadministrativos serv2 ON (serv2.id = desp."serviciosAdministrativosRecibe_id") LEFT JOIN planta_planta pla1 ON (pla1.id = desp."usuarioEntrega_id") LEFT JOIN planta_planta pla2 ON (pla2.id = desp."usuarioRecibe_id") WHERE desp.farmacia_id = ' + "'" + str(farmaciaId) + "'"
+    detalle = 'select desp.id id, desp.id despacho,serv1.nombre servEntrega ,  pla1.nombre entrega , serv2.nombre servRecibe, pla2.nombre recibe FROM farmacia_farmaciadespachos desp INNER JOIN farmacia_farmacia far ON (far.id = desp.farmacia_id and far."sedesClinica_id" = ' + "'" + str(sede) + "'" + ')  LEFT JOIN sitios_serviciosadministrativos serv1 ON (serv1.id = desp."serviciosAdministrativosEntrega_id") LEFT JOIN sitios_serviciosadministrativos serv2 ON (serv2.id = desp."serviciosAdministrativosRecibe_id") LEFT JOIN planta_planta pla1 ON (pla1.id = desp."usuarioEntrega_id") LEFT JOIN planta_planta pla2 ON (pla2.id = desp."usuarioRecibe_id") WHERE desp."fechaRegistro" >= ' + "'" + str(haceUnMes) + "'"
 
     print(detalle)
 
@@ -1212,74 +1203,3 @@ def DespachadoFarmaciaDetalle(request):
 
 
 
-def Load_dataFarmaciaDetalleOrdenados(request, data):
-    print("Entre Load_dataFarmaciaDetalleOrdenados")
-
-    context = {}
-    envioDatos = {}
-
-    d = json.loads(data)
-
-    farmaciaId = d['farmaciaId']
-
-    username = d['username']
-    sede = d['sede']
-    username_id = d['username_id']
-
-    nombreSede = d['nombreSede']
-    print("sede:", sede)
-    print("username:", username)
-    print("username_id:", username_id)
-
-    # Combo Datos Paciente
-
-    datosPaciente = []
-
-    miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
-                                   password="123456")
-    curx = miConexionx.cursor()
-
-    detalle = 'select usu.id id,  hist."tipoDoc_id" tipoDoc, tipos.nombre nombreTipoDoc, usu.documento documento, usu.nombre paciente, hist."consecAdmision" consecutivoAdmision, serv.nombre servicio, dep.numero cama FROM farmacia_farmacia far INNER JOIN clinico_historia hist ON (hist.id = far.historia_id) INNER JOIN usuarios_usuarios usu ON (usu.id=hist.documento_id) INNER JOIN usuarios_tiposdocumento tipos ON (tipos.id=hist."tipoDoc_id") INNER JOIN admisiones_ingresos ingreso ON (ingreso."tipoDoc_id" =hist."tipoDoc_id" and ingreso.documento_id=hist.documento_id and ingreso.consec = hist."consecAdmision")  INNER Join sitios_dependencias dep on (dep.id=ingreso."dependenciasActual_id") INNER Join sitios_serviciossedes serv on (serv.id=ingreso."serviciosActual_id") where far.id= ' + "'" + str(farmaciaId) + "'"
-    print(detalle)
-
-    curx.execute(detalle)
-
-    for id,tipoDoc,nombreTipoDoc, documento, paciente ,consecutivoAdmision, servicio, cama  in curx.fetchall():
-        datosPaciente.append(
-            {"model": "famacia.farmaciaDetalle1", "pk": id, "fields":
-                {'id':id, 'tipoDoc': tipoDoc, 'nombreTipoDoc':nombreTipoDoc, 'documento': documento,'paciente':paciente,'consecutivoAdmision':consecutivoAdmision ,'servicio':servicio, 'cama':cama}})
-
-    miConexionx.close()
-    print(datosPaciente)
-
-
-    # Fin Combo
-
-
-    farmaciaDetalle = []
-
-    miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
-                                   password="123456")
-    curx = miConexionx.cursor()
-
-    detalle = 'select  det.id id,estados.nombre estadoNombre ,origen.nombre origenNombre, mov.nombre movNombre, sum.nombre || cums  suministro, 	det."dosisCantidad" dosis, dosis.descripcion unidadDosis,   vias.nombre via,	det."cantidadOrdenada" cantidad,  via.nombre viaAdministracion , det.despachado despachado FROM farmacia_farmacia far INNER JOIN farmacia_farmaciadetalle det ON (det.farmacia_id = far.id) LEFT JOIN farmacia_farmaciaestados estados  ON (estados.id = far.estado_id) INNER JOIN enfermeria_enfermeriatipoorigen origen ON (origen.id = far."tipoOrigen_id") INNER JOIN enfermeria_enfermeriatipomovimiento mov ON (mov.id = far."tipoOrigen_id") INNER JOIN facturacion_suministros sum ON (sum.id= det.suministro_id) INNER JOIN clinico_viasadministracion vias ON (vias.id= det."viaAdministracion_id") INNER JOIN clinico_unidadesdemedidadosis dosis ON (dosis.id= det."dosisUnidad_id") INNER JOIN clinico_viasadministracion via ON (via.id= det."viaAdministracion_id")  where far.id ='  + "'" + str(farmaciaId) + "' AND det.despachado = 'N' ORDER BY det.id"
-    print(detalle)
-
-    curx.execute(detalle)
-
-    for id,estadoNombre, origenNombre,movNombre,suministro, dosis, unidadDosis, via, cantidad , viaAdministracion , despachado in curx.fetchall():
-        farmaciaDetalle.append(
-            {"model": "famacia.farmaciaDetalle", "pk": id, "fields":
-                {'id': id, 'estadoNombre':estadoNombre, 'origenNombre': origenNombre ,'movNombre':movNombre,'suministro':suministro,'dosis':dosis ,'unidadDosis':unidadDosis ,'cantidad':cantidad , 'viaAdministracion':viaAdministracion, 'despachado':despachado}})
-
-    miConexionx.close()
-    print(farmaciaDetalle)
-
-    envioDatos['datosPaciente'] = datosPaciente
-    envioDatos['farmaciaDetalle'] = farmaciaDetalle
-
-    print("envioDatos = " , envioDatos)
-
-    serialized1 = json.dumps(farmaciaDetalle, default=str)
-
-    return HttpResponse(serialized1, content_type='application/json')

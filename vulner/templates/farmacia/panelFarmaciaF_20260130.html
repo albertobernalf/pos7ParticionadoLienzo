@@ -20,8 +20,8 @@
 	<li><a href="#Farmacia"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span> Panel Farmacia </a></li>
         <li><a href="#Despachos"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Despachos Pendientes </a></li>
         <li><a href="#DespachosRealizados"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Despachos Realizados </a></li>
-	<li><a href="#Ordenados"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Ordenados</a></li>
-        <li><a href="#Devoluciones"><span class="fa-solid fa-user-doctor-message"></span> <span  class="tab-text"> </span>Recepcion Devoluciones</a></li>
+	<li><a href="#ConsultaDespachos"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Dispensacion General</a></li>
+        <li><a href="#Devoluciones"><span class="fa-solid fa-user-doctor-message"></span> <span  class="tab-text"> </span> Devoluciones</a></li>
 
     </ul>
 </div>
@@ -122,8 +122,7 @@ function RefrescarPantalla() {
 						 <th>tipoMovimiento</th>  
 						 <th>Servicio</th>  					
 					 <th>Historia</th>     
-					 <th>Estado</th>       
-					                                      
+					 <th>Estado</th>                                              
 				              
 					</bold>                                  
 
@@ -373,7 +372,7 @@ function RefrescarPantalla() {
 </article>
 
 
-<article id="DespachosRealizados">
+<article id="ConsultaDespachos">
         	
  <!-- INICIO TABLE DE  EL DATATABLE  -->
 		<div class="container my-2">
@@ -401,8 +400,7 @@ function RefrescarPantalla() {
  						  <th>ServEntrega</th>                             
 						 <th>Entrega</th>                                        
 						 <th>SerRecibe</th>  
-						 <th>Recibe</th>  
-						 <th>Sel</th>     					
+						 <th>Recibe</th>  					
 			              
 					</bold>                                  
 
@@ -442,55 +440,6 @@ function RefrescarPantalla() {
 
                                 </div>
 
-
-</article>
-
-
-<article id="Ordenados">
-
-
-  <!-- INICIO TABLE DE  EL DATATABLE  -->
-		<div class="container my-2">
-
-		<div align="left" height="2px" width="150px">
-
-			Orden :  <span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="ordenFarmacia"></span>
-			<span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;" id="nombreTipoDocN"></span>
-			<span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="documentoN"></span>
-			<span  style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;" id="paciente"></span>
-			Ing#: <span id="consecutivoAdmision"></span>
-			Servicio: <span id="servicio"></span>
-			Hab: <span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="habitacion"></span>
-
-		</div>
-
-
-	   <div class="row">
-				
-                                        <table  id= "tablaFarmaciaDetalleOrdenados" class=" display table table-striped table-sm fs-6 nowrap" style="width: 100%">
-                                           <thead>
-                                            <tr>    
-						<bold> 
-					    	 <th>Sel</th>                                               
- 						 <th>Orden Detalle #</th>  
-						 <th>Dosis</th>  
-						 <th>UnidadDosis</th>  	                           
-						 <th>Suministro</th>                                        				
-						 <th>Via</th>                                        				
-					 <th>cantidad</th>                                                 
-					 <th>Despachado</th>  
-					</bold>                                  
-
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                     
-                                        </table>
-
-
-		</div>
-	</div>
 
 </article>
 
@@ -771,8 +720,15 @@ function RefrescarPantalla() {
 
 
 
+<article id="DespachosRealizados">
+aquip
+</article>
+
+<article id="DispensacionGeneral">
+        	
 
 
+</article>
 
 
 

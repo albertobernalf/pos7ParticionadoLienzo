@@ -13,7 +13,6 @@ let dataTablePanelFarmaciaInitialized = false;
 let dataTableFarmaciaDespachosInitialized = false;
 let dataTableFarmaciaDespachosDispensaInitialized = false;
 let dataTableFarmaciaDetalleInitialized = false;
-let dataTableFarmaciaDetalleOrdenadosInitialized = false;
 let dataTableDespachosFarmaciaDispensaInitialized = false;
 let dataTableDespachosFarmaciaInitialized = false;
 let dataTableDespachosDetalleFarmaciaInitialized = false;
@@ -82,9 +81,8 @@ $('#tablaFormulacion tbody').on('click', 'tr', function () {
       	   textViasAdministracion = select3.options[select3.selectedIndex].innerText; //El texto de la opción seleccionada
 	
 	        var cantidadMedicamento =  document.getElementById("cantidadMedicamento").value;
-            var farmaciaDetalleId = document.getElementById("farmaciaDetalle").value;
 
-	    table10.row.add([  medicamentos, textMedicamentos, dosis,  textUMedidaDosis, textViasAdministracion, cantidadMedicamento   , farmaciaDetalleId,   '<i class="fa fa-trash"></i>']).draw(false);
+	    table10.row.add([ medicamentos, textMedicamentos, dosis,  textUMedidaDosis, textViasAdministracion, cantidadMedicamento   ,  '<i class="fa fa-trash"></i>']).draw(false);
 
         });
 
@@ -228,19 +226,21 @@ function arrancaFarmacia(valorTabla,valorData)
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-
+      messageTop: 'Farmacia Ordenes' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
+      messageTop: 'Farmacia Ordenes' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
+      messageTop: 'Farmacia Ordenes' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -441,18 +441,21 @@ function arrancaFarmacia(valorTabla,valorData)
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
+      messageTop: 'Farmacia Ordenes' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
+      messageTop: 'Farmacia Ordenes' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
+      messageTop: 'Farmacia Ordenes' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -536,18 +539,21 @@ function arrancaFarmacia(valorTabla,valorData)
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
+      messageTop: 'Farmacia Ordenes' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
+      messageTop: 'Farmacia Ordenes' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
+      messageTop: 'Farmacia Ordenes' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -608,14 +614,6 @@ function arrancaFarmacia(valorTabla,valorData)
                 { data:"fields.entrega"},
                 { data:"fields.servRecibe"},
                 { data:"fields.recibe"},
-
-                	{
-	  "render": function ( data, type, row ) {
-                        var btn = '';
-		 btn = btn + " <input type='radio' name='miImprimirDespacho2' style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;'  class='miImprimirDespacho form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
-                       return btn;
-                    },
-	},
                        ]
             }
 	        
@@ -637,18 +635,21 @@ function arrancaFarmacia(valorTabla,valorData)
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
+      messageTop: 'Farmacia Ordenes' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
+      messageTop: 'Farmacia Ordenes' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
+      messageTop: 'Farmacia Ordenes' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -730,18 +731,21 @@ function arrancaFarmacia(valorTabla,valorData)
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
+      messageTop: 'Farmacia Ordenes' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
+      messageTop: 'Farmacia Ordenes' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
+      messageTop: 'Farmacia Ordenes' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -832,18 +836,21 @@ function arrancaFarmacia(valorTabla,valorData)
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
+      messageTop: 'Farmacia Ordenes' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
+      messageTop: 'Farmacia Ordenes' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
+      messageTop: 'Farmacia Ordenes' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -906,118 +913,6 @@ function arrancaFarmacia(valorTabla,valorData)
             }
 	        
 		   dataTable = $('#tablaDevolucionesDetalleFarmacia').DataTable(dataTableOptionsDevolucionesDetalleFarmacia);
-
-  }
-
-
-    if (valorTabla == 9)
-    {
-        let dataTableOptionsFarmaciaDetalleOrdenados  ={
- dom: "<'row mb-0'<'col-sm-2'B><'col-sm-1'><'col-sm-4'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-            "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
-  buttons: [
-    {
-      extend: 'excelHtml5',
-      text: '<i class="fas fa-file-excel"></i> ',
-	// text: '<i class="bi bi-file-earmark-excel-fill"></i> Exportar Excel',
-      titleAttr: 'Exportar a Excel',
-      className: 'btn btn-success btn-sm',
-      messageTop: 'Farmacia Ordenes' ,
-    },
-    {
-      extend: 'pdfHtml5',
-      text: '<i class="fas fa-file-pdf"></i> ',
-      titleAttr: 'Exportar a PDF',
-      className: 'btn btn-danger btn-sm',
-      messageTop: 'Farmacia Ordenes' ,
-    },
-    {
-      extend: 'print',
-      text: '<i class="fa fa-print"></i> ',
-      titleAttr: 'Imprimir',
-      className: 'btn btn-info btn-sm',
-      messageTop: 'Farmacia Ordenes' ,
-    },
-  ],
-
-  lengthMenu: [2, 4, 15],
-           processing: true,
-            serverSide: false,
-            scrollY: '200px',
-	    scrollX: true,
-	    scrollCollapse: true,
-            paging:false,
-            columnDefs: [
-		{ className: 'centered', targets: [0, 1, 2, 3, 4, 5] },
-	    { width: '10%', targets: [2,3] },
-		{
-                    "targets": 6
-               }
-            ],
-	 pageLength: 20,
-	  destroy: true,
-	  language: {
-		    processing: 'Procesando...',
-		    lengthMenu: 'Mostrar _MENU_ registros',
-		    zeroRecords: 'No se encontraron resultados',
-		    emptyTable: 'Ningún dato disponible en esta tabla',
-		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
-		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
-		    infoThousands: ',',
-		    loadingRecords: 'Cargando...',
-		    paginate: {
-			      first: 'Primero',
-			      last: 'Último',
-			      next: 'Siguiente',
-			      previous: 'Anterior',
-		    }
-			},
-
-           ajax: {
-                 url:"/load_dataFarmaciaDetalleOrdenados/" +  data,
-                 type: "POST",
-                 dataSrc: ""
-            },
-            columns: [
-	{
-	  "render": function ( data, type, row ) {
-                        var btn = '';
-
-		 btn = btn + " <input type='radio' name='miFarmaciaDetalle2Ordenados' style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;' class='miFarmaciaDetalleOrdenados form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
-
-
-                       return btn;
-                    },
-
-	},
-
-                { data: "fields.id"},
-        		{ data: "fields.dosis"},
-                { data: "fields.unidadDosis"},
-                { data: "fields.suministro"},
-                { data: "fields.viaAdministracion"},
-                { data: "fields.cantidad"},
-
-                	{
-	  "render": function ( data, type, row ) {
-                        var btn = '';
-
-		 btn = btn + " <input type='radio' name='despachadoOrdenados' style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;' class='despachadoOrdenados form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
-
-
-                       return btn;
-                    },
-
-	},
-
-
-                        ]
-            }
-
-		   dataTable = $('#tablaFarmaciaDetalleOrdenados').DataTable(dataTableOptionsFarmaciaDetalleOrdenados);
-
 
   }
 
@@ -1148,12 +1043,8 @@ $('#tablaPanelFarmacia tbody').on('click', '.miSelFarmacia', function() {
 	     arrancaFarmacia(3,data);
 	     dataTableFarmaciaDetalleInitialized = true;
 
-	     arrancaFarmacia(5,data);
-	     dataTableDespachosFarmaciaInitialized = true;
-
-	     arrancaFarmacia(9,data);
-	     dataTableFarmaciaDetalleOrdenadosInitialized = true;
-
+	     //arrancaFarmacia(5,data);
+	     //dataTableDespachosFarmaciaInitialized = true;
 
 	    // arrancaFarmacia(7,data);
 	    // dataTableDespachosFarmaciaInitialized = true;
@@ -1407,53 +1298,8 @@ $('#tablaDespachosFarmacia tbody').on('click', '.miDespachoFarmacia2', function(
   });
 
 
-$('#tablaDespachosFarmacia tbody').on('click', '.miImprimirDespacho', function() {
 
-		  alert("ENTRE miImprimirDespacho VE");
 
-   	        var post_id = $(this).data('pk');
-
-		var despachoId =   post_id;
-		var farmaciaId = document.getElementById("farmaciaId").value;
-
-	var sedeSeleccionada = document.getElementById("sedeSeleccionada").value;
-        var username = document.getElementById("username").value;
-        var nombreSede = document.getElementById("nombreSede").value;
-    	var sede = document.getElementById("sede").value;
-        var username_id = document.getElementById("username_id").value;
-         var data =  {}   ;
-        data['username'] = username;
-        data['sedeSeleccionada'] = sedeSeleccionada;
-        data['nombreSede'] = nombreSede;
-        data['sede'] = sede;
-        data['username_id'] = username_id;
-	    data['despachoId'] = despachoId;
-	    data = JSON.stringify(data);
-		alert("voy ajax con farmaciaId = " + farmaciaId);
-
-     $.ajax({
-	            url: '/imprimirDespacho/',
-	            data: {'farmaciaId':farmaciaId,'despachoId':despachoId},
-                type: "POST",
-                dataType: 'json',
-                success: function (info) {
-
-		if (info.success == true)
-			 {
-			  document.getElementById("mensajes").innerHTML = data.Mensaje;
-			 }
-			else
-			{
-			document.getElementById("mensajesError").innerHTML = data.Mensaje;
-			return;
-			}
-                },
-             	        error: function(data){
-		       		document.getElementById("mensajesError").innerHTML =  data.responseText
-			        },
-
-            });
-  });
 
 
 function CambiaEstadoDespacho()
@@ -1520,13 +1366,12 @@ function tableActionsFormulacion() {
 			  btn = btn + " <button class='btn btn-danger deleteRevisionSistemas' id='borraDiag'>" + '<i class="fa fa-trash"></i>' + "</button>";
                         return btn;
                     },
-                    "targets": 14
+                    "targets": 13
                }
             ],
         lengthMenu: [5],
     columns:[
     //"dummy" configuration
-
         { visible: true }, //col 1
         { visible: true }, //col 2
         { visible: true }, //col 3
@@ -1534,7 +1379,6 @@ function tableActionsFormulacion() {
 	  { visible: true }, //col 5
 	  { visible: false }, //col 6
 	  { visible: true }, //col 7
-	              { visible: true }, //col 1
 
 
             ],
@@ -1577,14 +1421,13 @@ function AdicionarDespachosDispensa()
 	      /*  "vias"    : datos_tabla10[i][4] , */
 	        "viasAdministracion"    : datos_tabla10[i][4] ,
 	        "cantidadMedicamento"    : datos_tabla10[i][5] ,
-	       "farmaciaDetalleId"    : datos_tabla10[i][6] ,
 
 	      });
 	   };
 
 	    formulacion  = JSON.stringify(formulacion);
 
-	      alert("Esto envio formulacion = " + formulacion)
+	    //  alert("Esto envio formulacion = " + formulacion)
     
  	// Fin Formulacion
 

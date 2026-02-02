@@ -161,83 +161,47 @@ Mayor a un dia
 
                                     <input type="hidden" class="form-control form-control-sm" id="tipoExamenId"    name="tipoExamenId" value="" readonly>
 
-                                <div class="row row-cols-11">
+                             	<!-- 	<div style="heigth=50px;">  -->
 
-				     <div class="col">
 					TipoDoc:
-					<span id="tipoDocPaci" name="tipoDocPaci"></span>
-                                    </div>
+					<span id="tipoDocPaci" name="tipoDocPaci" size="2px"></span>
 
-				     <div class="col">
-					Documento:
-					<span id="documentoPaci" name="documentoPaci"></span>
-                                    </div>
-
-				     <div class="col">
-					Paciente:
-					<span id="nombrePaciente" name="nombrePaciente"></span>
-
-                                    </div>
-
-                                    <div class="col">
+					Doc#:
+					<span id="documentoPaci" name="documentoPaci"  size="6px"></span>
+				
+					<span id="nombrePaciente" name="nombrePaciente"  size="10px"></span>
 					<span id="tipoExamen" name="tipoExamen"></span>
-					TipoExamen:
-                                    </div>
-
-                                    <div class="col">
-					CupsId :
 					<span id="CupsId" name="CupsId"></span>
-                                        
-                                    </div>
-
-                                    <div class="col">
 					Examen:
 					<span id="nombreExamen" name="nombreExamen"></span>
-                                        
 
-                                    </div>
+		
 
-				  <div class="col">
-                                        <label for="serviciosAdministrativos" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;SeviciosAdmon:</label>
-                                        <div class="col-sm-8">
-                                            <select class="select-css h-40 w-20" id="serviciosAdministrativos"  tabindex= "0"
+					Cantidad:
+					<span id="cantidad" name="cantidad"></span>
+                                   
+                                         Folio:
+                                        <input type="text" class="form-control form-control-sm" id="folio" name="folio" size="2"
+                                               value="" readonly>
+
+                                         Resultado:
+                                        <input type="text" class="form-control form-control-sm" id="resultado" name="resultado"   value="" >
+
+                                         FechaToma:
+                                        <input type="datetime-local" class="form-control form-control-sm" id="fechaToma" name="fechaToma"   value="" >
+
+					Servicio:
+                                                    <select class="select-css" id="serviciosAdministrativos"  tabindex= "0"
                                                     name="serviciosAdministrativos" required>
                                                 {% for serviciosAdministrativos in ServiciosAdministrativos %}
                                                 <option value="{{serviciosAdministrativos.id}}"> {{serviciosAdministrativos.nombre}}</option>
                                                 {% endfor %}
                                             </select>
-                                        </div>
 
-                                    </div>
-
-				
-                                    <div class="col">
-					Cantidad:
-					<span id="cantidad" name="cantidad"></span>
-                                   
-
-                                    </div>
-				 <div class="col">
-                                         Folio:
-                                        <input type="text" class="form-control form-control-sm" id="folio" name="folio" size="2"
-                                               value="" readonly>
-
-                                    </div>
-		
-			 	<div class="col">
-                                         Resultado:
-                                        <input type="text" class="form-control form-control-sm" id="resultado" name="resultado"   value="" >
-
-                                    </div>
-
-			 	<div class="col">
-                                         FechaToma:
-                                        <input type="datetime-local" class="form-control form-control-sm" id="fechaToma" name="fechaToma"   value="" >
-
-                                    </div>
                                  
+				 <!--   </div>  -->
 
-                                </div>
+
 
                                 <div class="row">
 				  
@@ -316,12 +280,12 @@ Mayor a un dia
 
                                     </div>
                                     <div class="col">
-                                         Imagen :
+                                         ruta-Imagen :
                                         <input type="text" class="form-control form-control-sm" id="rutaImagen"
                                                name="rutaImagen" value="" size="4">
                                     </div>
                                     <div class="col">
-                                        Video :
+                                        ruta-Video :
                                         <input type="text" class="form-control form-control-sm" id="rutaVideo"
                                                name="rutaVideo" value="" size="4">
                                     </div>

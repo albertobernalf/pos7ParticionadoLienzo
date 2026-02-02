@@ -54,10 +54,9 @@ function arrancaApoyoTerapeutico(valorTabla,valorData)
     if (valorTabla == 1)
     {
         let dataTableOptionsApoyoTerapeutico  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
-
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
 
 //  dom: 'Bfrtilp',
   buttons: [
@@ -67,21 +66,18 @@ function arrancaApoyoTerapeutico(valorTabla,valorData)
 	// text: '<i class="bi bi-file-earmark-excel-fill"></i> Exportar Excel',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success btn-sm',
-      messageTop: 'Apoyo Terapeutico' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger btn-sm',
-      messageTop: 'Apoyo Terapeutico' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info btn-sm',
-      messageTop: 'Apoyo Terapeutico' ,
     },
   ],
 	autoWidth: false,
@@ -162,10 +158,9 @@ function arrancaApoyoTerapeutico(valorTabla,valorData)
     if (valorTabla == 2)
     {
         let dataTableOptionsRasgosConsulta  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
-
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
 
 //  dom: 'Bfrtilp',
   buttons: [
@@ -175,21 +170,18 @@ function arrancaApoyoTerapeutico(valorTabla,valorData)
 	// text: '<i class="bi bi-file-earmark-excel-fill"></i> Exportar Excel',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success btn-sm',
-      messageTop: 'Rasgos' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger btn-sm',
-      messageTop: 'Rasgos' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info btn-sm',
-      messageTop: 'Rasgos' ,
     },
   ],
 	autoWidth: false,
@@ -373,10 +365,9 @@ function arrancaApoyoTerapeutico(valorTabla,valorData)
     if (valorTabla == 4)
     {
         let dataTableOptionsRasgos  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
-
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
 
 //  dom: 'Bfrtilp',
   buttons: [
@@ -478,10 +469,9 @@ function arrancaApoyoTerapeutico(valorTabla,valorData)
 		alert("entre tabla 5");
 
         let dataTableOptionsOrdenadosApoyoTerapeutico  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
-
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
 
 //  dom: 'Bfrtilp',
   buttons: [
@@ -491,21 +481,18 @@ function arrancaApoyoTerapeutico(valorTabla,valorData)
 	// text: '<i class="bi bi-file-earmark-excel-fill"></i> Exportar Excel',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success btn-sm',
-      messageTop: 'Ordenados' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger btn-sm',
-      messageTop: 'Ordenados' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info btn-sm',
-      messageTop: 'Ordenados' ,
     },
   ],
 	autoWidth: false,
@@ -593,10 +580,10 @@ function arrancaApoyoTerapeutico(valorTabla,valorData)
 
 
         let dataTableOptionsNoOrdenadosApoyoTerapeutico  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
 
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
 
 //  dom: 'Bfrtilp',
   buttons: [
@@ -606,21 +593,18 @@ function arrancaApoyoTerapeutico(valorTabla,valorData)
 	// text: '<i class="bi bi-file-earmark-excel-fill"></i> Exportar Excel',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success btn-sm',
-      messageTop: 'No Ordenados' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger btn-sm',
-      messageTop: 'No Ordenados' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info btn-sm',
-      messageTop: 'No Ordenados' ,
     },
   ],
 	autoWidth: false,

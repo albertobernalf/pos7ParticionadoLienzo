@@ -277,7 +277,7 @@ function arrancaEnfermeria(valorTabla,valorData)
 		{ className: 'centered', targets: [0, 1, 2, 3] },
 	    { width: '10%', targets: [2,3] },
 		{  
-                    "targets": 12
+                    "targets": 11
                }
             ],
 	 pageLength: 3,
@@ -339,8 +339,8 @@ function arrancaEnfermeria(valorTabla,valorData)
 			visible: false
 		},
 
-                { data: "fields.folio"},
-  
+		{ data: "fields.despacho"},
+                { data: "fields.folio"}, 
                 { data: "fields.consecutivoMedicamento"},
                 { data: "fields.dosis"},
                 { data: "fields.cantidad"},
@@ -349,6 +349,7 @@ function arrancaEnfermeria(valorTabla,valorData)
                 { data: "fields.via"},
                 { data: "fields.frecuencia"},
                 { data: "fields.diasTratamiento"},
+
 
                         ]
             }
@@ -2436,7 +2437,7 @@ function GuardarDevolucion()
                             'servicioAdmonEnfermeria':servicioAdmonEnfermeria,'enfermeriaId':enfermeriaId},
  	      		success: function (data) {
 
-		if (info.success = true)
+		if (data.success = true)
 		{
 		document.getElementById("mensajes").innerHTML =	info.Mensaje;	
 		}

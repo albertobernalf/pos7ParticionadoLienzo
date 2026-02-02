@@ -1071,3 +1071,9 @@ Enero 30
 	Seguir lunes por cua no carga el reporte ?
 	Ver factutaracon completo proceso imprimrFactura
 	Seguir colocar titulos a los excel, pdf, print en todos los datatables
+
+
+Feb.02/2026
+
+	PENDIENTE Devouciones tanto de Enfermeria como de Farmacia
+        Pantalla apoyo terapeuitoc pailas

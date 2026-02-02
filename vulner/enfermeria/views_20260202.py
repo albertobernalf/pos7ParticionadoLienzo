@@ -756,7 +756,7 @@ def GuardaPlaneacionEnfermeria(request):
     print ("numeroPlaneos =", numeroPlaneos)
     dosis = request.POST['dosisP']
     print("dosis =", dosis)
-    cantidad = request.POST['dosisP']
+    cantidad = request.POST['cantidadP']
     print("cantidad =", cantidad)
     medida = request.POST['medidaP']
 

@@ -83,7 +83,7 @@ $(document).ready(function() {
 
 /*------------------------------------------
         --------------------------------------------
-        Create Post Code Formulacion Devolucinens
+        Create Post Code Formulacion Devolucines
         --------------------------------------------
         --------------------------------------------*/
         $('#BtnFormulacionDev').click(function (e) {
@@ -133,30 +133,29 @@ function arrancaEnfermeria(valorTabla,valorData)
     if (valorTabla == 1)
     {
         let dataTableOptionsPanelEnfermeria  ={
-   dom: "<'row mb-1'<'col-sm-2'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-1'<'col-sm-5'i><'col-sm-7'p>>",
+
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
+
   buttons: [
     {
       extend: 'excelHtml5',
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Enfermeria' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Enfermeria' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Enfermeria' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -212,7 +211,12 @@ function arrancaEnfermeria(valorTabla,valorData)
 
 	},
 
-                 { data: "fields.id"},
+              /*   { data: "fields.id"}, */
+		{
+			target: 0,
+			visible: true
+		},
+
                  { data: "fields.tipoDoc" }, 
                 { data: "fields.Documento"},
                 { data: "fields.Nombre"},
@@ -239,30 +243,27 @@ function arrancaEnfermeria(valorTabla,valorData)
     if (valorTabla == 2)
     {
         let dataTableOptionsMedicamentosEnfermeria  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
   buttons: [
     {
       extend: 'excelHtml5',
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Medicamentos Enfermeria' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Medicamentos Enfermeria' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Medicamentos Enfermeria' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -361,30 +362,27 @@ function arrancaEnfermeria(valorTabla,valorData)
     if (valorTabla == 3)
     {
         let dataTableOptionsParaClinicosEnfermeria  ={
-   dom: "<'row mb-1'<'col-sm-2'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
   buttons: [
     {
       extend: 'excelHtml5',
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Paraclinicos' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Paraclinicos' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Paraclinicos' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -462,30 +460,27 @@ function arrancaEnfermeria(valorTabla,valorData)
     if (valorTabla == 4)
     {
         let dataTableOptionsPedidosEnfermeria  ={
-   dom: "<'row mb-1'<'col-sm-2'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-            "<'row'<'col-sm-12'tr>>" + 
-             "<'row mt-1'<'col-sm-5'i><'col-sm-7'p>>",
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
   buttons: [
     {
       extend: 'excelHtml5',
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Pedidos Enfermeria' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Pedidos Enfermeria' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Pedidos Enfermeria' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -635,9 +630,9 @@ function arrancaEnfermeria(valorTabla,valorData)
     if (valorTabla == 6)
     {
         let dataTableOptionsTurnosEnfermeria  ={
-   dom: "<'row mb-1'<'col-sm-2'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-1'<'col-sm-5'i><'col-sm-7'p>>",
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
   buttons: [
     {
       extend: 'excelHtml5',
@@ -733,30 +728,27 @@ function arrancaEnfermeria(valorTabla,valorData)
     if (valorTabla == 7)
     {
         let dataTableOptionsPlaneacionEnfermeria  ={
-   dom: "<'row mb-1'<'col-sm-2'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-1'<'col-sm-5'i><'col-sm-7'p>>",
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
   buttons: [
     {
       extend: 'excelHtml5',
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Planeacion Enfermeria' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Planeacion Enfermeria' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Planeacion Enfermeria' ,
     },
   ],
 
@@ -773,7 +765,7 @@ function arrancaEnfermeria(valorTabla,valorData)
 		{ className: 'centered', targets: [0, 1, 2, 3, 4, 5] },
 	    { width: '10%', targets: [2,3] },
 		{  
-                    "targets": 13
+                    "targets": 15
                }
             ],
 	 pageLength: 3,
@@ -819,6 +811,7 @@ function arrancaEnfermeria(valorTabla,valorData)
         		{ data: "fields.fechaPlanea"},
                 { data: "fields.turnoPlanea"},
                 { data: "fields.enfermeraPlanea"},
+                { data: "fields.cantidadPlaneada"},
                 { data: "fields.fechaAplica"},
                 { data: "fields.turnoAplica"},
                 { data: "fields.enfermeraAplica"},
@@ -843,30 +836,27 @@ function arrancaEnfermeria(valorTabla,valorData)
     if (valorTabla == 8)
     {
         let dataTableOptionsDietasEnfermeria  ={
-   dom: "<'row mb-1'<'col-sm-2'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-1'<'col-sm-5'i><'col-sm-7'p>>",
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
   buttons: [
     {
       extend: 'excelHtml5',
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Dietas Enfermeria' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Dietas Enfermeria' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Dietas Enfermeria' ,
     },
   ],
 
@@ -944,30 +934,27 @@ function arrancaEnfermeria(valorTabla,valorData)
     if (valorTabla == 9)
     {
         let dataTableOptionsNotasEnfermeria  ={
-   dom: "<'row mb-1'<'col-sm-2'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-1'<'col-sm-5'i><'col-sm-7'p>>",
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
   buttons: [
     {
       extend: 'excelHtml5',
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Notas Enfermeria' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Notas Enfermeria' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Notas Enfermeria' ,
     },
   ],
 
@@ -1043,30 +1030,27 @@ function arrancaEnfermeria(valorTabla,valorData)
     if (valorTabla == 10)
     {
         let dataTableOptionsDevolucionEnfermeria  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
   buttons: [
     {
       extend: 'excelHtml5',
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Devoluciones Enfermeria' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Devoluciones Enfermeria' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Devoluciones Enfermeria' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -1157,9 +1141,9 @@ function arrancaEnfermeria(valorTabla,valorData)
     if (valorTabla == 11)
     {
         let dataTableOptionsConsultaDevolucionesEnfermeria  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
   buttons: [
     {
       extend: 'excelHtml5',
@@ -1251,30 +1235,27 @@ function arrancaEnfermeria(valorTabla,valorData)
     if (valorTabla == 12)
     {
         let dataTableOptionsConsultaDevolucionesDetalleEnfermeria  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
   buttons: [
     {
       extend: 'excelHtml5',
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Devoluciones detalle Enfermeria' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Devoluciones detalle Enfermeria' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Devoluciones detalle Enfermeria' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -1336,30 +1317,27 @@ function arrancaEnfermeria(valorTabla,valorData)
     if (valorTabla == 13)
     {
         let dataTableOptionsSignosVitalesEnfermeria  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
   buttons: [
     {
       extend: 'excelHtml5',
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Signos vitales' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Signos vitales' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Signos vitales' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -1601,11 +1579,8 @@ $('#tablaPanelEnfermeria tbody').on('click', '.miIngresoEnfermeriaId', function(
 	     arrancaEnfermeria(7,data);
 	     dataTablePlaneacionEnfermeriaInitialized = true;
 		
-
-
 	     arrancaEnfermeria(8,data);
 	     dataTableDietasEnfermeriaInitialized = true;
-
 
 	     arrancaEnfermeria(9,data);
 	     dataTableNotasEnfermeriaInitialized = true;
@@ -1615,7 +1590,6 @@ $('#tablaPanelEnfermeria tbody').on('click', '.miIngresoEnfermeriaId', function(
 
 	    arrancaEnfermeria(11,data);
 	    dataTableConsultaDevolucionesEnfermeriaInitialized = true;
-
 
 	    arrancaEnfermeria(13,data);
 	    dataTableSignosVitalesEnfermeriaInitialized = true;

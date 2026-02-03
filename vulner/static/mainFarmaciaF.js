@@ -323,21 +323,21 @@ function arrancaFarmacia(valorTabla,valorData)
 	// text: '<i class="bi bi-file-earmark-excel-fill"></i> Exportar Excel',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success btn-sm',
-      messageTop: 'Farmacia Detalle' ,
+      messageTop: 'Farmacia Ordenes' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger btn-sm',
-      messageTop: 'Farmacia Detalle' ,
+      messageTop: 'Farmacia Ordenes' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info btn-sm',
-      messageTop: 'Farmacia Detalle' ,
+      messageTop: 'Farmacia Ordenes' ,
     },
   ],
 
@@ -441,21 +441,18 @@ function arrancaFarmacia(valorTabla,valorData)
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Farmacia Despachos dispensa' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Farmacia Despachos dispensa' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Farmacia Despachos dispensa' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -615,7 +612,7 @@ function arrancaFarmacia(valorTabla,valorData)
                 	{
 	  "render": function ( data, type, row ) {
                         var btn = '';
-		 btn = btn + " <input type='radio' name='miImprimirDespacho2' style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;'  class='miImprimirDespacho form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
+		 btn = btn + " <input type='radio' name='miImprimirDesp' style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;'  class='miImprimirDespacho form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
                        return btn;
                     },
 	},
@@ -640,21 +637,18 @@ function arrancaFarmacia(valorTabla,valorData)
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Farmacia Despachos detalle' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Farmacia Despachos detalle' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Farmacia Despachos detalle' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -736,21 +730,18 @@ function arrancaFarmacia(valorTabla,valorData)
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Farmacia Devoluciones' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Farmacia Devoluciones' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Farmacia Devoluciones' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -841,21 +832,18 @@ function arrancaFarmacia(valorTabla,valorData)
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Farmacia Devoluciones detalle' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Farmacia Devoluciones detalle' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Farmacia Devoluciones detalle' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -1418,17 +1406,13 @@ $('#tablaDespachosFarmacia tbody').on('click', '.miDespachoFarmacia2', function(
 
   });
 
-
 $('#tablaDespachosFarmacia tbody').on('click', '.miImprimirDespacho', function() {
 
-		  alert("ENTRE miImprimirDespacho VE");
-
-   	        var post_id = $(this).data('pk');
-
+		  alert("ENTRE miImprimirDespacho ");
+	      var post_id = $(this).data('pk');
 		var despachoId =   post_id;
 		var farmaciaId = document.getElementById("farmaciaId").value;
-
-	var sedeSeleccionada = document.getElementById("sedeSeleccionada").value;
+	    var sedeSeleccionada = document.getElementById("sedeSeleccionada").value;
         var username = document.getElementById("username").value;
         var nombreSede = document.getElementById("nombreSede").value;
     	var sede = document.getElementById("sede").value;
@@ -1442,6 +1426,7 @@ $('#tablaDespachosFarmacia tbody').on('click', '.miImprimirDespacho', function()
 	    data['despachoId'] = despachoId;
 	    data = JSON.stringify(data);
 		alert("voy ajax con farmaciaId = " + farmaciaId);
+		alert("voy ajax con despachoId = " + despachoId);
 
      $.ajax({
 	            url: '/imprimirDespacho/',
@@ -1449,8 +1434,7 @@ $('#tablaDespachosFarmacia tbody').on('click', '.miImprimirDespacho', function()
                 type: "POST",
                 dataType: 'json',
                 success: function (info) {
-
-		if (info.success == true)
+		if (info.success==true)
 			 {
 			  document.getElementById("mensajes").innerHTML = data.Mensaje;
 			 }
@@ -1461,9 +1445,10 @@ $('#tablaDespachosFarmacia tbody').on('click', '.miImprimirDespacho', function()
 			}
                 },
              	        error: function(data){
-		       		document.getElementById("mensajesError").innerHTML =  data.responseText
-			        },
+             	        alert("POSIBLE ERROR =" + JSON.stringify(data));
 
+		       		document.getElementById("mensajesError").innerHTML =  data.responseText;
+		        },
             });
   });
 

@@ -39,21 +39,18 @@ function arrancaLiquidacion(valorTabla,valorData)
 	// text: '<i class="bi bi-file-earmark-excel-fill"></i> Exportar Excel',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success btn-sm',
-      messageTop: 'Liquidaciones' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger btn-sm',
-      messageTop: 'Liquidaciones' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info btn-sm',
-      messageTop: 'Liquidaciones' ,
     },
   ],
   autoWidth: false,
@@ -80,7 +77,7 @@ function arrancaLiquidacion(valorTabla,valorData)
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
+		    search: 'Buscar:',
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -204,21 +201,18 @@ function arrancaLiquidacion(valorTabla,valorData)
 	// text: '<i class="bi bi-file-earmark-excel-fill"></i> Exportar Excel',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success btn-sm',
-      messageTop: 'Liquidaciones detalle' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger btn-sm',
-      messageTop: 'Liquidaciones detalle' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info btn-sm',
-      messageTop: 'Liquidaciones detalle' ,
     },
   ],
 autoWidth: false,
@@ -252,7 +246,7 @@ autoWidth: false,
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
+		    search: 'Buscar:',
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -310,21 +304,18 @@ autoWidth: false,
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Facturacion' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Facturacion' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Facturacion' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -349,7 +340,7 @@ autoWidth: false,
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
+		    search: 'Buscar:',
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -425,21 +416,18 @@ autoWidth: false,
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Abonos' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Abonos' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Abonos' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -469,7 +457,7 @@ autoWidth: false,
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
+		    search: 'Buscar:',
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -524,21 +512,18 @@ autoWidth: false,
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Facturacion detalle' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Facturacion detalle' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Facturacion detalle' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -566,7 +551,7 @@ autoWidth: false,
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
+		    search: 'Buscar:',
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -621,21 +606,18 @@ autoWidth: false,
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'ReFacturacion' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'ReFacturacion' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'ReFacturacion' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -660,7 +642,7 @@ autoWidth: false,
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
+		    search: 'Buscar:',
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -1027,7 +1009,7 @@ window.addEventListener('load', async () => {
         $('body').on('click', '.ImprimirFactura', function () {
 
 	          var post_id = $(this).data('pk');
-		var row = $(this).closest('tr'); // Encuentra la fila
+		// var row = $(this).closest('tr'); // Encuentra la fila
 
 		// alert("ImprimirFactura entre pk = " + post_id);
 
@@ -1036,9 +1018,6 @@ window.addEventListener('load', async () => {
         var nombreSede = document.getElementById("nombreSede").value;
     	var sede = document.getElementById("sede").value;
         var username_id = document.getElementById("username_id").value;
-
-
-
 	var ingresoId = post_id;
 
 	$.ajax({
@@ -1075,7 +1054,7 @@ window.addEventListener('load', async () => {
         $('body').on('click', '.ImprimirCuenta', function () {
 
 	          var post_id = $(this).data('pk');
-		var row = $(this).closest('tr'); // Encuentra la fila
+		// var row = $(this).closest('tr'); // Encuentra la fila
 
 		// alert("ImprimirFactura entre pk = " + post_id);
 
@@ -1084,9 +1063,6 @@ window.addEventListener('load', async () => {
         var nombreSede = document.getElementById("nombreSede").value;
     	var sede = document.getElementById("sede").value;
         var username_id = document.getElementById("username_id").value;
-
-
-
 	var ingresoId = post_id;
 
 	$.ajax({

@@ -214,7 +214,7 @@ urlpatterns = [
     path('load_dataHabitacionesAdmisiones/<str:data>', viewsAdmisiones.Load_dataHabitacionesAdmisiones, name='load_dataHabitaciones_Admisiones'),
     path('imprimirAtencionUrgencias/', viewsAdmisionesReportes.ImprimirAtencionUrgencias),
     path('imprimirHojaAdmision/', viewsAdmisionesReportes.ImprimirHojaAdmision),
-    path('imprimirHojaAdmisionParametro/<str:ingresoId/', viewsAdmisionesReportes.ImprimirHojaAdmisionParametro),
+    path('imprimirHojaAdmisionParametro/<str:ingresoId>/', viewsAdmisionesReportes.ImprimirHojaAdmisionParametro),
     path('imprimirAutorizacionesAdm/', viewsAdmisionesReportes.ImprimirAutorizacionesAdm),
     path('buscarConvenioEmpresa/', viewsAdmisiones.buscarConvenioEmpresa),
 
@@ -474,10 +474,9 @@ urlpatterns = [
     path('recibirDevolucionFarmacia/', viewsFarmacia.RecibirDevolucionFarmacia, name='RecibirDevolucion_Farmacia'),
     path('recibirDevolucionDetalleFarmacia/', viewsFarmacia.RecibirDevolucionDetalleFarmacia, name='RecibirDevolucionDetalle_Farmacia'),
     path('despachadoFarmaciaDetalle/', viewsFarmacia.DespachadoFarmaciaDetalle, name='despachado_FarmaciaDetalle'),
-
     path('imprimirDespacho/', viewsFarmaciaReportes.ImprimirDespacho , name='Imprimir_despacho'),
-    path('load_dataFarmaciaDetalleOrdenados/<str:data>', viewsFarmacia.Load_dataFarmaciaDetalleOrdenados,
-         name='load_dataFarmaciaDetalleOrdenados'),
+    path('load_dataFarmaciaDetalleOrdenados/<str:data>', viewsFarmacia.Load_dataFarmaciaDetalleOrdenados, name='load_dataFarmaciaDetalleOrdenados'),
+
     #Enfermeria
 
     path('load_dataPanelEnfermeria/<str:data>', viewsEnfermeria.Load_dataPanelEnfermeria,name='load_dataPanelEnfermeria'),

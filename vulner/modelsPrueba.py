@@ -1066,8 +1066,6 @@ Enero 29
 
 Enero 30
 
-	Se hizo git el 30 de Enero como a las 11:35 Minutos. En la tarde solo se trato de actualizar def imprimirDespacho(request):
-	Seguir lunes por cua no carga el reporte ?
 	Ver factutaracon completo proceso imprimrFactura
 	Seguir colocar titulos a los excel, pdf, print en todos los datatables
 
@@ -1076,3 +1074,12 @@ Feb.02/2026
 
 	PENDIENTE Devouciones tanto de Enfermeria como de Farmacia
         Pantalla apoyo terapeuitoc pailas-ñucas PENDIENTE DE MEJORA
+	PENDIENTE impresion despachos de farmacia
+	PENDIENTE, todos los akax , todos los viesreportes con impresion actualizar
+
+Feb 04/2026
+
+	OPS al borrar una liqudaciondetalle coloca totales en ceros todos ops SOCORRO me dejo en ceros todo AUXILIO. Ops ver despues de almuerzito
+	cuando aplica abono no refresca la pantala liquidaciondetalle para reflejar el monot. pero ojo primero refrescar liquidacion, luego liquidacion detalle y luego seleccionar ops
+          como hacer ello?
+

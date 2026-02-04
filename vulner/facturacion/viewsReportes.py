@@ -8,7 +8,8 @@ import webbrowser
 import psycopg2
 import json
 import datetime
-
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 # import onnx as onnx
 # import onnxruntime as ort
 import pyttsx3
@@ -53,6 +54,17 @@ import datetime
 import cgi
 from django.utils import timezone
 from tarifarios.models import TarifariosDescripcionHonorarios
+
+import os
+import requests
+import urllib
+from django.http import FileResponse
+from io import BytesIO
+import io
+from django.http import FileResponse
+
+
+
 
 class PDFFacturacion(FPDF):
     def __init__(self, tipoDocId, documentoId, consec, ingresoId, factura, flag, *args, **kwargs):
@@ -277,6 +289,7 @@ class PDFFacturacion(FPDF):
         self.rect(5.0, 74.0, 200.0, 192.5)  # Coordenadas x, y, ancho, alto
 
 def ImprimirFactura(request):
+
 
     # Instantiation of inherited class
     ingresoId1 = request.POST["ingresoId"]
@@ -693,16 +706,41 @@ def ImprimirFactura(request):
 
     miConexiont.close()
 
+    print ("po aqui voy")
+
     carpeta = 'C:\EntornosPython\Pos7Particionado/vulner/JSONCLINICA\Facturas/PDF/'
-    print("carpeta = ", carpeta)
+    print("carpeta_ult = ", carpeta)
 
     archivo = carpeta + '' + 'Factura_' + str(facturaPaciente.id) + '.pdf'
-    print("archivo =", archivo)
+    print("archivo_ult =", archivo)
 
     try:
         # Intenta abrir el archivo directamente
+
+        buff = BytesIO()
+        buff.name = archivo
+        # Genera el archivo el el servidor
+
         pdf.output(archivo, 'F')
-        webbrowser.open(archivo)
+
+        # 2. Abrir el archivo PDF y leerlo
+        with open(archivo, 'rb') as f:
+            pdf_data = f.read()
+            # 3. Escribir los datos en el buffer
+            buff.write(pdf_data)
+
+        buff.seek(0)
+
+        return FileResponse(
+            buff,
+            as_attachment=True,  # Cambiar a False para verlo en navegador
+            filename=archivo,
+            content_type='application/pdf'
+        )
+
+    # hasta aquip
+
+
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
     except Exception as e:
@@ -710,6 +748,9 @@ def ImprimirFactura(request):
         datosMensaje = {'success': False, 'Mensaje': 'Cerrar Archivo cargado en browser'}
         json_data = json.dumps(datosMensaje, default=str)
         return HttpResponse(json_data, content_type='application/json')
+
+    print("Por aqui me voy_2")
+
 
     return JsonResponse({'success': True, 'message': 'Factura impresa!'})
 
@@ -1137,17 +1178,41 @@ def ImprimirLiquidacion(request):
 
     miConexiont.close()
 
-    carpeta = 'C:\EntornosPython\Pos7Particionado/vulner/JSONCLINICA\Facturas/PDF/'
-    print("carpeta = ", carpeta)
+    carpeta = 'C:\\EntornosPython\\Pos7Particionado\\vulner\\JSONCLINICA\\Facturas\\PDF\\'
+    print("carpeta_ulti = ", carpeta)
 
     #archivo = carpeta + '' + str(pacienteId.documento) + '_' + 'Liquida.pdf'
     archivo = carpeta + '' + 'Liquida_' + str(facturaPaciente.id) + '.pdf'
-    print("archivo =", archivo)
+    print("archivo_ulti =", archivo)
+
+    print ("aqui voy_0")
 
     try:
-        # Intenta abrir el archivo directamente
+
+        buff = BytesIO()
+        buff.name = archivo
+        #Genera el archivo el el servidor
+
         pdf.output(archivo, 'F')
-        webbrowser.open(archivo)
+
+
+        # 2. Abrir el archivo PDF y leerlo
+        with open(archivo, 'rb') as f:
+            pdf_data = f.read()
+            # 3. Escribir los datos en el buffer
+            buff.write(pdf_data)
+
+        buff.seek(0)
+
+        return FileResponse(
+            buff,
+            as_attachment=True,  # Cambiar a False para verlo en navegador
+            filename=archivo,
+            content_type='application/pdf'
+        )
+
+        # Intenta abrir el archivo directamente
+
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
     except Exception as e:
@@ -1155,5 +1220,8 @@ def ImprimirLiquidacion(request):
         datosMensaje = {'success': False, 'Mensaje': 'Cerrar Archivo cargado en browser'}
         json_data = json.dumps(datosMensaje, default=str)
         return HttpResponse(json_data, content_type='application/json')
+
+
+    print ("aqui voy_4")
 
     return JsonResponse({'success': True, 'message': 'Factura impresa!'})

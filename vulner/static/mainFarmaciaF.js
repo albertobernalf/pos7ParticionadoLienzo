@@ -1412,44 +1412,29 @@ $('#tablaDespachosFarmacia tbody').on('click', '.miImprimirDespacho', function()
 	      var post_id = $(this).data('pk');
 		var despachoId =   post_id;
 		var farmaciaId = document.getElementById("farmaciaId").value;
-	    var sedeSeleccionada = document.getElementById("sedeSeleccionada").value;
-        var username = document.getElementById("username").value;
-        var nombreSede = document.getElementById("nombreSede").value;
-    	var sede = document.getElementById("sede").value;
-        var username_id = document.getElementById("username_id").value;
-         var data =  {}   ;
-        data['username'] = username;
-        data['sedeSeleccionada'] = sedeSeleccionada;
-        data['nombreSede'] = nombreSede;
-        data['sede'] = sede;
-        data['username_id'] = username_id;
-	    data['despachoId'] = despachoId;
-	    data = JSON.stringify(data);
 		alert("voy ajax con farmaciaId = " + farmaciaId);
 		alert("voy ajax con despachoId = " + despachoId);
 
-     $.ajax({
-	            url: '/imprimirDespacho/',
-	            data: {'farmaciaId':farmaciaId,'despachoId':despachoId},
-                type: "POST",
-                dataType: 'json',
-                success: function (info) {
-		if (info.success==true)
-			 {
-			  document.getElementById("mensajes").innerHTML = data.Mensaje;
-			 }
-			else
-			{
-			document.getElementById("mensajesError").innerHTML = data.Mensaje;
-			return;
-			}
-                },
-             	        error: function(data){
-             	        alert("POSIBLE ERROR =" + JSON.stringify(data));
 
-		       		document.getElementById("mensajesError").innerHTML =  data.responseText;
-		        },
-            });
+
+$.ajax({
+    url: '/imprimirDespacho/',
+ 		data: {'farmaciaId':farmaciaId, 'despachoId':despachoId},
+    method: 'POST',
+    xhrFields: {
+        responseType: 'blob' // Importante: interpreta la respuesta como binario
+    },
+    success: function (data) {
+
+        var blob = new Blob([data], { type: 'application/pdf' });
+        var link = window.URL.createObjectURL(blob);
+        window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
+    },
+    error: function (error) {
+      document.getElementById("mensajesError").value =  data.responseText
+    }
+});
+
   });
 
 

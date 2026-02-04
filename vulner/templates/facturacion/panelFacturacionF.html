@@ -31,16 +31,9 @@ Triage:  <span id="tria" name="tria" style='color:red'>{{Triage}} </span> <img c
 Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </span> <img class="manImg" src={% static 'img/iloveimg-converted/icons8-enfermera-48_X.JPG' %}></img>
 </span>
 <input type="button" id="btnRefrescar" name="btnRefrescar" value="Refrescar Liquidacion" onclick="RefrescarPantalla()">
-<style>
-div.dataTables_wrapper  div.dataTables_filter input {
-   height: 2px;
-   padding:10px;
-   border-radius:8px;
-}
 
-div.dataTables_filter input {
-    width: 50px;
-  }
+<style>
+
 </style>
 
 <script>
@@ -149,13 +142,17 @@ div.dataTables_filter input {
 
 <article id="Traslados">
 
-		  <div style="height: 70px;  width:100%; background-color:#EBEBEB;">
+		<div style="height: 270px;  width:100%;>
+	
+		</div>
+
+		  <div style="height: 60px;  width:100%; background-color:#EBEBEB;">
 		
-			 <div class="row row-cols-2" style="height=50px;">
+			 <div class="row row-cols-3" style="height=50px;">
 				<div class="col">
 					<div class="form-group row">
-				                <label for="conveniosPaciente" class="col-form-label col-sm-3">Seleccione desde cual convenio :</label>
-				              <div class="col-sm-4">
+				                Seleccione desde cual convenio :
+				              <div class="col-sm-3">
 					             <select class="select-css"  id="conveniosPaciente" name="conveniosPaciente">
                                                     {% for conveniosPaciente in ConveniosPaciente %}
                                                             <option value="{{conveniosPaciente.id}}"> {{conveniosPaciente.nombre}}
@@ -168,8 +165,8 @@ div.dataTables_filter input {
 
 				<div class="col">
 					<div class="form-group row">
-				                <label for="conveniosPacienteHacia" class="col-form-label col-sm-3">Seleccione el nuevo convenio para la cuenta:</label>
-				              <div class="col-sm-4">
+				              Seleccione el nuevo convenio para la cuenta:
+				              <div class="col-sm-3">
 					             <select class="select-css"  id="conveniosPacienteHacia" name="conveniosPacienteHacia">
                                                     {% for conveniosPaciente in ConveniosPaciente %}
                                                             <option value="{{conveniosPacienteHacia.id}}"> {{conveniosPacienteHacia.nombre}}
@@ -182,8 +179,8 @@ div.dataTables_filter input {
 
 				 <div class="col">
 					<div class="form-group row">
-					 <label for="BtnTrasladoConvenio" class="col-form-label col-sm-3"> + </label>
-					     <div class="col col-sm-7">
+
+					     <div class="col col-sm-6">
 			                        <input type="button" class="form-control form-control-sm" id="BtnTrasladoConvenio"  name="BtnTrasladoConvenio" value="Traslado Convenio" onclick="TrasladoConvenio()">
 					</div>
 				   </div>
@@ -281,27 +278,7 @@ div.dataTables_filter input {
                                             </thead>
                                             <tbody>
                                             </tbody>
-                                           <tfoot>
-                                            <tr>
-                                                <th>Factura</th>
-                                                <th>Fecha</th>
-                                                <th>TipoDoc</th>
-                                                <th>Documento</th>
-                                                <th>Paciente</th>
-                                                <th>#</th>
-                                                <th>FecIngreso</th>
-                                                <th>Fecsalida</th>
-                                                <th>ServicioSalida</th>
-                                                <th>Camasalida</th>
-                                                <th>Dx</th>
-						 <th>Convenio</th>
-						 <th>SalidaClinica</th>
-						<th>Estado</th>
-
-                                                <th>Action</th>
-
-                                            </tr>
-                                            </tfoot>
+                                    
 
                                         </table>
 
@@ -438,23 +415,22 @@ div.dataTables_filter input {
 		        <input type="hidden" id="liquidacionId1" name="liquidacionId1" value="0" readonly>
 			<input type="hidden" id="tipoFactura" name="tipoFactura" value="FACTURA" readonly>
 
-		       <div class="row row-cols-10" style="height=30px;">
+		       <div class="row row-cols-11" style="height=30px;">
 						
 					<div class="col">
 			  		   
 						 Fecha:
-						<span id="fecha" name="fecha"></span>
-							<!--  <input type="text" id="fecha" name="fecha" value="0" readonly> -->
-	                                
+						<span class="texto-span" id="fecha" name="fecha"></span>
+                                
           	                          
                                       </div>
 
 					<div class="col">
 
-						Doc:
 						
-							<span id="tipoDoc" name="tipoDoc"></span>
-							<!--   <input type="text" id="tipoDoc" name="tipoDoc" value="0" readonly> -->
+						
+							<span class="texto-span" id="tipoDoc" name="tipoDoc"></span>
+
 
           	                           
                                       </div>
@@ -462,38 +438,37 @@ div.dataTables_filter input {
 					<div class="col">
 
 						
-							<span id="pdocumento" name="pdocumento"></span>
-							<!--  <input type="text" id="pdocumento" name="pdocumento" value="0" readonly> -->
+							<span  class="texto-span" id="pdocumento" name="pdocumento"></span>
+							
 
           	                          
                                       </div>
 
 					<div class="col">
 
-					 Nombre:
+					
+					<span class="texto-span"  id="paciente" name="paciente"></span>
 						
-					<span id="paciente" name="paciente"></span>
-							<!--  <input type="text" id="paciente" name="paciente" value="0" readonly> -->
 
           	                           
                                       </div>
 
 					<div class="col">
 
-						 Consec:
+						 Ing#:
 						
-						<span id="consecAdmision" name="consecAdmision"></span>
-							<!--  <input type="text" id="consecAdmision" name="consecAdmision" value="0" readonly> -->
+						<span  class="texto-span" id="consecAdmision" name="consecAdmision"></span>
+
 
           	                           
                                       </div>
 
 					<div class="col">
 
-						 SalidaDef:
+						 Sal:
 						
-						<span id="salidaDefinitiva" name="salidaDefinitiva"></span>
-							<!--  <input type="text" id="salidaDefinitiva" name="salidaDefinitiva" value="0" readonly> -->
+						<span class="texto-span" id="salidaDefinitiva" name="salidaDefinitiva"></span>
+							
 
           	                           
                                       </div>
@@ -501,10 +476,10 @@ div.dataTables_filter input {
 
 					<div class="col">
 
-						 Convenio:
+						 Conv:
 
-							<span id="nombreConvenio" name="nombreConvenio"></span>
-							<!--  <input type="text" id="nombreConvenio" name="nombreConvenio" value="0" readonly> -->
+							<span class="texto-span" id="nombreConvenio" name="nombreConvenio"></span>
+							
 
 
                                       </div>
@@ -514,18 +489,18 @@ div.dataTables_filter input {
 						Cama:
 
 
-						<span id="cama" name="cama"></span>
-							<!--  <input type="text" id="cama" name="cama" value="0" readonly> -->
+						<span class="texto-span" id="cama" name="cama"></span>
+							
 
 
                                       </div>
 
 					<div class="col">
 
-						salidaClinica:
+						salCli:
 						 
-							<span id="salidaClinica" name="salidaClinica"></span>
-							<!--  <input type="text" id="salidaClinica" name="salidaClinica" value="0" readonly> -->
+							<span class="texto-span" id="salidaClinica" name="salidaClinica"></span>
+
 
 
                                       </div>
@@ -534,20 +509,18 @@ div.dataTables_filter input {
 
 					<div class="col">
 
-						Servicio:
-							<span id="servicio" name="servicio"></span>
-							<!--  <input type="text" id="servicio" name="servicio" value="0" readonly> -->
+						Serv:
+							<span class="texto-span" id="servicio" name="servicio"></span>
+
 
 
                                       </div>
 
 					<div class="col">
 
-						 observaciones
-							<span id="observaciones" name="observaciones"></span>
+						 observa:
+							<span class="texto-span" id="observaciones" name="observaciones"></span>
 						
-							<!--  <input type="hidden" id="observaciones" name="observaciones" value="0" readonly> -->
-
 
                                      </div>
 
@@ -566,7 +539,7 @@ div.dataTables_filter input {
 
 					<div class="col-sm-1">
 					
-				                <label for="lserviciosAdministrativos" class="col-sm-1">Cups:</label>
+				               Serv:
 				       
 					             <select class="select-css"  id="lserviciosAdministrativos" name="lserviciosAdministrativos">
                                                     {% for serviciosAdministrativos in ServiciosAdministrativos %}
@@ -581,7 +554,7 @@ div.dataTables_filter input {
 
 					<div class="col-sm-1">
 					
-				                <label for="lcups" class="col-sm-1">Cups:</label>
+				               Cups:
 				       
 					             <select class="select-css"  id="lcups" name="lcups">
                                                     {% for cups in Cups %}
@@ -594,7 +567,7 @@ div.dataTables_filter input {
 
 					<div class="col-sm-2">
 
-				                <label for="lsuministros" class="col-sm-1">Suministro:</label>
+				              Cums:
 
 					             <select class="select-css"  id="lsuministros" name="lsuministros">
                                                     {% for suministros in Suministros %}
@@ -617,7 +590,7 @@ div.dataTables_filter input {
 					
 					<div class="col-sm-1">
 
-						 <label for="valorUnitario" class="col-sm-1">VrUnitario:</label>
+						vUnit:
 
 							  <input type="text" id="valorUnitario" name="valorUnitario" value="0" >
 
@@ -625,7 +598,7 @@ div.dataTables_filter input {
 
 					<div class="col-sm-2">
 
-						 <label for="lobservaciones" class="col-sm-1">Observa:</label>
+						 Observa:
 
 							  <input type="text" id="lobservaciones" name="lobservaciones" value="" >
 
@@ -635,7 +608,7 @@ div.dataTables_filter input {
 				
 				 <div class="col-sm-1">
 
-					 <label for="BtnAdicionarLiquidacion" class="col-sm-1"> + </label>
+
 
 			                        <input type="button" class="form-control form-control-sm" id="BtnAdicionarLiquidacion"  name="BtnAdicionarLiquidacion" value="Adicionar" onclick="AdicionarLiquidacion()">
 
@@ -696,7 +669,7 @@ div.dataTables_filter input {
 			
  				   <div class="col">
 			  		     
-						 <label for="totalCopagos" class="col-form-label col-sm-4">Copagos:</label>
+						 Copagos:
 						
 							  <input type="text" id="totalCopagos" name="totalCopagos" size=7 value="0" readonly>
 	                                     
@@ -704,7 +677,7 @@ div.dataTables_filter input {
          	                        
 					<div class="col">
 			  		    
-						 <label for="totalCuotaModeradora" class="col-form-label col-sm-4">Moderadora:</label>
+					Moderadora:
 						
 							  <input type="text" id="totalCuotaModeradora" name="totalCuotaModeradora" size=7 value="0" readonly>
 	                                      
@@ -712,7 +685,7 @@ div.dataTables_filter input {
 
 					<div class="col">
 			  		     <div class="form-group row">
-						 <label for="anticipos" class="col-form-label col-sm-8">Anticipos:</label>
+						 Anticipos:
 						 <div class="col-sm-2">
 							  <input type="text" id="anticipos" name="anticipos" size=7 value="0" readonly>
 	                                        </div>
@@ -721,7 +694,7 @@ div.dataTables_filter input {
 
 				<div class="col">
 			  		     <div class="form-group row">
-						 <label for="totalAbonos" class="col-form-label col-sm-4">Abonos:</label>
+						 Abonos:
 						 <div class="col-sm-2">
 							  <input type="text" id="totalAbonos" name="totalAbonos" size=7 value="0" readonly>
 	                                        </div>
@@ -730,7 +703,7 @@ div.dataTables_filter input {
 		
 					<div class="col">
 			  		     <div class="form-group row">
-						 <label for="totalRecibido" class="col-form-label col-sm-6">Total Recibido:</label>
+						Recibido:
 						 <div class="col-sm-2">
 							  <input type="text" id="totalRecibido" name="totalRecibido" size=7 value="0" readonly>
 	                                        </div>
@@ -746,7 +719,7 @@ div.dataTables_filter input {
 
 					<div class="col">
 			  		    
-						 <label for="totalProcedimientos" class="col-form-label col-sm-4">Procedimientos:</label>
+						 Procedimientos:
 						
 							  <input type="text" id="totalProcedimientos" name="Procedimientos" size=7 value="0" readonly>
 	                                      
@@ -754,7 +727,7 @@ div.dataTables_filter input {
 
 					<div class="col">
 			  		     <div class="form-group row">
-					<label for="totalSuministros" class="col-form-label col-sm-4">Suministros:</label>
+				Suministros:
 						 <div class="col-sm-1">
 							  <input type="text" id="totalSuministros" name="Suministros" size=7  value="0" readonly>
 	                                        </div>
@@ -763,7 +736,7 @@ div.dataTables_filter input {
 
 					<div class="col">
 			  		     <div class="form-group row">
-						 <label for="totalLiquidacion" class="col-form-label col-sm-8">Total Liquidacion:</label>
+						Liquidacion:
 						 <div class="col-sm-1">
 							  <input type="text" id="totalLiquidacion" name="totalLiquidacion" size=7 value="0" readonly>
 	                                        </div>
@@ -772,7 +745,7 @@ div.dataTables_filter input {
 
 					<div class="col">
 			  		     <div class="form-group row">
-						 <label for="valorApagar" class="col-form-label col-sm-6">Apagar:</label>
+						 Apagar:
 						 <div class="col-sm-2">
 							  <input type="text" id="valorApagar" name="valorApagar" size=7 value="0" readonly>
 	                                        </div>
@@ -988,7 +961,7 @@ div.dataTables_filter input {
 					<div class="col">
 			  		     <div class="form-group row">
 					
-				                <label for="RserviciosAdministrativos" class="col-sm-1">Cups:</label>
+				                <label for="RserviciosAdministrativos" class="col-sm-1">Servicio:</label>
 				       
 					             <select class="select-css"  id="RserviciosAdministrativos" name="RserviciosAdministrativos">
                                                     {% for serviciosAdministrativos in ServiciosAdministrativos %}
@@ -1049,19 +1022,7 @@ div.dataTables_filter input {
                                                             </thead>
                                                             <tbody>
                                                             </tbody>
-                                                            <tfoot>
-                                                            <tr>
-				                                <th>Tipo Pago                </th>
-                                                                <th>Forma Pago               </th>
-                                                                <th>Valor                    </th>
-                                                                <th>Descripcion              </th>
-                                                                <th>totalAplicado            </th>
-                                                                <th>Saldo                    </th>
-                                                                <th>Valor en curso</th>
-                                                                <th>Estado</th>
-							      <th>Editar Borrar</th>                                     
-                                                            </tr>
-                                                           </tfoot>
+                                                          
                                                         </table>
                                                     </div>
                                                 </div>
@@ -1265,6 +1226,15 @@ div.dataTables_filter input {
 
        <form id="postFormGenerarXml" name="postFormGenerarXml" class="form-horizontal"
                                   novalidate>
+
+
+		
+                                <div class="col-12">
+					<center>
+                                    <button type="button" class="btn btn-primary" id="GenerarBotXml" name="GenerarBotXml"  value="GenerarBotXml" onclick="GenerarXml()">Crear </button>
+					</center>
+                                </div>
+
 							
 				  <div class="row row-cols-10" style="height=30px;">
 						
@@ -1320,12 +1290,7 @@ div.dataTables_filter input {
                               	</div>
  				
 
-                                <div class="col-1">
-					<center>
-                                    <button type="button" class="btn btn-primary" id="GenerarBotXml" name="GenerarBotXml"  value="GenerarBotXml" onclick="GenerarXml()">Crear </button>
-					</center>
-                                </div>
-                                </div> <!-- CIERRA ROW 8 COLUMNAS  -->
+                                </div> <!-- CIERRA ROW 1 COLUMNAS  -->
 
                             </form>
 
@@ -1354,20 +1319,7 @@ div.dataTables_filter input {
                                             </thead>
                                             <tbody>
                                             </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <th>Cons</th>
-                                                <th>Fecha</th>
-                                                <th>NombreExamen</th>
-                                                <th>Cantidad</th>
-                                                <th>ValorUnida</th>
-                                                <th>ValorTotal</th>
-                                                <th>Observaciones</th>
-                                                <th>TipoRegistro</th>
-						<th>Estado</th>
-                                                <th>Editar Borrar</th>                                         
-                                            </tr>
-                                            </tfoot>
+
 
                                         </table>
 

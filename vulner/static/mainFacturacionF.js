@@ -26,10 +26,9 @@ function arrancaLiquidacion(valorTabla,valorData)
     if (valorTabla == 1)
     {
         let dataTableOptionsLiquidacion  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
-
+dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
 
 //  dom: 'Bfrtilp',
   buttons: [
@@ -77,7 +76,7 @@ function arrancaLiquidacion(valorTabla,valorData)
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -191,9 +190,10 @@ function arrancaLiquidacion(valorTabla,valorData)
     {
 
         let dataTableOptionsLiquidacionDetalle  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
+dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
+
   buttons: [
     {
       extend: 'excelHtml5',
@@ -246,7 +246,7 @@ autoWidth: false,
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -295,9 +295,9 @@ autoWidth: false,
     {
 
         let dataTableOptionsFacturacion  ={
-  dom: "<'row'<'col-md-2'B><'col-md-12'f>>" + 
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row'<'col-md-6'i><'col-md-6'p>>",
+dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
   buttons: [
     {
       extend: 'excelHtml5',
@@ -340,7 +340,7 @@ autoWidth: false,
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -409,7 +409,9 @@ autoWidth: false,
     {
 
         let dataTableOptionsFacAbonos  ={
-  dom: 'Bfrtilp',
+  dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
   buttons: [
     {
       extend: 'excelHtml5',
@@ -457,7 +459,7 @@ autoWidth: false,
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -505,7 +507,9 @@ autoWidth: false,
     {
 
         let dataTableOptionsFacturacionDetalle  ={
-   dom: 'Bfrtilp',
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
   buttons: [
     {
       extend: 'excelHtml5',
@@ -551,7 +555,7 @@ autoWidth: false,
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -597,9 +601,9 @@ autoWidth: false,
     {
 
         let dataTableOptionsReFacturacion  ={
-  dom: "<'row'<'col-md-2'B><'col-md-12'f>>" + 
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row'<'col-md-6'i><'col-md-6'p>>",
+dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
   buttons: [
     {
       extend: 'excelHtml5',
@@ -642,7 +646,7 @@ autoWidth: false,
 		    emptyTable: 'Ningún dato disponible en esta tabla',
 		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
 		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: 'Buscar:',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
 		    infoThousands: ',',
 		    loadingRecords: 'Cargando...',
 		    paginate: {
@@ -1020,36 +1024,26 @@ window.addEventListener('load', async () => {
         var username_id = document.getElementById("username_id").value;
 	var ingresoId = post_id;
 
-	$.ajax({
-	           url: '/imprimirFactura/',
-	            data : {ingresoId:ingresoId},
-	           type: 'POST',
-	           dataType : 'json',
-	  		success: function (data) {
 
-			if (data.success == true)
-			 {
-			  document.getElementById("mensajes").value = data.Mensajes;
-			 }
-			else
-			{
-			document.getElementById("mensajesError").value = data.Mensajes;
-			return;
-			}
-
-			 $('#pk').val(data.pk);
-		       	     
-
-                  },
-	   	        error: function(data){
-		       		document.getElementById("mensajesError").value =  data.responseText
-			        },
-	     });
-
-        });
+$.ajax({
+    url: '/imprimirFactura/',
+ data : {ingresoId:ingresoId},
+    method: 'POST',
+    xhrFields: {
+        responseType: 'blob' // Importante: interpreta la respuesta como binario
+    },
+    success: function (data) {
 
 
-
+        var blob = new Blob([data], { type: 'application/pdf' });
+        var link = window.URL.createObjectURL(blob);
+        window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
+    },
+    error: function (error) {
+      document.getElementById("mensajesError").value =  data.responseText
+    }
+});
+});
 
         $('body').on('click', '.ImprimirCuenta', function () {
 
@@ -1065,36 +1059,28 @@ window.addEventListener('load', async () => {
         var username_id = document.getElementById("username_id").value;
 	var ingresoId = post_id;
 
-	$.ajax({
-	           url: '/imprimirLiquidacion/',
-	            data : {ingresoId:ingresoId},
-	           type: 'POST',
-	           dataType : 'json',
-	  		success: function (data) {
-
-			if (data.success == true)
-			 {
-			  document.getElementById("mensajes").value = data.Mensajes;
-			 }
-			else
-			{
-			document.getElementById("mensajesError").value = data.Mensajes;
-			return;
-			}
-
-			 $('#pk').val(data.pk);
-		       	     
-
-                  },
-	   	        error: function(data){
-		       		document.getElementById("mensajesError").value =  data.responseText
-			        },
-	     });
-
-        });
 
 
+$.ajax({
+    url: '/imprimirLiquidacion/',
+ data : {ingresoId:ingresoId},
+    method: 'POST',
+    xhrFields: {
+        responseType: 'blob' // Importante: interpreta la respuesta como binario
+    },
+    success: function (data) {
 
+
+        var blob = new Blob([data], { type: 'application/pdf' });
+        var link = window.URL.createObjectURL(blob);
+        window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
+    },
+    error: function (error) {
+      document.getElementById("mensajesError").value =  data.responseText
+    }
+});
+
+       });
 
 	/*--------------------------------------------
         Click to Edit Button PostFacturacon

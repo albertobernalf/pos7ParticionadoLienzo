@@ -1063,10 +1063,10 @@ def PostDeleteLiquidacionDetalle(request):
     miConexion3 = None
     try:
 
-        totalSuministros = LiquidacionDetalle.objects.all().filter(liquidacion_id=liqId.liquidacion_id).filter(examen_id = None).exclude(estadoRegistro='I').exclude(anulado='S').aggregate(totalS=Coalesce(Sum('valorTotal'), 0))
+        totalSuministros = LiquidacionDetalle.objects.all().filter(liquidacion_id=liquidacionId).filter(examen_id = None).exclude(estadoRegistro='I').exclude(anulado='S').aggregate(totalS=Coalesce(Sum('valorTotal'), 0))
         totalSuministros = (totalSuministros['totalS']) + 0
         print("totalSuministros", totalSuministros)
-        totalProcedimientos = LiquidacionDetalle.objects.all().filter(liquidacion_id=liqId.liquidacion_id).filter(cums_id = None).exclude(estadoRegistro='I').exclude(anulado='S').aggregate(totalP=Coalesce(Sum('valorTotal'), 0))
+        totalProcedimientos = LiquidacionDetalle.objects.all().filter(liquidacion_id=liquidacionId).filter(cums_id = None).exclude(estadoRegistro='I').exclude(anulado='S').aggregate(totalP=Coalesce(Sum('valorTotal'), 0))
         totalProcedimientos = (totalProcedimientos['totalP']) + 0
         print("totalProcedimientos", totalProcedimientos)
 
@@ -1099,13 +1099,11 @@ def PostDeleteLiquidacionDetalle(request):
         miConexion3 = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",  password="123456")
         cur3 = miConexion3.cursor()
 
-        #comando1 = 'UPDATE facturacion_liquidacion SET "totalSuministros" = ' + "'" + str(totalSuministros) +  "'" + ',"totalProcedimientos" = ' + "'" +  str(totalProcedimientos) + "'" + ', "totalCopagos" = ' + "'" + str(totalCopagos) + "'" + ' , "totalCuotaModeradora" = ' + "'"  + str(totalCuotaModeradora) + "'" + ', anticipos = ' + "'" +  str(totalAnticipos) + "'" + ' ,"totalAbonos" = ' + "'" + str(totalAbonos) + "'" + ', "totalLiquidacion" = ' + "'" + str(totalLiquidacion) + "'" + ', "valorApagar" = ' + "'" + str(valorApagar)  + "'" +  ', "totalRecibido" = ' + "'" + str(totalRecibido) + "'"  +  ' WHERE id =' + str(liqId.liquidacion_id)
-        comando1 = 'UPDATE facturacion_liquidacion SET "totalSuministros" = ' + str(totalSuministros) + ',"totalProcedimientos" = ' + str(totalProcedimientos) + ', "totalCopagos" = ' + str(totalCopagos) + ' , "totalCuotaModeradora" = ' + str(totalCuotaModeradora) + ', anticipos = ' +  str(totalAnticipos) + ' ,"totalAbonos" = ' + str(totalAbonos) + ', "totalLiquidacion" = ' + str(totalLiquidacion) + ', "valorApagar" = ' + str(valorApagar) +  ', "totalRecibido" = ' + str(totalRecibido) + ' WHERE id =' + str(liqId.liquidacion_id)
+        comando1 = 'UPDATE facturacion_liquidacion SET "totalSuministros" = ' + "'" + str(totalSuministros) +  "'" + ',"totalProcedimientos" = ' + "'" +  str(totalProcedimientos) + "'" + ', "totalCopagos" = ' + "'" + str(totalCopagos) + "'" + ' , "totalCuotaModeradora" = ' + "'"  + str(totalCuotaModeradora) + "'" + ', anticipos = ' + "'" +  str(totalAnticipos) + "'" + ' ,"totalAbonos" = ' + "'" + str(totalAbonos) + "'" + ', "totalLiquidacion" = ' + "'" + str(totalLiquidacion) + "'" + ', "valorApagar" = ' + "'" + str(valorApagar)  + "'" +  ', "totalRecibido" = ' + "'" + str(totalRecibido) + "'"  +  ' WHERE id =' + str(liqId.liquidacion_id)
         print(comando1)
         cur3.execute(comando1)
 
         miConexion3.commit()
-
         cur3.close()
         miConexion3.close()
 

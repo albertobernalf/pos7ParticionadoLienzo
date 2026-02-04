@@ -1329,6 +1329,9 @@ $('#RvalorAPagarLetras').val(data.valorAPagarLetras);
 
 		        data2 = JSON.stringify(data2);
 
+		  arrancaLiquidacion(1,data2);
+		    dataTableLiquidacionInitialized = true;
+
 		  arrancaLiquidacion(4,data2);
 		    dataTableFacAbonosInitialized = true;
 		  arrancaLiquidacion(2,data2);

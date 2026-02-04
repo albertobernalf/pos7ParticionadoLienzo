@@ -643,7 +643,7 @@ $('#tablaFacturacions tbody').on('click', 'tr', function () {
 
    	   if (controlMed == 0)
    	   {
-   	   var table10 = $('#tablaFormulacion').DataTable({scrollY: '50px', paging:false,   scrollX: true,  scrollCollapse: true,  lengthMenu: [5]});   // accede de nuevo a la DataTable.
+   	   var table10 = $('#tablaFormulacion').DataTable({scrollY: '50px', paging:false,   scrollX: true, scrollY: '200px', scrollCollapse: true});   // accede de nuevo a la DataTable.
    	   controlMed=1;
    	   }
    	   else
@@ -785,7 +785,7 @@ function tableActionsEnfermedades() {
    var table= $('#tablaEnfermedades').DataTable({
                 "language": {
                   "lengthMenu": "Display _MENU_ registros",
-                   "search": "Filtrar registros:",
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
                     },
                 processing: true,
                 serverSide: true,
@@ -822,7 +822,7 @@ function tableActionsNotasEnfermeria() {
    var table= $('#tablaNotasEnfermeria').DataTable({
                 "language": {
                   "lengthMenu": "Display _MENU_ registros",
-                   "search": "Filtrar registros:",
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
                     },
                 processing: true,
                 serverSide: true,
@@ -857,7 +857,7 @@ function tableActionsLaboratorios() {
    var table= $('#tablaLaboratorios').DataTable({
                 "language": {
                   "lengthMenu": "Display _MENU_ registros",
-                   "search": "Filtrar registros:",
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
                     },
                 processing: true,
                 serverSide: true,
@@ -898,7 +898,7 @@ function tableActionsRadiologia() {
       var table1= $('#tablaRadiologia').DataTable({
                 "language": {
                   "lengthMenu": "Display _MENU_ registros",
-                   "search": "Filtrar registros:",
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
                     },
                 processing: true,
                 serverSide: true,
@@ -938,7 +938,7 @@ function tableActionsTerapias() {
    var table3 = $('#tablaTerapias').DataTable({
                 "language": {
                   "lengthMenu": "Display _MENU_ registros",
-                   "search": "Filtrar registros:",
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
                     },
                 processing: true,
                 serverSide: true,
@@ -977,7 +977,7 @@ function tableActionsNoQx() {
    var table4 = $('#tablaNoQx').DataTable({
                 "language": {
                   "lengthMenu": "Display _MENU_ registros",
-                   "search": "Filtrar registros:",
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
                     },
                 processing: true,
                 serverSide: true,
@@ -1017,7 +1017,7 @@ function tableActionsAntecedentes() {
    var table5 = $('#tablaAntecedentes').DataTable({
                 "language": {
                   "lengthMenu": "Display _MENU_ registros",
-                   "search": "Filtrar registros:",
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
                     },
                 processing: true,
                 serverSide: true,
@@ -1055,7 +1055,7 @@ function tableActionsDiagnosticos() {
    var table6 = $('#tablaDiagnosticos').DataTable({
                 "language": {
                   "lengthMenu": "Display _MENU_ registros",
-                   "search": "Filtrar registros:",
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
                     },
                 processing: true,
                 serverSide: true,
@@ -1097,7 +1097,7 @@ function tableActionsInterconsultas() {
    var table6 = $('#tablaInterconsultas').DataTable({
                 "language": {
                   "lengthMenu": "Display _MENU_ registros",
-                   "search": "Filtrar registros:",
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
                     },
                 processing: true,
                 serverSide: true,
@@ -1144,7 +1144,7 @@ function tableActionsRevisionSistemas() {
    var table9 = $('#tablaRevisionSistemas').DataTable({
                 "language": {
                   "lengthMenu": "Display _MENU_ registros",
-                   "search": "Filtrar registros:",
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
                     },
                 processing: true,
                 serverSide: true,
@@ -1184,11 +1184,11 @@ function tableActionsFormulacion() {
    var table10 = $('#tablaFormulacion').DataTable({
                 "language": {
                   "lengthMenu": "Display _MENU_ registros",
-                   "search": "Filtrar registros:",
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
                     },
                 processing: true,
                 serverSide: true,
-                scrollY: '130px',
+                scrollY: '200px',
 	            scrollX: true,
 	            scrollCollapse: true,
                 paging:false,

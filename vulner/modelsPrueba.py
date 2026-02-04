@@ -1075,11 +1075,19 @@ Feb.02/2026
 	PENDIENTE Devouciones tanto de Enfermeria como de Farmacia
         Pantalla apoyo terapeuitoc pailas-ñucas PENDIENTE DE MEJORA
 	PENDIENTE impresion despachos de farmacia
-	PENDIENTE, todos los akax , todos los viesreportes con impresion actualizar
+	PENDIENTE, todos los ajax , todos los viewsreportes con impresion actualizar
 
 Feb 04/2026
 
-	OPS al borrar una liqudaciondetalle coloca totales en ceros todos ops SOCORRO me dejo en ceros todo AUXILIO. Ops ver despues de almuerzito
+
 	cuando aplica abono no refresca la pantala liquidaciondetalle para reflejar el monot. pero ojo primero refrescar liquidacion, luego liquidacion detalle y luego seleccionar ops
           como hacer ello?
+	Bueno aun hay que mejorar navegacionclinicaf.html
+	Graves como imprimir por ajax las ordenes eje,plo : laboratior con Blob de muchos archivo data de muchos archivos vblob etc. INVESTIGAR cacharrear, por el momento descarga en el servidor
+	PREOCUPANTE la demora para hacer un folio clinico de cualquier paciente desde un cliente
+	ojo hay que quitar el scroll externo en toos los historico de paraclinico en los folios verificar
+	fijate que el header de fromular no se extendio hacia la derecha en el cliente .224. 
+	La grabacion desde l cleinte no es tan lenta
+	Ojo no he actualizado navegacionclinica.css
+	
 

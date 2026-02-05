@@ -1932,10 +1932,10 @@ def crearHistoriaClinica(request):
                                     # Aqui Guardar FARMACIA DETALLE
                                     #
 
-                                    comando = 'INSERT INTO farmacia_farmaciadetalle (farmacia_id, "historiaMedicamentos_id", suministro_id, "dosisCantidad",  "dosisUnidad_id","viaAdministracion_id" ,  "cantidadOrdenada","fechaRegistro", "usuarioRegistro_id","estadoReg","consecutivoMedicamento") values (' + "'" + str(
+                                    comando = 'INSERT INTO farmacia_farmaciadetalle (farmacia_id, "historiaMedicamentos_id", suministro_id, "dosisCantidad",  "dosisUnidad_id","viaAdministracion_id" ,  "cantidadOrdenada","fechaRegistro", "usuarioRegistro_id","estadoReg","consecutivoMedicamento", despachado) values (' + "'" + str(
                                         f) + "','" + str(i) + "','" + str(
                                         medicamentos) + "','" + str(dosis) + "','" + str(
-                                        uMedidaDosis) + "','" + str(vias)  + "','" + str(cantidadMedicamento) + "','" + str(fechaRegistro) + "','" + str(usuarioRegistro) + "','A','"  + str(consecutivo)  + "') RETURNING id"
+                                        uMedidaDosis) + "','" + str(vias)  + "','" + str(cantidadMedicamento) + "','" + str(fechaRegistro) + "','" + str(usuarioRegistro) + "','A','"  + str(consecutivo)  + "','N') RETURNING id"
                                     print("comando = ", comando)
                                     resultado = cur3.execute(comando)
                                     fd = cur3.fetchone()[0]

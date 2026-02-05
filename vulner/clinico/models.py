@@ -294,6 +294,7 @@ class Examenes(models.Model):
     class Meta:
         indexes = [
             models.Index(fields=['nombre'], name='examenesNombreIdx'),
+	    models.Index(fields=['codigoCups'], name='cups_Idx'),
         ]
 
 
@@ -1148,6 +1149,12 @@ class HistoriaSignosVitales(models.Model):
     fechaRegistro = models.DateTimeField(editable=True, null=True, blank=True)
     usuarioRegistro = models.ForeignKey('planta.Planta', blank=True, null=True, editable=True,    on_delete=models.PROTECT)
     estadoReg = models.CharField(max_length=1, choices=ESTADOREG_CHOICES,default='A', editable=False)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['historia'], name='signosVitales_idx1'),
+
+        ]
 
     def __str__(self):
         return str(self.id)

@@ -698,7 +698,7 @@ $('#tablaFacturacions tbody').on('click', 'tr', function () {
 
    	   if (controlLab == 0)
    	   {
-   	   var tableL = $('#tablaLaboratorios').DataTable({scrollY: '150px', paging:false,   scrollX: true,  scrollCollapse: true,  lengthMenu: [5]});   // accede de nuevo a la DataTable.
+   	   var tableL = $('#tablaLaboratorios').DataTable({scrollY: '200px', paging:false,   scrollX: true,  scrollCollapse: true,  lengthMenu: [5]});   // accede de nuevo a la DataTable.
    	   controlLab=1;
    	   }
    	   else
@@ -861,7 +861,8 @@ function tableActionsLaboratorios() {
                     },
                 processing: true,
                 serverSide: true,
-                scrollY: '250px',
+                scrollY: '200px',
+
 	            scrollX: true,
 	            scrollCollapse: true,
                 paging:false,
@@ -1910,6 +1911,17 @@ formHistoriaClinica.addEventListener('submit', e=>{
 
 				   },
  	      		success: function (data) {
+		
+			alert("Esto llega REVISAR = " + JSON.stringify(data));
+			//chivos = JSON.parse(JSON.stringify(data));
+			
+			//alert("archivo = " + chivos.url);
+
+			//var blob = new Blob([chivos.url], { type: 'application/pdf' });
+		        //var link = window.URL.createObjectURL(blob);
+		        // window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
+
+
 
 
 		        if ( data.success == true)

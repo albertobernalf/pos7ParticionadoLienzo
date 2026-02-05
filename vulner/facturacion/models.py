@@ -193,6 +193,8 @@ class Suministros (models.Model):
     class Meta:
         indexes = [
             models.Index(fields=['nombre'], name='suministrosNombreIdx'),
+	    models.Index(fields=['cums'], name='cums_Idx'),
+
         ]
 
     def __str__(self):

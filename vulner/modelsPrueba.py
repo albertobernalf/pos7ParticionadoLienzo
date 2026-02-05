@@ -1085,9 +1085,8 @@ Feb 04/2026
 	Bueno aun hay que mejorar navegacionclinicaf.html
 	Graves como imprimir por ajax las ordenes eje,plo : laboratior con Blob de muchos archivo data de muchos archivos vblob etc. INVESTIGAR cacharrear, por el momento descarga en el servidor
 	PREOCUPANTE la demora para hacer un folio clinico de cualquier paciente desde un cliente
-	ojo hay que quitar el scroll externo en toos los historico de paraclinico en los folios verificar
 	fijate que el header de fromular no se extendio hacia la derecha en el cliente .224. 
-	La grabacion desde l cleinte no es tan lenta
-	Ojo no he actualizado navegacionclinica.css
+	La carga de la pantalla en el clinete de HC La grabacion desde l cleinte no es tan lenta
 	
+Fen 05/2025
 

@@ -979,7 +979,6 @@ class ProgramacionCitasMedicas(models.Model):
 -- ops crear ripsotrosservicios de :insumos y material, honrario y estancias
 -- ops que pasa con el consecutivo de la factura
 -- hay un bonche barvaro en los ripsotrosservicios respecto asl cups o cum en unos casos cums (insumos) en otros casos cups (honorarios, estancias) =?? como arreglar mejorqar
-  -- Esto es el icebert humano de concebir sistemas desacoplados , desascciados
 -- Notas credito, notas debito RIPS de pronto no es tan compleo, complcado sacar mas adelante tiempito, son cosas de cuadre TUNNIG DE OPERATION
 -- Los RIPS , GLOSAS, CIRUGIA, son una prueba muy grande, imaginese hay que cuadrar la money el dinero los $, que cuadre como asi modeardoa , cuando se prorratea ES TENAZ
   - hasta alla hay que llegar
@@ -990,12 +989,6 @@ class ProgramacionCitasMedicas(models.Model):
 -- DEFINITIVAMENTE hay que aterrizar el tema insumos, qx, dispo medicos, honorarios etc. Es un saperongo, y en otros servicios ni se diga papaberol
 
 -- Que paso con ... / que desde TRIAGE coloco anulkado = 'A' en facturacion_liquidacion OPS
-
--- OJO MARTES 9 de Diciemnbre
-
-   No sube bien tipoHonorarios y ripstipootrosservicios hay un afila con error VERIFICAR
-   No sube examenes por culpa de los anteriores VERIFICAr
-   Continuar con el cargue de clinico y seguir creo facturacion. Terminar eljueves es mejor porque despues del dia 11 pailander
 
 -- Diciembre 22 
 
@@ -1050,9 +1043,6 @@ Puesta a Punta :
 Enero 26:
 	Ojo vrificar en tarifarioviews, no crear el servi¿cioadministrativo en cargarsuministros ?? PORCUA
 
-Enero 27:
-
-	Ops el historial de medicamentos NOPS sale ??????
 
 Enero 28:
 

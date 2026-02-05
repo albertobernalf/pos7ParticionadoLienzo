@@ -59,15 +59,10 @@ function arrancaAdmisiones(valorTabla,valorData)
     if (valorTabla == 1)
     {
         let dataTableOptionsAdmisiones  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
 
-// ESTABA
-//   dom: "<'row mb-0'<'col-sm-2'B><'col-sm-1'><'col-sm-4'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-//            "<'row'<'col-sm-12'tr>>" +
-//             "<'row mt-0'<'col-sm-4'i><'col-sm-4'p>>",
-
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
 
 //  dom: 'Bfrtilp',
   buttons: [
@@ -77,21 +72,18 @@ function arrancaAdmisiones(valorTabla,valorData)
 	// text: '<i class="bi bi-file-earmark-excel-fill"></i> Exportar Excel',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success btn-sm',
-      messageTop: 'Admisiones' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger btn-sm',
-      messageTop: 'Admisiones' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info btn-sm',
-      messageTop: 'Admisiones' ,
     },
   ],
 	autoWidth: false,
@@ -223,30 +215,27 @@ function arrancaAdmisiones(valorTabla,valorData)
       if (valorTabla == 2)
     {
         let dataTableOptionsConvenios  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
   buttons: [
     {
       extend: 'excelHtml5',
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Convenios' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Convenios' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Convenios' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -309,30 +298,28 @@ function arrancaAdmisiones(valorTabla,valorData)
     {
         let dataTableOptionsAbonosAdmisiones  ={
 
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
+
   buttons: [
     {
       extend: 'excelHtml5',
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Abonos' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Abonos' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Abonos' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -405,10 +392,9 @@ function arrancaAdmisiones(valorTabla,valorData)
     if (valorTabla == 4)
     {
         let dataTableOptionsAutorizaciones  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
-
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
 
 //  dom: 'Bfrtilp',
   buttons: [
@@ -418,21 +404,18 @@ function arrancaAdmisiones(valorTabla,valorData)
 	// text: '<i class="bi bi-file-earmark-excel-fill"></i> Exportar Excel',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success btn-sm',
-      messageTop: 'Autorizaciones' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger btn-sm',
-      messageTop: 'Autorizaciones' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info btn-sm',
-      messageTop: 'Autorizaciones' ,
     },
   ],
 	
@@ -512,10 +495,9 @@ function arrancaAdmisiones(valorTabla,valorData)
     if (valorTabla == 5)
     {
         let dataTableOptionsCenso  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
-
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
 
 //  dom: 'Bfrtilp',
   buttons: [
@@ -525,21 +507,18 @@ function arrancaAdmisiones(valorTabla,valorData)
 	// text: '<i class="bi bi-file-earmark-excel-fill"></i> Exportar Excel',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success btn-sm',
-      messageTop: 'Censo' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger btn-sm',
-      messageTop: 'Censo' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info btn-sm',
-      messageTop: 'Censo' ,
     },
   ],
 	
@@ -607,10 +586,9 @@ function arrancaAdmisiones(valorTabla,valorData)
     if (valorTabla == 6)
     {
         let dataTableOptionsHabitaciones  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
-
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
 
 //  dom: 'Bfrtilp',
   buttons: [
@@ -620,21 +598,18 @@ function arrancaAdmisiones(valorTabla,valorData)
 	// text: '<i class="bi bi-file-earmark-excel-fill"></i> Exportar Excel',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success btn-sm',
-      messageTop: 'Habitaciones' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger btn-sm',
-      messageTop: 'Habitaciones' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info btn-sm',
-      messageTop: 'Habitaciones' ,
     },
   ],
 	
@@ -3259,25 +3234,24 @@ $('#tablaDatos tbody').on('click', '.ImprimirHojaAdmision', function() {
 	 // alert ("post_id = " + post_id);
 	var ingresoId = post_id;
 
-	$.ajax({
-	           url: '/imprimirHojaAdmision/',
-	            data : {ingresoId:ingresoId},
-	           type: 'POST',
-	           dataType : 'json',
-	  		success: function (data) {
+$.ajax({
+    url: '/imprimirHojaAdmision/',
+ data : {ingresoId:ingresoId},
+    method: 'POST',
+    xhrFields: {
+        responseType: 'blob' // Importante: interpreta la respuesta como binario
+    },
+    success: function (data) {
 
-			 $('#pk').val(data.pk);
-			   info = data['message']
 
- 		        document.getElementById("mensajes").value = 'Revize la informacion completa de la Hoja de Admision '  + info;
-	       	     
-
-                  },
-	   		    error: function (data) {
-        
-	   			   document.getElementById("mensajesError").value = data.responseText;
-	   	    	}
-	     });
+        var blob = new Blob([data], { type: 'application/pdf' });
+        var link = window.URL.createObjectURL(blob);
+        window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
+    },
+    error: function (error) {
+      document.getElementById("mensajesError").value =  data.responseText
+    }
+});
 
 
     });
@@ -3291,24 +3265,24 @@ $('#tablaDatos tbody').on('click', '.ImprimirManilla', function() {
 	 // alert ("post_id = " + post_id);
 	var ingresoId = post_id;
 
-	$.ajax({
-	           url: '/impresionManilla/',
-	            data : {ingresoId:ingresoId},	
-	           type: 'POST',
-	           dataType : 'json',
-	  		success: function (data) {
-
-			 $('#pk').val(data.pk);
-	       	     
-
-                  },
-	   		    error: function (data) {
-	       
-	   			   document.getElementById("mensajesError").value =data.responseText;
-	   	    	}
-	     });
+$.ajax({
+    url: '/imprimirManilla/',
+ data : {ingresoId:ingresoId},
+    method: 'POST',
+    xhrFields: {
+        responseType: 'blob' // Importante: interpreta la respuesta como binario
+    },
+    success: function (data) {
 
 
+        var blob = new Blob([data], { type: 'application/pdf' });
+        var link = window.URL.createObjectURL(blob);
+        window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
+    },
+    error: function (error) {
+      document.getElementById("mensajesError").value =  data.responseText
+    }
+});
     });
 
 
@@ -3322,23 +3296,24 @@ $('#tablaDatos tbody').on('click', '.ImprimirAtencionInicialUrgencias', function
 	 // alert ("post_id = " + post_id);
 	var ingresoId = post_id;
 
-	$.ajax({
-	           url: '/imprimirAtencionUrgencias/',
-	            data : {ingresoId:ingresoId},
-	           type: 'POST',
-	           dataType : 'json',
-	  		success: function (data) {
+$.ajax({
+    url: '/imprimirAtencionUrgencias/',
+ data : {ingresoId:ingresoId},
+    method: 'POST',
+    xhrFields: {
+        responseType: 'blob' // Importante: interpreta la respuesta como binario
+    },
+    success: function (data) {
 
-			 $('#pk').val(data.pk);
-	       	     
 
-                  },
-	   		    error: function (data) {
-
-	   			   document.getElementById("mensajesError").value = data.responseText;
-	   	    	}
-	     });
-
+        var blob = new Blob([data], { type: 'application/pdf' });
+        var link = window.URL.createObjectURL(blob);
+        window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
+    },
+    error: function (error) {
+      document.getElementById("mensajesError").value =  data.responseText
+    }
+});
 
     });
 
@@ -3404,23 +3379,24 @@ $(document).on('change', '#municipios', function(event) {
 
 	var autorizacionId = post_id;
 
-	$.ajax({
-	           url: '/imprimirAutorizacionesAdm/',
-	            data : {autorizacionId:autorizacionId},
-	           type: 'POST',
-	           dataType : 'json',
-	  		success: function (data) {
+$.ajax({
+    url: '/imprimirAutorizacionesAdm/',
+ data : {autorizacionId:autorizacionId},
+    method: 'POST',
+    xhrFields: {
+        responseType: 'blob' // Importante: interpreta la respuesta como binario
+    },
+    success: function (data) {
 
-			 $('#pk').val(data.pk);
-	       	     
 
-                  },
-	   		    error: function (data) {
-    
-	   			   document.getElementById("mensajesError").value = data.responseText;
-	   	    	}
-	     });
-
+        var blob = new Blob([data], { type: 'application/pdf' });
+        var link = window.URL.createObjectURL(blob);
+        window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
+    },
+    error: function (error) {
+      document.getElementById("mensajesError").value =  data.responseText
+    }
+});
         });
 
 $(document).on('change', '#empresaC', function(event) {

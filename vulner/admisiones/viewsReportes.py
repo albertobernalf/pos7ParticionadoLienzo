@@ -53,6 +53,15 @@ import datetime
 import cgi
 from django.db import transaction
 
+import os
+import requests
+import urllib
+from django.http import FileResponse
+from io import BytesIO
+import io
+from django.http import FileResponse
+
+
 class PDFAtencionInicialUrgencias(FPDF):
     def __init__(self, tipoDocId, documentoId, consec,ingresoId,  *args, **kwargs):
     #def __init__(self, *args, **kwargs):
@@ -266,7 +275,7 @@ def ImprimirAtencionUrgencias(request):
     pdf.ln(1)
     linea = 7
 
-    # El propgrama debe preguntar desde que Folio hasta cual Y/O desde que fecha y hasta cual fecha
+    # El programa debe preguntar desde que Folio hasta cual Y/O desde que fecha y hasta cual fecha
 
     # Cursor recorre Laboratorios
 
@@ -593,7 +602,31 @@ def ImprimirAtencionUrgencias(request):
 
     try:
         # Intenta abrir el archivo directamente
-        webbrowser.open(archivo)
+        # webbrowser.open(archivo)
+
+        buff = BytesIO()
+        buff.name = archivo
+        #Genera el archivo el el servidor
+
+        pdf.output(archivo, 'F')
+
+
+        # 2. Abrir el archivo PDF y leerlo
+        with open(archivo, 'rb') as f:
+            pdf_data = f.read()
+            # 3. Escribir los datos en el buffer
+            buff.write(pdf_data)
+
+        buff.seek(0)
+
+        return FileResponse(
+            buff,
+            as_attachment=True,  # Cambiar a False para verlo en navegador
+            filename=archivo,
+            content_type='application/pdf'
+        )
+
+
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
     except Exception as e:
@@ -912,7 +945,31 @@ def ImprimirHojaAdmisionParametro(ingresoId):
 
     try:
         # Intenta abrir el archivo directamente
-        webbrowser.open(archivo)
+        #webbrowser.open(archivo)
+
+        buff = BytesIO()
+        buff.name = archivo
+        #Genera el archivo el el servidor
+
+        pdf.output(archivo, 'F')
+
+
+        # 2. Abrir el archivo PDF y leerlo
+        with open(archivo, 'rb') as f:
+            pdf_data = f.read()
+            # 3. Escribir los datos en el buffer
+            buff.write(pdf_data)
+
+        buff.seek(0)
+
+        return FileResponse(
+            buff,
+            as_attachment=True,  # Cambiar a False para verlo en navegador
+            filename=archivo,
+            content_type='application/pdf'
+        )
+
+
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
     except Exception as e:
@@ -1239,7 +1296,31 @@ def ImprimirHojaAdmision(request):
 
     try:
         # Intenta abrir el archivo directamente
-        webbrowser.open(archivo)
+        #webbrowser.open(archivo)
+
+        buff = BytesIO()
+        buff.name = archivo
+        #Genera el archivo el el servidor
+
+        pdf.output(archivo, 'F')
+
+
+        # 2. Abrir el archivo PDF y leerlo
+        with open(archivo, 'rb') as f:
+            pdf_data = f.read()
+            # 3. Escribir los datos en el buffer
+            buff.write(pdf_data)
+
+        buff.seek(0)
+
+        return FileResponse(
+            buff,
+            as_attachment=True,  # Cambiar a False para verlo en navegador
+            filename=archivo,
+            content_type='application/pdf'
+        )
+
+
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
     except Exception as e:
@@ -1341,7 +1422,31 @@ def ImpresionManilla(request):
 
     try:
         # Intenta abrir el archivo directamente
-        webbrowser.open(archivo)
+        #webbrowser.open(archivo)
+
+        buff = BytesIO()
+        buff.name = archivo
+        #Genera el archivo el el servidor
+
+        pdf.output(archivo, 'F')
+
+
+        # 2. Abrir el archivo PDF y leerlo
+        with open(archivo, 'rb') as f:
+            pdf_data = f.read()
+            # 3. Escribir los datos en el buffer
+            buff.write(pdf_data)
+
+        buff.seek(0)
+
+        return FileResponse(
+            buff,
+            as_attachment=True,  # Cambiar a False para verlo en navegador
+            filename=archivo,
+            content_type='application/pdf'
+        )
+
+
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
     except Exception as e:
@@ -1430,7 +1535,31 @@ def ImprimirAutorizacionesAdm(request):
 
     try:
         # Intenta abrir el archivo directamente
-        webbrowser.open(archivo)
+        #webbrowser.open(archivo)
+
+        buff = BytesIO()
+        buff.name = archivo
+        #Genera el archivo el el servidor
+
+        pdf.output(archivo, 'F')
+
+
+        # 2. Abrir el archivo PDF y leerlo
+        with open(archivo, 'rb') as f:
+            pdf_data = f.read()
+            # 3. Escribir los datos en el buffer
+            buff.write(pdf_data)
+
+        buff.seek(0)
+
+        return FileResponse(
+            buff,
+            as_attachment=True,  # Cambiar a False para verlo en navegador
+            filename=archivo,
+            content_type='application/pdf'
+        )
+
+
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
     except Exception as e:

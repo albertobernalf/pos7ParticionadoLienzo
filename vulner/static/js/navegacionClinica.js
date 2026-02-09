@@ -1802,6 +1802,9 @@ formHistoriaClinica.addEventListener('submit', e=>{
       
                $.ajax({
             	   type: 'POST',
+		    // xhrFields: {
+		     // responseType: 'blob' // Importante: interpreta la respuesta como binario
+		    //	    },
  	               url: '/crearHistoriaClinica/',
   	               data: { 'tipoDocPaciente':tipoDocPaciente,
   	                      'documentoPaciente':documentoPaciente,
@@ -1908,21 +1911,26 @@ formHistoriaClinica.addEventListener('submit', e=>{
 				'notasEnfermeria':notasEnfermeria,
 				'vomito':vomito,
 				'enfermedades':enfermedades,
-
 				   },
  	      		success: function (data) {
-		
+
 			alert("Esto llega REVISAR = " + JSON.stringify(data));
-			//chivos = JSON.parse(JSON.stringify(data));
-			
-			//alert("archivo = " + chivos.url);
 
-			//var blob = new Blob([chivos.url], { type: 'application/pdf' });
+
+			data.archivos.forEach(ids => {
+	
+			alert("A Pre-cargar : " + ids);			
+
+			//const url='/obtener_pdf/?file_id=51017_162Laboratorio';
+			//var blob = new Blob([url], { type: 'application/pdf' });
 		        //var link = window.URL.createObjectURL(blob);
-		        // window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
+		        //window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
+			//alert("A Post cargar : " + url);
 
+			});
+               
 
-
+			alert("ya cargue todos");
 
 		        if ( data.success == true)
 		            {
@@ -1941,6 +1949,7 @@ formHistoriaClinica.addEventListener('submit', e=>{
 
  	      		}, // cierra function sucess
 		 error: function(data){
+		alert("Llegue con ERROR = " + JSON.stringify(data));
 		       		document.getElementById("mensajesError").innerHTML =  data.responseText
 			        },
 

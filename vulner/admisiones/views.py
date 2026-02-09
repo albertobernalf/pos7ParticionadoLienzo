@@ -31,6 +31,10 @@ from clinico.models import Servicios,EspecialidadesMedicos, Medicos
 from django.db import transaction, IntegrityError
 from django.db.models import Q
 from admisiones.viewsReportes import ImprimirAtencionUrgencias, ImprimirHojaAdmision, ImpresionManilla
+from django.db.models import Q
+from django.db import transaction, IntegrityError
+from django.db.models import F
+from django.db.models import Q
 from django.db import transaction, IntegrityError
 from django.db.models import F
 from tarifarios.models import TiposHonorarios
@@ -73,7 +77,7 @@ def validaAcceso(request):
     print("Sede Mayuscula = ", Sede)
     print(contrase)
     print("sede= ", sede)
-
+    context = {}
     context['Documento'] = username
     context['Username'] = username
     context['Sede'] = sede
@@ -5254,7 +5258,7 @@ def buscarPaises(request):
     print ("Entre buscar  deptos del Pais    =",Pais)
 
 
-    # Combo Departamentos
+    # Combo de Medicos Especialidades
 
 
     miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres", password="123456")
@@ -5674,11 +5678,15 @@ def crearAdmisionDef(request):
             json_data = json.dumps(datosMensaje, default=str)
             return HttpResponse(json_data, content_type='application/json')
 
+
+
+
         # HASTA AQUIP TRANSACCIONALIDAD
 
         # Aqui reporte de inicial URGENCIAS, pero ojo se suspende porque tiene que tener TRIAGE
 
         #servicioUrgencias = Servicios.objects.get(id=busServicio2)
+
 
         #if servicioUrgencias.nombre == 'URGENCIAS':
         #    print("Entre imprimir inicial UREGNCIAS")
@@ -7772,6 +7780,9 @@ def GuardaAbonosAdmision(request):
             cur3.close()
             miConexion3.close()
 
+
+
+
 def PostDeleteConveniosAdmision(request):
 
     print ("Entre PostDeleteConveniosAdmision" )
@@ -8499,4 +8510,42 @@ def buscarConvenioEmpresa(request):
 
 
     return JsonResponse(json.dumps(conveniosEmpresas), safe=False)
+
+
+def Indicadores(request):
+
+    sede = request.GET["sede"]
+
+    print ("Entre buscar  Convenios de la empresa  =", empresaId)
+
+    # Combo Indicadores
+
+    miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+                                   password="123456")
+    curt = miConexiont.cursor()
+
+    comando = 'SELECT ser.nombre nombre, count(*) total FROM admisiones_ingresos i, usuarios_usuarios u, sitios_dependencias dep , clinico_servicios ser ,usuarios_tiposDocumento tp , sitios_dependenciastipo deptip  , clinico_Diagnosticos diag , sitios_serviciosSedes sd  WHERE sd."sedesClinica_id" = i."sedesClinica_id"  and sd.servicios_id  = ser.id and i."sedesClinica_id" = dep."sedesClinica_id" AND i."sedesClinica_id" = ' + "'" + str(
+        sede) + "'" + ' AND  deptip.id = dep."dependenciasTipo_id" and i."serviciosActual_id" = sd.id AND dep.disponibilidad = ' + "'" + str(
+        'O') + "'" + ' AND i."salidaDefinitiva" = ' + "'" + str(
+        'N') + "'" + ' and tp.id = u."tipoDoc_id" and  i."tipoDoc_id" = u."tipoDoc_id" and u.id = i."documento_id" and diag.id = i."dxActual_id" and i."fechaSalida" is null and dep."serviciosSedes_id" = sd.id and dep.id = i."dependenciasActual_id"  group by ser.nombre UNION SELECT ser.nombre, count(*) total FROM triage_triage t, usuarios_usuarios u, sitios_dependencias dep , usuarios_tiposDocumento tp , sitios_dependenciastipo deptip  , sitios_serviciosSedes sd, clinico_servicios ser WHERE sd."sedesClinica_id" = t."sedesClinica_id"  and t."sedesClinica_id" = dep."sedesClinica_id" AND  t."sedesClinica_id" =  ' + "'" + str(
+        sede) + "'" + ' AND dep."sedesClinica_id" =  sd."sedesClinica_id" AND dep.id = t.dependencias_id AND  t."serviciosSedes_id" = sd.id  AND deptip.id = dep."dependenciasTipo_id" and  tp.id = u."tipoDoc_id" and  t."tipoDoc_id" = u."tipoDoc_id" and u.id = t."documento_id"  and ser.id = sd.servicios_id and  dep."serviciosSedes_id" = sd.id and t."serviciosSedes_id" = sd.id and dep."tipoDoc_id" = t."tipoDoc_id" and  t."consecAdmision" = 0 and dep."documento_id" = t."documento_id" and ser.nombre = ' + "'" + str(
+        'TRIAGE') + "'" + ' group by ser.nombre'
+
+    curt.execute(comando)
+    print(comando)
+
+    indicadores = []
+
+    for nombre, total in curt.fetchall():
+        indicadores.append({'nombre': nombre, 'total': total})
+
+    miConexiont.close()
+    print(indicadores)
+
+    print("YA PASE INDICADORES")
+
+    # Fin combo Indicadores
+
+    return JsonResponse(json.dumps(indicadores), safe=False)
+
 

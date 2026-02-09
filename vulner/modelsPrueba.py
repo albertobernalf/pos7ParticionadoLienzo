@@ -1080,3 +1080,23 @@ Feb 04/2026
 	
 Fen 05/2025
 
+Lunes 9 de Feb
+
+	Probar descargar con : Colocando la ruta apropiada Solo eso a ver que pasa si funciona anton se generan los archivos en el servidor y se jalan
+        con JAVASCRIPT
+	o sea en views.py de clinico se hace un arreglo de rutas a devolver y se devuelve el arreglo
+$.ajax({
+    url: '/obtener-lista-pdfs/',
+    method: 'POST',
+    data: { /* tus filtros */ },
+    success: function(response) {
+        // 'response.urls' es un array como ['/pdf/1/', '/pdf/2/']
+        response.urls.forEach(url => {
+            window.open(url, '_blank');
+        });
+    }
+});
+
+Feb 09/2026
+
+	La impresion de la HC. super - recontra lenta

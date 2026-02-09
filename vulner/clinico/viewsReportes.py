@@ -53,6 +53,13 @@ import datetime
 import cgi
 from django.db import transaction
 
+import os
+from django.http import FileResponse
+from io import BytesIO
+import io
+
+
+
 class PDF(FPDF):
     def __init__(self, tipoDocId,documentoId, consec, esTriage, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -2645,12 +2652,32 @@ def ImprimirOrdenLaboratorio(ingresoId2, historiaId, convenioId, tipoAdmision):
     print ("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + str(historiaId) + 'Laboratorio.pdf'
+    nombreArchivo = str(pacienteId.documento) + '_' + str(historiaId) + 'Laboratorio.pdf'
     print ("archivo =" , archivo)
 
     try:
         # Intenta abrir el archivo directamente
         pdf.output(archivo, 'F')
+        print ("ACABE DE VREAR EL ARCHIVO")
         webbrowser.open(archivo)
+
+        #buff = BytesIO()
+        #buff.name = archivo
+        # Genera el archivo el el servidor
+
+        # 2. Abrir el archivo PDF y leerlo
+        #with open(archivo, 'rb') as f:
+        #    pdf_data = f.read()
+            # 3. Escribir los datos en el buffer
+        #    buff.write(pdf_data)
+
+        #buff.seek(0)
+        print("Voya devolver el buff o Archivo binario")
+
+        #return buff
+
+        return nombreArchivo
+
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
     except Exception as e:
@@ -2968,6 +2995,7 @@ def ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision):
     print ("carpeta = ", carpeta)
 
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + str(historiaId) + '_' + 'OrdenDeControl.pdf'
+    nombreArchivo = str(pacienteId.documento) + '_' + str(historiaId) + '_' + 'OrdenDeControl.pdf'
 
     print ("archivo =" , archivo)
 
@@ -2975,6 +3003,34 @@ def ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision):
         # Intenta abrir el archivo directamente
         pdf.output(archivo, 'F')
         webbrowser.open(archivo)
+
+        #buff = BytesIO()
+        #buff.name = archivo
+        # Genera el archivo el el servidor
+
+        # 2. Abrir el archivo PDF y leerlo
+        #with open(archivo, 'rb') as f:
+        #    pdf_data = f.read()
+            # 3. Escribir los datos en el buffer
+        #    buff.write(pdf_data)
+
+        #buff.seek(0)
+        print ("Voya devolver el buff o Archivo binario")
+	
+        #return buff
+        #
+        return nombreArchivo
+
+
+        #return JsonResponse({'success': True, 'archivo': buff})
+        #return HttpResponse(buff, content_type='application/json')
+        #return FileResponse(
+        #    buff,
+        ##    as_attachment=False,  # Cambiar a False para verlo en navegador
+        #    filename=archivo,
+        #    content_type='application/pdf'
+        #)
+
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
     except Exception as e:
@@ -2984,5 +3040,6 @@ def ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision):
         #return HttpResponse(json_data, content_type='application/json')
 
 
-    return JsonResponse({'success': True, 'message': 'Orden De COntrol impresa!'})
+    return JsonResponse({'success': True, 'message': 'Orden De COntrol impresa!','archivo':archivo})
+    #return JsonResponse({'success': True,'archivo':archivo})
 

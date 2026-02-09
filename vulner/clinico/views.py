@@ -61,6 +61,17 @@ import traceback
 from django.db import transaction, IntegrityError
 from django.utils import timezone
 
+import os
+from django.http import FileResponse
+from io import BytesIO
+import io
+from django.core.files.base import ContentFile
+import base64
+import zipfile
+from fastapi import FastAPI
+from fastapi.responses import StreamingResponse
+
+
 # Create your views here.
 
 def prueba(request):
@@ -2010,8 +2021,10 @@ def crearHistoriaClinica(request):
                                 if (columnaALeerPropia != ''):	
 
                                 	comando = 'SELECT conv.convenio_id id ,exa.cums cums, sum."' + str(columnaALeer.columna) + '"' + ' tarifaValor FROM facturacion_conveniospacienteingresos conv, tarifarios_tarifariosdescripcion des, tarifarios_tarifariossuministros sum, facturacion_suministros exa, contratacion_convenios conv1 , tarifarios_tipostarifa tiptar WHERE conv."tipoDoc_id" = ' + "'" + str(tipoDocId.id) + "'" + ' AND conv.documento_id = ' + "'" + str(documentoId.id) + "'" + ' AND conv."consecAdmision" = ' + "'" + str(ingresoPaciente) + "'" + ' AND conv.convenio_id = conv1.id AND des.id = conv1."tarifariosDescripcionSum_id" AND sum."codigoCum_id" = exa.id  And exa.id = ' + "'" + str(medicamentos) + "'" + ' AND des."tiposTarifa_id" = tiptar.id and sum."tiposTarifa_id" = tiptar.id'
+
                                 else:
-                                	comando = 'SELECT conv1.id id ,exa.cums cums, sum."' + str(convenioParticular.columna) + '"' + ' tarifaValor FROM  tarifarios_tarifariosdescripcion des, tarifarios_tarifariossuministros sum, facturacion_suministros exa, contratacion_convenios conv1 , tarifarios_tipostarifa tiptar WHERE conv1.id = ' + "'" + str(convenioParticular.id) + "'" + ' AND des.id = conv1."tarifariosDescripcionSum_id" AND sum."codigoCum_id" = exa.id  And exa.id = ' + "'" + str(medicamentos) + "'" + ' AND des."tiposTarifa_id" = tiptar.id and sum."tiposTarifa_id" = tiptar.id'
+
+                                    comando = 'SELECT conv1.id id ,exa.cums cums, sum."' + str(convenioParticular.columna) + '"' + ' tarifaValor FROM  tarifarios_tarifariosdescripcion des, tarifarios_tarifariossuministros sum, facturacion_suministros exa, contratacion_convenios conv1 , tarifarios_tipostarifa tiptar WHERE conv1.id = ' + "'" + str(convenioParticular.id) + "'" + ' AND des.id = conv1."tarifariosDescripcionSum_id" AND sum."codigoCum_id" = exa.id  And exa.id = ' + "'" + str(medicamentos) + "'" + ' AND des."tiposTarifa_id" = tiptar.id and sum."tiposTarifa_id" = tiptar.id'
 
 
                                 print ("comando =" , comando)
@@ -2419,24 +2432,31 @@ def crearHistoriaClinica(request):
 
                 ##Aqui vendiran los reportes
 
+                archivoOrdenDeControl=''
+                archivoOrdenDeLaboratorio=''
+                base1 ='file:\\175.16.0.100/HistoriasClinicas/'
+                base ='file:\\175.16.0.100/HistoriasClinicas/'
+
                 if (ordenDeControl != ''):
 
                     print("Entre imprimir orden de control")
                     ingresoId2=ingresosPaciente.id
-                    ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision)
-
-                print("Ya imprimi orden de control")
+                    archivoOrdenDeControl = ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision)
+                    print("sali imprimir orden de control", archivoOrdenDeControl)
 
 
                 if conteoLab >= 1:
                     print("Encontre ordenes de laboratrio")
-                    print("Encontre ordenes de laboratrio")
+
                     ingresoId2=ingresosPaciente.id
-                    ImprimirOrdenLaboratorio(ingresoId2, historiaId, convenioId, tipoAdmision)
+                    archivoOrdenDeLaboratorio = ImprimirOrdenLaboratorio(ingresoId2, historiaId, convenioId, tipoAdmision)
+                    print("Regrese de generar laboratrios")
+                    print("sali imprimir orden de laboratorio", archivoOrdenDeLaboratorio)
+
                 else:
                     print("No Encontre ordenes de laboratrio")
-                    print("No Encontre ordenes de laboratrio")
 
+                print ("pase_00")
                 if conteoRad >=  1:
                     print("Encontre ordenes de radiologia")
                     print("Encontre ordenes de radiologia")
@@ -2460,14 +2480,32 @@ def crearHistoriaClinica(request):
                    ingresoId2 = ingresosPaciente.id
                    ImprimirOrdenMedicamentos(ingresoId2, historiaId, convenioId, tipoAdmision)
 
-                if conteoInca >= 1:
+                if conteoInca >= 2:
                    print("Entre imprimir Incapacidades")
                    ingresoId2 = ingresosPaciente.id
                    ImprimirOrdenIncapacidad(ingresoId2, historiaId, convenioId, tipoAdmision)
 
+                #return JsonResponse({'success': True, 'Mensaje': 'Folio Actualizado !'})
+                #
 
-                return JsonResponse({'success': True, 'Mensaje': 'Folio Actualizado !'})
+                filesImprimir = []
+                print ("filesImprimir ANTES DE  = " , filesImprimir)
+                filesImprimir.append(archivoOrdenDeControl)
+                filesImprimir.append(archivoOrdenDeLaboratorio)
 
+                print("filesImprimir DESPUES  DE  = ", filesImprimir)
+                print ("filesImprimir = " , filesImprimir)
+
+                print ("Me devuelvo ajax ULTIMO")
+
+                return JsonResponse({'archivos':filesImprimir, 'success': True})
+
+                #return FileResponse(
+	            #archivoOrdenDeControl,
+	            #as_attachment=False,  # Cambiar a False para verlo en navegador
+	            #filename='EsunaPrueba.pdf',
+	            #content_type='application/pdf'
+	            #)
 
 
     if request.method == "POST":
@@ -3271,14 +3309,26 @@ def crearHistoriaClinica(request):
 
         # FIN Combo enfermedades
 
-
-
-
-
-
         return render(request, 'clinico/navegacionClinicaF.html', context);
 
+def Obtener_pdf(request):
 
+    print ("Entre obtener_pdfs_x")
+    file_id = request.GET["file_id"]
+
+    print("Entre obtener_pdfs_x", file_id)
+
+    file_path = f"C:\EntornosPython\pos7Particionado/vulner\JSONCLINICA\HistoriasClinicas\{file_id}.pdf"
+
+    print ("file_path = " , file_path)
+
+    response = FileResponse(open(file_path, 'rb'), content_type='application/pdf')
+
+    print ("pase")
+    response['Content-Disposition'] = 'inline; filename="documento.pdf"'
+    print("alla voy")
+
+    return response
 
 def serialize_datetime(obj): 
     if isinstance(obj, datetime.datetime): 
@@ -4211,7 +4261,7 @@ def load_dataInfoDiagnostico(request, data):
                                    password="123456")
     curx = miConexionx.cursor()
 
-    detalle = 'select his.id id,his.folio folio, his.fecha fechaRegistro, tiposDiag.nombre tipo, hisDiag.observaciones descripcion FROM clinico_historia his INNER JOIN clinico_historialdiagnosticos hisDiag ON (hisDiag.historia_id = his.id) INNER JOIN clinico_tiposdiagnostico  tiposDiag  ON (tiposDiag.id = hisDiag.diagnosticos_id)  WHERE his.documento_id = ' + "'" + str(
+    detalle = 'select his.id id,his.folio folio, his.fecha fechaRegistro, tiposDiag.nombre tipo, hisDiag.observaciones descripcion FROM clinico_historia his INNER JOIN clinico_historialdiagnosticos hisDiag ON (hisDiag.historia_id = his.id) INNER JOIN clinico_tiposdiagnostico  tiposDiag  ON (tiposDiag.id = hisDiag."tiposDiagnostico_id")  WHERE his.documento_id = ' + "'" + str(
         documentoId.id) + "'" + ' AND his."tipoDoc_id" = ' + "'" + str(
         tipodocId.id) + "'" + ' And his."consecAdmision"= ' + "'" + str(consec) + "' ORDER BY  his.folio desc"
 

@@ -59,7 +59,6 @@ from io import BytesIO
 import io
 
 
-
 class PDF(FPDF):
     def __init__(self, tipoDocId,documentoId, consec, esTriage, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -2092,7 +2091,7 @@ def ImprimirHistoriaClinica(request):
                                            password="123456")
             curx = miConexionx.cursor()
 
-            comando = 'SELECT especialidadesConsulta.nombre especialidadConsulta, plantaConsulta.nombre plantaConsulta, diag.nombre diagnostico,	inter."descripcionConsulta" descripcionConsulta, especialidadesConsultada.nombre especialidadConsultada, plantaConsultada.nombre plantaConsultada,  inter."respuestaConsulta" respuestaConsulta FROM clinico_historialinterconsultas inter INNER JOIN clinico_medicos medicosConsulta on (medicosConsulta.id = inter."medicoConsulta_id") INNER JOIN clinico_medicos medicosConsultado on (medicosConsultado.id = inter."medicoConsulta_id") INNER JOIN clinico_especialidades especialidadesConsulta ON (especialidadesConsulta.id = inter."especialidadConsulta_id" ) INNER JOIN clinico_especialidades especialidadesConsultada ON (especialidadesConsultada.id = inter."especialidadConsultada_id") INNER JOIN planta_planta plantaConsulta ON (plantaConsulta.id = medicosConsulta.planta_id) INNER JOIN planta_planta plantaConsultada ON (plantaConsultada.id = medicosConsultado.planta_id) INNER JOIN clinico_diagnosticos diag ON (diag.id = inter.diagnosticos_id) WHERE inter.historia_id = ' + str(
+            comando = 'SELECT especialidadesConsulta.nombre especialidadConsulta, plantaConsulta.nombre plantaConsulta, diag.nombre diagnostico,	inter."descripcionConsulta" descripcionConsulta, especialidadesConsultada.nombre especialidadConsultada, plantaConsultada.nombre plantaConsultada,  inter."respuestaConsulta" respuestaConsulta FROM clinico_historialinterconsultas inter INNER JOIN clinico_medicos medicosConsulta on (medicosConsulta.id = inter."medicoConsulta_id") INNER JOIN clinico_medicos medicosConsultado on (medicosConsultado.id = inter."medicoConsultado_id") INNER JOIN clinico_especialidades especialidadesConsulta ON (especialidadesConsulta.id = inter."especialidadConsulta_id" ) INNER JOIN clinico_especialidades especialidadesConsultada ON (especialidadesConsultada.id = inter."especialidadConsultada_id") INNER JOIN planta_planta plantaConsulta ON (plantaConsulta.id = medicosConsulta.planta_id) INNER JOIN planta_planta plantaConsultada ON (plantaConsultada.id = medicosConsultado.planta_id) INNER JOIN clinico_diagnosticos diag ON (diag.id = inter.diagnosticos_id) WHERE inter.historia_id = ' + str(
                 folios[0 + i]['HistoriaId'])
 
             curx.execute(comando)
@@ -2123,9 +2122,9 @@ def ImprimirHistoriaClinica(request):
                 pdf.cell(50, 1, 'Consulta ' + str(interConsultas[0 + x]['especialidadConsulta']), 0, 0, 'L')
                 pdf.cell(50, 1, '  ' + str(interConsultas[0 + x]['plantaConsulta']), 0, 0, 'L')
                 pdf.cell(50, 1, 'Diagnostico: ' + str(interConsultas[0 + x]['diagnostico']), 0, 0, 'L')
-                descripcionConsulta=str(interConsultas[0 + x]['interpretacion2'])
+                descripcionConsulta=str(interConsultas[0 + x]['descripcionConsulta'])
                 pdf.multi_cell(w=0, h=4, txt=descripcionConsulta, border=0, align='J', fill=False)                
-		#pdf.cell(100, 1, 'Descripcion: ' + str(interConsultas[0 + x]['descripcionConsulta']), 0, 0, 'L')
+		        #pdf.cell(100, 1, 'Descripcion: ' + str(interConsultas[0 + x]['descripcionConsulta']), 0, 0, 'L')
                 linea = linea + 3
                 pdf.ln(3)
                 pdf.cell(50, 1, 'Consultado: ' + str(interConsultas[0 + x]['especialidadConsultada']), 0, 0, 'L')
@@ -2138,6 +2137,7 @@ def ImprimirHistoriaClinica(request):
                 pdf.ln(3)
 
             # Cursor recorre Medicamentos
+            print ("ya imprimi INTERCONSULTAS")
 
             miConexionc = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                            password="123456")
@@ -2328,7 +2328,29 @@ def ImprimirHistoriaClinica(request):
     try:
         # Intenta abrir el archivo directamente
         pdf.output(archivo, 'F')
-        webbrowser.open(archivo)
+        #Genera el archivo el el servidor
+        #webbrowser.open(archivo)
+        buff = BytesIO()
+        buff.name = archivo
+
+        # 2. Abrir el archivo PDF y leerlo
+        with open(archivo, 'rb') as f:
+            pdf_data = f.read()
+            # 3. Escribir los datos en el buffer
+            buff.write(pdf_data)
+
+        buff.seek(0)
+
+        return FileResponse(
+            buff,
+            as_attachment=True,  # Cambiar a False para verlo en navegador
+            filename=archivo,
+            content_type='application/pdf'
+        )
+
+
+
+
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
     except Exception as e:

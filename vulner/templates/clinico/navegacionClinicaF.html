@@ -59,10 +59,11 @@
 {% endblock %}
 
 {% block paciente %}
-<div class="marco">
+<div class="marco"> 
 
 {% for datosPaciente in DatosPaciente %}
- <div class="paciente"> 
+
+  <div class="paciente">  
 
     <input type="hidden" id="tipoIng" name="tipoIng" value="{{TipoIng}}"> </input>
     <input type="hidden" id="espMedico" name="espMedico" value="{{EspMedico}}"> </input>
@@ -74,7 +75,7 @@
     <input type="hidden" id="fechaRegistro" name="fechaRegistro" value=""> </input>
 
     <input type="hidden" id="tipoDocPaciente" name="tipoDocPaciente" value="{{TipoDocPaciente}}">
-   TIPODOC_ID <input type="text" id="tipoDoc_id" name="tipoDoc_id" value="{{TipoDocPaciente}}">
+    <input type="hidden" id="tipoDoc_id" name="tipoDoc_id" value="{{TipoDocPaciente}}">
     <input type="hidden" id="documentoPaciente" name="documentoPaciente" value="{{DocumentoPaciente}}">
     <input type="hidden" id="ingresoPaciente" name="ingresoPaciente" value="{{IngresoPaciente}}">
 
@@ -100,6 +101,7 @@
 	<input type="hidden" id="tipoDocCirugia" name="tipoDocCirugia" value = "{{ datosPaciente.tipoDoc_id}}">
 	<input type="hidden" id="documentoCirugia" name="documentoCirugia" value = "{{ datosPaciente.documentoPaciente}}">
 	<input type="hidden" id="consecutivoIngresoCirugia" name="consecutivoIngresoCirugia" value = "{{ IngresoPaciente}}">
+
 
     <div class="form-row">
          <div class="form-group col-md-1">
@@ -129,18 +131,19 @@
 
             {{ datosPaciente.tipoUsuario}}
 
-            {{ datosPaciente.direccion}}
+            {{ datosPaciente.direccion}}	
             Tel:
             {{ datosPaciente.telefono}}
   Usuario:
             {{Profesional}}
+	</div>  <!-- cierra el gform-group -->
+        </div>  <!-- cierra el form-row -->
+       </div>  <!-- cierra el paciente -->
 
-        </div>
-    </div>
- </div> 
 
 {% endfor %}
-</div>
+
+</div>   <!-- cierra marco -->
 {% endblock %}
 
 

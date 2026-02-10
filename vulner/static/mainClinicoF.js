@@ -359,23 +359,23 @@ $('#tablaClinico tbody').on('click', '.ImprimirHc', function() {
 	var ingresoId = post_id;
 
 $.ajax({
-	           url: '/imprimirHistoriaClinica/',
-	            data : {ingresoId:ingresoId},
-	           type: 'POST',
-	           dataType : 'json',
-	  		success: function (data) {
+    url: '/imprimirHistoriaClinica/',
+ data : {ingresoId:ingresoId},
+    method: 'POST',
+    xhrFields: {
+        responseType: 'blob' // Importante: interpreta la respuesta como binario
+    },
+    success: function (data) {
+	// alert("de regreso");
 
-			 $('#pk').val(data.pk);
-	       	     
-
-                  },
-	   		    error: function (request, status, error) {
-	   			   document.getElementById("mensajesError").innerHTML = 'Error Contacte a su Administrador' + ': ' + error
-	   	    	}
-	     });
-
-
-
+        var blob = new Blob([data], { type: 'application/pdf' });
+        var link = window.URL.createObjectURL(blob);
+        window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
+    },
+    error: function (error) {
+      document.getElementById("mensajesError").value =  data.responseText
+    }
+});
 
     });
 

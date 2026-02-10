@@ -292,3 +292,48 @@ input[type="date"] {
 	font-size: 10px !important;
 
 }
+
+
+#flex-container1{
+  display: flex;
+  justify-content: center;
+
+}
+
+#flex-container1 div{
+  width: 1400px;
+  height: 75px;
+  color: #FFF;
+  text-align: center;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+}
+
+#btnRefrescar {
+  border: 1px solid #ccc;
+  padding: 0px;
+  height: 25px;
+  border:8px;
+}
+
+#btnCargaHc1 {
+  border: 1px solid #ccc;
+  padding: 0px;
+  height: 25px;
+  border:8px;
+}
+
+#flex-container2 div{
+  width: 1400px;
+  height: 25px;
+  color: #FFF;
+  text-align: center;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+}

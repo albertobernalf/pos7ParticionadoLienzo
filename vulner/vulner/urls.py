@@ -140,6 +140,8 @@ urlpatterns = [
     path('load_dataInfoDiagnostico/<str:data>', viewsClinico.load_dataInfoDiagnostico),
     path('load_dataInfoIncapacidad/<str:data>', viewsClinico.load_dataInfoIncapacidad),
     path('load_dataInfoEvolucion/<str:data>', viewsClinico.load_dataInfoEvolucion),
+    path('obtener_pdf/', viewsClinico.Obtener_pdf),
+
 
     # Actividaes Mecanicas
 
@@ -217,6 +219,9 @@ urlpatterns = [
     path('imprimirHojaAdmisionParametro/<str:ingresoId>/', viewsAdmisionesReportes.ImprimirHojaAdmisionParametro),
     path('imprimirAutorizacionesAdm/', viewsAdmisionesReportes.ImprimirAutorizacionesAdm),
     path('buscarConvenioEmpresa/', viewsAdmisiones.buscarConvenioEmpresa),
+    path('indicadores/', viewsAdmisiones.Indicadores , name = "indicadores_1"),
+    path('imprimirManillaAdmision/', viewsAdmisionesReportes.ImpresionManilla , name='imprimir_manilla'),
+
 
     # Triage
 

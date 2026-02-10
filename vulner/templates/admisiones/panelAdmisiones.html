@@ -78,76 +78,6 @@ table.dataTable tbody tr {
 </div>
 
 
-<script>
-// $('#tablaDatos').css('font-size', '40px');
-
-function RefrescarPantalla() {
-	 var sedeSeleccionada = document.getElementById("sedeSeleccionada").value;
-
-        var username = document.getElementById("username").value;
-        var nombreSede = document.getElementById("nombreSede").value;
-    	var sede = document.getElementById("sede").value;
-        var username_id = document.getElementById("username_id").value;
-        var data =  {}   ;
-        data['username'] = username;
-        data['sedeSeleccionada'] = sedeSeleccionada;
-        data['nombreSede'] = nombreSede;
-        data['sede'] = sede;
-        data['username_id'] = username_id;
-        data = JSON.stringify(data);
-        arrancaAdmisiones(1,data);
-	dataTableAdmisionesInitialized = true;
-
-	// AQUI EL AJAX QUE REFRESCA INDICADORES
-
-	$.ajax({
-	           url: '/indicadores/',
-	            data : {Sede:sede},
-	           type: 'GET',
-	           dataType : 'json',
-	  		success: function (respuesta) {
-
-				alert("indicadores = " + JSON.stringify(respuesta));
-
-				if (respuesta.nombre == 'HOSPITALIZACION')
-				{
-			document.getElementById("hosp").innerHTML = respuesta.total;
-				}
-
-
-				if (respuesta.nombre == 'TRIAGE')
-				{
-			document.getElementById("tria").innerHTML = respuesta.total;
-				}
-
-
-				if (respuesta.nombre == 'URGENCIAS')
-				{
-			document.getElementById("urg").innerHTML = respuesta.total;
-				}
-
-
-				if (respuesta.nombre == 'AMBULATORIO')
-				{
-			document.getElementById("amb").innerHTML = respuesta.total;
-				}
-
-                    },
-	   		    error: function (data) {
-      		
-
-	document.getElementById("mensajesError").value =  data.responseText;
-
-	   	    	}
-
-	     });
-
-
-	// FIN AJAX
-
-}
-
-</script>
 
 {% endblock %}
 
@@ -180,6 +110,7 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
                                     value="MJ1CwN7LHRoBZUnyQoPpHBnb4M3PwGYmsLJeNsN92l41zY9ZaUPztrhcMWyUTHxc">
                                 <div class="row justify-content-center">
                                 </div>
+			 {% csrf_token %}
 
                                 <input type="hidden" id="username" name="username" value="{{Username}}">
                                 <input type="hidden" id="username_id" name="username_id" value="{{Username_id}}">
@@ -217,11 +148,11 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
                                            <thead>
                                             <tr>    
 					<bold>    
-        			    <th style="width:1px">S1</th> 
-				      <th style="width:1px">No sep?</th>                               
-				      <th style="width:1px">Hoja Urg?</th>                               
-				      <th style="width:1px">Hoja Admision ?</th>                               
-				      <th style="width:1px">Manilla ?</th>                               
+        			    <th style="width:1px">Sel</th> 
+				      <th style="width:1px">Editar</th>                               
+				      <th style="width:1px">Hoja Admision</th>                               
+				      <th style="width:1px">Hoja Urgencias</th>                               
+				      <th style="width:1px">Manilla</th>                               
 				        <th>id</th>
 				        <th style="width:150px">tipoDoc</th>
                                 	<th>Documento</th>
@@ -638,7 +569,7 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
                                 <input type="hidden" id="profesional" name="profesional" value="{{Profesional}}">
                                 <input type="hidden" id="nombreSede" name="nombreSede" value="{{NombreSede}}">
                                 <input type="hidden" id="escogeModulo" name="escogeModulo" value="{{EscogeModulo}}">
-
+				 {% csrf_token %}
                                 {% if crearAdmisionForm.errors %}
                                 <p style="color:Red;"> Revizar estos camos</p>
 

@@ -315,3 +315,40 @@ input[type="datetime-local"] {
 	font-size: 15px !important;
 
 }
+
+.contenedor-flex {
+    display: flex;
+   flex-wrap: nowrap;
+   justify-content: center;
+  }
+
+.contenedor-inline-flex {
+    display: inline-flex;
+   flex-wrap: nowrap;
+   justify-content: center;
+  }
+
+
+#btnRefrescar {
+  border: 1px solid #ccc;
+  padding: 0px;
+  height: 15px;
+}
+
+#flex-container1{
+  display: flex;
+  justify-content: center;
+
+}
+
+#flex-container1 div{
+  width: 1150px;
+  height: 15px;
+	  color: #FFF;
+  text-align: center;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+}

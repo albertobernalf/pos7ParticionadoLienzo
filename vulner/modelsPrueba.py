@@ -1100,3 +1100,9 @@ $.ajax({
 Feb 09/2026
 
 	La impresion de la HC. super - recontra lenta
+
+Feb 10
+
+	Ops cuando creo un Triage me quita la ventana Crear TRiag GRAVISISSIMO
+	Cuando hace un triage No lo imprime
+	No se por que el refrescar no ejecuta el AJAX problemas de url

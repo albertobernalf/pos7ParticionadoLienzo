@@ -1422,7 +1422,7 @@ def ImpresionManilla(request):
 
     try:
         # Intenta abrir el archivo directamente
-        #webbrowser.open(archivo)
+        webbrowser.open(archivo)
 
         buff = BytesIO()
         buff.name = archivo
@@ -1441,7 +1441,7 @@ def ImpresionManilla(request):
 
         return FileResponse(
             buff,
-            as_attachment=True,  # Cambiar a False para verlo en navegador
+            as_attachment=False,  # Cambiar a False para verlo en navegador
             filename=archivo,
             content_type='application/pdf'
         )

@@ -369,7 +369,7 @@ $(document).on('change', '#busDocumentoSelTriage', function(event) {
     var tipoDoc = select.options[select.selectedIndex].value; /* Obtener el valor */
 
    documento = document.getElementById("busDocumentoSelTriage").value;
-   alert( "Este es el documento : " + tipoDoc +  " " + documento);
+  //  alert( "Este es el documento : " + tipoDoc +  " " + documento);
 
 	$.ajax({
 		type: 'POST',
@@ -433,8 +433,8 @@ $('#tablaDatosTriage tbody').on('click', '.miEditaTriage', function() {
 
 	 var post_id = $(this).data('pk');
 	var row = $(this).closest('tr'); // Encuentra la fila
-	alert("post_id=" + post_id);
-	alert("row=" + row);
+	// alert("post_id=" + post_id);
+	// alert("row=" + row);
 	var triageId= post_id;
 	 var sede =  document.getElementById("sede").value;
 	 var username =  document.getElementById("username").value;
@@ -447,9 +447,9 @@ $('#tablaDatosTriage tbody').on('click', '.miEditaTriage', function() {
         dato3 = dato1[2];
 	console.log(" fila selecciona de vuelta dato3 = ",  dato3);
 	console.log(" fila selecciona de vuelta dato3 = ",  dato3);
-	alert(" fila selecciona de vuelta dato3  glosaId= " +   dato3.Documento);
-	alert(" fila selecciona de vuelta dato3 factura = " + dato3.tipoDoc);
-	alert("Voy ajax editar Triage");
+	// alert(" fila selecciona de vuelta dato3  glosaId= " +   dato3.Documento);
+	// alert(" fila selecciona de vuelta dato3 factura = " + dato3.tipoDoc);
+	// alert("Voy ajax editar Triage");
 	
 
       $.ajax({
@@ -460,7 +460,7 @@ $('#tablaDatosTriage tbody').on('click', '.miEditaTriage', function() {
 
        
 		var dato =   JSON.parse(response_data['Triage'].servicioSedes);
-		alert("REGRESE dato = " + dato);
+		// alert("REGRESE dato = " + dato);
 
                 $('#busServicioT').val(response_data['Triage'].servicioSedes);
  
@@ -485,7 +485,7 @@ $('#tablaDatosTriage tbody').on('click', '.miEditaTriage', function() {
 				$('#tipoIngreso').val(response_data['Triage'].tipoIngreso);
 				$('#observaciones').val(response_data['Triage'].observaciones);
 				$('#clasificacionTriage').val(response_data['Triage'].clasificacionTriage);
-				alert("Voy a abrit la modal = ");
+				// alert("Voy a abrit la modal = ");
 		
 				 $('#modalActualizaTriage').modal('show');
 
@@ -504,11 +504,11 @@ $('#tablaDatosTriage tbody').on('click', '.miEditaTriage', function() {
 $('#tablaDatosTriage tbody').on('click', '.miTriage', function() {
 
  	var PermisoCrearTriage= document.getElementById("PermisoCrearTriage").value;
-	alert("PermisoCrearTriage = " + PermisoCrearTriage);
+	// alert("PermisoCrearTriage = " + PermisoCrearTriage);
 
 	if (PermisoCrearTriage == "False")
 		{
-		alert("No tiene permiso para ejecutar opcion");
+		// alert("No tiene permiso para ejecutar opcion");
 		return;
 		}
 		
@@ -538,15 +538,15 @@ $('#tablaDatosTriage tbody').on('click', '.miTriage', function() {
 //	alert ("Entre a crear la admision Triage");
 
   	var username = document.getElementById("username").value;
-  	alert ("username = " + username);
+  	// alert ("username = " + username);
 
       $.ajax({
 		type: 'POST',
     	url: '/admisionTriageModal/',
 		data: {'tiposDoc':dato3.tipoDoc,'documento':dato3.Documento,'sede':sede, 'username':username},
 		success: function (response_data) {
-   			    alert("entre DATOS MODAL ADMISION DESDE TRIAGE  de tipoDoc y documento  = " + response_data['TiposDoc2'] + " " +  response_data['Documento']);
-   			    alert("Servicios  = " + response_data['Servicios']);
+   			   //  alert("entre DATOS MODAL ADMISION DESDE TRIAGE  de tipoDoc y documento  = " + response_data['TiposDoc2'] + " " +  response_data['Documento']);
+   			  //   alert("Servicios  = " + response_data['Servicios']);
                 var options = '<option value="=================="></option>';
                 const $id2 = document.querySelector("#busServicio2");
 
@@ -609,7 +609,7 @@ $('#tablaDatosTriage tbody').on('click', '.miTriage', function() {
 				$('#ips').val(response_data['Ips']);
 				$('#numManilla').val('0');
 
-				alert("listo todo voy a abrir la modal");
+				// alert("listo todo voy a abrir la modal");
 
 			 $('#crearAdmTriage').modal('show');
 
@@ -630,17 +630,17 @@ $('#tablaDatosTriage tbody').on('click', '.miTriage', function() {
 			event.preventDefault();
 			var href = $(this).attr('href');
 			console.log("Entre AlBERTO BERNAL F Cargue la Forma Modal Usuarios");
-			alert("Entre carga MODAL");
+			// alert("Entre carga MODAL");
 
 			$.get(href, function(Usuarios,status)
 			 {
-			 alert("entre DATOS MODAL y el nombre es = ");
+			// alert("entre DATOS MODAL y el nombre es = ");
 
 
                 $('#tipoDoc').val(Usuarios.tipoDoc_id);
 				$('#documento').val(Usuarios.documento);
 
-				alert(Usuarios.nombre);
+				// alert(Usuarios.nombre);
 
 				$('#nombre').val(Usuarios.nombre);
 				$('#genero').val(Usuarios.genero);
@@ -706,7 +706,7 @@ $(document).on('change', '#municipios', function(event) {
 $(document).on('change', '#pais', function(event) {
 
        var Pais =   $(this).val()
-	alert("entre Pais");
+	// alert("entre Pais");
 
 
         $.ajax({
@@ -806,7 +806,7 @@ $.ajax({
 	           dataType : 'json',
 
 	  		success: function (respuesta) {
-			alert("regrese de buscar municipios " + respuesta );
+			// alert("regrese de buscar municipios " + respuesta );
 
 	  		   var options = '<option value="=================="></option>';
 
@@ -850,9 +850,9 @@ $.ajax({
 $(document).on('change', '#busServicio', function(event) {
 
        var serv =   $(this).val()
-      alert("Este es mi servicio codigo = " + serv);
+     //  alert("Este es mi servicio codigo = " + serv);
         var sede =  document.getElementById("sede").value;		
-	alert("sede = " + sede);
+	// alert("sede = " + sede);
 
 
 
@@ -957,9 +957,9 @@ $(document).on('change', '#busServicioX', function(event) {
 
        var serv =   $(this).val()
 
-       alert("Servicio = " + serv);
+       // alert("Servicio = " + serv);
         var sede =  document.getElementById("sede").value;
- alert("Sede = " + sede);
+  // alert("Sede = " + sede);
 
 
 
@@ -1015,7 +1015,7 @@ $(document).on('change', '#busSubServicio', function(event) {
 
         var SubServ =   $(this).val();
 
-        alert("SubServ = " + SubServ);
+        // alert("SubServ = " + SubServ);
 
         var Sede =  document.getElementById("Sede").value;
 
@@ -1195,7 +1195,7 @@ $(document).on('change', '#busSubServicio2', function(event) {
 
 			$.get(href, function(UsuariosHc,status)
 			 {
-			 alert("entre");
+			//  alert("entre");
 
 
                 $('#username').val(UsuariosHc.username);
@@ -1215,16 +1215,16 @@ $(document).on('change', '#busSubServicio2', function(event) {
 
 function abrir_modal(url)
         {
-            alert ("Entre NModal_0000000000000000000000000001");
+           //  alert ("Entre NModal_0000000000000000000000000001");
             $('#modalActualizaTriage').load(url, function()
             {
-            alert ("Entre NModal_001");
+           //  alert ("Entre NModal_001");
             $(this).modal({
 
                 backdrop: 'static',
                 keyboard: false
             })
-            alert ("Entre NModal_003");
+           // alert ("Entre NModal_003");
 
             $('#tipoDoc').val("1");
 	    	$('#documento').val("33333333333333333333");
@@ -1317,7 +1317,7 @@ function guardaTriageModal()
 
 		success: function (respuesta)
 		        {
-		        alert("De regreso con : " + JSON.stringify(respuesta));
+		       //  alert("De regreso con : " + JSON.stringify(respuesta));
 
 		 $('#mensajes').html(respuesta.Mensaje);
                // $('#mensaje1').html('<span> respuesta</span>');
@@ -1355,7 +1355,7 @@ function guardarAdmisionTriage()
   	var dependenciasIngreso = document.getElementById("dependenciasIngreso").value;
   	var busEspecialidad = document.getElementById("busEspecialidad").value;
   	var medicoIngreso = document.getElementById("medicoIngreso").value;
-  	alert(" medicoIngreso" + medicoIngreso);
+  	// alert(" medicoIngreso" + medicoIngreso);
   	var viasIngreso = document.getElementById("viasIngreso").value;
   	var causasExterna = document.getElementById("causasExterna").value;
   	var regimenes = document.getElementById("regimenes").value;
@@ -1364,7 +1364,7 @@ function guardarAdmisionTriage()
   	var ips = document.getElementById("ips").value;
   	var numManilla = document.getElementById("numManilla").value;
   	var sede = document.getElementById("sede").value;
-  	alert("sede =" + sede);
+  	// alert("sede =" + sede);
     var username = document.getElementById("username").value;
     var Profesional = document.getElementById("profesional").value;
 
@@ -1388,7 +1388,7 @@ function guardarAdmisionTriage()
 
 
 	// alert("Voy a guardar crear adnmision TRIAGE con empresa = " + empresasT);
-        alert("ripsServiciosIng = " + ripsServiciosIng);
+       //  alert("ripsServiciosIng = " + ripsServiciosIng);
 
 
       if (ripsmodalidadGrupoServicioTecSal='')
@@ -1433,7 +1433,7 @@ function guardarAdmisionTriage()
 
 	
 
-	alert("Voy AJAX ");
+	// alert("Voy AJAX ");
 
 	$.ajax({
      	 data: $('#AdmisionTriage').serialize(),
@@ -1445,7 +1445,7 @@ function guardarAdmisionTriage()
 		      
 			if (respuesta.success==false)
 			{
-			alert("Entre error");
+			// alert("Entre error");
 			document.getElementById("mensajesErrorModalCreaAdmisionTriage").value = respuesta['Mensajes'];
 			}
 			else
@@ -1475,17 +1475,17 @@ function guardarAdmisionTriage()
 
 $(document).on('change', '#busEspecialidad', function(event) {
 
-        alert("Entre cambio busEspecialidad");
+       // alert("Entre cambio busEspecialidad");
 
 
        var Esp =   $(this).val()
 
-	alert("especialidad Nro = " + Esp);
+	// alert("especialidad Nro = " + Esp);
 
 
         var Sede =  document.getElementById("sede").value;
        // var Sede1 = document.getElementById("FormBuscar").elements["Sede"];
-	alert("Sede = " + Sede);
+	// alert("Sede = " + Sede);
 
 
 
@@ -1529,10 +1529,10 @@ $(document).on('change', '#busEspecialidad', function(event) {
 
 $('#tablaDatosTriage tbody').on('click', '.ImprimirTriage', function() {
 
-	alert ("Entre ImprimirTriage ");
+	// alert ("Entre ImprimirTriage ");
 
 	     var post_id = $(this).data('pk');
-	alert ("post_id = " + post_id);
+	// alert ("post_id = " + post_id);
 	var triageId = post_id;
 
 	   var data =  {}   ;
@@ -1567,10 +1567,10 @@ $(document).on('change', '#busServicioT', function(event) {
 
 	var serv =   $(this).val()
 
-	alert("Entre para llamar a buscarServiciosTriage : " + serv)
+	// alert("Entre para llamar a buscarServiciosTriage : " + serv)
 
         var sede =  document.getElementById("sede").value;
-	alert("sede : " + sede)
+	// alert("sede : " + sede)
 
         $.ajax({
 	           url: '/buscarSubServiciosTriage',
@@ -1619,7 +1619,7 @@ $(document).on('change', '#empresasT', function(event) {
        var empresaId  = select.options[select.selectedIndex].value; /* Obtener el valor */
 
 
-	alert("Entre para llamar a buscarConvenios de Empresa : " + empresaId)
+	// alert("Entre para llamar a buscarConvenios de Empresa : " + empresaId)
 
         $.ajax({
 	           url: '/buscarConvenioEmpresa',
@@ -1666,7 +1666,7 @@ $(document).on('change', '#empresasTE', function(event) {
        var select = document.getElementById("empresasTE"); /*Obtener el SELECT */
        var empresaId  = select.options[select.selectedIndex].value; /* Obtener el valor */
 
-	alert("Entre para llamar a buscarConvenios de Empresa : " + empresaId);
+	// alert("Entre para llamar a buscarConvenios de Empresa : " + empresaId);
 
         $.ajax({
 	           url: '/buscarConvenioEmpresa',

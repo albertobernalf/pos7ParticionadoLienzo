@@ -8514,7 +8514,7 @@ def buscarConvenioEmpresa(request):
 
 def Indicadores(request):
 
-    sede = request.GET["sede"]
+    sede = request.POST["sede"]
 
     print ("Entre buscar  Convenios de la empresa  =", empresaId)
 
@@ -8542,7 +8542,7 @@ def Indicadores(request):
     miConexiont.close()
     print(indicadores)
 
-    print("YA PASE INDICADORES")
+    print("YA PASE INDICADORES", indicadores)
 
     # Fin combo Indicadores
 

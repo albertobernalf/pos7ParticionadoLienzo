@@ -102,8 +102,14 @@ function RefrescarPantalla() {
                             <input type="hidden" id="permisosDetalle" name="permisosDetalle"
                                    value="{{PermisosDetalle}}">
                             <input type="hidden" id="escogeModulo" name="escogeModulo" value="{{EscogeModulo}}">
-			<input type="button" id="btnRefrescar" name="btnRefrescar" value="Refrescar" onclick="RefrescarPantalla()">
-			<input type="text" id="PermisoCrearTriage" name="PermisoCrearTriage" value="{{PermisoCrearTriage}}" >
+
+			<div id="flex-container1">
+				<div>
+			<input type="button"  id="btnRefrescar" name="btnRefrescar" value="Refrescar" onclick="RefrescarPantalla()">
+				  </div>
+			  </div>
+
+			<input type="hidden" id="PermisoCrearTriage" name="PermisoCrearTriage" value="{{PermisoCrearTriage}}" >
 
                         </form>
 

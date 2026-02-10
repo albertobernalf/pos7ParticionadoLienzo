@@ -777,7 +777,7 @@ window.addEventListener('load', async () => {
         $('body').on('click', '.editPost', function () {
 
           var post_id = $(this).data('pk');
-          alert("pk1 = " + $(this).data('pk'));
+        //  alert("pk1 = " + $(this).data('pk'));
 
       	$.ajax({
 	           url: '/creacionHc/postConsultaHcli/',
@@ -785,8 +785,8 @@ window.addEventListener('load', async () => {
 	           type: 'POST',
 	           dataType : 'json',
 	  		success: function (data) {
-                        alert("Regrese");
-                        alert("respuesta="  + data);
+                       // alert("Regrese");
+                       // alert("respuesta="  + data);
 
 			 $('#pk').val(data.pk);
         	        $('#tipoDocId').val(data.tipoDocId);
@@ -814,11 +814,11 @@ window.addEventListener('load', async () => {
 
 	    var ingresoId= document.getElementById("ingresoId1").value;
 	    document.getElementById("ingresoId2").value = ingresoId;
-        alert("ingresoId" + ingresoId);
+       // alert("ingresoId" + ingresoId);
 
 	    if (ingresoId=='undefined')
 		{
-		alert("Debe seleccionar Ingreso");
+		// alert("Debe seleccionar Ingreso");
 		return;
 		}
 
@@ -830,11 +830,11 @@ window.addEventListener('load', async () => {
 	           type: 'POST',
 	           dataType : 'json',
 	  		success: function (data2) {
-	  		alert("llegue con : " + JSON.stringify(data2));
+	  		// alert("llegue con : " + JSON.stringify(data2));
 
 			if (data2 == '')
 				{
-				alert("Debe crear un Convenio");
+				// alert("Debe crear un Convenio");
 				document.getElementById("mensajesErrorAbonos").value = 'Debe crear un Convenio';
 				return;
 				}
@@ -843,7 +843,7 @@ window.addEventListener('load', async () => {
 	  		//var dato = JSON.parse(data2);
             const $id2 = document.querySelector("#convenioPaciente");
  	      	$("#convenioPaciente").empty();
-			alert("voy a llenar combo conveniospaciente");
+			// alert("voy a llenar combo conveniospaciente");
 	                 $.each(data2, function(key,value) {
                                     options +='<option value="' + value.id + '">' + value.nombre + '</option>';
                                     option = document.createElement("option");
@@ -1261,7 +1261,7 @@ function AUsuario()
 	var centrosC_id = document.getElementById("centrosc").value;
 	var ripsZonaTerritorial = document.getElementById("ripsZonaTerritorial").value;
 
-	alert("ripsZonaTerritorial = " + ripsZonaTerritorial);
+	// alert("ripsZonaTerritorial = " + ripsZonaTerritorial);
 
 
 if (genero =='')
@@ -3256,7 +3256,6 @@ $.ajax({
 
     });
 
-
 $('#tablaDatos tbody').on('click', '.ImprimirManilla', function() {
 
 	 // alert ("Entre ImprimirManilla ");
@@ -3266,14 +3265,14 @@ $('#tablaDatos tbody').on('click', '.ImprimirManilla', function() {
 	var ingresoId = post_id;
 
 $.ajax({
-    url: '/imprimirManilla/',
+    url: '/imprimirManillaAdmision/',
  data : {ingresoId:ingresoId},
     method: 'POST',
     xhrFields: {
         responseType: 'blob' // Importante: interpreta la respuesta como binario
     },
     success: function (data) {
-
+	// alert("de regreso");
 
         var blob = new Blob([data], { type: 'application/pdf' });
         var link = window.URL.createObjectURL(blob);
@@ -3457,4 +3456,58 @@ function ActivarFurips()
 
         }
 
+function RefrescarPantalla() {
+
+        var sedeSeleccionada = document.getElementById("sedeSeleccionada").value;
+        var username = document.getElementById("username").value;
+        var nombreSede = document.getElementById("nombreSede").value;
+    	var sede = document.getElementById("sede").value;
+        var username_id = document.getElementById("username_id").value;
+        var data =  {}   ;
+        data['username'] = username;
+        data['sedeSeleccionada'] = sedeSeleccionada;
+        data['nombreSede'] = nombreSede;
+        data['sede'] = sede;
+        data['username_id'] = username_id;
+        data = JSON.stringify(data);
+        arrancaAdmisiones(1,data);
+	dataTableAdmisionesInitialized = true;
+
+
+	$.ajax({url:'/indicadores/',
+			data: {'Sede':sede},
+			type: 'POST',
+			dataType: 'json',
+	  			success: function (respuesta) {
+					// alert("indicadores = " + JSON.stringify(respuesta));
+
+					if (respuesta.nombre == 'HOSPITALIZACION')
+					{
+					document.getElementById("hosp").innerHTML = respuesta.total;
+					}
+
+					if (respuesta.nombre == 'TRIAGE')
+					{
+					document.getElementById("tria").innerHTML = respuesta.total;
+					}
+
+					if (respuesta.nombre == 'URGENCIAS')
+					{
+					document.getElementById("urg").innerHTML = respuesta.total;
+					}
+
+					if (respuesta.nombre == 'AMBULATORIO')
+					{
+					document.getElementById("amb").innerHTML = respuesta.total;
+					}
+                    },
+	   		    error: function (data) {   		
+	document.getElementById("mensajesError").value =  data.responseText;
+
+	   	    	}
+	     });
+
+
+
+}
 

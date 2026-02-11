@@ -1122,6 +1122,11 @@ fEB 11:
 	ApoyoTerapeutico  -- Hacer
 	Facturacion-Glosas-Rips-Cirugia-Autorizaciones-Cartera -- Probar
 	ConsultaExterna (UNICO MODULO FALTANTE POR DESARROLLAR) -- No desarrollado
-
 	Seguir en la tarde con el wrtap del data table o el truncate renderizando el campo truncado INVESTIGAS // Gacturar cuen
-	Seguir con demas TAN¡BS DE faturacion
+	En contratacin por que no muestra suministros sera que no esta cargado ??? ABVERIGUAR
+	
+	Seguimos con autorizaciones de ceros mañanap
+	crear boton refrecar en autorizacinesdetalle
+	No esta hecho nada en autorizaciones cirugia
+
+

@@ -354,10 +354,94 @@ input[type="datetime-local"] {
   /* margin:10 */
 }
 
+#flex-container-detallePacAbono{
+  display: inline-flex;
+  justify-content: left;
+}
+
+
+
+#flex-container-detallePacAbono div{
+  width: 1350px;
+  height: 50px;
+  color: #FFF;
+  flex-wrap: wrap;
+  text-align: left;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
 
 .truncate {
-    max-width: 150px; /* Ajusta a tus necesidades */
+    max-width: 100px; /* Ajusta a tus necesidades */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+
+#flex-container-detallePacTraslado{
+  display: inline-flex;
+  justify-content: left;
+}
+
+
+
+#flex-container-detallePacTraslado div{
+  width: 1350px;
+  height: 50px;
+  color: #FFF;
+  flex-wrap: wrap;
+  text-align: left;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
+
+
+#flex-container-detallePacTraslado2{
+  display: inline-flex;
+  justify-content: left;
+}
+
+
+
+#flex-container-detallePacTraslado2 div{
+  width: 1350px;
+  height: 50px;
+  color: #FFF;
+  flex-wrap: wrap;
+  text-align: left;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
+
+#flex-container-totalesFactura{
+  display: inline-flex;
+  justify-content: left;
+}
+
+
+#flex-container-totalesFactura div{
+  width: 1350px;
+  height: 50px;
+  color: #FFF;
+  flex-wrap: wrap;
+  text-align: left;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
 }

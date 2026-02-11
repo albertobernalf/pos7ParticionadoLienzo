@@ -224,8 +224,9 @@ autoWidth: false,
 	    scrollCollapse: true,
             paging:false,
             columnDefs: [
-		  { width: "1px",  targets: [0] },
-		  { width: "8px",  targets: [1] },
+		  { targets: 0,width:'5%'   },
+		  { targets: 1, width:'100%' },
+		  { targets: 2, width:'120px' },
 		 
 		{     "render": function ( data, type, row ) {
                         var btn = '';
@@ -261,11 +262,15 @@ autoWidth: false,
                  dataSrc: ""
             },
             columns: [
-		
 
         { data: "fields.consecutivo"},
                 { data: "fields.fecha"},
-                { data: "fields.nombreExamen"},
+                { data: "fields.nombreExamen",  "className": "truncate"},
+ /* {
+            "className": "truncate", 
+            "target": [ 2 ] 
+        },*/
+
                 { data: "fields.cantidad"},
                 { data: "fields.valorUnitario"},
                 { data: "fields.valorTotal"},
@@ -833,32 +838,51 @@ window.addEventListener('load', async () => {
 			$('#triageId').val(data.triageId1);
 		}
 
-		//( $('#fecha').val(data.fecha);
-		document.getElementById("fecha").innerHTML = data.fecha;
-		//$('#tipoDoc_id').val(data.tipoDoc_id);
-		document.getElementById("tipoDoc").innerHTML = data.tipoDocumento;
-		// $('#documento_id').val(data.documento_id);
-		document.getElementById("pdocumento").innerHTML = data.documento;
-		//$('#tipoDoc').val(data.tipoDocumento);
-		//$('#pdocumento').val(data.documento);
+		// Para el detalle
 
-		//$('#paciente').val(data.paciente);
+		document.getElementById("fecha").innerHTML = data.fecha;
+		document.getElementById("tipoDoc").innerHTML = data.tipoDocumento;
+		document.getElementById("pdocumento").innerHTML = data.documento;
 		document.getElementById("paciente").innerHTML = data.paciente;
-		//$('#consecAdmision').val(data.consecAdmision);
 		document.getElementById("consecAdmision").innerHTML = data.consecAdmision;
 		document.getElementById("salidaDefinitiva").innerHTML = data.salidaDefinitiva;
-		//$('#nombreConvenio').val(data.nombreConvenio);
 		document.getElementById("nombreConvenio").innerHTML = data.nombreConvenio;
-		//$('#convenioId').val(data.convenioId);
 		document.getElementById("convenioId").innerHTML = data.convenioId;
-		//$('#observaciones').val(data.observaciones);
 		document.getElementById("observaciones").innerHTML = data.observaciones;
-		//$('#cama').val(data.dependenciaNombre);
 		document.getElementById("cama").innerHTML = data.dependenciaNombre;
-		//$('#servicio').val(data.servicioNombre);
 		document.getElementById("servicio").innerHTML = data.servicioNombre;
-		// $('#salidaClinica').val(data.salidaClinica);
 		document.getElementById("salidaClinica").innerHTML = data.salidaClinica;
+
+
+		// Para el abonoa
+
+		document.getElementById("fechaA").innerHTML = data.fecha;
+		document.getElementById("tipoDocA").innerHTML = data.tipoDocumento;
+		document.getElementById("pdocumentoA").innerHTML = data.documento;
+		document.getElementById("pacienteA").innerHTML = data.paciente;
+		document.getElementById("consecAdmisionA").innerHTML = data.consecAdmision;
+		document.getElementById("salidaDefinitivaA").innerHTML = data.salidaDefinitiva;
+		document.getElementById("nombreConvenioA").innerHTML = data.nombreConvenio;
+		//document.getElementById("convenioIdA").innerHTML = data.convenioId;
+		document.getElementById("observacionesA").innerHTML = data.observaciones;
+		document.getElementById("camaA").innerHTML = data.dependenciaNombre;
+		document.getElementById("servicioA").innerHTML = data.servicioNombre;
+		document.getElementById("salidaClinicaA").innerHTML = data.salidaClinica;
+
+		// Para el traslado
+
+		document.getElementById("fechaT").innerHTML = data.fecha;
+		document.getElementById("tipoDocT").innerHTML = data.tipoDocumento;
+		document.getElementById("pdocumentoT").innerHTML = data.documento;
+		document.getElementById("pacienteT").innerHTML = data.paciente;
+		document.getElementById("consecAdmisionT").innerHTML = data.consecAdmision;
+		document.getElementById("salidaDefinitivaT").innerHTML = data.salidaDefinitiva;
+		document.getElementById("nombreConvenioT").innerHTML = data.nombreConvenio;
+		//document.getElementById("convenioIdT").innerHTML = data.convenioId;
+		document.getElementById("observacionesT").innerHTML = data.observaciones;
+		document.getElementById("camaT").innerHTML = data.dependenciaNombre;
+		document.getElementById("servicioT").innerHTML = data.servicioNombre;
+		document.getElementById("salidaClinicaT").innerHTML = data.salidaClinica;
 
 
 			// Colocar Totales

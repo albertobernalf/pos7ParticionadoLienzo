@@ -144,51 +144,81 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
 
 <article id="Traslados">
 
-		<div style="height: 270px;  width:100%;>
-	
-		</div>
+		       <div id="flex-container-detallePacTraslado">
+						
+					<div>
+			  		   
+						 Fecha:
+						<span class="texto-span" id="fechaT" name="fechaT"></span>                                          	              			
+						
+							<span class="texto-span" id="tipoDocT" name="tipoDoc"></span>
+						
+							<span  class="texto-span" id="pdocumentoT" name="pdocumentoT"></span>
+					
+					<span class="texto-span"  id="pacienteT" name="pacienteT"></span>
+						
 
-		  <div style="height: 60px;  width:100%; background-color:#EBEBEB;">
-		
-			 <div class="row row-cols-3" style="height=50px;">
-				<div class="col">
-					<div class="form-group row">
-				                Seleccione desde cual convenio :
-				              <div class="col-sm-3">
+						 Ing#:
+						
+						<span  class="texto-span" id="consecAdmisionT" name="consecAdmisionT"></span>
+
+
+						 Sal:
+						
+						<span class="texto-span" id="salidaDefinitivaT" name="salidaDefinitivaT"></span>
+							
+						 Conv:
+
+							<span class="texto-span" id="nombreConvenioT" name="nombreConvenioT"></span>
+
+						Cama:
+
+
+						<span class="texto-span" id="camaT" name="camaT"></span>
+							
+
+						salCli:
+						 
+							<span class="texto-span" id="salidaClinicaT" name="salidaClinicaT"></span>
+
+						Serv:
+							<span class="texto-span" id="servicioT" name="servicioT"></span>
+
+						 observa:
+							<span class="texto-span" id="observacionesT" name="observacionesT"></span>
+						
+
+                                     </div>
+                                     </div>
+
+				<div id="flex-container-detallePacTraslado2">
+				<div>
+
+				<label for="conveniosPaciente" >Seleccione desde cual convenio :</label>
+
+
 					             <select class="select-css"  id="conveniosPaciente" name="conveniosPaciente">
                                                     {% for conveniosPaciente in ConveniosPaciente %}
                                                             <option value="{{conveniosPaciente.id}}"> {{conveniosPaciente.nombre}}
                                                             </option>
                                                             {% endfor %}
                                 	            </select>
-				              </div>
-				         </div>
-				 </div>
 
-				<div class="col">
-					<div class="form-group row">
-				              Seleccione el nuevo convenio para la cuenta:
-				              <div class="col-sm-3">
+				<label for="conveniosPacienteHacia">Seleccione el nuevo convenio para la cuenta: </label>
+
+
+
 					             <select class="select-css"  id="conveniosPacienteHacia" name="conveniosPacienteHacia">
                                                     {% for conveniosPaciente in ConveniosPaciente %}
                                                             <option value="{{conveniosPacienteHacia.id}}"> {{conveniosPacienteHacia.nombre}}
                                                             </option>
                                                             {% endfor %}
                                 	            </select>
-				              </div>
-				         </div>
-				 </div>
 
-				 <div class="col">
-					<div class="form-group row">
 
-					     <div class="col col-sm-6">
-			                        <input type="button" class="form-control form-control-sm" id="BtnTrasladoConvenio"  name="BtnTrasladoConvenio" value="Traslado Convenio" onclick="TrasladoConvenio()">
+			                        <input type="button"  id="BtnTrasladoConvenio"  name="BtnTrasladoConvenio" value="Traslado Convenio" onclick="TrasladoConvenio()">
 					</div>
 				   </div>
-				</div>
-			 </div>
-		 </div>
 </article>
 
 
@@ -859,14 +889,64 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
 
 <article id="Abonos">
 
-                        <!-- DESDE AQUIP DATATABLE  -->
+		<!-- Aqui detalle del abono -->
+
+		       <div id="flex-container-detallePacAbono">
+						
+					<div>
+			  		   
+						 Fecha:
+						<span class="texto-span" id="fechaA" name="fechaA"></span>                                          	              			
+						
+							<span class="texto-span" id="tipoDocA" name="tipoDocA"></span>
+						
+							<span  class="texto-span" id="pdocumentoA" name="pdocumentoA"></span>
+					
+					<span class="texto-span"  id="pacienteA" name="pacienteA"></span>
+						
+
+						 Ing#:
+						
+						<span  class="texto-span" id="consecAdmisionA" name="consecAdmisionA"></span>
+
+
+						 Sal:
+						
+						<span class="texto-span" id="salidaDefinitivaA" name="salidaDefinitivaA"></span>
+							
+						 Conv:
+
+							<span class="texto-span" id="nombreConvenioA" name="nombreConvenioA"></span>
+
+						Cama:
+
+
+						<span class="texto-span" id="camaA" name="camaA"></span>
+							
+
+						salCli:
+						 
+							<span class="texto-span" id="salidaClinicaA" name="salidaClinicaA"></span>
+
+						Serv:
+							<span class="texto-span" id="servicioA" name="servicioA"></span>
+
+						 observa:
+							<span class="texto-span" id="observacionesA" name="observacionesA"></span>
+						
+
+                                     </div>
+                                     </div>
+
+
 
 
 			<div class="container my-2">
              		   <div class="row">
 						 <input type="text" id="tipoIngreso" name="tipoIngreso" value="" readonly>
-
+						<!--  creo no va
                                 			 <button type="button" class="btn btn-primary" id="createNewPostAbonosFacturacion" value="crear abono"></button>
+						fin no va -->
 
                                                         <table id=tablaAbonosFacturacion class=" display table table-striped" style="width: 100%";>
                                                             <thead>
@@ -1188,83 +1268,48 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
 				</div>
 			</div>
 
-	       <div class="row row-cols-9" style="height=1px;">
+
+
+		<div id="flex-container-totalesFactura">
+	       <div>
 					
- 				   <div class="col">
 			  		     
-						 <label for="RtotalCopagos" class="col-form-label col-sm-4">Copagos:</label>
+						 <label for="RtotalCopagos" >Copagos:</label>
 						
-							  <input type="text" id="RtotalCopagos" name="RtotalCopagos" size=7 value="0" readonly>
-	                                     
-                                      </div>
-         	                        
-					<div class="col">
+							  <input type="text" id="RtotalCopagos" name="RtotalCopagos" size=7 value="0" placeholder="Copagos" readonly>
 			  		    
-						 <label for="totalCuotaModeradora" class="col-form-label col-sm-4">Moderadora:</label>
+						 <label for="totalCuotaModeradora" >Moderadora:</label>
 						
-							  <input type="text" id="RtotalCuotaModeradora" name="RtotalCuotaModeradora" size=7 value="0" readonly>
-	                                      
-                                      </div>
-
-					<div class="col">
+							  <input type="text" id="RtotalCuotaModeradora" name="RtotalCuotaModeradora" size=7 value="0"  placeholder="CuotaModeradora"readonly>
 			  		    
-						 <label for="RtotalProcedimientos" class="col-form-label col-sm-4">Proc:</label>
+						 <label for="RtotalProcedimientos" >Proc:</label>
 						
-							  <input type="text" id="RtotalProcedimientos" name="RProcedimientos" size=7 value="0" readonly>
-	                                      
-                                      </div>
+							  <input type="text" id="RtotalProcedimientos" name="RProcedimientos" size=7 value="0" placeholder="Proc" readonly>
 
-					<div class="col">
+					<label for="RtotalSuministros" >Suministros:</label>
 
-					<label for="RtotalSuministros" class="col-form-label col-sm-8">Suministros:</label>
+							  <input type="text" id="RtotalSuministros" name="RtotalSuministros" size=7  value="0" placeholder="Sum" readonly>
 
-							  <input type="text" id="RtotalSuministros" name="RtotalSuministros" size=7  value="0" readonly>
-	                                        </div>
+						 <label for="RtotalFactura" >Total:</label>
 
-					<div class="col">
+							  <input type="text" id="RtotalFactura" name="RtotalFactura" size=7 value="0" placeholder="Total" readonly>
+						 <label for="RvalorApagar" >Apagar:</label>
 
-						 <label for="RtotalFactura" class="col-form-label col-sm-8">Total:</label>
+							  <input type="text" id="RvalorApagar" name="RvalorApagar" size=7 value="0" placeholder="Pagar" readonly>
 
-							  <input type="text" id="RtotalFactura" name="RtotalFactura" size=7 value="0" readonly>
-                                      </div>
+						 <label for="RtotalAnticipos" >Anticipos:</label>
 
-					<div class="col">
-						 <label for="RvalorApagar" class="col-form-label col-sm-6">Apagar:</label>
+							  <input type="text" id="RtotalAnticipos" name="RtotalAnticipos" size=7 value="0" placeholder="Anticipos" readonly>
 
-							  <input type="text" id="RvalorApagar" name="RvalorApagar" size=7 value="0" readonly>
-                                      </div>
+						 <label for="RtotalAbonos" >Abonos:</label>
+							  <input type="text" id="RtotalAbonos" name="RtotalAbonos" size=7 value="0" placeholder="Abonos" readonly>
 
-					<div class="col">
+						 <label for="RtotalRecibido" >Recibido:</label>
+							 <input type="text" id="RtotalRecibido" name="RtotalRecibido" size=7 value="0" placeholder="Recibido" readonly>
 
-						 <label for="RtotalAnticipos" class="col-form-label col-sm-8">Anticipos:</label>
+						 <label for="RvalorAPagarLetras" >valor a Pagar en Letras:</label>
 
-							  <input type="text" id="RtotalAnticipos" name="RtotalAnticipos" size=7 value="0" readonly>
-                                      </div>
-
-				<div class="col">
-
-						 <label for="RtotalAbonos" class="col-form-label col-sm-4">Abonos:</label>
-							  <input type="text" id="RtotalAbonos" name="RtotalAbonos" size=7 value="0" readonly>
-                                      </div>
-		
-					<div class="col">
-
-						 <label for="RtotalRecibido" class="col-form-label col-sm-6">Recibido:</label>
-
-							  <input type="text" id="RtotalRecibido" name="RtotalRecibido" size=7 value="0" readonly>
-                                      </div>
-
-
-		       </div>  <!-- Cierra el rop de 8 columnas -->
-
-
-		<div class="row row-cols-1" style="height=1px;">
-
-					<div class="col">
-
-						 <label for="RvalorAPagarLetras" class="col-form-label col-sm-6">valor a Pagar en Letras:</label>
-
-							  <input type="text" id="RvalorAPagarLetras" name="RvalorAPagarLetras" size=120 value="" readonly>
+							  <input type="text" id="RvalorAPagarLetras" name="RvalorAPagarLetras" size=120 value=""placeholder="En Letras..." readonly>
                                       </div>
                                       </div>
 

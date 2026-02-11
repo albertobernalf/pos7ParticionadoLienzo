@@ -28,7 +28,7 @@ class IncapacidadesForm(forms.ModelForm):
         estadoReg = forms .CharField(max_length=1)
 
         widgets = {
-            'descripcion': forms.Textarea(attrs={'class': 'form-control', 'width': "100%", 'cols': "80", 'rows': "4",
+            'descripcion': forms.Textarea(attrs={'class': 'form-control', 'width': "50%", 'cols': "80", 'rows': "4",
                                                    'placeholder': "descripcion"}),
             'desdeFecha': forms.TextInput(attrs={'type': 'datetime-local'}),
             'hastaFecha': forms.TextInput(attrs={'type': 'datetime-local'}),
@@ -94,10 +94,10 @@ class historiaForm(forms.ModelForm):
     class Meta:
         model = Historia
         fields = '__all__'
-        widgets = {'antibioticos': forms.RadioSelect(choices=Historia.STATUS_CHOICES),
+        widgets = {'antibioticos': forms.RadioSelect(choices=Historia.STATUS_CHOICES,attrs={"placeholder": 'Antibiotico'}),
                    'monitoreo': forms.RadioSelect(choices=Historia.STATUS_CHOICES),
                    'movilidadLimitada': forms.RadioSelect(choices=Historia.STATUS_CHOICES),
-                   'nauseas': forms.RadioSelect(choices=Historia.STATUS_CHOICES),
+                   'nauseas': forms.RadioSelect(choices=Historia.STATUS_CHOICES ,attrs={"placeholder": 'Nauseas'}),
                    'llenadoCapilar': forms.RadioSelect(choices=Historia.STATUS_CHOICES),
                    'neurologia': forms.RadioSelect(choices=Historia.STATUS_CHOICES),
                    'irritacion': forms.RadioSelect(choices=Historia.STATUS_CHOICES),
@@ -121,12 +121,12 @@ class historiaForm(forms.ModelForm):
         especialidades = forms.ModelChoiceField(queryset=Especialidades.objects.all())
         planta = forms.ModelChoiceField(queryset=Planta.objects.all())
         apache2 = forms.IntegerField(label='Apache', disabled=True, initial=0)
-        antibioticos = forms.CharField(max_length=1)
-        monitoreo = forms.CharField(max_length=1)
-        movilidadLimitada = forms.CharField(max_length=1)
-        nauseas  = forms.CharField(max_length=1)
-        llenadoCapilar = forms.CharField(max_length=1)
-        neurologia = forms.CharField(max_length=1)
+        antibioticos = forms.CharField(max_length=1, help_text="Antibiotico")
+        monitoreo = forms.CharField(max_length=1 , help_text="Monitoreo")
+        movilidadLimitada = forms.CharField(max_length=1 , help_text="Movilidad Limitada")
+        nauseas  = forms.CharField(max_length=1 , help_text="Nauseas")
+        llenadoCapilar = forms.CharField(max_length=1 , help_text="Llenado capilar")
+        neurologia = forms.CharField(max_length=1 , help_text="Neurologia")
         irritacion = forms.CharField(max_length=1)
         pulsos = forms.CharField(max_length=1)
         retiroPuntos = forms.CharField(max_length=1)
@@ -170,15 +170,13 @@ class historiaForm(forms.ModelForm):
             'analisis':  forms.Textarea(attrs={'class': 'form-control', 'width': "100%", 'cols': "80", 'rows': "6", 'placeholder': "Analisis"}),
             'plann':     forms.Textarea(attrs={'class': 'form-control', 'width': "100%", 'cols': "80", 'rows': "6", 'placeholder': "Plan"}),
             'ordenDeControl': forms.Textarea(attrs={'class': 'form-control', 'width': "100%", 'cols': "40", 'rows': "6", 'placeholder': "Orden De Control"}),
-            'textoNotaAclaratoria':     forms.Textarea(attrs={'class': 'form-control', 'width': "50%", 'cols': "10", 'rows': "2", 'placeholder': "textoNotaAclaratoria"}),
-            'examenFisico':     forms.Textarea(attrs={'class': 'form-control', 'width': "50%", 'cols': "10", 'rows': "2", 'placeholder': "examenFisico"}),
-            'observaciones':     forms.Textarea(attrs={'class': 'form-control', 'width': "50%", 'cols': "10", 'rows': "2", 'placeholder': "observaciones"}),
-            'ingestaAlcohol':     forms.Textarea(attrs={'class': 'form-control', 'width': "50%", 'cols': "10", 'rows': "2", 'placeholder': "ingestaAlcohol"}),
-            'inmovilizacionObservaciones':     forms.Textarea(attrs={'class': 'form-control', 'width': "50%", 'cols': "10", 'rows': "2", 'placeholder': "inmovilizacionObservaciones"}),
-            'manejoQx':     forms.Textarea(attrs={'class': 'form-control', 'width': "50%", 'cols': "10", 'rows': "2", 'placeholder': "manejoQx"}),
-
-            'folio':     forms.TextInput(attrs={'readonly': 'readonly'})
-        }
+            'textoNotaAclaratoria':     forms.Textarea(attrs={'width': "30%", 'cols': "20", 'rows': "4", 'placeholder': "textoNotaAclaratoria"}),
+            'examenFisico':     forms.Textarea(attrs={'width': "30%", 'cols': "20", 'rows': "4", 'placeholder': "examenFisico"}),
+            'observaciones':     forms.Textarea(attrs={'width': "30%", 'cols': "20", 'rows': "4", 'placeholder': "observaciones"}),
+            'ingestaAlcohol':     forms.Textarea(attrs={'width': "30%", 'cols': "20", 'rows': "4", 'placeholder': "ingestaAlcohol"}),
+            'inmovilizacionObservaciones':     forms.Textarea(attrs={'width': "30%", 'cols': "20", 'rows': "4", 'placeholder': "inmovilizacionObservaciones"}),
+            'manejoQx':     forms.Textarea(attrs={ 'width': "30%", 'cols': "20", 'rows': "4", 'placeholder': "manejoQx"}),
+       }
 
 
     def clean_documento(self):

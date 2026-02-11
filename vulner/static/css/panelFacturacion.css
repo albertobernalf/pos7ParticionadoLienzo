@@ -293,4 +293,71 @@ input[type="datetime-local"] {
 
 }
 
+#flex-container-liquidacion{
+  display: flex;
+  justify-content: left;
+}
 
+
+#flex-container-liquidacion div{
+  width: 1350px;
+  height: 50px;
+  color: #FFF;
+  flex-wrap: wrap;
+  text-align: left;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
+
+
+#flex-container-totales{
+  display: inline-flex;
+  justify-content: left;
+}
+
+
+#flex-container-totales div{
+  width: 1350px;
+  height: 50px;
+  color: #FFF;
+  flex-wrap: wrap;
+  text-align: left;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
+
+#flex-container-detallePac{
+  display: inline-flex;
+  justify-content: left;
+}
+
+
+#flex-container-detallePac div{
+  width: 1350px;
+  height: 50px;
+  color: #FFF;
+  flex-wrap: wrap;
+  text-align: left;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
+
+
+.truncate {
+    max-width: 150px; /* Ajusta a tus necesidades */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

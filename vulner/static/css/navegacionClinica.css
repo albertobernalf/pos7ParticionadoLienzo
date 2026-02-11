@@ -326,6 +326,12 @@ input[type="date"] {
   border:8px;
 }
 
+#flex-container2{
+  display: flex;
+  justify-content: center;
+}
+
+
 #flex-container2 div{
   width: 1400px;
   height: 25px;
@@ -337,3 +343,137 @@ input[type="date"] {
   font-family: 'Roboto', sans-serif;
   /* background-color: #9B59B6;*/
 }
+
+#flex-container2-interconsulta{
+  display: flex;
+  justify-content: center;
+}
+
+
+#flex-container2-interconsulta div{
+  width: 800px;
+  height: 50px;
+  color: #FFF;
+  text-align: center;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
+
+#flex-container2-incapacidad{
+  display: flex;
+  justify-content: center;
+}
+
+#flex-container2-incapacidad div{
+  width: 800px;
+  height: 50px;
+  color: #FFF;
+  text-align: center;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
+
+#flex-container2-antecedentes{
+  display: flex;
+  justify-content: center;
+}
+
+#flex-container2-antecedentes div{
+  width: 800px;
+  height: 50px;
+  color: #FFF;
+  text-align: center;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
+
+#flex-container2-cirugia{
+  display: flex;
+  justify-content: center;
+}
+
+
+#flex-container2-cirugia div{
+  width: 800px;
+  height: 50px;
+  color: #FFF;
+  text-align: center;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
+
+#flex-container2-cirugia_1{
+  display: flex;
+  justify-content: center;
+}
+
+
+#flex-container2-cirugia_1 div{
+  width: 800px;
+  height: 50px;
+  color: #FFF;
+  text-align: center;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
+
+#flex-container2-cirugia_2{
+  display: flex;
+  justify-content: center;
+}
+
+
+#flex-container2-cirugia_2 div{
+  width: 800px;
+  height: 50px;
+  color: #FFF;
+  text-align: center;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
+
+#flex-container2-clinica{
+  display: flex;
+  justify-content: center;
+}
+
+
+#flex-container2-clinica div{
+  width: 800px;
+  height: 50px;
+  color: #FFF;
+flex-wrap: wrap;
+  text-align: center;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
+
+

@@ -219,15 +219,14 @@ autoWidth: false,
   lengthMenu: [2, 4, 15],
            processing: true,
             serverSide: false,
-            scrollY: '200px',
+            scrollY: '300px',
 	    scrollX: true,
 	    scrollCollapse: true,
             paging:false,
             columnDefs: [
-		  { width: "2px",  targets: [0] },
-		  { width: "500px",  targets: [1] },
-		  { width: "1900",  targets: [2] },
-		  { width: "40px",  targets: [3] },
+		  { width: "1px",  targets: [0] },
+		  { width: "8px",  targets: [1] },
+		 
 		{     "render": function ( data, type, row ) {
                         var btn = '';
                          btn = btn + " <button   class='btn btn-primary editPostLiquidacionDetalle' data-pk='" + row.pk + "'>" + "</button>";
@@ -1070,10 +1069,10 @@ $.ajax({
     },
     success: function (data) {
 
-
-        var blob = new Blob([data], { type: 'application/pdf' });
+     var blob = new Blob([data], { type: 'application/pdf' });
         var link = window.URL.createObjectURL(blob);
         window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
+  
     },
     error: function (error) {
       document.getElementById("mensajesError").value =  data.responseText

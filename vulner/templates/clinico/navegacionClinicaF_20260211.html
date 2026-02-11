@@ -461,7 +461,7 @@
 
  <div class="row row-cols-1 mt-3">
             <div class="col">
-
+                {{ historiaForm.ordenDeControl.label }} Consulta
                 {{ historiaForm.ordenDeControl }}
             </div>
   </div>
@@ -1420,133 +1420,286 @@
     </article>
 
     <article id="Clinica">
-<br><br><br><br>
-{% csrf_token %}
-  
-	<div id="flex-container2-clinica">
-	  <div>	
+<br><br><br><br><br>
+
+        <div class="row row-cols-20 mt-3">
+
+            <div class="col">
+            </div>
+               <div class="col">
+            </div>
+            <div class="col">
                 {{historiaForm.apache2.label}}
                 {{historiaForm.apache2}}
-
-                {{ historiaForm.antibioticos.label_tag }}
+            </div>
+            <div class="col">
+                {{ historiaForm.antibioticos.label }}
                 {{ historiaForm.antibioticos }}
+            </div>
 
+            <div class="col">
+                {{ historiaForm.monitoreo.label }}
                 {{ historiaForm.monitoreo}}
-                {{ historiaForm.movilidadLimitada.label_tag }}
-                {{ historiaForm.movilidadLimitada }}
+            </div>
 
-		   {{historiaForm.nauseas.label_tag}}
+            <div class="col">
+                {{ historiaForm.movilidadLimitada.label }}
+                {{ historiaForm.movilidadLimitada }}
+            </div>
+
+            <div class="col">
+                {{ historiaForm.nauseas.label }}
                 {{ historiaForm.nauseas}}
-                {{ historiaForm.llenadoCapilar.label_tag }}
+            </div>
+      
+            <div class="col">
+                {{ historiaForm.llenadoCapilar.label }}
                 {{ historiaForm.llenadoCapilar }}
-                {{ historiaForm.llenadoCapilar.label_tag }}
+            </div>
+
+            <div class="col">
+                {{ historiaForm.llenadoCapilar.label }}
                 {{ historiaForm.llenadoCapilar }}
+            </div>
+            <div class="col">
                 {{ historiaForm.neurologia.label }}
                 {{ historiaForm.neurologia }}
+            </div>
+            <div class="col">
                 {{ historiaForm.irritacion.label }}
                 {{ historiaForm.irritacion }}
+            </div>
+            <div class="col">
                 {{ historiaForm.pulsos.label }}
                 {{ historiaForm.pulsos}}
+            </div>
+            <div class="col">
                 {{ historiaForm.retiroPuntos.label }}
                 {{ historiaForm.retiroPuntos }}
+            </div>
 
+             <div class="col">
 
+            </div>
+             <div class="col">
+
+            </div>
+
+            </div>
+        <div class="row row-cols-10 mt-3">
+                           <div class="col">
+            </div>
+               <div class="col">
+            </div>
+
+            <div class="col">
                 {{ historiaForm.vomito.label }}
                 {{ historiaForm.vomito }}
+            </div>
+            <div class="col">
                 {{ historiaForm.inmovilizacion.label }}
                 {{ historiaForm.inmovilizacion }}
+            </div>
+            <div class="col">
                 {{ historiaForm.notaAclaratoria.label }}
                 {{ historiaForm.notaAclaratoria }}
+            </div>
+            <div class="col">
                 {{ historiaForm.fecNotaAclaratoria.label }}
                 {{ historiaForm.fecNotaAclaratoria}}
+            </div>
+
+            <div class="col">
                 {{ historiaForm.textoNotaAclaratoria.label }}
                 {{ historiaForm.textoNotaAclaratoria}}
+            </div>
+            <div class="col">
                 {{ historiaForm.examenFisico.label }}
                 {{ historiaForm.examenFisico}}
+            </div>
+            <div class="col">
                 {{ historiaForm.noQx.label }}
                 {{ historiaForm.noQx}}
+            </div>
+            <div class="col">
                 {{ historiaForm.observaciones.label }}
                 {{ historiaForm.observaciones}}
+            </div>
+            <div class="col">
                 {{ historiaForm.riesgoHemodinamico.label }}
                 {{ historiaForm.riesgoHemodinamico}}
+            </div>
+                           <div class="col">
+            </div>
+               <div class="col">
+            </div>
 
+        </div>
+        <div class="row row-cols-15 mt-3">
+               <div class="col">
+            </div>
+               <div class="col">
+            </div>
 
+            <div class="col">
                 {{ historiaForm.riesgos.label }}
                 {{ historiaForm.riesgos}}
+            </div>
+
+            <div class="col">
                 {{ historiaForm.trombocitopenia.label }}
                 {{ historiaForm.trombocitopenia}}
+            </div>
+            <div class="col">
                 {{ historiaForm.hipotension.label }}
                 {{ historiaForm.hipotension}}
+            </div>
+            <div class="col">
                 {{ historiaForm.indiceMortalidad.label }}
                 {{ historiaForm.indiceMortalidad}}
+            </div>
+            <div class="col">
                 {{ historiaForm.ingestaAlcohol.label }}
                 {{ historiaForm.ingestaAlcohol}}
+            </div>
+
+            <div class="col">
                 {{ historiaForm.inmovilizacionObservaciones.label }}
                 {{ historiaForm.inmovilizacionObservaciones}}
+            </div>
+            <div class="col">
+                {{ historiaForm.ingestaAlcohol.label }}
+                {{ historiaForm.ingestaAlcohol}}
+            </div>
 
+            <div class="col">
                 {{ historiaForm.justificacion.label }}
                 {{ historiaForm.justificacion}}
+            </div>
+            <div class="col">
                 {{ historiaForm.leucopenia.label }}
                 {{ historiaForm.leucopenia}}
+            </div>
+            <div class="col">
                 {{ historiaForm.manejoQx.label }}
                 {{ historiaForm.manejoQx}}
-	  </div>
-	</div>
+            </div>
+             <div class="col">
+
+            </div>
+             <div class="col">
+
+            </div>
+        </div>
     </article>
 
 
     <article id="Cirugias">
 <br><br><br><br><br>        			
-
+                      <div class="container my-2">
 				  <form class="form-inline" id="postFormCirugiaClinica" name="postFormCirugiaClinica">
+					<div class="row" style="height:25px">
+
+				
 		
-					<div>
+		                           </div>
+					Solicita:
+				<div class="row" style="height:25px">
+
 					<input type="checkbox" id="cBoxCirugia" name="cBoxCirugia"   value="" />
 		
 		                           </div>
+					<div class="row">
 
+	                               	<div class="col-1">
+					 <input type="text"  class="form-control mr-sm-2" id="solicitaHospitalizacion" name="solicitaHospitalizacion" size="1" maxlength="1" placeholder="Hosp"  >
+					</div>
+					<div class="col-1">
+					  <input type="text" class="form-control mr-sm-2"  id="solicitaAyudante" name="solicitaAyudante" size="1" maxlength="15" placeholder="Ayudante"  >
+					</div>					
+					<div class="col-1">
+					 <input type="text"  class="form-control mr-sm-2"  id="solicitaTiempoQx" name="solicitaTiempoQx" size="1" maxlength="15" placeholder="TiempoQx"  >
+					</div>
+					<div class="col-1">
+					 <input type="text" class="form-control mr-sm-2"   id="solicitaTipoQx" name="solicitaTipoQx" size="1" maxlength="15"  placeholder="tipoQx"  >
+					</div>
+					<div class="col-1">
+					 <input type="text" class="form-control mr-sm-2"  id="solicitaAnestesia" name="solicitaAnestesia" size="1" maxlength="15" placeholder="Anestesia"  >
+					</div>
+					<div class="col-1">
+					 <input type="text"  class="form-control mr-sm-2" id="solicitaOtros" name="solicitaOtros" size="1" maxlength="1" maxlength="15" placeholder="Otros"  >
+					</div>
 
-				<div id="flex-container2-cirugia">
+					<div class="col-1">
+					 <input type="text"  class="form-control mr-sm-2" id="tiempoMaxQx" name="tiempoMaxQx" size="10" maxlength="20" placeholder="tiempoMaxQx"  >
+					</div>
 
-	                               	<div>
-					 <input type="text"   id="solicitaHospitalizacion" name="solicitaHospitalizacion" size="1" maxlength="5" placeholder="Hosp"  >
-
-					  <input type="text"   id="solicitaAyudante" name="solicitaAyudante" size="1" maxlength="15" placeholder="Ayudante"  >
-					 <input type="text"    id="solicitaTiempoQx" name="solicitaTiempoQx" size="1" maxlength="15" placeholder="TiempoQx"  >
-					 <input type="text"   id="solicitaTipoQx" name="solicitaTipoQx" size="1" maxlength="15"  placeholder="tipoQx"  >
-					 <input type="text"  id="solicitaAnestesia" name="solicitaAnestesia" size="1" maxlength="15" placeholder="Anestesia"  >
-					 <input type="text"   id="solicitaOtros" name="solicitaOtros" size="1" maxlength="1" maxlength="15" placeholder="Otros"  >
-					 <input type="text"   id="tiempoMaxQx" name="tiempoMaxQx" size="10" maxlength="20" placeholder="tiempoMaxQx"  >
-					 <input type="text"   id="solicitaAutoSutura" name="solicitaAutoSutura" size="1" maxlength="20" placeholder="AutoSutura"  >
-					 <input type="text"    id="solicitaSoporte" name="solicitaSoporte" size="1" maxlength="15"  placeholder="Soporte"  >
-					 <input type="text"   id="describeOtros" name="describeOtros"  size="1" maxlength="1" placeholder="describeOtros"  >
-	                               </div>
+					<div class="col-1">
+					 <input type="text"  class="form-control mr-sm-2" id="solicitaAutoSutura" name="solicitaAutoSutura" size="1" maxlength="20" placeholder="AutoSutura"  >
+					</div>
+					<div class="col-1">
+					 <input type="text"  class="form-control mr-sm-2"  id="solicitaSoporte" name="solicitaSoporte" size="1" maxlength="15"  placeholder="Soporte"  >
+					</div>
+					<div class="col-1">	
+					 <input type="text"  class="form-control mr-sm-2" id="describeOtros" name="describeOtros"  size="1" maxlength="1" placeholder="describeOtros"  >
+                                </div>
 
 				</div>
 
-				<div id="flex-container2-cirugia_1">
+				<div class="row">
 	
-                                	<div>						
-					 <input type="text"   id="solicitaSangre" name="solicitaSangre" size="1" maxlength="1" placeholder="Sangre"  >
-					 <input type="text"   id="describeSangre" name="describeSangre" size="1" maxlength="1" placeholder="describeSangre"  >
-					 <input type="text"  id="cantidadSangre" name="cantidadSangre" size="1" maxlength="1" placeholder="cantidadSangre"  >
-					 <input type="text"   id="solicitaCamaUci" name="solicitaCamaUci" size="1" maxlength="1" placeholder="CamaUci"  >
-					 <input type="text"  id="solicitaMicroscopio" name="solicitaMicroscopio" size="1" maxlength="1" placeholder="Microscopio"  >
-					 <input type="text"   id="solicitaRx" name="solicitaRx" size="1" maxlength="1" placeholder="Rx"  >
-					 <input type="text"   id="solicitaOsteosintesis" name="solicitaOsteosintesis" size="1" maxlength="1" placeholder="Osteosintesis"  >
-					 <input type="text"  id="solicitaBiopsia" name="solicitaBiopsia" size="1" maxlength="1" placeholder="Biopsia"  >
-					 <input type="text"   id="solicitaMalla" name="solicitaMalla" size="1" maxlength="1" placeholder="Malla"  >
-					 <input type="text"   id="solicitaOtros" name="solicitaOtros" size="1" maxlength="1" placeholder="Otros"  >
-					 <input type="hidden"   id="username3_id" name="username3_id" >
-	                                </div>						
+
+				<div class="col-1">
+					 <input type="text"  class="form-control form-control-sm" id="solicitaSangre" name="solicitaSangre" size="1" maxlength="1" placeholder="Sangre"  >
+                                </div>			
+
+				<div class="col-1">
+					 <input type="text"  class="form-control form-control-sm" id="describeSangre" name="describeSangre" size="1" maxlength="1" placeholder="describeSangre"  >
+
+                                </div>
+				<div class="col-1">
+					 <input type="text"  class="form-control form-control-sm" id="cantidadSangre" name="cantidadSangre" size="1" maxlength="1" placeholder="cantidadSangre"  >
+                                </div>
+
+				<div class="col-1">
+					 <input type="text"  class="form-control form-control-sm" id="solicitaCamaUci" name="solicitaCamaUci" size="1" maxlength="1" placeholder="CamaUci"  >
+                                </div>
+
+				<div class="col-1">
+					 <input type="text"  class="form-control form-control-sm" id="solicitaMicroscopio" name="solicitaMicroscopio" size="1" maxlength="1" placeholder="Microscopio"  >
+
+                                </div>
+				<div class="col-1">
+					 <input type="text"  class="form-control form-control-sm" id="solicitaRx" name="solicitaRx" size="1" maxlength="1" placeholder="Rx"  >
+                                </div>
+				<div class="col-1">
+					 <input type="text"  class="form-control form-control-sm" id="solicitaOsteosintesis" name="solicitaOsteosintesis" size="1" maxlength="1" placeholder="Osteosintesis"  >
+                                </div>
+				<div class="col-1">
+					 <input type="text"  class="form-control form-control-sm" id="solicitaBiopsia" name="solicitaBiopsia" size="1" maxlength="1" placeholder="Biopsia"  >
+	                         </div>
+				<div class="col-1">
+					 <input type="text"  class="form-control form-control-sm" id="solicitaMalla" name="solicitaMalla" size="1" maxlength="1" placeholder="Malla"  >
+                                </div>
+				<div class="col-1">
+					 <input type="text"  class="form-control form-control-sm" id="solicitaOtros" name="solicitaOtros" size="1" maxlength="1" placeholder="Otros"  >
                                 </div>						
 
-				<div id="flex-container2-cirugia_2">
+				<div class="col-12">
+					 <input type="hidden"  class="form-control form-control-sm" id="username3_id" name="username3_id" >
+                                </div>
+			
+				</div>
+				<div class="row" style="height:25px">
 
-                                <div>						
+				
+		
+	                           </div>
 
+				<div class="row">
+				  <div class="col-2">
                                         <label for="anestesia" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Anestesia:</label>
-					Anestesia:
+                                        <div class="col-sm-8">
                                             <select class="select-css h-40 w-20" id="anestesia"  tabindex= "0"
                                                     name="anestesia"
                                                     required>
@@ -1554,20 +1707,25 @@
                                                 <option value="{{tiposAnestesia.id}}"> {{tiposAnestesia.nombre}}</option>
                                                 {% endfor %}
                                             </select>
+                                        </div>
+                                    </div>
 
+				  <div class="col-2">
                                         <label for="tiposCirugia" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TipoCirugia:</label>
-                                        	Tipo Cirugia:   
-					 <select class="select-css h-40 w-20" id="tiposCirugia"  tabindex= "0"
+                                        <div class="col-sm-8">
+                                            <select class="select-css h-40 w-20" id="tiposCirugia"  tabindex= "0"
                                                     name="tiposCirugia"
                                                     required>
                                                 {% for tiposCirugia in TiposCirugia %}
                                                 <option value="{{tiposCirugia.id}}"> {{tiposCirugia.nombre}}</option>
                                                 {% endfor %}
                                             </select>
+                                        </div>
+                                    </div>
 
-
+  				<div class="col-2">
                                         <label for="dxPreQx" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dxPreQx:</label>
-						Dx-PreQx:
+                                        <div class="col-sm-8">
                                             <select class="select-css h-40 w-20" id="dxPreQx"  tabindex= "0"
                                                     name="dxPreQx"
                                                     required>
@@ -1575,8 +1733,12 @@
                                                 <option value="{{diagnosticosCirugia.id}}"> {{diagnosticosCirugia.nombre}}</option>
                                                 {% endfor %}
                                             </select>
+                                        </div>
+                                    </div>
+
+				<div class="col-2">
                                         <label for="dxPrinc" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dxPrinc:</label>
-						Dx-Principal:
+                                        <div class="col-sm-8">
                                             <select class="select-css h-40 w-20" id="dxPrinc"  tabindex= "0"
                                                     name="dxPrinc"
                                                     required>
@@ -1584,9 +1746,12 @@
                                                 <option value="{{diagnosticosCirugia.id}}"> {{diagnosticosCirugia.nombre}}</option>
                                                 {% endfor %}
                                             </select>
+                                        </div>
+                                    </div>
 
+				<div class="col-2">
                                         <label for="dxRel1" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dxRel1:</label>
-						Dx-relacionado:
+                                        <div class="col-sm-8">
                                             <select class="select-css h-40 w-20" id="dxRel1"  tabindex= "0"
                                                     name="dxRel1"
                                                     required>
@@ -1596,10 +1761,13 @@
                                             </select>
                                         </div>
                                     </div>                                             
+                                    </div>                                             
 
-		
+
+
+				
                             </form>
-
+                                </div> <!-- CIERRA ROW 8 COLUMNAS  -->
 
 
     </article>
@@ -1659,7 +1827,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="card">
-                                        <div class="card-header" style="height:80px;">
+                                        <div class="card-header" style="height:50px;">
                                             <center>
                                                 <div class="row">
 
@@ -1926,7 +2094,7 @@
              <!-- DESDE AQUIP DATATABLE  -->
 
                     <table class="table"
-                           style="background-color:LightGray; BORDERCOLOR=RED ; border: 8px solid black;  width:70%;">
+                           style="background-color:LightGray; BORDERCOLOR=RED ; border: 8px solid black;  width:99%;">
                         <form class="form-inline" action="/crearAntecedentesDef/" method="POST"
                               id="FormaAntecedentes">
 
@@ -1934,9 +2102,11 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="card">
-                                        <div class="card-header" style="height:80px; width:85%;">
-                                          
-						<div id="flex-container2-antecedentes">
+                                        <div class="card-header" style="height:50px;">
+                                            <center>
+                                                <div class="row">
+                                                    <div class="col-sm-5">
+
                                                         <select class="select-css"  id="antecedentes"
                                                                 name="antecedentes">
                                                             {% for antecedentes in Antecedentes %}
@@ -1945,16 +2115,21 @@
                                                             </option>
                                                             {% endfor %}
                                                         </select>
+                                                    </div>
 
-
+                                                    <div class="col-sm-3">
 							Observaciones:
-                                                        <input type="text" id="observa6" name="observa6" value="" size="70px">
+                                                        <input type="text" id="observa6" name="observa6" value="">
+                                                    </div>
 
 
+                                                    <div class="col-sm-2 text-end">
                                                         <span class="text-secondary">Adicionar</span>
                                                         <a class="btn btn-success" href="javascript:void(0)"
                                                            id="BtnAdicionarAntecedentes"> <i class="fa fa-plus"></i></a>
-						</div>
+                                                    </div>
+                                                </div>
+                                            </center>
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
@@ -2034,25 +2209,37 @@
 
 
 
-	<!-- <div class="container">  -->
-	<div id="flex-container2-incapacidad">
-
+	<div class="container">
 
             <form   method="POST"  id="formIncapacidades">
-		<div>
+             <div class="row row-cols-6 mt-3">
+
+            <div class="col-sm-2">
                 Tipo Incapacidad:
                 {{IncapacidadesForm.tiposIncapacidad}}
+            </div>
+
+            <div class="col-sm-2">
                 Diagnostico:
                 {{IncapacidadesForm.diagnosticosIncapacidad}}
+            </div>
+            <div class="col-sm-2">
                 Inicia:
                 {{IncapacidadesForm.desdeFecha}}
+            </div>
+            <div class="col-sm-2">
                 Termina:
                 {{IncapacidadesForm.hastaFecha}}
+            </div>
+    		 <div class="col-sm-1">
                 Numero de dias:
                 {{IncapacidadesForm.numDias}}
+            </div>
+            <div class="col-sm-3">
                 Descripcion:
                 {{IncapacidadesForm.descripcion}}
-		</div>
+            </div>
+                 </div>
             </form>
 
     </div>
@@ -2123,10 +2310,10 @@
                             <!-- INICIO ENCABEZADOS DE CAPTURA -->
 
 					<div id="flex-container2-interconsulta">
-                                                <!-- <div class="row">  -->
+                                                <div class="row">
 
-                                                  <!--  <div class="col-sm-1"> -->
-                                                        Tipo :
+                                                    <div class="col-sm-1">
+                                                        Tipo Interconsulta:
                                                         <select class="select-css"  id="tiposInterconsulta"
                                                                 name="tiposInterconsulta">
                                                             {% for tiposInterconsulta in TiposInterconsulta %}
@@ -2135,10 +2322,10 @@
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                  <!-- </div> -->
+                                                   </div>
 
-                                                   <!-- <div class="col-sm-1"> -->
-                                                        Espe-consultada:</label>
+                                                    <div class="col-sm-1">
+                                                        Especialidad consultada:</label>
                                                         <select class="select-css"  id="especialidadConsultada"
                                                                 name="especialidadConsultada">
                                                             {% for especialidadesMedicosInterConsultas in EspecialidadesMedicosInterConsultas %}
@@ -2147,12 +2334,12 @@
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                   <!-- </div> -->
+                                                    </div>
 
 
-                                                   <!-- <div class="col-sm-2"> -->
+                                                    <div class="col-sm-2">
                                                         <label for="medicoConsultado"
-                                                               class="col-sm-1 control-label">Medico consultado:</label>
+                                                               class="col-sm-12 control-label">Medico consultado:</label>
                                                         <select class="select-css" aria-label="" id="medicoConsultado" name="medicoConsultado">
                                                             {% for medicos in Medicos %}
                                                             <option value="{{medicos.id}}">
@@ -2160,17 +2347,17 @@
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                  <!--  </div> -->
+                                                    </div>
 
 
-                                                   <!-- <div class="col-sm-2"> -->
-                                                        Describe:
+                                                    <div class="col-sm-2">
+                                                        Descripcion:
                                                         <input type="text" id="descripcionI" name="descripcionI" value="">
-                                                   <!-- </div> -->
+                                                    </div>
 
 
 
-                                                   <!-- <div class="col-sm-2"> -->
+                                                    <div class="col-sm-2">
                                                         Diagnostico:
                                                         <select class="select-css" aria-label="" id="diagnosticosI"
                                                                 name="diagnosticosI">
@@ -2180,24 +2367,23 @@
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-					     <!--   </div> -->
 
-						<!--  <div class="col-sm-2"> -->
-                                                        Orden:
-                                                        <input type="text" id="ordenMedicaInt" name="ordenMedicaInt" value="" size="5px">
-                                                 <!--   </div> -->
-                                            
-
+						  <div class="col-sm-2">
+                                                        Numero Orden:
+                                                        <input type="text" id="ordenMedicaInt" name="ordenMedicaInt" value="">
+                                                    </div>
+                                                    </div>
 
 
-                                                  <!--  <div class="col-sm-2 text-end"> -->
+
+                                                    <div class="col-sm-2 text-end">
                                                         <span class="text-secondary">Adicionar</span>
                                                         <a class="btn btn-success" href="javascript:void(0)"
                                                            id="BtnAdicionarInterconsultas"> <i class="fa fa-plus"></i></a>
-                                                  <!--  </div> -->
+                                                    </div>
 
 
-                                               <!--  </div> -->  <!-- FIN ROW -->
+                                                </div> <!-- FIN ROW -->
 		                            <!-- FIN ENCABEZADOS DE CAPTURA -->
 					  </div> <!-- FIN DEL FLEXBOX -->
                                           <!--  </center> -->
@@ -2311,16 +2497,16 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="card" >
-                                        <div class="card-header" style="height:8rem;">
+                                        <div class="card-header" style="height:4rem;">
                                             
                                                <div class= "row">                                        
-						<div class="col-sm-9">
+						<div class="col-sm-8">
 						<label for="observacionesNotas">Nota:</label>
-						<textarea id="observacionesNotas" name="observacionesNotas" rows="4" cols="100" placeholder="Ingrese Nota Enfermeria..." required wrap="hard"></textarea>
+						<textarea id="observacionesNotas" name="observacionesNotas" rows="4" cols="60" placeholder="Ingrese Nota Enfermeria..." required wrap="hard"></textarea>
 						</div>
 
-						<div class="col-sm-3">
-                                                        <span class="text-secondary">Adicion</span>
+						<div class="col-sm-4">
+                                                        <span class="text-secondary">Adicionar</span>
                                                         <a class="btn btn-success" href="javascript:void(0)"
                                                            id="BtnAdicionarNotasEnfermeria"> <i
                                                                 class="fa fa-battery-half"></i></a>

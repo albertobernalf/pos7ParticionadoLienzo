@@ -407,7 +407,7 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
 
 <article id="LiquidacionDetalle">
 	
-			<div style="height: 30px;  width:100%; background-color:#EBEBEB;"> 
+			<div style="height: 50px;  width:100%; background-color:#EBEBEB;"> 
 
 			<input type="hidden" id="ingresoId" name="ingresoId" value="">
 			<input type="hidden" id="triageId" name="triageId" value="">
@@ -417,32 +417,76 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
 		        <input type="hidden" id="liquidacionId1" name="liquidacionId1" value="0" readonly>
 			<input type="hidden" id="tipoFactura" name="tipoFactura" value="FACTURA" readonly>
 
-		       <div id="flex-container-detallePac">
+		       <div class="row row-cols-11" style="height=30px;">
 						
-					<div>
+					<div class="col">
 			  		   
 						 Fecha:
-						<span class="texto-span" id="fecha" name="fecha"></span>                                          	              			
+						<span class="texto-span" id="fecha" name="fecha"></span>
+                                
+          	                          
+                                      </div>
+
+					<div class="col">
+
+						
 						
 							<span class="texto-span" id="tipoDoc" name="tipoDoc"></span>
+
+
+          	                           
+                                      </div>
+
+					<div class="col">
+
 						
 							<span  class="texto-span" id="pdocumento" name="pdocumento"></span>
+							
+
+          	                          
+                                      </div>
+
+					<div class="col">
+
 					
 					<span class="texto-span"  id="paciente" name="paciente"></span>
 						
+
+          	                           
+                                      </div>
+
+					<div class="col">
 
 						 Ing#:
 						
 						<span  class="texto-span" id="consecAdmision" name="consecAdmision"></span>
 
 
+          	                           
+                                      </div>
+
+					<div class="col">
+
 						 Sal:
 						
 						<span class="texto-span" id="salidaDefinitiva" name="salidaDefinitiva"></span>
 							
+
+          	                           
+                                      </div>
+
+
+					<div class="col">
+
 						 Conv:
 
 							<span class="texto-span" id="nombreConvenio" name="nombreConvenio"></span>
+							
+
+
+                                      </div>
+
+					<div class="col">
 
 						Cama:
 
@@ -450,18 +494,36 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
 						<span class="texto-span" id="cama" name="cama"></span>
 							
 
+
+                                      </div>
+
+					<div class="col">
+
 						salCli:
 						 
 							<span class="texto-span" id="salidaClinica" name="salidaClinica"></span>
 
+
+
+                                      </div>
+
+
+
+					<div class="col">
+
 						Serv:
 							<span class="texto-span" id="servicio" name="servicio"></span>
+
+
+
+                                      </div>
+
+					<div class="col">
 
 						 observa:
 							<span class="texto-span" id="observaciones" name="observaciones"></span>
 						
 
-                                     </div>
                                      </div>
 
 
@@ -471,13 +533,13 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
 
 		 <!--  FIN Datos Liquidacion Cabecera READONLY (crear Div de Encabezados -->
 
+		 <!--  Data Table LiquidacionDetalle  -->
 	
-			      <div id="flex-container-liquidacion">
-				<div>
-
+			      <div class="row row-cols-8" >
 				  <input type="hidden" id="tipoRegistro" name="tipoRegistro" value="MANUAL">
 				  <input type="hidden" id="valorTotal" name="valorTotal" value="0" >
-			
+
+					<div class="col-sm-1">
 					
 				               Serv:
 				       
@@ -487,7 +549,13 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
                                                             </option>
                                                             {% endfor %}
                                             </select>
-									
+				        
+					 </div>
+
+
+
+					<div class="col-sm-1">
+					
 				               Cups:
 				       
 					             <select class="select-css"  id="lcups" name="lcups">
@@ -497,6 +565,9 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
                                                             {% endfor %}
                                             </select>
 				        
+					 </div>
+
+					<div class="col-sm-2">
 
 				              Cums:
 
@@ -508,32 +579,60 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
                                             </select>
 
 
-						 <label for="cantidad">Cantidad:</label>
+					 </div>
+
+					<div class="col-sm-1">
+
+						 <label for="cantidad" class="col-sm-1">Cantidad:</label>
 						
 							  <input type="text" id="cantidad" name="cantidad" value="0" >
 	                                     
+
+                                      </div>
+					
+					<div class="col-sm-1">
+
 						vUnit:
 
 							  <input type="text" id="valorUnitario" name="valorUnitario" value="0" >
 
+                                      </div>
+
+					<div class="col-sm-2">
+
 						 Observa:
 
 							  <input type="text" id="lobservaciones" name="lobservaciones" value="" >
-		                     
-			   <input type="button"  id="BtnAdicionarLiquidacion"  name="BtnAdicionarLiquidacion" value="Adicionar" onclick="AdicionarLiquidacion()">
-		
 
-					 <label for="BtnRefrescarLiquidacionDetalle" >  </label>
-			                        <input type="button"  id="BtnRefrescarLiquidacionDetalle"  name="BtnRefrescarLiquidacionDetalle" value="Refrescar Detalle" onclick="RefrescarLiquidacionDetalle()">
+
+                                      </div>
+
+				
+				 <div class="col-sm-1">
+
+
+
+			                        <input type="button" class="form-control form-control-sm" id="BtnAdicionarLiquidacion"  name="BtnAdicionarLiquidacion" value="Adicionar" onclick="AdicionarLiquidacion()">
+
+				</div>
+
+		
+				 <div class="col-sm-1">
+
+					 <label for="BtnRefrescarLiquidacionDetalle" class="col-sm-1">  </label>
+			                        <input type="button" class="form-control form-control-sm" id="BtnRefrescarLiquidacionDetalle"  name="BtnRefrescarLiquidacionDetalle" value="Refrescar Detalle" onclick="RefrescarLiquidacionDetalle()">
+				</div>
+
+					<div class="col-sm-1">
 
 					<span style="padding-left:8px; padding-right:3px; padding-top: 3px; display:inline-block;">
-						Facturar: <img class="manImg" src="{% static 'img/icons8-impresora-50.png' %}"  onclick="AFacturar()"></img> <span id="alta" name="alta" style='color:blue'>Facturar </span>
+						Facturar: <img class="manImg" src={% static 'img/iloveimg-converted/Facturar.JPG' %} onclick="AFacturar()"></img> <span id="alta" name="alta" style='color:red'>Facturar </span>
 					</span>
+          	                            </div>
 
 
-			</div> <!-- Cierra div -->
 
-       </div>		<!- Cierra flexbox
+       </div>		<!- Cierra ro de 8 columnas -->
 
 			<!-- FIN campos a adicionar valors -->
 
@@ -566,53 +665,94 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
 		 <!--  Totales  (Crear Div De Totales)-->
 
 
-		        <div id="flex-container-totales">     
-   			   <div">
+		        <div class="tabla-contenedor">     
+   			   <div class="row">
 				
 			
- 			
+ 				   <div class="col">
 			  		     
 						 Copagos:
 						
-							  <input type="text" id="totalCopagos" name="totalCopagos" size=8 value="0" readonly>
+							  <input type="text" id="totalCopagos" name="totalCopagos" size=7 value="0" readonly>
 	                                     
-                        
+                                      </div>
+         	                        
+					<div class="col">
 			  		    
 					Moderadora:
 						
-							  <input type="text" id="totalCuotaModeradora" name="totalCuotaModeradora" size=8 value="0" readonly>
+							  <input type="text" id="totalCuotaModeradora" name="totalCuotaModeradora" size=7 value="0" readonly>
 	                                      
-                        
+                                      </div>
+
+					<div class="col">
+			  		     <div class="form-group row">
 						 Anticipos:
-			
-							  <input type="text" id="anticipos" name="anticipos" size=8 value="0" readonly>
-	                
-          	        						 Abonos:
-			
-							  <input type="text" id="totalAbonos" name="totalAbonos" size=8 value="0" readonly>
-	                
-				Recibido:
+						 <div class="col-sm-2">
+							  <input type="text" id="anticipos" name="anticipos" size=7 value="0" readonly>
+	                                        </div>
+          	                            </div>
+                                      </div>
 
-							  <input type="text" id="totalRecibido" name="totalRecibido" size=8 value="0" readonly>
+				<div class="col">
+			  		     <div class="form-group row">
+						 Abonos:
+						 <div class="col-sm-2">
+							  <input type="text" id="totalAbonos" name="totalAbonos" size=7 value="0" readonly>
+	                                        </div>
+          	                            </div>
+                                      </div>
+		
+					<div class="col">
+			  		     <div class="form-group row">
+						Recibido:
+						 <div class="col-sm-2">
+							  <input type="text" id="totalRecibido" name="totalRecibido" size=7 value="0" readonly>
+	                                        </div>
+          	                            </div>
+                                      </div>
 
 
 
-						 Proc:
+
+
+			    </div>
+   			   <div class="row">
+
+					<div class="col">
+			  		    
+						 Procedimientos:
 						
-							  <input type="text" id="totalProcedimientos" name="Procedimientos" size=8 value="0" readonly>
+							  <input type="text" id="totalProcedimientos" name="Procedimientos" size=7 value="0" readonly>
 	                                      
+                                      </div>
 
-				Sum:
+					<div class="col">
+			  		     <div class="form-group row">
+				Suministros:
+						 <div class="col-sm-1">
+							  <input type="text" id="totalSuministros" name="Suministros" size=7  value="0" readonly>
+	                                        </div>
+          	                            </div>
+                                      </div>
 
-							  <input type="text" id="totalSuministros" name="Suministros" size=8  value="0" readonly>
+					<div class="col">
+			  		     <div class="form-group row">
+						Liquidacion:
+						 <div class="col-sm-1">
+							  <input type="text" id="totalLiquidacion" name="totalLiquidacion" size=7 value="0" readonly>
+	                                        </div>
+          	                            </div>
+                                      </div>
 
-						Liquida:
-
-							  <input type="text" id="totalLiquidacion" name="totalLiquidacion" size=8 value="0" readonly>
-
-						 Pagar:
-
-							  <input type="text" id="valorApagar" name="valorApagar" size=8 value="0" readonly>
+					<div class="col">
+			  		     <div class="form-group row">
+						 Apagar:
+						 <div class="col-sm-2">
+							  <input type="text" id="valorApagar" name="valorApagar" size=7 value="0" readonly>
+	                                        </div>
+          	                            </div>
+                                      </div>
 
 
                                   

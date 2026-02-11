@@ -1106,3 +1106,22 @@ Feb 10
 	Ops cuando creo un Triage me quita la ventana Crear TRiag GRAVISISSIMO
 	Cuando hace un triage No lo imprime
 	No se por que el refrescar no ejecuta el AJAX problemas de url
+
+fEB 11:
+
+	En la historia clinica aun no imprime nada del folio de la ciruigia y nadad de la cirugia
+	si imprime las repuestas d ela interconsulta
+	OPS imprimio una hojan de admision aun pacinte en urgencias ???
+	cuando pasa de triag a cama aunque guarda no aclara pantalla por erro y no refresca el triag VERIFICAR
+	Ojo creo que no esta guardando la justificacion o la Nota aclaratorio en historia clinica
+
+	REVISIONES. PUESTA A PUNTO MODULOS (15 Modulos) Ademas de: Planta, Usuarios, Medicos, 
+
+	Triage-Admisiones-HistoriaClinica-Farmacia-Enfermeria-  oK
+	Contratacion-Tarifarios       				-- Verificar
+	ApoyoTerapeutico  -- Hacer
+	Facturacion-Glosas-Rips-Cirugia-Autorizaciones-Cartera -- Probar
+	ConsultaExterna (UNICO MODULO FALTANTE POR DESARROLLAR) -- No desarrollado
+
+	Seguir en la tarde con el wrtap del data table o el truncate renderizando el campo truncado INVESTIGAS // Gacturar cuen
+	Seguir con demas TAN¡BS DE faturacion

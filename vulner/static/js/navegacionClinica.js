@@ -1101,7 +1101,7 @@ function tableActionsInterconsultas() {
 		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
                     },
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 scrollY: '130px',
 	            scrollX: true,
 	            scrollCollapse: true,
@@ -1914,12 +1914,9 @@ formHistoriaClinica.addEventListener('submit', e=>{
 				   },
  	      		success: function (data) {
 
-			alert("Esto llega REVISAR = " + JSON.stringify(data));
-
-
 			data.archivos.forEach(ids => {
 	
-			alert("A Pre-cargar : " + ids);			
+	
 
 			//const url='/obtener_pdf/?file_id=51017_162Laboratorio';
 			//var blob = new Blob([url], { type: 'application/pdf' });
@@ -1930,7 +1927,6 @@ formHistoriaClinica.addEventListener('submit', e=>{
 			});
                
 
-			alert("ya cargue todos");
 
 		        if ( data.success == true)
 		            {

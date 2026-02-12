@@ -114,7 +114,7 @@ urlpatterns = [
     #path('creacionHC/postConsultaHc/<str:id>/edit/', viewsClinico.PostConsultaHc, name='Post_editHc'),
     #path('creacionHC/<str:id>', viewsClinico.PostConsultaHcli),
     path('creacionHc/postConsultaHcli/', viewsClinico.PostConsultaHcli , name='Post_editHc'),
-    path('imprimirHistoriaClinica/', viewsClinicoReportes.ImprimirHistoriaClinica),
+    path('imprimirHistoriaClinica/', viewsClinicoReportes.ImprimirHistoriaClinica, name='Post_imprimirHc'),
     path('imprimirOrdenIncapacidad/<str:ingresoId> , <str:historiaId>/', viewsClinicoReportes.ImprimirOrdenIncapacidad),
     path('imprimirOrdenLaboratorio/<str:ingresoId> , <str:historiaId>, <str:convenioId>,<str:tipoAdmision>/', viewsClinicoReportes.ImprimirOrdenLaboratorio),
     path('imprimirOrdenTerapia/<str:ingresoId> , <str:historiaId>, <str:convenioId>,<str:tipoAdmision>/', viewsClinicoReportes.ImprimirOrdenTerapia),
@@ -324,7 +324,8 @@ urlpatterns = [
     path('load_dataAutorizacionesDetalle/<str:data>', viewsAutorizaciones.load_dataAutorizacionesDetalle, name='loaddataAutorizacionesDetalle'),
     path('actualizarAutorizacionDetalle/', viewsAutorizaciones.ActualizarAutorizacionDetalle, name='actualizarAutorizacionDetalle'),
     path('leerDetalleAutorizacion/', viewsAutorizaciones.LeerDetalleAutorizacion,  name='LeerDetalleAutorizacion'),
-    path('imprimirAutorizaciones/', viewsAutorizacionesReportes.ImprimirAutorizaciones),
+    path('imprimirAut/', viewsAutorizacionesReportes.ImprimirAut, name='Imprimir_Aut'),
+    path('imprimirAut/<str:data>', viewsAutorizacionesReportes.ImprimirAut, name='Imprimir_Aut'),
 
     # Cartera - Glosas
 
@@ -354,6 +355,7 @@ urlpatterns = [
     path('consultaGlosasDetalleRips/', viewsCartera.ConsultaGlosasDetalleRips, name='consulta_GlosasDetalleRi´ps'),
     path('load_tablaGlosasDetalleRips/<str:data>', viewsCartera.Load_tablaGlosasDetalleRips, name='Load_tablaGlosasDetalle_Rips'),
 
+    path('load_dataCartera/<str:data>', viewsCartera.Load_dataCartera, name='loaddata_Cartera'),
 
     # Tarifas
 	

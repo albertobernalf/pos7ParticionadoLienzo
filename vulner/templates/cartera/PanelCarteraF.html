@@ -9,39 +9,18 @@
 <link rel="stylesheet" type="text/css"  href = {% static 'css/litle.css' %} >
 <script src={% static 'js/panelTabsCartera.js' %} defer >         </script>
 
-<!-- Datatable extension SELECT 
-<link href="https://cdn.datatables.net/v/dt/dt-2.2.2/datatables.min.css" rel="stylesheet" integrity="sha384-2vMryTPZxTZDZ3GnMBDVQV8OtmoutdrfJxnDTg0bVam9mZhi7Zr3J1+lkVFRr71f" crossorigin="anonymous">
-<script src="https://cdn.datatables.net/v/dt/dt-2.2.2/datatables.min.js" integrity="sha384-2Ul6oqy3mEjM7dBJzKOck1Qb/mzlO+k/0BQv3D3C7u+Ri9+7OBINGa24AeOv5rgu" crossorigin="anonymous"></script>
--->
 
 
 <div class="marco">
     <ul class="tabs">
    <li><a href="#Caja"><span class="fa-solid fa-user-doctor-message"></span> <span   class="tab-text"> </span> Caja</a></li>
-        <li><a href="#Cartera Vencida"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Cartera Vencida</a></li>
-     
-
+        <li><a href="#Cartera"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Cartera</a></li>   
+        <li><a href="#PagosEmpresas"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Pagos Empresas</a></li>   
+        <li><a href="#Pagos"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Pagos Factura</a></li>   
     </ul>
 </div>
 
 <style>
-
-div.dataTables_filter input {
-    width: 50px;
-  }
-#tablaCartera {
-     /*    font-family: 'Verdana', sans-serif;  */  /* Times*/
- font-family: 'Times', 'Times New Roman',Verdana,  sans-serif;
-        font-size: 50px;
-	 padding: 1px;
-	 /* Alto de las celdas */
-	  height: 1px;
-    }
-
-table.dataTable tbody tr {
-  min-height: 60px;
-}
-
 
 .my-row-class {
     height: 30px;
@@ -70,37 +49,6 @@ function RefrescarPantalla() {
 <div class="marco">
     <div class="secciones">
 
-        <article id="Cartera">
-      
-	
-            <form action="/carteraVencida/" method="get" id="FormCarteraVencida">
-
-                <input type="hidden" id="username" name="username" value="{{Username}}">
-                <input type="hidden" id="sedeSeleccionada" name="sedeSeleccionada" value="{{SedeSeleccionada}}">
-                <input type="hidden" id="numreporte" name="numreporte" value="{{numreporte}}">
-                <input type="hidden" id="grupo" name="grupo" value="{{Grupo}}">
-                <input type="hidden" id="subGrupo" name="subGrupo" value="{{SubGrupo}}">
-                <!--  Estos si de la Aplixcacion base -->
-                <input type="hidden" id="sede" name="sede" value="{{Sede}}">
-                <input type="hidden" id="documento" name="documento" value="{{Documento}}">
-                <input type="hidden" id="nombreSede" name="nombreSede" value="{{NombreSede}}">
-                <input type="hidden" id="profesional" name="profesional" value="{{Profesional}}">
-                <input type="hidden" id="permisosGrales" name="permisosGrales" value="{{PermisosGrales}}">
-                <input type="hidden" id="permisosDetalle" name="permisosDetalle" value="{{PermisosDetalle}}">
-                <input type="hidden" id="escogeModulo" name="escogeModulo" value="{{EscogeModulo}}">
-                <input type="hidden" id="username_id" name="username_id" value="{{Username_id}}">
-
-                <input type="hidden" id="tipoDocId" name="tipoDocId" value="">
-                <input type="hidden" id="nombreTipoDoc" name="nombreTipoDoc" value="">
-                <input type="hidden" id="documentoId" name="documentoId" value="">
-                <input type="hidden" id="documento2" name="documento2" value="">
-                <input type="hidden" id="consec" name="consec" value="">
-                <input type="hidden" id="tipoIng" name="tipoIng" value="{{tipoIng}}">
-		<input type="hidden" id="convenioId" name="convenioId" value="{{convenioId}}">
-	
-            </form>
-			EN BLANCO
-        </article>
 
 <article id="Caja">
             <!-- INICIO TABLE DE  EL DATATABLE  -->
@@ -111,6 +59,7 @@ function RefrescarPantalla() {
                                             <tr>    
 						<bold>                                  
 						<th>Accion </th>
+						<th>Edita </th>
                                                 <th>id</th>
                                                 <th>Fecha</th>
                                                 <th>Entrega</th>
@@ -162,144 +111,83 @@ function RefrescarPantalla() {
              			  <input type="hidden" id="username_id" name="username_idC" value="{{Username_id}}">
                			<input type="hidden" id="sedeC" name="sedeC" value="{{Sede}}">
 
-                      <div class="row row-cols-lg-auto g-3 align-items-center mb-3">
+                      <div id="flex-container-caja">
+				<div>
 
-
-				  <div class="col-4">
 					                                   
-                                    <input type="hidden" class="form-control" id="sedesClinica_id" name="sedesClinica_id"  value="{{Sede}}" readonly></input>
-                                </div>
+                                    <input type="hidden"  id="sedesClinica_id" name="sedesClinica_id"  value="{{Sede}}" readonly></input>
+                                
+                                       <label for="serviciosAdministrativos_id" >ServiciosAdmon:</label>
 
-				  <div class="col-8">
-                                        <label for="serviciosAdministrativos_id" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SeviciosAdmon:</label>
-                                        <div class="col-sm-8">
-                                            <select class="select-css h-40 w-20" id="serviciosAdministrativos_id"  tabindex= "0"
+                                            <select  id="serviciosAdministrativos_id"  tabindex= "0"
                                                     name="serviciosAdministrativos_id"
                                                     required>
                                                 {% for serviciosAdministrativos in ServiciosAdministrativos %}
                                                 <option value="{{serviciosAdministrativos.id}}"> {{serviciosAdministrativos.nombre}}</option>
                                                 {% endfor %}
                                             </select>
-                                        </div>
-
-                                    </div>
-
-					  
-				<div class="col-12">
 					fecha:
                                                 
-					 <input type="date"  class="form-control" id="fecha" name="fecha" placeholder="fecha"  readonly>
-                                </div>
+					 <input type="date"  id="fecha" name="fecha" placeholder="fecha"  readonly></input>
 
-				<div class="col-12">
-                               		  Entrega:
-                                        <label for="usuarioEntrega_id" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SeviciosAdmon:</label>
-                                        <div class="col-sm-8">
-                                            <select class="select-css h-40 w-20" id="usuarioEntrega_id"  tabindex= "0"
+                                        <label for="usuarioEntrega_id" >Entrega:</label>
+
+                                            <select  id="usuarioEntrega_id"  tabindex= "0"
                                                     name="usuarioEntrega_id"
                                                     required>
                                                 {% for usuarioEngrega in UsuarioEntrega  %}
                                                 <option value="{{usuarioEngrega.id}}"> {{usuarioEngrega.nombre}}</option>
                                                 {% endfor %}
                                            </select>
-	                                </div>
-                                 </div>
 
+                                        <label for="usuarioRecibe_id" >Recibe:</label>
 
-
-				<div class="col-12">
-                               		  Recibe:
-                                        <label for="usuarioRecibe_id" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SeviciosAdmon:</label>
-                                        <div class="col-sm-8">
-                                            <select class="select-css h-40 w-20" id="usuarioRecibe_id"  tabindex= "0"
+                                            <select  id="usuarioRecibe_id"  tabindex= "0"
                                                     name="usuarioRecibe_id"
                                                     required>
                                                 {% for usuarioRecibe in UsuarioRecibe   %}
                                                 <option value="{{usuarioRecibe.id}}"> {{usuarioRecibe.nombre}}</option>
                                                 {% endfor %}
                                            </select>
-	                                </div>
-                                 </div>
 
+                                        <label for="usuarioSuperviza_id" >Superviza:</label>
 
-
-				<div class="col-12">
-                               		  Recibe:
-                                        <label for="usuarioSuperviza_id" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SeviciosAdmon:</label>
-                                        <div class="col-sm-8">
-                                            <select class="select-css h-40 w-20" id="usuarioSuperviza_id"  tabindex= "0"
+                                            <select  id="usuarioSuperviza_id"  tabindex= "0"
                                                     name="usuarioSuperviza_id"
                                                     required>
                                                 {% for usuarioSuperviza in UsuarioSuperviza   %}
                                                 <option value="{{usuarioSuperviza.id}}"> {{usuarioSuperviza.nombre}}</option>
                                                 {% endfor %}
                                            </select>
-	                                </div>
-                                 </div>
-
-
-				<div class="col-12">
-					Total Efectivo:                               
-					 <input type="text"  class="form-control" id="totalEfectivo" name="totalEfectivo" placeholder="totalEfectivo">
-                                </div>
-
-				<div class="col-12">
+					Total Efectivo: 
+				<label for="totalEfectivo" >totalEfectivo:</label>
+                              
+					 <input type="text"   id="totalEfectivo" name="totalEfectivo" placeholder="totalEfectivo"></input>
 					Total EsperadoEfectivo:                               
-					 <input type="text"  class="form-control" id="totalEfectivoEsperado" name="totalEfectivoEsperado" placeholder="totalEfectivoEsperado" readonly>
-                                </div>
-
-
-				<div class="col-12">
+					 <input type="text"   id="totalEfectivoEsperado" name="totalEfectivoEsperado" placeholder="totalEfectivoEsperado" readonly></input>
 					Total Tarjetas Debito:                               
-					 <input type="text"  class="form-control" id="totalTarjetasDebito" name="totalTarjetasDebito" placeholder="totalTarjetasDebito">
-                                </div>
-				<div class="col-12">
+					 <input type="text"   id="totalTarjetasDebito" name="totalTarjetasDebito" placeholder="totalTarjetasDebito"></input>
+
 					Total Tarjetas Debito Esperado:                               
-					 <input type="text"  class="form-control" id="totalTarjetasDebitoEsperado" name="totalTarjetasDebitoEsperado" placeholder="totalTarjetasDebitoEsperado" readonly>
-                                </div>
-
-
-
-				<div class="col-12">
+					 <input type="text"   id="totalTarjetasDebitoEsperado" name="totalTarjetasDebitoEsperado" placeholder="totalTarjetasDebitoEsperado" readonly></input>
 					Total Tarjetas Credito:                               
-					 <input type="text"  class="form-control" id="totalTarjetasCredito" name="totalTarjetasCredito" placeholder="totalTarjetasCredito">
-                                </div>
+					 <input type="text"   id="totalTarjetasCredito" name="totalTarjetasCredito" placeholder="totalTarjetasCredito"></input>
 
-				<div class="col-12">
 					Total Tarjetas Credito Esperado:                               
-					 <input type="text"  class="form-control" id="totalTarjetasCreditoEsperado" name="totalTarjetasCreditoEsperado" placeholder="totalTarjetasCreditoEsperado" readonly>
-                                </div>
-
-
-				<div class="col-12">
+					 <input type="text"   id="totalTarjetasCreditoEsperado" name="totalTarjetasCreditoEsperado" placeholder="totalTarjetasCreditoEsperado" readonly></input>
 					Total Cheques:                               
-					 <input type="text"  class="form-control" id="totalCheques" name="totalCheques" placeholder="totalCheques">
-                                </div>
-
-				<div class="col-12">
+					 <input type="text"   id="totalCheques" name="totalCheques" placeholder="totalCheques"></input>
 					Total Cheques Esperado:                               
-					 <input type="text"  class="form-control" id="totalChequesEsperado" name="totalChequesEsperado" placeholder="totalChequesEsperado" readonly>
-                                </div>
-
-
-				<div class="col-12">
+					 <input type="text"   id="totalChequesEsperado" name="totalChequesEsperado" placeholder="totalChequesEsperado" readonly></input>
 					Total :                               
-					 <input type="text"  class="form-control" id="total" name="total" placeholder="total" >
-                                </div>
-
-				<div class="col-12">
+					 <input type="text"   id="total" name="total" placeholder="total" ></input>
 					Total Esperado:                               
-					 <input type="text"  class="form-control" id="totalEsperado" name="totalEsperado" placeholder="totalEsperado" readonly>
-                                </div>
-
-
-
-				<div class="col-12">
+					 <input type="text"   id="totalEsperado" name="totalEsperado" placeholder="totalEsperado" readonly></input>
 					Estado Caja:                               
-					 <input type="text"  class="form-control" id="estadoCaja" name="estadoCaja" placeholder="estadoCaja">
+					 <input type="text"   id="estadoCaja" name="estadoCaja" placeholder="estadoCaja"></input>
                                 </div>
 
-                                </div> <!-- CIERRA ROW 8 COLUMNAS  -->
+                                </div> 
 
                             </form>
 
@@ -318,6 +206,63 @@ function RefrescarPantalla() {
      <!-- FIN Espacio Modales  -->
 
 </article>
+
+        <article id="Cartera">
+      
+	
+            <form action="/carteraVencida/" method="get" id="FormCarteraVencida">
+
+                <input type="hidden" id="username" name="username" value="{{Username}}">
+                <input type="hidden" id="sedeSeleccionada" name="sedeSeleccionada" value="{{SedeSeleccionada}}">
+                <input type="hidden" id="numreporte" name="numreporte" value="{{numreporte}}">
+                <input type="hidden" id="grupo" name="grupo" value="{{Grupo}}">
+                <input type="hidden" id="subGrupo" name="subGrupo" value="{{SubGrupo}}">
+                <!--  Estos si de la Aplixcacion base -->
+                <input type="hidden" id="sede" name="sede" value="{{Sede}}">
+                <input type="hidden" id="documento" name="documento" value="{{Documento}}">
+                <input type="hidden" id="nombreSede" name="nombreSede" value="{{NombreSede}}">
+                <input type="hidden" id="profesional" name="profesional" value="{{Profesional}}">
+                <input type="hidden" id="permisosGrales" name="permisosGrales" value="{{PermisosGrales}}">
+                <input type="hidden" id="permisosDetalle" name="permisosDetalle" value="{{PermisosDetalle}}">
+                <input type="hidden" id="escogeModulo" name="escogeModulo" value="{{EscogeModulo}}">
+                <input type="hidden" id="username_id" name="username_id" value="{{Username_id}}">
+
+                <input type="hidden" id="tipoDocId" name="tipoDocId" value="">
+                <input type="hidden" id="nombreTipoDoc" name="nombreTipoDoc" value="">
+                <input type="hidden" id="documentoId" name="documentoId" value="">
+                <input type="hidden" id="documento2" name="documento2" value="">
+                <input type="hidden" id="consec" name="consec" value="">
+                <input type="hidden" id="tipoIng" name="tipoIng" value="{{tipoIng}}">
+		<input type="hidden" id="convenioId" name="convenioId" value="{{convenioId}}">
+	
+            </form>
+			
+
+            <!-- INICIO TABLE DE  EL DATATABLE  -->
+ 	<div class="container my-2">          
+   			   <div class="row">
+                                        <table  id= "tablaCartera" class=" display table table-striped table-sm fs-6 nowrap" style="width: 100%";>
+                                           <thead>
+                                            <tr>    
+						<bold>                                  
+						<th>Accion </th>
+                                                <th>id</th>
+                                                <th>factura</th>
+                                                <th>fecha</th>
+                                                <th>nombre</th>
+                                                <th>valor</th>
+                                                <th>pagos</th>
+                                                <th>saldo</th>
+						</bold>                                  
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>				
+                                       </table>
+                                    </div>
+                                </div>
+
+        </article>
     
     </div>
 </div>

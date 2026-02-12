@@ -9,7 +9,7 @@ let dataTableConveniosInitialized = false;
 let dataTableConveniosProcedimientosInitialized = false;
 let dataTableConveniosSuministrosInitialized = false;
 let dataTableConveniosHonorariosInitialized = false;
-
+let dataTableTarifariosSuministrosInitialized = false;
 
 $(document).ready(function() {
 	var now = new Date();
@@ -295,7 +295,7 @@ function arrancaConvenios(valorTabla,valorData)
 
                        return btn;
                     },
-                    "targets":18
+                    "targets":5
                }
             ],
 	 pageLength: 3,
@@ -323,25 +323,13 @@ function arrancaConvenios(valorTabla,valorData)
                  dataSrc: ""
             },
             columns: [
-	          { data: "fields.id"},
+                { data: "fields.id"},
+                { data: "fields.tipoTarifa"},
+                { data: "fields.cums"},
                 { data: "fields.codigoHomologado"},
-                { data: "fields.tiposTarifa_id"},
-                { data: "fields.codigoCum_id"},
-                { data: "fields.concepto_id"},
-                { data: "fields.colValor1"},
-                { data: "fields.colValor2"},
-                { data: "fields.colValor3"},
-                { data: "fields.colValor4"},
-                { data: "fields.colValor5"},
-                { data: "fields.colValor6"},
-                { data: "fields.colValor7"},
-                { data: "fields.colValor8"},
-                { data: "fields.colValor9"},
-                { data: "fields.colValor10"},
-                { data: "fields.usuarioRegistro_id"},
-                { data: "fields.fechaRegistro"},
-                { data: "fields.estadoReg"},
-                     ]
+                { data: "fields.exaNombre"},
+               { data: "fields.valorColumna"},
+                    ]
             }
 
             if  (dataTableTarifariosSuministrosInitialized)  {
@@ -350,7 +338,10 @@ function arrancaConvenios(valorTabla,valorData)
 
                     }
 
+
                 dataTableB = $('#tablaTarifariosSuministros').DataTable(dataTableOptionsSuministros);
+
+
 
 	            dataTableTarifariosSuministrosInitialized  = true;
       }
@@ -853,6 +844,7 @@ $('#tablaConvenios tbody').on('click', '.miConvenio2', function() {
 	    	var sede = document.getElementById("sede").value;
 	        var username_id = document.getElementById("username_id").value;
 	         var data =  {}   ;
+	         var data2 =  {}   ;
 	        data['username'] = username;
 	        data['sedeSeleccionada'] = sedeSeleccionada;
 	        data['nombreSede'] = nombreSede;
@@ -861,13 +853,18 @@ $('#tablaConvenios tbody').on('click', '.miConvenio2', function() {
 	        data['tarifariosDescripcionProc_id'] = dato3.tarifariosDescripcionProc_id;
 	        data['tarifariosDescripcionSum_id'] = dato3.tarifariosDescripcionSum_id;
 
- 		data = JSON.stringify(data);
-  	console.log ( "Voy a cargar " + data);
+ 		data2 = JSON.stringify(data);
+  	alert ( "Voy a cargar " + data2);
 
 
-        arrancaConvenios(2,data);
+        arrancaConvenios(2,data2);
 	    dataTableConveniosProcedimientosInitialized = true;
-  	console.log ( "ya cargue");
+  	alert ( "ya cargue Proc");
+
+        arrancaConvenios(3,data2);
+	    dataTableConveniosSuministrosInitialized = true;
+  	alert ( "ya cargue Sum");
+
 
   });
 
@@ -900,6 +897,7 @@ $('#tablaTarifariosDescripcionSuministros tbody').on('click', '.miDescripcionSum
 	    	var sede = document.getElementById("sede").value;
 	        var username_id = document.getElementById("username_id").value;
 	         var data =  {}   ;
+	                  var data2 =  {}   ;
 	        data['username'] = username;
 	        data['sedeSeleccionada'] = sedeSeleccionada;
 	        data['nombreSede'] = nombreSede;
@@ -907,9 +905,9 @@ $('#tablaTarifariosDescripcionSuministros tbody').on('click', '.miDescripcionSum
 	        data['username_id'] = username_id;
 	        data['tiposTarifa_id'] = dato3.id;
 
- 		data = JSON.stringify(data);
+ 		data2 = JSON.stringify(data);
 
-        arrancaConvenios(3,data);
+        arrancaConvenios(3,data2);
 	    dataTableConveniosSuministrosInitialized = true;
 
   });

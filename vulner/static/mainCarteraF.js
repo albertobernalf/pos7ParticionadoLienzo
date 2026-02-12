@@ -10,6 +10,7 @@ let dataTableG;
 let dataTableH;
 
 let dataTableCajaInitialized = false;
+let dataTableCarteraInitialized = false;
 
 
 $(document).ready(function() {
@@ -46,30 +47,28 @@ function arrancaCartera(valorTabla,valorData)
     if (valorTabla == 1)
     {
         let dataTableOptionsCaja  ={
-   dom: "<'row mb-1'<'col-sm-3'B><'col-sm-3'><'col-sm-6'f>>" + // B = Botones a la izquierda, f = filtro a la derecha
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>",
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
+
   buttons: [
     {
       extend: 'excelHtml5',
       text: '<i class="fas fa-file-excel"></i> ',
       titleAttr: 'Exportar a Excel',
       className: 'btn btn-success',
-      messageTop: 'Caja' ,
     },
     {
       extend: 'pdfHtml5',
       text: '<i class="fas fa-file-pdf"></i> ',
       titleAttr: 'Exportar a PDF',
       className: 'btn btn-danger',
-      messageTop: 'Caja' ,
     },
     {
       extend: 'print',
       text: '<i class="fa fa-print"></i> ',
       titleAttr: 'Imprimir',
       className: 'btn btn-info',
-      messageTop: 'Caja' ,
     },
   ],
   lengthMenu: [2, 4, 15],
@@ -84,7 +83,7 @@ function arrancaCartera(valorTabla,valorData)
 	    { width: '10%', targets: [2,3] },
 
 		{   
-                    "targets": 17
+                    "targets": 18
                }
             ],
 	 pageLength: 3,
@@ -117,11 +116,21 @@ function arrancaCartera(valorTabla,valorData)
 		{
 		  "render": function ( data, type, row ) {
                         var btn = '';
+        		     btn = btn + " <input type='radio' name='cajaSeleccion' style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;' class='miSeleccionCaja form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
+                       return btn;
+                    },
+
+		},
+
+	{
+		  "render": function ( data, type, row ) {
+                        var btn = '';
         		     btn = btn + " <input type='radio' name='caja' class='miCaja form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
                        return btn;
                     },
 
 		},
+
 
                 { data: "fields.id"},
                 { data: "fields.fecha"},
@@ -143,6 +152,97 @@ function arrancaCartera(valorTabla,valorData)
        ]
             }
 	        dataTable = $('#tablaCaja').DataTable(dataTableOptionsCaja);
+  }
+
+    if (valorTabla == 2)
+    {
+        let dataTableOptionsCartera  ={
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
+
+  buttons: [
+    {
+      extend: 'excelHtml5',
+      text: '<i class="fas fa-file-excel"></i> ',
+      titleAttr: 'Exportar a Excel',
+      className: 'btn btn-success',
+    },
+    {
+      extend: 'pdfHtml5',
+      text: '<i class="fas fa-file-pdf"></i> ',
+      titleAttr: 'Exportar a PDF',
+      className: 'btn btn-danger',
+    },
+    {
+      extend: 'print',
+      text: '<i class="fa fa-print"></i> ',
+      titleAttr: 'Imprimir',
+      className: 'btn btn-info',
+    },
+  ],
+  lengthMenu: [2, 4, 15],
+           processing: true,
+            serverSide: false,
+            scrollY: '275px',
+	    scrollX: true,
+	    scrollCollapse: true,
+            paging:false,
+            columnDefs: [
+		{ className: 'centered', targets: [0, 1, 2, 3, 4, 5] },
+	    { width: '10%', targets: [2,3] },
+
+		{   
+                    "targets": 7
+               }
+            ],
+	 pageLength: 3,
+	  destroy: true,
+	  language: {
+		    processing: 'Procesando...',
+		    lengthMenu: 'Mostrar _MENU_ registros',
+		    zeroRecords: 'No se encontraron resultados',
+		    emptyTable: 'Ningún dato disponible en esta tabla',
+		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
+		    infoThousands: ',',
+		    loadingRecords: 'Cargando...',
+		    paginate: {
+			      first: 'Primero',
+			      last: 'Último',
+			      next: 'Siguiente',
+			      previous: 'Anterior',
+		    }
+			},
+
+
+           ajax: {
+                 url:"/load_dataCartera/" +  data,
+                 type: "POST",
+                 dataSrc: ""
+            },
+            columns: [
+		{
+		  "render": function ( data, type, row ) {
+                        var btn = '';
+        		     btn = btn + " <input type='radio' name='cartera' class='miCaja form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
+                       return btn;
+                    },
+
+		},
+
+                { data: "fields.id"},
+                { data: "fields.factura"},
+                { data: "fields.fecha"},
+                { data: "fields.nombre"},
+                { data: "fields.valor"},
+                { data: "fields.pagos"},
+                { data: "fields.saldo"},
+
+       ]
+            }
+	        dataTable = $('#tablaCartera').DataTable(dataTableOptionsCartera);
   }
 }
 
@@ -170,6 +270,9 @@ const initDataTableCaja = async () => {
 
          arrancaCartera(1,data);
 	 dataTableCajaInitialized = true;
+
+         arrancaCartera(2,data);
+	 dataTableCarteraInitialized = true;
 
 
 }
@@ -216,16 +319,19 @@ window.addEventListener('load', async () => {
                 dataType: 'json',
                 success: function (info) {
 
-		if (info.success == true)
-			 {
-			  document.getElementById("mensajes").value = data.Mensajes;
-			 }
-			else
-			{
-			document.getElementById("mensajesError").value = data.Mensajes;
-			return;
-			}
+		alert("Iregrese de editarCaja" + JSON.stringify(info));
 
+	//	if (info.success == true)
+	//		 {
+	//		  document.getElementById("mensajes").value = data.Mensajes;
+	//		 }
+	//		else
+	//		{
+	//		document.getElementById("mensajesError").value = data.Mensajes;
+	//		return;
+	//		}
+
+		alert("sigo marcha");
 
 		$('#postFormCaja').trigger("reset");
 

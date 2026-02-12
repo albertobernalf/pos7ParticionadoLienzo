@@ -427,20 +427,26 @@ function CerrarModalJson()
 
 	var autorizacionId = post_id;
 
-	$.ajax({
-	           url: '/imprimirAutorizaciones/',
-	            data : {autorizacionId:autorizacionId},
-	           type: 'POST',
-	           dataType : 'json',
-	  		success: function (data) {
+	alert("voy ajax imprimir " + autorizacionId);
 
-			 $('#pk').val(data.pk);
-	       	     
+$.ajax({
+    url: '/imprimirAut/',
+   data : {autorizacionId:autorizacionId},
+    method: 'POST',
+    xhrFields: {
+        responseType: 'blob' // Importante: interpreta la respuesta como binario
+    },
+    success: function (data) {
+	alert("llegue");
 
-                  },
-		   	        error: function(data){
-		       		document.getElementById("mensajesErrorAbonos").innerHTML =  data.responseText
-			        },
-	     });
 
-        });
+        var blob = new Blob([data], { type: 'application/pdf' });
+        var link = window.URL.createObjectURL(blob);
+        window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
+    },
+    error: function (error) {
+      document.getElementById("mensajesError").value =  data.responseText
+    }
+});
+
+       });

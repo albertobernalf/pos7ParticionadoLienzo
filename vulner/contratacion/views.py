@@ -1739,6 +1739,8 @@ def Load_dataTarifariosSuministros1(request, data):
     print("username_id:", username_id)
     print("tiposTarifa:", tiposTarifa)
 
+    tarifariosDescripcionSum_id = d['tarifariosDescripcionSum_id']
+    entidadColumna = TarifariosDescripcion.objects.get(id=tarifariosDescripcionSum_id)
 
     # print("data = ", request.GET('data'))
 
@@ -1749,20 +1751,18 @@ def Load_dataTarifariosSuministros1(request, data):
     curx = miConexionx.cursor()
 
 
-    detalle = 'select tarsum.id id, tiptar.nombre tipoTarifa, exa.cums cums, tarsum."codigoHomologado" codigoHomologado, exa.nombre exaNombre, tarsum."colValorBase", tarsum."colValor1", tarsum."colValor2" , tarsum."colValor3"	, tarsum."colValor4"	, tarsum."colValor5"	, tarsum."colValor6"	, tarsum."colValor7"	, tarsum."colValor8"	, tarsum."colValor9" , tarsum."colValor10" from tarifarios_tipostarifaProducto tarprod, tarifarios_tipostarifa tiptar, tarifarios_TarifariosDescripcion tardes, tarifarios_tarifariossuministros tarsum, facturacion_suministros exa where tiptar.id = tardes."tiposTarifa_id" and tarsum."tiposTarifa_id" = tiptar.id and tardes.columna=' + "'" + str('colValorBase') + "'" + ' and exa.id = tarsum."codigoCum_id" and tarsum."tiposTarifa_id" =' + "'" + str(tiposTarifa) + "'" + ' and tarprod.id = tiptar."tiposTarifaProducto_id"'
+    #detalle = 'select tarsum.id id, tiptar.nombre tipoTarifa, exa.cums cums, tarsum."codigoHomologado" codigoHomologado, exa.nombre exaNombre, tarsum."colValorBase", tarsum."colValor1", tarsum."colValor2" , tarsum."colValor3"	, tarsum."colValor4"	, tarsum."colValor5"	, tarsum."colValor6"	, tarsum."colValor7"	, tarsum."colValor8"	, tarsum."colValor9" , tarsum."colValor10" from tarifarios_tipostarifaProducto tarprod, tarifarios_tipostarifa tiptar, tarifarios_TarifariosDescripcion tardes, tarifarios_tarifariossuministros tarsum, facturacion_suministros exa where tiptar.id = tardes."tiposTarifa_id" and tarsum."tiposTarifa_id" = tiptar.id and tardes.columna=' + "'" + str('colValorBase') + "'" + ' and exa.id = tarsum."codigoCum_id" and tarsum."tiposTarifa_id" =' + "'" + str(tiposTarifa) + "'" + ' and tarprod.id = tiptar."tiposTarifaProducto_id"'
+    detalle = 'select tarsum.id id, tiptar.nombre tipoTarifa, sum.cums cums, tarsum."codigoHomologado" codigoHomologado, sum.nombre exaNombre, tarsum."' + str(entidadColumna.columna) + '" valorColumna' +  ' from tarifarios_tipostarifaProducto tarprod, tarifarios_tipostarifa tiptar, tarifarios_TarifariosDescripcion tardes, tarifarios_tarifariossuministros tarsum, facturacion_suministros sum , contratacion_convenios conv where tarprod.id = tiptar."tiposTarifaProducto_id" and tiptar.id = tardes."tiposTarifa_id" and tarsum."tiposTarifa_id" = tiptar.id and sum.id = tarsum."codigoCum_id" and tardes.id =' + "'" + str(tarifariosDescripcionSum_id) + "'" + ' and conv."tarifariosDescripcionSum_id" = tardes.id'
 
     print(detalle)
 
     curx.execute(detalle)
 
-    for id, tipoTarifa, cums, codigoHomologado, exanombre, colValorBase, colValor1, colValor2, colValor3, colValor4, colValor5, colValor6, colValor7, colValor8, colValor9, colValor10 in curx.fetchall():
+    for id, tipoTarifa, cums, codigoHomologado, exanombre, valorColumna  in curx.fetchall():
         tarifariosSuministros.append(
             {"model": "tarifarios.tarifariosSuministros", "pk": id, "fields":
                 {'id': id, 'tipoTarifa': tipoTarifa, 'cums': cums, 'codigoHomologado': codigoHomologado,
-                 'exaNombre': exanombre, 'colValorBase': colValorBase, 'colValor1': colValor1, 'colValor2': colValor2,
-                 'colValor3': colValor3, 'colValor4': colValor4,
-                 'colValor5': colValor5, 'colValor6': colValor6, 'colValor7': colValor7, 'colValor8': colValor8,
-                 'colValor9': colValor9, 'colValor10': colValor10
+                 'exaNombre': exanombre, 'valorColumna': valorColumna
                  }})
 
     miConexionx.close()

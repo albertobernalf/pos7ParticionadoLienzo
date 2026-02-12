@@ -2143,3 +2143,39 @@ def ConsultaNotasCreditoDetalleRips(request):
 
     return HttpResponse(serialized1, content_type='application/json')
 
+
+def Load_dataCartera(request, data):
+
+    print("Entre Load_dataCartera")
+
+    context = {}
+    d = json.loads(data)
+
+    sedesClinica_id = d['sedesClinica_id']
+    print("sedesClinica_id = ", sedesClinica_id)
+
+    cartera = []
+
+    miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+                                   password="123456")
+    curx = miConexionx.cursor()
+
+    detalle = 'SELECT car.id, car.factura_id factura, fac."fechaFactura" fecha, usu.nombre, car.valor, car.pagos, car.saldo FROM cartera_cartera car, facturacion_facturacion fac, usuarios_usuarios usu WHERE car."sedesClinica_id" = ' + "'" + str(sedesClinica_id) + "' AND fac.id = car.factura_id AND " + 'fac."tipoDoc_id" = usu."tipoDoc_id" AND fac.documento_id = usu.id '
+
+    print ("detalle = ", detalle)
+
+    curx.execute(detalle)
+
+    for id,  factura, fecha, nombre,valor, pagos, saldo  in curx.fetchall():
+        cartera.append(
+            {"model": "cartera.cartera", "pk": id, "fields":
+                {'id': id, 'factura': factura , 'fecha':fecha, 'nombre':nombre, 'valor': valor, 'pagos': pagos, 'saldo':saldo            }})
+
+
+
+    miConexionx.close()
+    print("cartera"  , cartera)
+
+    serialized1 = json.dumps(cartera, default=str)
+
+    return HttpResponse(serialized1, content_type='application/json')

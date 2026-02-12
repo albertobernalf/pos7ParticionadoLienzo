@@ -17,18 +17,18 @@ class tiposPlantaAdmin(admin.ModelAdmin):
 #@admin.register(PerfilesPlanta)
 #class perfilesPlantaAdmin(admin.ModelAdmin):
 
-#        list_display = ("id", "sedesClinica",  "tiposPlanta", "planta",)
-#        search_fields =  ("id", "sedesClinica__nombre",  "tiposPlanta_nombre", "planta__nombre",)
+#        list_display = ("id", "sedesClinica",  "tiposPlanta", "planta", "esCajero")
+#        search_fields =  ("id", "sedesClinica__nombre",  "tiposPlanta_nombre", "planta__nombre", "esCajero")
         # Filtrar
 #        list_filter = ('sedesClinica','planta','tiposPlanta')
 
 @admin.register(Planta)
 class plantaAdmin(admin.ModelAdmin):
 
-    list_display = ("id","sedesClinica","tiposPlanta","tipoDoc","documento","nombre","genero","direccion","telefono")
-    search_fields = ("id","sedesClinica__nombre","tiposPlanta__nombre","tipoDoc__nombre","documento","nombre","genero","direccion","telefono")
+    list_display = ("id","sedesClinica","tiposPlanta","tipoDoc","documento","nombre","genero","direccion","telefono", "esCajero")
+    search_fields = ("id","sedesClinica__nombre","tiposPlanta__nombre","tipoDoc__nombre","documento","nombre","genero","direccion","telefono", "esCajero")
     # Filtrar
-    list_filter = ('nombre','sedesClinica',"tiposPlanta",'documento','genero')
+    list_filter = ('nombre','sedesClinica',"tiposPlanta",'documento','genero', "esCajero")
 
 
 

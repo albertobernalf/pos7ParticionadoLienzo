@@ -1156,7 +1156,7 @@ def ImprimirHistoriaClinica(request):
     print("Entre ImprimirHistoriaClinica ")
 
     ingresoId = request.POST["ingresoId"]
-    #print("ingresoId = ", ingresoId)
+    print("ingresoId = ", ingresoId)
 
     print("ingresoId = ", ingresoId)
     llave = ingresoId.split('-')
@@ -1186,9 +1186,10 @@ def ImprimirHistoriaClinica(request):
     print("documentoPaciente = ", pacienteId.documento)
 
     pdf = PDF(tipoDocId,documentoId, consec, estriage)
-
+    print("LISTO 000")
     pdf.add_page()
 
+    print("LISTO 1")
     pdf.alias_nb_pages()
     pdf.set_margins(left=10, top=5, right=5)
     print("LISTO 1.5")
@@ -1210,7 +1211,7 @@ def ImprimirHistoriaClinica(request):
 
     comando = 'select  h.id HistoriaId, h.folio folioId, h.fecha fechaFolio, tip.nombre tipoFolio from clinico_historia h left join clinico_tiposfolio tip ON (tip.id = h."tiposFolio_id" ) where h.documento_id = ' + "'" + str(documentoId) + "'" + ' order by h.id'
     curt.execute(comando)
-    #print(comando)
+    print(comando)
 
     folios = []
 
@@ -1252,7 +1253,7 @@ def ImprimirHistoriaClinica(request):
 
         curt.execute(comando)
 
-        #print(comando)
+        print(comando)
 
         historia = []
 
@@ -1304,7 +1305,7 @@ def ImprimirHistoriaClinica(request):
                 folios[0 + i]['HistoriaId']) + ' AND historia.apache2 != 0'
             curh.execute(comando)
 
-            #print(comando)
+            print(comando)
 
             rasgosHistoria = []
 
@@ -1379,7 +1380,7 @@ def ImprimirHistoriaClinica(request):
 
             curr.execute(comando)
 
-            #print(comando)
+            print(comando)
 
             revisionSistemas = []
 
@@ -1461,7 +1462,7 @@ def ImprimirHistoriaClinica(request):
 
             cure.execute(comando)
 
-            #print(comando)
+            print(comando)
 
             signosVitales = []
 
@@ -1522,7 +1523,7 @@ def ImprimirHistoriaClinica(request):
 
             cure.execute(comando)
 
-            #print(comando)
+            print(comando)
 
             notasEnfermeria = []
 
@@ -1564,7 +1565,7 @@ def ImprimirHistoriaClinica(request):
 
             curt.execute(comando)
 
-            #print(comando)
+            print(comando)
 
             laboratorios = []
 
@@ -1666,7 +1667,7 @@ def ImprimirHistoriaClinica(request):
 
                 curp.execute(comando)
 
-                #print(comando)
+                print(comando)
 
                 resultadosLab = []
 
@@ -1709,7 +1710,7 @@ def ImprimirHistoriaClinica(request):
 
             curt.execute(comando)
 
-            #print(comando)
+            print(comando)
 
             radiologia = []
 
@@ -1744,7 +1745,7 @@ def ImprimirHistoriaClinica(request):
                 #comando ='SELECT hisExa.interpretacion1, hisExa."fechaInterpretacion1", med.nombre medico FROM clinico_historiaexamenes hisExa INNER JOIN  clinico_medicos med ON (med.id = hisExa."medicoInterpretacion1_id") INNER JOIN clinico_historia historia on (historia.id = hisExa.historia_id ) WHERE hisExa.historia_id = ' + "'" + str(folios[0 + i]['HistoriaId']) + "'"
                 comando = 'SELECT hisExa.interpretacion1, hisExa."fechaInterpretacion1", pla.nombre medicoInterpreta1, hisExa.interpretacion2, hisExa."fechaInterpretacion2", pla.nombre medicoInterpreta2 FROM clinico_historiaexamenes hisExa LEFT JOIN  clinico_medicos med ON (med.id = hisExa."medicoInterpretacion1_id") LEFT  JOIN  clinico_medicos med2 ON (med2.id = hisExa."medicoInterpretacion2_id") INNER JOIN clinico_historia historia on (historia.id = hisExa.historia_id ) LEFT JOIN planta_planta pla ON (pla.id=med.planta_id) LEFT JOIN planta_planta pla2 ON (pla2.id=med2.planta_id) WHERE hisExa.id = ' + "'" + str(radiologia[0 + l]['id'])  + "'"
 
-                #print(comando)
+                print(comando)
                 cury.execute(comando)
 
                 resultadosCabezoteRad = []
@@ -1812,7 +1813,7 @@ def ImprimirHistoriaClinica(request):
 
                 cura.execute(comando)
 
-                #print(comando)
+                print(comando)
 
                 resultadosRad = []
 
@@ -1853,7 +1854,7 @@ def ImprimirHistoriaClinica(request):
 
             curt.execute(comando)
 
-            #print(comando)
+            print(comando)
 
             terapias = []
 
@@ -1889,7 +1890,7 @@ def ImprimirHistoriaClinica(request):
                 #comando ='SELECT hisExa.interpretacion1, hisExa."fechaInterpretacion1", med.nombre medico FROM clinico_historiaexamenes hisExa INNER JOIN  clinico_medicos med ON (med.id = hisExa."medicoInterpretacion1_id") INNER JOIN clinico_historia historia on (historia.id = hisExa.historia_id ) WHERE hisExa.historia_id = ' + "'" + str(folios[0 + i]['HistoriaId']) + "'"
                 comando = 'SELECT hisExa.interpretacion1, hisExa."fechaInterpretacion1", pla.nombre medicoInterpreta1, hisExa.interpretacion2, hisExa."fechaInterpretacion2", pla.nombre medicoInterpreta2 FROM clinico_historiaexamenes hisExa LEFT JOIN  clinico_medicos med ON (med.id = hisExa."medicoInterpretacion1_id") LEFT  JOIN  clinico_medicos med2 ON (med2.id = hisExa."medicoInterpretacion2_id") INNER JOIN clinico_historia historia on (historia.id = hisExa.historia_id ) LEFT JOIN planta_planta pla ON (pla.id=med.planta_id) LEFT JOIN planta_planta pla2 ON (pla2.id=med2.planta_id) WHERE hisExa.id = ' + "'" + str(terapias[0 + l]['id'])  + "'"
 
-                #print(comando)
+                print(comando)
                 cury.execute(comando)
 
                 resultadosCabezoteTer = []
@@ -1955,7 +1956,7 @@ def ImprimirHistoriaClinica(request):
 
                 curb.execute(comando)
 
-                #print(comando)
+                print(comando)
 
                 resultadosTer = []
 
@@ -1996,7 +1997,7 @@ def ImprimirHistoriaClinica(request):
 
             curt.execute(comando)
 
-            #print(comando)
+            print(comando)
 
             noqX = []
 
@@ -2031,7 +2032,7 @@ def ImprimirHistoriaClinica(request):
                 #comando ='SELECT hisExa.interpretacion1, hisExa."fechaInterpretacion1", med.nombre medico FROM clinico_historiaexamenes hisExa INNER JOIN  clinico_medicos med ON (med.id = hisExa."medicoInterpretacion1_id") INNER JOIN clinico_historia historia on (historia.id = hisExa.historia_id ) WHERE hisExa.historia_id = ' + "'" + str(folios[0 + i]['HistoriaId']) + "'"
                 comando = 'SELECT hisExa.interpretacion1, hisExa."fechaInterpretacion1", pla.nombre medicoInterpreta1, hisExa.interpretacion2, hisExa."fechaInterpretacion2", pla.nombre medicoInterpreta2 FROM clinico_historiaexamenes hisExa LEFT JOIN  clinico_medicos med ON (med.id = hisExa."medicoInterpretacion1_id") LEFT  JOIN  clinico_medicos med2 ON (med2.id = hisExa."medicoInterpretacion2_id") INNER JOIN clinico_historia historia on (historia.id = hisExa.historia_id ) LEFT JOIN planta_planta pla ON (pla.id=med.planta_id) LEFT JOIN planta_planta pla2 ON (pla2.id=med2.planta_id) WHERE hisExa.id = ' + "'" + str(noqX[0 + l]['id'])  + "'"
 
-                #print(comando)
+                print(comando)
                 cury.execute(comando)
 
                 resultadosCabezoteNoQx = []
@@ -2146,7 +2147,7 @@ def ImprimirHistoriaClinica(request):
                 folios[0 + i]['HistoriaId'])
             curc.execute(comando)
 
-            #print(comando)
+            print(comando)
 
             medicamentos = []
 
@@ -2196,7 +2197,7 @@ def ImprimirHistoriaClinica(request):
                 folios[0 + i]['HistoriaId'])
             curi.execute(comando)
 
-            #print(comando)
+            print(comando)
 
             incapacidades = []
 
@@ -2244,7 +2245,7 @@ def ImprimirHistoriaClinica(request):
 
             curt.execute(comando)
 
-            #print(comando)
+            print(comando)
 
             diagnosticos = []
 
@@ -2286,7 +2287,7 @@ def ImprimirHistoriaClinica(request):
             comando = 'SELECT medicos."registroMedico", planta.nombre plantaNombre, planta."tipoDoc_id", planta.documento 	FROM clinico_historia historia INNER JOIN planta_planta planta ON (planta.id = historia."usuarioRegistro_id") INNER JOIN clinico_medicos medicos ON (medicos.planta_id = planta.id) WHERE historia.id = ' + "'" + str(folios[0 + i]['HistoriaId']) + "'"
             curx.execute(comando)
 
-            #print(comando)
+            print(comando)
 
             registroMed = []
 

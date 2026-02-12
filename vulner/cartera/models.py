@@ -495,3 +495,62 @@ class Caja(models.Model):
 
     def __str__(self):
         return str(self.serviciosAdministrativos)
+
+class PagosEmpresas(models.Model):
+    ESTADOREG_CHOICES = [
+        ('A', 'Activo'),
+        ('I', 'Inactivo'), ]
+
+    id = models.AutoField(primary_key=True)
+    fecha = models.DateTimeField(editable=True, null=True, blank=True)
+    sedesClinica = models.ForeignKey('sitios.SedesClinica', blank=True,null= True, editable=True, on_delete=models.PROTECT, related_name = 'SedesClinica764145')
+    serviciosAdministrativos = models.ForeignKey('sitios.ServiciosAdministrativos', blank=True,null= True, editable=True,  on_delete=models.PROTECT,   related_name='seradm095')
+    empresa = models.ForeignKey('facturacion.Empresas', blank=True,null= True, editable=True, on_delete=models.PROTECT, related_name = 'EmpresasPagos73645')
+    tipoPago = models.ForeignKey('cartera.TiposPagos', blank=True,null= True, editable=True, on_delete=models.PROTECT)
+    formaPago = models.ForeignKey('cartera.FormasPagos', blank=True,null= True, editable=True, on_delete=models.PROTECT)
+    radicado = models.DecimalField( max_digits=20, decimal_places=0, default=0)
+    valor = models.DecimalField( max_digits=20, decimal_places=0, default=0)
+    descripcion = models.CharField(max_length=200, null=False)
+    fechaRegistro = models.DateTimeField(default=now, blank=True, null=True, editable=True)
+    estadoReg = models.CharField(max_length=1, choices=ESTADOREG_CHOICES, default='A', editable=False)
+
+    def __str__(self):
+        return self.descripcion
+
+
+class PagosEmpresasDetalle(models.Model):
+    ESTADOREG_CHOICES = [
+        ('A', 'Activo'),
+        ('I', 'Inactivo'), ]
+
+    id = models.AutoField(primary_key=True)
+    pagosEmpresas = models.ForeignKey('cartera.PagosEmpresas', blank=True,null= True, editable=True, on_delete=models.PROTECT, related_name = 'EmpresasPagos7646')
+    empresa = models.ForeignKey('facturacion.Empresas', blank=True,null= True, editable=True, on_delete=models.PROTECT, related_name = 'Empresas7645')
+    factura  =  models.ForeignKey('facturacion.facturacion',blank=True,null= True, editable=True, on_delete=models.PROTECT)
+    radicadoFactura = models.DecimalField( max_digits=20, decimal_places=0, default=0)
+    valor = models.DecimalField( max_digits=20, decimal_places=0, default=0)
+    fechaRegistro = models.DateTimeField(default=now, blank=True, null=True, editable=True)
+    estadoReg = models.CharField(max_length=1, choices=ESTADOREG_CHOICES, default='A', editable=False)
+
+    def __str__(self):
+        return self.descripcion
+
+
+class Cartera(models.Model):
+    ESTADOREG_CHOICES = [
+        ('A', 'Activo'),
+        ('I', 'Inactivo'), ]
+
+    id = models.AutoField(primary_key=True)
+    sedesClinica = models.ForeignKey('sitios.SedesClinica', blank=True,null= True, editable=True, on_delete=models.PROTECT, related_name = 'SedesClinica784145')
+    factura  =  models.ForeignKey('facturacion.facturacion',blank=True,null= True, editable=True, on_delete=models.PROTECT)
+    valor = models.DecimalField( max_digits=20, decimal_places=0, default=0)
+    pagos = models.DecimalField( max_digits=20, decimal_places=0, default=0)
+    saldo= models.DecimalField( max_digits=20, decimal_places=0, default=0)	
+    valor = models.DecimalField( max_digits=20, decimal_places=0, default=0)
+    fechaRegistro = models.DateTimeField(default=now, blank=True, null=True, editable=True)
+    estadoReg = models.CharField(max_length=1, choices=ESTADOREG_CHOICES, default='A', editable=False)
+
+    def __str__(self):
+        return self.descripcion
+

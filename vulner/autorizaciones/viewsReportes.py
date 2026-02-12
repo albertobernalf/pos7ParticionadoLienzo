@@ -53,8 +53,15 @@ import json
 import datetime
 import cgi
 
+import os
+import requests
+import urllib
+from django.http import FileResponse
+from io import BytesIO
+import io
 
-def ImprimirAutorizaciones(request):
+
+def ImprimirAut(request):
     # Instantiation of inherited class
 
     autorizacion = request.POST["autorizacionId"]
@@ -214,15 +221,13 @@ def ImprimirAutorizaciones(request):
     #  Fin datos personales paciente
 
 
-
-
     #pdf = PDFAutorizacion(tipoDocId, documentoId, consec, ingresoId)
     #pdf.alias_nb_pages()
     #pdf.set_margins(left=10, top=5, right=5)
     ##pdf.add_page()
     pdf.set_font('Times', '', 8)
     pdf.ln(1)
-    linea = 7
+
 
 
     # Define el ancho de línea
@@ -233,6 +238,7 @@ def ImprimirAutorizaciones(request):
     pdf.set_font('Times', 'B', 9)
     pdf.ln(3)
     pdf.cell(100, 30, 'AUTORIZACION:', 0, 0, 'C')
+    pdf.cell(30, 30, 'cuarta linea', 0, 0, 'C')
     pdf.set_font('Times', '', 7)
 
     carpeta = 'C:\EntornosPython\Pos7Particionado/vulner/JSONCLINICA\HistoriasClinicas/'
@@ -245,7 +251,32 @@ def ImprimirAutorizaciones(request):
 
     try:
         # Intenta abrir el archivo directamente
-        webbrowser.open(archivo)
+        #webbrowser.open(archivo)
+
+        buff = BytesIO()
+        buff.name = archivo
+        #Genera el archivo el el servidor
+
+        pdf.output(archivo, 'F')
+
+
+        # 2. Abrir el archivo PDF y leerlo
+        with open(archivo, 'rb') as f:
+            pdf_data = f.read()
+            # 3. Escribir los datos en el buffer
+            buff.write(pdf_data)
+
+        buff.seek(0)
+
+        return FileResponse(
+            buff,
+            as_attachment=True,  # Cambiar a False para verlo en navegador
+            filename=archivo,
+            content_type='application/pdf'
+        )
+
+
+
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
     except Exception as e:

@@ -2044,22 +2044,24 @@ def crearHistoriaClinica(request):
                                     print("convenioValor[0]['sum'] = ", convenioValor[0]['sum'])
 
                                 # Aqui analiza si es necesario que caiga en la tabla de Autorizaciones
+                                #
+                                estadoAutorizacionId = EstadosAutorizacion.objects.get(nombre='PENDIENTE')
+
 
                                 if (medicamentosId.requiereAutorizacion == 'S'):
 
                                     comando = 'SELECT aut.id id FROM autorizaciones_autorizaciones  aut, clinico_historia historia WHERE  aut.historia_id = historia.id AND historia."tipoDoc_id" = ' + "'" + str(
                                         tipoDocId.id) + "' AND historia.documento_id = " + "'" + str(
                                         documentoId.id) + "'" + ' AND historia."consecAdmision" = ' + "'" + str(
-                                        ingresoPaciente) + "' AND aut.historia_id = " + "'" + str(historiaId) + "'"
+                                        ingresoPaciente) + "' AND aut.historia_id = " + "'" + str(historiaId) + "' AND " + '"estadoAutorizacion_id" = ' + "'" + str(estadoAutorizacionId.id) + "'"
 
                                     cur3.execute(comando)
                                     hayAut = []
 
                                     for id in cur3.fetchall():
                                         hayAut.append({'id': id})
-
-
-                                    estadoAutorizacionId = EstadosAutorizacion.objects.get(nombre='PENDIENTE')
+                                    
+                                    print("hayAut ANTES DE = ", hayAut)
 
                                     hayAut = str(hayAut)
                                     hayAut = hayAut.replace("None", ' ')
@@ -2069,10 +2071,12 @@ def crearHistoriaClinica(request):
                                     hayAut = hayAut.replace(" ", '')
                                     hayAut = hayAut.replace("{'id':", '')
                                     hayAut = hayAut.replace("}", '')
+                                    hayAut = hayAut.replace("[", '')
+                                    hayAut = hayAut.replace("]", '')
 
                                     print("hayAut = ", hayAut)
 
-                                    if hayAut == '[]':
+                                    if hayAut == '':
 
 
                                         #comando = 'INSERT INTO autorizaciones_autorizaciones ("estadoAutorizacion_id","fechaModifica", "fechaRegistro", "estadoReg",empresa_id, "plantaOrdena_id", "sedesClinica_id", "usuarioRegistro_id", historia_id )  SELECT ' + "'" + str(estadoAutorizacionId.id) + "'" + ', now(), now(), ' + "'" + str('A') + "'" + ', conv.empresa_id,  ' + "'" + str(plantaId.id) + "','" +  str(sede) + "','" + str(usuarioRegistro) + "'," + "'" + str(historiaId) + "'" + ' FROM facturacion_conveniospacienteingresos convIngreso, contratacion_conveniosprocedimientos proc, contratacion_convenios conv WHERE conv.id = convIngreso.convenio_id AND convIngreso."tipoDoc_id" = ' + "'" +  str(tipoDocId.id) + "' AND convIngreso.documento_id = " + "'" + str(documentoId.id) + "'" + ' AND convIngreso."consecAdmision" = ' + "'" + str(ingresoPaciente) + "' AND conv.id = proc.convenio_id AND proc.cups_id = " + "'" +  str(medicamentos) + "' RETURNING id"

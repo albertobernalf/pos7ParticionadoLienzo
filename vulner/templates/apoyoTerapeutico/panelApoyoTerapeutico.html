@@ -152,7 +152,8 @@ Mayor a un dia
 
        <article id="RespuestasApoTerap">
             <center>
-                <h3>Ingresar resultados Examenes</h3></center>
+              
+
    <div style="height: 1px;  width:90%;">  
                             <form class="form-inline" action="/crearApoyoTerapeutico/" method="POST"
                                   id="ApoyoTerapeuticoForma">
@@ -161,7 +162,8 @@ Mayor a un dia
 
                                     <input type="hidden" class="form-control form-control-sm" id="tipoExamenId"    name="tipoExamenId" value="" readonly>
 
-                             	<!-- 	<div style="heigth=50px;">  -->
+                             	<div id="flex-container-respuesta">  
+					<div>
 
 					TipoDoc:
 					<span id="tipoDocPaci" name="tipoDocPaci" size="2px"></span>
@@ -173,43 +175,45 @@ Mayor a un dia
 					<span id="tipoExamen" name="tipoExamen"></span>
 					<span id="CupsId" name="CupsId"></span>
 					Examen:
-					<span id="nombreExamen" name="nombreExamen"></span>
-
-		
+				<span id="nombreExamen" name="nombreExamen"></span>
+	
 
 					Cantidad:
 					<span id="cantidad" name="cantidad"></span>
                                    
                                          Folio:
-                                        <input type="text" class="form-control form-control-sm" id="folio" name="folio" size="2"
+                                        <input type="text"  id="folio" name="folio" size="2"
                                                value="" readonly>
 
-                                         Resultado:
-                                        <input type="text" class="form-control form-control-sm" id="resultado" name="resultado"   value="" >
+                                         Toma:
+                                        <input type="datetime-local"  id="fechaToma" name="fechaToma"   value="" placeholder="Fecha Toma">
 
-                                         FechaToma:
-                                        <input type="datetime-local" class="form-control form-control-sm" id="fechaToma" name="fechaToma"   value="" >
+
+                                 
+				    </div>  
+				    </div>  
+
+
+
+			<div id="flex-container-respuesta1">  
+					<div>
 
 					Servicio:
-                                                    <select class="select-css" id="serviciosAdministrativos"  tabindex= "0"
+                                                    <select  id="serviciosAdministrativos"  tabindex= "0"
                                                     name="serviciosAdministrativos" required>
                                                 {% for serviciosAdministrativos in ServiciosAdministrativos %}
                                                 <option value="{{serviciosAdministrativos.id}}"> {{serviciosAdministrativos.nombre}}</option>
                                                 {% endfor %}
                                             </select>
 
-                                 
-				 <!--   </div>  -->
+                                         Resul:
+                                        <input type="text"  id="resultado" name="resultado"   value="" placeholder="Resultado">
 
 
 
-                                <div class="row">
-				  
-
-                                        <div class="col">
                                         Estado:
 
-                                        <select class="select-css  h-40 w-10" id="estadoExamen"
+                                        <select  id="estadoExamen"
                                                 name="estadoExamen">
                                             {% for estadosExamenes in EstadosExamenes %}
                                             <option value="{{estadosExamenes.id}}">
@@ -218,26 +222,16 @@ Mayor a un dia
                                             {% endfor %}
                                         </select>
 
-                                    </div>
 
+                                        <input type="text"  id="observaciones"
+                                               name="observaciones" size="6" value="" placeholder="Observa" readonly>
 
-                                    <div class="col">
-                                         Observa:
-                                        <input type="text" class="form-control form-control-sm" id="observaciones"
-                                               name="observaciones" size="6" value="" readonly>
+                                        <input type="text"  id="interpretacion1"
+                                               name="interpretacion1"  value="" placeholder="Interpretacion 1">
 
-                                    </div>
+                                        Med:
 
-                                    <div class="col">
-                                        Interpreta1:
-                                        <input type="text" class="form-control form-control-sm" id="interpretacion1"
-                                               name="interpretacion1" size="6" value="">
-
-                                    </div>
-                                    <div class="col">
-                                        Medico:
-
-                                        <select class="select-css  h-40 w-10" id="medicoInterpretacion1"
+                                        <select  id="medicoInterpretacion1"
                                                 name="medicoInterpretacion1">
                                             {% for medicoInterpretacion1 in MedicoInterpretacion1 %}
                                             <option value="{{medicoInterpretacion1.id}}">
@@ -246,19 +240,12 @@ Mayor a un dia
                                             {% endfor %}
                                         </select>
 
-                                    </div>
+                                        <input type="text"  id="interpretacion2"
+                                               name="interpretacion2" value="" placeholder="Interpretacion 2">
 
-                                    <div class="col">
-                                     Interpreta2:
-                                        <input type="text" class="form-control form-control-sm" id="interpretacion2"
-                                               name="interpretacion2" value="">
+                                       Med:
 
-                                    </div>
-
-                                    <div class="col">
-                                       Medico:
-
-                                        <select class="select-css  h-40 w-10" id="medicoInterpretacion2"
+                                        <select  id="medicoInterpretacion2"
                                                 name="medicoInterpretacion2">
                                             {% for medicoInterpretacion2 in MedicoInterpretacion2 %}
                                             <option value="{{medicoInterpretacion2.id}}">
@@ -267,27 +254,22 @@ Mayor a un dia
                                             {% endfor %}
                                         </select>
 
-                                    </div>
-                                    <div class="col">
                                        MedReporte:
 
-                                        <select class="select-css" id="medicoReporte" name="medicoReporte" >
+                                        <select id="medicoReporte" name="medicoReporte" >
                                             {% for medicoReporte in MedicoReporte %}
                                             <option value="{{medicoReporte.id}}"> {{medicoReporte.nombre}}
                                             </option>
                                             {% endfor %}
                                         </select>
+                                         Imagen :
+                                        <input type="text"  id="rutaImagen"
+                                               name="rutaImagen" value="" size="4" placeholder="Ruta Imagen">
 
-                                    </div>
-                                    <div class="col">
-                                         ruta-Imagen :
-                                        <input type="text" class="form-control form-control-sm" id="rutaImagen"
-                                               name="rutaImagen" value="" size="4">
-                                    </div>
-                                    <div class="col">
-                                        ruta-Video :
-                                        <input type="text" class="form-control form-control-sm" id="rutaVideo"
-                                               name="rutaVideo" value="" size="4">
+                                        Video :
+                                        <input type="text"  id="rutaVideo"
+                                               name="rutaVideo" value="" size="4" placeholder="Ruta video">
+
                                     </div>
 
                                 </div>
@@ -300,14 +282,15 @@ Mayor a un dia
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="card" style="width=100%;">
-                                            <div class="card-header" style="height:30px;width=100%;">
-                                                <div class="row">
+                                            <div class="card-header" style="height:60px;width=100%;">
 
 
-                                                    <div class="col">
+			<div id="flex-container-resultado">  
+					<div>
+
                                                         RazgoClinico:
 
-                                                        <select class="form-select  h-10 w-10" id="rasgosClinicos"
+                                                        <select  id="rasgosClinicos"
                                                                 name="rasgosClinicos">
                                                             {% for rasgosClinicos in RasgosClinicos %}
                                                             <option value="{{rasgosClinicos.id}}">
@@ -315,25 +298,19 @@ Mayor a un dia
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
 
- 						 <div class="col"> Observa:
                                                         <input type="text" id="observa" name="observa" value="">
-                                                    </div>
 
-                                                    <div class="col">
+
+
                                                        Resultado:
                                                         <input type="text" id="valor" name="valor" value="">
-                                                    </div>
+					 
 
-						 
 
-                                                    <div class="col">
                                                         <span class="text-secondary">Crear Resultado</span>
                                                         <a class="btn btn-success" href="javascript:void(0)"
                                                            id="createNewResultadoRasgo"> <i class="fa fa-plus"></i></a>
-                                                    </div>
-                                                    <div class="col">
                                                       
 
 							<span style="padding-right:3px; padding-top: 3px; display:inline-block; ">
@@ -344,8 +321,7 @@ Mayor a un dia
 
                                                     </div>
 
-
-                                                </div> <!-- Cierra el row -->
+                                                </div> <!-- Cierra el flex -->
                                             </div>  <!-- Cierra el header -->
 						<br>
 						<br>

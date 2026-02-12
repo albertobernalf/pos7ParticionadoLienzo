@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from cartera.models import FormasPagos, TiposPagos,Pagos,TiposGlosas,MotivosGlosas, Radicaciones, Remisiones, TiposNotas, EstadosGlosas, GlosasConceptoGeneral, GlosasConceptoEspecifico, Caja, TiposNotasCredito, NotasCreditoDetalle, NotasCreditoDetalleRips
+from cartera.models import FormasPagos, TiposPagos,Pagos,TiposGlosas,MotivosGlosas, Radicaciones, Remisiones, TiposNotas, EstadosGlosas, GlosasConceptoGeneral, GlosasConceptoEspecifico, Caja, TiposNotasCredito, NotasCreditoDetalle, NotasCreditoDetalleRips, PagosEmpresas, PagosEmpresasDetalle
 
 @admin.register(FormasPagos)
 class formasPagosAdmin(admin.ModelAdmin):
@@ -121,3 +121,11 @@ class notasCreditoDetalleRipsAdmin(admin.ModelAdmin):
     search_fields = ("id", "notaCreditoDetalle","valorNota","tiposNotasCredito__nombre")
     # Filtrar
     list_filter = ("id", "notaCreditoDetalle","valorNota","tiposNotasCredito")
+
+
+@admin.register(PagosEmpresas)
+class pagosEmpresasAdmin(admin.ModelAdmin):
+    list_display = ("id", "fecha", "sedesClinica", "serviciosAdministrativos", "empresa" ,"tipoPago","formaPago","valor", "descripcion")
+    search_fields = ("id", "fecha", "sedesClinica__nombre", "serviciosAdministrativos_nombre", "empresa__nombre" ,"tipoPago_nombre","formaPago__nombre","valor", "descripcion")
+    # Filtrar
+    list_filter = ("id", "fecha", "sedesClinica", "serviciosAdministrativos", "empresa" ,"tipoPago","formaPago","valor", "descripcion")

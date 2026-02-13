@@ -543,6 +543,7 @@ class Cartera(models.Model):
 
     id = models.AutoField(primary_key=True)
     sedesClinica = models.ForeignKey('sitios.SedesClinica', blank=True,null= True, editable=True, on_delete=models.PROTECT, related_name = 'SedesClinica784145')
+    empresa = models.ForeignKey('facturacion.Empresas', blank=True,null= True, editable=True, on_delete=models.PROTECT, related_name = 'Empresas764578')
     factura  =  models.ForeignKey('facturacion.facturacion',blank=True,null= True, editable=True, on_delete=models.PROTECT)
     valor = models.DecimalField( max_digits=20, decimal_places=0, default=0)
     pagos = models.DecimalField( max_digits=20, decimal_places=0, default=0)

@@ -356,7 +356,9 @@ urlpatterns = [
     path('load_tablaGlosasDetalleRips/<str:data>', viewsCartera.Load_tablaGlosasDetalleRips, name='Load_tablaGlosasDetalle_Rips'),
 
     path('load_dataCartera/<str:data>', viewsCartera.Load_dataCartera, name='loaddata_Cartera'),
+    path('load_dataPagosEmpresas/<str:data>', viewsCartera.Load_dataPagosEmpresas,name='load_data_PagosEmpresas'),
 
+    path('guardarPagosEmpresas/', viewsCartera.GuardarPagosEmpresas, name='guardarPagos_Empresas'),
     # Tarifas
 	
     path('load_dataTarifariosProcedimientos/<str:data>', viewsTarifarios.Load_dataTarifariosProcedimientos, name='Load_dataTarifariosProcedimientos'),

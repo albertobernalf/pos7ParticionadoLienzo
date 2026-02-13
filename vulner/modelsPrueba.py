@@ -1143,4 +1143,12 @@ FEB 12:
 	Arreglar Cartera tODA... en la tarde ... Ojo hay que marcar d eplanta como cajeros
 	Y despues si seguir con Cirugia ... 
 	Seguir mejorando vista apoyo terapeutico
-	
+
+feb 13:
+       OJO HAY QUE CREAR TODA LAS FUNCIONES EN LA PARAMETRIZACION, fcaturas, rips,json etc
+       OJO AL FACTURAR VERIFICAR NO GRABO A PAGOS EMPRESAS
+	OJO AL FGACTURA NO REFRESCON PANTALA VERIFICAR
+	CREO QUJE ME DESORDENAS LOS ICONOS EN PANTALLA DESPUES DE ALGIUNA CCCIONRAR
+
+
+

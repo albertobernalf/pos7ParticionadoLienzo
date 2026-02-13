@@ -272,7 +272,7 @@ Mayor a un dia
 
                                     </div>
 
-                                </div>
+                                </div>  <!-- Cierra flexbox -->
 
 				 </form>
                                 <!-- DESDE AQUIP DATATABLE  -->
@@ -323,10 +323,13 @@ Mayor a un dia
 
                                                 </div> <!-- Cierra el flex -->
                                             </div>  <!-- Cierra el header -->
-						<br>
-						<br>
+		
 
                                             <div class="card-body" style="height:30px;width=100%;">
+						<br>
+						<br>
+						<br>
+						<br>
                                                 <div class="row">
                                                      <div class="col-sm-12"> 
 
@@ -414,52 +417,37 @@ Mayor a un dia
                                     <input type="hidden" class="form-control form-control-sm" id="ztipoExamenId"    name="ztipoExamenId" value="" readonly>
 
 
-                                <div class="row row-cols-8">
+			<div id="flex-container-resultadosRes">  
+					<div>
 
-				     <div class="col">
-                                        <label for="ztipoDocPaci" class="col-sm-3 control-label"> TipoDoc:</label>
+                                        <label for="ztipoDocPaci" > TipoDoc:</label>
                                         <input type="text" class="form-control form-control-sm" id="ztipoDocPaci"
                                                name="ztipoDocPaci" value="" readonly>
-                                    </div>
-
-<div class="col">
-                                        <label for="zdocumentoPaci" class="col-sm-3 control-label">Paciente:</label>
-                                        <input type="text" class="form-control form-control-sm" id="zdocumentoPaci"
+                                        <label for="zdocumentoPaci" >Paciente:</label>
+                                        <input type="text" id="zdocumentoPaci"
                                                name="zdocumentoPaciente" value="" readonly>
-                                    </div>
 
-
-				     <div class="col">
-                                        <label for="znombrePaciente" class="col-sm-3 control-label">Paciente:</label>
-                                        <input type="text" class="form-control form-control-sm" id="znombrePaciente"
+                                        <label for="znombrePaciente" >Paciente:</label>
+                                        <input type="text"  id="znombrePaciente"
                                                name="znombrePaciente" value="" readonly>
-                                    </div>
 
-
-
-                                    <div class="col">
-                                        <label for="ztipoExamen" class="col-sm-3 control-label"> TipoExamen:</label>
-                                        <input type="text" class="form-control form-control-sm" id="ztipoExamen"
+                                        <label for="ztipoExamen" > TipoExamen:</label>
+                                        <input type="text"  id="ztipoExamen"
                                                name="ztipoExamen" value="" readonly>
-                                    </div>
+                    
 
-                                    <div class="col">
-                                        <label for="zCupsId" class="col-sm-1 control-label"> CupsId :</label>
-                                        <input type="text" class="form-control form-control-sm" id="zCupsId"
+                                        <label for="zCupsId" > CupsId :</label>
+                                        <input type="text"  id="zCupsId"
                                                name="zCupsId" value="" readonly>
-                                    </div>
 
-                                    <div class="col">
-                                        <label for="znombreExamen" class="col-sm-6 control-label"> Examen:</label>
-                                        <input type="text" class="form-control form-control-sm" id="znombreExamen"
+                                        <label for="znombreExamen" > Examen:</label>
+                                        <input type="text"  id="znombreExamen"
                                                name="znombreExamen" value="" readonly>
 
-                                    </div>
+                           
+                                        <label for="zserviciosAdministrativos" >Servicio:</label>
 
-				          <div class="col">
-                                        <label for="zserviciosAdministrativos" class="col-sm-6 control-label">Servicio:</label>
-
-                                        <select class="form-select  h-40 w-10" id="zserviciosAdministrativos"
+                                        <select class="form-select" id="zserviciosAdministrativos"
                                                 name="zserviciosAdministrativos" disabled>
                                             {% for serviciosAdministrativos in ServiciosAdministrativos %}
                                             <option value="{{serviciosAdministrativos.id}}">
@@ -468,31 +456,20 @@ Mayor a un dia
                                             {% endfor %}
                                         </select>
 
-                                    </div>
-				
-                                    <div class="col">
-                                        <label for="zcantidad" class="col-sm-1 control-label"> Cantidad:</label>
-                                        <input type="text" class="form-control form-control-sm" id="zcantidad"
+                                
+                                        <label for="zcantidad" > Cantidad:</label>
+                                        <input type="text"  id="zcantidad"
                                                name="zcantidad" value="" readonly>
 
-                                    </div>
 
-                                 
-
-                                </div>
-
-                                <div class="row row-cols-8">
-				   <div class="col">
-                                        <label for="zfolio" class="col-sm-1 control-label"> Folio:</label>
-                                        <input type="text" class="form-control form-control-sm" id="zfolio" name="zfolio"
+                                        <label for="zfolio" > Folio:</label>
+                                        <input type="text"  id="zfolio" name="zfolio"
                                                value="" readonly>
 
-                                    </div>
 
-                                        <div class="col">
-                                        <label for="zestadoExamen" class="col-sm-6 control-label">EstadoExamen:</label>
+                                        <label for="zestadoExamen" >EstadoExamen:</label>
 
-                                        <select class="form-select  h-40 w-10" id="zestadoExamen"
+                                        <select class="form-select" id="zestadoExamen"
                                                 name="zestadoExamen" disabled>
                                             {% for estadosExamenes in EstadosExamenes %}
                                             <option value="{{estadosExamenes.id}}">
@@ -501,28 +478,20 @@ Mayor a un dia
                                             {% endfor %}
                                         </select>
 
-                                    </div>
-
-
-                                    <div class="col">
-                                        <label for="zobservaciones" class="col-sm-6 control-label"> Observaciones
+                                        <label for="zobservaciones" > Observaciones
                                             :</label>
-                                        <input type="text" class="form-control form-control-sm" id="zobservaciones"
+                                        <input type="text"  id="zobservaciones"
                                                name="zobservaciones" value="" readonly>
 
-                                    </div>
-
-                                    <div class="col">
-                                        <label for="zinterpretacion1" class="col-sm-6 control-label"> Interpretacion1
+                                        <label for="zinterpretacion1" > Interpretacion1
                                             :</label>
-                                        <input type="text" class="form-control form-control-sm" id="zinterpretacion1"
+                                        <input type="text"  id="zinterpretacion1"
                                                name="zinterpretacion1" value="" readonly>
 
-                                    </div>
-                                    <div class="col">
-                                        <label for="zmedicoInterpretacion1" class="col-sm-6 control-label">MedicoInterpreta:</label>
 
-                                        <select class="form-select  h-40 w-10" id="zmedicoInterpretacion1"
+                                        <label for="zmedicoInterpretacion1">MedicoInterpreta:</label>
+
+                                        <select class="form-select" id="zmedicoInterpretacion1"
                                                 name="zmedicoInterpretacion1" disabled>
                                             {% for medicoInterpretacion1 in MedicoInterpretacion1 %}
                                             <option value="{{medicoInterpretacion1.id}}">
@@ -531,19 +500,14 @@ Mayor a un dia
                                             {% endfor %}
                                         </select>
 
-                                    </div>
 
-                                    <div class="col">
-                                        <label for="zinterpretacion2" class="col-sm-6 control-label"> Interpretacion2:</label>
-                                        <input type="text" class="form-control form-control-sm" id="zinterpretacion2"
+                                        <label for="zinterpretacion2" > Interpretacion2:</label>
+                                        <input type="text"  id="zinterpretacion2"
                                                name="zinterpretacion2" value="" readonly>
 
-                                    </div>
+                                        <label for="zmedicoInterpretacion2" >MedicoInterpreta:</label>
 
-                                    <div class="col">
-                                        <label for="zmedicoInterpretacion2" class="col-sm-6 control-label">MedicoInterpreta:</label>
-
-                                        <select class="form-select  h-40 w-10" id="zmedicoInterpretacion2"
+                                        <select class="form-select" id="zmedicoInterpretacion2"
                                                 name="zmedicoInterpretacion2" disabled>
                                             {% for medicoInterpretacion2 in MedicoInterpretacion2 %}
                                             <option value="{{medicoInterpretacion2.id}}">
@@ -552,26 +516,23 @@ Mayor a un dia
                                             {% endfor %}
                                         </select>
 
-                                    </div>
-                                    <div class="col">
-                                        <label for="zmedicoReporte" class="col-sm-6 control-label">MedicoReporte:</label>
+                                  
+                                        <label for="zmedicoReporte" >MedicoReporte:</label>
 
-                                        <select class="form-select  h-40 w-10" id="zmedicoReporte" name="zmedicoReporte" disabled>
+                                        <select class="form-select" id="zmedicoReporte" name="zmedicoReporte" disabled>
                                             {% for medicoReporte in MedicoReporte %}
                                             <option value="{{medicoReporte.id}}"> {{medicoReporte.nombre}}
                                             </option>
                                             {% endfor %}
                                         </select>
 
-                                    </div>
-                                    <div class="col">
-                                        <label for="zrutaImagen" class="col-sm-6 control-label"> RutaImagen :</label>
-                                        <input type="text" class="form-control form-control-sm" id="zrutaImagen"
+
+                                        <label for="zrutaImagen" > RutaImagen :</label>
+                                        <input type="text"  id="zrutaImagen"
                                                name="zrutaImagen" value="" readonly>
-                                    </div>
-                                    <div class="col">
-                                        <label for="zrutaVideo" class="col-sm-6 control-label"> RutaVideo :</label>
-                                        <input type="text" class="form-control form-control-sm" id="zrutaVideo"
+
+                                        <label for="zrutaVideo" > RutaVideo :</label>
+                                        <input type="text"  id="zrutaVideo"
                                                name="zrutaVideo" value="" readonly>
                                     </div>
 

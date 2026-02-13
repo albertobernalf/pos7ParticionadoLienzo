@@ -331,3 +331,23 @@ input[type="datetime-local"] {
   /* background-color: #9B59B6;*/
   /* margin:10 */
 }
+
+#flex-container-resultadoRes{
+  display: inline-flex;
+  justify-content: left;
+}
+
+
+#flex-container-resultadoRes div1{
+  width: 1200px;
+  height: 50px;
+  color: #FFF;
+  flex-wrap: wrap;
+  text-align: left;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}

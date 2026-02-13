@@ -1403,15 +1403,17 @@ def FacturarCuenta(request):
             return JsonResponse({'success': False, 'Mensajes': 'Paciente NO tiene Salida Clinica. Consultar medico tratante !', 'Factura' : 0 })
 
     # AQUI VALDAR SI HAY CIRUGIAS QUE NO ESTEN REALIZADAS  ## OPS ESTO SI HAY QUE REVIZARLO
-    
+ 
+    print ( "Evaluo cirugia"   )
     estadoCirugiaRealizada = EstadosCirugias.objects.get(nombre='REALIZADA')
     estadoCirugiaFacturada = EstadosCirugias.objects.get(nombre='FACTURADA')
-    estadoProgramacionRealizada = ProgramacionCirugias.objects.get(nombre='Realizada')
+    estadoProgramacionRealizada = EstadosProgramacion.objects.get(nombre='Realizada')
 
     try:
         with transaction.atomic():
 
             totalCirugias = Cirugias.objects.filter(tipoDoc_id=usuarioId.tipoDoc_id , documento_id=usuarioId.documento_id ,consec=usuarioId.consecAdmision, estadoCirugia_id= estadoCirugiaRealizada.id).count()
+            print ( "total cirugias", totalCirugias   )
 
             if (cirugias >=1):
                 Cirugias.objects.filter(tipoDoc_id=usuarioId.tipoDoc_id , documento_id=usuarioId.documento_id ,consec=usuarioId.consecAdmision , estadoCirugia_id= estadoCirugiaRealizada.id).update(estadoCirugia_id=estadoCirugiaFacturada.id)
@@ -1425,7 +1427,7 @@ def FacturarCuenta(request):
         print("No haga nada")
 
     ## RUTINA ACTUALIZA DX, SERV ,
-
+    print ( "pase cirugia"   )
     miConexion3 = None
     try:
         miConexion3 = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",   password="123456")
@@ -1565,7 +1567,22 @@ def FacturarCuenta(request):
                 comando4 = 'UPDATE facturacion_refacturacion SET "facturaNueva" = ' + "'" + str(facturacionId) + "'" + ' WHERE documento_id = ' + "'" + str(triageId.documento_id) + "' and " + '"tipoDoc_id" = ' + "'" + str(triageId.tipoDoc_id) + "' and " + '"consecAdmision" = ' + "'" + str(triageId.consec) + "' AND "  + ' "facturaAnulada"  = ' + "'"  + str(facturaAnulada) + "'"
                 cur3.execute(comando4)
 
+
         miConexion3.commit()
+
+
+	# Aqui creo el registro en cartera
+
+        facturaFisica = Facturacion.objects.get(id=facturacionId)
+        convenioFisico = Convenios.objects.get(id=facturaFisica.convenio_id)
+
+        comando11 = 'INSERT INTO cartera_cartera (pagos,saldo,valor,  "fechaRegistro","estadoReg", factura_id, "sedesClinica_id", empresa_id) SELECT 0 , ' + "'" + str(facturaFisica.totalFactura) + "','" + str(facturaFisica.totalFactura) + "'," + str(fechaRegistro) + "','A'," + str(facturacionId) + "','" + str(sede) + "','" + str(convenioFisico.empresa_id) + "')"
+        cur3.execute(comando11)
+        print(comando11)
+
+        miConexion3.commit()
+
+
         cur3.close()
         miConexion3.close()
 

@@ -3190,6 +3190,78 @@ def escogeAcceso(request, Sede, Username, Profesional, Documento, NombreSede, es
 
         # Fin Combo ServiciosAdministrativos
 
+        # Combo Empresas
+
+        miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+                                       password="123456")
+        curt = miConexiont.cursor()
+
+        comando = "SELECT c.id id,c.nombre nombre FROM facturacion_empresas c"
+
+        curt.execute(comando)
+        print(comando)
+
+        empresas = []
+
+        for id, nombre in curt.fetchall():
+            empresas.append({'id': id, 'nombre': nombre})
+
+        miConexiont.close()
+        print(empresas)
+
+        context['Empresas'] = empresas
+
+        # Fin combo empresas
+
+        # Combo FormasPagos
+
+        miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+                                       password="123456")
+        curt = miConexiont.cursor()
+
+        comando = "SELECT c.id id,c.nombre nombre FROM cartera_formaspagos c"
+
+        curt.execute(comando)
+        print(comando)
+
+        formasPagos = []
+
+        for id, nombre in curt.fetchall():
+            formasPagos.append({'id': id, 'nombre': nombre})
+
+        miConexiont.close()
+        print(formasPagos)
+
+        context['FormasPagos'] = formasPagos
+
+        # Fin combo formasPagos
+
+        # Combo TiposPagos
+
+        miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+                                       password="123456")
+        curt = miConexiont.cursor()
+
+        comando = "SELECT c.id id,c.nombre nombre FROM cartera_tipospagos c"
+
+        curt.execute(comando)
+        print(comando)
+
+        tiposPagos = []
+
+        for id, nombre in curt.fetchall():
+            tiposPagos.append({'id': id, 'nombre': nombre})
+
+        miConexiont.close()
+        print(tiposPagos)
+
+        context['TiposPagos'] = tiposPagos
+
+        # Fin combo tiposPagos
+
+
+
+
         return render(request, "cartera/PanelCarteraF.html", context)
 
 

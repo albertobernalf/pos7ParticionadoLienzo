@@ -273,3 +273,24 @@ input[type="date"] {
   /* background-color: #9B59B6;*/
   /* margin:10 */
 }
+
+#flex-container-pagosEmpresas{
+  display: inline-flex;
+  justify-content: left;
+}
+
+
+#flex-container-pagosEmpresas div{
+  width: 800px;
+  height: 150px;
+  color: #FFF;
+  flex-wrap: wrap;
+  text-align: left;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
+

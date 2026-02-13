@@ -35,7 +35,7 @@ from django.db.models import F
 from cirugia.models import EstadosCirugias, EstadosProgramacion, Cirugias
 from django.db.models import F
 from sitios.models import ServiciosSedes
-
+from contratacion.models import Convenios
 
 def decimal_serializer(obj):
     if isinstance(obj, Decimal):
@@ -1573,12 +1573,15 @@ def FacturarCuenta(request):
 
 	# Aqui creo el registro en cartera
 
+        print("aui voy")
         facturaFisica = Facturacion.objects.get(id=facturacionId)
         convenioFisico = Convenios.objects.get(id=facturaFisica.convenio_id)
+        print("aui pase")
 
-        comando11 = 'INSERT INTO cartera_cartera (pagos,saldo,valor,  "fechaRegistro","estadoReg", factura_id, "sedesClinica_id", empresa_id) SELECT 0 , ' + "'" + str(facturaFisica.totalFactura) + "','" + str(facturaFisica.totalFactura) + "'," + str(fechaRegistro) + "','A'," + str(facturacionId) + "','" + str(sede) + "','" + str(convenioFisico.empresa_id) + "')"
-        cur3.execute(comando11)
+        comando11 = 'INSERT INTO cartera_cartera (pagos,saldo,valor,  "fechaRegistro","estadoReg", factura_id, "sedesClinica_id", empresa_id) VALUES ( 0 , ' +  str(facturaFisica.totalFactura) + "," + str(facturaFisica.totalFactura) + ",'" + str(fechaRegistro) + "','A'," + str(facturacionId) + ",'" + str(sede) + "'," + str(convenioFisico.empresa_id) + ")"
         print(comando11)
+        cur3.execute(comando11)
+
 
         miConexion3.commit()
 

@@ -185,18 +185,22 @@ Mayor a un dia
                                         <input type="text"  id="folio" name="folio" size="2"
                                                value="" readonly>
 
-                                         Toma:
-                                        <input type="datetime-local"  id="fechaToma" name="fechaToma"   value="" placeholder="Fecha Toma">
+                              
 
+								  <input type="button" id="btn-rango" name="btn-rango"
+                                                               value="Guardar Resultado¡" onClick="guardarResultado()">
 
                                  
 				    </div>  
 				    </div>  
 
-
+			<br>
 
 			<div id="flex-container-respuesta1">  
 					<div>
+
+        Toma:
+                                        <input type="datetime-local"  id="fechaToma" name="fechaToma"   value="" placeholder="Fecha Toma">
 
 					Servicio:
                                                     <select  id="serviciosAdministrativos"  tabindex= "0"
@@ -224,10 +228,7 @@ Mayor a un dia
 
 
                                         <input type="text"  id="observaciones"
-                                               name="observaciones" size="6" value="" placeholder="Observa" readonly>
-
-                                        <input type="text"  id="interpretacion1"
-                                               name="interpretacion1"  value="" placeholder="Interpretacion 1">
+                                               name="observaciones" size="50" value="" placeholder="Observaciones" >
 
                                         Med:
 
@@ -240,10 +241,12 @@ Mayor a un dia
                                             {% endfor %}
                                         </select>
 
-                                        <input type="text"  id="interpretacion2"
-                                               name="interpretacion2" value="" placeholder="Interpretacion 2">
 
-                                       Med:
+                                        <input type="text"  id="interpretacion1"
+                                               name="interpretacion1"  value="" placeholder="Interpretacion 1" size="50">
+
+
+                                      Med:
 
                                         <select  id="medicoInterpretacion2"
                                                 name="medicoInterpretacion2">
@@ -253,6 +256,11 @@ Mayor a un dia
                                             </option>
                                             {% endfor %}
                                         </select>
+
+                                        <input type="text"  id="interpretacion2"
+                                               name="interpretacion2" value="" placeholder="Interpretacion 2" size="50">
+
+
 
                                        MedReporte:
 
@@ -308,16 +316,12 @@ Mayor a un dia
 					 
 
 
-                                                        <span class="text-secondary">Crear Resultado</span>
+                                                        <span class="text-secondary">Crear Razgo</span>
                                                         <a class="btn btn-success" href="javascript:void(0)"
-                                                           id="createNewResultadoRasgo"> <i class="fa fa-plus"></i></a>
+                                                           id="createNewResultadoRasgo"> </a>
                                                       
 
-							<span style="padding-right:3px; padding-top: 3px; display:inline-block; ">
-							<img class="manImg" src={% static 'img/iloveimg-converted/icons8-guardar-48.JPG' %}></img>
-								  <input type="button" id="btn-rango" name="btn-rango"
-                                                               value="Guardar ¡" onClick="guardarResultado()">
-							</span>
+							
 
                                                     </div>
 
@@ -327,9 +331,7 @@ Mayor a un dia
 
                                             <div class="card-body" style="height:30px;width=100%;">
 						<br>
-						<br>
-						<br>
-						<br>
+					
                                                 <div class="row">
                                                      <div class="col-sm-12"> 
 

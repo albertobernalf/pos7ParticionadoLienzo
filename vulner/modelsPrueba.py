@@ -1146,9 +1146,8 @@ FEB 12:
 
 feb 13:
        OJO HAY QUE CREAR TODA LAS FUNCIONES EN LA PARAMETRIZACION, fcaturas, rips,json etc
-       OJO AL FACTURAR VERIFICAR NO GRABO A PAGOS EMPRESAS
-	OJO AL FGACTURA NO REFRESCON PANTALA VERIFICAR
-	CREO QUJE ME DESORDENAS LOS ICONOS EN PANTALLA DESPUES DE ALGIUNA CCCIONRAR
-
-
-
+	ojo hay un erro al dar salida cliica l paciente si no hay complicacion-dx no guarda NULL
+	Ops hizo la factyra pero NO IMPRIMIO LA FACTURA
+	En apoyo terapeutico resultados arreglar el flexcontrol sale feo
+	cuando interpreta un examen, debe blanquear la plantilla  hacer quiery a los ordenados al primero que quede en pantalla
+	

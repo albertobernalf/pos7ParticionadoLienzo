@@ -13,10 +13,11 @@
 12. ejecuta /import_datos_global_1	
 13. ejecutar insert NO APLICA
 14. ejecuta /import_datos_global_2
-	
+15. adiciones	
+16. Crear Funciones CARPETA:C:\EntornosPython\pos7ParticionadoLienzo\vulner\Funciones
 
 	
-	
+-- ADICIONES:	
 -- INSERT NO APLICA
 select * from clinico_grupos	
 
@@ -126,3 +127,5 @@ select * from rips_ripstiposdocumento
 SELECT * FROM USUARIOS_TIPOSDOCUMENTO
 SELECT * FROM SITIOS_DEPARTAMENTOS
 SELECT * FROM SITIOS_municipios
+
+

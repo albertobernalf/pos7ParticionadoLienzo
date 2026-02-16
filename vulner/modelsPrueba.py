@@ -1032,88 +1032,30 @@ class ProgramacionCitasMedicas(models.Model):
 	7. Inicio segunda parte proyecto (Inteligencia artificial + Electronica-robotica)
 
 
-Enero 23
-
 Puesta a Punta :
 
-        la pantalla de admisiones se modifica el "dom", propiedad del datatable tbldatos de admisiones que en lienzo esta comentariao
         ojo que pasa con los botones de la izquierda ver el html por que no tienen cabeceras o titulos    esto en paneladmisiones.html
- 
-
-Enero 26:
-	Ojo vrificar en tarifarioviews, no crear el servi¿cioadministrativo en cargarsuministros ?? PORCUA
-
-
-Enero 28:
-
+	Ojo vrificar en tarifarioviews, no crear el servi¿cioadministrativo en cargarsuministros ?? PORCUA 
 	El boton refrescar de admisones. No refresca INDICADORES
         Al crear la admision desde triage, no dice que combo de rips hace falta seleccionar controlar eso con javascript VERIFICAR
 	se pierde el nombre de la Aplicacion al crear admision desde triag VERIFICAR
-
-Enero 29
-
 	Ojo cuando borro un medicamento en farmacia, al grabar lp topma de nuevo error .No debe guardar
-
-Enero 30
-
 	Ver factutaracon completo proceso imprimrFactura
 	Seguir colocar titulos a los excel, pdf, print en todos los datatables
-
-
-Feb.02/2026
 
 	PENDIENTE Devouciones tanto de Enfermeria como de Farmacia
         Pantalla apoyo terapeuitoc pailas-ñucas PENDIENTE DE MEJORA
 	PENDIENTE impresion despachos de farmacia
 	PENDIENTE, todos los ajax , todos los viewsreportes con impresion actualizar
 
-Feb 04/2026
-
 
 	cuando aplica abono no refresca la pantala liquidaciondetalle para reflejar el monot. pero ojo primero refrescar liquidacion, luego liquidacion detalle y luego seleccionar ops
           como hacer ello?
-	Bueno aun hay que mejorar navegacionclinicaf.html
 	Graves como imprimir por ajax las ordenes eje,plo : laboratior con Blob de muchos archivo data de muchos archivos vblob etc. INVESTIGAR cacharrear, por el momento descarga en el servidor
 	PREOCUPANTE la demora para hacer un folio clinico de cualquier paciente desde un cliente
 	fijate que el header de fromular no se extendio hacia la derecha en el cliente .224. 
-	La carga de la pantalla en el clinete de HC La grabacion desde l cleinte no es tan lenta
+
 	
-Fen 05/2025
-
-Lunes 9 de Feb
-
-	Probar descargar con : Colocando la ruta apropiada Solo eso a ver que pasa si funciona anton se generan los archivos en el servidor y se jalan
-        con JAVASCRIPT
-	o sea en views.py de clinico se hace un arreglo de rutas a devolver y se devuelve el arreglo
-$.ajax({
-    url: '/obtener-lista-pdfs/',
-    method: 'POST',
-    data: { /* tus filtros */ },
-    success: function(response) {
-        // 'response.urls' es un array como ['/pdf/1/', '/pdf/2/']
-        response.urls.forEach(url => {
-            window.open(url, '_blank');
-        });
-    }
-});
-
-Feb 09/2026
-
-	La impresion de la HC. super - recontra lenta
-
-Feb 10
-
-	Ops cuando creo un Triage me quita la ventana Crear TRiag GRAVISISSIMO
-	Cuando hace un triage No lo imprime
-	No se por que el refrescar no ejecuta el AJAX problemas de url
-
-fEB 11:
-
-	En la historia clinica aun no imprime nada del folio de la ciruigia y nadad de la cirugia
-	OPS imprimio una hoja de admision aun pacinte en urgencias ???
-	cuando pasa de triage a cama aunque guarda no aclara pantalla por erro y no refresca el triag VERIFICAR
-	Ojo creo que no esta guardando la justificacion o la Nota aclaratorio en historia clinica
-
 	REVISIONES. PUESTA A PUNTO MODULOS (15 Modulos) Ademas de: Planta, Usuarios, Medicos, 
 
 	Triage-Admisiones-HistoriaClinica-Farmacia-Enfermeria-  oK
@@ -1123,31 +1065,35 @@ fEB 11:
 	ConsultaExterna (UNICO MODULO FALTANTE POR DESARROLLAR) -- No desarrollado
 
 	
-FEB 12:
+FEB 16:
 
-	Seguimos con autorizaciones de ceros mañanap
-	crear boton refrecar en autorizacinesdetalle
+	Ops cuando creo un Triage me quita la ventana Crear TRiag GRAVISISSIMO
+	Cuando hace un triage No lo imprime
+	No se por que el refrescar no ejecuta el AJAX problemas de url
+
+	La impresion de la HC. super - recontra lenta
+
+	En la historia clinica aun no imprime nada del folio de la ciruigia y nadad de la cirugia
+	OPS imprimio una hoja de admision aun pacinte en urgencias ???
+	cuando pasa de triage a cama aunque guarda no aclara pantalla por erro y no refresca el triag VERIFICAR
+	Ojo creo que no esta guardando la justificacion o la Nota aclaratorio en historia clinica
 	No esta hecho nada en autorizaciones cirugia
 	Ojo hay que quitarle los avisos main.js a facturacion y a autoriaciones etc
 	Seguir en la tarde con el wrap del data table o el truncate renderizando el campo truncado INVESTIGAS // Gacturar cuen
-
 	Se debe manejar perfectamente el tema de las impresiones, conteo de lineas m saltos de pagina AL PELUCHE
    	o si no pailas
 	Como hacer para que cunado se autoriza y no hay mas pendientes si desaparece de aut, pero
 	No esta desapareciendo de autDet (la bendita vaina de no poder seleccionar una fila del datatable)
 	cuando uno esta ceando un labratoio no se ven las observa
-
 	Ver en la tarde la Impresion e las lineas de autorizacion para ver su manejo
-	
-
-	Arreglar Cartera tODA... en la tarde ... Ojo hay que marcar d eplanta como cajeros
+	Arreglar Cartera tODA... en la tarde ... Ojo hay que marcar de planta como cajeros
+	Hay que hacer en cartera el tab de los pagos que tiene cada factura
 	Y despues si seguir con Cirugia ... 
 	Seguir mejorando vista apoyo terapeutico
-
-feb 13:
-       OJO HAY QUE CREAR TODA LAS FUNCIONES EN LA PARAMETRIZACION, fcaturas, rips,json etc
-	ojo hay un erro al dar salida cliica l paciente si no hay complicacion-dx no guarda NULL
+        OJO HAY QUE CREAR TODA LAS FUNCIONES EN LA PARAMETRIZACION, fcaturas, rips,json etc, VER CUALES ESTAN ACTIVAS ULTIMA VERSION OJO
+	ojo hay un error al dar salida cliica al paciente si no hay complicacion-dx no guarda NULL
 	Ops hizo la factyra pero NO IMPRIMIO LA FACTURA
 	En apoyo terapeutico resultados arreglar el flexcontrol sale feo
 	cuando interpreta un examen, debe blanquear la plantilla  hacer quiery a los ordenados al primero que quede en pantalla
 	
+	La elaboracion de factura debe imprimir lña factura OJO

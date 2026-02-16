@@ -106,6 +106,7 @@ class PDFFacturacion(FPDF):
 
         miConexiont.close()
 
+        print("voy por peunta FLAG")
         if (self.flag=='F'):
 
             factura = Facturacion.objects.get(id=self.factura)
@@ -116,95 +117,100 @@ class PDFFacturacion(FPDF):
 
         ## FIN CURSOR
 
+
         if (self.flag=='F'):
+            print("voy por codigoqr", factura.codigoQr)
 
             self.image(factura.codigoQr, 180, 5, 20, 10)
 
         else:
-
+            print("nada de codigoqr")
             #self.image(factura.codigoQr, 180, 5, 20, 10)
             pass
 
-
-
+        print("voy por tirulos")
         self.ln(4)
         self.set_font('Times', 'B', 8)
-        self.cell(180, 1, empresa[0]['nombreEmpresa'], 0, 0, 'C')
-        self.ln(1)
-        self.cell(77, 11, '', 0, 0, 'L')
-        self.cell(10, 11, 'N.I.T: ', 0, 0, 'C')
-        self.cell(13, 11, empresa[0]['nit'], 0, 0, 'L')
-        self.cell(20, 11, empresa[0]['nitVerificacion'], 0, 0, 'L')
+        self.cell(180, 10, empresa[0]['nombreEmpresa'], 0, 0, 'C')
+        self.ln(3)
+        self.cell(77, 10, '', 0, 0, 'L')
+        self.cell(10, 10, 'N.I.T: ', 0, 0, 'C')
+        self.cell(13, 10, empresa[0]['nit'], 0, 0, 'L')
+        self.cell(20, 10, empresa[0]['nitVerificacion'], 0, 0, 'L')
 
-        self.ln(5)
-        self.cell(60, 12, '', 0, 0, 'L')
-        self.cell(30, 12, empresa[0]['direccionPrestador'], 0, 0, 'C')
-        self.cell(5, 11, 'Tel:', 0, 0, 'L')
-        self.cell(25, 12, empresa[0]['telefonoPrestador'], 0, 0, 'C')
-        self.set_font('Times', '', 7)
+        self.ln(3)
+        self.cell(60, 10, '', 0, 0, 'L')
+        self.cell(30, 10, empresa[0]['direccionPrestador'], 0, 0, 'C')
+        self.cell(5, 10, 'Tel:', 0, 0, 'L')
+        self.cell(25, 10, empresa[0]['telefonoPrestador'], 0, 0, 'C')
+        self.set_font('Times', '', 8)
         # Define el ancho de línea
         self.set_line_width(0.4)
         # Dibuja el borde
 
-        self.rect(5.0, 46.0, 200.0, 220.0)  # Coordenadas x, y, ancho, alto
+        self.rect(5.0, 24.0, 200.0, 230.0)  # Coordenadas x, y, ancho, alto el cudro mas grande
         self.ln(3)
         # Logo
         self.image('C:/EntornosPython/Pos7Particionado/vulner/static/img/MedicalFinal.jpg', 7, 5, 30, 17)
         # Arial bold 15
-        self.set_font('Times', 'B', 7)
+        self.set_font('Times', 'B', 8)
         self.ln(3)
-        #self.cell(120, 13, 'Cufe : 6b7dd1910792ec82b16f5a30d83da5c8f10895b42e3a685a8ee0f0edfc9e32e087576ba23525a50091a6eeb5bd9a9c5e ', 0, 0, 'L')
+        #self.cell(120, 10, 'Cufe : 6b7dd1910792ec82b16f5a30d83da5c8f10895b42e3a685a8ee0f0edfc9e32e087576ba23525a50091a6eeb5bd9a9c5e ', 0, 0, 'L')
         self.cell(7, 13,'Cufe : ', 0, 0, 'L')
         if (self.flag=='F'):
 
-            self.cell(120, 13, str(factura.cufeDefinitivo), 0, 0, 'L')
+            self.cell(120, 10, str(factura.cufeDefinitivo), 0, 0, 'L')
         else:
             pass
 
-        self.ln(3)
+        self.ln(4)
         self.set_font('Times', 'B', 8)
         if (self.flag=='F'):
 
-            self.cell(60, 14, 'FACTURA ELECTRONICA DE VENTA:', 0, 0, 'L')
+            self.cell(60, 10, 'FACTURA ELECTRONICA DE VENTA:', 0, 0, 'L')
 
         else:
 
-            self.cell(60, 14, 'PREFATURA:', 0, 0, 'L')
+            self.cell(60, 10, 'PREFATURA:', 0, 0, 'L')
 
 
-        self.cell(25, 14, str(self.factura), 0, 0, 'L')
-        self.cell(20, 14, '', 0, 0, 'L')
+        self.cell(25, 10, str(self.factura), 0, 0, 'L')
+        self.cell(20, 10, '', 0, 0, 'L')
         parametro1 = Parametros.objects.get(nombre='Factura_1')
-        self.cell(60, 14, str(parametro1.parametro1), 0, 0, 'L')
-        #self.cell(70, 14, 'AUTORETENEDOR EN RENTA RESOLUCION 151 DEL 14-01-2016', 0, 0, 'L')
+        self.cell(60, 10, str(parametro1.parametro1), 0, 0, 'L')
+        #self.cell(70, 10, 'AUTORETENEDOR EN RENTA RESOLUCION 151 DEL 14-01-2016', 0, 0, 'L')
         self.ln(3)
-        self.set_font('Times', '', 7)
-        self.cell(105, 15, '', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(105, 10, '', 0, 0, 'L')
         parametro2 = Parametros.objects.get(nombre='Factura_2')
-        self.cell(60, 15, str(parametro2.parametro1), 0, 0, 'L')
-        #self.cell(60, 14, 'Gran Contribuyente Res. 0012220 de 26-12-2022 - Actividad económica 8610', 0, 0, 'L')
+        self.cell(60, 10, str(parametro2.parametro1), 0, 0, 'L')
+        #self.cell(60, 10, 'Gran Contribuyente Res. 0012220 de 26-12-2022 - Actividad económica 8610', 0, 0, 'L')
         self.ln(3)
-        self.cell(10, 15, '', 0, 0, 'L')
+        self.cell(10, 10, '', 0, 0, 'L')
+        self.ln(3)
         fechaExpedicion = datetime.datetime.now()
-        self.cell(25, 15, 'Fecha de Expedición:', 0, 0, 'L')
-        self.cell(40, 15, str(fechaExpedicion), 0, 0, 'L')
-
-        self.cell(95, 15, 'Fecha de Vencimiento (Cartera):', 0, 0, 'L')
-        #self.cell(30, 15, 'Pagina 1 de 4', 0, 0, 'L')
-        self.cell(30, 15, 'Pagina ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'Fecha de Expedición:', 0, 0, 'L')
+        self.cell(40, 10, str(fechaExpedicion), 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.set_font('Times', 'B', 8)
+        self.cell(95, 10, 'Fecha de Vencimiento (Cartera):', 0, 0, 'L')
+        #self.cell(30, 10, 'Pagina 1 de 4', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(30, 10, 'Pagina ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
         self.ln(3)
-        self.cell(30, 16, '', 0, 0, 'C')
+        self.cell(30, 10, '', 0, 0, 'C')
         parametro3 = Parametros.objects.get(nombre='Factura_3')
-        self.cell(130, 16, str(parametro3.parametro1), 0, 0, 'C')
-        #self.cell(100, 16, 'Favor NO efectuar retención de Industria y Comercio e IVA - Somos agentes retenedores de IVA', 0, 0, 'L')
+        self.cell(130, 10, str(parametro3.parametro1), 0, 0, 'C')
+        #self.cell(100, 10, 'Favor NO efectuar retención de Industria y Comercio e IVA - Somos agentes retenedores de IVA', 0, 0, 'L')
         self.ln(3)
-        self.cell(30, 17, '', 0, 0, 'L')
+        self.cell(30, 10, '', 0, 0, 'L')
         parametro4 = Parametros.objects.get(nombre='Factura_4')
-        self.cell(130, 17, str(parametro4.parametro1), 0, 0, 'C')
-        #self.cell(100, 17, 'Resolución DIAN # 18764069407849 del 22/04/2024 al 22/10/2025 de la CME342.410,00 a la CME500.000,00', 0, 0, 'L')
+        self.cell(130, 10, str(parametro4.parametro1), 0, 0, 'C')
+        #self.cell(100, 10, 'Resolución DIAN # 18764069407849 del 22/04/2024 al 22/10/2025 de la CME342.410,00 a la CME500.000,00', 0, 0, 'L')
         self.set_line_width(0.4)
         # Dibuja el borde
-        self.rect(5.0,46.0, 200.0, 18.0)  # Coordenadas x, y, ancho, alto
+        self.rect(5.0,62.0, 200.0, 7.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
 
         ## CURSOR PARA PACIENTE
@@ -237,56 +243,58 @@ class PDFFacturacion(FPDF):
         miConexiont.close()
 
         ## FIN CURSOR
-        self.cell(30, 20, 'Nombre del Paciente:', 0, 0, 'L')
-        self.set_font('Times', '', 9)
+        self.set_font('Times', 'B', 8)
+        self.cell(30, 10, 'Nombre del Paciente:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(100, 10, paciente[0]['nombre'], 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.cell(15, 10, 'Admision:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(15, 10, str(paciente[0]['ingreso']), 0, 0, 'L')
+        self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(30, 10, 'Identificación:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(5, 10, paciente[0]['abreviatura'], 0, 0, 'L')
+        self.cell(50, 10, paciente[0]['documento'], 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.cell(17, 10, 'Edad:', 0, 0, 'L')
+        self.cell(25, 10, str(paciente[0]['edad']), 0, 0, 'L')
+        self.cell(20, 10, 'Fec. Ingreso:', 0, 0, 'L')
+        self.cell(20, 10, str(paciente[0]['fechaIngreso']), 0, 0, 'L')
+        self.ln(3)
+        self.cell(30, 10, 'Dirección:', 0, 0, 'L')
+        self.cell(55, 10, paciente[0]['direccion'], 0, 0, 'L')
+        self.cell(17, 10, 'Teléfono:', 0, 0, 'L')
+        self.cell(25, 10, paciente[0]['telefono'], 0, 0, 'L')
+        self.cell(20, 10, 'Fec. Egreso:', 0, 0, 'L')
+        self.cell(20, 10, str(paciente[0]['fechaSalida']), 0, 0, 'L')
+        self.ln(3)
+        self.cell(30, 10, 'Municipio:', 0, 0, 'L')
+        self.cell(50, 10, paciente[0]['municipioPaciente'], 0, 0, 'L')
+        self.ln(3)
+        self.cell(30, 10, 'Responsable:', 0, 0, 'L')
+        self.cell(55, 10, paciente[0]['nombreEmpresa'], 0, 0, 'L')
+        self.cell(17, 10, 'Nit:', 0, 0, 'L')
+        self.cell(15, 10, paciente[0]['nit'], 0, 0, 'L')
+        self.ln(3)
+        self.set_line_width(0.4)
 
-        self.cell(130, 20, paciente[0]['nombre'], 0, 0, 'L')
-        self.set_font('Times', 'B', 7)
-        self.cell(15, 20, 'Admision:', 0, 0, 'L')
-        self.set_font('Times', '', 9)
-        self.cell(15, 20, str(paciente[0]['ingreso']), 0, 0, 'L')
+        # Dibuja el borde
+        #self.rect(5.0,64.0, 200.0, 5.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
-        self.set_font('Times', 'B', 7)
-        self.cell(30, 21, 'Identificación:', 0, 0, 'L')
-        self.set_font('Times', '', 9)
-        self.cell(5, 21, paciente[0]['abreviatura'], 0, 0, 'L')
-        self.cell(50, 21, paciente[0]['documento'], 0, 0, 'L')
-        self.set_font('Times', 'B', 7)
-        self.cell(17, 21, 'Edad:', 0, 0, 'L')
-        self.cell(25, 21, str(paciente[0]['edad']), 0, 0, 'L')
-        self.cell(20, 21, 'Fec. Ingreso:', 0, 0, 'L')
-        self.cell(20, 21, str(paciente[0]['fechaIngreso']), 0, 0, 'L')
-        self.ln(3)
-        self.cell(30, 22, 'Dirección:', 0, 0, 'L')
-        self.cell(55, 22, paciente[0]['direccion'], 0, 0, 'L')
-        self.cell(17, 22, 'Teléfono:', 0, 0, 'L')
-        self.cell(25, 22, paciente[0]['telefono'], 0, 0, 'L')
-        self.cell(20, 22, 'Fec. Egreso:', 0, 0, 'L')
-        self.cell(20, 22, str(paciente[0]['fechaSalida']), 0, 0, 'L')
-        self.ln(3)
-        self.cell(30, 23, 'Municipio:', 0, 0, 'L')
-        self.cell(50, 23, paciente[0]['municipioPaciente'], 0, 0, 'L')
-        self.ln(3)
-        self.cell(30, 23, 'Responsable:', 0, 0, 'L')
-        self.cell(55, 24, paciente[0]['nombreEmpresa'], 0, 0, 'L')
-        self.cell(17, 24, 'Nit:', 0, 0, 'L')
-        self.cell(15, 24, paciente[0]['nit'], 0, 0, 'L')
+        self.cell(10, 10, 'CUPS', 0, 0, 'L')
+        self.cell(20, 10, 'Cod.Tarifa', 0, 0, 'L')
+        self.cell(120, 10, 'Descripcion', 0, 0, 'L')
+        self.cell(12, 10, 'Cantidad', 0, 0, 'L')
+        self.cell(20, 10, 'Vr.Unidad', 0, 0, 'L')
+        self.cell(15, 10, 'Vr.Total', 0, 0, 'L')
+        self.ln(5)
+        self.cell(30, 10, 'Detallado de la Factura', 0, 0, 'L')
+        self.ln(5)
         self.set_line_width(0.4)
         # Dibuja el borde
-        self.rect(5.0,64.0, 200.0, 5.0)  # Coordenadas x, y, ancho, alto
-        self.ln(3)
-        self.cell(10, 25, 'CUPS', 0, 0, 'L')
-        self.cell(20, 25, 'Cod.Tarifa', 0, 0, 'L')
-        self.cell(80, 25, 'Descripcion', 0, 0, 'L')
-        self.cell(35, 25, 'Cantidad', 0, 0, 'L')
-        self.cell(30, 25, 'Vr.Unitario', 0, 0, 'L')
-        self.cell(30, 25, 'Vr.Total', 0, 0, 'L')
-        self.ln(4)
-        self.cell(30, 26, 'Detallado de la Factura', 0, 0, 'L')
-        self.ln(4)
-        self.set_line_width(0.4)
-        # Dibuja el borde
-        self.rect(5.0, 74.0, 200.0, 192.5)  # Coordenadas x, y, ancho, alto
+        #self.rect(5.0, 74.0, 200.0, 192.5)  # Coordenadas x, y, ancho, alto
 
 def ImprimirFactura(request):
 
@@ -331,7 +339,6 @@ def ImprimirFactura(request):
     miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
 
-
     curt = miConexiont.cursor()
 
     comando = 'SELECT tipo.abreviatura abrev, usu.documento documento, usu."primerNombre",usu."segundoNombre",usu."primerApellido", usu."segundoApellido", cast((cast(now() as date)  - cast(usu."fechaNacio" as date)) as text)   edad , usu.genero sexo, ing."fechaIngreso" fechaIngreso FROM admisiones_ingresos ing INNER JOIN usuarios_usuarios usu ON (usu.id=ing.documento_id) INNER JOIN usuarios_tiposdocumento tipo ON (tipo.id = usu."tipoDoc_id") WHERE ing.id= ' + "'" + str(
@@ -344,6 +351,7 @@ def ImprimirFactura(request):
 
     manilla = []
 
+
     for abrev, documento, primerNombre, segundoNombre, primerApellido, segundoApellido, edad, sexo, fechaIngreso in curt.fetchall():
         manilla.append(
             {'abrev': abrev, 'documento': documento, 'primerNombre': primerNombre, 'segundoNombre': segundoNombre,
@@ -351,21 +359,33 @@ def ImprimirFactura(request):
              'edad': edad, 'sexo': sexo, "fechaIngreso": fechaIngreso})
 
     miConexiont.close()
-    print("manilla = ", manilla)
+    print("voy fpdpf = ")
 
     pdf = PDFFacturacion(tipoDocId, documentoId, consec, ingresoId, factura ,'F',format="letter")
-    pdf.alias_nb_pages()
+    print("vuelvofpdpf = ")
+    #pdf.alias_nb_pages()
+    print("que paso?? = ")
     pdf.set_margins(left=10, top=5, right=5)
+    print("que paso?? = ")
     pdf.add_page()
-    pdf.set_font('Times', '', 8)
+    print("que paso?? = ")
+    pdf.set_font('Times', 'B', 8)
+    print("que paso?? = ")
     pdf.ln(1)
-    linea = 7
 
+    print("que paso??xxxx = ")
     conceptoMedicamentos= Conceptos.objects.get(nombre='MEDICAMENTOS')
+    print("volvi pdfp1")
     conceptoProcedimientosQx= Conceptos.objects.get(nombre='PROCEDIMIENTOS QX')
+    print("volvi pdfp2")
     honorarioSalas = TiposHonorarios.objects.get(nombre='DERECHOS DE SALA')
+    print("volvi pdfp3")
+
     conceptoInsumosMedicos = Conceptos.objects.get(nombre='INSUMOS MEDICOS')
+    print("volvi pdfp4")
     conceptoMaterialQx = Conceptos.objects.get(nombre='MATERIAL QX Y/O MATERIAL ESPEC')
+
+    print("volvi pdfp5")
 
     miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
@@ -468,9 +488,9 @@ def ImprimirFactura(request):
                 print ("voy a imprimir concepto =" , id)
                 pdf.cell(15, 26 + lineaConcepto + lineaDetalle, str(cups), 0, 0, 'L')
                 pdf.cell(15, 26 + lineaConcepto + lineaDetalle, str(homologado), 0, 0, 'L')
-                pdf.cell(85, 26 + lineaConcepto + lineaDetalle, str(descripcion), 0, 0, 'L')
+                #pdf.cell(85, 26 + lineaConcepto + lineaDetalle, str(descripcion), 0, 0, 'L')
                 #pdf.multi_cell(w=100, h=10, txt=str(descripcion),  align='J')
-                #pdf.multi_cell(w=85, h=3, txt=str(descripcion), align='L' )
+                pdf.multi_cell(w=85, h=3, txt=str(descripcion), align='L' )
 
                 pdf.cell(30, 26 + lineaConcepto + lineaDetalle, str(cantidad), 0, 0, 'L')
                 pdf.cell(30, 26 + lineaConcepto + lineaDetalle, str(valorUnitario), 0, 0, 'L')
@@ -505,12 +525,12 @@ def ImprimirFactura(request):
 
                     subTotal = subTotal + float(valorTotal)
 
-                    pdf.cell(15, 26 + lineaConcepto + lineaDetalle, str(cups), 0, 0, 'L')
-                    pdf.cell(15, 26 + lineaConcepto + lineaDetalle, str(homologado), 0, 0, 'L')
-                    pdf.cell(85, 26 + lineaConcepto + lineaDetalle, str(descripcion), 0, 0, 'L')
-                    pdf.cell(30, 26 + lineaConcepto + lineaDetalle, str(cantidad), 0, 0, 'L')
-                    pdf.cell(30, 26 + lineaConcepto + lineaDetalle, str(valorUnitario), 0, 0, 'L')
-                    pdf.cell(30, 26 + lineaConcepto + lineaDetalle, str(valorTotal), 0, 0, 'L')
+                    pdf.cell(15, 10, str(cups), 0, 0, 'L')
+                    pdf.cell(15, 10, str(homologado), 0, 0, 'L')
+                    pdf.cell(85, 10, str(descripcion), 0, 0, 'L')
+                    pdf.cell(30, 10, str(cantidad), 0, 0, 'L')
+                    pdf.cell(30, 10, str(valorUnitario), 0, 0, 'L')
+                    pdf.cell(30, 10, str(valorTotal), 0, 0, 'L')
                     pdf.ln(4)
 
                     # Ahora barro un CURSOR CON EL DETALLE DE LOS HONORARIOS
@@ -570,12 +590,12 @@ def ImprimirFactura(request):
 
                     subTotal = subTotal + float(valorTotal)
 
-                    pdf.cell(15, 26 + lineaConcepto + lineaDetalle, str(cups), 0, 0, 'L')
-                    pdf.cell(15, 26 + lineaConcepto + lineaDetalle, str(homologado), 0, 0, 'L')
-                    pdf.cell(85, 26 + lineaConcepto + lineaDetalle, str(descripcion), 0, 0, 'L')
-                    pdf.cell(30, 26 + lineaConcepto + lineaDetalle, str(cantidad), 0, 0, 'L')
-                    pdf.cell(30, 26 + lineaConcepto + lineaDetalle, str(valorUnitario), 0, 0, 'L')
-                    pdf.cell(30, 26 + lineaConcepto + lineaDetalle, str(valorTotal), 0, 0, 'L')
+                    pdf.cell(15, 10, str(cups), 0, 0, 'L')
+                    pdf.cell(15, 10, str(homologado), 0, 0, 'L')
+                    pdf.cell(85, 10, str(descripcion), 0, 0, 'L')
+                    pdf.cell(30, 10, str(cantidad), 0, 0, 'L')
+                    pdf.cell(30, 10, str(valorUnitario), 0, 0, 'L')
+                    pdf.cell(30, 10, str(valorTotal), 0, 0, 'L')
                     pdf.ln(4)
 
                     # Ahora barro un CURSOR CON EL DETALLE DE LOS HONORARIOS
@@ -585,11 +605,11 @@ def ImprimirFactura(request):
                     print("COMANDO =", comando)
                     cury.execute(comando)
 
-                    pdf.cell(40, 26 + lineaConcepto + lineaDetalle, 'HonorariosMedicos', 0, 0, 'L')
-                    pdf.cell(40, 26 + lineaConcepto + lineaDetalle, 'Anestesiologo', 0, 0, 'L')
-                    pdf.cell(40, 26 + lineaConcepto + lineaDetalle, 'Ayudantia', 0, 0, 'L')
-                    pdf.cell(40, 26 + lineaConcepto + lineaDetalle, 'Derechos de Sala', 0, 0, 'L')
-                    pdf.cell(40, 26 + lineaConcepto + lineaDetalle, 'Materiales', 0, 0, 'L')
+                    pdf.cell(40, 10, 'HonorariosMedicos', 0, 0, 'L')
+                    pdf.cell(40, 10, 'Anestesiologo', 0, 0, 'L')
+                    pdf.cell(40, 10, 'Ayudantia', 0, 0, 'L')
+                    pdf.cell(40, 10, 'Derechos de Sala', 0, 0, 'L')
+                    pdf.cell(40, 10, 'Materiales', 0, 0, 'L')
 
                     pdf.ln(4)
 
@@ -610,11 +630,11 @@ def ImprimirFactura(request):
                             MATERIALES = 0
 
 
-                        pdf.cell(40, 26 + lineaConcepto + lineaDetalle, str(CIRUJANO), 0, 0, 'L')
-                        pdf.cell(40, 26 + lineaConcepto + lineaDetalle, str(ANESTESIOLOGO), 0, 0, 'L')
-                        pdf.cell(40, 26 + lineaConcepto + lineaDetalle, str(AYUDANTE), 0, 0, 'L')
-                        pdf.cell(40, 26 + lineaConcepto + lineaDetalle, str(SALAS), 0, 0, 'L')
-                        pdf.cell(40, 26 + lineaConcepto + lineaDetalle, str(MATERIALES), 0, 0, 'L')
+                        pdf.cell(40, 10 + lineaDetalle, str(CIRUJANO), 0, 0, 'L')
+                        pdf.cell(40, 10, str(ANESTESIOLOGO), 0, 0, 'L')
+                        pdf.cell(40, 10, str(AYUDANTE), 0, 0, 'L')
+                        pdf.cell(40, 10, str(SALAS), 0, 0, 'L')
+                        pdf.cell(40, 10, str(MATERIALES), 0, 0, 'L')
 
                         pdf.ln(4)
 
@@ -629,9 +649,9 @@ def ImprimirFactura(request):
         lineaConcepto = lineaConcepto + 1
         pdf.ln(1)
         miConexiony.close()
-        pdf.cell(145, 26 + lineaDetalle, ' ' , 0, 0, 'L')
-        pdf.cell(30, 26  + lineaDetalle, 'SubTotal ' , 0, 0, 'L')
-        pdf.cell(30, 26 + lineaDetalle, str(subTotal), 0, 0, 'L')
+        pdf.cell(145, 10, ' ' , 0, 0, 'L')
+        pdf.cell(30, 10, 'SubTotal ' , 0, 0, 'L')
+        pdf.cell(30, 0, str(subTotal), 0, 0, 'L')
         pdf.ln(2)
         subTotal=0
 
@@ -664,45 +684,45 @@ def ImprimirFactura(request):
     ## Aquip totales
     pdf.set_font('Times', 'B', 7)
     pdf.ln(4)
-    pdf.cell(145, 26, 'Valor en letras', 0, 0, 'L')
-    pdf.cell(30, 26, 'SubTotal Cargos:', 0, 0, 'L')
-    pdf.cell(30, 26 , str(totalFactura), 0, 0, 'L')
+    pdf.cell(152, 10, 'Valor en letras', 0, 0, 'L')
+    pdf.cell(30, 10, 'SubTotal Cargos:', 0, 0, 'L')
+    pdf.cell(30, 10 , str(totalFactura), 0, 0, 'L')
     pdf.ln(3)
-    lineaDetalle = lineaDetalle + 1
-    pdf.cell(145, 27 , str(valorAPagarLetras), 0, 0, 'L')
-    pdf.cell(30, 27, 'Abonos o Cuota:', 0, 0, 'L')
-    pdf.cell(30, 27 , str(abonos), 0, 0, 'L')
+
+    pdf.cell(145, 10 , str(valorAPagarLetras), 0, 0, 'L')
+    pdf.cell(30, 10, 'Abonos o Cuota:', 0, 0, 'L')
+    pdf.cell(30, 10 , str(abonos), 0, 0, 'L')
     pdf.ln(3)
-    lineaDetalle = lineaDetalle + 1
-    pdf.cell(145, 28 , str(''), 0, 0, 'L')
-    pdf.cell(30, 28, 'Anticipos:', 0, 0, 'L')
-    pdf.cell(30, 28 , str(anticipos), 0, 0, 'L')
+
+    pdf.cell(145, 10 , str(''), 0, 0, 'L')
+    pdf.cell(30, 10, 'Anticipos:', 0, 0, 'L')
+    pdf.cell(30, 10 , str(anticipos), 0, 0, 'L')
 
     pdf.ln(3)
-    lineaDetalle = lineaDetalle + 1
-    pdf.cell(145, 29 , str(''), 0, 0, 'L')
-    pdf.cell(30, 29, 'Descuentos:', 0, 0, 'L')
-    pdf.cell(30, 29 , str(descuentos), 0, 0, 'L')
+
+    pdf.cell(145, 10 , str(''), 0, 0, 'L')
+    pdf.cell(30, 10, 'Descuentos:', 0, 0, 'L')
+    pdf.cell(30, 10 , str(descuentos), 0, 0, 'L')
 
     pdf.ln(3)
-    lineaDetalle = lineaDetalle + 1
-    pdf.cell(145, 30 , str(''), 0, 0, 'L')
-    pdf.cell(30, 30, 'Valor a Pagar:', 0, 0, 'L')
-    pdf.cell(30, 30 , str(valorApagar), 0, 0, 'L')
+
+    pdf.cell(145, 10 , str(''), 0, 0, 'L')
+    pdf.cell(30, 10, 'Valor a Pagar:', 0, 0, 'L')
+    pdf.cell(30, 10 , str(valorApagar), 0, 0, 'L')
 
     pdf.ln(12)
 
-    pdf.cell(40, 34, 'Facturado por:', 0, 0, 'L')
-    pdf.cell(100, 34, str(usuario), 0, 0, 'L')
-    pdf.cell(40, 34, 'Firma del Paciente o Reponsable:', 0, 0, 'L')
+    pdf.cell(40, 10, 'Facturado por:', 0, 0, 'L')
+    pdf.cell(100, 10, str(usuario), 0, 0, 'L')
+    pdf.cell(40, 10, 'Firma del Paciente o Reponsable:', 0, 0, 'L')
 
     pdf.ln(3)
-    pdf.cell(40, 35, str(''), 0, 0, 'L')
-    pdf.cell(40, 35, 'Facturador(a):', 0, 0, 'L')
+    pdf.cell(40, 10, str(''), 0, 0, 'L')
+    pdf.cell(40, 10, 'Facturador(a):', 0, 0, 'L')
 
     pdf.ln(8)
-    pdf.cell(40, 36, 'Fecha de impresion:', 0, 0, 'L')
-    pdf.cell(150, 36, str(fechaRegistro), 0, 0, 'L')
+    pdf.cell(40, 10, 'Fecha de impresion:', 0, 0, 'L')
+    pdf.cell(150, 10, str(fechaRegistro), 0, 0, 'L')
 
     miConexiont.close()
 
@@ -872,13 +892,12 @@ def ImprimirLiquidacion(request):
         conceptos.append(
             {'id': id, 'nombreConcepto': nombreConcepto})
 
-        #pdf.cell(40, 26 + lineaConcepto, str(conceptos[0]['nombreConcepto']), 0, 0, 'C')
-        pdf.ln(3)
-        pdf.set_font('Times', 'B', 7)
-        pdf.cell(200, 22 + lineaConcepto, str(nombreConcepto), 0, 0, 'C')
-        pdf.set_font('Times', '', 7)
+        pdf.ln(1)
+        pdf.set_font('Times', 'B', 8)
+        pdf.cell(200, 10, str(nombreConcepto), 0, 0, 'C')
+        pdf.set_font('Times', '', 8)
 
-        pdf.ln(5)
+        pdf.ln(4)
 
         ## AQUI VIENE EL CURSOR DEL DETALLE DE LA FACTURA
 
@@ -900,7 +919,6 @@ def ImprimirLiquidacion(request):
             #comando = 'select sum.cums cups,tarSum."codigoHomologado" homologado, sum.nombre  descripcion, detFac.cantidad cantidad, 	detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_liquidaciondetalle detFac INNER JOIN facturacion_liquidacion fac ON (fac.id=detFac.liquidacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id)  LEFT JOIN tarifarios_tarifariosdescripcion tarDesc ON (tarDesc.id=conv."tarifariosDescripcionSum_id") LEFT JOIN tarifarios_tarifariossuministros tarSum ON (tarSum."tiposTarifa_id"=tarDesc."tiposTarifa_id" AND tarSum.id = detFac.cums_id ) where detfac.liquidacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" +   ' AND sum.concepto_id = ' + "'" + str(id) + "'" + ' ORDER BY sum.cums'
             comando = 'select sum.cums cups, ' + "' '" + ' homologado, sum.nombre  descripcion, detFac.cantidad cantidad,detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_liquidaciondetalle detFac INNER JOIN facturacion_liquidacion fac ON (fac.id=detFac.liquidacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) where detfac.liquidacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" + ' AND sum.concepto_id = ' + "'" + str(conceptoInsumosMedicos.id) + "' ORDER BY sum.cums"
             print("entre iNSUMOS MEDICOS")
-
 
 
         if (id ==conceptoMaterialQx.id):
@@ -929,30 +947,39 @@ def ImprimirLiquidacion(request):
         salvoConcepto = id
 
         ## Aqui comienza el detalle de cada item del concepto en cuestion
+        #
+        pdf.set_font('Times', '', 8)
         if (id != conceptoProcedimientosQx.id):
-
 
             for cups, homologado, descripcion, cantidad, valorUnitario, valorTotal in cury.fetchall():
                 detalleFacturacion.append(
                     {'cups': cups, 'homologado': homologado,'descripcion':descripcion, 'cantidad':cantidad,'valorUnitario':valorUnitario, 'valorTotal':valorTotal })
 
                 print ("voy a imprimir concepto =" , id)
-                pdf.cell(15, 26 + lineaConcepto + lineaDetalle, str(cups), 0, 0, 'L')
-                pdf.cell(15, 26 + lineaConcepto + lineaDetalle, str(homologado), 0, 0, 'L')
-                pdf.cell(85, 26 + lineaConcepto + lineaDetalle, str(descripcion), 0, 0, 'L')
+                pdf.cell(15, 10 , str(cups), 0, 0, 'L')
+                pdf.cell(15, 10, str(homologado), 0, 0, 'L')
+                #pdf.cell(85, 10, str(descripcion), 0, 0, 'L')
                 #pdf.multi_cell(w=100, h=10, txt=str(descripcion),  align='J')
-                #pdf.multi_cell(w=85, h=3, txt=str(descripcion), align='L' )
 
-                pdf.cell(30, 26 + lineaConcepto + lineaDetalle, str(cantidad), 0, 0, 'L')
-                pdf.cell(30, 26 + lineaConcepto + lineaDetalle, str(valorUnitario), 0, 0, 'L')
-                pdf.cell(30, 26 + lineaConcepto + lineaDetalle, str(valorTotal), 0, 0, 'L')
+                if (len(descripcion) < 65):
+                     pdf.cell(120, 10, str(descripcion), 0, 0, 'L')
+                else:
+                    x = pdf.get_x()
+                    y = pdf.get_y()
+                    pdf.multi_cell(w=120, h=3, txt=str(descripcion), align='L' )
+                    pdf.set_xy(x + 120, y)
+
+
+                pdf.cell(15, 10 , str(cantidad), 0, 0, 'L')
+                pdf.cell(18, 10 , str(valorUnitario), 0, 0, 'L')
+                pdf.cell(25, 10 , str(valorTotal), 0, 0, 'L')
 
                 subTotal = subTotal + float(valorTotal)
 
                 #lineaDetalle=lineaDetalle +1
 
                 pdf.ln(3)
-                lineaDetalle = lineaDetalle + 2
+
                 #pdf.rect(5.0, 26 + lineaConcepto + lineaDetalle, 200.0, 0)  # Coordenadas x, y, ancho, alto
 
         else:
@@ -969,6 +996,7 @@ def ImprimirLiquidacion(request):
 
                 for idCups, cups, homologado, descripcion, cantidad, valorUnitario, valorTotal in cury.fetchall():
 
+                    pdf.set_font('Times', 'B', 8)
                     print ("voy a comenzar a imprimir el total del procediento =" , id)
                     print("cups = ", cups)
                     print("idCups = ", idCups)
@@ -976,13 +1004,14 @@ def ImprimirLiquidacion(request):
 
                     subTotal = subTotal + float(valorTotal)
 
-                    pdf.cell(15, 26 + lineaConcepto + lineaDetalle, str(cups), 0, 0, 'L')
-                    pdf.cell(15, 26 + lineaConcepto + lineaDetalle, str(homologado), 0, 0, 'L')
-                    pdf.cell(85, 26 + lineaConcepto + lineaDetalle, str(descripcion), 0, 0, 'L')
-                    pdf.cell(30, 26 + lineaConcepto + lineaDetalle, str(cantidad), 0, 0, 'L')
-                    pdf.cell(30, 26 + lineaConcepto + lineaDetalle, str(valorUnitario), 0, 0, 'L')
-                    pdf.cell(30, 26 + lineaConcepto + lineaDetalle, str(valorTotal), 0, 0, 'L')
+                    pdf.cell(15, 10 , str(cups), 0, 0, 'L')
+                    pdf.cell(15, 10 , str(homologado), 0, 0, 'L')
+                    pdf.cell(85, 10 , str(descripcion), 0, 0, 'L')
+                    pdf.cell(30, 10 , str(cantidad), 0, 0, 'L')
+                    pdf.cell(30, 10 , str(valorUnitario), 0, 0, 'L')
+                    pdf.cell(30, 10 , str(valorTotal), 0, 0, 'L')
                     pdf.ln(4)
+                    pdf.set_font('Times', '', 8)
 
                     # Ahora barro un CURSOR CON EL DETALLE DE LOS HONORARIOS
 
@@ -993,11 +1022,11 @@ def ImprimirLiquidacion(request):
                     print ("COMANDO =" , comando)
                     cury.execute(comando)
 
-                    pdf.cell(40, 26 + lineaConcepto + lineaDetalle, 'HonorariosMedicos', 0, 0, 'L')
-                    pdf.cell(40, 26 + lineaConcepto + lineaDetalle, 'Anestesiologo', 0, 0, 'L')
-                    pdf.cell(40, 26 + lineaConcepto + lineaDetalle, 'Ayudantia', 0, 0, 'L')
-                    pdf.cell(40, 26 + lineaConcepto + lineaDetalle, 'Derechos de Sala', 0, 0, 'L')
-                    pdf.cell(40, 26 + lineaConcepto + lineaDetalle, 'Materiales', 0, 0, 'L')
+                    pdf.cell(40, 10, 'HonorariosMedicos', 0, 0, 'L')
+                    pdf.cell(40, 10, 'Anestesiologo', 0, 0, 'L')
+                    pdf.cell(40, 10, 'Ayudantia', 0, 0, 'L')
+                    pdf.cell(40, 10, 'Derechos de Sala', 0, 0, 'L')
+                    pdf.cell(40, 10, 'Materiales', 0, 0, 'L')
                     pdf.ln(4)
 
                     print("voy a comenzar a imprimir LOS HONORARIOS DEPROCEDIMIENTO EN CUESTION")
@@ -1016,11 +1045,11 @@ def ImprimirLiquidacion(request):
                         if (MATERIALES == None):
                             MATERIALES = 0
 
-                        pdf.cell(40, 26 + lineaConcepto + lineaDetalle, str(CIRUJANO), 0, 0, 'L')
-                        pdf.cell(40, 26 + lineaConcepto + lineaDetalle, str(ANESTESIOLOGO), 0, 0, 'L')
-                        pdf.cell(40, 26 + lineaConcepto + lineaDetalle, str(AYUDANTE), 0, 0, 'L')
-                        pdf.cell(40, 26 + lineaConcepto + lineaDetalle, str(SALAS), 0, 0, 'L')
-                        pdf.cell(40, 26 + lineaConcepto + lineaDetalle, str(MATERIALES), 0, 0, 'L')
+                        pdf.cell(40, 10, str(CIRUJANO), 0, 0, 'L')
+                        pdf.cell(40, 10, str(ANESTESIOLOGO), 0, 0, 'L')
+                        pdf.cell(40, 10, str(AYUDANTE), 0, 0, 'L')
+                        pdf.cell(40, 10, str(SALAS), 0, 0, 'L')
+                        pdf.cell(40, 10, str(MATERIALES), 0, 0, 'L')
 
 
                         pdf.ln(4)
@@ -1041,14 +1070,15 @@ def ImprimirLiquidacion(request):
                     print("id = ", id)
 
                     subTotal = subTotal + float(valorTotal)
-
-                    pdf.cell(15, 26 + lineaConcepto + lineaDetalle, str(cups), 0, 0, 'L')
-                    pdf.cell(15, 26 + lineaConcepto + lineaDetalle, str(homologado), 0, 0, 'L')
-                    pdf.cell(85, 26 + lineaConcepto + lineaDetalle, str(descripcion), 0, 0, 'L')
-                    pdf.cell(30, 26 + lineaConcepto + lineaDetalle, str(cantidad), 0, 0, 'L')
-                    pdf.cell(30, 26 + lineaConcepto + lineaDetalle, str(valorUnitario), 0, 0, 'L')
-                    pdf.cell(30, 26 + lineaConcepto + lineaDetalle, str(valorTotal), 0, 0, 'L')
+                    pdf.set_font('Times', 'B', 8)
+                    pdf.cell(15, 10, str(cups), 0, 0, 'L')
+                    pdf.cell(15, 10, str(homologado), 0, 0, 'L')
+                    pdf.cell(85, 10, str(descripcion), 0, 0, 'L')
+                    pdf.cell(30, 10, str(cantidad), 0, 0, 'L')
+                    pdf.cell(30, 10, str(valorUnitario), 0, 0, 'L')
+                    pdf.cell(30, 10, str(valorTotal), 0, 0, 'L')
                     pdf.ln(4)
+                    pdf.set_font('Times', '', 8)
 
                     # Ahora barro un CURSOR CON EL DETALLE DE LOS HONORARIOS
 
@@ -1058,11 +1088,11 @@ def ImprimirLiquidacion(request):
                     print("COMANDO =", comando)
                     cury.execute(comando)
 
-                    pdf.cell(40, 26 + lineaConcepto + lineaDetalle, 'HonorariosMedicos', 0, 0, 'L')
-                    pdf.cell(40, 26 + lineaConcepto + lineaDetalle, 'Anestesiologo', 0, 0, 'L')
-                    pdf.cell(40, 26 + lineaConcepto + lineaDetalle, 'Ayudantia', 0, 0, 'L')
-                    pdf.cell(40, 26 + lineaConcepto + lineaDetalle, 'Derechos de Sala', 0, 0, 'L')
-                    pdf.cell(40, 26 + lineaConcepto + lineaDetalle, 'Materiales', 0, 0, 'L')
+                    pdf.cell(40, 10, 'HonorariosMedicos', 0, 0, 'L')
+                    pdf.cell(40, 10, 'Anestesiologo', 0, 0, 'L')
+                    pdf.cell(40, 10, 'Ayudantia', 0, 0, 'L')
+                    pdf.cell(40, 10, 'Derechos de Sala', 0, 0, 'L')
+                    pdf.cell(40, 10, 'Materiales', 0, 0, 'L')
                     pdf.ln(4)
 
                     print("voy a comenzar a imprimir LOS HONORARIOS DEPROCEDIMIENTO EN CUESTION")
@@ -1082,11 +1112,11 @@ def ImprimirLiquidacion(request):
                             MATERIALES = 0
 
 
-                        pdf.cell(40, 26 + lineaConcepto + lineaDetalle, str(CIRUJANO), 0, 0, 'L')
-                        pdf.cell(40, 26 + lineaConcepto + lineaDetalle, str(ANESTESIOLOGO), 0, 0, 'L')
-                        pdf.cell(40, 26 + lineaConcepto + lineaDetalle, str(AYUDANTE), 0, 0, 'L')
-                        pdf.cell(40, 26 + lineaConcepto + lineaDetalle, str(SALAS), 0, 0, 'L')
-                        pdf.cell(40, 26 + lineaConcepto + lineaDetalle, str(MATERIALES), 0, 0, 'L')
+                        pdf.cell(40, 10, str(CIRUJANO), 0, 0, 'L')
+                        pdf.cell(40, 10, str(ANESTESIOLOGO), 0, 0, 'L')
+                        pdf.cell(40, 10, str(AYUDANTE), 0, 0, 'L')
+                        pdf.cell(40, 10, str(SALAS), 0, 0, 'L')
+                        pdf.cell(40, 10, str(MATERIALES), 0, 0, 'L')
 
                         pdf.ln(4)
 
@@ -1098,12 +1128,12 @@ def ImprimirLiquidacion(request):
         ## FIN CURSOR DETALLE FACTURA
 
         pdf.ln(4)
-        lineaConcepto = lineaConcepto + 1
-        pdf.ln(1)
+
+
         miConexiony.close()
-        pdf.cell(145, 26 + lineaDetalle, ' ' , 0, 0, 'L')
-        pdf.cell(30, 26  + lineaDetalle, 'SubTotal ' , 0, 0, 'L')
-        pdf.cell(30, 26 + lineaDetalle, str(subTotal), 0, 0, 'L')
+        pdf.cell(150, 10 , ' ' , 0, 0, 'L')
+        pdf.cell(30, 10  , 'SubTotal ' , 0, 0, 'L')
+        pdf.cell(35, 10 , str(subTotal), 0, 0, 'L')
         pdf.ln(2)
         subTotal=0
 
@@ -1134,47 +1164,47 @@ def ImprimirLiquidacion(request):
     #pdf.rect(5.0, 90.0, 200.0, 25)  # Coordenadas x, y, ancho, alto
 
     ## Aquip totales
-    pdf.set_font('Times', 'B', 7)
+    pdf.set_font('Times', 'B', 8)
     pdf.ln(4)
-    pdf.cell(145, 26, 'Valor en letras', 0, 0, 'L')
-    pdf.cell(30, 26, 'SubTotal Cargos:', 0, 0, 'L')
-    pdf.cell(30, 26 , str(totalFactura), 0, 0, 'L')
+    pdf.cell(152, 10, 'Valor en letras', 0, 0, 'L')
+    pdf.cell(30, 10, 'SubTotal Cargos:', 0, 0, 'L')
+    pdf.cell(30, 10 , str(totalFactura), 0, 0, 'L')
     pdf.ln(3)
-    lineaDetalle = lineaDetalle + 1
-    pdf.cell(145, 27 , str(valorAPagarLetras), 0, 0, 'L')
-    pdf.cell(30, 27, 'Abonos o Cuota:', 0, 0, 'L')
-    pdf.cell(30, 27 , str(abonos), 0, 0, 'L')
+
+    pdf.cell(152, 10 , str(valorAPagarLetras), 0, 0, 'L')
+    pdf.cell(30, 10, 'Abonos o Cuota:', 0, 0, 'L')
+    pdf.cell(30, 10 , str(abonos), 0, 0, 'L')
     pdf.ln(3)
-    lineaDetalle = lineaDetalle + 1
-    pdf.cell(145, 28 , str(''), 0, 0, 'L')
-    pdf.cell(30, 28, 'Anticipos:', 0, 0, 'L')
-    pdf.cell(30, 28 , str(anticipos), 0, 0, 'L')
+
+    pdf.cell(152, 10 , str(''), 0, 0, 'L')
+    pdf.cell(30, 10, 'Anticipos:', 0, 0, 'L')
+    pdf.cell(30, 10 , str(anticipos), 0, 0, 'L')
 
     pdf.ln(3)
-    lineaDetalle = lineaDetalle + 1
-    pdf.cell(145, 29 , str(''), 0, 0, 'L')
-    pdf.cell(30, 29, 'Descuentos:', 0, 0, 'L')
-    pdf.cell(30, 29 , str(descuentos), 0, 0, 'L')
+
+    pdf.cell(152, 10 , str(''), 0, 0, 'L')
+    pdf.cell(30, 10, 'Descuentos:', 0, 0, 'L')
+    pdf.cell(30, 10 , str(descuentos), 0, 0, 'L')
 
     pdf.ln(3)
-    lineaDetalle = lineaDetalle + 1
-    pdf.cell(145, 30 , str(''), 0, 0, 'L')
-    pdf.cell(30, 30, 'Valor a Pagar:', 0, 0, 'L')
-    pdf.cell(30, 30 , str(valorApagar), 0, 0, 'L')
+
+    pdf.cell(152, 10 , str(''), 0, 0, 'L')
+    pdf.cell(30, 10, 'Valor a Pagar:', 0, 0, 'L')
+    pdf.cell(30, 10 , str(valorApagar), 0, 0, 'L')
 
     pdf.ln(12)
 
-    pdf.cell(40, 34, 'Facturado por:', 0, 0, 'L')
-    pdf.cell(100, 34, str(usuario), 0, 0, 'L')
-    pdf.cell(40, 34, 'Firma del Paciente o Reponsable:', 0, 0, 'L')
+    pdf.cell(40, 10, 'Facturado por:', 0, 0, 'L')
+    pdf.cell(100, 10, str(usuario), 0, 0, 'L')
+    pdf.cell(40, 10, 'Firma del Paciente o Reponsable:', 0, 0, 'L')
 
     pdf.ln(3)
-    pdf.cell(40, 35, str(''), 0, 0, 'L')
-    pdf.cell(40, 35, 'Facturador(a):', 0, 0, 'L')
+    pdf.cell(40, 10, str(''), 0, 0, 'L')
+    pdf.cell(40, 10, 'Facturador(a):', 0, 0, 'L')
 
     pdf.ln(8)
-    pdf.cell(40, 36, 'Fecha de impresion:', 0, 0, 'L')
-    pdf.cell(150, 36, str(fechaRegistro), 0, 0, 'L')
+    pdf.cell(40, 10, 'Fecha de impresion:', 0, 0, 'L')
+    pdf.cell(150, 10, str(fechaRegistro), 0, 0, 'L')
 
     miConexiont.close()
 

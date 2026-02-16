@@ -74,11 +74,6 @@ class PDF(FPDF):
         print("Entre al HEADER")
         self.image('C:/EntornosPython/pos7Particionado/vulner/static/img/MedicalFinal.jpg', 170 ,15, 10 , 5)
         # Arial bold 15
-        self.set_font('Times', 'B', 7)
-
-        # Move to the right
-        #self.cell(12)
-
 
         convenioId = ConveniosPacienteIngresos.objects.filter(tipoDoc_id=self.tipoDocId,documento_id=self.documentoId,consecAdmision=self.consec).aggregate(Max('convenio_id'))
 
@@ -115,66 +110,69 @@ class PDF(FPDF):
         # Title
         #
         self.ln(2)
-        self.cell(195, 1, 'CLINICA MEDICAL',  0, 0, 'C')
+        self.set_font('Times', 'BI', 9)
+        self.cell(195, 12, 'CLINICA MEDICAL',  0, 0, 'C')
         self.ln(3)
-        self.cell(195, 1, 'HISTORIA CLINICA', 0, 0, 'C')
-        self.ln(2)
+        self.cell(195, 12, 'HISTORIA CLINICA', 0, 0, 'C')
+        self.ln(5)
         self.set_line_width(0.4)
         self.rect(10.0, 15.0, 195.0, 270.0)  # Coordenadas x, y, ancho, alto
 
-        self.set_line_width(0.5)
-        self.rect(10.0, 15.0, 195.0, 20)  # Coordenadas x, y, ancho, alto
+        #self.set_line_width(0.5)
+        #self.rect(10.0, 15.0, 195.0, 20)  # Coordenadas x, y, ancho, alto
 
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 11, 'PACIENTE: ', 0, 0, 'L')
-        self.set_font('Times', '', 7)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'PACIENTE: ', 0, 0, 'L')
+        self.set_font('Times', '', 8)
 
-        self.cell(25, 11, str(historia[0]['tipnombre']), 0, 0, 'L')
-        self.cell(25, 11, str(historia[0]['documentoPaciente']), 0, 0, 'L')
-        self.cell(25, 11, str(historia[0]['nombre']), 0, 0, 'L')
-        self.ln(1)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 16, 'EDAD:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 16, str(historia[0]['edad']), 0, 0, 'L')
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 16, 'GENERO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 16, str(historia[0]['genero']), 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 18, 'REGIMEN:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 18, str(historia[0]['regimen']), 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 20, 'CONVENIO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(25, 20, historia[0]['convenio'], 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 21, 'SERVICIO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(25, 21, historia[0]['servicio'], 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 23, 'FECHA:', 0, 0, 'L')
-        self.cell(25, 23, historia[0]['fecha'], 0, 0, 'L')
+        self.cell(25, 10, str(historia[0]['tipnombre']), 0, 0, 'L')
+        self.cell(25, 10, str(historia[0]['documentoPaciente']), 0, 0, 'L')
+        self.cell(45, 10, str(historia[0]['nombre']), 0, 0, 'L')
+
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'EDAD:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(50, 10, str(historia[0]['edad']), 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.ln(3)
+        self.cell(25, 10, 'GENERO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(50, 10, str(historia[0]['genero']), 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'REGIMEN:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(50, 10, str(historia[0]['regimen']), 0, 0, 'L')
+        self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'CONVENIO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(25, 10, historia[0]['convenio'], 0, 0, 'L')
+        #self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'SERVICIO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(25, 10, historia[0]['servicio'], 0, 0, 'L')
+        #self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'FECHA:', 0, 0, 'L')
+        self.cell(25, 10, historia[0]['fecha'], 0, 0, 'L')
+        self.set_font('Times', '', 8)
 
         # Line break
-        self.ln(14)
+        self.ln(6)
 
 
     # Page footer
     def footer(self):
         # Position at 1.5 cm from bottom
         # Position at 3 cm from bottom
-        self.set_y(-30)
+
+        self.set_y(-25)
         # Arial italic 8
         self.set_font('Times', 'I', 8)
         # Page number
         self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
-
+        self.set_font('Times', '', 8)
 
 class PDFOrdenIncapacidad(FPDF):
     def __init__(self, tipoDocId, documentoId, consec,historiaId ,  convenioId, tipoAdmision, *args, **kwargs):
@@ -249,14 +247,16 @@ class PDFOrdenIncapacidad(FPDF):
     	# Define el ancho de línea
         self.set_line_width(0.4)
         # Dibuja el borde
-        self.rect(10.0, 15.0, 195.0, 260.0)  # Coordenadas x, y, ancho, alto
+        self.set_font('Times', 'B', 8)
+        self.rect(10.0, 15.0, 195.0, 275.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
-        self.cell(195, 1, 'CLINICA MEDICAL',  0, 0, 'C')
+        self.cell(195, 1, 'CLINICA MEDICAL', 0, 0, 'C')
         self.ln(3)
-        self.cell(195, 1, 'INCAPACIDAD', 0, 0, 'C')
+        self.cell(195, 1, 'INCAPACIDAD MEDICA', 0, 0, 'C')
         self.ln(2)
         self.set_line_width(0.5)
-        self.rect(10.0, 15.0, 195.0, 20)  # Coordenadas x, y, ancho, alto
+        self.rect(10.0, 15.0, 195.0, 15)  # Coordenadas x, y, ancho, alto
+
 
         self.set_font('Times', 'B', 7)
         self.cell(25, 10, 'PACIENTE: ', 0, 0, 'L')
@@ -353,7 +353,7 @@ class PDFOrdenLaboratorio(FPDF):
         # Logo
         self.image('C:/EntornosPython/pos7Particionado/vulner/static/img/MedicalFinal.jpg', 180 ,20, 10 , 10)
         # Arial bold 15
-        self.set_font('Times', 'B', 7)
+        self.set_font('Times', 'B', 8)
 
         # Move to the right
         # self.cell(12)
@@ -411,65 +411,65 @@ class PDFOrdenLaboratorio(FPDF):
         # Define el ancho de línea
         self.set_line_width(0.4)
         # Dibuja el borde
-
-        self.rect(10.0, 15.0, 195.0, 265.0)  # Coordenadas x, y, ancho, alto
+        self.set_font('Times', 'B', 8)
+        self.rect(10.0, 15.0, 195.0, 275.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
         self.cell(195, 1, 'CLINICA MEDICAL', 0, 0, 'C')
         self.ln(3)
         self.cell(195, 1, 'LABORATORIOS', 0, 0, 'C')
         self.ln(2)
         self.set_line_width(0.5)
-        self.rect(10.0, 15.0, 195.0, 20)  # Coordenadas x, y, ancho, alto
+        self.rect(10.0, 15.0, 195.0, 15)  # Coordenadas x, y, ancho, alto
 
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 11, 'PACIENTE: ', 0, 0, 'L')
-        self.set_font('Times', '', 7)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'PACIENTE: ', 0, 0, 'L')
+        self.set_font('Times', '', 8)
 
-        self.cell(25, 11, historia[0]['tipnombre'], 0, 0, 'L')
-        self.cell(25, 11, historia[0]['documentoPaciente'], 0, 0, 'L')
-        self.cell(25, 11, historia[0]['nombre'], 0, 0, 'L')
-        self.ln(1)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 16, 'EDAD:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 16, historia[0]['edad'], 0, 0, 'L')
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 16, 'GENERO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 16, str(historia[0]['genero']), 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 18, 'REGIMEN:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
+        self.cell(25, 10, historia[0]['tipnombre'], 0, 0, 'L')
+        self.cell(25, 10, historia[0]['documentoPaciente'], 0, 0, 'L')
+        self.cell(25, 10, historia[0]['nombre'], 0, 0, 'L')
+        self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'EDAD:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(50, 10, historia[0]['edad'], 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.cell(20, 10, 'GENERO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(50, 10, str(historia[0]['genero']), 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.cell(15, 10, 'REGIMEN:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
         print("regimen = ", historia[0]['regimen'])
 
-        self.cell(50, 18, str(historia[0]['regimen']), 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 20, 'CONVENIO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(25, 20, str(historia[0]['convenio']), 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 21, 'SERVICIO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(25, 21, historia[0]['servicio'], 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 23, 'FECHA:', 0, 0, 'L')
-        self.cell(25, 23, historia[0]['fecha'], 0, 0, 'L')
+        self.cell(40, 10, str(historia[0]['regimen']), 0, 0, 'L')
+        self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'CONVENIO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(25, 10, str(historia[0]['convenio']), 0, 0, 'L')
+        self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'SERVICIO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(25, 10, historia[0]['servicio'], 0, 0, 'L')
+
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'FECHA:', 0, 0, 'L')
+        self.cell(25, 10, historia[0]['fecha'], 0, 0, 'L')
 
         # Line break
-        self.ln(14)
+        self.ln(8)
 
     # Page footer
     def footer(self):
         # Position at 1.5 cm from bottom
-        self.set_y(-30)
+        self.set_y(-25)
         # Arial italic 8
-        self.set_font('Times', 'B', 7)
-        self.cell(180, 5, 'MEDICO ORDENA', 0, 0, 'C')
-        self.ln(4)
+        self.set_font('Times', 'B', 8)
+        self.cell(180, 10, 'MEDICO ORDENA', 0, 0, 'l')
+        self.ln(2)
+        self.set_font('Times', '', 8)
 
         miConexionii = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                        password="123456")
@@ -488,18 +488,22 @@ class PDFOrdenLaboratorio(FPDF):
         miConexionii.close()
 
         self.set_line_width(0.4)
-        self.rect(10, 265.0, 195.0, 15.0)  # Coordenadas x, y, ancho, alto
+        #self.rect(10, 265.0, 195.0, 15.0)  # Coordenadas x, y, ancho, alto
 
         print('registro =', registro)
-        self.cell(15, 7, 'Firmado Por:', 0, 0, 'L')
-        self.cell(25, 7, '' + str(registro[0]['tipoDoc_id']), 0, 0, 'L')
-        self.cell(25, 7, '' + str(registro[0]['documento']), 0, 0, 'L')
-        self.cell(80, 7, '' + str(registro[0]['plantaNombre']), 0, 0, 'L')
-        self.cell(50, 7, 'Registro Medico:' + str(registro[0]['registroMedico']), 0, 0, 'L')
-
+        self.set_font('Times', 'B', 8)
+        self.cell(15, 10, 'Firmado Por:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(25, 10, '' + str(registro[0]['tipoDoc_id']), 0, 0, 'L')
+        self.cell(25, 10, '' + str(registro[0]['documento']), 0, 0, 'L')
+        self.cell(80, 10, '' + str(registro[0]['plantaNombre']), 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.cell(50, 10, 'Registro Medico:' + str(registro[0]['registroMedico']), 0, 0, 'L')
+        self.set_font('Times', '', 8)
         self.ln(2)
-        self.cell(100, 9, 'Firmado Electronicamente', 0, 0, 'L')
-        self.set_font('Times', 'I', 8)
+        self.set_font('Times', 'B', 8)
+        self.cell(100, 10, 'Firmado Electronicamente', 0, 0, 'L')
+        self.set_font('Times', '', 8)
         # Page number
         #self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
 
@@ -576,50 +580,53 @@ class PDFOrdenTerapia(FPDF):
         self.set_line_width(0.4)
         # Dibuja el borde
 
-        self.rect(10.0, 15.0, 195.0, 265.0)  # Coordenadas x, y, ancho, alto
+        self.set_font('Times', 'B', 8)
+        self.rect(10.0, 15.0, 195.0, 275.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
         self.cell(195, 1, 'CLINICA MEDICAL', 0, 0, 'C')
         self.ln(3)
         self.cell(195, 1, 'TERAPIAS', 0, 0, 'C')
         self.ln(2)
         self.set_line_width(0.5)
-        self.rect(10.0, 15.0, 195.0, 20)  # Coordenadas x, y, ancho, alto
+        self.rect(10.0, 15.0, 195.0, 15)  # Coordenadas x, y, ancho, alto
 
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 11, 'PACIENTE: ', 0, 0, 'L')
-        self.set_font('Times', '', 7)
 
-        self.cell(25, 11, historia[0]['tipnombre'], 0, 0, 'L')
-        self.cell(25, 11, historia[0]['documentoPaciente'], 0, 0, 'L')
-        self.cell(25, 11, historia[0]['nombre'], 0, 0, 'L')
-        self.ln(1)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 16, 'EDAD:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 16, historia[0]['edad'], 0, 0, 'L')
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 16, 'GENERO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 16, str(historia[0]['genero']), 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 18, 'REGIMEN:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 18, str(historia[0]['regimen']), 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 20, 'CONVENIO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(25, 20, str(historia[0]['convenio']), 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 21, 'SERVICIO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(25, 21, historia[0]['servicio'], 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 23, 'FECHA:', 0, 0, 'L')
-        self.cell(25, 23, historia[0]['fecha'], 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'PACIENTE: ', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+
+        self.cell(25, 10, historia[0]['tipnombre'], 0, 0, 'L')
+        self.cell(25, 10, historia[0]['documentoPaciente'], 0, 0, 'L')
+        self.cell(25, 10, historia[0]['nombre'], 0, 0, 'L')
+        self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'EDAD:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(50, 10, historia[0]['edad'], 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.cell(20, 10, 'GENERO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(50, 10, str(historia[0]['genero']), 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.cell(15, 10, 'REGIMEN:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        print("regimen = ", historia[0]['regimen'])
+
+        self.cell(40, 10, str(historia[0]['regimen']), 0, 0, 'L')
+        self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'CONVENIO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(25, 10, str(historia[0]['convenio']), 0, 0, 'L')
+        self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'SERVICIO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(25, 10, historia[0]['servicio'], 0, 0, 'L')
+
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'FECHA:', 0, 0, 'L')
+        self.cell(25, 10, historia[0]['fecha'], 0, 0, 'L')
 
         # Line break
         self.ln(14)
@@ -650,7 +657,7 @@ class PDFOrdenTerapia(FPDF):
         miConexionii.close()
 
         self.set_line_width(0.4)
-        self.rect(10, 265.0, 195.0, 15.0)  # Coordenadas x, y, ancho, alto
+        #self.rect(10, 265.0, 195.0, 15.0)  # Coordenadas x, y, ancho, alto
 
 
         print('registro =', registro)
@@ -738,50 +745,53 @@ class PDFOrdenRadiologia(FPDF):
         self.set_line_width(0.4)
         # Dibuja el borde
 
-        self.rect(10.0, 15.0, 195.0, 265.0)  # Coordenadas x, y, ancho, alto
+        self.set_font('Times', 'B', 8)
+        self.rect(10.0, 15.0, 195.0, 275.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
         self.cell(195, 1, 'CLINICA MEDICAL', 0, 0, 'C')
         self.ln(3)
         self.cell(195, 1, 'RADIOLOGIA', 0, 0, 'C')
         self.ln(2)
         self.set_line_width(0.5)
-        self.rect(10.0, 15.0, 195.0, 20)  # Coordenadas x, y, ancho, alto
+        self.rect(10.0, 15.0, 195.0, 15)  # Coordenadas x, y, ancho, alto
 
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 11, 'PACIENTE: ', 0, 0, 'L')
-        self.set_font('Times', '', 7)
 
-        self.cell(25, 11, historia[0]['tipnombre'], 0, 0, 'L')
-        self.cell(25, 11, historia[0]['documentoPaciente'], 0, 0, 'L')
-        self.cell(25, 11, historia[0]['nombre'], 0, 0, 'L')
-        self.ln(1)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 16, 'EDAD:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 16, historia[0]['edad'], 0, 0, 'L')
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 16, 'GENERO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 16, historia[0]['genero'], 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 18, 'REGIMEN:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 18, str(historia[0]['regimen']), 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 20, 'CONVENIO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(25, 20, str(historia[0]['convenio']), 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 21, 'SERVICIO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(25, 21, str(historia[0]['servicio']), 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 23, 'FECHA:', 0, 0, 'L')
-        self.cell(25, 23, historia[0]['fecha'], 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'PACIENTE: ', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+
+        self.cell(25, 10, historia[0]['tipnombre'], 0, 0, 'L')
+        self.cell(25, 10, historia[0]['documentoPaciente'], 0, 0, 'L')
+        self.cell(25, 10, historia[0]['nombre'], 0, 0, 'L')
+        self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'EDAD:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(50, 10, historia[0]['edad'], 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.cell(20, 10, 'GENERO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(50, 10, str(historia[0]['genero']), 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.cell(15, 10, 'REGIMEN:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        print("regimen = ", historia[0]['regimen'])
+
+        self.cell(40, 10, str(historia[0]['regimen']), 0, 0, 'L')
+        self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'CONVENIO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(25, 10, str(historia[0]['convenio']), 0, 0, 'L')
+        self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'SERVICIO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(25, 10, historia[0]['servicio'], 0, 0, 'L')
+
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'FECHA:', 0, 0, 'L')
+        self.cell(25, 10, historia[0]['fecha'], 0, 0, 'L')
 
         # Line break
         self.ln(14)
@@ -812,7 +822,7 @@ class PDFOrdenRadiologia(FPDF):
         miConexionii.close()
 
         self.set_line_width(0.4)
-        self.rect(10, 265.0, 195.0, 15.0)  # Coordenadas x, y, ancho, alto
+        #self.rect(10, 265.0, 195.0, 15.0)  # Coordenadas x, y, ancho, alto
 
         print('registro =', registro)
         self.cell(15, 7, 'Firmado Por:', 0, 0, 'L')
@@ -899,50 +909,53 @@ class PDFOrdenMedicamentos(FPDF):
         # Define el ancho de línea
         self.set_line_width(0.4)
         # Dibuja el borde
-        self.rect(10.0, 15.0, 195.0, 265.0)  # Coordenadas x, y, ancho, alto
+        self.set_font('Times', 'B', 8)
+        self.rect(10.0, 15.0, 195.0, 275.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
         self.cell(195, 1, 'CLINICA MEDICAL', 0, 0, 'C')
         self.ln(3)
         self.cell(195, 1, 'FORMULACION MEDICAMENTOS', 0, 0, 'C')
         self.ln(2)
         self.set_line_width(0.5)
-        self.rect(10.0, 15.0, 195.0, 20)  # Coordenadas x, y, ancho, alto
+        self.rect(10.0, 15.0, 195.0, 15)  # Coordenadas x, y, ancho, alto
 
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 11, 'PACIENTE: ', 0, 0, 'L')
-        self.set_font('Times', '', 7)
 
-        self.cell(25, 11, historia[0]['tipnombre'], 0, 0, 'L')
-        self.cell(25, 11, historia[0]['documentoPaciente'], 0, 0, 'L')
-        self.cell(25, 11, historia[0]['nombre'], 0, 0, 'L')
-        self.ln(1)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 16, 'EDAD:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 16, historia[0]['edad'], 0, 0, 'L')
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 16, 'GENERO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 16, historia[0]['genero'], 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 18, 'REGIMEN:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 18, str(historia[0]['regimen']), 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 20, 'CONVENIO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(25, 20, str(historia[0]['convenio']), 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 21, 'SERVICIO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(25, 21, str(historia[0]['servicio']), 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 23, 'FECHA:', 0, 0, 'L')
-        self.cell(25, 23, historia[0]['fecha'], 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'PACIENTE: ', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+
+        self.cell(25, 10, historia[0]['tipnombre'], 0, 0, 'L')
+        self.cell(25, 10, historia[0]['documentoPaciente'], 0, 0, 'L')
+        self.cell(25, 10, historia[0]['nombre'], 0, 0, 'L')
+        self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'EDAD:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(50, 10, historia[0]['edad'], 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.cell(20, 10, 'GENERO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(50, 10, str(historia[0]['genero']), 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.cell(15, 10, 'REGIMEN:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        print("regimen = ", historia[0]['regimen'])
+
+        self.cell(40, 10, str(historia[0]['regimen']), 0, 0, 'L')
+        self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'CONVENIO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(25, 10, str(historia[0]['convenio']), 0, 0, 'L')
+        self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'SERVICIO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(25, 10, historia[0]['servicio'], 0, 0, 'L')
+
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'FECHA:', 0, 0, 'L')
+        self.cell(25, 10, historia[0]['fecha'], 0, 0, 'L')
 
         # Line break
         self.ln(14)
@@ -973,7 +986,7 @@ class PDFOrdenMedicamentos(FPDF):
                 {'registroMedico': registroMedico, 'plantaNombre': plantaNombre, 'tipoDoc_id': tipoDoc_id, 'documento': documento})
         miConexionii.close()
         self.set_line_width(0.4)
-        self.rect(10, 265.0, 195.0, 15.0)  # Coordenadas x, y, ancho, alto
+        #self.rect(10, 265.0, 195.0, 15.0)  # Coordenadas x, y, ancho, alto
 
 
         print('registro =', registro)
@@ -1061,50 +1074,52 @@ class PDFOrdenDeControl(FPDF):
         self.set_line_width(0.4)
         # Dibuja el borde
 
-        self.rect(10.0, 15.0, 195.0, 265.0)  # Coordenadas x, y, ancho, alto
+        self.set_font('Times', 'B', 8)
+        self.rect(10.0, 15.0, 195.0, 275.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
         self.cell(195, 1, 'CLINICA MEDICAL', 0, 0, 'C')
         self.ln(3)
-        self.cell(195, 1, 'ORDEN DE CONTROL', 0, 0, 'C')
+        self.cell(195, 1, 'ORDEN DE CONTROLL', 0, 0, 'C')
         self.ln(2)
         self.set_line_width(0.5)
-        self.rect(10.0, 15.0, 195.0, 20)  # Coordenadas x, y, ancho, alto
+        self.rect(10.0, 15.0, 195.0, 15)  # Coordenadas x, y, ancho, alto
 
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 11, 'PACIENTE: ', 0, 0, 'L')
-        self.set_font('Times', '', 7)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'PACIENTE: ', 0, 0, 'L')
+        self.set_font('Times', '', 8)
 
-        self.cell(25, 11, historia[0]['tipnombre'], 0, 0, 'L')
-        self.cell(25, 11, historia[0]['documentoPaciente'], 0, 0, 'L')
-        self.cell(25, 11, historia[0]['nombre'], 0, 0, 'L')
-        self.ln(1)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 16, 'EDAD:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 16, historia[0]['edad'], 0, 0, 'L')
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 16, 'GENERO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 16, historia[0]['genero'], 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 18, 'REGIMEN:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 18, str(historia[0]['regimen']), 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 20, 'CONVENIO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(25, 20, str(historia[0]['convenio']), 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 21, 'SERVICIO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(25, 21, str(historia[0]['servicio']), 0, 0, 'L')
-        self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 23, 'FECHA:', 0, 0, 'L')
-        self.cell(25, 23, historia[0]['fecha'], 0, 0, 'L')
+        self.cell(25, 10, historia[0]['tipnombre'], 0, 0, 'L')
+        self.cell(25, 10, historia[0]['documentoPaciente'], 0, 0, 'L')
+        self.cell(25, 10, historia[0]['nombre'], 0, 0, 'L')
+        self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'EDAD:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(50, 10, historia[0]['edad'], 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.cell(20, 10, 'GENERO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(50, 10, str(historia[0]['genero']), 0, 0, 'L')
+        self.set_font('Times', 'B', 8)
+        self.cell(15, 10, 'REGIMEN:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        print("regimen = ", historia[0]['regimen'])
+
+        self.cell(40, 10, str(historia[0]['regimen']), 0, 0, 'L')
+        self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'CONVENIO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(25, 10, str(historia[0]['convenio']), 0, 0, 'L')
+        self.ln(3)
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'SERVICIO:', 0, 0, 'L')
+        self.set_font('Times', '', 8)
+        self.cell(25, 10, historia[0]['servicio'], 0, 0, 'L')
+
+        self.set_font('Times', 'B', 8)
+        self.cell(25, 10, 'FECHA:', 0, 0, 'L')
+        self.cell(25, 10, historia[0]['fecha'], 0, 0, 'L')
 
         # Line break
         self.ln(14)
@@ -1135,7 +1150,7 @@ class PDFOrdenDeControl(FPDF):
         miConexionii.close()
 
         self.set_line_width(0.4)
-        self.rect(10, 265.0, 195.0, 15.0)  # Coordenadas x, y, ancho, alto
+        #self.rect(10, 265.0, 195.0, 15.0)  # Coordenadas x, y, ancho, alto
 
         print('registro =', registro)
         self.cell(15, 7, 'Firmado Por:', 0, 0, 'L')
@@ -1154,7 +1169,7 @@ class PDFOrdenDeControl(FPDF):
 def ImprimirHistoriaClinica(request):
     # Instantiation of inherited class
     print("Entre ImprimirHistoriaClinica ")
-
+    linea=0
     ingresoId = request.POST["ingresoId"]
     #print("ingresoId = ", ingresoId)
 
@@ -1191,14 +1206,8 @@ def ImprimirHistoriaClinica(request):
 
     pdf.alias_nb_pages()
     pdf.set_margins(left=10, top=5, right=5)
-    print("LISTO 1.5")
-    pdf.set_font('Times', '', 8)
-    print("LISTO 2")
-    pdf.ln(5)
-    linea = 5
-    totalFolios = 20
 
-    print ("LISTO 3")
+    totalFolios = 20
 
     # El propgrama debe preguntar desde que Folio hasta cual Y/O desde que fecha y hasta cual fecha
 
@@ -1219,30 +1228,25 @@ def ImprimirHistoriaClinica(request):
             {'HistoriaId': HistoriaId, 'folioId': folioId, 'fechaFolio': fechaFolio, 'tipoFolio': tipoFolio})
     miConexiont.close()
 
+
+
     for i in range(0, len(folios)):
 
         pdf.set_line_width(0.3)
-        #pdf.rect(10.0, 43.0, 195.0, 5)  # Coordenadas x, y, ancho, alto
 
+        pdf.set_font('Times', 'B', 8)
 
         pdf.cell(1, 1,
                  '_________________________________________________________________________________________________________________________________________',
                  0, 0, 'L')
-        pdf.cell(20, 7, 'Folio No ' + str(folios[0 + i]['folioId']), 0, 0, 'L')
-        pdf.cell(80, 7, 'Fecha: ' + str(folios[0 + i]['fechaFolio']), 0, 0, 'L')
-        pdf.cell(25, 7, 'Tipo Folio: ' + str(folios[0 + i]['tipoFolio']), 0, 0, 'L')
+        pdf.cell(20, 13, 'Folio No ' + str(folios[0 + i]['folioId']), 0, 0, 'L')
+        pdf.cell(80, 13, 'Fecha: ' + str(folios[0 + i]['fechaFolio']), 0, 0, 'L')
+        pdf.cell(25, 13, 'Tipo Folio: ' + str(folios[0 + i]['tipoFolio']), 0, 0, 'L')
+        #pdf.cell(1, 1,
+        #         '____________________________________________________________________',
+        #         0, 0, 'L')
 
-        print("linea = ", linea)
-        linea = linea + 1
-        pdf.ln(1)
-        pdf.cell(1, 10,
-                 '_________________________________________________________________________________________________________________________________________',
-                 0, 0, 'L')
-
-        linea = linea + 7
-        pdf.ln(8)
-
-        # Cursor recorre basicos Historia Clinica
+        pdf.set_font('Times', '', 8)
 
         miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                        password="123456")
@@ -1263,36 +1267,53 @@ def ImprimirHistoriaClinica(request):
         miConexiont.close()
 
         print("historia = ", historia)
-        print("matriz historia = ", len(historia))
+        pdf.ln(6)
 
         for l in range(0, len(historia)):
             plan = str(historia[0 + l]['plan'])
             analisis = str(historia[0 + l]['analisis'])
             motivo =  str(historia[0 + l]['motivo'])
-            pdf.cell(15, 1, 'Motivo:', '', 0, 0, 'L')
-            pdf.multi_cell(w=0, h=4, txt=motivo , border=0, align='J',fill=False)
-            #pdf.cell(250, 1, 'Motivo ' + str(historia[0 + l]['motivo']), 0, 0, 'L')
-            pdf.ln(3)
+
+            if motivo != '' and motivo != 'None':
+                pdf.cell(15, 10, 'Motivo:', '', 0, 0, 'L')
+                pdf.ln(7)
+                #pdf.cell(15, 10, 'Motivo:', '', 0, 0, 'L')
+                pdf.multi_cell(w=0, h=3, txt=motivo , border=0, align='L',fill=False)
+
             subjetivo =  str(historia[0 + l]['subjetivo'])
-            pdf.cell(15, 1, 'Subjetivo:', '', 0, 0, 'L')
-            pdf.multi_cell(w=0, h=4, txt=subjetivo , border=0, align='J',fill=False)
-            #pdf.cell(250, 1, 'Subjetivo: ' + str(historia[0 + l]['subjetivo']), 0, 0, 'L')
-            pdf.ln(3)
-            objetivo =  str(historia[0 + l]['objetivo'])
-            pdf.multi_cell(w=0, h=4, txt=objetivo , border=0, align='J',fill=False)
-            #pdf.cell(250, 1, 'Objetivo: ' + str(historia[0 + l]['objetivo']), 0, 0, 'L')
-            pdf.ln(3)
-            pdf.cell(15, 1, 'Analisis:', '', 0, 0, 'L')
-            pdf.multi_cell(w=0, h=4, txt=analisis, border=0, align='J', fill=False)
-            #pdf.cell(250, 1, 'Analisis: ' + str(historia[0 + l]['analisis']), 0, 0, 'L')
-            pdf.ln(3)
-            pdf.cell(15,1,'Plan:','',0,0,'L')
-            pdf.multi_cell(w=0, h=4, txt=plan,border=0, align='J',fill=False)
-            #pdf.cell(250, 1, 'Plan: ' + str(historia[0 + l]['plan']), 0, 0, 'L')
-            pdf.ln(3)
-            pdf.cell(30, 1, 'CausasExterna: ' + str(historia[0 + l]['causasExterna']), 0, 0, 'L')
-            linea = linea + 5
-            pdf.ln(5)
+
+            if subjetivo != '' and subjetivo != 'None':
+                pdf.cell(15, 10, 'Subjetivo:', '', 0, 0, 'L')
+                pdf.ln(7)
+                pdf.multi_cell(w=0, h=3, txt=subjetivo , border=0, align='J',fill=False)
+
+            if objetivo != '' and objetivo != 'None':
+
+                objetivo = str(historia[0 + l]['objetivo'])
+                pdf.cell(15, 10, 'Objetivo: ' + str(historia[0 + l]['objetivo']), 0, 0, 'L')
+                pdf.ln(7)
+                pdf.multi_cell(w=0, h=3, txt=objetivo, border=0, align='J', fill=False)
+
+
+
+            if analisis != '' and analisis != 'None':
+
+                pdf.cell(15, 10, 'Analisis:', '', 0, 0, 'L')
+                pdf.ln(7)
+                pdf.multi_cell(w=0, h=3, txt=analisis, border=0, align='J', fill=False)
+
+
+
+            if plan != '' and plan != 'None' and plan != None:
+                pdf.cell(15, 10, 'Plan:', '', 0, 0, 'L')
+                pdf.ln(7)
+                pdf.multi_cell(w=0, h=3, txt=plan,border=0, align='J',fill=False)
+
+            pdf.ln(1)
+
+            if str(historia[0 + l]['causasExterna']) != '' and str(historia[0 + l]['causasExterna']) != 'None' and str(historia[0 + l]['causasExterna']) != None:
+
+                pdf.cell(30, 10, 'CausasExterna: ' + str(historia[0 + l]['causasExterna']), 0, 0, 'L')
 
             # Cursor recorre Historia Clinica ( flags de heridas , nota aclaratoria etc)
 
@@ -1326,46 +1347,42 @@ def ImprimirHistoriaClinica(request):
             print("matriz rasgosHistoria = ", len(rasgosHistoria))
 
             if (rasgosHistoria != []):
-                linea = linea + 2
+
                 pdf.ln(2)
-                pdf.cell(180, 1, 'RASGOS HISTORIA', 0, 0, 'C')
-                linea = linea + 3
+                pdf.set_font('Times', 'B', 8)
+                pdf.cell(180, 12, 'RASGOS HISTORIA', 0, 0, 'C')
+                pdf.set_font('Times', '', 8)
                 pdf.ln(4)
 
             for l in range(0, len(rasgosHistoria)):
-                pdf.cell(20, 1, 'Antibioticos ' + str(rasgosHistoria[0 + l]['antibioticos']), 0, 0, 'L')
-                pdf.cell(20, 1, 'Apache2: ' + str(rasgosHistoria[0 + l]['apache2']), 0, 0, 'L')
-                pdf.cell(100, 1, 'ExamenFisico: ' + str(rasgosHistoria[0 + l]['examenFisico']), 0, 0, 'L')
-                pdf.cell(20, 1, 'Hipotension: ' + str(rasgosHistoria[0 + l]['hipotension']), 0, 0, 'L')
-                pdf.cell(20, 1, 'IngestaAlcohol: ' + str(rasgosHistoria[0 + l]['ingestaAlcohol']), 0, 0, 'L')
-                linea = linea + 4
+                pdf.cell(20, 10, 'Antibioticos ' + str(rasgosHistoria[0 + l]['antibioticos']), 0, 0, 'L')
+                pdf.cell(20, 10, 'Apache2: ' + str(rasgosHistoria[0 + l]['apache2']), 0, 0, 'L')
+                pdf.cell(100, 10, 'ExamenFisico: ' + str(rasgosHistoria[0 + l]['examenFisico']), 0, 0, 'L')
+                pdf.cell(20, 10, 'Hipotension: ' + str(rasgosHistoria[0 + l]['hipotension']), 0, 0, 'L')
+                pdf.cell(20, 10, 'IngestaAlcohol: ' + str(rasgosHistoria[0 + l]['ingestaAlcohol']), 0, 0, 'L')
                 pdf.ln(4)
 
-                pdf.cell(20, 1, 'Irritacion: ' + str(rasgosHistoria[0 + l]['irritacion']), 0, 0, 'L')
-                pdf.cell(100, 1, 'Justificacion: ' + str(rasgosHistoria[0 + l]['justificacion']), 0, 0, 'L')
-                pdf.cell(20, 1, 'Leucopenia: ' + str(rasgosHistoria[0 + l]['leucopenia']), 0, 0, 'L')
-                pdf.cell(20, 1, 'LlenadoCapilar: ' + str(rasgosHistoria[0 + l]['llenadoCapilar']), 0, 0, 'L')
-                pdf.cell(20, 1, 'Monitoreo: ' + str(rasgosHistoria[0 + l]['monitoreo']), 0, 0, 'L')
-                linea = linea + 4
+                pdf.cell(20, 10, 'Irritacion: ' + str(rasgosHistoria[0 + l]['irritacion']), 0, 0, 'L')
+                pdf.cell(100, 10, 'Justificacion: ' + str(rasgosHistoria[0 + l]['justificacion']), 0, 0, 'L')
+                pdf.cell(20, 10, 'Leucopenia: ' + str(rasgosHistoria[0 + l]['leucopenia']), 0, 0, 'L')
+                pdf.cell(20, 10, 'LlenadoCapilar: ' + str(rasgosHistoria[0 + l]['llenadoCapilar']), 0, 0, 'L')
+                pdf.cell(20, 10, 'Monitoreo: ' + str(rasgosHistoria[0 + l]['monitoreo']), 0, 0, 'L')
                 pdf.ln(4)
 
-                pdf.cell(100, 1, 'MovilidadLimitada: ' + str(rasgosHistoria[0 + l]['movilidadLimitada']), 0, 0, 'L')
-                pdf.cell(20, 1, 'Neurologia: ' + str(rasgosHistoria[0 + l]['neurologia']), 0, 0, 'L')
-                pdf.cell(2, 1, 'NotaAclaratoria: ' + str(rasgosHistoria[0 + l]['notaAclaratoria']), 0, 0, 'L')
-                linea = linea + 4
+                pdf.cell(100, 10, 'MovilidadLimitada: ' + str(rasgosHistoria[0 + l]['movilidadLimitada']), 0, 0, 'L')
+                pdf.cell(20, 10, 'Neurologia: ' + str(rasgosHistoria[0 + l]['neurologia']), 0, 0, 'L')
+                pdf.cell(2, 10, 'NotaAclaratoria: ' + str(rasgosHistoria[0 + l]['notaAclaratoria']), 0, 0, 'L')
                 pdf.ln(4)
-                pdf.cell(20, 1, 'Pulsos: ' + str(rasgosHistoria[0 + l]['pulsos']), 0, 0, 'L')
-                pdf.cell(20, 1, 'RetiroPuntos: ' + str(rasgosHistoria[0 + l]['retiroPuntos']), 0, 0, 'L')
-                pdf.cell(50, 1, 'RiesgoHemodinamico: ' + str(rasgosHistoria[0 + l]['riesgoHemodinamico']), 0, 0, 'L')
-                pdf.cell(100, 1, 'Riesgos: ' + str(rasgosHistoria[0 + l]['riesgos']), 0, 0, 'L')
-                linea = linea + 4
+                pdf.cell(20, 10, 'Pulsos: ' + str(rasgosHistoria[0 + l]['pulsos']), 0, 0, 'L')
+                pdf.cell(20, 10, 'RetiroPuntos: ' + str(rasgosHistoria[0 + l]['retiroPuntos']), 0, 0, 'L')
+                pdf.cell(50, 10, 'RiesgoHemodinamico: ' + str(rasgosHistoria[0 + l]['riesgoHemodinamico']), 0, 0, 'L')
+                pdf.cell(100, 10, 'Riesgos: ' + str(rasgosHistoria[0 + l]['riesgos']), 0, 0, 'L')
                 pdf.ln(4)
-                pdf.cell(500, 1, 'NotaAclaratoria: ' + str(rasgosHistoria[0 + l]['textoNotaAclaratoria']), 0, 0, 'L')
-                pdf.cell(100, 1, 'Tratamiento: ' + str(rasgosHistoria[0 + l]['tratamiento']), 0, 0, 'L')
-                pdf.cell(20, 1, 'Trombocitopenia: ' + str(rasgosHistoria[0 + l]['trombocitopenia']), 0, 0, 'L')
-                pdf.cell(20, 1, 'Vomito: ' + str(rasgosHistoria[0 + l]['vomito']), 0, 0, 'L')
+                pdf.cell(500, 10, 'NotaAclaratoria: ' + str(rasgosHistoria[0 + l]['textoNotaAclaratoria']), 0, 0, 'L')
+                pdf.cell(100, 10, 'Tratamiento: ' + str(rasgosHistoria[0 + l]['tratamiento']), 0, 0, 'L')
+                pdf.cell(20, 10, 'Trombocitopenia: ' + str(rasgosHistoria[0 + l]['trombocitopenia']), 0, 0, 'L')
+                pdf.cell(20, 10, 'Vomito: ' + str(rasgosHistoria[0 + l]['vomito']), 0, 0, 'L')
 
-                linea = linea + 3
                 pdf.ln(3)
 
             # Cursor recorre Revision x Sistemas
@@ -1392,23 +1409,24 @@ def ImprimirHistoriaClinica(request):
             print("matriz revisionSistemas = ", len(revisionSistemas))
 
             if (revisionSistemas != []):
-                linea = linea + 2
+                pdf.set_font('Times', 'B', 8)
                 pdf.ln(2)
-                pdf.cell(180, 1, 'REVISION POR SISTEMAS', 0, 0, 'C')
-                linea = linea + 3
-                pdf.ln(4)
+                pdf.cell(180, 12, 'REVISION POR SISTEMAS', 0, 0, 'L')
+                pdf.set_font('Times', '', 8)
+                pdf.ln(6)
 
             for l in range(0, len(revisionSistemas)):
 
                 sistema =  str(revisionSistemas[0 + l]['sistema'])
-                pdf.multi_cell(w=0, h=4, txt=sistema , border=0, align='J',fill=False)
-                #pdf.cell(50, 1, 'Sistema ' + str(revisionSistemas[0 + l]['sistema']), 0, 0, 'L')
-                observacion =  str(revisionSistemas[0 + l]['observacion'])
-                pdf.multi_cell(w=0, h=4, txt=observacion , border=0, align='J',fill=False)
-                #pdf.cell(100, 1, 'Observacion: ' + str(revisionSistemas[0 + l]['observacion']), 0, 0, 'L')
+                pdf.multi_cell(w=0, h=5, txt=sistema , border=0, align='J',fill=False)
 
-                linea = linea + 3
-                pdf.ln(3)
+                observacion = str(revisionSistemas[0 + l]['observacion'])
+
+                if observacion != '' and observacion != 'None' and observacion != None:
+
+                    pdf.multi_cell(w=0, h=5, txt=observacion , border=0, align='J',fill=False)
+
+            pdf.ln(1)
 
             # Cursor recorre Antecedentes
 
@@ -1434,19 +1452,21 @@ def ImprimirHistoriaClinica(request):
             print("matriz antecedentes = ", len(antecedentes))
 
             if (antecedentes != []):
-                linea = linea + 2
+
                 pdf.ln(2)
-                pdf.cell(180, 1, 'ANTECEDENTES', 0, 0, 'C')
-                linea = linea + 3
+                pdf.set_font('Times', 'B', 8)
+                pdf.cell(180, 12, 'ANTECEDENTES', 0, 0, 'L')
+                pdf.set_font('Times', '', 8)
                 pdf.ln(4)
 
             for l in range(0, len(antecedentes)):
-                pdf.cell(50, 1, 'antecedente ' + str(antecedentes[0 + l]['antecedente']), 0, 0, 'L')
+                pdf.cell(50, 10, 'antecedente ' + str(antecedentes[0 + l]['antecedente']), 0, 0, 'L')
                 descripcion =  str(antecedentes[0 + l]['descripcion'])
-                pdf.multi_cell(w=0, h=4, txt=descripcion , border=0, align='J',fill=False)
-                #pdf.cell(100, 1, 'Descripcion: ' + str(antecedentes[0 + l]['descripcion']), 0, 0, 'L')
 
-                linea = linea + 3
+                if descripcion != '' or descripcion == None:
+
+                    pdf.multi_cell(w=0, h=10, txt=descripcion , border=0, align='J',fill=False)
+
                 pdf.ln(3)
 
             # Cursor recorre Signos vitales
@@ -1479,35 +1499,33 @@ def ImprimirHistoriaClinica(request):
             print("matriz signosVitales = ", len(signosVitales))
 
             if (signosVitales != []):
-                linea = linea + 2
+
                 pdf.ln(2)
-                pdf.cell(180, 1, 'SIGNOS VITALES', 0, 0, 'C')
-                linea = linea + 3
+                pdf.set_font('Times', 'B', 8)
+                pdf.cell(180, 10, 'SIGNOS VITALES', 0, 0, 'L')
+                pdf.set_font('Times', '', 8)
                 pdf.ln(4)
 
             for l in range(0, len(signosVitales)):
-                pdf.cell(30, 1, 'Fecha ' + str(signosVitales[0 + l]['fecha']), 0, 0, 'L')
-                pdf.cell(30, 1, 'FrecCardiaca: ' + str(signosVitales[0 + l]['frecCardiaca']), 0, 0, 'L')
-                pdf.cell(30, 1, 'FrecRespiratoria ' + str(signosVitales[0 + l]['frecRespiratoria']), 0, 0, 'L')
-                pdf.cell(30, 1, 'TensionADiastolica ' + str(signosVitales[0 + l]['tensionADiastolica']), 0, 0, 'L')
-                pdf.cell(30, 1, 'Tempreatura ' + str(signosVitales[0 + l]['temperatura']), 0, 0, 'L')
-                pdf.cell(30, 1, 'Saturacion ' + str(signosVitales[0 + l]['saturacion']), 0, 0, 'L')
-                linea = linea + 3
+                pdf.cell(30, 10, 'Fecha ' + str(signosVitales[0 + l]['fecha']), 0, 0, 'L')
+                pdf.cell(30, 10, 'FrecCardiaca: ' + str(signosVitales[0 + l]['frecCardiaca']), 0, 0, 'L')
+                pdf.cell(30, 10, 'FrecRespiratoria ' + str(signosVitales[0 + l]['frecRespiratoria']), 0, 0, 'L')
+                pdf.cell(30, 10, 'TensionADiastolica ' + str(signosVitales[0 + l]['tensionADiastolica']), 0, 0, 'L')
+                pdf.cell(30, 10, 'Tempreatura ' + str(signosVitales[0 + l]['temperatura']), 0, 0, 'L')
+                pdf.cell(30, 10, 'Saturacion ' + str(signosVitales[0 + l]['saturacion']), 0, 0, 'L')
                 pdf.ln(3)
-                pdf.cell(30, 1, 'Glucometria ' + str(signosVitales[0 + l]['glucometria']), 0, 0, 'L')
-                pdf.cell(30, 1, 'Glasgow ' + str(signosVitales[0 + l]['glasgow']), 0, 0, 'L')
-                pdf.cell(30, 1, 'apache ' + str(signosVitales[0 + l]['apache']), 0, 0, 'L')
-                pdf.cell(30, 1, 'pvc ' + str(signosVitales[0 + l]['pvc']), 0, 0, 'L')
-                pdf.cell(30, 1, 'Cuna ' + str(signosVitales[0 + l]['cuna']), 0, 0, 'L')
-                pdf.cell(30, 1, 'Ic ' + str(signosVitales[0 + l]['ic']), 0, 0, 'L')
-                linea = linea + 3
+                pdf.cell(30, 10, 'Glucometria ' + str(signosVitales[0 + l]['glucometria']), 0, 0, 'L')
+                pdf.cell(30, 10, 'Glasgow ' + str(signosVitales[0 + l]['glasgow']), 0, 0, 'L')
+                pdf.cell(30, 10, 'apache ' + str(signosVitales[0 + l]['apache']), 0, 0, 'L')
+                pdf.cell(30, 10, 'pvc ' + str(signosVitales[0 + l]['pvc']), 0, 0, 'L')
+                pdf.cell(30, 10, 'Cuna ' + str(signosVitales[0 + l]['cuna']), 0, 0, 'L')
+                pdf.cell(30, 10, 'Ic ' + str(signosVitales[0 + l]['ic']), 0, 0, 'L')
                 pdf.ln(3)
-                pdf.cell(30, 1, 'GlasgowOcular ' + str(signosVitales[0 + l]['glasgowOcular']), 0, 0, 'L')
-                pdf.cell(30, 1, 'GlasgowVerbal ' + str(signosVitales[0 + l]['glasgowVerbal']), 0, 0, 'L')
-                pdf.cell(30, 1, 'GlasgowMotora ' + str(signosVitales[0 + l]['glasgowMotora']), 0, 0, 'L')
-                pdf.cell(30, 1, 'Observacion ' + str(signosVitales[0 + l]['observacion']), 0, 0, 'L')
+                pdf.cell(30, 10, 'GlasgowOcular ' + str(signosVitales[0 + l]['glasgowOcular']), 0, 0, 'L')
+                pdf.cell(30, 10, 'GlasgowVerbal ' + str(signosVitales[0 + l]['glasgowVerbal']), 0, 0, 'L')
+                pdf.cell(30, 10, 'GlasgowMotora ' + str(signosVitales[0 + l]['glasgowMotora']), 0, 0, 'L')
+                pdf.cell(30, 10, 'Observacion ' + str(signosVitales[0 + l]['observacion']), 0, 0, 'L')
 
-                linea = linea + 3
                 pdf.ln(3)
 
             # Cursor recorre Notas de Enfermeria
@@ -1535,18 +1553,18 @@ def ImprimirHistoriaClinica(request):
             print("matriz notasEnfermeria = ", len(notasEnfermeria))
 
             if (notasEnfermeria != []):
-                linea = linea + 2
+                pdf.set_font('Times', 'B', 8)
                 pdf.ln(2)
-                pdf.cell(180, 1, 'NOTAS ENFERMERIA', 0, 0, 'C')
-                linea = linea + 3
+                pdf.cell(180, 10, 'NOTAS ENFERMERIA', 0, 0, 'L')
+                pdf.set_font('Times', '', 8)
                 pdf.ln(4)
 
             for l in range(0, len(notasEnfermeria)):
-                pdf.cell(30, 1, 'Fecha ' + str(notasEnfermeria[0 + l]['fecha']), 0, 0, 'L')
+                pdf.cell(30, 10, 'Fecha ' + str(notasEnfermeria[0 + l]['fecha']), 0, 0, 'L')
                 nota =  str(notasEnfermeria[0 + l]['nota'])
-                pdf.multi_cell(w=0, h=4, txt=nota , border=0, align='J',fill=False)
-                #pdf.cell(30, 1, '  ' + str(notasEnfermeria[0 + l]['nota']), 0, 0, 'L')
-                linea = linea + 3
+                if nota != '' and nota != 'None' and nota != None:
+
+                    pdf.multi_cell(w=0, h=10, txt=nota , border=0, align='J',fill=False)
                 pdf.ln(3)
 
             # Cursor recorre Oxigeno
@@ -1577,19 +1595,19 @@ def ImprimirHistoriaClinica(request):
             print("matriz laboratorios = ", len(laboratorios))
 
             if (laboratorios != []):
-                linea = linea + 2
+                pdf.set_font('Times', 'B', 8)
                 pdf.ln(2)
-                pdf.cell(180, 1, 'LABORATORIOS', 0, 0, 'C')
-                linea = linea + 3
+                pdf.cell(180, 12, 'LABORATORIOS', 0, 0, 'L')
+                pdf.set_font('Times', '', 8)
                 pdf.ln(4)
 
             for l in range(0, len(laboratorios)):
-                pdf.cell(20, 1, 'Cups ' + str(laboratorios[0 + l]['codigoCups']), 0, 0, 'L')
-                pdf.cell(100, 1, 'Nombre: ' + str(laboratorios[0 + l]['nombre']), 0, 0, 'L')
-                pdf.cell(25, 1, 'Cantidad: ' + str(laboratorios[0 + l]['cantidad']), 0, 0, 'L')
-                pdf.cell(25, 1, 'Observacion: ' + str(laboratorios[0 + l]['observaciones']), 0, 0, 'L')
-                linea = linea + 3
-                pdf.ln(3)
+                pdf.cell(20, 10, 'Cups ' + str(laboratorios[0 + l]['codigoCups']), 0, 0, 'L')
+                pdf.cell(100, 10, 'Nombre: ' + str(laboratorios[0 + l]['nombre']), 0, 0, 'L')
+                pdf.cell(25, 10, 'Cantidad: ' + str(laboratorios[0 + l]['cantidad']), 0, 0, 'L')
+                pdf.cell(25, 10, 'Observacion: ' + str(laboratorios[0 + l]['observaciones']), 0, 0, 'L')
+
+                pdf.ln(2)
 
                 ## Aqui cabezote del resultado laboratoiro
 
@@ -1618,38 +1636,42 @@ def ImprimirHistoriaClinica(request):
 
 
                 if (resultadosCabezoteLab != []):
-                    linea = linea + 2
-                    pdf.ln(2)
-                    pdf.cell(180, 1, 'Resultados Grales:', 0, 0, 'L')
-                    linea = linea + 4
+                    pdf.set_font('Times', 'B', 8)
+
+                    if interpretacion1 != '' and interpretacion1 != 'None' and interpretacion1 != None and  interpretacion2 != '' and interpretacion2 != 'None' and interpretacion2 != None:
+
+                            pdf.cell(180, 12, 'RESULTADOS', 0, 0, 'L')
+
+                    pdf.set_font('Times', '', 8)
                     pdf.ln(4)
 
                     for s in range(0, len(resultadosCabezoteLab)):
                         interpretacion1=str(resultadosCabezoteLab[0 + s]['interpretacion1'])
-                        pdf.cell(20, 1, 'Interprestacion1:', '', 0, 0, 'L')
-                        pdf.multi_cell(w=0, h=4, txt=interpretacion1, border=0, align='J', fill=False)
-                        #pdf.cell(120, 1, 'Interpretacion1 ' + str(resultadosCabezoteLab[0 + s]['interpretacion1']), 0, 0, 'L')
-                        linea = linea + 3
-                        pdf.ln(3)
-                        pdf.cell(20, 2, 'Fecha: ' + str(resultadosCabezoteLab[0 + s]['fechaInterpretacion1']), 0, 0, 'L')
-                        linea = linea + 3
-                        pdf.ln(3)
-                        pdf.cell(25, 3, 'Medico: ' + str(resultadosCabezoteLab[0 + s]['medicoInterpreta1']), 0, 0, 'L')
-                        linea = linea + 3
-                        pdf.ln(5)
+
+
+                        if interpretacion1 != '' and interpretacion1 != 'None' and interpretacion1 != None:
+
+                            pdf.cell(20, 10, 'Interprestacion1:', '', 0, 0, 'L')
+
+                            pdf.multi_cell(w=0, h=3, txt=interpretacion1, border=0, align='J', fill=False)
+                            pdf.ln(1)
+                            pdf.cell(20, 10, 'Fecha: ' + str(resultadosCabezoteLab[0 + s]['fechaInterpretacion1']), 0, 0, 'L')
+                            pdf.ln(3)
+                            pdf.cell(25, 10, 'Medico: ' + str(resultadosCabezoteLab[0 + s]['medicoInterpreta1']), 0, 0, 'L')
+                            pdf.ln(5)
+
                         interpretacion2=str(resultadosCabezoteLab[0 + s]['interpretacion2'])
-                        pdf.multi_cell(w=0, h=4, txt=interpretacion2, border=0, align='J', fill=False)
-                        #pdf.cell(120, 1, 'Interpretacion2' + str(resultadosCabezoteLab[0 + s]['interpretacion2']), 0, 0, 'L')
-                        linea = linea + 3
-                        pdf.ln(3)
-                        pdf.cell(20, 2, 'Fecha: ' + str(resultadosCabezoteLab[0 + s]['fechaInterpretacion2']), 0, 0, 'L')
-                        linea = linea + 3
-                        pdf.ln(3)
 
-                        pdf.cell(25, 3, 'Medico: ' + str(resultadosCabezoteLab[0 + s]['medicoInterpreta2']), 0, 0, 'L')
+                        if interpretacion2 != '' and interpretacion2 != 'None' and interpretacion2 != None:
+                            pdf.ln(1)
+                            pdf.cell(20, 10, 'Interprestacion2:', '', 0, 0, 'L')
+                            pdf.multi_cell(w=0, h=3, txt=interpretacion2, border=0, align='J', fill=False)
+                            pdf.ln(1)
+                            pdf.cell(20, 10, 'Fecha: ' + str(resultadosCabezoteLab[0 + s]['fechaInterpretacion2']), 0, 0, 'L')
+                            pdf.ln(3)
 
-                        linea = linea + 4
-                        pdf.ln(4)
+                            pdf.cell(25, 10, 'Medico: ' + str(resultadosCabezoteLab[0 + s]['medicoInterpreta2']), 0, 0, 'L')
+                pdf.ln(2)
 
                     ## Fin cabezote
 
@@ -1679,20 +1701,19 @@ def ImprimirHistoriaClinica(request):
                 print("matriz Resultados laboratorios = ", len(resultadosLab))
 
                 if (resultadosLab != []):
-                    linea = linea + 2
+                    pdf.set_font('Times', 'B', 8)
                     pdf.ln(2)
-                    pdf.cell(180, 1, 'Resultados:', 0, 0, 'L')
-                    linea = linea + 4
+                    pdf.cell(180, 10, 'Detalle:', 0, 0, 'L')
+                    pdf.set_font('Times', '', 8)
                     pdf.ln(4)
 
                 for s in range(0, len(resultadosLab)):
-                    pdf.cell(70, 1, 'Rasgo ' + str(resultadosLab[0 + s]['rasgo']), 0, 0, 'L')
-                    pdf.cell(40, 1, 'Unidad: ' + str(resultadosLab[0 + s]['unidad']), 0, 0, 'L')
-                    pdf.cell(25, 1, 'Minimo: ' + str(resultadosLab[0 + s]['minimo']), 0, 0, 'L')
-                    pdf.cell(25, 1, 'Maximo: ' + str(resultadosLab[0 + s]['maximo']), 0, 0, 'L')
-                    pdf.cell(25, 1, 'Valor: ' + str(resultadosLab[0 + s]['valor']), 0, 0, 'L')
-                    linea = linea + 5
-                    pdf.ln(5)
+                    pdf.cell(70, 7, 'Rasgo ' + str(resultadosLab[0 + s]['rasgo']), 0, 0, 'L')
+                    pdf.cell(40, 7, 'Unidad: ' + str(resultadosLab[0 + s]['unidad']), 0, 0, 'L')
+                    pdf.cell(25, 7, 'Minimo: ' + str(resultadosLab[0 + s]['minimo']), 0, 0, 'L')
+                    pdf.cell(25, 7, 'Maximo: ' + str(resultadosLab[0 + s]['maximo']), 0, 0, 'L')
+                    pdf.cell(25, 7, 'Valor: ' + str(resultadosLab[0 + s]['valor']), 0, 0, 'L')
+                    pdf.ln(4)
 
                 miConexionp.close()
 
@@ -1722,19 +1743,18 @@ def ImprimirHistoriaClinica(request):
             print("matriz Radiologia = ", len(radiologia))
 
             if (radiologia != []):
-                linea = linea + 2
+                pdf.set_font('Times', 'B', 8)
                 pdf.ln(2)
-                pdf.cell(180, 1, 'RADIOLOGIA', 0, 0, 'C')
-                linea = linea + 3
+                pdf.cell(180, 10, 'RADIOLOGIA', 0, 0, 'L')
+                pdf.set_font('Times', '', 8)
                 pdf.ln(4)
 
             for l in range(0, len(radiologia)):
-                pdf.cell(20, 1, 'Cups ' + str(radiologia[0 + l]['codigoCups']), 0, 0, 'L')
-                pdf.cell(100, 1, 'Nombre: ' + str(radiologia[0 + l]['nombre']), 0, 0, 'L')
-                pdf.cell(25, 1, 'Cantidad: ' + str(radiologia[0 + l]['cantidad']), 0, 0, 'L')
-                pdf.cell(25, 1, 'Observacion: ' + str(radiologia[0 + l]['observaciones']), 0, 0, 'L')
-                linea = linea + 3
-                pdf.ln(3)
+                pdf.cell(20, 10, 'Cups ' + str(radiologia[0 + l]['codigoCups']), 0, 0, 'L')
+                pdf.cell(90, 10, 'Nombre: ' + str(radiologia[0 + l]['nombre']), 0, 0, 'L')
+                pdf.cell(25, 10, 'Cant: ' + str(radiologia[0 + l]['cantidad']), 0, 0, 'L')
+                pdf.multi_cell(0, 10, 'Obs: ' + str(radiologia[0 + l]['observaciones']), 0, 0, 'L')
+
 
                 ## Aqui cabezote del resultado Radiologia
 
@@ -1762,42 +1782,41 @@ def ImprimirHistoriaClinica(request):
 
 
                 if (resultadosCabezoteRad != []):
-                    linea = linea + 2
-                    pdf.ln(2)
-                    pdf.cell(180, 1, 'Resultados Grales:', 0, 0, 'L')
-                    linea = linea + 4
-                    pdf.ln(4)
+                    pdf.set_font('Times', 'B', 8)
 
-                for s in range(0, len(resultadosCabezoteRad)):
-                    interpretacion1 = str(resultadosCabezoteRad[0 + s]['interpretacion1'])
-                    pdf.cell(20, 1, 'Interprestacion1:', '', 0, 0, 'L')
-                    pdf.multi_cell(w=0, h=4, txt=interpretacion1, border=0, align='J', fill=False)
-                    #pdf.cell(120, 1, 'Interpretacion1 ' + str(resultadosCabezoteRad[0 + s]['interpretacion1']), 0, 0, 'L')
-                    linea = linea + 3
-                    pdf.ln(3)
-                    pdf.cell(20, 2, 'Fecha: ' + str(resultadosCabezoteRad[0 + s]['fechaInterpretacion1']), 0, 0, 'L')
-                    linea = linea + 3
-                    pdf.ln(3)
-                    pdf.cell(25, 3, 'Medico: ' + str(resultadosCabezoteRad[0 + s]['medicoInterpreta1']), 0, 0, 'L')
-                    linea = linea + 3
-                    pdf.ln(5)
-                    interpretacion2=str(resultadosCabezoteRad[0 + s]['interpretacion2'])
-                    pdf.multi_cell(w=0, h=4, txt=interpretacion2, border=0, align='J', fill=False)
-                    #pdf.cell(120, 1, 'Interpretacion2' + str(resultadosCabezoteRad[0 + s]['interpretacion2']), 0, 0, 'L')
-                    linea = linea + 3
-                    pdf.ln(3)
-                    pdf.cell(20, 2, 'Fecha: ' + str(resultadosCabezoteRad[0 + s]['fechaInterpretacion2']), 0, 0, 'L')
-                    linea = linea + 3
-                    pdf.ln(3)
+                    if interpretacion1 != '' and interpretacion1 != 'None' and interpretacion1 != None and  interpretacion2 != '' and interpretacion2 != 'None' and interpretacion2 != None:
 
-                    pdf.cell(25, 3, 'Medico: ' + str(resultadosCabezoteRad[0 + s]['medicoInterpreta2']), 0, 0, 'L')
+                        pdf.cell(180, 12, 'RESULTADOS', 0, 0, 'L')
+                        pdf.set_font('Times', '', 8)
+                        pdf.ln(4)
 
-                    linea = linea + 4
-                    pdf.ln(4)
+                        for s in range(0, len(resultadosCabezoteRad)):
+                            interpretacion1 = str(resultadosCabezoteRad[0 + s]['interpretacion1'])
+
+                            if interpretacion1 != '' and interpretacion1 != 'None':
+
+                                pdf.cell(20, 10, 'Interprestacion1:', '', 0, 0, 'L')
+                                pdf.multi_cell(w=0, h=3, txt=interpretacion1, border=0, align='J', fill=False)
+                                pdf.ln(3)
+                                pdf.cell(20, 10, 'Fecha: ' + str(resultadosCabezoteRad[0 + s]['fechaInterpretacion1']), 0, 0, 'L')
+                                pdf.ln(3)
+                                pdf.cell(25, 10, 'Medico: ' + str(resultadosCabezoteRad[0 + s]['medicoInterpreta1']), 0, 0, 'L')
+                                pdf.ln(5)
+
+
+                            if interpretacion2 != '' and interpretacion2 != 'None':
+                                interpretacion2 = str(resultadosCabezoteRad[0 + s]['interpretacion2'])
+                                pdf.multi_cell(w=0, h=3, txt=interpretacion2, border=0, align='J', fill=False)
+                                pdf.ln(3)
+                                pdf.cell(20, 10, 'Fecha: ' + str(resultadosCabezoteRad[0 + s]['fechaInterpretacion2']), 0, 0, 'L')
+                                linea = linea + 3
+
+
+                                pdf.cell(25, 10, 'Medico: ' + str(resultadosCabezoteRad[0 + s]['medicoInterpreta2']), 0, 0, 'L')
+
+                pdf.ln(1)
 
                 ## Fin cabezote
-
-
 
                 # Aquip Resultados del RADIOLOGIA
 
@@ -1822,23 +1841,24 @@ def ImprimirHistoriaClinica(request):
                 miConexiona.close()
 
                 print("Resultados radiologia = ", resultadosRad)
-                print("matriz Resultados laboratorios = ", len(resultadosRad))
+                print("matriz Resultados radiologia = ", len(resultadosRad))
 
                 if (resultadosRad != []):
-                    linea = linea + 2
-                    pdf.ln(2)
-                    pdf.cell(180, 1, 'Resultados:', 0, 0, 'L')
-                    linea = linea + 4
+
+                    pdf.ln(1)
+                    pdf.set_font('Times', 'B', 8)
+                    pdf.cell(180, 12, 'RESULTADOS:', 0, 0, 'L')
+                    pdf.set_font('Times', '', 8)
                     pdf.ln(4)
 
                 for s in range(0, len(resultadosRad)):
-                    pdf.cell(70, 1, 'Rasgo ' + str(resultadosRad[0 + s]['rasgo']), 0, 0, 'L')
-                    pdf.cell(40, 1, 'Unidad: ' + str(resultadosRad[0 + s]['unidad']), 0, 0, 'L')
-                    pdf.cell(25, 1, 'Minimo: ' + str(resultadosRad[0 + s]['minimo']), 0, 0, 'L')
-                    pdf.cell(25, 1, 'Maximo: ' + str(resultadosRad[0 + s]['maximo']), 0, 0, 'L')
-                    pdf.cell(25, 1, 'Valor: ' + str(resultadosRad[0 + s]['valor']), 0, 0, 'L')
-                    linea = linea + 5
-                    pdf.ln(5)
+                    pdf.cell(70, 10, 'Rasgo ' + str(resultadosRad[0 + s]['rasgo']), 0, 0, 'L')
+                    pdf.cell(40, 10, 'Unidad: ' + str(resultadosRad[0 + s]['unidad']), 0, 0, 'L')
+                    pdf.cell(25, 10, 'Minimo: ' + str(resultadosRad[0 + s]['minimo']), 0, 0, 'L')
+                    pdf.cell(25, 10, 'Maximo: ' + str(resultadosRad[0 + s]['maximo']), 0, 0, 'L')
+                    pdf.cell(25, 10, 'Valor: ' + str(resultadosRad[0 + s]['valor']), 0, 0, 'L')
+
+                pdf.ln(1)
 
                 # Fin impresion de Resultados de Radiologia
 
@@ -1866,21 +1886,19 @@ def ImprimirHistoriaClinica(request):
             print("matriz terapias = ", len(terapias))
 
             if (terapias != []):
-                linea = linea + 2
-                pdf.ln(2)
-                pdf.cell(180, 1, 'TERAPIAS', 0, 0, 'C')
-                linea = linea + 3
+                pdf.set_font('Times', 'B', 8)
+                pdf.ln(1)
+                pdf.cell(180, 12, 'TERAPIAS', 0, 0, 'L')
+                pdf.set_font('Times', '', 8)
                 pdf.ln(4)
 
             for l in range(0, len(terapias)):
-                pdf.cell(20, 1, 'Cups ' + str(terapias[0 + l]['codigoCups']), 0, 0, 'L')
-                pdf.cell(100, 1, 'Nombre: ' + str(terapias[0 + l]['nombre']), 0, 0, 'L')
-                pdf.cell(25, 1, 'Cantidad: ' + str(terapias[0 + l]['cantidad']), 0, 0, 'L')
-                pdf.cell(25, 1, 'Observacion: ' + str(terapias[0 + l]['observaciones']), 0, 0, 'L')
-                linea = linea + 3
-                pdf.ln(3)
+                pdf.cell(20, 10, 'Cups ' + str(terapias[0 + l]['codigoCups']), 0, 0, 'L')
+                pdf.cell(100, 10, 'Nombre: ' + str(terapias[0 + l]['nombre']), 0, 0, 'L')
+                pdf.cell(25, 10, 'Cantidad: ' + str(terapias[0 + l]['cantidad']), 0, 0, 'L')
+                pdf.multi_cell(0, 10, 'Observacion: ' + str(terapias[0 + l]['observaciones']), 0, 0, 'L')
 
-
+                pdf.ln(1)
                 ## Aqui cabezote del resultado Terapias
 
                 miConexiony = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
@@ -1907,37 +1925,36 @@ def ImprimirHistoriaClinica(request):
 
 
                 if (resultadosCabezoteTer != []):
-                    linea = linea + 2
+                    pdf.set_font('Times', 'B', 8)
                     pdf.ln(2)
-                    pdf.cell(180, 1, 'Resultados Grales:', 0, 0, 'L')
-                    linea = linea + 4
+                    if (len(resultadosCabezoteTer) >0) :
+                        pdf.cell(180, 12, 'Detalle:', 0, 0, 'L')
+                    pdf.set_font('Times', '', 8)
                     pdf.ln(4)
 
                 for s in range(0, len(resultadosCabezoteTer)):
                     interpretacion1=str(resultadosCabezoteTer[0 + s]['interpretacion2'])
-                    pdf.multi_cell(w=0, h=4, txt=interpretacion1, border=0, align='J', fill=False)
-                    #pdf.cell(120, 1, 'Interpretacion1 ' + str(resultadosCabezoteTer[0 + s]['interpretacion1']), 0, 0, 'L')
-                    linea = linea + 3
-                    pdf.ln(3)
-                    pdf.cell(20, 2, 'Fecha: ' + str(resultadosCabezoteTer[0 + s]['fechaInterpretacion1']), 0, 0, 'L')
-                    linea = linea + 3
-                    pdf.ln(3)
-                    pdf.cell(25, 3, 'Medico: ' + str(resultadosCabezoteTer[0 + s]['medicoInterpreta1']), 0, 0, 'L')
-                    linea = linea + 3
-                    pdf.ln(5)
-                    interpretacion2=str(resultadosCabezoteTer[0 + s]['interpretacion2'])
-                    pdf.multi_cell(w=0, h=4, txt=interpretacion2, border=0, align='J', fill=False)
-                    #pdf.cell(120, 1, 'Interpretacion2' + str(resultadosCabezoteTer[0 + s]['interpretacion2']), 0, 0, 'L')
-                    linea = linea + 3
-                    pdf.ln(3)
-                    pdf.cell(20, 2, 'Fecha: ' + str(resultadosCabezoteTer[0 + s]['fechaInterpretacion2']), 0, 0, 'L')
-                    linea = linea + 3
-                    pdf.ln(3)
 
-                    pdf.cell(25, 3, 'Medico: ' + str(resultadosCabezoteTer[0 + s]['medicoInterpreta2']), 0, 0, 'L')
+                    if interpretacion1 != '' and interpretacion1 != 'None':
 
-                    linea = linea + 4
-                    pdf.ln(4)
+                        pdf.multi_cell(w=0, h=3, txt=interpretacion1, border=0, align='J', fill=False)
+                        pdf.ln(3)
+                        pdf.cell(20, 10, 'Fecha: ' + str(resultadosCabezoteTer[0 + s]['fechaInterpretacion1']), 0, 0, 'L')
+                        pdf.ln(3)
+                        pdf.cell(25, 10, 'Medico: ' + str(resultadosCabezoteTer[0 + s]['medicoInterpreta1']), 0, 0, 'L')
+                        pdf.ln(5)
+
+
+                    if interpretacion2 != '' and interpretacion2 != 'None':
+
+                        interpretacion2=str(resultadosCabezoteTer[0 + s]['interpretacion2'])
+                        pdf.multi_cell(w=0, h=3, txt=interpretacion2, border=0, align='J', fill=False)
+                        pdf.ln(3)
+                        pdf.cell(20, 10, 'Fecha: ' + str(resultadosCabezoteTer[0 + s]['fechaInterpretacion2']), 0, 0, 'L')
+                        pdf.ln(3)
+
+                        pdf.cell(25, 10, 'Medico: ' + str(resultadosCabezoteTer[0 + s]['medicoInterpreta2']), 0, 0, 'L')
+                pdf.ln(4)
 
                 ## Fin cabezote
 
@@ -1968,19 +1985,19 @@ def ImprimirHistoriaClinica(request):
                 print("matriz Resultados resultadosTer = ", len(resultadosTer))
 
                 if (resultadosTer != []):
-                    linea = linea + 2
+                    pdf.set_font('Times', 'B', 8)
                     pdf.ln(2)
-                    pdf.cell(180, 1, 'Resultados:', 0, 0, 'L')
-                    linea = linea + 4
+                    if interpretacion1 != '' and interpretacion1 != 'None' and interpretacion1 != None and  interpretacion2 != '' and interpretacion2 != 'None' and interpretacion2 != None:
+                        pdf.cell(180, 12, 'RESULTADOS:', 0, 0, 'L')
+                    pdf.set_font('Times', '', 8)
                     pdf.ln(4)
 
                 for s in range(0, len(resultadosTer)):
-                    pdf.cell(70, 1, 'Rasgo ' + str(resultadosTer[0 + s]['rasgo']), 0, 0, 'L')
-                    pdf.cell(40, 1, 'Unidad: ' + str(resultadosTer[0 + s]['unidad']), 0, 0, 'L')
-                    pdf.cell(25, 1, 'Minimo: ' + str(resultadosTer[0 + s]['minimo']), 0, 0, 'L')
-                    pdf.cell(25, 1, 'Maximo: ' + str(resultadosTer[0 + s]['maximo']), 0, 0, 'L')
-                    pdf.cell(25, 1, 'Valor: ' + str(resultadosTer[0 + s]['valor']), 0, 0, 'L')
-                    linea = linea + 5
+                    pdf.cell(70, 10, 'Rasgo ' + str(resultadosTer[0 + s]['rasgo']), 0, 0, 'L')
+                    pdf.cell(40, 10, 'Unidad: ' + str(resultadosTer[0 + s]['unidad']), 0, 0, 'L')
+                    pdf.cell(25, 10, 'Minimo: ' + str(resultadosTer[0 + s]['minimo']), 0, 0, 'L')
+                    pdf.cell(25, 10, 'Maximo: ' + str(resultadosTer[0 + s]['maximo']), 0, 0, 'L')
+                    pdf.cell(25, 10, 'Valor: ' + str(resultadosTer[0 + s]['valor']), 0, 0, 'L')
                     pdf.ln(5)
 
                 # Fin impresion de Resultados de Terapias
@@ -2009,18 +2026,17 @@ def ImprimirHistoriaClinica(request):
             print("matriz noqX = ", len(noqX))
 
             if (noqX != []):
-                linea = linea + 2
+                pdf.set_font('Times', 'B', 8)
                 pdf.ln(2)
-                pdf.cell(180, 1, 'PROCEDIMIENTOS NO QX', 0, 0, 'C')
-                linea = linea + 3
+                pdf.cell(180, 12, 'PROCEDIMIENTOS NO QX', 0, 0, 'L')
+                pdf.set_font('Times', '', 8)
                 pdf.ln(4)
 
             for l in range(0, len(noqX)):
-                pdf.cell(20, 1, 'Cups ' + str(noqX[0 + l]['codigoCups']), 0, 0, 'L')
-                pdf.cell(100, 1, 'Nombre: ' + str(noqX[0 + l]['nombre']), 0, 0, 'L')
-                pdf.cell(25, 1, 'Cantidad: ' + str(noqX[0 + l]['cantidad']), 0, 0, 'L')
-                pdf.cell(25, 1, 'Observacion: ' + str(noqX[0 + l]['observaciones']), 0, 0, 'L')
-                linea = linea + 3
+                pdf.cell(20, 10, 'Cups ' + str(noqX[0 + l]['codigoCups']), 0, 0, 'L')
+                pdf.cell(100, 10, 'Nombre: ' + str(noqX[0 + l]['nombre']), 0, 0, 'L')
+                pdf.cell(25, 10, 'Cantidad: ' + str(noqX[0 + l]['cantidad']), 0, 0, 'L')
+                pdf.cell(25, 10, 'Observacion: ' + str(noqX[0 + l]['observaciones']), 0, 0, 'L')
                 pdf.ln(3)
 
                 print ("noQx = ",noqX )
@@ -2049,37 +2065,39 @@ def ImprimirHistoriaClinica(request):
 
 
                 if (resultadosCabezoteNoQx != []):
-                    linea = linea + 2
+                    pdf.set_font('Times', 'B', 8)
                     pdf.ln(2)
-                    pdf.cell(180, 1, 'Resultados Grales:', 0, 0, 'L')
+                    if interpretacion1 != '' and interpretacion1 != 'None' and interpretacion1 != None and  interpretacion2 != '' and interpretacion2 != 'None' and interpretacion2 != None:
+
+                        pdf.cell(180, 12, 'RESULTADOS', 0, 0, 'L')
+
                     linea = linea + 4
                     pdf.ln(4)
 
                 for s in range(0, len(resultadosCabezoteNoQx)):
-                    interpretacion2=str(resultadosCabezoteNoQx[0 + s]['interpretacion2'])
-                    pdf.multi_cell(w=0, h=4, txt=interpretacion2, border=0, align='J', fill=False)
-                    #pdf.cell(120, 1, 'Interpretacion1 ' + str(resultadosCabezoteNoQx[0 + s]['interpretacion1']), 0, 0, 'L')
-                    linea = linea + 3
-                    pdf.ln(3)
-                    pdf.cell(20, 2, 'Fecha: ' + str(resultadosCabezoteNoQx[0 + s]['fechaInterpretacion1']), 0, 0, 'L')
-                    linea = linea + 3
-                    pdf.ln(3)
-                    pdf.cell(25, 3, 'Medico: ' + str(resultadosCabezoteNoQx[0 + s]['medicoInterpreta1']), 0, 0, 'L')
-                    linea = linea + 3
-                    pdf.ln(5)
-                    interpretacion2=str(resultadosCabezoteNoQx[0 + s]['interpretacion2'])
-                    pdf.multi_cell(w=0, h=4, txt=interpretacion2, border=0, align='J', fill=False)
-                    #pdf.cell(120, 1, 'Interpretacion2' + str(resultadosCabezoteNoQx[0 + s]['interpretacion2']), 0, 0, 'L')
-                    linea = linea + 3
-                    pdf.ln(3)
-                    pdf.cell(20, 2, 'Fecha: ' + str(resultadosCabezoteNoQx[0 + s]['fechaInterpretacion2']), 0, 0, 'L')
-                    linea = linea + 3
-                    pdf.ln(3)
 
-                    pdf.cell(25, 3, 'Medico: ' + str(resultadosCabezoteNoQx[0 + s]['medicoInterpreta2']), 0, 0, 'L')
+                    if interpretacion1 != '' and interpretacion1 != 'None':
 
-                    linea = linea + 4
-                    pdf.ln(4)
+                        interpretacion1=str(resultadosCabezoteNoQx[0 + s]['interpretacion1'])
+                        pdf.multi_cell(w=0, h=3, txt=interpretacion1, border=0, align='J', fill=False)
+                        #pdf.cell(120, 10, 'Interpretacion1 ' + str(resultadosCabezoteNoQx[0 + s]['interpretacion1']), 0, 0, 'L')
+                        pdf.ln(3)
+                        pdf.cell(20, 10, 'Fecha: ' + str(resultadosCabezoteNoQx[0 + s]['fechaInterpretacion1']), 0, 0, 'L')
+                        pdf.ln(3)
+                        pdf.cell(25, 10, 'Medico: ' + str(resultadosCabezoteNoQx[0 + s]['medicoInterpreta1']), 0, 0, 'L')
+                        pdf.ln(5)
+
+                    if interpretacion2 != '' and interpretacion2 != 'None':
+
+                        interpretacion2=str(resultadosCabezoteNoQx[0 + s]['interpretacion2'])
+                        pdf.multi_cell(w=0, h=3, txt=interpretacion2, border=0, align='J', fill=False)
+                        pdf.ln(3)
+                        pdf.cell(20, 10, 'Fecha: ' + str(resultadosCabezoteNoQx[0 + s]['fechaInterpretacion2']), 0, 0, 'L')
+                        pdf.ln(3)
+                        pdf.cell(25, 3, 'Medico: ' + str(resultadosCabezoteNoQx[0 + s]['medicoInterpreta2']), 0, 0, 'L')
+
+                        linea = linea + 4
+                        pdf.ln(4)
 
                 ## Fin cabezote
 
@@ -2111,29 +2129,25 @@ def ImprimirHistoriaClinica(request):
             print("matriz interConsultas = ", len(interConsultas))
 
             if (interConsultas != []):
-                linea = linea + 2
+                pdf.set_font('Times', 'B', 8)
                 pdf.ln(2)
-                pdf.cell(180, 1, 'INTERCONSULTAS', 0, 0, 'C')
-                linea = linea + 3
-                pdf.ln(4)
+                pdf.cell(180, 12, 'INTERCONSULTAS', 0, 0, 'L')
+                pdf.set_font('Times', '', 8)
+                pdf.ln(5)
 
             for x in range(0, len(interConsultas)):
-                pdf.cell(50, 1, 'Consulta ' + str(interConsultas[0 + x]['especialidadConsulta']), 0, 0, 'L')
-                pdf.cell(50, 1, '  ' + str(interConsultas[0 + x]['plantaConsulta']), 0, 0, 'L')
-                pdf.cell(50, 1, 'Diagnostico: ' + str(interConsultas[0 + x]['diagnostico']), 0, 0, 'L')
+                pdf.cell(50, 10, 'Consulta ' + str(interConsultas[0 + x]['especialidadConsulta']), 0, 0, 'L')
+                pdf.cell(50, 10, '  ' + str(interConsultas[0 + x]['plantaConsulta']), 0, 0, 'L')
+                pdf.cell(50, 10, 'Diagnostico: ' + str(interConsultas[0 + x]['diagnostico']), 0, 0, 'L')
                 descripcionConsulta=str(interConsultas[0 + x]['descripcionConsulta'])
-                pdf.multi_cell(w=0, h=4, txt=descripcionConsulta, border=0, align='J', fill=False)
-		        #pdf.cell(100, 1, 'Descripcion: ' + str(interConsultas[0 + x]['descripcionConsulta']), 0, 0, 'L')
-                linea = linea + 3
-                pdf.ln(3)
-                pdf.cell(50, 1, 'Consultado: ' + str(interConsultas[0 + x]['especialidadConsultada']), 0, 0, 'L')
-                pdf.cell(50, 1, '   ' + str(interConsultas[0 + x]['plantaConsultada']), 0, 0, 'L')
+                pdf.multi_cell(w=0, h=10, txt=descripcionConsulta, border=0, align='J', fill=False)
+                pdf.cell(50, 10, 'Consultado: ' + str(interConsultas[0 + x]['especialidadConsultada']), 0, 0, 'L')
+                pdf.cell(50, 10, '   ' + str(interConsultas[0 + x]['plantaConsultada']), 0, 0, 'L')
                 respuestaConsulta=str(interConsultas[0 + x]['respuestaConsulta'])
-                pdf.multi_cell(w=0, h=4, txt=respuestaConsulta, border=0, align='J', fill=False)
-                #pdf.cell(100, 1, 'Respuesta:' + str(interConsultas[0 + x]['respuestaConsulta']), 0, 0, 'L')
+                pdf.multi_cell(w=0, h=10, txt=respuestaConsulta, border=0, align='J', fill=False)
 
-                linea = linea + 1
-                pdf.ln(3)
+
+                pdf.ln(1)
 
             # Cursor recorre Medicamentos
             print ("ya imprimi INTERCONSULTAS")
@@ -2160,27 +2174,22 @@ def ImprimirHistoriaClinica(request):
             print("matriz medicamentos = ", len(medicamentos))
 
             if (medicamentos != []):
-                linea = linea + 2
+                pdf.set_font('Times', 'B', 8)
                 pdf.ln(2)
-                pdf.cell(180, 1, 'MEDICAMENTOS', 0, 0, 'C')
-                linea = linea + 5
-                pdf.ln(5)
+                pdf.cell(180, 12, 'MEDICAMENTOS', 0, 0, 'L')
+                pdf.set_font('Times', '', 8)
+                pdf.ln(9)
 
             for z in range(0, len(medicamentos)):
                 suministro=str(medicamentos[0 + z]['suministro'])
-                pdf.multi_cell(w=0, h=4, txt=suministro, border=0, align='J', fill=False)
+                pdf.cell(80, h=4, txt=suministro, border=0, align='J', fill=False)
+                pdf.cell(10, 4, 'Cant: ' + str(medicamentos[0 + z]['cantidad']), 0, 0, 'L')
+                pdf.cell(10, 4, 'Dias: ' + str(medicamentos[0 + z]['diasTratamiento']), 0, 0, 'L')
+                pdf.cell(15, 4, 'Dosis ' + str(medicamentos[0 + z]['dosis']), 0, 0, 'L')
+                pdf.cell(15, 4, 'Medida: ' + str(medicamentos[0 + z]['medida']), 0, 0, 'L')
+                pdf.multi_cell(0, 4, 'Via: ' + str(medicamentos[0 + z]['via']), 0, 0, 'L')
 
-                #pdf.cell(90, 1, 'Med: ' + str(medicamentos[0 + z]['suministro']), 0, 0, 'L')
-                pdf.cell(15, 1, 'Cant: ' + str(medicamentos[0 + z]['cantidad']), 0, 0, 'L')
-                pdf.cell(15, 1, 'Dias: ' + str(medicamentos[0 + z]['diasTratamiento']), 0, 0, 'L')
-                #linea = linea + 3
-                #pdf.ln(3)
-                pdf.cell(15, 1, 'Dosis ' + str(medicamentos[0 + z]['dosis']), 0, 0, 'L')
-                pdf.cell(15, 1, 'Medida: ' + str(medicamentos[0 + z]['medida']), 0, 0, 'L')
-                pdf.cell(25, 1, 'Via: ' + str(medicamentos[0 + z]['via']), 0, 0, 'L')
-
-                linea = linea + 3
-                pdf.ln(3)
+            pdf.ln(1)
 
             # Cursor recorre Cirugias
 
@@ -2210,29 +2219,33 @@ def ImprimirHistoriaClinica(request):
             print("matriz incapacidades = ", len(incapacidades))
 
             if (incapacidades != []):
-                linea = linea + 2
+                print("entre if")
+                pdf.set_font('Times', 'B', 8)
                 pdf.ln(2)
-                pdf.cell(180, 1, 'Incapacidad Medica', 0, 0, 'C')
-                linea = linea + 5
-                pdf.ln(5)
+                print("que pasa")
+                if (len(incapacidades) >0):
+                    pdf.cell(180, 10, 'INCAPACIDAD MEDICA', 0, 0, 'C')
+
+                pdf.set_font('Times', '', 8)
+                pdf.ln(6)
+
+            print ("antes el fopr")
 
             for z in range(0, len(incapacidades)):
-                pdf.cell(50, 1, 'Tipo: ' + str(incapacidades[0 + z]['tipo']), 0, 0, 'L')
-                pdf.cell(100, 1, 'Diagnostico: ' + str(incapacidades[0 + z]['diagnostico']), 0, 0, 'L')
-                linea = linea + 3
+                pdf.cell(50, 10, 'Tipo: ' + str(incapacidades[0 + z]['tipo']), 0, 0, 'L')
+                pdf.cell(100, 10, 'Diagnostico: ' + str(incapacidades[0 + z]['diagnostico']), 0, 0, 'L')
                 pdf.ln(3)
-                pdf.cell(25, 1, 'Desde: ' + str(incapacidades[0 + z]['desdeFecha']), 0, 0, 'L')
-                pdf.cell(25, 1, 'Hasta ' + str(incapacidades[0 + z]['hastaFecha']), 0, 0, 'L')
-                pdf.cell(20, 1, 'Dias: ' + str(incapacidades[0 + z]['dias']), 0, 0, 'L')
+                pdf.cell(25, 10, 'Desde: ' + str(incapacidades[0 + z]['desdeFecha']), 0, 0, 'L')
+                pdf.cell(25, 10, 'Hasta ' + str(incapacidades[0 + z]['hastaFecha']), 0, 0, 'L')
+                pdf.cell(20, 10, 'Dias: ' + str(incapacidades[0 + z]['dias']), 0, 0, 'L')
                 descripcion=str(incapacidades[0 + z]['descripcion'])
-                pdf.multi_cell(w=0, h=4, txt=descripcion, border=0, align='J', fill=False)
+                pdf.multi_cell(w=0, h=10, txt=descripcion, border=0, align='J', fill=False)
 
-                #pdf.cell(100, 1, 'Descripcion: ' + str(incapacidades[0 + z]['descripcion']), 0, 0, 'L')
-
-                linea = linea + 3
-                pdf.ln(3)
+            pdf.ln(1)
 
             # Cursor recorre Diagnosticos
+
+            print ("Pase incapa")
 
             miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                            password="123456")
@@ -2258,23 +2271,18 @@ def ImprimirHistoriaClinica(request):
             print("matriz diagnosticos = ", len(diagnosticos))
 
             if (diagnosticos != []):
-                linea = linea + 2
+                pdf.set_font('Times', 'b', 8)
                 pdf.ln(2)
-                pdf.cell(180, 1, 'DIAGNOSTICOS', 0, 0, 'C')
-                linea = linea + 3
-                pdf.ln(4)
+                pdf.cell(180, 12, 'DIAGNOSTICOS', 0, 0, 'L')
+                pdf.set_font('Times', '', 8)
+                pdf.ln(6)
 
             for l in range(0, len(diagnosticos)):
-                pdf.cell(30, 1, 'Tipo ' + str(diagnosticos[0 + l]['tipoDiag']), 0, 0, 'L')
-                pdf.cell(20, 1, 'Consecutivo: ' + str(diagnosticos[0 + l]['consecutivo']), 0, 0, 'L')
-
+                pdf.cell(30, 10, 'Tipo ' + str(diagnosticos[0 + l]['tipoDiag']), 0, 0, 'L')
+                pdf.cell(20, 10, 'Consecutivo: ' + str(diagnosticos[0 + l]['consecutivo']), 0, 0, 'L')
                 nombreDiagnostico=str(diagnosticos[0 + l]['nombreDiagnostico'])
-                pdf.multi_cell(w=0, h=4, txt=nombreDiagnostico, border=0, align='J', fill=False)
-
-
-                pdf.cell(100, 1, 'Nombre: ' + str(diagnosticos[0 + l]['nombreDiagnostico']), 0, 0, 'L')
-                pdf.cell(100, 1, 'Observaciones: ' + str(diagnosticos[0 + l]['observaciones']), 0, 0, 'L')
-                linea = linea + 1
+                pdf.multi_cell(w=0, h=3, txt=nombreDiagnostico, border=0, align='J', fill=False)
+                pdf.cell(100, 10, 'Observaciones: ' + str(diagnosticos[0 + l]['observaciones']), 0, 0, 'L')
                 pdf.ln(3)
 
             # Aqui viene elmedico que firma el folio
@@ -2295,25 +2303,18 @@ def ImprimirHistoriaClinica(request):
                     {'registroMedico': registroMedico, 'plantaNombre': plantaNombre, 'tipoDoc_id': tipoDoc_id,
                      'documento': documento})
             miConexionx.close()
+            pdf.set_font('Times', 'b', 8)
+            pdf.cell(15, 12, 'Firmado Por:', 0, 0, 'L')
+            pdf.set_font('Times', '', 8)
+            pdf.cell(25, 10, '' + str(registroMed[0]['tipoDoc_id']), 0, 0, 'L')
+            pdf.cell(25, 10, '' + str(registroMed[0]['documento']), 0, 0, 'L')
+            pdf.cell(80, 10, '' + str(registroMed[0]['plantaNombre']), 0, 0, 'L')
+            pdf.cell(50, 10, 'Registro Medico:' + str(registroMed[0]['registroMedico']), 0, 0, 'L')
 
-            pdf.cell(15, 7, 'Firmado Por:', 0, 0, 'L')
-            pdf.cell(25, 7, '' + str(registroMed[0]['tipoDoc_id']), 0, 0, 'L')
-            pdf.cell(25, 7, '' + str(registroMed[0]['documento']), 0, 0, 'L')
-            pdf.cell(80, 7, '' + str(registroMed[0]['plantaNombre']), 0, 0, 'L')
-            pdf.cell(50, 7, 'Registro Medico:' + str(registroMed[0]['registroMedico']), 0, 0, 'L')
+            pdf.ln(4)
+            pdf.cell(100, 10, 'Firmado Electronicamente', 0, 0, 'L')
+            pdf.ln(7    )
 
-            linea = linea + 2
-            pdf.ln(2)
-            pdf.cell(100, 9, 'Firmado Electronicamente', 0, 0, 'L')
-
-            linea = linea + 5
-            pdf.ln(5)
-
-            # self.ln(2)
-            # self.cell(100, 9, 'Firmado Electronicamente', 0, 0, 'L')
-            # self.set_font('Times', 'I', 8)
-            # Page number
-            # self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
 
     carpeta = 'C:\\EntornosPython\\pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'
     print ("carpeta = ", carpeta)
@@ -2429,7 +2430,7 @@ def ImprimirOrdenIncapacidad(ingresoId2, historiaId,convenioId , tipoAdmision):
        linea = linea + 2
        pdf.ln(2)
        pdf.set_font('Times', 'B', 8)
-       pdf.cell(180, 1, 'Incapacidad Medica' , 0, 0, 'C')
+       pdf.cell(180, 1, 'Incapacidad Medica' , 0, 0, 'l')
        pdf.set_font('Times', '', 8)
        linea = linea + 5
        pdf.ln(5)
@@ -2621,10 +2622,8 @@ def ImprimirOrdenLaboratorio(ingresoId2, historiaId, convenioId, tipoAdmision):
     pdf.alias_nb_pages()
     pdf.set_margins(left=10, top=5, right=5)
     pdf.add_page()
-    pdf.set_font('Times', '', 8)
-    pdf.ln(7)
-    linea = 7
-    totalFolios = 20
+    pdf.set_font('Times', 'B', 8)
+    pdf.ln(2)
 
     # El propgrama debe preguntar desde que Folio hasta cual Y/O desde que fecha y hasta cual fecha
 
@@ -2651,23 +2650,19 @@ def ImprimirOrdenLaboratorio(ingresoId2, historiaId, convenioId, tipoAdmision):
     print("matriz laboratorios = ", len(laboratorios))
 
     if (laboratorios != []):
-        linea = linea + 2
-        pdf.ln(2)
         pdf.set_font('Times', 'B', 8)
-        pdf.cell(180, 1, 'LABORATORIOS', 0, 0, 'C')
+        #pdf.cell(180, 1, 'LABORATORIOS', 0, 0, 'C')
         pdf.set_font('Times', '', 8)
-        linea = linea + 3
         pdf.ln(4)
 
     for l in range(0, len(laboratorios)):
-        pdf.cell(20, 1, 'Cups ' + str(laboratorios[0 + l]['codigoCups']), 0, 0, 'L')
-        pdf.cell(100, 1, 'Nombre: ' + str(laboratorios[0 + l]['nombre']), 0, 0, 'L')
-        pdf.cell(25, 1, 'Cantidad: ' + str(laboratorios[0 + l]['cantidad']), 0, 0, 'L')
+        pdf.cell(20, 10, 'Cups ' + str(laboratorios[0 + l]['codigoCups']), 0, 0, 'L')
+        pdf.cell(140, 10, '' + str(laboratorios[0 + l]['nombre']), 0, 0, 'L')
+        pdf.cell(25, 10, 'Cantidad: ' + str(laboratorios[0 + l]['cantidad']), 0, 0, 'L')
         observaciones=str(laboratorios[0 + l]['observaciones'])
-        pdf.multi_cell(w=0, h=4, txt=observaciones, border=0, align='J', fill=False)
-        #pdf.cell(25, 1, 'Observacion: ' + str(laboratorios[0 + l]['observaciones']), 0, 0, 'L')
-        linea = linea + 4
-        pdf.ln(4)
+        pdf.multi_cell(w=0, h=3, txt=observaciones, border=0, align='J', fill=False)
+
+        pdf.ln(1)
 
     carpeta = 'C:\\EntornosPython\\pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'
     print ("carpeta = ", carpeta)
@@ -2746,9 +2741,7 @@ def ImprimirOrdenRadiologia(ingresoId2, historiaId, convenioId, tipoAdmision):
     pdf.set_margins(left=10, top=5, right=5)
     pdf.add_page()
     pdf.set_font('Times', '', 8)
-    pdf.ln(7)
-    linea = 7
-    totalFolios = 20
+    pdf.ln(2)
 
     # El propgrama debe preguntar desde que Folio hasta cual Y/O desde que fecha y hasta cual fecha
 
@@ -2775,24 +2768,21 @@ def ImprimirOrdenRadiologia(ingresoId2, historiaId, convenioId, tipoAdmision):
     print("matriz radiologia = ", len(radiologia))
 
     if (radiologia != []):
-        linea = linea + 2
-        pdf.ln(2)
         pdf.set_font('Times', 'B', 8)
-        pdf.cell(180, 1, 'RADIOLOGIA', 0, 0, 'C')
+        #pdf.cell(180, 1, 'RADIOLOGIA', 0, 0, 'C')
         pdf.set_font('Times', '', 8)
-        linea = linea + 3
         pdf.ln(4)
 
     for l in range(0, len(radiologia)):
-        pdf.cell(20, 1, 'Cups ' + str(radiologia[0 + l]['codigoCups']), 0, 0, 'L')
-        pdf.cell(100, 1, 'Nombre: ' + str(radiologia[0 + l]['nombre']), 0, 0, 'L')
-        pdf.cell(25, 1, 'Cantidad: ' + str(radiologia[0 + l]['cantidad']), 0, 0, 'L')
+        pdf.cell(20, 10, 'Cups ' + str(radiologia[0 + l]['codigoCups']), 0, 0, 'L')
+        pdf.cell(140, 10, 'Nombre: ' + str(radiologia[0 + l]['nombre']), 0, 0, 'L')
+        pdf.cell(25, 10, 'Cantidad: ' + str(radiologia[0 + l]['cantidad']), 0, 0, 'L')
         observaciones=str(radiologia[0 + l]['observaciones'])
-        pdf.multi_cell(w=0, h=4, txt=observaciones, border=0, align='J', fill=False)
+        pdf.multi_cell(w=0, h=3, txt=observaciones, border=0, align='J', fill=False)
 
         #pdf.cell(25, 1, 'Observacion: ' + str(radiologia[0 + l]['observaciones']), 0, 0, 'L')
-        linea = linea + 4
-        pdf.ln(4)
+
+        pdf.ln(1)
 
     carpeta = 'C:\\EntornosPython\\pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'
     print ("carpeta = ", carpeta)
@@ -2887,10 +2877,8 @@ def ImprimirOrdenMedicamentos(ingresoId2, historiaId, convenioId, tipoAdmision):
         linea = linea + 2
         pdf.ln(2)
         pdf.set_font('Times', 'B', 8)
-        pdf.cell(180, 1, 'FORMULACION MEDICAMENTOS', 0, 0, 'C')
+        #pdf.cell(180, 1, 'FORMULACION MEDICAMENTOS', 0, 0, 'C')
         pdf.set_font('Times', '', 8)
-        linea = linea + 5
-        pdf.ln(5)
 
     for l in range(0, len(medicamentos)):
 
@@ -2904,8 +2892,8 @@ def ImprimirOrdenMedicamentos(ingresoId2, historiaId, convenioId, tipoAdmision):
         pdf.cell(25, 1, ' ' + str(medicamentos[0 + l]['frecuencia']), 0, 0, 'L')
         pdf.cell(13, 1, 'Cant: ' + str(medicamentos[0 + l]['cantidad']), 0, 0, 'L')
         pdf.cell(13, 1, 'Dias: ' + str(medicamentos[0 + l]['dias']), 0, 0, 'L')
-        linea = linea + 4
-        pdf.ln(4)
+
+        pdf.ln(1)
 
     carpeta = 'C:\\EntornosPython\\pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'
     print ("carpeta = ", carpeta)
@@ -2968,8 +2956,6 @@ def ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision):
     pdf.add_page()
     pdf.set_font('Times', '', 8)
     pdf.ln(7)
-    linea = 7
-    totalFolios = 20
 
     # El propgrama debe preguntar desde que Folio hasta cual Y/O desde que fecha y hasta cual fecha
 
@@ -2996,12 +2982,10 @@ def ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision):
     print("matriz ordenDeControl = ", len(ordenDeControl))
 
     if (ordenDeControl != []):
-        linea = linea + 2
-        pdf.ln(2)
+
         pdf.set_font('Times', 'B', 8)
-        pdf.cell(180, 1, 'ORDEN DE CONTROL', 0, 0, 'C')
+        #pdf.cell(180, 1, 'ORDEN DE CONTROL', 0, 0, 'C')
         pdf.set_font('Times', '', 8)
-        linea = linea + 3
         pdf.ln(4)
 
     for l in range(0, len(ordenDeControl)):
@@ -3009,7 +2993,6 @@ def ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision):
         pdf.multi_cell(w=0, h=4, txt=orden, border=0, align='J', fill=False)
 
         #pdf.cell(20, 1, str(ordenDeControl[0 + l]['orden']), 0, 0, 'L')
-        linea = linea + 4
         pdf.ln(4)
 
     carpeta = 'C:\\EntornosPython\\pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'

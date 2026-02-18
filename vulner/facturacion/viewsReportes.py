@@ -130,7 +130,7 @@ class PDFFacturacion(FPDF):
 
         print("voy por tirulos")
         self.ln(4)
-        self.set_font('Helvetica', 'B', 8)
+        self.set_font('helvetica', 'B', 8)
         self.cell(180, 10, empresa[0]['nombreEmpresa'], 0, 0, 'C')
         self.ln(3)
         self.cell(77, 10, '', 0, 0, 'L')
@@ -143,7 +143,7 @@ class PDFFacturacion(FPDF):
         self.cell(30, 10, empresa[0]['direccionPrestador'], 0, 0, 'C')
         self.cell(5, 10, 'Tel:', 0, 0, 'L')
         self.cell(25, 10, empresa[0]['telefonoPrestador'], 0, 0, 'C')
-        self.set_font('Helvetica', '', 8)
+        self.set_font('helvetica', '', 8)
         # Define el ancho de línea
         self.set_line_width(0.4)
         # Dibuja el borde
@@ -153,7 +153,7 @@ class PDFFacturacion(FPDF):
         # Logo
         self.image('C:/EntornosPython/Pos7Particionado/vulner/static/img/MedicalFinal.jpg', 7, 5, 30, 17)
         # Arial bold 15
-        self.set_font('Helvetica', 'B', 8)
+        self.set_font('helvetica', 'B', 8)
         self.ln(3)
         #self.cell(120, 10, 'Cufe : 6b7dd1910792ec82b16f5a30d83da5c8f10895b42e3a685a8ee0f0edfc9e32e087576ba23525a50091a6eeb5bd9a9c5e ', 0, 0, 'L')
         self.cell(7, 13,'Cufe : ', 0, 0, 'L')
@@ -163,8 +163,8 @@ class PDFFacturacion(FPDF):
         else:
             pass
 
-        self.ln(4)
-        self.set_font('Helvetica', 'B', 8)
+        self.ln(5)
+        self.set_font('helvetica', 'B', 8)
         if (self.flag=='F'):
 
             self.cell(60, 10, 'FACTURA ELECTRONICA DE VENTA:', 0, 0, 'L')
@@ -180,23 +180,23 @@ class PDFFacturacion(FPDF):
         self.cell(60, 10, str(parametro1.parametro1), 0, 0, 'L')
         #self.cell(70, 10, 'AUTORETENEDOR EN RENTA RESOLUCION 151 DEL 14-01-2016', 0, 0, 'L')
         self.ln(3)
-        self.set_font('Helvetica', '', 8)
-        self.cell(105, 10, '', 0, 0, 'L')
+        self.set_font('helvetica', '', 8)
+        self.cell(95, 10, '', 0, 0, 'L')
         parametro2 = Parametros.objects.get(nombre='Factura_2')
-        self.cell(60, 10, str(parametro2.parametro1), 0, 0, 'L')
-        #self.cell(60, 10, 'Gran Contribuyente Res. 0012220 de 26-12-2022 - Actividad económica 8610', 0, 0, 'L')
+        self.cell(50, 10, str(parametro2.parametro1), 0, 0, 'L')
+        #self.cell(50, 10, 'Gran Contribuyente Res. 0012220 de 26-12-2022 - Actividad económica 8610', 0, 0, 'L')
         self.ln(3)
         self.cell(10, 10, '', 0, 0, 'L')
         self.ln(3)
         fechaExpedicion = datetime.datetime.now()
-        self.set_font('Helvetica', 'B', 8)
-        self.cell(25, 10, 'Fecha de Expedición:', 0, 0, 'L')
+        self.set_font('helvetica', 'B', 8)
+        self.cell(35, 10, 'Fecha de Expedición:', 0, 0, 'L')
         self.cell(40, 10, str(fechaExpedicion), 0, 0, 'L')
-        self.set_font('Helvetica', '', 8)
-        self.set_font('Helvetica', 'B', 8)
+        self.set_font('helvetica', '', 8)
+        self.set_font('helvetica', 'B', 8)
         self.cell(95, 10, 'Fecha de Vencimiento (Cartera):', 0, 0, 'L')
         #self.cell(30, 10, 'Pagina 1 de 4', 0, 0, 'L')
-        self.set_font('Helvetica', '', 8)
+        self.set_font('helvetica', '', 8)
         self.cell(30, 10, 'Pagina ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
         self.ln(3)
         self.cell(30, 10, '', 0, 0, 'C')
@@ -243,21 +243,21 @@ class PDFFacturacion(FPDF):
         miConexiont.close()
 
         ## FIN CURSOR
-        self.set_font('Helvetica', 'B', 8)
+        self.set_font('helvetica', 'B', 8)
         self.cell(30, 10, 'Nombre del Paciente:', 0, 0, 'L')
-        self.set_font('Helvetica', '', 8)
+        self.set_font('helvetica', '', 8)
         self.cell(100, 10, paciente[0]['nombre'], 0, 0, 'L')
-        self.set_font('Helvetica', 'B', 8)
+        self.set_font('helvetica', 'B', 8)
         self.cell(15, 10, 'Admision:', 0, 0, 'L')
-        self.set_font('Helvetica', '', 8)
+        self.set_font('helvetica', '', 8)
         self.cell(15, 10, str(paciente[0]['ingreso']), 0, 0, 'L')
         self.ln(3)
-        self.set_font('Helvetica', 'B', 8)
+        self.set_font('helvetica', 'B', 8)
         self.cell(30, 10, 'Identificación:', 0, 0, 'L')
-        self.set_font('Helvetica', '', 8)
+        self.set_font('helvetica', '', 8)
         self.cell(5, 10, paciente[0]['abreviatura'], 0, 0, 'L')
         self.cell(50, 10, paciente[0]['documento'], 0, 0, 'L')
-        self.set_font('Helvetica', 'B', 8)
+        self.set_font('helvetica', 'B', 8)
         self.cell(17, 10, 'Edad:', 0, 0, 'L')
         self.cell(25, 10, str(paciente[0]['edad']), 0, 0, 'L')
         self.cell(20, 10, 'Fec. Ingreso:', 0, 0, 'L')
@@ -291,7 +291,7 @@ class PDFFacturacion(FPDF):
         self.cell(15, 10, 'Vr.Total', 0, 0, 'L')
         self.ln(5)
         self.cell(30, 10, 'Detallado de la Factura', 0, 0, 'L')
-        self.ln(5)
+        self.ln(3)
         self.set_line_width(0.4)
         # Dibuja el borde
         #self.rect(5.0, 74.0, 200.0, 192.5)  # Coordenadas x, y, ancho, alto
@@ -369,7 +369,7 @@ def ImprimirFactura(request):
     print("que paso?? = ")
     pdf.add_page()
     print("que paso?? = ")
-    pdf.set_font('Helvetica', 'B', 8)
+    pdf.set_font('helvetica', 'B', 8)
     print("que paso?? = ")
     pdf.ln(1)
 
@@ -423,11 +423,15 @@ def ImprimirFactura(request):
 
         #pdf.cell(40, 26 + lineaConcepto, str(conceptos[0]['nombreConcepto']), 0, 0, 'C')
         pdf.ln(3)
-        pdf.set_font('Helvetica', 'B', 7)
+        pdf.set_font('helvetica', 'B', 8)
+        pdf.cell(200, 10, str('___________________________________________________________________________________________________________________________'), 0, 0, 'L')
+        pdf.ln(3)
         pdf.cell(200, 10, str(nombreConcepto), 0, 0, 'C')
-        pdf.set_font('Helvetica', '', 7)
+        pdf.ln(1) 
+        pdf.cell(200, 10, str('___________________________________________________________________________________________________________________________'), 0, 0, 'L')
+        pdf.set_font('helvetica', '', 8)
+        pdf.ln(4)
 
-        pdf.ln(5)
 
         ## AQUI VIENE EL CURSOR DEL DETALLE DE LA FACTURA
 
@@ -531,7 +535,7 @@ def ImprimirFactura(request):
                 for idCups, cups, homologado, descripcion, cantidad, valorUnitario, valorTotal in cury.fetchall():
 
 
-                    pdf.set_font('Helvetica', 'B', 8)
+                    pdf.set_font('helvetica', 'B', 8)
                     print ("voy a comenzar a imprimir el total del procediento =" , id)
                     print("cups = ", cups)
                     print("idCups = ", idCups)
@@ -546,7 +550,7 @@ def ImprimirFactura(request):
                     pdf.cell(30, 10, str(valorUnitario), 0, 0, 'L')
                     pdf.cell(30, 10, str(valorTotal), 0, 0, 'L')
                     pdf.ln(4)
-                    pdf.set_font('Helvetica', '', 8)
+                    pdf.set_font('helvetica', '', 8)
                     # Ahora barro un CURSOR CON EL DETALLE DE LOS HONORARIOS
 
                     comando = 'select tipHono.id idHonorario,(select ' + "'" + str('Cod:') + "'" + '||' + "' '||" + ' tarIss."homologado" ||' + "' $ '||" + 'sum(detFac."valorTotal") FROM facturacion_facturaciondetalle detFac INNER JOIN facturacion_facturacion fac ON (fac.id=detFac.facturacion_id) INNER JOIN clinico_examenes exa on (exa.id=detFac.examen_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id)  INNER JOIN tarifarios_tablahonorariosiss tarIss ON (tarIss."tiposHonorarios_id" = detFac."tipoHonorario_id" ) where detfac.facturacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" + '  AND exa.concepto_id = ' + "'" + str(salvoConcepto) + "'" + ' and detFac.examen_id= ' + "'" + str(idCups) + "'" + ' and tarIss."tiposHonorarios_id" = ' + "'" + str(tipoCirujano.id) + "'" + ' group by tarIss."homologado",exa.nombre) CIRUJANO, (select ' + "'" + str('Cod:') + "'||' '||" + 'tarIss."homologado" ||' + "'" + " $ '||" + ' sum(detFac."valorTotal") FROM facturacion_facturaciondetalle detFac INNER JOIN facturacion_facturacion fac ON (fac.id=detFac.facturacion_id) 	INNER JOIN clinico_examenes exa on (exa.id=detFac.examen_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id) 	INNER JOIN tarifarios_tablahonorariosiss tarIss ON (tarIss."tiposHonorarios_id" = detFac."tipoHonorario_id" ) where detfac.facturacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" + ' AND exa.concepto_id = ' + "'" + str(salvoConcepto) + "'" + ' and detFac.examen_id= ' + "'" + str(idCups) + "'" + ' and tarIss."tiposHonorarios_id" = ' + "'" + str(tipoAnestesiologo.id) + "'" + ' group by tarIss."homologado",exa.nombre) ANESTESIOLOGO, (select ' + "'" + str('Cod:') + "'" + "||' '||" + 'tarIss."homologado" ||' + "' $ '||" + 'sum(detFac."valorTotal") FROM facturacion_facturaciondetalle detFac INNER JOIN facturacion_facturacion fac ON (fac.id=detFac.facturacion_id)  INNER JOIN clinico_examenes exa on (exa.id=detFac.examen_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id) INNER JOIN tarifarios_tablahonorariosiss tarIss ON (tarIss."tiposHonorarios_id" = detFac."tipoHonorario_id" ) where detfac.facturacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" + ' AND exa.concepto_id = ' + "'" + str(salvoConcepto) + "'" + ' and detFac.examen_id= ' + "'" + str(idCups) + "'" + ' and tarIss."tiposHonorarios_id" = ' + "'" + str(tipoAyudante.id) + "'" + ' group by tarIss."homologado",exa.nombre) AYUDANTE,	(select ' + "'" + str('Cod:') + "'" + "||' '||" + ' detFac."codigoHomologado" ||' + "' $ '||" + ' sum(detFac."valorTotal") 	FROM facturacion_facturaciondetalle detFac INNER JOIN facturacion_facturacion fac ON (fac.id=detFac.facturacion_id) INNER JOIN clinico_examenes exa on (exa.id=detFac.examen_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id)  where detfac.facturacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" + '  AND exa.concepto_id = ' + "'" + str(salvoConcepto) + "'" + ' and detFac.examen_id= ' + "'" + str(idCups) + "'" + ' and detFac."tipoHonorario_id" = ' + "'" + str(tipoDerechosSala.id) + "'" + ' GROUP BY   detFac."codigoHomologado",exa.nombre) SALAS  ,(select ' + "'" + str('Cod:') + "'||' '||" + ' detFac."codigoHomologado" ||' + "'" + str('$') + "'||" + ' sum(detFac."valorTotal") FROM facturacion_facturaciondetalle detFac INNER JOIN facturacion_facturacion fac ON (fac.id=detFac.facturacion_id) INNER JOIN clinico_examenes exa on (exa.id=detFac.examen_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id) INNER JOIN tarifarios_tablamaterialsuturacuracion tarMat ON (tarMat."tipoHonorario_id" = detFac."tipoHonorario_id" and tarMat."grupoQx_id" = exa."grupoQx_id"  ) where detfac.facturacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" + '  AND exa.concepto_id = ' + "'" +  str(salvoConcepto) + "'" + ' and detFac.examen_id= ' + "'" + str(idCups) + "'" + ' and tarMat."tipoHonorario_id" = ' + "'" + str(tipoMateriales.id) + "'" + ' GROUP BY detFac."codigoHomologado",exa.nombre) MATERIALES  FROM tarifarios_tiposhonorarios tipHono WHERE tipHono.nombre in (' + "'" + str('CIRUJANO') + "')" + ' ORDER BY tipHono.id'
@@ -603,7 +607,7 @@ def ImprimirFactura(request):
                     print("id = ", id)
 
                     subTotal = subTotal + float(valorTotal)
-                    pdf.set_font('Helvetica', 'B', 8)
+                    pdf.set_font('helvetica', 'B', 8)
 
                     pdf.cell(15, 10, str(cups), 0, 0, 'L')
                     pdf.cell(15, 10, str(homologado), 0, 0, 'L')
@@ -612,7 +616,7 @@ def ImprimirFactura(request):
                     pdf.cell(30, 10, str(valorUnitario), 0, 0, 'L')
                     pdf.cell(30, 10, str(valorTotal), 0, 0, 'L')
                     pdf.ln(4)
-                    pdf.set_font('Helvetica', '', 8)
+                    pdf.set_font('helvetica', '', 8)
 
                     # Ahora barro un CURSOR CON EL DETALLE DE LOS HONORARIOS
 
@@ -694,7 +698,7 @@ def ImprimirFactura(request):
     #pdf.rect(5.0, 90.0, 200.0, 25)  # Coordenadas x, y, ancho, alto
 
     ## Aquip totales
-    pdf.set_font('Helvetica', 'B', 8)
+    pdf.set_font('helvetica', 'B', 8)
     pdf.ln(4)
     pdf.cell(152, 10, 'Valor en letras', 0, 0, 'L')
     pdf.cell(30, 10, 'SubTotal Cargos:', 0, 0, 'L')
@@ -860,7 +864,7 @@ def ImprimirLiquidacion(request):
     pdf.alias_nb_pages()
     pdf.set_margins(left=10, top=5, right=5)
     pdf.add_page()
-    pdf.set_font('Helvetica', '', 8)
+    pdf.set_font('helvetica', '', 8)
     pdf.ln(1)
     linea = 7
 
@@ -904,10 +908,14 @@ def ImprimirLiquidacion(request):
         conceptos.append(
             {'id': id, 'nombreConcepto': nombreConcepto})
 
-        pdf.ln(1)
-        pdf.set_font('Helvetica', 'B', 8)
+        #pdf.ln(1)
+        pdf.set_font('helvetica', 'B', 8)
+        pdf.cell(200, 10, str('___________________________________________________________________________________________________________________________'), 0, 0, 'L')
+        pdf.ln(3)
         pdf.cell(200, 10, str(nombreConcepto), 0, 0, 'C')
-        pdf.set_font('Helvetica', '', 8)
+        pdf.ln(1) 
+        pdf.cell(200, 10, str('___________________________________________________________________________________________________________________________'), 0, 0, 'L')
+        pdf.set_font('helvetica', '', 8)
 
         pdf.ln(4)
 
@@ -960,7 +968,7 @@ def ImprimirLiquidacion(request):
 
         ## Aqui comienza el detalle de cada item del concepto en cuestion
         #
-        pdf.set_font('Helvetica', '', 8)
+        pdf.set_font('helvetica', '', 8)
         if (id != conceptoProcedimientosQx.id):
 
             for cups, homologado, descripcion, cantidad, valorUnitario, valorTotal in cury.fetchall():
@@ -1011,7 +1019,7 @@ def ImprimirLiquidacion(request):
 
                 for idCups, cups, homologado, descripcion, cantidad, valorUnitario, valorTotal in cury.fetchall():
 
-                    pdf.set_font('Helvetica', 'B', 8)
+                    pdf.set_font('helvetica', 'B', 8)
                     print ("voy a comenzar a imprimir el total del procediento =" , id)
                     print("cups = ", cups)
                     print("idCups = ", idCups)
@@ -1026,7 +1034,7 @@ def ImprimirLiquidacion(request):
                     pdf.cell(30, 10 , str(valorUnitario), 0, 0, 'L')
                     pdf.cell(30, 10 , str(valorTotal), 0, 0, 'L')
                     pdf.ln(4)
-                    pdf.set_font('Helvetica', '', 8)
+                    pdf.set_font('helvetica', '', 8)
 
                     # Ahora barro un CURSOR CON EL DETALLE DE LOS HONORARIOS
 
@@ -1085,7 +1093,7 @@ def ImprimirLiquidacion(request):
                     print("id = ", id)
 
                     subTotal = subTotal + float(valorTotal)
-                    pdf.set_font('Helvetica', 'B', 8)
+                    pdf.set_font('helvetica', 'B', 8)
                     pdf.cell(15, 10, str(cups), 0, 0, 'L')
                     pdf.cell(15, 10, str(homologado), 0, 0, 'L')
                     pdf.cell(85, 10, str(descripcion), 0, 0, 'L')
@@ -1093,7 +1101,7 @@ def ImprimirLiquidacion(request):
                     pdf.cell(30, 10, str(valorUnitario), 0, 0, 'L')
                     pdf.cell(30, 10, str(valorTotal), 0, 0, 'L')
                     pdf.ln(4)
-                    pdf.set_font('Helvetica', '', 8)
+                    pdf.set_font('helvetica', '', 8)
 
                     # Ahora barro un CURSOR CON EL DETALLE DE LOS HONORARIOS
 
@@ -1179,7 +1187,7 @@ def ImprimirLiquidacion(request):
     #pdf.rect(5.0, 90.0, 200.0, 25)  # Coordenadas x, y, ancho, alto
 
     ## Aquip totales
-    pdf.set_font('Helvetica', 'B', 8)
+    pdf.set_font('helvetica', 'B', 8)
     pdf.ln(4)
     pdf.cell(152, 10, 'Valor en letras', 0, 0, 'L')
     pdf.cell(30, 10, 'SubTotal Cargos:', 0, 0, 'L')

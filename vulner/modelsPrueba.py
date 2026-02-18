@@ -1096,4 +1096,3 @@ FEB 16:
 	cuando interpreta un examen, debe blanquear la plantilla  hacer quiery a los ordenados al primero que quede en pantalla
 	La elaboracion de factura debe imprimir la factura OJO
 
-	Tocando :Despachos , Triage(viesreportes,panelTriage), Clinico, maincartera, panelcartera, modelcartra, viewsclinico, navegacionclinic, viesreportes clinico, url

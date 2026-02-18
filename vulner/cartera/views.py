@@ -2285,3 +2285,105 @@ def GuardarPagosEmpresas(request):
 
 
 
+
+def Load_dataPagosEmpresasDetalle(request, data):
+
+    print("Entre Load_dataPagosEmpresasDetalle")
+
+    context = {}
+    d = json.loads(data)
+
+    sedesClinica_id = d['sedesClinica_id']
+    print("sedesClinica_id = ", sedesClinica_id)
+
+    pagoId = d['pagoId']
+    print("pagoId = ", pagoId)
+
+    pagosEmpresasDetalle = []
+
+    miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+                                   password="123456")
+    curx = miConexionx.cursor()
+
+    detalle = 'SELECT pagDetalle.id id, pagDetalle.factura_id facturaId ,pagDetalle.valor, pagDetalle."radicadoFactura", serv.nombre nombreServicio FROM cartera_pagosEmpresas pag INNER JOIN cartera_pagosEmpresasdetalle pagDetalle ON (pagDetalle."pagosEmpresas_id"=pag.id)  LEFT JOIN sitios_serviciosadministrativos serv on (serv.id= pagDetalle."serviciosAdministrativos_id")  WHERE pagDetalle."pagosEmpresas_id" = ' + "'" + str(pagoId) + "'"
+
+    print ("detalle = ", detalle)
+
+    curx.execute(detalle)
+
+    for id, facturaId, valor, radicadoFactura, nombreServicio  in curx.fetchall():
+        pagosEmpresasDetalle.append(
+            {"model": "cartera.pagosEmpresasDetalle", "pk": id, "fields":
+                {'id': id, 'facturaId': facturaId , 'valor':valor, 'radicadoFactura':radicadoFactura , 'nombreServicio':nombreServicio}})
+
+
+    miConexionx.close()
+    print("pagosEmpresasDetalle"  , pagosEmpresasDetalle)
+
+    serialized1 = json.dumps(pagosEmpresasDetalle, default=str)
+
+    return HttpResponse(serialized1, content_type='application/json')
+
+
+def GuardarPagosEmpresasDetalle(request):
+
+    print ("Entre GuardarPagosEmpresasDetalle" )
+
+
+    serviciosAdministrativos = request.POST["servicioDetalle"]
+    print("serviciosAdministrativos =", serviciosAdministrativos)
+
+    valorPagoDetalle= request.POST["valorPagoDetalle"]
+    print("valorPagoDetalle =", valorPagoDetalle)
+
+    facturaPago= request.POST["facturaPago"]
+    print("facturaPago =", facturaPago)
+
+    radicadoPago= request.POST['radicadoPagoMuestra']
+    print("radicadoPago =", radicadoPago)
+
+    radicadoPago = request.POST["radicadoFactura"]
+    print("radicadoPago =", radicadoPago)
+
+    empresaPagoMuestra= request.POST["empresaPagoMuestra"]
+    print("empresaPagoMuestra =", empresaPagoMuestra)
+
+    username = request.POST["usernamePago_id"]
+    print("username =", username)
+    sede = request.POST["sedePago"]
+    print("sede =", sede)
+
+    fechaRegistro = timezone.now()
+    print("fechaRegistro", fechaRegistro)	
+
+    miConexion3 = None
+    try:
+
+        miConexion3 = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",  password="123456")
+        cur3 = miConexion3.cursor()
+
+        print ("armo comando")
+        comando = 'INSERT INTO cartera_pagosempresasDetalle (valor,"fechaRegistro", "estadoReg", factura_id, "pagosEmpresas_id" ,"radicadoFactura" , "serviciosAdministrativos_id") VALUES ( ' + "'" + str(valorPagoDetalle) + "','" + str(fechaRegistro) + "','A','" + str(facturaPago) + "','" + str(empresaPagoMuestra) + "','" + str(radicadoPago) + "','" +  str(serviciosAdministrativos) + "')"
+
+        print(comando)
+        cur3.execute(comando)
+
+        miConexion3.commit()
+        cur3.close()
+        miConexion3.close()
+
+        return JsonResponse({'success': True, 'Mensajes': 'Pago Detalle registrado satisfactoriamente!'})
+
+    except psycopg2.DatabaseError as error:
+        print ("Entre por rollback" , error)
+        if miConexion3:
+            print("Entro ha hacer el Rollback")
+            #miConexion3.rollback()
+
+        message_error= str(error)
+        return JsonResponse({'success': False, 'Mensajes': message_error})
+
+    finally:
+        if miConexion3:
+            cur3.close()
+            miConexion3.close()

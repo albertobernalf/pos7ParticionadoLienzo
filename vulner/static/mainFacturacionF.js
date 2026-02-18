@@ -1056,8 +1056,6 @@ $.ajax({
         responseType: 'blob' // Importante: interpreta la respuesta como binario
     },
     success: function (data) {
-
-
         var blob = new Blob([data], { type: 'application/pdf' });
         var link = window.URL.createObjectURL(blob);
         window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]

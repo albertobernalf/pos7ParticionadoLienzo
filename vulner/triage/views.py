@@ -1276,6 +1276,11 @@ def crearTriage(request):
         triageId = grabo.id
         ImprimirTriageParametro(triageId)
 
+        print("Volvi de imprimir la pagina triage Y me voy para el paneltriage")
+        context['PermisoTriage'] = 'True'
+        context['PermisoCrearTriage'] = 'True'
+
+
         return render(request, "triage/panelTriage.html", context)
 
 

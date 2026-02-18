@@ -294,3 +294,44 @@ input[type="date"] {
   /* margin:10 */
 }
 
+
+#flex-container-pagosEmpresasDetalle{
+  display: inline-flex;
+  justify-content: left;
+}
+
+
+#flex-container-pagosEmpresasDetalle div{
+  width: 800px;
+  height: 150px;
+  color: #FFF;
+  flex-wrap: wrap;
+  text-align: left;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
+
+#flex-container-pagosEmpresasMuestarPago{
+  display: inline-flex;
+  justify-content: left;
+}
+
+
+#flex-container-pagosEmpresasMuestarPago{
+  width: 800px;
+  height: 150px;
+  color: #FFF;
+  flex-wrap: wrap;
+  text-align: left;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
+

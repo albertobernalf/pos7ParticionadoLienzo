@@ -110,7 +110,7 @@ class PDF(FPDF):
         # Title
         #
         self.ln(2)
-        self.set_font('Times', 'BI', 9)
+        self.set_font('Helvetica', 'BI', 9)
         self.cell(195, 12, 'CLINICA MEDICAL',  0, 0, 'C')
         self.ln(3)
         self.cell(195, 12, 'HISTORIA CLINICA', 0, 0, 'C')
@@ -121,42 +121,42 @@ class PDF(FPDF):
         #self.set_line_width(0.5)
         #self.rect(10.0, 15.0, 195.0, 20)  # Coordenadas x, y, ancho, alto
 
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'PACIENTE: ', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
 
         self.cell(25, 10, str(historia[0]['tipnombre']), 0, 0, 'L')
         self.cell(25, 10, str(historia[0]['documentoPaciente']), 0, 0, 'L')
         self.cell(45, 10, str(historia[0]['nombre']), 0, 0, 'L')
 
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'EDAD:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(50, 10, str(historia[0]['edad']), 0, 0, 'L')
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.ln(3)
         self.cell(25, 10, 'GENERO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(50, 10, str(historia[0]['genero']), 0, 0, 'L')
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'REGIMEN:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(50, 10, str(historia[0]['regimen']), 0, 0, 'L')
         self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'CONVENIO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(25, 10, historia[0]['convenio'], 0, 0, 'L')
         #self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'SERVICIO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(25, 10, historia[0]['servicio'], 0, 0, 'L')
         #self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'FECHA:', 0, 0, 'L')
         self.cell(25, 10, historia[0]['fecha'], 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
 
         # Line break
         self.ln(6)
@@ -169,10 +169,10 @@ class PDF(FPDF):
 
         self.set_y(-25)
         # Arial italic 8
-        self.set_font('Times', 'I', 8)
+        self.set_font('Helvetica', 'I', 8)
         # Page number
         self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
 
 class PDFOrdenIncapacidad(FPDF):
     def __init__(self, tipoDocId, documentoId, consec,historiaId ,  convenioId, tipoAdmision, *args, **kwargs):
@@ -189,7 +189,7 @@ class PDFOrdenIncapacidad(FPDF):
         # Logo
         self.image('C:/EntornosPython/pos7Particionado/vulner/static/img/MedicalFinal.jpg', 170 ,15, 10 , 5)
         # Arial bold 15
-        self.set_font('Times', 'B', 7)
+        self.set_font('Helvetica', 'B', 7)
 
         # Move to the right
         # self.cell(12)
@@ -247,7 +247,7 @@ class PDFOrdenIncapacidad(FPDF):
     	# Define el ancho de línea
         self.set_line_width(0.4)
         # Dibuja el borde
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.rect(10.0, 15.0, 195.0, 275.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
         self.cell(195, 1, 'CLINICA MEDICAL', 0, 0, 'C')
@@ -258,39 +258,39 @@ class PDFOrdenIncapacidad(FPDF):
         self.rect(10.0, 15.0, 195.0, 15)  # Coordenadas x, y, ancho, alto
 
 
-        self.set_font('Times', 'B', 7)
+        self.set_font('Helvetica', 'B', 7)
         self.cell(25, 10, 'PACIENTE: ', 0, 0, 'L')
-        self.set_font('Times', '', 7)
+        self.set_font('Helvetica', '', 7)
 
         self.cell(25, 10, str(historia[0]['tipnombre']), 0, 0, 'L')
         self.cell(25, 10, str(historia[0]['documentoPaciente']), 0, 0, 'L')
         self.cell(25, 10, str(historia[0]['nombre']), 0, 0, 'L')
         self.ln(1)
-        self.set_font('Times', 'B', 7)
+        self.set_font('Helvetica', 'B', 7)
         self.cell(25, 16, 'EDAD:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
+        self.set_font('Helvetica', '', 7)
         self.cell(50, 16, historia[0]['edad'], 0, 0, 'L')
-        self.set_font('Times', 'B', 7)
+        self.set_font('Helvetica', 'B', 7)
         self.cell(25, 16, 'GENERO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
+        self.set_font('Helvetica', '', 7)
         self.cell(50, 16, historia[0]['genero'], 0, 0, 'L')
         self.ln(2)
-        self.set_font('Times', 'B', 7)
+        self.set_font('Helvetica', 'B', 7)
         self.cell(25, 18, 'REGIMEN:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
+        self.set_font('Helvetica', '', 7)
         self.cell(50, 18, str(historia[0]['regimen']), 0, 0, 'L')
         self.ln(2)
-        self.set_font('Times', 'B', 7)
+        self.set_font('Helvetica', 'B', 7)
         self.cell(25, 20, 'CONVENIO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
+        self.set_font('Helvetica', '', 7)
         self.cell(25, 20, str(historia[0]['convenio']), 0, 0, 'L')
         self.ln(2)
-        self.set_font('Times', 'B', 7)
+        self.set_font('Helvetica', 'B', 7)
         self.cell(25, 21, 'SERVICIO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
+        self.set_font('Helvetica', '', 7)
         self.cell(25, 21, str(historia[0]['servicio']), 0, 0, 'L')
         self.ln(2)
-        self.set_font('Times', 'B', 7)
+        self.set_font('Helvetica', 'B', 7)
         self.cell(25, 23, 'FECHA:', 0, 0, 'L')
         self.cell(25, 23, historia[0]['fecha'], 0, 0, 'L')
 
@@ -303,7 +303,7 @@ class PDFOrdenIncapacidad(FPDF):
         #self.set_y(-15)
         self.set_y(-15)
         # Arial italic 8
-        self.set_font('Times', 'B', 7)
+        self.set_font('Helvetica', 'B', 7)
         self.cell(180, 5, 'MEDICO ORDENA', 0, 0, 'C')
         self.ln(4)
 
@@ -335,7 +335,7 @@ class PDFOrdenIncapacidad(FPDF):
 
         self.ln(2)
         self.cell(100, 9, 'Firmado Electronicamente', 0, 0, 'L')
-        self.set_font('Times', 'I', 8)
+        self.set_font('Helvetica', 'I', 8)
         # Page number
         #self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
 
@@ -353,7 +353,7 @@ class PDFOrdenLaboratorio(FPDF):
         # Logo
         self.image('C:/EntornosPython/pos7Particionado/vulner/static/img/MedicalFinal.jpg', 180 ,20, 10 , 10)
         # Arial bold 15
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
 
         # Move to the right
         # self.cell(12)
@@ -411,7 +411,7 @@ class PDFOrdenLaboratorio(FPDF):
         # Define el ancho de línea
         self.set_line_width(0.4)
         # Dibuja el borde
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.rect(10.0, 15.0, 195.0, 275.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
         self.cell(195, 1, 'CLINICA MEDICAL', 0, 0, 'C')
@@ -421,40 +421,40 @@ class PDFOrdenLaboratorio(FPDF):
         self.set_line_width(0.5)
         self.rect(10.0, 15.0, 195.0, 15)  # Coordenadas x, y, ancho, alto
 
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'PACIENTE: ', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
 
         self.cell(25, 10, historia[0]['tipnombre'], 0, 0, 'L')
         self.cell(25, 10, historia[0]['documentoPaciente'], 0, 0, 'L')
         self.cell(25, 10, historia[0]['nombre'], 0, 0, 'L')
         self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'EDAD:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(50, 10, historia[0]['edad'], 0, 0, 'L')
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(20, 10, 'GENERO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(50, 10, str(historia[0]['genero']), 0, 0, 'L')
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(15, 10, 'REGIMEN:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         print("regimen = ", historia[0]['regimen'])
 
         self.cell(40, 10, str(historia[0]['regimen']), 0, 0, 'L')
         self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'CONVENIO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(25, 10, str(historia[0]['convenio']), 0, 0, 'L')
         self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'SERVICIO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(25, 10, historia[0]['servicio'], 0, 0, 'L')
 
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'FECHA:', 0, 0, 'L')
         self.cell(25, 10, historia[0]['fecha'], 0, 0, 'L')
 
@@ -466,10 +466,10 @@ class PDFOrdenLaboratorio(FPDF):
         # Position at 1.5 cm from bottom
         self.set_y(-25)
         # Arial italic 8
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(180, 10, 'MEDICO ORDENA', 0, 0, 'l')
         self.ln(2)
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
 
         miConexionii = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                        password="123456")
@@ -491,19 +491,19 @@ class PDFOrdenLaboratorio(FPDF):
         #self.rect(10, 265.0, 195.0, 15.0)  # Coordenadas x, y, ancho, alto
 
         print('registro =', registro)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(15, 10, 'Firmado Por:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(25, 10, '' + str(registro[0]['tipoDoc_id']), 0, 0, 'L')
         self.cell(25, 10, '' + str(registro[0]['documento']), 0, 0, 'L')
         self.cell(80, 10, '' + str(registro[0]['plantaNombre']), 0, 0, 'L')
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(50, 10, 'Registro Medico:' + str(registro[0]['registroMedico']), 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.ln(2)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(100, 10, 'Firmado Electronicamente', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         # Page number
         #self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
 
@@ -522,7 +522,7 @@ class PDFOrdenTerapia(FPDF):
         # Logo
         self.image('C:/EntornosPython/pos7Particionado/vulner/static/img/MedicalFinal.jpg', 180 ,20, 10 , 10)
         # Arial bold 15
-        self.set_font('Times', 'B', 7)
+        self.set_font('Helvetica', 'B', 7)
 
         # Move to the right
         # self.cell(12)
@@ -580,7 +580,7 @@ class PDFOrdenTerapia(FPDF):
         self.set_line_width(0.4)
         # Dibuja el borde
 
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.rect(10.0, 15.0, 195.0, 275.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
         self.cell(195, 1, 'CLINICA MEDICAL', 0, 0, 'C')
@@ -591,40 +591,40 @@ class PDFOrdenTerapia(FPDF):
         self.rect(10.0, 15.0, 195.0, 15)  # Coordenadas x, y, ancho, alto
 
 
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'PACIENTE: ', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
 
         self.cell(25, 10, historia[0]['tipnombre'], 0, 0, 'L')
         self.cell(25, 10, historia[0]['documentoPaciente'], 0, 0, 'L')
         self.cell(25, 10, historia[0]['nombre'], 0, 0, 'L')
         self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'EDAD:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(50, 10, historia[0]['edad'], 0, 0, 'L')
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(20, 10, 'GENERO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(50, 10, str(historia[0]['genero']), 0, 0, 'L')
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(15, 10, 'REGIMEN:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         print("regimen = ", historia[0]['regimen'])
 
         self.cell(40, 10, str(historia[0]['regimen']), 0, 0, 'L')
         self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'CONVENIO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(25, 10, str(historia[0]['convenio']), 0, 0, 'L')
         self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'SERVICIO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(25, 10, historia[0]['servicio'], 0, 0, 'L')
 
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'FECHA:', 0, 0, 'L')
         self.cell(25, 10, historia[0]['fecha'], 0, 0, 'L')
 
@@ -636,7 +636,7 @@ class PDFOrdenTerapia(FPDF):
         # Position at 1.5 cm from bottom
         self.set_y(-30)
         # Arial italic 8
-        self.set_font('Times', 'B', 7)
+        self.set_font('Helvetica', 'B', 7)
         self.cell(180, 5, 'MEDICO ORDENA', 0, 0, 'C')
         self.ln(4)
 
@@ -669,7 +669,7 @@ class PDFOrdenTerapia(FPDF):
 
         self.ln(2)
         self.cell(100, 9, 'Firmado Electronicamente', 0, 0, 'L')
-        self.set_font('Times', 'I', 8)
+        self.set_font('Helvetica', 'I', 8)
         # Page number
         #self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
 
@@ -688,7 +688,7 @@ class PDFOrdenRadiologia(FPDF):
         # Logo
         self.image('C:/EntornosPython/pos7Particionado/vulner/static/img/MedicalFinal.jpg', 180 ,20, 10 , 10)
         # Arial bold 15
-        self.set_font('Times', 'B', 7)
+        self.set_font('Helvetica', 'B', 7)
 
         # Move to the right
         # self.cell(12)
@@ -745,7 +745,7 @@ class PDFOrdenRadiologia(FPDF):
         self.set_line_width(0.4)
         # Dibuja el borde
 
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.rect(10.0, 15.0, 195.0, 275.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
         self.cell(195, 1, 'CLINICA MEDICAL', 0, 0, 'C')
@@ -756,40 +756,40 @@ class PDFOrdenRadiologia(FPDF):
         self.rect(10.0, 15.0, 195.0, 15)  # Coordenadas x, y, ancho, alto
 
 
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'PACIENTE: ', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
 
         self.cell(25, 10, historia[0]['tipnombre'], 0, 0, 'L')
         self.cell(25, 10, historia[0]['documentoPaciente'], 0, 0, 'L')
         self.cell(25, 10, historia[0]['nombre'], 0, 0, 'L')
         self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'EDAD:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(50, 10, historia[0]['edad'], 0, 0, 'L')
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(20, 10, 'GENERO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(50, 10, str(historia[0]['genero']), 0, 0, 'L')
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(15, 10, 'REGIMEN:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         print("regimen = ", historia[0]['regimen'])
 
         self.cell(40, 10, str(historia[0]['regimen']), 0, 0, 'L')
         self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'CONVENIO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(25, 10, str(historia[0]['convenio']), 0, 0, 'L')
         self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'SERVICIO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(25, 10, historia[0]['servicio'], 0, 0, 'L')
 
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'FECHA:', 0, 0, 'L')
         self.cell(25, 10, historia[0]['fecha'], 0, 0, 'L')
 
@@ -801,7 +801,7 @@ class PDFOrdenRadiologia(FPDF):
         # Position at 1.5 cm from bottom
         self.set_y(-30)
         # Arial italic 8
-        self.set_font('Times', 'B', 7)
+        self.set_font('Helvetica', 'B', 7)
         self.cell(180, 5, 'MEDICO ORDENA', 0, 0, 'C')
         self.ln(4)
 
@@ -833,7 +833,7 @@ class PDFOrdenRadiologia(FPDF):
 
         self.ln(2)
         self.cell(100, 9, 'Firmado Electronicamente', 0, 0, 'L')
-        self.set_font('Times', 'I', 8)
+        self.set_font('Helvetica', 'I', 8)
         # Page number
         #self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
 
@@ -853,7 +853,7 @@ class PDFOrdenMedicamentos(FPDF):
         # Logo
         self.image('C:/EntornosPython/pos7Particionado/vulner/static/img/MedicalFinal.jpg', 180 ,20, 10 , 10)
         # Arial bold 15
-        self.set_font('Times', 'B', 7)
+        self.set_font('Helvetica', 'B', 7)
 
         # Move to the right
         # self.cell(12)
@@ -909,7 +909,7 @@ class PDFOrdenMedicamentos(FPDF):
         # Define el ancho de línea
         self.set_line_width(0.4)
         # Dibuja el borde
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.rect(10.0, 15.0, 195.0, 275.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
         self.cell(195, 1, 'CLINICA MEDICAL', 0, 0, 'C')
@@ -920,40 +920,40 @@ class PDFOrdenMedicamentos(FPDF):
         self.rect(10.0, 15.0, 195.0, 15)  # Coordenadas x, y, ancho, alto
 
 
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'PACIENTE: ', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
 
         self.cell(25, 10, historia[0]['tipnombre'], 0, 0, 'L')
         self.cell(25, 10, historia[0]['documentoPaciente'], 0, 0, 'L')
         self.cell(25, 10, historia[0]['nombre'], 0, 0, 'L')
         self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'EDAD:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(50, 10, historia[0]['edad'], 0, 0, 'L')
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(20, 10, 'GENERO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(50, 10, str(historia[0]['genero']), 0, 0, 'L')
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(15, 10, 'REGIMEN:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         print("regimen = ", historia[0]['regimen'])
 
         self.cell(40, 10, str(historia[0]['regimen']), 0, 0, 'L')
         self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'CONVENIO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(25, 10, str(historia[0]['convenio']), 0, 0, 'L')
         self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'SERVICIO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(25, 10, historia[0]['servicio'], 0, 0, 'L')
 
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'FECHA:', 0, 0, 'L')
         self.cell(25, 10, historia[0]['fecha'], 0, 0, 'L')
 
@@ -965,7 +965,7 @@ class PDFOrdenMedicamentos(FPDF):
         # Position at 1.5 cm from bottom
         self.set_y(-30)
         # Arial italic 8
-        self.set_font('Times', 'B', 7)
+        self.set_font('Helvetica', 'B', 7)
         self.cell(180, 5, 'MEDICO ORDENA', 0, 0, 'C')
         self.ln(4)
 
@@ -998,7 +998,7 @@ class PDFOrdenMedicamentos(FPDF):
 
         self.ln(2)
         self.cell(100, 9, 'Firmado Electronicamente', 0, 0, 'L')
-        self.set_font('Times', 'I', 8)
+        self.set_font('Helvetica', 'I', 8)
         # Page number
         #self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
 
@@ -1017,7 +1017,7 @@ class PDFOrdenDeControl(FPDF):
         # Logo
         self.image('C:/EntornosPython/pos7Particionado/vulner/static/img/MedicalFinal.jpg', 180 ,20, 10 , 10)
         # Arial bold 15
-        self.set_font('Times', 'B', 7)
+        self.set_font('Helvetica', 'B', 7)
 
         # Move to the right
         # self.cell(12)
@@ -1074,7 +1074,7 @@ class PDFOrdenDeControl(FPDF):
         self.set_line_width(0.4)
         # Dibuja el borde
 
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.rect(10.0, 15.0, 195.0, 275.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
         self.cell(195, 1, 'CLINICA MEDICAL', 0, 0, 'C')
@@ -1084,40 +1084,40 @@ class PDFOrdenDeControl(FPDF):
         self.set_line_width(0.5)
         self.rect(10.0, 15.0, 195.0, 15)  # Coordenadas x, y, ancho, alto
 
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'PACIENTE: ', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
 
         self.cell(25, 10, historia[0]['tipnombre'], 0, 0, 'L')
         self.cell(25, 10, historia[0]['documentoPaciente'], 0, 0, 'L')
         self.cell(25, 10, historia[0]['nombre'], 0, 0, 'L')
         self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'EDAD:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(50, 10, historia[0]['edad'], 0, 0, 'L')
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(20, 10, 'GENERO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(50, 10, str(historia[0]['genero']), 0, 0, 'L')
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(15, 10, 'REGIMEN:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         print("regimen = ", historia[0]['regimen'])
 
         self.cell(40, 10, str(historia[0]['regimen']), 0, 0, 'L')
         self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'CONVENIO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(25, 10, str(historia[0]['convenio']), 0, 0, 'L')
         self.ln(3)
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'SERVICIO:', 0, 0, 'L')
-        self.set_font('Times', '', 8)
+        self.set_font('Helvetica', '', 8)
         self.cell(25, 10, historia[0]['servicio'], 0, 0, 'L')
 
-        self.set_font('Times', 'B', 8)
+        self.set_font('Helvetica', 'B', 8)
         self.cell(25, 10, 'FECHA:', 0, 0, 'L')
         self.cell(25, 10, historia[0]['fecha'], 0, 0, 'L')
 
@@ -1129,7 +1129,7 @@ class PDFOrdenDeControl(FPDF):
         # Position at 1.5 cm from bottom
         self.set_y(-30)
         # Arial italic 8
-        self.set_font('Times', 'B', 7)
+        self.set_font('Helvetica', 'B', 7)
         self.cell(180, 5, 'MEDICO ORDENA', 0, 0, 'C')
         self.ln(4)
 
@@ -1161,7 +1161,7 @@ class PDFOrdenDeControl(FPDF):
 
         self.ln(2)
         self.cell(100, 9, 'Firmado Electronicamente', 0, 0, 'L')
-        self.set_font('Times', 'I', 8)
+        self.set_font('Helvetica', 'I', 8)
         # Page number
         #self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
 
@@ -1234,7 +1234,7 @@ def ImprimirHistoriaClinica(request):
 
         pdf.set_line_width(0.3)
 
-        pdf.set_font('Times', 'B', 8)
+        pdf.set_font('Helvetica', 'B', 8)
 
         pdf.cell(1, 1,
                  '_________________________________________________________________________________________________________________________________________',
@@ -1246,7 +1246,7 @@ def ImprimirHistoriaClinica(request):
         #         '____________________________________________________________________',
         #         0, 0, 'L')
 
-        pdf.set_font('Times', '', 8)
+        pdf.set_font('Helvetica', '', 8)
 
         miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                        password="123456")
@@ -1349,9 +1349,9 @@ def ImprimirHistoriaClinica(request):
             if (rasgosHistoria != []):
 
                 pdf.ln(2)
-                pdf.set_font('Times', 'B', 8)
+                pdf.set_font('Helvetica', 'B', 8)
                 pdf.cell(180, 12, 'RASGOS HISTORIA', 0, 0, 'C')
-                pdf.set_font('Times', '', 8)
+                pdf.set_font('Helvetica', '', 8)
                 pdf.ln(4)
 
             for l in range(0, len(rasgosHistoria)):
@@ -1409,10 +1409,10 @@ def ImprimirHistoriaClinica(request):
             print("matriz revisionSistemas = ", len(revisionSistemas))
 
             if (revisionSistemas != []):
-                pdf.set_font('Times', 'B', 8)
+                pdf.set_font('Helvetica', 'B', 8)
                 pdf.ln(2)
                 pdf.cell(180, 12, 'REVISION POR SISTEMAS', 0, 0, 'L')
-                pdf.set_font('Times', '', 8)
+                pdf.set_font('Helvetica', '', 8)
                 pdf.ln(6)
 
             for l in range(0, len(revisionSistemas)):
@@ -1454,9 +1454,9 @@ def ImprimirHistoriaClinica(request):
             if (antecedentes != []):
 
                 pdf.ln(2)
-                pdf.set_font('Times', 'B', 8)
+                pdf.set_font('Helvetica', 'B', 8)
                 pdf.cell(180, 12, 'ANTECEDENTES', 0, 0, 'L')
-                pdf.set_font('Times', '', 8)
+                pdf.set_font('Helvetica', '', 8)
                 pdf.ln(4)
 
             for l in range(0, len(antecedentes)):
@@ -1501,9 +1501,9 @@ def ImprimirHistoriaClinica(request):
             if (signosVitales != []):
 
                 pdf.ln(2)
-                pdf.set_font('Times', 'B', 8)
+                pdf.set_font('Helvetica', 'B', 8)
                 pdf.cell(180, 10, 'SIGNOS VITALES', 0, 0, 'L')
-                pdf.set_font('Times', '', 8)
+                pdf.set_font('Helvetica', '', 8)
                 pdf.ln(4)
 
             for l in range(0, len(signosVitales)):
@@ -1553,10 +1553,10 @@ def ImprimirHistoriaClinica(request):
             print("matriz notasEnfermeria = ", len(notasEnfermeria))
 
             if (notasEnfermeria != []):
-                pdf.set_font('Times', 'B', 8)
+                pdf.set_font('Helvetica', 'B', 8)
                 pdf.ln(2)
                 pdf.cell(180, 10, 'NOTAS ENFERMERIA', 0, 0, 'L')
-                pdf.set_font('Times', '', 8)
+                pdf.set_font('Helvetica', '', 8)
                 pdf.ln(4)
 
             for l in range(0, len(notasEnfermeria)):
@@ -1595,10 +1595,10 @@ def ImprimirHistoriaClinica(request):
             print("matriz laboratorios = ", len(laboratorios))
 
             if (laboratorios != []):
-                pdf.set_font('Times', 'B', 8)
+                pdf.set_font('Helvetica', 'B', 8)
                 pdf.ln(2)
                 pdf.cell(180, 12, 'LABORATORIOS', 0, 0, 'L')
-                pdf.set_font('Times', '', 8)
+                pdf.set_font('Helvetica', '', 8)
                 pdf.ln(4)
 
             for l in range(0, len(laboratorios)):
@@ -1636,13 +1636,13 @@ def ImprimirHistoriaClinica(request):
 
 
                 if (resultadosCabezoteLab != []):
-                    pdf.set_font('Times', 'B', 8)
+                    pdf.set_font('Helvetica', 'B', 8)
 
                     if interpretacion1 != '' and interpretacion1 != 'None' and interpretacion1 != None and  interpretacion2 != '' and interpretacion2 != 'None' and interpretacion2 != None:
 
                             pdf.cell(180, 12, 'RESULTADOS', 0, 0, 'L')
 
-                    pdf.set_font('Times', '', 8)
+                    pdf.set_font('Helvetica', '', 8)
                     pdf.ln(4)
 
                     for s in range(0, len(resultadosCabezoteLab)):
@@ -1701,10 +1701,10 @@ def ImprimirHistoriaClinica(request):
                 print("matriz Resultados laboratorios = ", len(resultadosLab))
 
                 if (resultadosLab != []):
-                    pdf.set_font('Times', 'B', 8)
+                    pdf.set_font('Helvetica', 'B', 8)
                     pdf.ln(2)
                     pdf.cell(180, 10, 'Detalle:', 0, 0, 'L')
-                    pdf.set_font('Times', '', 8)
+                    pdf.set_font('Helvetica', '', 8)
                     pdf.ln(4)
 
                 for s in range(0, len(resultadosLab)):
@@ -1743,10 +1743,10 @@ def ImprimirHistoriaClinica(request):
             print("matriz Radiologia = ", len(radiologia))
 
             if (radiologia != []):
-                pdf.set_font('Times', 'B', 8)
+                pdf.set_font('Helvetica', 'B', 8)
                 pdf.ln(2)
                 pdf.cell(180, 10, 'RADIOLOGIA', 0, 0, 'L')
-                pdf.set_font('Times', '', 8)
+                pdf.set_font('Helvetica', '', 8)
                 pdf.ln(4)
 
             for l in range(0, len(radiologia)):
@@ -1782,12 +1782,12 @@ def ImprimirHistoriaClinica(request):
 
 
                 if (resultadosCabezoteRad != []):
-                    pdf.set_font('Times', 'B', 8)
+                    pdf.set_font('Helvetica', 'B', 8)
 
                     if interpretacion1 != '' and interpretacion1 != 'None' and interpretacion1 != None and  interpretacion2 != '' and interpretacion2 != 'None' and interpretacion2 != None:
 
                         pdf.cell(180, 12, 'RESULTADOS', 0, 0, 'L')
-                        pdf.set_font('Times', '', 8)
+                        pdf.set_font('Helvetica', '', 8)
                         pdf.ln(4)
 
                         for s in range(0, len(resultadosCabezoteRad)):
@@ -1846,9 +1846,9 @@ def ImprimirHistoriaClinica(request):
                 if (resultadosRad != []):
 
                     pdf.ln(1)
-                    pdf.set_font('Times', 'B', 8)
+                    pdf.set_font('Helvetica', 'B', 8)
                     pdf.cell(180, 12, 'RESULTADOS:', 0, 0, 'L')
-                    pdf.set_font('Times', '', 8)
+                    pdf.set_font('Helvetica', '', 8)
                     pdf.ln(4)
 
                 for s in range(0, len(resultadosRad)):
@@ -1886,10 +1886,10 @@ def ImprimirHistoriaClinica(request):
             print("matriz terapias = ", len(terapias))
 
             if (terapias != []):
-                pdf.set_font('Times', 'B', 8)
+                pdf.set_font('Helvetica', 'B', 8)
                 pdf.ln(1)
                 pdf.cell(180, 12, 'TERAPIAS', 0, 0, 'L')
-                pdf.set_font('Times', '', 8)
+                pdf.set_font('Helvetica', '', 8)
                 pdf.ln(4)
 
             for l in range(0, len(terapias)):
@@ -1925,11 +1925,11 @@ def ImprimirHistoriaClinica(request):
 
 
                 if (resultadosCabezoteTer != []):
-                    pdf.set_font('Times', 'B', 8)
+                    pdf.set_font('Helvetica', 'B', 8)
                     pdf.ln(2)
                     if (len(resultadosCabezoteTer) >0) :
                         pdf.cell(180, 12, 'Detalle:', 0, 0, 'L')
-                    pdf.set_font('Times', '', 8)
+                    pdf.set_font('Helvetica', '', 8)
                     pdf.ln(4)
 
                 for s in range(0, len(resultadosCabezoteTer)):
@@ -1985,11 +1985,11 @@ def ImprimirHistoriaClinica(request):
                 print("matriz Resultados resultadosTer = ", len(resultadosTer))
 
                 if (resultadosTer != []):
-                    pdf.set_font('Times', 'B', 8)
+                    pdf.set_font('Helvetica', 'B', 8)
                     pdf.ln(2)
                     if interpretacion1 != '' and interpretacion1 != 'None' and interpretacion1 != None and  interpretacion2 != '' and interpretacion2 != 'None' and interpretacion2 != None:
                         pdf.cell(180, 12, 'RESULTADOS:', 0, 0, 'L')
-                    pdf.set_font('Times', '', 8)
+                    pdf.set_font('Helvetica', '', 8)
                     pdf.ln(4)
 
                 for s in range(0, len(resultadosTer)):
@@ -2026,10 +2026,10 @@ def ImprimirHistoriaClinica(request):
             print("matriz noqX = ", len(noqX))
 
             if (noqX != []):
-                pdf.set_font('Times', 'B', 8)
+                pdf.set_font('Helvetica', 'B', 8)
                 pdf.ln(2)
                 pdf.cell(180, 12, 'PROCEDIMIENTOS NO QX', 0, 0, 'L')
-                pdf.set_font('Times', '', 8)
+                pdf.set_font('Helvetica', '', 8)
                 pdf.ln(4)
 
             for l in range(0, len(noqX)):
@@ -2065,7 +2065,7 @@ def ImprimirHistoriaClinica(request):
 
 
                 if (resultadosCabezoteNoQx != []):
-                    pdf.set_font('Times', 'B', 8)
+                    pdf.set_font('Helvetica', 'B', 8)
                     pdf.ln(2)
                     if interpretacion1 != '' and interpretacion1 != 'None' and interpretacion1 != None and  interpretacion2 != '' and interpretacion2 != 'None' and interpretacion2 != None:
 
@@ -2129,10 +2129,10 @@ def ImprimirHistoriaClinica(request):
             print("matriz interConsultas = ", len(interConsultas))
 
             if (interConsultas != []):
-                pdf.set_font('Times', 'B', 8)
+                pdf.set_font('Helvetica', 'B', 8)
                 pdf.ln(2)
                 pdf.cell(180, 12, 'INTERCONSULTAS', 0, 0, 'L')
-                pdf.set_font('Times', '', 8)
+                pdf.set_font('Helvetica', '', 8)
                 pdf.ln(5)
 
             for x in range(0, len(interConsultas)):
@@ -2174,10 +2174,10 @@ def ImprimirHistoriaClinica(request):
             print("matriz medicamentos = ", len(medicamentos))
 
             if (medicamentos != []):
-                pdf.set_font('Times', 'B', 8)
+                pdf.set_font('Helvetica', 'B', 8)
                 pdf.ln(2)
                 pdf.cell(180, 12, 'MEDICAMENTOS', 0, 0, 'L')
-                pdf.set_font('Times', '', 8)
+                pdf.set_font('Helvetica', '', 8)
                 pdf.ln(9)
 
             for z in range(0, len(medicamentos)):
@@ -2192,6 +2192,76 @@ def ImprimirHistoriaClinica(request):
             pdf.ln(1)
 
             # Cursor recorre Cirugias
+
+
+            miConexionr = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+                                           password="123456")
+            curr = miConexionr.cursor()
+
+            #comando = 'SELECT revision.nombre sistema, hist.observacion observacion FROM clinico_historiarevisionsistemas hist INNER JOIN clinico_revisionsistemas revision  ON (revision.id = hist."revisionSistemas_id") WHERE hist.historia_id = ' + str(
+            #    folios[0 + i]['HistoriaId'])
+
+            folioCuestion = folios[0 + i]['HistoriaId']
+
+            comando='SELECT cir.urgente, cir."fechaIniAnestesia", cir."HoraIniAnestesia", cir."fechaFinAnestesia", cir."horaFinAnestesia","fechaQxInicial", cir."horaQxInicial", "fechaQxFinal", cir."horaQxFinal", cir."descripcionQx", cir."dxComplicacion_id", cir."dxPostQx_id", cir.especialidad_id FROM clinico_historialcirugias histCiru INNER JOIN clinico_historia his on (his.id=histCiru.historia_id) INNER JOIN cirugia_cirugias cir ON (cir.id=histCiru.cirugia_id) WHERE histCiru.historia_id = ' + "'" + str(folioCuestion) + "'"
+
+            curr.execute(comando)
+
+            #print(comando)
+
+            cirugia = []
+
+            for urgente, fechaIniAnestesia,HoraIniAnestesia, fechaFinAnestesia, horaFinAnestesia, fechaQxInicial, horaQxInicial,  fechaQxFinal, horaQxFinal, descripcionQx, dxComplicacion_id, dxPostQx_id,especialidad_id  in curr.fetchall():
+                cirugia.append(
+                    {'urgente': urgente, 'fechaIniAnestesia': fechaIniAnestesia, 'HoraIniAnestesia':HoraIniAnestesia,
+                     'fechaFinAnestesia':fechaFinAnestesia, 'horaFinAnestesia':horaFinAnestesia,
+                     'fechaQxInicial':fechaQxInicial,'horaQxInicial':horaQxInicial, 'fechaQxFinal':fechaQxFinal ,'horaQxFinal':horaQxFinal,'descripcionQx':descripcionQx ,'dxComplicacion_id':dxComplicacion_id,  'dxPostQx_id':dxPostQx_id, 'especialidad_id':especialidad_id})
+
+            miConexionr.close()
+
+            print("cirugia = ", cirugia)
+            print("matriz cirugia = ", len(cirugia))
+
+            if (cirugia != []):
+                pdf.set_font('Helvetica', 'B', 8)
+                pdf.ln(2)
+                pdf.cell(180, 12, 'CIRUGIAS', 0, 0, 'L')
+                pdf.set_font('Helvetica', '', 8)
+                pdf.ln(6)
+
+            for l in range(0, len(cirugia)):
+
+                pdf.set_font('Helvetica', 'B', 8)
+                pdf.cell(10, 10, 'URGENTE', 0, 0, 'L')
+                pdf.set_font('Helvetica', '', 8)
+                pdf.cell(15, 10,  str(cirugia[0 + z]['urgente']), 0, 0, 'L')
+                pdf.set_font('Helvetica', 'B', 8)
+                pdf.cell(10, 10, 'FEC.INICIO CIRUGIA', 0, 0, 'L')
+                pdf.set_font('Helvetica', '', 8)
+                pdf.cell(15, 10, str(cirugia[0 + z]['fechaQxInicial']), 0, 0, 'L')
+                pdf.set_font('Helvetica', 'B', 8)
+                pdf.cell(10, 10, 'FEC.FIN CIRUGIA', 0, 0, 'L')
+                pdf.set_font('Helvetica', '', 8)
+                pdf.cell(15, 10, str(cirugia[0 + z]['fechaQxFinal']), 0, 0, 'L')
+                pdf.set_font('Helvetica', 'B', 8)
+                pdf.cell(10, 10, 'DESCRIPCION QX', 0, 0, 'L')
+                pdf.set_font('Helvetica', '', 8)
+                descripcionQx =  str(cirugia[0 + l]['descripcionQx'])
+                pdf.multi_cell(w=0, h=5, txt=descripcionQx , border=0, align='J',fill=False)
+
+                pdf.set_font('Helvetica', 'B', 8)
+                pdf.cell(10, 10, 'DIAGNOSTICO POSTQX', 0, 0, 'L')
+                pdf.set_font('Helvetica', '', 8)
+                pdf.cell(15, 10, str(cirugia[0 + z]['dxPostQx_id']), 0, 0, 'L')
+
+                pdf.set_font('Helvetica', 'B', 8)
+                pdf.cell(10, 10, 'COMPLICACIONES', 0, 0, 'L')
+                pdf.set_font('Helvetica', '', 8)
+                pdf.cell(15, 10, str(cirugia[0 + z]['dxComplicacion_id']), 0, 0, 'L')
+
+            pdf.ln(1)
+
+            ##  Fin cursor recorre cirugias
 
             # Cursor recorre Enfermeria
 
@@ -2220,13 +2290,13 @@ def ImprimirHistoriaClinica(request):
 
             if (incapacidades != []):
                 print("entre if")
-                pdf.set_font('Times', 'B', 8)
+                pdf.set_font('Helvetica', 'B', 8)
                 pdf.ln(2)
                 print("que pasa")
                 if (len(incapacidades) >0):
                     pdf.cell(180, 10, 'INCAPACIDAD MEDICA', 0, 0, 'C')
 
-                pdf.set_font('Times', '', 8)
+                pdf.set_font('Helvetica', '', 8)
                 pdf.ln(6)
 
             print ("antes el fopr")
@@ -2271,10 +2341,10 @@ def ImprimirHistoriaClinica(request):
             print("matriz diagnosticos = ", len(diagnosticos))
 
             if (diagnosticos != []):
-                pdf.set_font('Times', 'b', 8)
+                pdf.set_font('Helvetica', 'b', 8)
                 pdf.ln(2)
                 pdf.cell(180, 12, 'DIAGNOSTICOS', 0, 0, 'L')
-                pdf.set_font('Times', '', 8)
+                pdf.set_font('Helvetica', '', 8)
                 pdf.ln(6)
 
             for l in range(0, len(diagnosticos)):
@@ -2303,9 +2373,9 @@ def ImprimirHistoriaClinica(request):
                     {'registroMedico': registroMedico, 'plantaNombre': plantaNombre, 'tipoDoc_id': tipoDoc_id,
                      'documento': documento})
             miConexionx.close()
-            pdf.set_font('Times', 'b', 8)
+            pdf.set_font('Helvetica', 'b', 8)
             pdf.cell(15, 12, 'Firmado Por:', 0, 0, 'L')
-            pdf.set_font('Times', '', 8)
+            pdf.set_font('Helvetica', '', 8)
             pdf.cell(25, 10, '' + str(registroMed[0]['tipoDoc_id']), 0, 0, 'L')
             pdf.cell(25, 10, '' + str(registroMed[0]['documento']), 0, 0, 'L')
             pdf.cell(80, 10, '' + str(registroMed[0]['plantaNombre']), 0, 0, 'L')
@@ -2398,7 +2468,7 @@ def ImprimirOrdenIncapacidad(ingresoId2, historiaId,convenioId , tipoAdmision):
     pdf.alias_nb_pages()
     pdf.set_margins(left= 10, top= 5, right= 5 )
     pdf.add_page()
-    pdf.set_font('Times', '', 8)
+    pdf.set_font('Helvetica', '', 8)
     pdf.ln(7)
     linea = 7
 
@@ -2429,9 +2499,9 @@ def ImprimirOrdenIncapacidad(ingresoId2, historiaId,convenioId , tipoAdmision):
 
        linea = linea + 2
        pdf.ln(2)
-       pdf.set_font('Times', 'B', 8)
+       pdf.set_font('Helvetica', 'B', 8)
        pdf.cell(180, 1, 'Incapacidad Medica' , 0, 0, 'l')
-       pdf.set_font('Times', '', 8)
+       pdf.set_font('Helvetica', '', 8)
        linea = linea + 5
        pdf.ln(5)
 
@@ -2469,6 +2539,9 @@ def ImprimirOrdenIncapacidad(ingresoId2, historiaId,convenioId , tipoAdmision):
         # Intenta abrir el archivo directamente
         pdf.output(archivo, 'F')
         webbrowser.open(archivo)
+
+        return archivo
+
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
     except Exception as e:
@@ -2515,7 +2588,7 @@ def ImprimirOrdenTerapia(ingresoId2, historiaId, convenioId, tipoAdmision):
     pdf.alias_nb_pages()
     pdf.set_margins(left=10, top=5, right=5)
     pdf.add_page()
-    pdf.set_font('Times', '', 8)
+    pdf.set_font('Helvetica', '', 8)
     pdf.ln(7)
     linea = 7
     totalFolios = 20
@@ -2547,9 +2620,9 @@ def ImprimirOrdenTerapia(ingresoId2, historiaId, convenioId, tipoAdmision):
     if (terapias != []):
         linea = linea + 2
         pdf.ln(2)
-        pdf.set_font('Times', 'B', 8)
+        pdf.set_font('Helvetica', 'B', 8)
         pdf.cell(180, 1, 'TERAPIAS', 0, 0, 'C')
-        pdf.set_font('Times', '', 8)
+        pdf.set_font('Helvetica', '', 8)
         linea = linea + 3
         pdf.ln(4)
 
@@ -2576,6 +2649,9 @@ def ImprimirOrdenTerapia(ingresoId2, historiaId, convenioId, tipoAdmision):
         # Intenta abrir el archivo directamente
         pdf.output(archivo, 'F')
         webbrowser.open(archivo)
+
+        return archivo
+
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
     except Exception as e:
@@ -2622,7 +2698,7 @@ def ImprimirOrdenLaboratorio(ingresoId2, historiaId, convenioId, tipoAdmision):
     pdf.alias_nb_pages()
     pdf.set_margins(left=10, top=5, right=5)
     pdf.add_page()
-    pdf.set_font('Times', 'B', 8)
+    pdf.set_font('Helvetica', 'B', 8)
     pdf.ln(2)
 
     # El propgrama debe preguntar desde que Folio hasta cual Y/O desde que fecha y hasta cual fecha
@@ -2650,9 +2726,9 @@ def ImprimirOrdenLaboratorio(ingresoId2, historiaId, convenioId, tipoAdmision):
     print("matriz laboratorios = ", len(laboratorios))
 
     if (laboratorios != []):
-        pdf.set_font('Times', 'B', 8)
+        pdf.set_font('Helvetica', 'B', 8)
         #pdf.cell(180, 1, 'LABORATORIOS', 0, 0, 'C')
-        pdf.set_font('Times', '', 8)
+        pdf.set_font('Helvetica', '', 8)
         pdf.ln(4)
 
     for l in range(0, len(laboratorios)):
@@ -2692,7 +2768,7 @@ def ImprimirOrdenLaboratorio(ingresoId2, historiaId, convenioId, tipoAdmision):
 
         #return buff
 
-        return nombreArchivo
+        return archivo
 
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
@@ -2740,7 +2816,7 @@ def ImprimirOrdenRadiologia(ingresoId2, historiaId, convenioId, tipoAdmision):
     pdf.alias_nb_pages()
     pdf.set_margins(left=10, top=5, right=5)
     pdf.add_page()
-    pdf.set_font('Times', '', 8)
+    pdf.set_font('Helvetica', '', 8)
     pdf.ln(2)
 
     # El propgrama debe preguntar desde que Folio hasta cual Y/O desde que fecha y hasta cual fecha
@@ -2768,9 +2844,9 @@ def ImprimirOrdenRadiologia(ingresoId2, historiaId, convenioId, tipoAdmision):
     print("matriz radiologia = ", len(radiologia))
 
     if (radiologia != []):
-        pdf.set_font('Times', 'B', 8)
+        pdf.set_font('Helvetica', 'B', 8)
         #pdf.cell(180, 1, 'RADIOLOGIA', 0, 0, 'C')
-        pdf.set_font('Times', '', 8)
+        pdf.set_font('Helvetica', '', 8)
         pdf.ln(4)
 
     for l in range(0, len(radiologia)):
@@ -2796,6 +2872,9 @@ def ImprimirOrdenRadiologia(ingresoId2, historiaId, convenioId, tipoAdmision):
         # Intenta abrir el archivo directamente
         pdf.output(archivo, 'F')
         webbrowser.open(archivo)
+
+        return archivo
+
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
     except Exception as e:
@@ -2842,7 +2921,7 @@ def ImprimirOrdenMedicamentos(ingresoId2, historiaId, convenioId, tipoAdmision):
     pdf.alias_nb_pages()
     pdf.set_margins(left=10, top=5, right=5)
     pdf.add_page()
-    pdf.set_font('Times', '', 8)
+    pdf.set_font('Helvetica', '', 8)
     pdf.ln(7)
     linea = 7
     totalFolios = 20
@@ -2876,9 +2955,9 @@ def ImprimirOrdenMedicamentos(ingresoId2, historiaId, convenioId, tipoAdmision):
     if (medicamentos != []):
         linea = linea + 2
         pdf.ln(2)
-        pdf.set_font('Times', 'B', 8)
+        pdf.set_font('Helvetica', 'B', 8)
         #pdf.cell(180, 1, 'FORMULACION MEDICAMENTOS', 0, 0, 'C')
-        pdf.set_font('Times', '', 8)
+        pdf.set_font('Helvetica', '', 8)
 
     for l in range(0, len(medicamentos)):
 
@@ -2907,6 +2986,9 @@ def ImprimirOrdenMedicamentos(ingresoId2, historiaId, convenioId, tipoAdmision):
         # Intenta abrir el archivo directamente
         pdf.output(archivo, 'F')
         webbrowser.open(archivo)
+
+        return archivo
+
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
     except Exception as e:
@@ -2954,7 +3036,7 @@ def ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision):
     pdf.alias_nb_pages()
     pdf.set_margins(left=10, top=5, right=5)
     pdf.add_page()
-    pdf.set_font('Times', '', 8)
+    pdf.set_font('Helvetica', '', 8)
     pdf.ln(7)
 
     # El propgrama debe preguntar desde que Folio hasta cual Y/O desde que fecha y hasta cual fecha
@@ -2983,9 +3065,9 @@ def ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision):
 
     if (ordenDeControl != []):
 
-        pdf.set_font('Times', 'B', 8)
+        pdf.set_font('Helvetica', 'B', 8)
         #pdf.cell(180, 1, 'ORDEN DE CONTROL', 0, 0, 'C')
-        pdf.set_font('Times', '', 8)
+        pdf.set_font('Helvetica', '', 8)
         pdf.ln(4)
 
     for l in range(0, len(ordenDeControl)):
@@ -3008,22 +3090,27 @@ def ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision):
         pdf.output(archivo, 'F')
         webbrowser.open(archivo)
 
-        #buff = BytesIO()
-        #buff.name = archivo
-        # Genera el archivo el el servidor
+        buff = BytesIO()
+        buff.name = archivo
+        #Genera el archivo el el servidor
 
-        # 2. Abrir el archivo PDF y leerlo
-        #with open(archivo, 'rb') as f:
-        #    pdf_data = f.read()
+        # Abrir el archivo PDF y leerlo
+        with open(archivo, 'rb') as f:
+            pdf_data = f.read()
             # 3. Escribir los datos en el buffer
-        #    buff.write(pdf_data)
+            buff.write(pdf_data)
 
-        #buff.seek(0)
+        buff.seek(0)
         print ("Voya devolver el buff o Archivo binario")
 
         #return buff
         #
-        return nombreArchivo
+        devuelvo = {}
+        devuelvo['nombre'] = archivo
+        devuelvo['blob'] = buff
+        print("devuelvo = " + devuelvo)
+
+        return devuelvo
 
 
         #return JsonResponse({'success': True, 'archivo': buff})

@@ -2177,7 +2177,7 @@ def crearHistoriaClinica(request):
                         #
                         if (salidaClinica=='S'):
 
-                            comando = 'UPDATE admisiones_ingresos SET "salidaClinica" = ' + "'" + str(salidaClinica) + "'" + ', "dxSalida_id" = ' + "'" + str(diagnosticoIdSalida) + "'" + ', "medicoSalida_id" = ' + "'" + str(plantaId.id) + "'" + ', "especialidadesMedicosSalida_id" = ' + "'" + str(espMedico) + "'" +  ',"serviciosSalida_id" = "serviciosActual_id"  ' + ', "salidaMotivo_id" = ' + "'" + str(tiposSalidas) + "'," + ' "dxComplicacion_id" = ' + "'" + str(dxComplicacion) + "'" +  ' WHERE "tipoDoc_id" =  ' + "'" + str(tipoDocId.id) + "' and documento_id = " + "'" + str(documentoId.id) + "' AND consec = " + "'" + str(ingresoPaciente) + "'"
+                            comando = 'UPDATE admisiones_ingresos SET "salidaClinica" = ' + "'" + str(salidaClinica) + "'" + ', "dxSalida_id" = ' + "'" + str(diagnosticoIdSalida) + "'" + ', "medicoSalida_id" = ' + "'" + str(plantaId.id) + "'" + ', "especialidadesMedicosSalida_id" = ' + "'" + str(espMedico) + "'" +  ',"serviciosSalida_id" = "serviciosActual_id"  ' + ', "salidaMotivo_id" = ' + "'" + str(tiposSalidas) + "'," + ' "dxComplicacion_id" = ' +  str(dxComplicacion)  +  ' WHERE "tipoDoc_id" =  ' + "'" + str(tipoDocId.id) + "' and documento_id = " + "'" + str(documentoId.id) + "' AND consec = " + "'" + str(ingresoPaciente) + "'"
                             print(comando)
                             cur3.execute(comando)
                             #miConexion3.commit()
@@ -2441,11 +2441,17 @@ def crearHistoriaClinica(request):
                 base1 ='file:\\175.16.0.100/HistoriasClinicas/'
                 base ='file:\\175.16.0.100/HistoriasClinicas/'
 
+
+                filesImprimir = []
+                print ("filesImprimir ANTES DE  = " , filesImprimir)
+              
+
                 if (ordenDeControl != ''):
 
                     print("Entre imprimir orden de control")
                     ingresoId2=ingresosPaciente.id
                     archivoOrdenDeControl = ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision)
+                    filesImprimir.append(archivoOrdenDeControl)
                     print("sali imprimir orden de control", archivoOrdenDeControl)
 
 
@@ -2465,7 +2471,8 @@ def crearHistoriaClinica(request):
                     print("Encontre ordenes de radiologia")
                     print("Encontre ordenes de radiologia")
                     ingresoId2 = ingresosPaciente.id
-                    ImprimirOrdenRadiologia(ingresoId2, historiaId, convenioId, tipoAdmision)
+                    archivoOrdenDeRadiologia = ImprimirOrdenRadiologia(ingresoId2, historiaId, convenioId, tipoAdmision)
+                    filesImprimir.append(archivoOrdenDeRadiologia)
                 else:
                     print("No Encontre ordenes de radiologia")
                     print("No Encontre ordenes de radiologia")
@@ -2474,7 +2481,8 @@ def crearHistoriaClinica(request):
                     print("Encontre ordenes de terapias")
                     print("Encontre ordenes de terapias")
                     ingresoId2 = ingresosPaciente.id
-                    ImprimirOrdenTerapia(ingresoId2, historiaId, convenioId, tipoAdmision)
+                    archivoOrdenDeTerapia = ImprimirOrdenTerapia(ingresoId2, historiaId, convenioId, tipoAdmision)
+                    filesImprimir.append(archivoOrdenDeTerapia)
                 else:
                     print("No Encontre ordenes de terapias")
                     print("No Encontre ordenes de terapias")
@@ -2482,20 +2490,18 @@ def crearHistoriaClinica(request):
                 if conteoMed >= 1:
                    print("Entre imprimir Medicamentos")
                    ingresoId2 = ingresosPaciente.id
-                   ImprimirOrdenMedicamentos(ingresoId2, historiaId, convenioId, tipoAdmision)
+                   archivoOrdenDeMedicamentos = ImprimirOrdenMedicamentos(ingresoId2, historiaId, convenioId, tipoAdmision)
+                   filesImprimir.append(archivoOrdenDeMedicamentos)
 
                 if conteoInca >= 2:
                    print("Entre imprimir Incapacidades")
                    ingresoId2 = ingresosPaciente.id
-                   ImprimirOrdenIncapacidad(ingresoId2, historiaId, convenioId, tipoAdmision)
+                   archivoOrdenDeIncapacidad = ImprimirOrdenIncapacidad(ingresoId2, historiaId, convenioId, tipoAdmision)
+                   filesImprimir.append(archivoOrdenDeIncapacidad)
 
                 #return JsonResponse({'success': True, 'Mensaje': 'Folio Actualizado !'})
                 #
 
-                filesImprimir = []
-                print ("filesImprimir ANTES DE  = " , filesImprimir)
-                filesImprimir.append(archivoOrdenDeControl)
-                filesImprimir.append(archivoOrdenDeLaboratorio)
 
                 print("filesImprimir DESPUES  DE  = ", filesImprimir)
                 print ("filesImprimir = " , filesImprimir)
@@ -3318,11 +3324,12 @@ def crearHistoriaClinica(request):
 def Obtener_pdf(request):
 
     print ("Entre obtener_pdfs_x")
-    file_id = request.GET["file_id"]
+    file_id = request.POST["file_id"]
 
     print("Entre obtener_pdfs_x", file_id)
 
-    file_path = f"C:\EntornosPython\pos7Particionado/vulner\JSONCLINICA\HistoriasClinicas\{file_id}.pdf"
+    #file_path = f"C:\EntornosPython\pos7Particionado/vulner\JSONCLINICA\HistoriasClinicas\{file_id}.pdf"
+    file_path = file_id
 
     print ("file_path = " , file_path)
 

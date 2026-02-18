@@ -12,6 +12,7 @@ let dataTableH;
 let dataTableCajaInitialized = false;
 let dataTableCarteraInitialized = false;
 let dataTablePagosEmpresasInitialized = false;
+let dataTablePagosEmpresasDetalleInitialized = false;
 
 
 $(document).ready(function() {
@@ -342,6 +343,99 @@ function arrancaCartera(valorTabla,valorData)
 	        dataTable = $('#tablaPagosEmpresas').DataTable(dataTableOptionsPagosEmpresas);
   }
 
+
+    if (valorTabla == 4)
+    {
+        let dataTableOptionsPagosEmpresasDetalle  ={
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
+
+  buttons: [
+    {
+      extend: 'excelHtml5',
+      text: '<i class="fas fa-file-excel"></i> ',
+      titleAttr: 'Exportar a Excel',
+      className: 'btn btn-success',
+    },
+    {
+      extend: 'pdfHtml5',
+      text: '<i class="fas fa-file-pdf"></i> ',
+      titleAttr: 'Exportar a PDF',
+      className: 'btn btn-danger',
+    },
+    {
+      extend: 'print',
+      text: '<i class="fa fa-print"></i> ',
+      titleAttr: 'Imprimir',
+      className: 'btn btn-info',
+    },
+  ],
+  lengthMenu: [2, 4, 15],
+           processing: true,
+            serverSide: false,
+            scrollY: '275px',
+	    scrollX: true,
+	    scrollCollapse: true,
+            paging:false,
+            columnDefs: [
+		{ className: 'centered', targets: [0, 1, 2, 3, 4, 5] },
+	    { width: '10%', targets: [2,3] },
+
+		{   
+                    "targets": 5
+               }
+            ],
+	 pageLength: 3,
+	  destroy: true,
+	  language: {
+		    processing: 'Procesando...',
+		    lengthMenu: 'Mostrar _MENU_ registros',
+		    zeroRecords: 'No se encontraron resultados',
+		    emptyTable: 'Ningún dato disponible en esta tabla',
+		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
+		    infoThousands: ',',
+		    loadingRecords: 'Cargando...',
+		    paginate: {
+			      first: 'Primero',
+			      last: 'Último',
+			      next: 'Siguiente',
+			      previous: 'Anterior',
+		    }
+			},
+
+
+           ajax: {
+                 url:"/load_dataPagosEmpresasDetalle/" +  data,
+                 type: "POST",
+                 dataSrc: ""
+            },
+            columns: [
+		{
+		  "render": function ( data, type, row ) {
+                        var btn = '';
+        		     btn = btn + " <input type='radio' name='editarPagosEmpresasDetalle1' style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;' class='editarPagosEmpresasDetalle form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
+                       return btn;
+                    },
+		},
+                { data: "fields.id"},
+                { data: "fields.facturaId"},
+                { data: "fields.valor"},
+                { data: "fields.radicadoFactura"},
+		{
+		  "render": function ( data, type, row ) {
+                        var btn = '';
+        		     btn = btn + " <input type='radio' name='borrarPagosEmpresasDetalle1' style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;' class='borrarPagosEmpresasDetalle form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
+                       return btn;
+                    },
+		},
+       ]
+            }
+	        dataTable = $('#tablaPagosEmpresasDetalle').DataTable(dataTableOptionsPagosEmpresasDetalle);
+  }
+
 }
 
 const initDataTableCaja = async () => {
@@ -380,6 +474,8 @@ const initDataTableCaja = async () => {
 	   dataTablePagosEmpresasInitialized = true;
 	alert("acabe de mostrar pagos");
 
+     arrancaCartera(4,data);
+	   dataTablePagosEmpresasDetalleInitialized = true;
 
 }
 
@@ -579,6 +675,106 @@ function GuardarPagosEmpresas()
 
 		 arrancaCartera(3,data);
 	         dataTablePagosEmpresasInitialized = true;
+                },
+            error: function (data) {
+            	document.getElementById("mensajesErrorModalPagosEmpresas").value =  data.responseText;
+
+	   	    	}
+            });
+}
+
+
+
+
+$('#tablaPagosEmpresas tbody').on('click', '.cargarPagosEmpresas', function() {
+
+	 alert("Entre cargarPagosEmpresasa");
+	var row = $(this).closest('tr'); // Encuentra la fila
+	var sede = document.getElementById("sede").value;
+	document.getElementById("sedesClinica_id").value =  sede;
+
+		var table = $('#tablaPagosEmpresas').DataTable();  // Inicializa el DataTable jquery 	      
+
+  	        var rowindex = table.row(row).data(); // Obtiene los datos de la fila
+
+
+	        console.log(" fila selecciona de vuelta AQUI PUEDE ESTAR EL PROBLEMA = " ,  table.row(row).data());
+	        dato1 = Object.values(rowindex);
+		console.log(" fila seleccionad d evuelta dato1 = ",  dato1);
+	        dato3 = dato1[2];
+		console.log(" fila selecciona de vuelta dato3 = ",  dato3);
+	        console.log ( "dato pago = " , dato3.id); 
+	        console.log ( "dato valor = " , dato3.valor); 
+	        console.log ( "dato descripcion = " , dato3.descripcion); 
+	        console.log ( "dato radicado = " , dato3.radicado); 
+
+
+	document.getElementById("empresaPagoMuestra").value = dato3.id;
+	document.getElementById("valorPagoMuestra").value =dato3.valor;
+	document.getElementById("descripcionPagoMuestra").value = dato3.descripcion;
+	document.getElementById("radicadoPagoMuestra").value = dato3.radicado;
+
+	var data =  {}   ;
+	        data['username'] = username;
+		data['username_id'] = username_id;
+	        data['sedeSeleccionada'] = sedeSeleccionada;
+	        data['nombreSede'] = nombreSede;
+	        data['sede'] = sede;
+	        data['sedesClinica_id'] = sede;
+	        data['pagoId'] = dato3.id;
+
+	        data = JSON.stringify(data);
+
+		 arrancaCartera(4,data);
+	         dataTablePagosEmpresasDetalleInitialized = true;
+	
+		 $('#ModelPagosEmpresasDetalle').modal('show');
+
+})
+
+
+function GuardarPagosEmpresasDetalle()
+{
+		alert("Entre GuardarPagosEmpresasDetalle")
+		var sedeSeleccionada = document.getElementById("sedeSeleccionada").value;
+	        var username = document.getElementById("username").value;
+	        var nombreSede = document.getElementById("nombreSede").value;
+	    	var sede = document.getElementById("sede").value;
+	    	var pagoId = document.getElementById("idPago").value;
+
+
+            $.ajax({
+                data: $('#postFormPagosEmpresasDetalle').serialize(),
+	        url: "/guardarPagosEmpresasDetalle/",
+                type: "POST",
+                dataType: 'json',
+                success: function (data2) {
+
+		if (data2.success == true)
+			 {
+			  document.getElementById("mensajes").value = data2.Mensajes;
+			 }
+			else
+			{
+			document.getElementById("mensajesErrorModalPagosEmpresas").value = data2.Mensajes;
+			return;
+			}
+
+		var data =  {}   ;
+	        data['username'] = username;
+		data['username_id'] = username_id;
+	        data['sedeSeleccionada'] = sedeSeleccionada;
+	        data['nombreSede'] = nombreSede;
+	        data['sede'] = sede;
+	        data['sedesClinica_id'] = sede;
+	        data['pagoId'] = pagoId;
+
+		 // $('#crearModelPagosEmpresasDetalle').modal('hide');
+
+	        data = JSON.stringify(data);
+
+		 arrancaCartera(4,data);
+	         dataTablePagosEmpresasDetalleInitialized = true;
                 },
             error: function (data) {
             	document.getElementById("mensajesErrorModalPagosEmpresas").value =  data.responseText;

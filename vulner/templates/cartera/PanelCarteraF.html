@@ -382,7 +382,7 @@ function RefrescarPantalla() {
 		<input type="text"   id="radicado" name="radicado" placeholder="radicado" ></input>
 
 		
-					 <select  id="servicio"    name="servicio"
+					 <select  id="servicioDetalle"    name="servicioDetalle"
                                                     required>
                                                 {% for serviciosAdministrativos in ServiciosAdministrativos %}
                                                 <option value="{{serviciosAdministrativos.id}}"> {{serviciosAdministrativos.nombre}}</option>
@@ -410,6 +410,101 @@ function RefrescarPantalla() {
                 </div>  <!-- CIERRA MODAL FADE -->
 
      <!-- FIN Espacio Modales  -->
+
+	            <!-- Espacio Modales Pagos Empresas Detalle-->
+
+            <div class="modal fade" id="ModelPagosEmpresasDetalle" tabindex="-1" role="dialog"  style="overflow-y:scroll;" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable  modal-dialog-center" role="document" >
+                    <div class="modal-content">
+                        <div class="modal-header">
+	     <div  class="modal-title" id="exampleModalLabel" style="text-align:center;"><font gont-family="Times New roman" size=5">Pagos Empresas Detalle</font> </div>
+                                        <button type="button" class="close" data-bs-dismiss="modal"  aria-label="Close"> <span aria-hidden="true">&times;</span>  </button>
+			<button type="button" class="btn btn-primary" id="saveBtnPagosEmpresasDetalle" onclick="GuardarPagosEmpresasDetalle()">Grabar!</button> 
+                        </div>
+		
+                        <div class="modal-body">
+
+  			  <form id="postFormPagosEmpresasDetalle" name="postFormPagosEmpresasDetalle">
+
+				                      <div id="flex-container-pagosEmpresasMuestarPago">
+				<div>
+				
+
+				<input type="text"   id="empresaPagoMuestra" name="empresaPagoMuestra" placeholder="empresaPagoMuestra"  readonly></input>
+				<input type="hidden"   id="sedePago" name="sedePago" placeholder="sedePago"  readonly></input>
+				<input type="hidden"   id="usernamePago_id" name="usernamePago_id" placeholder="usernamePago_id"  value="{{username_id}}" readonly></input>
+				<input type="text"   id="valorPagoMuestra" name="valorPagoMuestra" placeholder="valorPagoMuestra"  readonly></input>
+				<input type="text"   id="descripcionPagoMuestra" name="descripcionPagoMuestra" placeholder="descripcionPagoMuestra"   readonly></input>
+			<input type="text"   id="radicadoPagoMuestra" name="radicadoPagoMuestra" placeholder="radicadoPago"  readonly></input>
+					
+
+				</div>
+				</div>
+
+
+
+                      <div id="flex-container-pagosEmpresasDetalle">
+				<div>
+
+	
+
+		<input type="text"   id="valorPagoDetalle" name="valorPagoDetalle" placeholder="valorPago" ></input>
+		<input type="text"   id="facturaPago" name="facturaPago" placeholder="Factura a abonar" ></input>
+		<input type="text"   id="radicadoFactura" name="radicadoFactura" placeholder="radicadoFactura" ></input>
+
+		
+					 <select  id="servicioDetalle"    name="servicioDetalle"
+                                                    required>
+                                                {% for serviciosAdministrativos in ServiciosAdministrativos %}
+                                                <option value="{{serviciosAdministrativos.id}}"> {{serviciosAdministrativos.nombre}}</option>
+                                                {% endfor %}
+                                            </select>
+                                </div>
+                                </div> 
+
+                            </form>
+
+			<!--A Aqui viene el Datatable de las facturas relacionadas con el pago -->
+
+
+		<div class="container my-2">          
+   			   <div class="row">
+                                        <table  id= "tablaPagosEmpresasDetalle" class=" display table table-striped table-sm fs-6 nowrap" style="width: 100%";>
+                                           <thead>
+                                            <tr>    
+						<bold>                                  
+						<th>Editar </th>
+                                                <th>id</th>
+                                                <th>Factura</th>
+                                                <th>Valor</th>
+                                                <th>RadicadoFactura</th>
+						<th>Borrar</th>
+						</bold>                                  
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>				
+                                       </table>
+                                    </div>
+                                </div>
+
+
+			<!-- FIN DATATABLE -->
+
+                        </div> <!-- CIERRA BODY -->
+			<div class="modal-footer">
+
+		<textarea id="mensajesErrorModalPagosEmpresasDetalle" name="mensajesErrorModalPagosEmpresasDetalle" style="background-color: lightred; color: navy;"  rows="1" cols="60" placeholder="Mensajes..."  wrap="hard"></textarea>			
+	  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar   </button>
+                      
+			    </div> <!-- CIERRA FOOTER -->			
+                        </div> <!-- CIERRA MODAL CONTENTE -->
+                    </div> <!-- CIERRA MODAL DIALOG -->
+                </div>  <!-- CIERRA MODAL FADE -->
+
+     <!-- FIN Espacio Modales  EmpresasDetalle-->
+
+
 
 
         </article>
@@ -440,6 +535,7 @@ function RefrescarPantalla() {
 </div>
 
 {% endblock %}
+
 
 
 

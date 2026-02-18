@@ -29,6 +29,11 @@ import json
 import datetime
 import cgi
 from django.db import transaction
+import os
+from django.http import FileResponse
+from io import BytesIO
+import io
+
 
 
 class PDFDespacho(FPDF):
@@ -45,7 +50,7 @@ class PDFDespacho(FPDF):
         # Logo
         self.image('C:/EntornosPython/pos7Particionado/vulner/static/img/MedicalFinal.jpg', 180 ,20, 10 , 10)
         # Arial bold 15
-        self.set_font('Times', 'B', 7)
+        self.set_font('Sans Serif', 'B', 7)
 
         # Move to the right
         # self.cell(12)
@@ -104,59 +109,60 @@ class PDFDespacho(FPDF):
 
         self.rect(10.0, 15.0, 195.0, 265.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
-        self.cell(195, 1, 'CLINICA MEDICAL', 0, 0, 'C')
+        self.set_font('Sans Serif', 'B', 7)
+        self.cell(195, 10, 'CLINICA MEDICAL', 0, 0, 'C')
         self.ln(3)
-        self.cell(195, 1, 'DESPACHO', 0, 0, 'C')
+        self.cell(195, 10, 'DESPACHO', 0, 0, 'C')
         self.ln(2)
         self.set_line_width(0.5)
         self.rect(10.0, 15.0, 195.0, 20)  # Coordenadas x, y, ancho, alto
 
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 11, 'PACIENTE: ', 0, 0, 'L')
-        self.set_font('Times', '', 7)
+        self.set_font('Sans Serif', 'B', 8)
+        self.cell(25, 10, 'PACIENTE: ', 0, 0, 'L')
+        self.set_font('Sans Serif', '', 8)
 
-        self.cell(25, 11, historia[0]['tipnombre'], 0, 0, 'L')
-        self.cell(25, 11, historia[0]['documentoPaciente'], 0, 0, 'L')
-        self.cell(25, 11, historia[0]['nombre'], 0, 0, 'L')
+        self.cell(25, 10, historia[0]['tipnombre'], 0, 0, 'L')
+        self.cell(25, 10, historia[0]['documentoPaciente'], 0, 0, 'L')
+        self.cell(25, 10, historia[0]['nombre'], 0, 0, 'L')
         self.ln(1)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 16, 'EDAD:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 16, historia[0]['edad'], 0, 0, 'L')
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 16, 'GENERO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 16, historia[0]['genero'], 0, 0, 'L')
+        self.set_font('Sans Serif', 'B', 8)
+        self.cell(25, 10, 'EDAD:', 0, 0, 'L')
+        self.set_font('Sans Serif', '', 8)
+        self.cell(50, 10, historia[0]['edad'], 0, 0, 'L')
+        self.set_font('Sans Serif', 'B', 8)
+        self.cell(25, 10, 'GENERO:', 0, 0, 'L')
+        self.set_font('Sans Serif', '', 7)
+        self.cell(50, 10, historia[0]['genero'], 0, 0, 'L')
         self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 18, 'REGIMEN:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(50, 18, str(historia[0]['regimen']), 0, 0, 'L')
+        self.set_font('Sans Serif', 'B', 8)
+        self.cell(25, 10, 'REGIMEN:', 0, 0, 'L')
+        self.set_font('Sans Serif', '', 8)
+        self.cell(50, 10, str(historia[0]['regimen']), 0, 0, 'L')
         self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 20, 'CONVENIO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(25, 20, str(historia[0]['convenio']), 0, 0, 'L')
+        self.set_font('Sans Serif', 'B', 8)
+        self.cell(25, 10, 'CONVENIO:', 0, 0, 'L')
+        self.set_font('Sans Serif', '', 8)
+        self.cell(25, 10, str(historia[0]['convenio']), 0, 0, 'L')
         self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 21, 'SERVICIO:', 0, 0, 'L')
-        self.set_font('Times', '', 7)
-        self.cell(25, 21, str(historia[0]['servicio']), 0, 0, 'L')
+        self.set_font('Sans Serif', 'B', 8)
+        self.cell(25, 10, 'SERVICIO:', 0, 0, 'L')
+        self.set_font('Sans Serif', '', 8)
+        self.cell(25, 10, str(historia[0]['servicio']), 0, 0, 'L')
         self.ln(2)
-        self.set_font('Times', 'B', 7)
-        self.cell(25, 23, 'FECHA:', 0, 0, 'L')
-        self.cell(25, 23, historia[0]['fecha'], 0, 0, 'L')
+        self.set_font('Sans Serif', 'B', 8)
+        self.cell(25, 10, 'FECHA:', 0, 0, 'L')
+        self.cell(25, 10, historia[0]['fecha'], 0, 0, 'L')
 
         # Line break
-        self.ln(14)
+        self.ln(7)
 
     # Page footer
     def footer(self):
         # Position at 1.5 cm from bottom
         self.set_y(-30)
         # Arial italic 8
-        self.set_font('Times', 'B', 7)
-        self.cell(180, 5, 'MEDICO ORDENA', 0, 0, 'C')
+        self.set_font('Sans Serif', 'B', 8)
+        #self.cell(180, 10, 'MEDICO ORDENA', 0, 0, 'C')
         self.ln(4)
 
         miConexionii = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
@@ -179,30 +185,42 @@ class PDFDespacho(FPDF):
         self.set_line_width(0.4)
         self.rect(10, 265.0, 195.0, 15.0)  # Coordenadas x, y, ancho, alto
 
+        self.set_font('Sans Serif', 'B', 8)
         print('registro =', registro)
-        self.cell(15, 7, 'Entrega Por:', 0, 0, 'L')
-        self.cell(25, 7, '' + str(registro[0]['entrega']), 0, 0, 'L')
+        self.cell(15, 10, 'Entrega Por:', 0, 0, 'L')
+        self.set_font('Sans Serif', '', 8)
+        self.cell(25, 10, '' + str(registro[0]['entrega']), 0, 0, 'L')
+
 
         self.ln(2)
-        self.cell(100, 9, 'Recibe', 0, 0, 'L')
-        self.cell(25, 9, '' + str(registro[0]['recibe']), 0, 0, 'L')
-        self.set_font('Times', 'I', 8)
+        self.set_font('Sans Serif', 'B', 8)
+        self.cell(100, 10, 'Recibe', 0, 0, 'L')
+        self.set_font('Sans Serif', '', 8)
+        self.cell(25, 10, '' + str(registro[0]['recibe']), 0, 0, 'L')
+        self.set_font('Sans Serif', '', 8)
         # Page number
         #self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
 
 
+def ImprimirDespacho(request):
 
-
-def ImprimirDespacho(farmaciaId, despachoId):
     # Instantiation of inherited class
 
     print("Entre ImprimirDespacho " , farmaciaId)
-    print("Entre Despacho  ", despachoId)
+
+    farmaciaId = request.POST['farmaciaId']
+    print("farmaciaId =", farmaciaId)
+
+    despachoId = request.POST['despachoId']
+    print("despachoId =", despachoId)
 
     farmacia = Farmacia.objects.get(id=farmaciaId)
     historia = Historia.objects.get(id=farmacia.historia_id)
-    #farmaciaDetalle = FarmaciaDetalle.objects.filter(farmaciaDetalle_id=farmaciaDetalleId).first
 
+    print("historia =", historia)
+    print("farmacia =", farmacia)
+
+    #farmaciaDetalle = FarmaciaDetalle.objects.filter(farmaciaDetalle_id=farmaciaDetalleId).first
 
     try:
         with transaction.atomic():
@@ -234,7 +252,7 @@ def ImprimirDespacho(farmaciaId, despachoId):
     pdf.alias_nb_pages()
     pdf.set_margins(left=10, top=5, right=5)
     pdf.add_page()
-    pdf.set_font('Times', '', 8)
+    pdf.set_font('Sans Serif', '', 8)
     pdf.ln(7)
     linea = 7
 
@@ -265,25 +283,21 @@ def ImprimirDespacho(farmaciaId, despachoId):
     if (despacho != []):
         linea = linea + 2
         pdf.ln(2)
-        pdf.set_font('Times', 'B', 8)
-        pdf.cell(180, 1, 'DESPACHO', 0, 0, 'C')
-        pdf.set_font('Times', '', 8)
-        linea = linea + 3
+        pdf.set_font('Sans Serif', 'B', 8)
+        pdf.cell(180, 10, 'DESPACHO', 0, 0, 'C')
+        pdf.set_font('Sans Serif', '', 8)
         pdf.ln(4)
 
     for l in range(0, len(despacho)):
-        self.cell(25, 11, despacho[0]['despacho'], 0, 0, 'L')
-        self.cell(25, 11, despacho[0]['item'], 0, 0, 'L')
-        self.cell(25, 11, despacho[0]['dosis'], 0, 0, 'L')
-        self.cell(25, 11, despacho[0]['dosisUnidad'], 0, 0, 'L')
-        self.cell(25, 11, despacho[0]['descripcion'], 0, 0, 'L')
-        self.cell(25, 11, despacho[0]['cums'], 0, 0, 'L')
+        self.cell(25, 10, despacho[0]['despacho'], 0, 0, 'L')
+        self.cell(25, 10, despacho[0]['item'], 0, 0, 'L')
+        self.cell(25, 10, despacho[0]['dosis'], 0, 0, 'L')
+        self.cell(25, 10, despacho[0]['dosisUnidad'], 0, 0, 'L')
+        self.cell(25, 10, despacho[0]['descripcion'], 0, 0, 'L')
+        self.cell(25, 10, despacho[0]['cums'], 0, 0, 'L')
         suministro=str(despacho[0 + l]['suministro'])
-        pdf.multi_cell(w=0, h=4, txt=suministro, border=0, align='J', fill=False)
-        self.cell(25, 11, despacho[0]['cantidad'], 0, 0, 'L')
-
-
-        linea = linea + 4
+        pdf.multi_cell(w=0, h=3, txt=suministro, border=0, align='J', fill=False)
+        self.cell(25, 10, despacho[0]['cantidad'], 0, 0, 'L')
         pdf.ln(4)
 
     carpeta = 'C:\\EntornosPython\\pos7Particionado\\vulner\\JSONCLINICA\\Despachos\\'
@@ -296,7 +310,30 @@ def ImprimirDespacho(farmaciaId, despachoId):
     try:
         # Intenta abrir el archivo directamente
         pdf.output(archivo, 'F')
-        webbrowser.open(archivo)
+
+        buff = BytesIO()
+        buff.name = archivo
+        #Genera el archivo el el servidor
+
+        pdf.output(archivo, 'F')
+
+
+        # 2. Abrir el archivo PDF y leerlo
+        with open(archivo, 'rb') as f:
+            pdf_data = f.read()
+            # 3. Escribir los datos en el buffer
+            buff.write(pdf_data)
+
+        buff.seek(0)
+
+        return FileResponse(
+            buff,
+            as_attachment=True,  # Cambiar a False para verlo en navegador
+            filename=archivo,
+            content_type='application/pdf'
+        )
+
+
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
     except Exception as e:
@@ -307,4 +344,3 @@ def ImprimirDespacho(farmaciaId, despachoId):
 
 
     return JsonResponse({'success': True, 'message': 'Orden De COntrol impresa!'})
-

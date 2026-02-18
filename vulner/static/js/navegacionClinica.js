@@ -873,7 +873,7 @@ function tableActionsLaboratorios() {
 			  btn = btn + " <button class='btn btn-danger deletePostLaboratorio' >" + '<i class="fa fa-trash"></i>' + "</button>";
                         return btn;
                     },
-                    "targets": 4
+                    "targets": 5
                }
             ],
         lengthMenu: [5],
@@ -883,7 +883,7 @@ function tableActionsLaboratorios() {
         { visible: true },
         { visible: true },
         { visible: true },
-        { visible: true },
+
             ],
     });
 }
@@ -1914,15 +1914,35 @@ formHistoriaClinica.addEventListener('submit', e=>{
 				   },
  	      		success: function (data) {
 
-			data.archivos.forEach(ids => {
-	
-	
+				alert("llegue del AJAX1 " + JSON.stringify(data.archivos));
 
-			//const url='/obtener_pdf/?file_id=51017_162Laboratorio';
-			//var blob = new Blob([url], { type: 'application/pdf' });
-		        //var link = window.URL.createObjectURL(blob);
-		        //window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
-			//alert("A Post cargar : " + url);
+			data.archivos.forEach(ids => {
+				alert ( "entre en el FOR = " + ids);
+		
+//		            $.ajax({                
+//			        url: "/obtener_pdf/",
+//				data:{'file_id':ids},
+//		                 method: 'POST',
+//   				 xhrFields: {
+//				        responseType: 'blob' // Importante: interpreta la respuesta como binario
+//				    },
+//		                success: function (data2) {
+			// alert("llegue del AJAX2 DE IMPRESION" + JSON.stringify(data2));
+				var blob = new Blob([data.archivos.blob], { type: 'application/pdf' });
+			        var link = window.URL.createObjectURL(blob);
+
+				alert("voy a abrir la ventana # = " + ids);
+
+			        window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
+//
+				alert("ya abri la ventana # = " + ids);
+//
+//
+//		                },
+//				  error: function (data2) {
+//		   			    	document.getElementById("mensajesError").value =   data2.responseText;
+//			   	    	}
+//		            });
 
 			});
                

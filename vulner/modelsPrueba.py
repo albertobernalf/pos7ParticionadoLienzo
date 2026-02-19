@@ -1096,3 +1096,4 @@ FEB 16:
 	cuando interpreta un examen, debe blanquear la plantilla  hacer quiery a los ordenados al primero que quede en pantalla
 	La elaboracion de factura debe imprimir la factura OJO
 
+	se trabajo con farmacia, cartera , clinico

@@ -31,7 +31,7 @@ from rips.models  import RipsMedicamentos, RipsConsultas, RipsProcedimientos, Ri
 import pickle
 from django.db import transaction, IntegrityError
 from django.db.models import Sum
-
+from django.db import transaction, IntegrityError
 
 # Function to convert dictionary keys and values
 def convert_keys_and_values(d):
@@ -2284,8 +2284,6 @@ def GuardarPagosEmpresas(request):
             miConexion3.close()
 
 
-
-
 def Load_dataPagosEmpresasDetalle(request, data):
 
     print("Entre Load_dataPagosEmpresasDetalle")
@@ -2336,7 +2334,7 @@ def GuardarPagosEmpresasDetalle(request):
     valorPagoDetalle= request.POST["valorPagoDetalle"]
     print("valorPagoDetalle =", valorPagoDetalle)
 
-    facturaPago= request.POST["facturaPago"]
+    facturaPago = request.POST["facturaPago"]
     print("facturaPago =", facturaPago)
 
     radicadoPago= request.POST['radicadoPagoMuestra']
@@ -2356,6 +2354,33 @@ def GuardarPagosEmpresasDetalle(request):
     fechaRegistro = timezone.now()
     print("fechaRegistro", fechaRegistro)	
 
+    # Validaciones
+
+    try:
+        print("paso_00")
+        with transaction.atomic():
+            print("paso_0111")
+
+            facturaId = Facturacion.objects.get(id=facturaPago)
+            print("paso_01")
+            if (facturaId.totalFactura > int(valorPagoDetalle)):
+                print("paso_02")
+                return JsonResponse({'success': False, 'Mensaje': 'Pago mayor que el valor de la Factura'})
+
+
+    except Exception as e:
+        # Aquí ya se hizo rollback automáticamente
+        print("Se hizo rollback por PRONO SE HACE NADA:", e)
+        print ("Entre exception")
+        #return JsonResponse({'success': False, 'Mensaje': e})
+        return JsonResponse({'success': False, 'Mensajes': 'Factura No existe'})
+
+    finally:
+        print ("entre finally")
+        pass
+
+    print("paso_03")
+
     miConexion3 = None
     try:
 
@@ -2363,10 +2388,21 @@ def GuardarPagosEmpresasDetalle(request):
         cur3 = miConexion3.cursor()
 
         print ("armo comando")
-        comando = 'INSERT INTO cartera_pagosempresasDetalle (valor,"fechaRegistro", "estadoReg", factura_id, "pagosEmpresas_id" ,"radicadoFactura" , "serviciosAdministrativos_id") VALUES ( ' + "'" + str(valorPagoDetalle) + "','" + str(fechaRegistro) + "','A','" + str(facturaPago) + "','" + str(empresaPagoMuestra) + "','" + str(radicadoPago) + "','" +  str(serviciosAdministrativos) + "')"
+        comando = 'INSERT INTO cartera_pagosempresasDetalle (valor,"fechaRegistro", "estadoReg", factura_id, "pagosEmpresas_id" ,"radicadoFactura" , "serviciosAdministrativos_id") VALUES ( ' + "'" + str(valorPagoDetalle) + "','" + str(fechaRegistro) + "','A','" + str(facturaPago) + "','" + str(empresaPagoMuestra) + "','" + str(radicadoPago) + "','" +  str(serviciosAdministrativos) + "');"
 
         print(comando)
         cur3.execute(comando)
+
+        comando = 'UPDATE cartera_cartera cartera SET pagos = pagos + ' + str(valorPagoDetalle) + ' WHERE cartera.factura_id = ' + "'" + str(facturaPago) + "'"
+
+        print(comando)
+        cur3.execute(comando)
+
+        comando = 'UPDATE cartera_cartera cartera SET saldo = valor - pagos  WHERE cartera.factura_id = ' + "'" + str(facturaPago) + "'"
+
+        print(comando)
+        cur3.execute(comando)
+
 
         miConexion3.commit()
         cur3.close()
@@ -2387,3 +2423,52 @@ def GuardarPagosEmpresasDetalle(request):
         if miConexion3:
             cur3.close()
             miConexion3.close()
+
+
+
+
+def Load_dataCarteraDetalle(request, data):
+
+    print("Entre Load_dataCarteraDetalle")
+
+    context = {}
+    print("aqui01")
+    d = json.loads(data)
+
+    print("aqui02")
+
+    sede = d['sedesClinica_id']
+    print("sedesClinica_id = ", sede)
+
+    facturaId = d['facturaId']
+    print("facturaId = ", facturaId)
+
+    carteraDetalle = []
+
+    print ("carteraDetalle carteraDetalle = ")
+
+    miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres", password="123456")
+
+    curx = miConexionx.cursor()
+
+    print ("antesde detalle = ")
+
+    comando = 'select car.id id, emp.nombre nombreEmpresa,  pagosEmp.id pagoId, pagosEmp.fecha,car.factura_id factura,car.valor,car.pagos,car.saldo FROM  cartera_cartera car  LEFT JOIN cartera_pagosempresasdetalle pagDet ON (pagDet.factura_id = car.factura_id) LEFT JOIN cartera_pagosempresas pagosEmp ON (pagosEmp.id = pagDet."pagosEmpresas_id")  INNER JOIN facturacion_empresas emp on (emp.id=car.empresa_id) WHERE car."sedesClinica_id" = ' + "'" + str(sede) + "' AND pagDet.factura_id = " + "'" + str(facturaId) + "'"
+
+    print ("comando = ", comando)
+
+    curx.execute(comando)
+
+    for id, nombreEmpresa, pagoId, fecha, factura, valor, pagos, saldo  in curx.fetchall():
+        carteraDetalle.append(
+            {"model": "cartera.pagosEmpresasDetalle", "pk": id, "fields":
+                {'id': id, 'nombreEmpresa': nombreEmpresa , 'pagoId':pagoId, 'fecha':fecha , 'factura':factura, 'valor':valor, 'pagos':pagos, 'saldo':saldo}})
+
+
+    miConexionx.close()
+    print("carteraDetalle "  , carteraDetalle )
+
+    serialized1 = json.dumps(carteraDetalle , default=str)
+
+    return HttpResponse(serialized1, content_type='application/json')
+

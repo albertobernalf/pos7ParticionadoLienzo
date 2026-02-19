@@ -1407,19 +1407,15 @@ $('#tablaDespachosFarmacia tbody').on('click', '.miDespachoFarmacia2', function(
   });
 
 $('#tablaDespachosFarmacia tbody').on('click', '.miImprimirDespacho', function() {
-
 		  alert("ENTRE miImprimirDespacho ");
 	      var post_id = $(this).data('pk');
 		var despachoId =   post_id;
 		var farmaciaId = document.getElementById("farmaciaId").value;
 		alert("voy ajax con farmaciaId = " + farmaciaId);
 		alert("voy ajax con despachoId = " + despachoId);
-
-
-
 $.ajax({
-    url: '/imprimirDespacho/',
- 		data: {'farmaciaId':farmaciaId, 'despachoId':despachoId},
+ 	data: {farmaciaId:farmaciaId, despachoId:despachoId},
+	url: "/imprimirDespachoFarmacia/",
     method: 'POST',
     xhrFields: {
         responseType: 'blob' // Importante: interpreta la respuesta como binario
@@ -1434,7 +1430,6 @@ $.ajax({
       document.getElementById("mensajesError").value =  data.responseText
     }
 });
-
   });
 
 

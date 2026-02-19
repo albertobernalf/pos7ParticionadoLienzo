@@ -2529,13 +2529,11 @@ def ImprimirOrdenIncapacidad(ingresoId2, historiaId,convenioId , tipoAdmision):
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + str(historiaId) + 'Incapacidad.pdf'
     print ("archivo =" , archivo)
 
-    #pdf.output('C:\EntornosPython\pos7Particionado/vulner/JSONCLINICA\HistoriasClinicas/hClinica.pdf', 'F')
-
 
     try:
         # Intenta abrir el archivo directamente
         pdf.output(archivo, 'F')
-        webbrowser.open(archivo)
+        #webbrowser.open(archivo)
 
         return archivo
 
@@ -2645,7 +2643,7 @@ def ImprimirOrdenTerapia(ingresoId2, historiaId, convenioId, tipoAdmision):
     try:
         # Intenta abrir el archivo directamente
         pdf.output(archivo, 'F')
-        webbrowser.open(archivo)
+        #webbrowser.open(archivo)
 
         return archivo
 
@@ -2748,7 +2746,7 @@ def ImprimirOrdenLaboratorio(ingresoId2, historiaId, convenioId, tipoAdmision):
         # Intenta abrir el archivo directamente
         pdf.output(archivo, 'F')
         print ("ACABE DE VREAR EL ARCHIVO")
-        webbrowser.open(archivo)
+        #webbrowser.open(archivo)
 
         #buff = BytesIO()
         #buff.name = archivo
@@ -2863,12 +2861,10 @@ def ImprimirOrdenRadiologia(ingresoId2, historiaId, convenioId, tipoAdmision):
     archivo = carpeta + '' + str(pacienteId.documento)+ '_' + str(historiaId)  + 'Radiologia.pdf'
     print ("archivo =" , archivo)
 
-
-
     try:
         # Intenta abrir el archivo directamente
         pdf.output(archivo, 'F')
-        webbrowser.open(archivo)
+        #webbrowser.open(archivo)
 
         return archivo
 
@@ -2977,12 +2973,10 @@ def ImprimirOrdenMedicamentos(ingresoId2, historiaId, convenioId, tipoAdmision):
     archivo = carpeta + '' + str(pacienteId.documento) + '_' + str(historiaId) + 'Medicamentos.pdf'
     print ("archivo =" , archivo)
 
-
-
     try:
         # Intenta abrir el archivo directamente
         pdf.output(archivo, 'F')
-        webbrowser.open(archivo)
+        #webbrowser.open(archivo)
 
         return archivo
 
@@ -3085,7 +3079,7 @@ def ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision):
     try:
         # Intenta abrir el archivo directamente
         pdf.output(archivo, 'F')
-        webbrowser.open(archivo)
+        #webbrowser.open(archivo)
 
         buff = BytesIO()
         buff.name = archivo
@@ -3102,22 +3096,9 @@ def ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision):
 
         #return buff
         #
-        devuelvo = {}
-        devuelvo['nombre'] = archivo
-        devuelvo['blob'] = buff
-        print("devuelvo = " + devuelvo)
 
-        return devuelvo
+        return archivo
 
-
-        #return JsonResponse({'success': True, 'archivo': buff})
-        #return HttpResponse(buff, content_type='application/json')
-        #return FileResponse(
-        #    buff,
-        ##    as_attachment=False,  # Cambiar a False para verlo en navegador
-        #    filename=archivo,
-        #    content_type='application/pdf'
-        #)
 
     except FileNotFoundError:
         print(f"Error: Archivo no encontrado en {archivo}")
@@ -3129,5 +3110,4 @@ def ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision):
 
 
     return JsonResponse({'success': True, 'message': 'Orden De COntrol impresa!','archivo':archivo})
-    #return JsonResponse({'success': True,'archivo':archivo})
 

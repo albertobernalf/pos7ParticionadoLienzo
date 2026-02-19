@@ -11,6 +11,7 @@ let dataTableH;
 
 let dataTableCajaInitialized = false;
 let dataTableCarteraInitialized = false;
+let dataTableCarteraDetalleInitialized = false;
 let dataTablePagosEmpresasInitialized = false;
 let dataTablePagosEmpresasDetalleInitialized = false;
 
@@ -228,7 +229,7 @@ function arrancaCartera(valorTabla,valorData)
 		{
 		  "render": function ( data, type, row ) {
                         var btn = '';
-        		     btn = btn + " <input type='radio' name='cartera' class='miCaja form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
+        		     btn = btn + " <input type='radio' name='cartera' class='miCartera form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
                        return btn;
                     },
 		},
@@ -436,6 +437,100 @@ function arrancaCartera(valorTabla,valorData)
 	        dataTable = $('#tablaPagosEmpresasDetalle').DataTable(dataTableOptionsPagosEmpresasDetalle);
   }
 
+
+
+    if (valorTabla == 5)
+    {
+        alert("entre options");
+
+
+        let dataTableOptionsCarteraDetalle  ={
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
+
+  buttons: [
+    {
+      extend: 'excelHtml5',
+      text: '<i class="fas fa-file-excel"></i> ',
+      titleAttr: 'Exportar a Excel',
+      className: 'btn btn-success',
+    },
+    {
+      extend: 'pdfHtml5',
+      text: '<i class="fas fa-file-pdf"></i> ',
+      titleAttr: 'Exportar a PDF',
+      className: 'btn btn-danger',
+    },
+    {
+      extend: 'print',
+      text: '<i class="fa fa-print"></i> ',
+      titleAttr: 'Imprimir',
+      className: 'btn btn-info',
+    },
+  ],
+  lengthMenu: [2, 4, 15],
+           processing: true,
+            serverSide: false,
+            scrollY: '275px',
+	    scrollX: true,
+	    scrollCollapse: true,
+            paging:false,
+            columnDefs: [
+		{ className: 'centered', targets: [0, 1, 2, 3, 4, 5] },
+	    { width: '10%', targets: [2,3] },
+
+		{   
+                    "targets": 8
+               }
+            ],
+	 pageLength: 3,
+	  destroy: true,
+	  language: {
+		    processing: 'Procesando...',
+		    lengthMenu: 'Mostrar _MENU_ registros',
+		    zeroRecords: 'No se encontraron resultados',
+		    emptyTable: 'Ningún dato disponible en esta tabla',
+		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
+		    infoThousands: ',',
+		    loadingRecords: 'Cargando...',
+		    paginate: {
+			      first: 'Primero',
+			      last: 'Último',
+			      next: 'Siguiente',
+			      previous: 'Anterior',
+		    }
+			},
+           ajax: {
+                 url:"/load_dataCarteraDetalle/" +  data,
+                 type: "POST",
+                 dataSrc: ""
+            },
+            columns: [
+		{
+		  "render": function ( data, type, row ) {
+                        var btn = '';
+        		     btn = btn + " <input type='radio' name='editarCarteraDetalle1' style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;' class='editarCarteraDetalle form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
+                       return btn;
+                    },
+		},
+                { data: "fields.id"},
+                { data: "fields.nombreEmpresa"},
+                { data: "fields.pagoId"},
+                { data: "fields.fecha"},
+                { data: "fields.factura"},
+                { data: "fields.valor"},
+                { data: "fields.pagos"},
+                { data: "fields.saldo"},
+       ]
+            }
+                    alert("entre options2");
+	        dataTable = $('#tablaCarteraDetalle').DataTable(dataTableOptionsCarteraDetalle);
+  }
+
+
 }
 
 const initDataTableCaja = async () => {
@@ -476,6 +571,7 @@ const initDataTableCaja = async () => {
 
      arrancaCartera(4,data);
 	   dataTablePagosEmpresasDetalleInitialized = true;
+	alert("ya cargue la tabla");
 
 }
 
@@ -756,13 +852,13 @@ function GuardarPagosEmpresasDetalle()
 			 }
 			else
 			{
-			document.getElementById("mensajesErrorModalPagosEmpresas").value = data2.Mensajes;
+			document.getElementById("mensajesErrorModalPagosEmpresasDetalle").value = data2.Mensajes;
 			return;
 			}
 
 		var data =  {}   ;
 	        data['username'] = username;
-		data['username_id'] = username_id;
+    		data['username_id'] = username_id;
 	        data['sedeSeleccionada'] = sedeSeleccionada;
 	        data['nombreSede'] = nombreSede;
 	        data['sede'] = sede;
@@ -773,12 +869,56 @@ function GuardarPagosEmpresasDetalle()
 
 	        data = JSON.stringify(data);
 
-		 arrancaCartera(4,data);
+		     arrancaCartera(5,data);
 	         dataTablePagosEmpresasDetalleInitialized = true;
+
                 },
+
             error: function (data) {
-            	document.getElementById("mensajesErrorModalPagosEmpresas").value =  data.responseText;
+            	document.getElementById("mensajesErrorModalPagosEmpresasDetalle").value =  data.responseText;
 
 	   	    	}
             });
 }
+
+ $('#tablaCartera tbody').on('click', '.miCartera', function() {
+
+        var post_id = $(this).data('pk');
+
+
+
+	    		var table = $('#tablaCartera').DataTable();  // Inicializa el DataTable jquery
+	var row = $(this).closest('tr'); // Encuentra la fila
+  	        var rowindex = table.row(row).data(); // Obtiene los datos de la fila
+
+	        console.log(" fila selecciona de vuelta AQUI PUEDE ESTAR EL PROBLEMA = " ,  table.row(row).data());
+	        dato1 = Object.values(rowindex);
+		console.log(" fila seleccionad d evuelta dato1 = ",  dato1);
+	        dato3 = dato1[2];
+		console.log(" fila selecciona de vuelta dato3 = ",  dato3);
+	        console.log ( "dato pago = " , dato3.factura);
+        var facturaId = dato3.factura;
+        alert("entre cartera con FACTURA " + facturaId);
+
+
+        var data =  {}   ;
+     	var sedeSeleccionada = document.getElementById("sedeSeleccionada").value;
+        var username = document.getElementById("username").value;
+        var nombreSede = document.getElementById("nombreSede").value;
+    	var sede = document.getElementById("sede").value;
+        var username_id = document.getElementById("username_id").value;
+
+        alert("pase01");
+        data['username'] = username;
+        data['sedeSeleccionada'] = sedeSeleccionada;
+        data['nombreSede'] = nombreSede;
+        data['sede'] = sede;
+        data['username_id'] = username_id;
+	    data['sedesClinica_id'] = sede;
+	    data['facturaId'] = facturaId;
+            data = JSON.stringify(data);
+
+        		 arrancaCartera(5,data);
+	         dataTableCarteraDetalleInitialized = true;
+	         alert("despúes del cargue");
+  });

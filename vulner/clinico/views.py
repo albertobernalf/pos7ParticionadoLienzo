@@ -70,7 +70,8 @@ import base64
 import zipfile
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
-
+from django.conf import settings
+import base64
 
 # Create your views here.
 
@@ -2441,9 +2442,9 @@ def crearHistoriaClinica(request):
                 base1 ='file:\\175.16.0.100/HistoriasClinicas/'
                 base ='file:\\175.16.0.100/HistoriasClinicas/'
 
-
-                filesImprimir = []
-                print ("filesImprimir ANTES DE  = " , filesImprimir)
+                nombres_archivos = []
+                archivos_blob = []
+                print ("nombres_archivos  = " , nombres_archivos)
               
 
                 if (ordenDeControl != ''):
@@ -2451,7 +2452,7 @@ def crearHistoriaClinica(request):
                     print("Entre imprimir orden de control")
                     ingresoId2=ingresosPaciente.id
                     archivoOrdenDeControl = ImprimirOrdenDeControl(ingresoId2, historiaId, convenioId, tipoAdmision)
-                    filesImprimir.append(archivoOrdenDeControl)
+                    nombres_archivos.append(archivoOrdenDeControl)
                     print("sali imprimir orden de control", archivoOrdenDeControl)
 
 
@@ -2460,7 +2461,7 @@ def crearHistoriaClinica(request):
 
                     ingresoId2=ingresosPaciente.id
                     archivoOrdenDeLaboratorio = ImprimirOrdenLaboratorio(ingresoId2, historiaId, convenioId, tipoAdmision)
-                    print("Regrese de generar laboratrios")
+                    nombres_archivos.append(archivoOrdenDeLaboratorio)
                     print("sali imprimir orden de laboratorio", archivoOrdenDeLaboratorio)
 
                 else:
@@ -2472,7 +2473,7 @@ def crearHistoriaClinica(request):
                     print("Encontre ordenes de radiologia")
                     ingresoId2 = ingresosPaciente.id
                     archivoOrdenDeRadiologia = ImprimirOrdenRadiologia(ingresoId2, historiaId, convenioId, tipoAdmision)
-                    filesImprimir.append(archivoOrdenDeRadiologia)
+                    nombres_archivos.append(archivoOrdenDeRadiologia)
                 else:
                     print("No Encontre ordenes de radiologia")
                     print("No Encontre ordenes de radiologia")
@@ -2482,7 +2483,7 @@ def crearHistoriaClinica(request):
                     print("Encontre ordenes de terapias")
                     ingresoId2 = ingresosPaciente.id
                     archivoOrdenDeTerapia = ImprimirOrdenTerapia(ingresoId2, historiaId, convenioId, tipoAdmision)
-                    filesImprimir.append(archivoOrdenDeTerapia)
+                    nombres_archivos.append(archivoOrdenDeTerapia)
                 else:
                     print("No Encontre ordenes de terapias")
                     print("No Encontre ordenes de terapias")
@@ -2491,32 +2492,40 @@ def crearHistoriaClinica(request):
                    print("Entre imprimir Medicamentos")
                    ingresoId2 = ingresosPaciente.id
                    archivoOrdenDeMedicamentos = ImprimirOrdenMedicamentos(ingresoId2, historiaId, convenioId, tipoAdmision)
-                   filesImprimir.append(archivoOrdenDeMedicamentos)
+                   nombres_archivos.append(archivoOrdenDeMedicamentos)
 
                 if conteoInca >= 2:
                    print("Entre imprimir Incapacidades")
                    ingresoId2 = ingresosPaciente.id
                    archivoOrdenDeIncapacidad = ImprimirOrdenIncapacidad(ingresoId2, historiaId, convenioId, tipoAdmision)
-                   filesImprimir.append(archivoOrdenDeIncapacidad)
-
-                #return JsonResponse({'success': True, 'Mensaje': 'Folio Actualizado !'})
-                #
+                   nombres_archivos.append(archivoOrdenDeIncapacidad)
 
 
-                print("filesImprimir DESPUES  DE  = ", filesImprimir)
-                print ("filesImprimir = " , filesImprimir)
+                print ("nombres_archivos = " , nombres_archivos)
+                for nombre in nombres_archivos:
+                    ruta_archivo = os.path.join(settings.MEDIA_ROOT, nombre)
 
-                print ("Me devuelvo ajax ULTIMO")
+                    #if os.path.exists(nombres_archivos):
+                    print("aquitoy01")
+                    with open(ruta_archivo, 'rb') as f:
+                            # Leer binario -> Base64 -> String UTF-8
+                            print("aquitoy02")
 
-                return JsonResponse({'archivos':filesImprimir, 'success': True})
+                            print("aquitoy019")
+                            contenido_base64 = base64.b64encode(f.read()).decode('utf-8')
+                            print("aquitoy02")
+                            # Identificar el tipo de contenido (opcional pero recomendado)
+                            ext = nombre.split('.')[-1]
+                            print("aquitoy03")
+                            archivos_blob.append({
+                                'nombre': nombre,
+                               'contenido': contenido_base64,
+                                'tipo': f'image/{ext}' if ext in ['jpg', 'png'] else 'application/pdf'
+                            })
 
-                #return FileResponse(
-	            #archivoOrdenDeControl,
-	            #as_attachment=False,  # Cambiar a False para verlo en navegador
-	            #filename='EsunaPrueba.pdf',
-	            #content_type='application/pdf'
-	            #)
+                print("a ENVIAR =",archivos_blob )
 
+                return JsonResponse({'archivos': archivos_blob, 'success': True}, safe=True)
 
     if request.method == "POST":
 

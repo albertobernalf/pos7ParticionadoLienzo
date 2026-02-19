@@ -15,7 +15,7 @@
     <ul class="tabs">
    <li><a href="#Caja"><span class="fa-solid fa-user-doctor-message"></span> <span   class="tab-text"> </span> Caja</a></li>
         <li><a href="#Cartera"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Cartera</a></li>   
-        <li><a href="#Pagos"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Pagos Factura</a></li>   
+        <li><a href="#CarteraDetalle"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Pagos Factura</a></li>   
         <li><a href="#PagosEmpresas"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Pagos Empresas</a></li>   
 
     </ul>
@@ -382,7 +382,7 @@ function RefrescarPantalla() {
 		<input type="text"   id="radicado" name="radicado" placeholder="radicado" ></input>
 
 		
-					 <select  id="servicioDetalle"    name="servicioDetalle"
+					 <select  id="servicio"    name="servicio"
                                                     required>
                                                 {% for serviciosAdministrativos in ServiciosAdministrativos %}
                                                 <option value="{{serviciosAdministrativos.id}}"> {{serviciosAdministrativos.nombre}}</option>
@@ -426,16 +426,20 @@ function RefrescarPantalla() {
 
   			  <form id="postFormPagosEmpresasDetalle" name="postFormPagosEmpresasDetalle">
 
-				                      <div id="flex-container-pagosEmpresasMuestarPago">
+				<input type="text" id="usernamePago_id" name="usernamePago_id" value={{Username_id}}  readonly></input>
+				<input type="text" id="sedePago" name="sedePago" value={{Sede}}  readonly></input>
+
+	                      <div id="flex-container-pagosEmpresasMuestarPago">
 				<div>
 				
-
-				<input type="text"   id="empresaPagoMuestra" name="empresaPagoMuestra" placeholder="empresaPagoMuestra"  readonly></input>
-				<input type="hidden"   id="sedePago" name="sedePago" placeholder="sedePago"  readonly></input>
-				<input type="hidden"   id="usernamePago_id" name="usernamePago_id" placeholder="usernamePago_id"  value="{{username_id}}" readonly></input>
-				<input type="text"   id="valorPagoMuestra" name="valorPagoMuestra" placeholder="valorPagoMuestra"  readonly></input>
-				<input type="text"   id="descripcionPagoMuestra" name="descripcionPagoMuestra" placeholder="descripcionPagoMuestra"   readonly></input>
-			<input type="text"   id="radicadoPagoMuestra" name="radicadoPagoMuestra" placeholder="radicadoPago"  readonly></input>
+				PagoId:
+				<input type="text" id="empresaPagoMuestra" name="empresaPagoMuestra" placeholder="empresaPagoMuestra"  readonly></input>
+				Valor Pago
+				<input type="text" id="valorPagoMuestra" name="valorPagoMuestra" placeholder="valorPagoMuestra"  readonly></input>
+				Descripcion
+				<input type="text" id="descripcionPagoMuestra" name="descripcionPagoMuestra" placeholder="descripcionPagoMuestra"   readonly></input>
+				Radicado Pago
+				<input type="text" id="radicadoPagoMuestra" name="radicadoPagoMuestra" placeholder="radicadoPago"  readonly></input>
 					
 
 				</div>
@@ -446,7 +450,6 @@ function RefrescarPantalla() {
                       <div id="flex-container-pagosEmpresasDetalle">
 				<div>
 
-	
 
 		<input type="text"   id="valorPagoDetalle" name="valorPagoDetalle" placeholder="valorPago" ></input>
 		<input type="text"   id="facturaPago" name="facturaPago" placeholder="Factura a abonar" ></input>
@@ -508,6 +511,43 @@ function RefrescarPantalla() {
 
 
         </article>
+
+<article id="CarteraDetalle">
+            <!-- INICIO TABLE DE  EL DATATABLE  -->
+ 	<div class="container my-2">          
+   			   <div class="row">
+                                        <table  id= "tablaCarteraDetalle" class=" display table table-striped table-sm fs-6 nowrap" style="width: 100%";>
+                                           <thead>
+                                            <tr>    
+						<bold>                                  
+						<th>Edita </th>
+                                                <th>id</th>
+                                                <th>Empresa</th>
+                                                <th>Pago</th>
+                                                <th>Fecha</th>
+						<th>Factura</th>
+						<th>Valor</th>
+						<th>Pagos</th>
+						<th>Saldo</th>
+						</bold>                                  
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+ 					
+                                        </table>
+                                    </div>
+                                </div>
+
+
+	            <!-- Espacio Modales  Glosas-->
+
+     <!-- FIN Espacio Modales  -->
+
+</article>
+
+
 
     
     </div>

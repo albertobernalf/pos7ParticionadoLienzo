@@ -1914,39 +1914,25 @@ formHistoriaClinica.addEventListener('submit', e=>{
 				   },
  	      		success: function (data) {
 
-				alert("llegue del AJAX1 " + JSON.stringify(data.archivos));
 
-			data.archivos.forEach(ids => {
-				alert ( "entre en el FOR = " + ids);
-		
-//		            $.ajax({                
-//			        url: "/obtener_pdf/",
-//				data:{'file_id':ids},
-//		                 method: 'POST',
-//   				 xhrFields: {
-//				        responseType: 'blob' // Importante: interpreta la respuesta como binario
-//				    },
-//		                success: function (data2) {
-			// alert("llegue del AJAX2 DE IMPRESION" + JSON.stringify(data2));
-				var blob = new Blob([data.archivos.blob], { type: 'application/pdf' });
-			        var link = window.URL.createObjectURL(blob);
+			data.archivos.forEach(archivo => {
 
-				alert("voy a abrir la ventana # = " + ids);
+				   // Crear un Blob a partir de la cadena Base64
+				      const byteCharacters = atob(archivo.contenido);
+				      const byteNumbers = new Array(byteCharacters.length);
+				      for (let i = 0; i < byteCharacters.length; i++) {
+				        byteNumbers[i] = byteCharacters.charCodeAt(i);
+					      }	
+				      const byteArray = new Uint8Array(byteNumbers);
+				      const blob = new Blob([byteArray], {type: archivo.tipo});
 
-			        window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
-//
-				alert("ya abri la ventana # = " + ids);
-//
-//
-//		                },
-//				  error: function (data2) {
-//		   			    	document.getElementById("mensajesError").value =   data2.responseText;
-//			   	    	}
-//		            });
+				      // Ejemplo: Crear un enlace de descarga o mostrar imagen
+				      const url = URL.createObjectURL(blob);
+					// var blob = new Blob([data.archivos.blob], { type: 'application/pdf' });
+				        var link = window.URL.createObjectURL(blob);
+				        window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
 
-			});
-               
-
+			});            
 
 		        if ( data.success == true)
 		            {

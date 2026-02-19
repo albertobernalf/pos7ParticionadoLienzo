@@ -361,6 +361,7 @@ urlpatterns = [
     path('guardarPagosEmpresas/', viewsCartera.GuardarPagosEmpresas, name='guardarPagos_Empresas'),
     path('guardarPagosEmpresasDetalle/', viewsCartera.GuardarPagosEmpresasDetalle, name='guardarPagos_EmpresasDetalle'),
     path('load_dataPagosEmpresasDetalle/<str:data>', viewsCartera.Load_dataPagosEmpresasDetalle, name='load_data_PagosEmpresasDetalle'),
+    path('load_dataCarteraDetalle/<str:data>', viewsCartera.Load_dataCarteraDetalle, name='loaddata_CarteraDetalle'),
 
     # Tarifas
 	
@@ -486,7 +487,8 @@ urlpatterns = [
     path('recibirDevolucionFarmacia/', viewsFarmacia.RecibirDevolucionFarmacia, name='RecibirDevolucion_Farmacia'),
     path('recibirDevolucionDetalleFarmacia/', viewsFarmacia.RecibirDevolucionDetalleFarmacia, name='RecibirDevolucionDetalle_Farmacia'),
     path('despachadoFarmaciaDetalle/', viewsFarmacia.DespachadoFarmaciaDetalle, name='despachado_FarmaciaDetalle'),
-    path('imprimirDespacho/', viewsFarmaciaReportes.ImprimirDespacho , name='Imprimir_despacho'),
+    path('imprimirDespachoFarmacia/', viewsFarmaciaReportes.ImprimirDespacho , name='Imprimir_despacho'),
+    path('imprimirDespachoFarmacia/<str:farmaciaId>, <str:despachoId', viewsFarmaciaReportes.ImprimirDespacho , name='Imprimir_despacho'),
     path('load_dataFarmaciaDetalleOrdenados/<str:data>', viewsFarmacia.Load_dataFarmaciaDetalleOrdenados, name='load_dataFarmaciaDetalleOrdenados'),
 
     #Enfermeria

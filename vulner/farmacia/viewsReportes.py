@@ -201,8 +201,7 @@ class PDFDespacho(FPDF):
         # Page number
         #self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
 
-
-def ImprimirDespacho(request):
+def ImprimirDespacho(request, farmaciaId, despachoId):
 
     # Instantiation of inherited class
 

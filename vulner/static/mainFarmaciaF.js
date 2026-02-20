@@ -1413,21 +1413,23 @@ $('#tablaDespachosFarmacia tbody').on('click', '.miImprimirDespacho', function()
 		var farmaciaId = document.getElementById("farmaciaId").value;
 		alert("voy ajax con farmaciaId = " + farmaciaId);
 		alert("voy ajax con despachoId = " + despachoId);
+
 $.ajax({
- 	data: {farmaciaId:farmaciaId, despachoId:despachoId},
+ 	data: {'farmaciaId':farmaciaId, 'despachoId':despachoId},
 	url: "/imprimirDespachoFarmacia/",
-    method: 'POST',
-    xhrFields: {
-        responseType: 'blob' // Importante: interpreta la respuesta como binario
-    },
+	method: 'POST',
+	xhrFields: {
+        	responseType: 'blob' // Importante: interpreta la respuesta como binario
+		    },
     success: function (data) {
 
         var blob = new Blob([data], { type: 'application/pdf' });
         var link = window.URL.createObjectURL(blob);
-        window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
+        window.open(link, '_blank'); // Abre el PDF en nueva pestaña 
     },
+
     error: function (error) {
-      document.getElementById("mensajesError").value =  data.responseText
+      document.getElementById("mensajesError").value =  data.responseText;
     }
 });
   });

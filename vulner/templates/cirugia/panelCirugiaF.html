@@ -58,7 +58,6 @@ function RefrescarPantalla() {
 	    dataTableSolicitudCirugiaInitialized = true;
 }
 </script>
-<input type="button" id="btnRefrescar" name="btnRefrescar" value="Refrescar" onclick="RefrescarPantalla()">
 
 
 
@@ -111,10 +110,16 @@ function RefrescarPantalla() {
 
              
 		<div align="right" height="15px" width="50px">
-               <input type="button" style="height:25px;margin-left: 0 ; margin-bottom: 0;border-top-right-radius: 0;"  size="30px" id="BtnAdicionarCirugia"  name="BtnAdicionarCirugia" value="Adicionar" onclick= "SolicitudCirugia()" >				    
+			<input type="button" id="btnRefrescar" name="btnRefrescar" value="Refrescar" onclick="RefrescarPantalla()">
+
+			 <input type="button" style="height:25px;margin-left: 0 ; margin-bottom: 0;border-top-right-radius: 0;"  size="30px" id="BtnAdicionarCirugia"  name="BtnAdicionarCirugia" value="Adicionar" onclick= "SolicitudCirugia()" >				    
+              
 		</div>
 
    			   <div class="row">
+
+
+
 				
                                         <table  id= "tablaSolicitudCirugia" class=" display table table-striped table-sm fs-6 nowrap" style="width: 100%";>
                                            <thead>
@@ -183,8 +188,8 @@ function RefrescarPantalla() {
   			  <form id="postFormSolicitudCirugia" name="postFormSolicitudCirugia">
 
                                 <input type="hidden" name="post_id" id="post_id">
-                                <input type="text" name="cirugiaId2" id="cirugiaId2">
-                                <input type="text" name="ingresoId2" id="ingresoId2">
+                                <input type="hidden" name="cirugiaId2" id="cirugiaId2">
+                                <input type="hidden" name="ingresoId2" id="ingresoId2">
 			     <input type="hidden" class="form-control" id="sedesClinica_id" name="sedesClinica_id"  readonly></input>
 
                       <div class="row row-cols-lg-auto g-3 align-items-center mb-3">
@@ -644,6 +649,20 @@ function RefrescarPantalla() {
                                         </div>
 
 
+
+			<div class="col-3">
+                                        <label for="tipoHonorarios" class="col-sm-1 control-label">TipoHonorarios:</label>
+                                        <div class="col-sm-8">
+                                            <select class="select-css h-40 w-20" id="tipoHonorarios"  tabindex= "0"  name="tipoHonorarios"  required>
+                                                {% for tiposHonorarios in TiposHonorarios %}
+                                                <option value="{{tiposHonorarios.id}}"> {{tiposHonorarios.nombre}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                         </div>
+
+
+
 				  <div class="col-3">
                                         <label for="medico" class="col-sm-1 control-label">Medico:</label>
                                         <div class="col-sm-8">
@@ -662,17 +681,6 @@ function RefrescarPantalla() {
                                             <select class="select-css h-40 w-20"  id="finalidadParticipantesCirugia"  tabindex= "0"  name="finalidadParticipantesCirugia"  required>
                                                 {% for finalidadCirugia in FinalidadCirugia %}
                                                 <option value="{{finalidadCirugia.id}}"> {{finalidadCirugia.nombre}}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                         </div>
-
-			<div class="col-3">
-                                        <label for="tipoHonorarios" class="col-sm-1 control-label">TipoHonorarios:</label>
-                                        <div class="col-sm-8">
-                                            <select class="select-css h-40 w-20" id="tipoHonorarios"  tabindex= "0"  name="tipoHonorarios"  required>
-                                                {% for tiposHonorarios in TiposHonorarios %}
-                                                <option value="{{tiposHonorarios.id}}"> {{tiposHonorarios.nombre}}</option>
                                                 {% endfor %}
                                             </select>
                                         </div>
@@ -1715,7 +1723,7 @@ function RefrescarPantalla() {
 				 <div class="col-2">
                                         <label for="procedMaterialesInforme" class="col-sm-1 control-label">Procedimientos:</label>
                                         <div class="col-sm-8">
-                                            <select class="select-css h-40 w-20"  id="procedMaterialesInforme"  tabindex= "0"  name="procedMaterialesInforme" required>
+                                            <select class="select-css h-40 w-20"  id="procedMaterialesInforme"   name="procedMaterialesInforme" required>
                                                 {% for procedMaterialesInforme in ProcedMaterialesInforme %}
                                                 <option value="{{procedMaterialesInforme.id}}"> {{procedMaterialesInforme.nombre}}</option>
                                                 {% endfor %}
@@ -1735,12 +1743,7 @@ function RefrescarPantalla() {
                                         </div>
                          </div>
 
-
-
-			  <div class="col-2">
-			  Valor Unitario:
-			 <input type="text" class="form-control" id="unitarioLiquidacionInforme" name="unitarioLiquidacionInforme"  ></input>  
-                         </div>
+		
 
 			
 			  <div class="col-2">
@@ -1748,19 +1751,25 @@ function RefrescarPantalla() {
 			 <input type="text" class="form-control" id="cantidadInforme" name="cantidadInforme"  ></input>  
                          </div>
 
+
+			  <div class="col-2">
+			  Valor Unitario:
+			 <input type="text" class="form-control" id="unitarioLiquidacionInforme" name="unitarioLiquidacionInforme"  ></input>  
+                         </div>
+
 			  <div class="col-2">
 			 Valor Liquidacion:
-			 <input type="text" class="form-control" id="valorLiquidacion" name="valorLiquidacion"  readonly ></input>
+			 <input type="text" class="form-control" id="valorLiquidacionInforme" name="valorLiquidacionInforme" value="0" readonly ></input>
                          </div>
 
 			  <div class="col-2">
 			 Hoja de Gasto:
-			 <input type="checkbox"  id="hojaDeGastoInforme" name="hojaDeGastoInforme"   ></input>
+			 <input type="checkbox"  id="hojaDeGastoInforme" name="hojaDeGastoInforme"  ></input>
                          </div>
 
 
 			  <div class="col-2">
-			 <input type="text" class="form-control" id="usernameMaterialInformeCirugia_id" name="usernameMaterialInformeCirugia_id" readonly></input>  
+			 <input type="text" class="form-control" id="usernameMaterialInformeCirugia_id" name="usernameMaterialInformeCirugia_id" value="{{Username_id}}" readonly></input>  
                          </div>
 
 

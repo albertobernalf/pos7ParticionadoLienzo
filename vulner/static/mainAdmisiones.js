@@ -3234,9 +3234,13 @@ $('#tablaDatos tbody').on('click', '.ImprimirHojaAdmision', function() {
 	 // alert ("post_id = " + post_id);
 	var ingresoId = post_id;
 
+
 $.ajax({
     url: '/imprimirHojaAdmision/',
- data : {ingresoId:ingresoId},
+  data : {ingresoId:ingresoId},
+
+
+
     method: 'POST',
     xhrFields: {
         responseType: 'blob' // Importante: interpreta la respuesta como binario

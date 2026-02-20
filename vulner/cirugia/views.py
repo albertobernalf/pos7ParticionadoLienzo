@@ -62,6 +62,7 @@ def Load_dataProgramacionCirugia(request, data):
     print("username_id:", username_id)
 
     estadoProgramacion = EstadosProgramacion.objects.get(nombre='Solicitud')
+    estadoProgramacionRealizada = EstadosProgramacion.objects.get(nombre='Realizada')
     #estadoCirugiaSinAsignar = EstadosCirugias.objects.get(nombre='SIN ASIGNAR')
     estadoCirugiaPendiente = EstadosCirugias.objects.get(nombre='PENDIENTE')
     estadoCirugiaConfirmada = EstadosCirugias.objects.get(nombre='CONFIRMADA')
@@ -76,7 +77,7 @@ def Load_dataProgramacionCirugia(request, data):
     curx = miConexionx.cursor()
 
 
-    detalle = 'SELECT prog.id id,  u."tipoDoc_id" tipoDoc_id ,tipdoc.abreviatura abrev, u.documento documento, i.consec consecutivo, u.nombre paciente,estprog.nombre estadoProg,sala.numero, sala.nombre sala, prog."fechaProgramacionInicia" inicia, prog."horaProgramacionInicia" horaInicia, prog."fechaProgramacionFin" Termina, prog."horaProgramacionFin" horaTermina ,(SELECT exa.nombre FROM cirugia_cirugias cir LEFT JOIN cirugia_cirugiasprocedimientos cirproc on (cirproc.cirugia_id = cir.id) INNER JOIN clinico_examenes exa on (exa.id = cirproc.cups_id) WHERE cir."tipoDoc_id" = prog."tipoDoc_id" and cir.documento_id = prog.documento_id  and cir."consecAdmision" = prog."consecAdmision" limit 1) cirugias , estcir.nombre estadoCirugia FROM cirugia_programacioncirugias prog INNER JOIN sitios_sedesclinica sed	on (sed.id = prog."sedesClinica_id") INNER JOIN admisiones_ingresos i ON (i."tipoDoc_id" =prog."tipoDoc_id" AND i.documento_id =  prog.documento_id AND i.consec= prog."consecAdmision" )  LEFT JOIN cirugia_cirugias cir ON (cir."tipoDoc_id" =prog."tipoDoc_id" AND cir.documento_id =  prog.documento_id AND cir."consecAdmision" = prog."consecAdmision" )  INNER JOIN cirugia_estadoscirugias estcir ON (estcir.id = cir."estadoCirugia_id" AND  estcir.id IN ( ' + "'" + str(estadoCirugiaPendiente.id) + "','" + str(estadoCirugiaConfirmada.id) + "','" + str(estadoCirugiaRealizada.id)  + "'))" + '  INNER JOIN usuarios_usuarios u ON (u.id = i.documento_id ) INNER JOIN usuarios_tiposdocumento tipdoc ON (tipdoc.id =  u."tipoDoc_id") INNER JOIN cirugia_estadosprogramacion estprog ON (estprog.id = prog."estadoProgramacion_id" ) LEFT JOIN sitios_salas sala ON (sala.id =prog.sala_id )  WHERE sed.id = ' + "'" + str(sede) +  "'"  + ' order by sala.numero'
+    detalle = 'SELECT prog.id id,  u."tipoDoc_id" tipoDoc_id ,tipdoc.abreviatura abrev, u.documento documento, i.consec consecutivo, u.nombre paciente,estprog.nombre estadoProg,sala.numero, sala.nombre sala, prog."fechaProgramacionInicia" inicia, prog."horaProgramacionInicia" horaInicia, prog."fechaProgramacionFin" Termina, prog."horaProgramacionFin" horaTermina ,(SELECT exa.nombre FROM cirugia_cirugias cir LEFT JOIN cirugia_cirugiasprocedimientos cirproc on (cirproc.cirugia_id = cir.id) INNER JOIN clinico_examenes exa on (exa.id = cirproc.cups_id) WHERE cir."tipoDoc_id" = prog."tipoDoc_id" and cir.documento_id = prog.documento_id  and cir."consecAdmision" = prog."consecAdmision" limit 1) cirugias , estcir.nombre estadoCirugia FROM cirugia_programacioncirugias prog INNER JOIN sitios_sedesclinica sed	on (sed.id = prog."sedesClinica_id") INNER JOIN admisiones_ingresos i ON (i."tipoDoc_id" =prog."tipoDoc_id" AND i.documento_id =  prog.documento_id AND i.consec= prog."consecAdmision" )  LEFT JOIN cirugia_cirugias cir ON (cir."tipoDoc_id" =prog."tipoDoc_id" AND cir.documento_id =  prog.documento_id AND cir."consecAdmision" = prog."consecAdmision" )  INNER JOIN cirugia_estadoscirugias estcir ON (estcir.id = cir."estadoCirugia_id" AND  estcir.id IN ( ' + "'" + str(estadoCirugiaPendiente.id) + "','" + str(estadoCirugiaConfirmada.id) + "','" + str(estadoCirugiaRealizada.id)  + "'))" + '  INNER JOIN usuarios_usuarios u ON (u.id = i.documento_id ) INNER JOIN usuarios_tiposdocumento tipdoc ON (tipdoc.id =  u."tipoDoc_id") INNER JOIN cirugia_estadosprogramacion estprog ON (estprog.id = prog."estadoProgramacion_id" AND estprog.nombre != '  + "'" + str(estadoProgramacionRealizada.nombre) + "'" + ' ) LEFT JOIN sitios_salas sala ON (sala.id =prog.sala_id )  WHERE sed.id = ' + "'" + str(sede) +  "'"  + ' order by sala.numero'
 
     print(detalle)
 
@@ -298,7 +299,7 @@ def Load_dataSolicitudCirugia(request, data):
     curx = miConexionx.cursor()
 
 
-    detalle = 'SELECT cir.id id, i."sedesClinica_id" sede, u."tipoDoc_id" tipoDoc_id, u.documento documento, u.nombre paciente , i.consec consecutivo, u."fechaNacio" nacimiento,u.genero genero, (now() - u."fechaNacio" ) edad, i.id ingreso, cir."fechaSolicita" solicita, dep.nombre cama,	emp.nombre empresa	, u.telefono,cir."solicitaSangre", cir."describeSangre", "cantidadSangre","solicitaCamaUci",cir."solicitaMicroscopio","solicitaRx","solicitaAutoSutura","solicitaOsteosintesis",	"solicitaBiopsia", cir"solicitaMalla", cir"solicitaOtros", estcir.nombre estadoCir,tiposAnes.nombre anestesia FROM admisiones_ingresos i INNER JOIN  usuarios_usuarios u ON ( u."tipoDoc_id" = i."tipoDoc_id" and  u.id = i.documento_id ) INNER JOIN  cirugia_cirugias cir ON (cir."sedesClinica_id" = i."sedesClinica_id" and cir."tipoDoc_id"=i."tipoDoc_id" AND cir.documento_id = i.documento_id AND cir."consecAdmision"= i.consec) INNER JOIN sitios_dependencias dep ON (dep.id =  i."dependenciasActual_id") LEFT JOIN  facturacion_empresas emp ON (emp.id = i.empresa_id ) LEFT JOIN  sitios_serviciosadministrativos serv ON (serv.id = cir."serviciosAdministrativos_id" ) LEFT JOIN  cirugia_estadoscirugias estcir ON (estcir.id = cir."estadoCirugia_id" ) LEFT JOIN  cirugia_tiposanestesia tiposAnes ON (tiposAnes.id = cir.anestesia_id ) LEFT JOIN  cirugia_tiposcirugia tiposCiru ON (tiposCiru.id = cir."tiposCirugia_id") WHERE i."sedesClinica_id" = ' + "'" + str(sede) + "' AND " + 'cir."estadoCirugia_id" IN ( ' + "'" + str(estadoCirugiaPendiente.id) + "','" + str(estadoCirugiaConfirmada.id) + "')"
+    detalle = 'SELECT cir.id id, i."sedesClinica_id" sede, u."tipoDoc_id" tipoDoc_id, u.documento documento, u.nombre paciente , i.consec consecutivo, u."fechaNacio" nacimiento,u.genero genero, age(u."fechaNacio") edad, i.id ingreso, cir."fechaSolicita" solicita, dep.nombre cama,	emp.nombre empresa	, u.telefono,cir."solicitaSangre", cir."describeSangre", "cantidadSangre","solicitaCamaUci",cir."solicitaMicroscopio","solicitaRx","solicitaAutoSutura","solicitaOsteosintesis",	"solicitaBiopsia", cir"solicitaMalla", cir"solicitaOtros", estcir.nombre estadoCir,tiposAnes.nombre anestesia FROM admisiones_ingresos i INNER JOIN  usuarios_usuarios u ON ( u."tipoDoc_id" = i."tipoDoc_id" and  u.id = i.documento_id ) INNER JOIN  cirugia_cirugias cir ON (cir."sedesClinica_id" = i."sedesClinica_id" and cir."tipoDoc_id"=i."tipoDoc_id" AND cir.documento_id = i.documento_id AND cir."consecAdmision"= i.consec) INNER JOIN sitios_dependencias dep ON (dep.id =  i."dependenciasActual_id") LEFT JOIN  facturacion_empresas emp ON (emp.id = i.empresa_id ) LEFT JOIN  sitios_serviciosadministrativos serv ON (serv.id = cir."serviciosAdministrativos_id" ) LEFT JOIN  cirugia_estadoscirugias estcir ON (estcir.id = cir."estadoCirugia_id" ) LEFT JOIN  cirugia_tiposanestesia tiposAnes ON (tiposAnes.id = cir.anestesia_id ) LEFT JOIN  cirugia_tiposcirugia tiposCiru ON (tiposCiru.id = cir."tiposCirugia_id") WHERE i."sedesClinica_id" = ' + "'" + str(sede) + "' AND " + 'cir."estadoCirugia_id" IN ( ' + "'" + str(estadoCirugiaPendiente.id) + "','" + str(estadoCirugiaConfirmada.id) + "')"
 
     print(detalle)
 
@@ -342,6 +343,8 @@ def Load_dataIngresosCirugia(request, data):
 
     # print("data = ", request.GET('data'))
 
+    estadoProgramacionRealizada = EstadosProgramacion.objects.get(nombre='Realizada')
+
     ingresosCirugia = []
 
     miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
@@ -349,7 +352,8 @@ def Load_dataIngresosCirugia(request, data):
     curx = miConexionx.cursor()
 
 
-    detalle = 'SELECT i.id id,i."tipoDoc_id" tipoDoc_id, u.documento documento,u.nombre paciente, i.consec consecutivo, u.genero, (now() - u."fechaNacio")/360 edad, u."fechaNacio" nacimiento, dep.nombre cama, u.telefono telefono, emp.nombre empresa FROM admisiones_ingresos i INNER JOIN usuarios_usuarios u ON (u."tipoDoc_id" =  i."tipoDoc_id" AND u.id =  i.documento_id) LEFT JOIN sitios_dependencias dep ON (dep."sedesClinica_id" = i."sedesClinica_id" AND dep.id = i."dependenciasActual_id") LEFT JOIN facturacion_empresas emp	 ON (emp.id = i.empresa_id )  INNER JOIN sitios_serviciossedes servsed ON (servsed.id = dep."serviciosSedes_id") INNER JOIN clinico_servicios serv ON (serv.id = servsed.servicios_id AND (serv.nombre = ' + "'" + str('HOSPITALIZACION') + "' OR serv.nombre = " + "'" + str('URGENCIAS') + "' OR serv.nombre = '" + str('AMBULATORIO') + "'))" + ' where i."sedesClinica_id" = ' + "'" + str(sede) + "'" + ' AND i."fechaSalida"  is null ' + ' AND (i."tipoDoc_id", i.documento_id, i.consec) not in (select cirx."tipoDoc_id", cirx.documento_id, cirx."consecAdmision" FROM cirugia_cirugias cirx WHERE cirx."tipoDoc_id" = i."tipoDoc_id" AND cirx.documento_id = i.documento_id AND cirx."consecAdmision" = i.consec AND cirx."estadoProgramacion_id" !=4) ORDER BY i."dependenciasActual_id"'
+    #detalle = 'SELECT i.id id,i."tipoDoc_id" tipoDoc_id, u.documento documento,u.nombre paciente, i.consec consecutivo, u.genero, age(u."fechaNacio") edad, u."fechaNacio" nacimiento, dep.nombre cama, u.telefono telefono, emp.nombre empresa FROM admisiones_ingresos i INNER JOIN usuarios_usuarios u ON (u."tipoDoc_id" =  i."tipoDoc_id" AND u.id =  i.documento_id) LEFT JOIN sitios_dependencias dep ON (dep."sedesClinica_id" = i."sedesClinica_id" AND dep.id = i."dependenciasActual_id") LEFT JOIN facturacion_empresas emp	 ON (emp.id = i.empresa_id )  INNER JOIN sitios_serviciossedes servsed ON (servsed.id = dep."serviciosSedes_id") INNER JOIN clinico_servicios serv ON (serv.id = servsed.servicios_id AND (serv.nombre = ' + "'" + str('HOSPITALIZACION') + "' OR serv.nombre = " + "'" + str('URGENCIAS') + "' OR serv.nombre = '" + str('AMBULATORIO') + "'))" + ' where i."sedesClinica_id" = ' + "'" + str(sede) + "'" + ' AND i."fechaSalida"  is null ' + ' AND (i."tipoDoc_id", i.documento_id, i.consec) not in (select cirx."tipoDoc_id", cirx.documento_id, cirx."consecAdmision" FROM cirugia_cirugias cirx WHERE cirx."tipoDoc_id" = i."tipoDoc_id" AND cirx.documento_id = i.documento_id AND cirx."consecAdmision" = i.consec AND cirx."estadoProgramacion_id" = ' + "'" + str(estadoProgramacionRealizada.id) + "'" + ') ORDER BY i."dependenciasActual_id"'
+    detalle = 'SELECT i.id id,i."tipoDoc_id" tipoDoc_id, u.documento documento,u.nombre paciente, i.consec consecutivo, u.genero, age(u."fechaNacio") edad, u."fechaNacio" nacimiento, dep.nombre cama, u.telefono telefono, emp.nombre empresa FROM admisiones_ingresos i INNER JOIN usuarios_usuarios u ON (u."tipoDoc_id" =  i."tipoDoc_id" AND u.id =  i.documento_id) LEFT JOIN sitios_dependencias dep ON (dep."sedesClinica_id" = i."sedesClinica_id" AND dep.id = i."dependenciasActual_id") LEFT JOIN facturacion_empresas emp	 ON (emp.id = i.empresa_id )  INNER JOIN sitios_serviciossedes servsed ON (servsed.id = dep."serviciosSedes_id") INNER JOIN clinico_servicios serv ON (serv.id = servsed.servicios_id AND (serv.nombre = ' + "'" + str('HOSPITALIZACION') + "' OR serv.nombre = " + "'" + str('URGENCIAS') + "' OR serv.nombre = '" + str('AMBULATORIO') + "'))" + ' where i."sedesClinica_id" = ' + "'" + str(sede) + "'" + ' AND i."fechaSalida"  is null '
     print(detalle)
 
     curx.execute(detalle)
@@ -560,7 +564,6 @@ def CrearSolicitudCirugia(request):
         cirugiaId = cur3.fetchone()[0]
 
         print(comando)
-        cur3.execute(comando)
 
         comando2 = 'INSERT INTO cirugia_programacioncirugias ("consecAdmision", "fechaRegistro", "estadoReg", documento_id, "sedesClinica_id", "tipoDoc_id", "usuarioRegistro_id",  "estadoProgramacion_id", cirugia_id) values (' + "'" + str(registroIngreso.consec) + "','" + str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(registroIngreso.documento_id) + "','" + str(sedesClinica_id) + "','" + str(registroIngreso.tipoDoc_id) + "','" + str(username) + "','" + str(estadoProgramacion.id) + "','" + str(cirugiaId)  + "')"
 
@@ -1336,7 +1339,12 @@ def CrearMaterialCirugia(request):
     suministro = request.POST["suministro"]
     print ("suministro =", suministro)
 
-    hojaDeGasto = request.POST["hojaDeGasto"]
+    if 'hojaDeGastoInforme' in request.POST:
+        hojaDeGasto = 'S'
+    else:
+        hojaDeGasto = 'N'
+
+
     print ("hojaDeGasto =", hojaDeGasto)
 
     if (hojaDeGasto == 'on'):
@@ -1406,7 +1414,13 @@ def CrearMaterialInformeCirugia(request):
     suministro = request.POST["suministroInforme"]
     print ("suministro =", suministro)
 
-    hojaDeGasto = request.POST["hojaDeGastoInforme"]
+    if 'hojaDeGastoInforme' in request.POST:
+        hojaDeGasto = 'S'
+    else:
+        hojaDeGasto = 'N'
+
+    #hojaDeGasto = request.POST['hojaDeGastoInforme']
+
     print ("hojaDeGasto =", hojaDeGasto)
 
     username_id = request.POST["usernameMaterialInformeCirugia_id"]
@@ -1418,18 +1432,14 @@ def CrearMaterialInformeCirugia(request):
     unitario = request.POST["unitarioLiquidacionInforme"]
     print ("unitario =", unitario)
 
-    valorLiquidacion = request.POST["valorLiquidacion"]
+    valorLiquidacion = request.POST["valorLiquidacionInforme"]
     print ("valorLiquidacion =", valorLiquidacion)
 
     procedMaterialesInforme = request.POST["procedMaterialesInforme"]
     print ("procedMaterialesInforme =", procedMaterialesInforme)
 
-
-
     estadoReg = 'A'
     fechaRegistro = timezone.now()
-
-
 
     miConexion3 = None
     try:
@@ -1437,7 +1447,7 @@ def CrearMaterialInformeCirugia(request):
         miConexion3 = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",  password="123456")
         cur3 = miConexion3.cursor()
 
-        comando = 'INSERT INTO cirugia_cirugiasmaterialQx (cantidad, "fechaRegistro", "estadoReg", cirugia_id, suministro_id, "usuarioRegistro_id", "valorLiquidacion", "cirugiaProcedimiento_id", unitario, hojaDeGasto) VALUES (' + "'" + str(cantidad) + "','" + str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(cirugiaId) + "','"  + str(suministro) + "','" + str(username_id) + "','" +  str(valorLiquidacion) + "','" + str(procedMaterialesInforme) + "','" + str(unitario) +  + "','"  + str(hojaDeGasto) + "')" 
+        comando = 'INSERT INTO cirugia_cirugiasmaterialQx (cantidad, "fechaRegistro", "estadoReg", cirugia_id, suministro_id, "usuarioRegistro_id", "valorLiquidacion", "cirugiaProcedimiento_id", unitario, "hojaDeGasto") VALUES (' + "'" + str(cantidad) + "','" + str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(cirugiaId) + "','"  + str(suministro) + "','" + str(username_id) + "','" +  str(valorLiquidacion) + "','" + str(procedMaterialesInforme) + "','" + str(unitario) +   "','"  + str(hojaDeGasto) + "')"
 
         print(comando)
         cur3.execute(comando)
@@ -1911,7 +1921,6 @@ def BuscaAdicionarQx(request):
     sede = request.POST.get('sede')
     print("sede =", sede)
 
-
     adicionarQx = []
 
     miConexion3 = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
@@ -1970,6 +1979,8 @@ def GuardarEstadoProgramacionCirugia(request):
     print("estadoCancelado = " , estadoCancelado.id )
 
     programacionEstadoAnterior = ProgramacionCirugias.objects.get(id=programacionId)
+
+    print("programacionEstadoAnterior_1 = ", programacionEstadoAnterior.id)
 
     cirugiaId = Cirugias.objects.get(tipoDoc_id =programacionEstadoAnterior.tipoDoc_id, documento_id=programacionEstadoAnterior.documento_id , consecAdmision = programacionEstadoAnterior.consecAdmision)
 

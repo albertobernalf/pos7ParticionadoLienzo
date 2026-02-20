@@ -2200,7 +2200,7 @@ def ImprimirHistoriaClinica(request):
 
             folioCuestion = folios[0 + i]['HistoriaId']
 
-            comando='SELECT cir.urgente, cir."fechaIniAnestesia", cir."HoraIniAnestesia", cir."fechaFinAnestesia", cir."horaFinAnestesia","fechaQxInicial", cir."horaQxInicial", "fechaQxFinal", cir."horaQxFinal", cir."descripcionQx", cir."dxComplicacion_id", cir."dxPostQx_id", cir.especialidad_id FROM clinico_historialcirugias histCiru INNER JOIN clinico_historia his on (his.id=histCiru.historia_id) INNER JOIN cirugia_cirugias cir ON (cir.id=histCiru.cirugia_id) WHERE histCiru.historia_id = ' + "'" + str(folioCuestion) + "'"
+            comando='SELECT cir.urgente, cir."fechaIniAnestesia", cir."HoraIniAnestesia", cir."fechaFinAnestesia", cir."horaFinAnestesia","fechaQxInicial", cir."horaQxInicial", "fechaQxFinal", cir."horaQxFinal", cir."descripcionQx", cir."dxComplicacion_id", cir."dxPostQx_id", cir.especialidad_id , cir.analisis, cir.planx FROM clinico_historialcirugias histCiru INNER JOIN clinico_historia his on (his.id=histCiru.historia_id) INNER JOIN cirugia_cirugias cir ON (cir.id=histCiru.cirugia_id) WHERE histCiru.historia_id = ' + "'" + str(folioCuestion) + "'"
 
             curr.execute(comando)
 
@@ -2208,11 +2208,11 @@ def ImprimirHistoriaClinica(request):
 
             cirugia = []
 
-            for urgente, fechaIniAnestesia,HoraIniAnestesia, fechaFinAnestesia, horaFinAnestesia, fechaQxInicial, horaQxInicial,  fechaQxFinal, horaQxFinal, descripcionQx, dxComplicacion_id, dxPostQx_id,especialidad_id  in curr.fetchall():
+            for urgente, fechaIniAnestesia,HoraIniAnestesia, fechaFinAnestesia, horaFinAnestesia, fechaQxInicial, horaQxInicial,  fechaQxFinal, horaQxFinal, descripcionQx, dxComplicacion_id, dxPostQx_id,especialidad_id, analisis, planx  in curr.fetchall():
                 cirugia.append(
                     {'urgente': urgente, 'fechaIniAnestesia': fechaIniAnestesia, 'HoraIniAnestesia':HoraIniAnestesia,
                      'fechaFinAnestesia':fechaFinAnestesia, 'horaFinAnestesia':horaFinAnestesia,
-                     'fechaQxInicial':fechaQxInicial,'horaQxInicial':horaQxInicial, 'fechaQxFinal':fechaQxFinal ,'horaQxFinal':horaQxFinal,'descripcionQx':descripcionQx ,'dxComplicacion_id':dxComplicacion_id,  'dxPostQx_id':dxPostQx_id, 'especialidad_id':especialidad_id})
+                     'fechaQxInicial':fechaQxInicial,'horaQxInicial':horaQxInicial, 'fechaQxFinal':fechaQxFinal ,'horaQxFinal':horaQxFinal,'descripcionQx':descripcionQx ,'dxComplicacion_id':dxComplicacion_id,  'dxPostQx_id':dxPostQx_id, 'especialidad_id':especialidad_id, 'analisis':analisis, 'planx':planx})
 
             miConexionr.close()
 
@@ -2222,39 +2222,55 @@ def ImprimirHistoriaClinica(request):
             if (cirugia != []):
                 pdf.set_font('Helvetica', 'B', 8)
                 pdf.ln(2)
-                pdf.cell(180, 12, 'CIRUGIAS', 0, 0, 'L')
+                pdf.cell(180, 12, 'CIRUGIA', 0, 0, 'L')
                 pdf.set_font('Helvetica', '', 8)
                 pdf.ln(6)
 
             for l in range(0, len(cirugia)):
 
                 pdf.set_font('Helvetica', 'B', 8)
-                pdf.cell(10, 10, 'URGENTE', 0, 0, 'L')
+                pdf.cell(20, 10, 'URGENTE', 0, 0, 'L')
                 pdf.set_font('Helvetica', '', 8)
                 pdf.cell(15, 10,  str(cirugia[0 + z]['urgente']), 0, 0, 'L')
                 pdf.set_font('Helvetica', 'B', 8)
-                pdf.cell(10, 10, 'FEC.INICIO CIRUGIA', 0, 0, 'L')
+                pdf.cell(40, 10, 'FEC.INICIO CIRUGIA', 0, 0, 'L')
                 pdf.set_font('Helvetica', '', 8)
-                pdf.cell(15, 10, str(cirugia[0 + z]['fechaQxInicial']), 0, 0, 'L')
+                pdf.cell(30, 10, str(cirugia[0 + z]['fechaQxInicial']), 0, 0, 'L')
                 pdf.set_font('Helvetica', 'B', 8)
-                pdf.cell(10, 10, 'FEC.FIN CIRUGIA', 0, 0, 'L')
+                pdf.cell(40, 10, 'FEC.FIN CIRUGIA', 0, 0, 'L')
                 pdf.set_font('Helvetica', '', 8)
-                pdf.cell(15, 10, str(cirugia[0 + z]['fechaQxFinal']), 0, 0, 'L')
+                pdf.cell(30, 10, str(cirugia[0 + z]['fechaQxFinal']), 0, 0, 'L')
+                pdf.set_font('Helvetica', '', 8)
+                pdf.ln(5)
                 pdf.set_font('Helvetica', 'B', 8)
-                pdf.cell(10, 10, 'DESCRIPCION QX', 0, 0, 'L')
+                pdf.cell(50, 10, 'NOTA ANALISIS', 0, 0, 'L')
+                pdf.set_font('Helvetica', '', 8)
+                analisis = str(cirugia[0 + l]['analisis'])
+                pdf.multi_cell(w=0, h=3, txt=analisis, border=0, align='J', fill=False)
+                pdf.set_font('Helvetica', '', 8)
+                pdf.ln(5)
+                pdf.set_font('Helvetica', 'B', 8)
+                pdf.cell(50, 10, 'NOTA PLAN', 0, 0, 'L')
+                pdf.set_font('Helvetica', '', 8)
+                plan = str(cirugia[0 + l]['planx'])
+                pdf.multi_cell(w=0, h=3, txt=plan, border=0, align='J', fill=False)
+                pdf.set_font('Helvetica', '', 8)
+                pdf.set_font('Helvetica', 'B', 8)
+                pdf.ln(5)
+                pdf.cell(40, 10, 'DESCRIPCION QX', 0, 0, 'L')
                 pdf.set_font('Helvetica', '', 8)
                 descripcionQx =  str(cirugia[0 + l]['descripcionQx'])
-                pdf.multi_cell(w=0, h=5, txt=descripcionQx , border=0, align='J',fill=False)
+                pdf.multi_cell(w=0, h=3, txt=descripcionQx , border=0, align='J',fill=False)
+                pdf.set_font('Helvetica', 'B', 8)
+                pdf.cell(40, 10, 'DIAGNOSTICO POSTQX', 0, 0, 'L')
+                pdf.set_font('Helvetica', '', 8)
+                pdf.cell(80, 10, str(cirugia[0 + z]['dxPostQx_id']), 0, 0, 'L')
 
                 pdf.set_font('Helvetica', 'B', 8)
-                pdf.cell(10, 10, 'DIAGNOSTICO POSTQX', 0, 0, 'L')
+                pdf.cell(40, 10, 'COMPLICACIONES', 0, 0, 'L')
                 pdf.set_font('Helvetica', '', 8)
-                pdf.cell(15, 10, str(cirugia[0 + z]['dxPostQx_id']), 0, 0, 'L')
-
-                pdf.set_font('Helvetica', 'B', 8)
-                pdf.cell(10, 10, 'COMPLICACIONES', 0, 0, 'L')
-                pdf.set_font('Helvetica', '', 8)
-                pdf.cell(15, 10, str(cirugia[0 + z]['dxComplicacion_id']), 0, 0, 'L')
+                pdf.cell(80, 10, str(cirugia[0 + z]['dxComplicacion_id']), 0, 0, 'L')
+                pdf.ln(2)
 
             pdf.ln(1)
 

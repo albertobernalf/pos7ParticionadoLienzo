@@ -700,10 +700,7 @@ LUNES 15-SEPTIEMBRE: Ademas de revizar lo de arriba: ver acomodar columnas grade
 
 --EL DIA LUNES 22 DE SEPTIEMBRE
 
- -- INGRESAR MAS multicell()
- -- Ingresar mas coasa a paciente imhoep
- -- Probar facturacion /refacturar, / anular etc
--- OPS SACO ERROR AL IMPRIMIR LA AUTORIZACION DEL TRIAGE. PREGUNTA PORQUE SALE EN AUTORIZACIONES SI YA NO ESTA EN CLINICA?
+
 -- OJO HACER IMPRESION DE ORDENES E IMPRESION DE FOLIOS EN HCLINICA
 -- ojo hau que hacer un refres a farmaciades´pachos
 -- ops notengo devolucionmes por triage, hay que incluirlasen el query load_datadevolucones
@@ -721,7 +718,7 @@ LUNES 15-SEPTIEMBRE: Ademas de revizar lo de arriba: ver acomodar columnas grade
 -- la pantalla de farmacia dispensaacion que debe tener
 -- ops cuando ingreso revision x sistemas me descuadra la grilla
 -- cuando yo autorizo no se desaparece de la pantalla de autorizaciones ver esop
--- ops no me grabo lo de nota aclaratoria
+
 -- 1que pasa con los calendarios son complñicado sno son muy funcinales que digamso
 -- ops la ventana rips revizar(creo no trae mensajes de eroor y otras)
 -- ops error aparece el paciente ambulatorio que ya se le dio salida ERO ojo, no coloco fecha de salida, el nro de lqa factura no ,o coloco
@@ -862,10 +859,8 @@ class ProgramacionCitasMedicas(models.Model):
 -- crear parametros de ruta para almacenar archivos json y toda la facturacion electronica
 
 -- TIPS BOLIVIA
-	-- tamañpo de letra font mas grande en todo
   	-- Solo admisiones admisiona No triage
 	-- los diagnosticos no estan al ingreso d ela admsion
-	--- el eror de paula de foreign key m,edioc invalido al dar salidad clinica que paso ??
 	
 --  FIN TIPS BOLIVIA
 
@@ -915,10 +910,6 @@ class ProgramacionCitasMedicas(models.Model):
  -- Apenas aplico-grabo un abono no refresca saldo ( OJO SOLO EL refresh de las pantallas, liquidaciondetalle, porque si grabo bien los totales en liquidacion
 	(LO UNICO ES QUE HAYA UN ERROR SE VE QUE REFRESCA)
  -- Cuando uno refresca en liquidacindetalle la cuenta, no refresca la cabecera, por ejemplo si tengo cambio de cama no lo refresca, sinmo solo hasta que selecciono de nuevo la cuenta
-
- -- hay que aregla la pantalla clinico, el datatable de interconsultas algo pasa allip - pailas
- -- (..ok. VALIDAR) ops en farmacia al hacer un despacho no actualiza la pantalla dispensacion general, toco salir y volbver a entrar para que actualizara
- -- (..OK VALIDAR) ops desde farmacia me actualio mal el valor d ela cupota moderadora en liquidacion . OJO CORREGIR YAP
  -- ops cuando uno selecciona en farmaciafarmaciadetalle un medicamento y lo señala y despacha por uno de ellos pasa que al seleccionar uno y no muetra despacho alguno, pero si seleciona el 
    -- otro muestra amos. ALGO PASA ALLI VERIFICAR (OPS CREO ESTA BIEN )
   -- (.. ok validar) ops colocar el codigo cups en la pantalla liquidaciondetalle para mejor entendimiento
@@ -1035,7 +1026,7 @@ class ProgramacionCitasMedicas(models.Model):
 Puesta a Punta :
 
         ojo que pasa con los botones de la izquierda ver el html por que no tienen cabeceras o titulos    esto en paneladmisiones.html
-	Ojo vrificar en tarifarioviews, no crear el servi¿cioadministrativo en cargarsuministros ?? PORCUA 
+	Ojo verificar en tarifarioviews, no crear el servi¿cioadministrativo en cargarsuministros ?? PORCUA 
 	El boton refrescar de admisones. No refresca INDICADORES
         Al crear la admision desde triage, no dice que combo de rips hace falta seleccionar controlar eso con javascript VERIFICAR
 	se pierde el nombre de la Aplicacion al crear admision desde triag VERIFICAR
@@ -1046,7 +1037,7 @@ Puesta a Punta :
 	PENDIENTE Devouciones tanto de Enfermeria como de Farmacia
         Pantalla apoyo terapeuitoc pailas-ñucas PENDIENTE DE MEJORA
 	PENDIENTE impresion despachos de farmacia
-	PENDIENTE, todos los ajax , todos los viewsreportes con impresion actualizar
+
 
 
 	cuando aplica abono no refresca la pantala liquidaciondetalle para reflejar el monot. pero ojo primero refrescar liquidacion, luego liquidacion detalle y luego seleccionar ops
@@ -1070,30 +1061,44 @@ FEB 16:
 	Ops cuando creo un Triage me quita la ventana Crear TRiag GRAVISISSIMO ,, ops esta relacionado con los permisos TRIAG
  	verificar
 	Cuando hace un triage No lo imprime
-	No se por que el refrescar no ejecuta el AJAX problemas de url
 	La impresion de la HC. super - recontra lenta
 	En la historia clinica aun no imprime nada del folio de la ciruigia y nadad de la cirugia
 	OPS imprimio una hoja de admision aun paciente en urgencias ???
-
-	cuando pasa de triage a cama aunque guarda no aclara pantalla por erro y no refresca el triag VERIFICAR
-	Ojo creo que no esta guardando la justificacion o la Nota aclaratorio en historia clinica VERIFICAR
 	No esta hecho nada en autorizaciones cirugia
 	Ojo hay que quitarle los avisos main.js a facturacion y a autoriaciones etc
-
 	Seguir en la tarde con el wrap del data table o el truncate renderizando el campo truncado INVESTIGAS // Gacturar cuen
-
 	Como hacer para que cunado se autoriza y no hay mas pendientes si desaparece de aut, pero
 	No esta desapareciendo de autDet (la bendita vaina de no poder seleccionar una fila del datatable)
 	cuando uno esta creando un laboratoio no se ven las observa
-
-	Arreglar Cartera tODA... en la tarde ... Ojo hay que marcar de planta como cajeros
-	Hay que hacer en cartera el tab de los pagos que tiene cada factura
 	Y despues si seguir con Cirugia ... 
-	Seguir mejorando vista apoyo terapeutico
         OJO HAY QUE CREAR TODA LAS FUNCIONES EN LA PARAMETRIZACION, fcaturas, rips,json etc, VER CUALES ESTAN ACTIVAS ULTIMA VERSION OJO
+	ops no me grabo lo de nota aclaratoria
 	ojo hay un error al dar salida cliica al paciente si no hay complicacion-dx no guarda NULL PROBAR
-	En apoyo terapeutico resultados arreglar el flexcontrol sale feo
 	cuando interpreta un examen, debe blanquear la plantilla  hacer quiery a los ordenados al primero que quede en pantalla
 	La elaboracion de factura debe imprimir la factura OJO
+	
+FEB 20:
 
-	se trabajo con farmacia, cartera , clinico
+	El checkbox de materialesif¿formecirugia cuando INACTIVO no lo lee el request.POST
+	Ops como colocarle el convenio a una cirugia, en que momento hacerlo en la programacion de cirugia desarrollar esto alli ?
+	Ops no me cuadro la liquidacion de la cuenta con la ciruguia algo pasa.. VERIFICAR. Puesta a punta
+	En cirugia programacion, sigue listando las cirugias ya programadas y ya realziadas
+	No esta crendo el folio de la cirugia en historia_cirugias
+	OPS hay algo que no entiendo al realzar la cirugia primero no me creo el folio en clinico_historialcirugias y despues sip
+	OPS al crear una solicitud de cirugia me creo dos (2) en Cirugia
+	OPS como se ANULA una solicitud de cirugia
+	OJO con las edades me esan mamando gallo en la pantalla de solicitud
+	OPS no me dejo cancelar una programacion de cirugias
+	OPS creo que hay un problema de diseño al no permitir mas de una cirugia para un mismo paciente en el mismo ingreso VERIFICAR
+	OPS el convenio solo falta cyunado desde HC hacen la solciitud debe haber algo para actualziar el convenio vERIFICAR
+
+
+	Terminar, probar cartera
+	mañana crear una cirugia , ver impresion HC y facturarla, seguimiento
+	Luego si RIPS y GLOSAS
+
+	DESPUES DE TODO ESTO, comenzar Consulta Externa
+	Tablas particionadas
+	Frurips, devoluciones d farmacia
+	Mejorar, crear reportes a la lata
+	Instalar Clinica*Report

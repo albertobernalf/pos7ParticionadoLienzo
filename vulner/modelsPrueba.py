@@ -202,20 +202,14 @@ $(primeraFila).find('td input[type="checkbox"]').prop('checked', true);  // Marc
 -- OJO CREAR CONTROL que borre si el rips esta creado y volverlo a crear
 -- ojo crear control si ya esta ENVIADO EL RIPS , no dejarlos enviar nuevamente
 
--       --> ojo en facturacion_facturacion Nomuestra nda ver que pasa --- y seguir hasta facturar la malosa con muchos medicamentos y lab, rad, tera, noqx a ver que pasa conrips
---> ojo hay que volver a revizar eL modulo de cargue  de tarifas a liquidaciondetalle
 --> ojo verificar de nuevo no me gusta ver la empresa por elos conveios de contratacion, deberia ser por admisiones_ingresos en lel campp empresa_id , cambiar esto VERIFICAR
 
 -- ojo mañana no me libero la cama
--- ojo lunes marzop --> hacer rutina desde autorizacion enviar el detalle de la liquidacion
-       -- verificar comletar con combos ventana modal detalleautorizacon
-
 -- ojo lunes marzo, seguir verificar todop el proceso con RIPS envio ,factura, JSON con datos de paciente de prueba astrid bernal 
    validaciones, autorizaciomes, medicamentos, mipres, (6) rips  , HISTORIA CLINICA
 
 -- OJAZO CUANDO GUARDFE UNA HOSPIATIZACION y vuine a crear urgencias no me mostro muchos combos
 -- ojazo cuando formula en hisotira clinica debe resetaear los controles de la dosis tiodos toditos
--- ojazo graves cuando crea dos cabezotes de facturacion_factuarciondetalle
 -- ojazo creo no cayeron las terapias desde hc a la facturacion_liquidaciondetalle
 -- ojazo lunes no se que paso con folio de papa, con fluconazol y terapia. Problema con autorizaiones de medicamento con una terapia junta
 -- ops NO ME MUESTRA NI POR EL CHIRAS EN RIPS LA FACTURA QUE ACABO DE HACER DE ASTRID , DE QUE EMPRESA ES ???
@@ -266,15 +260,7 @@ $(document).ready(function() {
  2. VENTANAS BOOSTRAP MODAL ELEGANTES
   3. SEGUIR CLINICO.HTML  NUEVOS DATATABLES
 
--- Probar la funcion que genera los JSON
 -- ops que pasa si deja crearuna glosa sin rips , PAILANDER , ERROR ??? Averiguar
--- hacer el insetr de proced.glosas
-- hacer nva factura traza a los meedicamentos
--- ver el json archivo d proced, medicamentos
--- ojo verificar el json global
--- ojo hacer la rutina cuando son proced o medicamentos MANUALES, ah pero con que solo sean manuales el
-
-
 ---------------------------
 ------- tips IMPORTANTE PARA MODULOS DE CONSULTA EXTERNA, AMBULATORIO, INVENTARIOS, FACTURACION------------- LA REUNION FUE BENEFICIOSA PARA MY PROGRAM
 ------------------------------
@@ -668,7 +654,6 @@ ojo pendiente en aplicacion de medicamentos arreglar cuando aplica la modal no p
 -- TRAZA De combate ,, Puesta a punto Nro 2: oJOOOOOOOOOOOOOOOOOOOOOO
 -------------------------------------------------------------------------------------
 	1. combo localidades en actualizar usuaro de triage NO FUNCIONa, CREO QUE EN ADMISIONES TAMPOCO
-	2. en crear responsables y acompañamtes No esta hecho hay que hacerlo
 	3. ops crre un servicio admon y no aparece en dependencia ???
         11. OJO TOCO EN TARIFARIOS update tarifarios_TarifariosDescripcion set columna = 'colValorBase' where id=36 AL MOMENTO DE CREAR UNA DESCRICOPMN  ES MEJOPR SOLO DESDE "ColValorBase"
 
@@ -866,18 +851,12 @@ class ProgramacionCitasMedicas(models.Model):
 
 -- RIPS
   -- COMO se hace con los ambulatorios
-  -- se esta trabajando jsos indicidualk despues se pasan los script a la funcion de envioGRAL
--- cuando cree un aplique de abono debre refrescar la pantalla liquidaciondetalle
--- ojo camellar el modulo de abonos
-
    -- quedo quemado el miuniciiop en ripsusuarios ?
 
 -- ojo veriicar en ripsprocedimientos, el recaudo_id, el prorrateo de los pagos,los campos "null", null
 -- no se porque ripshOspitalizacion no ingresa la factura 142 hospitalziados
 -- revizar de nuevo ripsreciennacidos
 -- hacer ripmedicamentos , hay mucho null por cua. (En el suministro debe estar parametrizado todos los datos de acuerdo  a toidas las tablas rips
-
-
 -- OPS OJO CUANDO HICO EL MEDIAMENTO D EMARIA PAULA NO COLOCO EL NHUMERO DE HISTORIAMEDIAMENTO, SUPONGO FARMACIA AL DISPENSAR OPSREOPS
 -- esta pendiente--> mas info para ripsmedicamentos
 -- verificar ripsreciennacidos de acuredo mingov.vo
@@ -925,19 +904,12 @@ class ProgramacionCitasMedicas(models.Model):
 -- ojo la pantallade farmacia depachos debe mostrat si y solo si el codigo CUPS y adems no muestran cantidades IMPORTATIDIMO
 -- como hacer para que los combos muestre los empleados d cada area o depto (desarrollo loco) en farmacia despachosppor ejemplo. se me ocurre en el 
 	model de planta seleccionar creo el area o serv-admon
--- ops me creo seis registro dupliado al dispensar una sola vez ALGO PASO
-
--- ojala pantalla en cirugia de adicionar materiale qx argal cantidad * unitario = total , readonly total y hacerla multiplicacion
--- ops en el modulo de cirugias en solicitud muestra elestado de  programacion mal debe ser el estado del la cirugia y lorelizado y facturado no debe salir
--- ops arreglar que en la programacion no salga la camacho con su estado de programacion
--- OJO CONTROLES DE CIRUGIA SI NOESTA PROGRAMADA NO DEJAR LIQUIDAR CUENTA, SI NO ESTA REALUZAD TAMPO DEJAR LIQUIDA .tamñoco dejar liquidar si no esta hecha la descricxpionqx
 
 
 -- VEO MUY LENTO ELMODULO TARIFARIO PARA AGREAR CREAR TARIFAS
 
 -- (.. ok validar) OPS PERSISTE EL ERROR DE QUE CUANDO CREA UNA CIRUGIA EN LA TABLA PROGRAMACION DE CIRUGIA NO CREA EL CIRUGIA_ID. // OJO ESTO NO SE HIZO DESDE LA HC VERIFICAR
 -- la disponinbilidd de salas de cirugia no funciona aun
--- (ok.. validar) ops la cirugia aun no tiene el convenio . Para colocar un convenio de los que vienen poor HC habria que crear un boton que edite la cirugia y se pueda actualzar elconveio OJOOO
 -- ojo PONER control de fechas  en las fechas de quirofanos cirugias (ok..Validar...)
 -- (ok.. validar)ops al generar el totala pagar esta mal eror en generarliquidcaon dese cirugia-.. UUUYY NOO comoasi que totalproceimientos = 2200 re-maluco -- ops relocoo la pantalla no me muestra lo
    que esta grabado en tablas como asi????? socorro ?? auxilio ERRROOR remaluco. son dos cosas uno lo que guarda elgeneralliquiacion de cirugia y otro el que selecciona lacuenta
@@ -960,7 +932,7 @@ class ProgramacionCitasMedicas(models.Model):
 -- hay problemas con el checkbox de material de cirugia cuando off no graba sale error
 -- ojo creo que problemas en historiamedicamentos cuado se autoriza u med que tuee mas de un item en el folio o sea mas de un medicamento
 -- no aparece la cantidassolicitada en farmacia detalle creop (creo esta a la derecha)
--- OPS LOS paraclinicos en ENFERMERIA NO MUESTRA CIRUGIAS ??
+
 -- OJO hay que verificar quep cuando se factura una cirugia cambi a FACTURADO para que salga de la programacion de cirugias
 
 -- ojo no me actualizo desde farmacia los totales d eliquidacion (validar de nuevo)
@@ -1031,18 +1003,11 @@ Puesta a Punta :
         Al crear la admision desde triage, no dice que combo de rips hace falta seleccionar controlar eso con javascript VERIFICAR
 	se pierde el nombre de la Aplicacion al crear admision desde triag VERIFICAR
 	Ojo cuando borro un medicamento en farmacia, al grabar lp topma de nuevo error .No debe guardar
-	Ver factutaracon completo proceso imprimrFactura
-	Seguir colocar titulos a los excel, pdf, print en todos los datatables
-
 	PENDIENTE Devouciones tanto de Enfermeria como de Farmacia
         Pantalla apoyo terapeuitoc pailas-ñucas PENDIENTE DE MEJORA
 	PENDIENTE impresion despachos de farmacia
-
-
-
 	cuando aplica abono no refresca la pantala liquidaciondetalle para reflejar el monot. pero ojo primero refrescar liquidacion, luego liquidacion detalle y luego seleccionar ops
           como hacer ello?
-	Graves como imprimir por ajax las ordenes eje,plo : laboratior con Blob de muchos archivo data de muchos archivos vblob etc. INVESTIGAR cacharrear, por el momento descarga en el servidor
 	PREOCUPANTE la demora para hacer un folio clinico de cualquier paciente desde un cliente
 	fijate que el header de fromular no se extendio hacia la derecha en el cliente .224. 
 
@@ -1058,11 +1023,9 @@ Puesta a Punta :
 	
 FEB 16:
 
-	Ops cuando creo un Triage me quita la ventana Crear TRiag GRAVISISSIMO ,, ops esta relacionado con los permisos TRIAG
- 	verificar
+	Ops cuando creo un Triage me quita la ventana Crear TRiag GRAVISISSIMO ,, ops esta relacionado con los permisos TRIAG	verificar
 	Cuando hace un triage No lo imprime
 	La impresion de la HC. super - recontra lenta
-	En la historia clinica aun no imprime nada del folio de la ciruigia y nadad de la cirugia
 	OPS imprimio una hoja de admision aun paciente en urgencias ???
 	No esta hecho nada en autorizaciones cirugia
 	Ojo hay que quitarle los avisos main.js a facturacion y a autoriaciones etc
@@ -1070,7 +1033,6 @@ FEB 16:
 	Como hacer para que cunado se autoriza y no hay mas pendientes si desaparece de aut, pero
 	No esta desapareciendo de autDet (la bendita vaina de no poder seleccionar una fila del datatable)
 	cuando uno esta creando un laboratoio no se ven las observa
-	Y despues si seguir con Cirugia ... 
         OJO HAY QUE CREAR TODA LAS FUNCIONES EN LA PARAMETRIZACION, fcaturas, rips,json etc, VER CUALES ESTAN ACTIVAS ULTIMA VERSION OJO
 	ops no me grabo lo de nota aclaratoria
 	ojo hay un error al dar salida cliica al paciente si no hay complicacion-dx no guarda NULL PROBAR
@@ -1078,21 +1040,17 @@ FEB 16:
 	La elaboracion de factura debe imprimir la factura OJO
 	
 FEB 20:
+OJO EL 23 DE FEBRERO TRANAJAR TODO LO DE CIRUGIA Y CARTERA PENDIENTE VERIFICAR ABAJO Y ARRIBA DE ESTE DOCUMENTO
 
-	El checkbox de materialesif¿formecirugia cuando INACTIVO no lo lee el request.POST
-	Ops como colocarle el convenio a una cirugia, en que momento hacerlo en la programacion de cirugia desarrollar esto alli ?
 	Ops no me cuadro la liquidacion de la cuenta con la ciruguia algo pasa.. VERIFICAR. Puesta a punta
-	En cirugia programacion, sigue listando las cirugias ya programadas y ya realziadas
-	No esta crendo el folio de la cirugia en historia_cirugias
 	OPS hay algo que no entiendo al realzar la cirugia primero no me creo el folio en clinico_historialcirugias y despues sip
-	OPS al crear una solicitud de cirugia me creo dos (2) en Cirugia
 	OPS como se ANULA una solicitud de cirugia
 	OJO con las edades me esan mamando gallo en la pantalla de solicitud
 	OPS no me dejo cancelar una programacion de cirugias
 	OPS creo que hay un problema de diseño al no permitir mas de una cirugia para un mismo paciente en el mismo ingreso VERIFICAR
-	OPS el convenio solo falta cyunado desde HC hacen la solciitud debe haber algo para actualziar el convenio vERIFICAR
-
-
+	OPS el convenio solo falta cunado desde HC hacen la solciitud debe haber algo para actualziar el convenio vERIFICAR
+	OPS en cirugia el tab Ocupacion salas muestra LIBRE buna OCUPADA CORREGIR
+	OPS LOS paraclinicos en ENFERMERIA NO MUESTRA CIRUGIAS ??
 	Terminar, probar cartera
 	mañana crear una cirugia , ver impresion HC y facturarla, seguimiento
 	Luego si RIPS y GLOSAS

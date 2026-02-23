@@ -2599,9 +2599,6 @@ def escogeAcceso(request, Sede, Username, Profesional, Documento, NombreSede, es
         # Fin combo vias de acceso
 
 
-
-
-
         miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                        password="123456")
         curt = miConexiont.cursor()

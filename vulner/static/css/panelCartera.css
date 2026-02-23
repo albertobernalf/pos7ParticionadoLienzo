@@ -315,13 +315,13 @@ input[type="date"] {
   /* margin:10 */
 }
 
-#flex-container-pagosEmpresasMuestarPago{
+#flex-container-pagosEmpresasMuestraPago div{
   display: inline-flex;
   justify-content: left;
 }
 
 
-#flex-container-pagosEmpresasMuestarPago{
+#flex-container-pagosEmpresasMuestraPago{
   width: 800px;
   height: 150px;
   color: #FFF;

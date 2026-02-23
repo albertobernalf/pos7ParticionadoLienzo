@@ -2191,13 +2191,18 @@ def Load_dataPagosEmpresas(request, data):
     sedesClinica_id = d['sedesClinica_id']
     print("sedesClinica_id = ", sedesClinica_id)
 
+
+    empresaId = d['empresaId']
+    print("empresaId = ", empresaId)
+
+
     pagosEmpresas = []
 
     miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
     curx = miConexionx.cursor()
 
-    detalle = 'SELECT pag.id id, emp.nombre empresa, pag.fecha, forma.nombre formaPago, tipo.nombre tipoPago , pag.valor , pag.descripcion, pag."fechaRegistro", pag.radicado, serv.nombre servicio FROM cartera_pagosEmpresas pag INNER JOIN facturacion_empresas emp ON (emp.id=pag.empresa_id) INNER JOIN cartera_formaspagos forma ON (forma.id = pag."formaPago_id") INNER JOIN cartera_tipospagos tipo ON (tipo.id="tipoPago_id") LEFT JOIN sitios_serviciosadministrativos serv on (serv.id= pag."serviciosAdministrativos_id")  WHERE pag."sedesClinica_id" = ' + "'" + str(sedesClinica_id) + "'"  
+    detalle = 'SELECT pag.id id, emp.nombre empresa, pag.fecha, forma.nombre formaPago, tipo.nombre tipoPago , pag.valor , pag.descripcion, pag."fechaRegistro", pag.radicado, serv.nombre servicio FROM cartera_pagosEmpresas pag INNER JOIN facturacion_empresas emp ON (emp.id=pag.empresa_id) INNER JOIN cartera_formaspagos forma ON (forma.id = pag."formaPago_id") INNER JOIN cartera_tipospagos tipo ON (tipo.id="tipoPago_id") LEFT JOIN sitios_serviciosadministrativos serv on (serv.id= pag."serviciosAdministrativos_id")  WHERE pag."sedesClinica_id" = ' + "'" + str(sedesClinica_id) + "' AND pag.empresa_id = "  + "'" + str(empresaId) + "'"
 
     print ("detalle = ", detalle)
 
@@ -2469,6 +2474,50 @@ def Load_dataCarteraDetalle(request, data):
     print("carteraDetalle "  , carteraDetalle )
 
     serialized1 = json.dumps(carteraDetalle , default=str)
+
+    return HttpResponse(serialized1, content_type='application/json')
+
+
+
+def Load_dataEmpresas(request, data):
+
+    print("Entre Load_dataEmpresas")
+
+    context = {}
+    print("aqui01")
+    d = json.loads(data)
+
+    print("aqui02")
+
+    sede = d['sedesClinica_id']
+    print("sedesClinica_id = ", sede)
+
+    empresas = []
+
+
+    miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres", password="123456")
+
+    curx = miConexionx.cursor()
+
+    print ("antesde detalle = ")
+
+    comando ='SELECT emp.id id, tipEmp.nombre tipoEmpresa,tipDoc.nombre  tipoDoc,  documento, emp.nombre empresa ,"codigoEapb",dep.nombre departamento, mun.nombre municipio, direccion, telefono,representante   FROM facturacion_empresas emp INNER JOIN sitios_departamentos dep on (dep.id= emp.departamento_id) INNER JOIN sitios_municipios mun on (mun.departamento_id = dep.id AND mun.id = emp.municipio_id) INNER JOIN usuarios_tiposdocumento tipDoc on (tipDoc.id = emp."tipoDoc_id") LEFT JOIN facturacion_tiposempresa tipEmp on (tipEmp.id=emp."tipoEmpresa_id") where emp."estadoReg" = ' + "'" + str('A') + "'" + ' order by emp.nombre'
+
+    print ("comando = ", comando)
+
+    curx.execute(comando)
+
+    for id, tipoEmpresa, tipoDoc, documento, empresa, codigoEapb, departamento, municipio,direccion, telefono,  representante  in curx.fetchall():
+        empresas.append(
+            {"model": "cartera.Empresas", "pk": id, "fields":
+                {'id': id, 'tipoEmpresa': tipoEmpresa , 'tipoDoc':tipoDoc, 'documento':documento , 'empresa':empresa,
+                 'codigoEapb':codigoEapb, 'departamento':departamento, 'municipio':municipio, 'direccion':direccion, 'telefono': telefono, 'representante':representante}})
+
+
+    miConexionx.close()
+    print("empresas "  , empresas )
+
+    serialized1 = json.dumps(empresas , default=str)
 
     return HttpResponse(serialized1, content_type='application/json')
 

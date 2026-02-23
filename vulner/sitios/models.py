@@ -321,12 +321,12 @@ class Salas(models.Model):
     serviciosAdministrativos = models.ForeignKey('sitios.Serviciosadministrativos', blank=True,null= True, editable=True, on_delete=models.PROTECT)
     estadoSala = models.ForeignKey('cirugia.EstadosSalas', blank=True, null=True, editable=True,   on_delete=models.PROTECT) 
     fechaRegistro = models.DateTimeField(default=now, editable=False)
-    iniciaServicio =  models.CharField(max_length=5,blank=True, null=True, )
-    finServicio =  models.CharField(max_length=5,blank=True, null=True, )
+    #iniciaServicio =  models.CharField(max_length=5,blank=True, null=True, )
+    #finServicio =  models.CharField(max_length=5,blank=True, null=True, )
     estadoReg = models.CharField(max_length=1, choices=ESTADOREG_CHOICES,default='A', editable=False)
 
     def __str__(self):
-        return '%s %s' % (self.nombre , self.serviciosAdministrativos)
+        return '%s %s %s' % (self.sedesClinica , self.nombre , self.serviciosAdministrativos)
 
 
 class TiposSalas(models.Model):
@@ -339,3 +339,23 @@ class TiposSalas(models.Model):
 
     def __str__(self):
         return self.nombre
+
+class DisponibilidadSalas(models.Model):
+    ESTADOREG_CHOICES = [
+        ('A', 'Activo'),
+        ('I', 'Inactivo'), ]
+    ESTADO_SALA_CHOICES = [
+        ('L', 'Activo'),
+        ('M', 'Mantenimiento'), ]
+    id = models.AutoField(primary_key=True)
+    sala =  models.ForeignKey('sitios.salas', blank=True,null= True, editable=True, on_delete=models.PROTECT)
+    año = models.IntegerField(blank=True, null=True)
+    mes= models.IntegerField(blank=True, null=True)
+    dia= models.IntegerField(blank=True, null=True)
+    desdeHora =	models.CharField(max_length=5,blank=True, null=True)
+    hastaHora = models.CharField(max_length=5,blank=True, null=True)
+    estadoSala = models.CharField(max_length=1,choices=ESTADO_SALA_CHOICES, default='A', editable=False)
+    estadoReg = models.CharField(max_length=1,choices=ESTADOREG_CHOICES, default='L', editable=False)
+
+    def __int__(self):
+        return self.año

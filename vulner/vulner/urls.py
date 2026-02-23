@@ -44,6 +44,7 @@ from cirugia import views as viewsCirugia
 from farmacia import views as viewsFarmacia
 from enfermeria import views as viewsEnfermeria
 from Reportes import views as  viewsReportesR
+from sitios import views as  viewsSitios
 
 from autorizaciones import views as viewsAutorizaciones
 from autorizaciones import viewsReportes as viewsAutorizacionesReportes
@@ -362,6 +363,7 @@ urlpatterns = [
     path('guardarPagosEmpresasDetalle/', viewsCartera.GuardarPagosEmpresasDetalle, name='guardarPagos_EmpresasDetalle'),
     path('load_dataPagosEmpresasDetalle/<str:data>', viewsCartera.Load_dataPagosEmpresasDetalle, name='load_data_PagosEmpresasDetalle'),
     path('load_dataCarteraDetalle/<str:data>', viewsCartera.Load_dataCarteraDetalle, name='loaddata_CarteraDetalle'),
+    path('load_dataEmpresas/<str:data>', viewsCartera.Load_dataEmpresas, name='loaddata_Empresas'),
 
     # Tarifas
 	
@@ -467,7 +469,7 @@ urlpatterns = [
     path('buscarConveniosCirugiaPaciente/', viewsCirugia.BuscarConveniosCirugiaPaciente, name='BuscarConveniosCirugia_Paciente'),
     path('buscarProcedimientosParticipantesDeCirugia/', viewsCirugia.BuscarProcedimientosParticipantesDeCirugia, name='buscarProcedimientosParticipantesDe_Cirugia'),
     path('buscarProcedimientosMaterialesDeCirugia/', viewsCirugia.BuscarProcedimientosMaterialesDeCirugia,  name='buscarProcedimientosMaterialesDe_Cirugia'),
-
+    path('load_dataDisponibilidadSalasCirugia/<str:data>', viewsCirugia.Load_dataDisponibilidadSalasCirugia,name='load_dataDisponibilidad_salasCirugia'),
 
 
 

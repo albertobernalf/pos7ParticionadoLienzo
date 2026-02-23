@@ -154,6 +154,49 @@ def Load_dataSalasCirugia(request, data):
     return HttpResponse(serialized1, content_type='application/json')
 
 
+
+def Load_dataDisponibilidadSalasCirugia(request, data):
+    print("Entre Load_dataDisponibilidadaSalasCirugia")
+
+    context = {}
+    d = json.loads(data)
+
+
+    sede = d['sede']
+    print("sede:", sede)
+    salaId = d['salaId']
+    print("salaId:", salaId)
+
+
+    disponibilidadSalasCirugia = []
+
+    miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+                                   password="123456")
+    curx = miConexionx.cursor()
+
+
+    detalle = 'SELECT sal.id id, sal.id sala, sal.nombre nombre, dispoSala.año , dispoSala.mes , dispoSala.dia, dispoSala."desdeHora", dispoSala."hastaHora", dispoSala."estadoSala"  FROM sitios_salas sal,  sitios_disponibilidadSalas dispoSala WHERE sal."sedesClinica_id" = ' + "'" + str(sede) + "'" + ' AND sal.id = dispoSala.sala_id AND sal.id = ' + "'" + str(salaId) + "'" + ' ORDER BY sal.numero'
+
+    print(detalle)
+
+    curx.execute(detalle)
+
+    for id, sala, nombre, año, mes, dia, desdeHora, hastaHora , estadoSala  in curx.fetchall():
+        disponibilidadSalasCirugia.append(
+            {"model": "sitios.salas", "pk": id, "fields":
+                {'id': id, 'sala': sala, 'nombre': nombre, 'año': año,
+                 'mes': mes, 'dia': dia, 'desdeHora':desdeHora, 'hastaHora':hastaHora, 'estadoSala':estadoSala}})
+
+    miConexionx.close()
+    print(disponibilidadSalasCirugia)
+
+    serialized1 = json.dumps(disponibilidadSalasCirugia, default=str)
+
+    return HttpResponse(serialized1, content_type='application/json')
+
+
+
+
 def CrearProgramacionCirugia(request):
 
     print ("Entre CrearProgramacionCirugia" )
@@ -197,6 +240,11 @@ def CrearProgramacionCirugia(request):
     estadoProgramacion = EstadosProgramacion.objects.get(nombre='Programada')
     estadoCirugia = EstadosCirugias.objects.get(nombre='PENDIENTE')
     estadoSala = EstadosSalas.objects.get(nombre='OCUPADA')
+
+    conveniosProg = request.POST["conveniosProg"]
+    print("conveniosProg =", conveniosProg)
+
+
     estadoReg = 'A'
     fechaRegistro = timezone.now()
 
@@ -242,7 +290,7 @@ def CrearProgramacionCirugia(request):
         print(comando)
         cur3.execute(comando)
 
-        comando1 = 'UPDATE cirugia_cirugias SET "fechaProg" = ' + "'" + str(fechaProgramacionInicia)   + "'," + '"HoraProg" = ' + "'" + str(horaProgramacionInicia)  +  "', sala_id = '" + str(sala) + "'," + '"estadoProgramacion_id" = ' + "'" + str(estadosProgramacionY) + "'," + '"estadoCirugia_id" = ' + "'" + str(estadoCirugia.id) + "'" + ' WHERE id = ' + "'"  + str(registroCirugia.id) + "'"
+        comando1 = 'UPDATE cirugia_cirugias SET "fechaProg" = ' + "'" + str(fechaProgramacionInicia)   + "'," + '"HoraProg" = ' + "'" + str(horaProgramacionInicia)  +  "', sala_id = " + str(sala) + "," + '"estadoProgramacion_id" = ' + "'" + str(estadosProgramacionY) + "'," + '"estadoCirugia_id" = '  + str(estadoCirugia.id) + ", convenio_id = " + "'" + str(conveniosProg) + "'" + ' WHERE id = ' + "'"  + str(registroCirugia.id) + "'"
 
         print(comando1)
         cur3.execute(comando1)
@@ -428,7 +476,11 @@ def CrearSolicitudCirugia(request):
     serviciosAdministrativos = request.POST.get("serviciosAdministrativosI")
     print ("serviciosAdministrativos =", serviciosAdministrativos)
 
-    solicitaSangre = request.POST["solicitaSangre"]
+    if 'solicitaSangre' in request.POST:
+        solicitaSangre = 'S'
+    else:
+        solicitaSangre = 'N'
+
     print ("solicitaSangre =", solicitaSangre)
 
     describeSangre = request.POST["describeSangre"]
@@ -437,32 +489,63 @@ def CrearSolicitudCirugia(request):
     cantidadSangre = request.POST["cantidadSangre"]
     print ("cantidadSangre =", cantidadSangre)
 
-    solicitaCamaUci = request.POST["solicitaCamaUci"]
+    if 'solicitaCamaUci' in request.POST:
+        solicitaCamaUci = 'S'
+    else:
+        solicitaCamaUci = 'N'
+
+
     print ("solicitaCamaUci =", solicitaCamaUci)
 
-    solicitaMicroscopio = request.POST["solicitaMicroscopio"]
-    print ("olicitaMicroscopio =", solicitaMicroscopio)
+    if 'solicitaMicroscopio' in request.POST:
+        solicitaMicroscopio = 'S'
+    else:
+        solicitaMicroscopio = 'N'
 
+    print ("solicitaMicroscopio =", solicitaMicroscopio)
 
-    solicitaCamaUci = request.POST["solicitaCamaUci"]
-    print ("solicitaCamaUci =", solicitaCamaUci)
+    if 'solicitaRx' in request.POST:
+        solicitaRx = 'S'
+    else:
+        solicitaRx = 'N'
 
-    solicitaRx = request.POST["solicitaRx"]
     print ("solicitaRx =", solicitaRx)
 
-    solicitaCamaUci = request.POST["solicitaCamaUci"]
-    print ("solicitaCamaUci =", solicitaCamaUci)
+    if 'solicitaOsteosintesis' in request.POST:
+        solicitaOsteosintesis = 'S'
+    else:
+        solicitaOsteosintesis = 'N'
 
-    solicitaOsteosintesis = request.POST["solicitaOsteosintesis"]
     print ("solicitaOsteosintesis =", solicitaOsteosintesis)
-    solicitaBiopsia = request.POST["solicitaBiopsia"]
+
+    if 'solicitaBiopsia' in request.POST:
+        solicitaBiopsia = 'S'
+    else:
+        solicitaBiopsia = 'N'
+
     print ("solicitaBiopsia =", solicitaBiopsia)
-    solicitaMalla = request.POST["solicitaMalla"]
+
+    if 'solicitaMalla' in request.POST:
+        solicitaMalla = 'S'
+    else:
+        solicitaMalla = 'N'
+
     print ("solicitaMalla =", solicitaMalla)
-    solicitaOtros = request.POST["solicitaOtros"]
+
+    if 'solicitaOtros' in request.POST:
+        solicitaOtros = 'S'
+    else:
+        solicitaOtros = 'N'
+
+
     print ("solicitaOtros =", solicitaOtros)
 
-    anestesia = request.POST["anestesia"]
+    if 'anestesia' in request.POST:
+        anestesia = 'S'
+    else:
+        anestesia = 'N'
+
+
     print ("anestesia =", anestesia)
     sedesClinica_id = request.POST["sedesClinica_id"]
     print("sedesClinica_id =", sedesClinica_id)
@@ -470,29 +553,49 @@ def CrearSolicitudCirugia(request):
     username = request.POST["username3_id"]
     print("username =", username)
 
+    if 'solicitaHospitalizacion' in request.POST:
 
-    solicitaHospitalizacion = request.POST["solicitaHospitalizacion"]
+       solicitaHospitalizacion = 'S'
+    else:
+        solicitaHospitalizacion = 'N'
+
     print ("solicitaHospitalizacion =", solicitaHospitalizacion)
-    solicitaAyudante = request.POST["solicitaAyudante"]
+
+    if 'solicitaAyudante' in request.POST:
+        solicitaAyudante = 'S'
+    else:
+        solicitaAyudante = 'N'
+
+
     print ("solicitaAyudante =", solicitaAyudante)
-    solicitaTiempoQx = request.POST["solicitaTiempoQx"]
+    if 'solicitaTiempoQx' in request.POST:
+        solicitaTiempoQx = 'S'
+    else:
+        solicitaTiempoQx = 'N'
+
     print ("solicitaTiempoQx =", solicitaTiempoQx)
+    if 'solicitaTipoQx' in request.POST:
+        solicitaTipoQx = 'S'
+    else:
+        solicitaTipoQx= 'N'
 
-
-    solicitaTipoQx = request.POST["solicitatipoQx"]
     print ("solicitatipoQx =", solicitaTipoQx)
-    solicitaAnestesia = request.POST["solicitaAnestesia"]
-    print ("solicitaAnestesia =", solicitaAnestesia)
-    solicitaOtros = request.POST["solicitaOtros"]
-    print ("solicitaOtros =", solicitaOtros)
+
     tiempoMaxQx = request.POST["tiempoMaxQx"]
     print ("tiempoMaxQx =", tiempoMaxQx)
-    solicitaAutoSutura = request.POST["solicitaAutoSutura"]
-    print ("solicitaAutoSutura =", solicitaAutoSutura)
 
-    solicitaSoporte = request.POST["solicitaSoporte"]
+    if 'solicitaAutoSutura' in request.POST:
+        solicitaAutoSutura = 'S'
+    else:
+        solicitaAutoSutura= 'N'
+
+    
+    if 'solicitaSoporte' in request.POST:
+        solicitaSoporte = 'S'
+    else:
+        solicitaSoporte= 'N'
+
     print ("solicitaSoporte =", solicitaSoporte)
-
     describeOtros = request.POST["describeOtros"]
     print ("describeOtros =", describeOtros)
 
@@ -504,7 +607,6 @@ def CrearSolicitudCirugia(request):
 
     dxPreQx = request.POST["dxPreQx"]
     print ("dxPreQx =", dxPreQx)
-
 
     dxPrinc = request.POST["dxPrinc"]
     print ("dxPrinc =", dxPrinc)
@@ -551,19 +653,20 @@ def CrearSolicitudCirugia(request):
 
     registroIngreso = Ingresos.objects.get(id=ingresoId)
 
+    print("A INSERTAR")
+
     miConexion3 = None
     try:
 
         miConexion3 = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",  password="123456")
         cur3 = miConexion3.cursor()
 
-
-        comando = 'INSERT INTO cirugia_cirugias ("consecAdmision", "fechaSolicita", "solicitaHospitalizacion", "solicitaAyudante", "solicitaTiempoQx",  "solicitaAnestesia", "solicitaSangre", "describeSangre", "cantidadSangre", "solicitaCamaUci", "solicitaMicroscopio", "solicitaRx", "solicitaAutoSutura", "solicitaOsteosintesis",  "solicitaBiopsia", "solicitaMalla", "solicitaOtros", "describeOtros", "tiempoMaxQx", "fechaRegistro", "estadoReg", anestesia_id, documento_id,  "dxPreQx_id", "dxPrinc_id", "dxRel1_id", especialidad_id, "sedesClinica_id", "tipoDoc_id", "usuarioRegistro_id", "usuarioSolicita_id", "serviciosAdministrativos_id", "estadoProgramacion_id", "tiposCirugia_id","estadoCirugia_id", anulado, convenio_id) VALUES (' + "'" + str(registroIngreso.consec) + "','" + str(fechaSolicita) + "','" + str(solicitaHospitalizacion) + "','" + str(solicitaAyudante) + "','" + str(solicitaTiempoQx) + "','"  + str(solicitaAnestesia) + "','" + str(solicitaSangre) + "','" + str(describeSangre) + "','" + str(cantidadSangre) + "','" + str(solicitaCamaUci) + "','" + str(solicitaMicroscopio) + "','" + str(solicitaRx) + "','" + str(solicitaAutoSutura) + "','" + str(solicitaOsteosintesis) + "','"  + str(solicitaBiopsia) + "','" + str(solicitaMalla) + "','" + str(solicitaOtros) + "','" + str(describeOtros) + "','" + str(tiempoMaxQx) + "','" + str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(anestesia) + "','" + str(registroIngreso.documento_id) + "','" + str(dxPreQx) + "','" + str(dxPrinc) + "','" + str(dxRel1) + "','" + str(especialidadX) + "','" + str(sedesClinica_id) + "','" + str(registroIngreso.tipoDoc_id) + "','" + str(username) + "','" + str(username) + "','" + str(serviciosAdministrativos) + "','" + str(estadoProgramacion.id) + "','" + str(tiposCirugia) + "','" + str(estadoCirugia.id) + "','N','" + str(convenioProc) + "'" + ') RETURNING id'
+        comando = 'INSERT INTO cirugia_cirugias ("consecAdmision", "fechaSolicita", "solicitaHospitalizacion", "solicitaAyudante", "solicitaTiempoQx",  "solicitaAnestesia", "solicitaSangre", "describeSangre", "cantidadSangre", "solicitaCamaUci", "solicitaMicroscopio", "solicitaRx", "solicitaAutoSutura", "solicitaOsteosintesis",  "solicitaBiopsia", "solicitaMalla", "solicitaOtros", "describeOtros", "tiempoMaxQx", "fechaRegistro", "estadoReg", anestesia_id, documento_id,  "dxPreQx_id", "dxPrinc_id", "dxRel1_id", especialidad_id, "sedesClinica_id", "tipoDoc_id", "usuarioRegistro_id", "usuarioSolicita_id", "serviciosAdministrativos_id", "estadoProgramacion_id", "tiposCirugia_id","estadoCirugia_id", anulado, convenio_id) VALUES (' + "'" + str(registroIngreso.consec) + "','" + str(fechaSolicita) + "','" + str(solicitaHospitalizacion) + "','" + str(solicitaAyudante) + "','" + str(solicitaTiempoQx) + "','"  + str(solicitaAnestesia) + "','" + str(solicitaSangre) + "','" + str(describeSangre) + "','" + str(cantidadSangre) + "','" + str(solicitaCamaUci) + "','" + str(solicitaMicroscopio) + "','" + str(solicitaRx) + "','" + str(solicitaAutoSutura) + "','" + str(solicitaOsteosintesis) + "','"  + str(solicitaBiopsia) + "','" + str(solicitaMalla) + "','" + str(solicitaOtros) + "','" + str(describeOtros) + "','" + str(tiempoMaxQx) + "','" + str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(anestesia) + "','" + str(registroIngreso.documento_id) + "','" + str(dxPreQx) + "','" + str(dxPrinc) + "','" + str(dxRel1) + "','" + str(especialidadX) + "','" + str(sedesClinica_id) + "','" + str(registroIngreso.tipoDoc_id) + "','" + str(username) + "','" + str(username) + "','" + str(serviciosAdministrativos) + "','" + str(estadoProgramacion.id) + "','" + str(tiposCirugia) + "','" + str(estadoCirugia.id) + "','N','" + str(convenioProc) + "'" + ') RETURNING id;'
+ 
+        print("comando = " , comando)
         resultado = cur3.execute(comando)
 
         cirugiaId = cur3.fetchone()[0]
-
-        print(comando)
 
         comando2 = 'INSERT INTO cirugia_programacioncirugias ("consecAdmision", "fechaRegistro", "estadoReg", documento_id, "sedesClinica_id", "tipoDoc_id", "usuarioRegistro_id",  "estadoProgramacion_id", cirugia_id) values (' + "'" + str(registroIngreso.consec) + "','" + str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(registroIngreso.documento_id) + "','" + str(sedesClinica_id) + "','" + str(registroIngreso.tipoDoc_id) + "','" + str(username) + "','" + str(estadoProgramacion.id) + "','" + str(cirugiaId)  + "')"
 
@@ -1245,6 +1348,30 @@ def BuscaProgramacionCirugia(request):
 
     # Fin combo estadosProgramacion
 
+    # Combo convenios paciente
+
+    miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+                                   password="123456")
+    curt = miConexiont.cursor()
+
+    #comando = "SELECT p.id id, p.nombre nombre FROM  cirugia_estadosprogramacion p where nombre in ( " + "'" + str('Programada') + "','" + str('Cancelada')  + "')" + ' ORDER BY nombre'
+    comando = 'select conv.id, conv.nombre FROM cirugia_programacioncirugias prog LEFT JOIN facturacion_conveniospacienteingresos convIngreso ON (convIngreso."tipoDoc_id"= prog."tipoDoc_id" AND convIngreso.documento_id=prog.documento_id AND convIngreso."consecAdmision" = prog."consecAdmision") LEFT JOIN contratacion_convenios conv ON (conv.id = convIngreso.convenio_id) where prog.id = ' + "'" + str(programacionId) + "'"
+
+    curt.execute(comando)
+    print(comando)
+
+    conveniosPaciente = []
+
+    for id, nombre in curt.fetchall():
+        conveniosPaciente.append({'id': id, 'nombre': nombre})
+
+    miConexiont.close()
+    print("ConveniosPaciente", conveniosPaciente)
+
+
+    # Fin combo estadosProgramacion
+
+
     # Combo procedParticipantes
 
     miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
@@ -1292,8 +1419,6 @@ def BuscaProgramacionCirugia(request):
 
     # Fin combo procedParticipantes
 
-
-
     programacionCirugia = []
 
     miConexion3 = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
@@ -1322,7 +1447,8 @@ def BuscaProgramacionCirugia(request):
     programacionCirugia[0]['estadosProgramacion'] = estadosProgramacion
     programacionCirugia[0]['ProcedParticipantes'] = procedParticipantes
     programacionCirugia[0]['ProcedMateriales'] = procedMateriales
-
+    programacionCirugia[0]['ConveniosPaciente'] = conveniosPaciente
+    print(programacionCirugia)
 
     serialized1 = json.dumps(programacionCirugia, default=str)
 
@@ -1346,11 +1472,6 @@ def CrearMaterialCirugia(request):
 
 
     print ("hojaDeGasto =", hojaDeGasto)
-
-    if (hojaDeGasto == 'on'):
-        hojaDeGasto='S'
-    else:
-        hojaDeGasto = 'N'
 
     procedMateriales = request.POST["procedMateriales"]
     print ("procedMateriales =", procedMateriales)

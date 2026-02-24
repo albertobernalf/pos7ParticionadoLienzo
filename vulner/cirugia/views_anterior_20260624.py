@@ -43,7 +43,6 @@ from django.utils import timezone
 from contratacion.models import  ConveniosLiquidacionTarifasHonorarios
 from tarifarios.models import TarifariosDescripcion , TiposHonorarios
 
-
 # Create your views here.
 
 
@@ -167,26 +166,48 @@ def Load_dataDisponibilidadSalasCirugia(request, data):
     print("sede:", sede)
     salaId = d['salaId']
     print("salaId:", salaId)
+    fechaDia = timezone.now()
 
 
-    disponibilidadSalasCirugia = []
 
     miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
     curx = miConexionx.cursor()
 
+    comando = 'SELECT sala, fecha, "desdeHora", "hastaHora" FROM sitios_dispoibilidadsalas WHERE id = '  + "'" + str(salaId) + "'"
+    print("comando = ", comando)
+    curx.execute(comando)
 
-    detalle = 'SELECT sal.id id, sal.id salas, sal.nombre nombre, dispoSala.fecha , dispoSala."desdeHora", dispoSala."hastaHora", dispoSala."estadoSala"  FROM sitios_salas sal,  sitios_disponibilidadSalas dispoSala WHERE sal."sedesClinica_id" = ' + "'" + str(sede) + "'" + ' AND sal.id = dispoSala.salas_id AND sal.id = ' + "'" + str(salaId) + "'" + ' ORDER BY sal.numero'
+    salas = []
+
+    for  sala, fecha, desdeHora, hastaHora in curx.fetchall():
+        disponibilidadSalasCirugia.append(
+            {"model": "sitios.salas", "pk": id, "fields":
+                {'id': id, 'sala': sala, 'nombre': nombre, 'fecha': fecha,
+                 'desdeHora':desdeHora, 'hastaHora':hastaHora, 'estadoSala':estadoSala}})
+
+
+
+
+    miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+                                   password="123456")
+    curx = miConexionx.cursor()
+
+    disponibilidadSalasCirugia = []
+
+    detalle = 'SELECT sal.id id, sal.id sala, sal.nombre nombre, dispoSala.fecha , dispoSala."desdeHora", dispoSala."hastaHora", dispoSala."estadoSala"  FROM sitios_salas sal,  sitios_disponibilidadSalas dispoSala WHERE sal."sedesClinica_id" = ' + "'" + str(sede) + "'" + ' AND sal.id = dispoSala.sala_id AND sal.id = ' + "'" + str(salaId) + "'" + ' ORDER BY sal.numero'
 
     print(detalle)
 
     curx.execute(detalle)
 
-    for id, salas, nombre, fecha, desdeHora, hastaHora , estadoSala  in curx.fetchall():
+    for id, sala, nombre, fecha, desdeHora, hastaHora , estadoSala  in curx.fetchall():
         disponibilidadSalasCirugia.append(
             {"model": "sitios.salas", "pk": id, "fields":
                 {'id': id, 'sala': sala, 'nombre': nombre, 'fecha': fecha,
                  'desdeHora':desdeHora, 'hastaHora':hastaHora, 'estadoSala':estadoSala}})
+
+
 
     miConexionx.close()
     print(disponibilidadSalasCirugia)
@@ -422,8 +443,8 @@ def Load_dataIngresosCirugia(request, data):
     return HttpResponse(serialized1, content_type='application/json')
 
 
-def Load_dataDisponibilidadSalas(request, data):
-    print("Entre Load_dataDisponibilidadSalas")
+def Load_dataDisponibilidadSala(request, data):
+    print("Entre Load_dataDisponibilidadSala")
 
     context = {}
     d = json.loads(data)
@@ -431,153 +452,39 @@ def Load_dataDisponibilidadSalas(request, data):
     username = d['username']
     sede = d['sede']
     username_id = d['username_id']
-    print ("aqui voy_01")
 
+    nombreSede = d['nombreSede']
     print("sede:", sede)
     print("username:", username)
     print("username_id:", username_id)
-    fecha_hoy = timezone.now()
-    fecha_hoy = fecha_hoy.strftime("%Y-%m-%d")
-    #fecha_hoy = datetime.now().date()
-    dias_a_revisar = 5
 
-    print("fecha_hoy = ", fecha_hoy)
+    # print("data = ", request.GET('data'))
+
+    disponibilidadCirugia = []
+
     miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
     curx = miConexionx.cursor()
 
-    comando1 = 'SELECT id, id salaId , nombre nombreSala FROM sitios_salas WHERE "sedesClinica_id"  = ' + "'" + str(sede) + "' ORDER BY id"
-    print("comando1 = ", comando1)
-    curx.execute(comando1)
+    #detalle = 'SELECT salas.id id,salas.numero numero , salas.nombre nombre,prog."fechaProgramacionInicia", prog."fechaProgramacionFin" ,cast(prog."horaProgramacionInicia" as time), cast(prog."horaProgramacionFin" as time) , ' + "'" + str('OCUPADO') + "'" + ' estado FROM cirugia_programacioncirugias prog LEFT JOIN sitios_salas salas ON (salas.id = prog.sala_id ) WHERE salas."sedesClinica_id" = ' + "'" + str(sede) + "'" + ' ORDER BY salas.numero,prog."fechaProgramacionInicia",cast(prog."horaProgramacionInicia" as time)'
+    #detalle = 'SELECT prog.id prog, salas.id id,salas.numero numero , salas.nombre nombre,prog."fechaProgramacionInicia", prog."fechaProgramacionFin" ,	cast(prog."horaProgramacionInicia" as time), cast(prog."horaProgramacionFin" as time) , ' + "'" + str('OCUPADO') + "'" + ' estado FROM cirugia_programacioncirugias prog LEFT JOIN sitios_salas salas ON (salas.id = prog.sala_id and salas."sedesClinica_id" = prog."sedesClinica_id" ) WHERE salas."sedesClinica_id" = ' + "'" + str(sede) + "'" + ' union SELECT prog.id prog, salas.id id,salas.numero numero , salas.nombre nombre,prog."fechaProgramacionFin", prog2."fechaProgramacionInicia" ,cast(prog."horaProgramacionFin" as time) + interval ' + "'" + str('1 minute') + "'" + ' , cast(prog2."horaProgramacionInicia" as time) - interval ' + "'" + str('1 minute') + "'" + ', ' + "'" + str('LIBRE') + "'" + ' estado FROM cirugia_programacioncirugias prog , sitios_salas salas, cirugia_programacioncirugias prog2 where salas.id = prog.sala_id  and salas."sedesClinica_id" = prog."sedesClinica_id" and prog2."sedesClinica_id" = prog."sedesClinica_id" and	salas."sedesClinica_id" =  ' + "'" + str(sede) + "'" + ' and  prog2.id = (select min(prog3.id) from cirugia_programacioncirugias prog3 where prog3.id > prog.id) UNION SELECT prog.id prog, salas.id id,salas.numero numero , salas.nombre nombre,prog."fechaProgramacionFin", prog2."fechaProgramacionInicia" ,cast(prog2."horaProgramacionFin" as time) + interval ' + "'" + str('1 minute') + "'" + ' , cast(salas."finServicio" as time)  , ' + "'" + str('LIBRE') + "'" + ' estado FROM cirugia_programacioncirugias prog , sitios_salas salas, cirugia_programacioncirugias prog2 where salas.id = prog.sala_id  and salas."sedesClinica_id" = prog."sedesClinica_id" and prog2."sedesClinica_id" = prog."sedesClinica_id" and	salas."sedesClinica_id" = ' + "'" + str(sede) + "'" + ' and  prog2.id = (select min(prog3.id) from cirugia_programacioncirugias prog3 where prog3.id > prog.id ) order by 3,5,7'
+    detalle = 'SELECT prog.id prog, salas.id id,salas.numero numero , salas.nombre nombre,prog."fechaProgramacionInicia", prog."fechaProgramacionFin" ,	cast(prog."horaProgramacionInicia" as time), cast(prog."horaProgramacionFin" as time) , ' + "'" + str('OCUPADO') + "'" + ' estado FROM cirugia_programacioncirugias prog LEFT JOIN sitios_salas salas ON (salas.id = prog.sala_id and salas."sedesClinica_id" = prog."sedesClinica_id" ) WHERE salas."sedesClinica_id" = ' + "'" + str(sede) + "'" + ' union SELECT prog.id prog, salas.id id,salas.numero numero , salas.nombre nombre,prog."fechaProgramacionInicia", prog."fechaProgramacionFin" ,cast(prog."horaProgramacionFin" as time) + interval ' + "'" + str('1 minute') + "'" + ' , CASE when cast(salas."finServicio" as time) >= cast(prog."horaProgramacionFin" as time) then cast(salas."finServicio" as time)   ELSE cast(prog."horaProgramacionFin" as time)  END ' + ', ' + "'" + str('LIBRE') + "'" + ' estado FROM cirugia_programacioncirugias prog LEFT JOIN sitios_salas salas ON (salas.id = prog.sala_id ) where salas."sedesClinica_id" =  ' + "'" + str(sede) + "'" + ' order by 3,5,7'
+    print(detalle)
 
-    salas = []
+    curx.execute(detalle)
 
-    for  id, salaId, nombreSala in curx.fetchall():
-        salas.append(
-            {"model": "sitios.salas", "pk": id, "fields":
-                {'id':id, 'salaId': salaId, 'nombreSala': nombreSala}})
+    contador = 0
 
-        fecha_futura = fecha_hoy
-        primeraIteracionDia = 'S'
-        print("SALA No ", salaId)
-
-
-        for i in range(dias_a_revisar + 1):
-
-            print("fecha_futura  ", fecha_futura)
-
-            comando2 = 'SELECT dispoSalas.id id , dispoSalas.id dispoId , dispoSalas.fecha, dispoSalas."desdeHora", dispoSalas."hastaHora", dispoSalas."estadoDisponibilidad" FROM sitios_disponibilidadsalas dispoSalas, sitios_salas salas WHERE salas.id = ' + "'" + str(salaId) + "' AND  salas.id = dispoSalas.salas_id  AND disposalas.fecha = " + "'" + str(fecha_futura) + "'" + ' ORDER BY "desdeHora", "hastaHora"'
-            print("comando2 = ", comando2)
-            curx.execute(comando2)
-
-            salasDisponibilidad = []
-            disponibilidadAprobada = []
-
-            for  id, dispoId , fecha, desdeHora, hastaHora, estadoDisponibilidad in curx.fetchall():
-                salasDisponibilidad.append(
-		            {"model": "sitios.disponibilidadsalas", "pk": id, "fields":
-		                {'id': id, 'dispoId': dispoId ,'fecha': fecha,
-		                 'desdeHora':desdeHora, 'hastaHora':hastaHora, 'estadoDisponibilidad':estadoDisponibilidad}})
-
-                print("voy por el comando3 = ")
-                comando3 = 'SELECT prog.id, prog.id progId, prog."fechaProgramacionInicia" fechaProgramacionInicia, prog."fechaProgramacionFin" fechaProgramacionFin,	prog."horaProgramacionInicia" horaProgramacionInicia, prog."horaProgramacionFin" horaProgramacionFin , usu.nombre nombrePaciente FROM cirugia_programacioncirugias prog INNER JOIN usuarios_usuarios usu ON (usu.id = prog.documento_id ) WHERE prog.sala_id = ' + "'" + str(salaId) + "'" + ' AND prog."fechaProgramacionInicia" = ' + "'" + str(fecha_futura) + "' ORDER BY " + ' prog."horaProgramacionInicia" '
-                print("comando3 = ", comando3)
-
-                curx.execute(comando3)
-                disponibilidadCirugia = []
-
-
-                for  id, progId, fechaProgramacionInicia, fechaProgramacionFin,  horaProgramacionInicia, horaProgramacionFin , nombrePaciente in curx.fetchall():
-                        disponibilidadCirugia.append(
-                            {"model": "admisiones.disponibilidadCirugia", "pk": id, "fields":
-                                {'id':id, 'progId':progId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
-                                 'horaProgramacionFin': horaProgramacionFin,'nombrePaciente':nombrePaciente}})
-                        print("que paso")
-
-                        fechaProgramacionIniciaAnterior = fechaProgramacionInicia
-                        fechaProgramacionFinAnterior = fechaProgramacionFin
-                        horaProgramacionIniciaAnterior = horaProgramacionInicia
-                        horaProgramacionFinAnterior = horaProgramacionFin
-
-                        print("voy a comenzar a escribir ")
-
-                        if (primeraIteracionDia == 'S'):
-
-                            print ("entre primera iteracion")
-                            print("desdeHora:" , desdeHora)
-                            print("horaProgramacionInicia:", horaProgramacionInicia)
-
-                            if (desdeHora < horaProgramacionInicia):
-                                print("entre desdeHora <  horaProgramacionInicia")
-                                # Hueco DISPONIBLE
-                                #disponibilidadAprobada.append(
-                                #            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                #            {'id':id, 'progId':dispoId, 'salaId':salaId, 'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': desdeHora,
-                                #             'horaProgramacionFin': horaProgramacionInicia,'nombrePaciente':'','estado':'DISPONIBLE'}})
-                                #Ahora si la cirugia AGENDADA
-                                disponibilidadAprobada.append(
-                                            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                            {'id':id, 'progId':progId, 'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
-                                             'horaProgramacionFin': horaProgramacionFin ,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
-
-
-                                primeraIteracionDia == 'N'
-                                print("disponibilidadAprobada = ", disponibilidadAprobada)
-
-                            if (desdeHora == horaProgramacionInicia):
-                                # Ahora si la cirugia AGENDADA
-                                #disponibilidadAprobada.append(
-                                #            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                ##            {'id':id, 'progId':progId, 'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
-                                #             'horaProgramacionFin': horaProgramacionFin,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
-                                pass
-
-                            primeraIteracionDia == 'N'
-                            fechaProgramacionIniciaAnterior = fechaProgramacionInicia
-                            fechaProgramacionFinAnterior = fechaProgramacionFin
-                            horaProgramacionIniciaAnterior = horaProgramacionInicia
-                            horaProgramacionFinAnterior = horaProgramacionFin
-
-
-                        else:
-                            # Por aqui No es primera iteracion
-
-                            if (horaProgramacionFinAnterior < horaProgramacionInicia):
-                                # Hueco DISPONIBLE
-                                #disponibilidadAprobada.append(
-                                #            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                #            {'id':id, 'progId':dispoId, 'salaId':salaId, 'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': horaProgramacionFinAnterior,
-                                #             'horaProgramacionFin': horaProgramacionInicia,'nombrePaciente':'','estado':'DISPONIBLE'}})
-                                # Ahora si la cirugia AGENDADA
-                                #disponibilidadAprobada.append(
-                                #            {"model": "cirugia_programacion", "pk": id, "fields":
-                                #            {'id':id, 'progId':progId, 'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
-                                #             'horaProgramacionFin': horaProgramacionFin ,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
-                                pass
-
-                            if (horaProgramacionFinAnterior == horaProgramacionInicia):
-
-                                # Ahora si la cirugia AGENDADA
-                                #disponibilidadAprobada.append(
-                                #            {"model": "cirugia.programacionAprobada", "pk": progId, "fields":
-                                #            {'id':id, 'progId':progId, 'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
-                                #             'horaProgramacionFin': horaProgramacionFin ,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
-                                pass
-                            fechaProgramacionIniciaAnterior = fechaProgramacionInicia
-                            fechaProgramacionFinAnterior = fechaProgramacionFin
-                            horaProgramacionIniciaAnterior = horaProgramacionInicia
-                            horaProgramacionFinAnterior = horaProgramacionFin
-
-
-                fecha_futura = fecha_hoy + timedelta(days=i)
-                fecha_formateada = fecha_futura.strftime("%yyyy-%m-%d")
-                primeraIteracion = 'S'
-
+    for  prog,id,numero, nombre,  fechaProgramacionInicia, fechaProgramacionFin,  horaProgramacionInicia, horaProgramacionFin , estado  in curx.fetchall():
+            disponibilidadCirugia.append(
+        	    {"model": "admisiones.ingresos", "pk": id, "fields":
+                	{'prog':prog,'id': id,  'numero': numero, 'nombre': nombre, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
+	                 'horaProgramacionFin': horaProgramacionFin,'estado':estado }})
 
     miConexionx.close()
-    print(disponibilidadAprobada)
+    print(disponibilidadCirugia)
 
-    serialized1 = json.dumps(disponibilidadAprobada, default=str)
+    serialized1 = json.dumps(disponibilidadCirugia, default=str)
 
     return HttpResponse(serialized1, content_type='application/json')
 
@@ -3757,4 +3664,3 @@ def BuscarConveniosCirugiaPaciente(request):
     serialized1 = json.dumps(conveniosPacienteCirugia, default=str)
 
     return HttpResponse(serialized1, content_type='application/json')
-

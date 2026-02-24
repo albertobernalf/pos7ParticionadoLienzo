@@ -5,7 +5,7 @@ from django.contrib import admin
 from cirugia.models import OrganosCirugias, IntervencionCirugias, TiposHeridasOperatorias, PlanificacionCirugia,  FinalidadCirugia, GravedadCirugia, ZonasCirugia, EstadosCirugias
 
 from cirugia.models import ProgramacionCirugias, EstadosSalas, HojasDeGastos,RecordAnestesico, CirugiasParticipantes, CirugiasProcedimientos, EstadosProgramacion, TiposAnestesia, TiposCirugia, RegionesOperatorias, ViasDeAcceso
-from sitios.models import DisponibilidadSalas
+
 
 @admin.register(OrganosCirugias)
 class organosCirugiasAdmin(admin.ModelAdmin):
@@ -146,9 +146,3 @@ class viasDeAccesoAdmin(admin.ModelAdmin):
     # Filtrar
     list_filter =  ("id", "nombre")
 
-@admin.register(DisponibilidadSalas)
-class disponibilidadSalasAdmin(admin.ModelAdmin):
-    list_display = ("id", "sala", "año","mes","dia","desdeHora", "hastaHora","estadoSala")
-    search_fields =  ("id", "sala__nombre", "año","mes","dia","desdeHora", "hastaHora","estadoSala")
-    # Filtrar
-    list_filter =  ("id", "sala", "año","mes","dia","desdeHora", "hastaHora","estadoSala")

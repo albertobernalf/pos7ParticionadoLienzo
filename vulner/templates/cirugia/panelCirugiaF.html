@@ -931,7 +931,7 @@ function RefrescarPantalla() {
 	<!-- Modal para Programacion de  Cirugia -->
 
             <div class="modal fade" id="crearModelProgramacionCirugia" tabindex="-1" role="dialog"  style="overflow-y:scroll;" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-                <div class="modal-dialog  modal-lg modal-dialog-scrollable  modal-dialog-center" role="document" >
+                <div class="modal-dialog  modal-lg modal-fullscreen"  modal-dialog-center" role="document" >
                     <div class="modal-content">
                         <div class="modal-header">
                              <h4 class="modal-title" id="modelHeadingProgramacionCirugia"> </h4> 
@@ -953,25 +953,20 @@ function RefrescarPantalla() {
              
 		   <div class="row">
 				
-                                        <table  id= "tablaDisponibilidadSala" class=" display table table-striped table-sm fs-6 nowrap" style="width: 100%";>
+                                        <table  id= "tablaDisponibilidadSalas" class=" display table table-striped table-sm fs-6 nowrap" style="width: 100%";>
                                            <thead>
                                             <tr>    
-						<bold>                
-					                                             
-					     <th>Opcion</th>                                               
-					     <th>id</th>
-					     <th>sala</th>
-					     <th>nombre</th>
-					     <th>fec.inicia</th>
-					     <th>fec.Fin</th>
-					     <th>horaInicio</th>
-					     <th>horaFin</th>
-					    <th>Estado</th>
-				
-					  
-				              
+						<bold>                					                                             					                                           
+					     <th>id      </th>
+					     <th>sala    </th>
+					     <th>nombre  </th>
+					     <th>fec.inicia </th>
+					     <th>fec.Fin    </th>
+					     <th>horaInicio </th>
+					     <th>horaFin </th>
+					     <th>paciente</th>
+					     <th>Estado  </th>						  		              
 					</bold>                                  
-
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -1995,9 +1990,7 @@ function RefrescarPantalla() {
 					     <th>Id</th>   
 					     <th>Sala</th>   
 					     <th>Nombre</th>
-					     <th>Año</th>
-					     <th>Mes</th>
-					     <th>Dia</th>
+					     <th>Fecha</th>
 					     <th>DesdeHora</th>
 					     <th>HastaHora</th>
 					     <th>Estado</th>	              

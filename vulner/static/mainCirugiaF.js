@@ -13,7 +13,7 @@ let dataTableProgramacionCirugiaInitialized = false;
 let dataTableSalasCirugiaInitialized = false;
 let dataTableSolicitudCirugiaInitialized = false;
 let dataTableIngresosCirugiaInitialized = false;
-let dataTableDisponibilidadSalaInitialized = false;
+let dataTableDisponibilidadSalasInitialized = false;
 let dataTableProcedimientosCirugiaInitialized = false;
 let dataTableParticipantesCirugiaInitialized = false;
 let dataTableMaterialCirugiaInitialized = false;
@@ -741,116 +741,6 @@ function arrancaCirugia(valorTabla,valorData)
 
   }
 
-    if (valorTabla == 7)
-    {
-        let dataTableOptionsDisponibilidadSala  ={
-	  lengthMenu: [2, 4, 15],
-           processing: true,
-            serverSide: false,
-            scrollY: '150px',
-	    scrollX: true,
-	    scrollCollapse: true,
-            paging:false,
-            columnDefs: [
-		{ className: 'centered', targets: [0, 1, 2, 3] },
-	    { width: '10%', targets: [2,3] },
-		{  
-                    "targets": 8
-               }
-            ],
-	 pageLength: 3,
-	  destroy: true,
-	  language: {
-		    processing: 'Procesando...',
-		    lengthMenu: 'Mostrar _MENU_ registros',
-		    zeroRecords: 'No se encontraron resultados',
-		    emptyTable: 'Ningún dato disponible en esta tabla',
-		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
-		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
-		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
-		    infoThousands: ',',
-		    loadingRecords: 'Cargando...',
-		    paginate: {
-			      first: 'Primero',
-			      last: 'Último',
-			      next: 'Siguiente',
-			      previous: 'Anterior',
-		    }
-			},
-
-           ajax: {
-                 url:"/load_dataDisponibilidadSala/" +  data,
-                 type: "POST",
-                 dataSrc: ""
-            },
-            columns: [
-	{
-	  "render": function ( data, type, row ) {
-                        var btn = '';
-
-	    btn = btn + " <input type='radio' name='miDisponibilidadSala' class='miDisponibilidadSala2 form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
-
-
-                       return btn;
-                    },
-
-	},
-
-
-		/* { data: "fields.prog"}, */
-		{ data: "fields.id"},
-                { data: "fields.sala"},
-                { data: "fields.nombre"},
-                { data: "fields.fechaProgramacionInicia"},
-                { data: "fields.fechaProgramacionFin"},
-                { data: "fields.horaProgramacionInicia"},
-                { data: "fields.horaProgramacionFin"},
-            /*    { data: "fields.estado"},  */
-
-
-
-     {
-		         target : 8,
-			"sWidth": "1%",
-        	           "render": function (data, type, row) {
-                console.log ('data = ', data);
-                console.log ('type = ', type);
-                console.log ('row = ', row);
-
-
-				if ( row['fields']['estado'] === 'OCUPADO')
-                {
-                    return '<i class="far fa-dot-circle" style="color:red; " >Ocupado</i>';
-					/*  return 'SIN CONVENIO'; */
-					}
-
-			    if ( row['fields']['estado'] ==  'LIBRE')
-				{
-		 return '<i class="far fa-dot-circle" style="color:green" >Libre</i>';
-/*
-                     return  row['fields']['estado'];
-                    return data;
-*/
-                    }
-
-
-	                    }
-			},
-
-
-
-
-
-
-
-
-
-                        ]
-            }
-
-		dataTable = $('#tablaDisponibilidadSala').DataTable(dataTableOptionsDisponibilidadSala);
-
-  }
 
     if (valorTabla == 8)
     {
@@ -1484,11 +1374,13 @@ function arrancaCirugia(valorTabla,valorData)
 
     if (valorTabla == 17)
     {
-        let dataTableOptionsDisponibilidadSalasCirugia  ={
+
+	alert("Acabo de entrar disponibilidad");
+
+        let dataTableOptionsDisponibilidadSalas  ={
  dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
             "<'row'<'col-sm-12'tr>>" +
              "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
-
   buttons: [
     {
       extend: 'excelHtml5',
@@ -1542,9 +1434,8 @@ function arrancaCirugia(valorTabla,valorData)
 			      previous: 'Anterior',
 		    }
 			},
-
            ajax: {
-                 url:"/load_dataDisponibilidadSalasCirugia/" +  data,
+                 url:"/load_dataDisponibilidadSalas/" +  data,
                  type: "POST",
                  dataSrc: ""
             },
@@ -1553,42 +1444,36 @@ function arrancaCirugia(valorTabla,valorData)
 	  "render": function ( data, type, row ) {
                         var btn = '';
 
-		 btn = btn + " <input type='radio' name='miDisponibilidad2' class='miDicponibilidad form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
+		 btn = btn + " <input type='radio' name='miDisponibilidad2' class='miDisponibilidad form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
 
 
                        return btn;
                     },
 
 	},
-
 	{
 	  "render": function ( data, type, row ) {
                         var btn = '';
 
 	     btn = btn + " <button class='miEditaDisponibilidad btn-primary ' data-pk='" + row.pk + "'>" + '<i class="fa-duotone fa-regular fa-thumbs-up"></i>' + "</button>";
-
-
                        return btn;
                     },
 
 	},
-
                 { data: "fields.id"},
-                { data: "fields.sala"},
-		   { data: "fields.nombre"}, 
-                { data: "fields.año"},
-                { data: "fields.mes"},
-                { data: "fields.dia"},
-                { data: "fields.desdeHora"},
-                { data: "fields.hastaHora"},
-                { data: "fields.estadoSala"},
+                { data: "fields.progId"},
+                { data: "fields.salaId"},
+                { data: "fields.fechaProgramacionInicia"},
+                { data: "fields.fechaProgramacionFin"},
+                { data: "fields.horaProgramacionInicia"},
+                { data: "fields.horaProgramacionFin"},
+                { data: "fields.nombrePaciente"},
+                { data: "fields.estado"},
                         ]            }
-	        
-		   dataTable = $('#tablaDisponibilidadSalasCirugia').DataTable(dataTableOptionsDisponibilidadSalasCirugia);
 
+		   dataTable = $('#tablaDisponibilidadSalas').DataTable(dataTableOptionsDisponibilidadSalas);
 
   }
-
 
 
 }
@@ -1661,7 +1546,7 @@ $('#tablaProgramacionCirugia tbody').on('click', '.miProgramacionCirugia2', func
 
 $('#tablaProgramacionCirugia tbody').on('click', '.miEditaProgramacionCirugia', function() {
 
-		//  alert("ENTRE Editar Programacion Cirugia");
+		  alert("ENTRE Editar Programacion Cirugia");
 
 	     var post_id = $(this).data('pk');
 	// alert("programacion : " + post_id);
@@ -1703,11 +1588,8 @@ $('#tablaProgramacionCirugia tbody').on('click', '.miEditaProgramacionCirugia', 
             $('#modelHeadingProgramacionCirugia').html("Creacion Programacion de Cirugia");
             $('#crearModelProgramacionCirugia').modal('show');      
 
-
-	
 	username_id = document.getElementById("username_id").value   ;
 
-	
 	document.getElementById("usernameProgramacionCirugia_id").value = username_id;
 
             $('#estadosProgramacionY').val(info[0].fields.estado_id);
@@ -1757,7 +1639,6 @@ $('#tablaProgramacionCirugia tbody').on('click', '.miEditaProgramacionCirugia', 
                      const $id3 = document.querySelector("#procedMateriales");
 
  	      		     $("#procedMateriales").empty();
-				   alert("ya blanquue los procedMateriales");
 
 	                 $.each(info[0].procedMateriales, function(key,value) {
                                     options +='<option value="' + value.id + '">' + value.nombre + '</option>';
@@ -1772,7 +1653,7 @@ $('#tablaProgramacionCirugia tbody').on('click', '.miEditaProgramacionCirugia', 
 
 		// combos Informe participa y merial
 
-	  var dato = JSON.parse(info);
+	  // var dato = JSON.parse(info);
                      const $id4 = document.querySelector("#procedParticipantesInforme");
 
  	      		     $("#procedParticipantesInforme").empty();
@@ -1790,7 +1671,6 @@ $('#tablaProgramacionCirugia tbody').on('click', '.miEditaProgramacionCirugia', 
                      const $id5 = document.querySelector("#procedMaterialesInforme");
 
  	      		     $("#procedMaterialesInforme").empty();
-				   alert("ya blanquue los procedMaterialesInforme");
 
 	                 $.each(info[0].procedMateriales, function(key,value) {
                                     options +='<option value="' + value.id + '">' + value.nombre + '</option>';
@@ -1801,15 +1681,7 @@ $('#tablaProgramacionCirugia tbody').on('click', '.miEditaProgramacionCirugia', 
  	      		      });
 
 
-
-
-
-
 		// fin combos informe
-
-
-
-
 
 		var data =  {}   ;
 	        data['username'] = username;
@@ -1818,10 +1690,16 @@ $('#tablaProgramacionCirugia tbody').on('click', '.miEditaProgramacionCirugia', 
 	        data['sede'] = sede;
 	        data['username_id'] = username_id;
 			
-	        data = JSON.stringify(data);	
+	        data = JSON.stringify(data);
 
-	     arrancaCirugia(7,data);
-	    dataTableDisponibilidadSalaInitialized = true;
+    	alert("voy a cargar  la disponibilidad");
+
+
+	     arrancaCirugia(17,data);
+	    dataTableDisponibilidadSalasInitialized = true;
+
+		alert("acabo de mostrar la disponibilidad");
+
 
 		// document.getElementById("mensajesExitoModalProgramacion").innerHTML = 'Programacion actualizada Satisfactoriamente !';
 				                },
@@ -2296,11 +2174,6 @@ $('#tablaProgramacionCirugia tbody').on('click', '.miProgramacionCirugia2', func
 	document.getElementById("programacionHastaCirugia").innerHTML = dato3.horaInicia;
 	document.getElementById("programacionHastaHoraCirugia").innerHTML = dato3.horaTermina;
 
-
-
-
-
-
 	// Fin llenado
 
          var data =  {}   ;
@@ -2766,8 +2639,8 @@ function CrearProgramacionCirugia()
 
 	document.getElementById("mensajesExitoModalProgramacion").value = data2.Mensajes;
 	  
-	     arrancaCirugia(7,data);
-	    dataTableDisponibilidadSalaInitialized = true;
+	     // arrancaCirugia(7,data);
+	    // dataTableDisponibilidadSalaInitialized = true;
 
    arrancaCirugia(3,data);
 	    dataTableSolicitudCirugiaInitialized = true;
@@ -3790,4 +3663,3 @@ $('#tablaSalasCirugia tbody').on('click', '.miSalaCirugia', function() {
 	    	dataTableDisponibilidadSalasCirugiaInitialized = true;
      
   });
-

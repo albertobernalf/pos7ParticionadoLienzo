@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from sitios.models import Departamentos, Ciudades, Centros, SedesClinica, DependenciasTipo, Dependencias,  ServiciosSedes, SubServiciosSedes, HistorialDependencias, Municipios, Paises, Localidades,  ServiciosAdministrativos, Ubicaciones, Bodegas, Salas, TiposSalas
+from sitios.models import Departamentos, Ciudades, Centros, SedesClinica, DependenciasTipo, Dependencias,  ServiciosSedes, SubServiciosSedes, HistorialDependencias, Municipios, Paises, Localidades,  ServiciosAdministrativos, Ubicaciones, Bodegas, Salas, TiposSalas, DisponibilidadSalas
 
 
 
@@ -173,6 +173,14 @@ class tiposSalasAdmin(admin.ModelAdmin):
     # Filtrar
     list_filter = ('nombre',)
 
+
+@admin.register(DisponibilidadSalas)
+class disponibilidadSalasAdmin(admin.ModelAdmin):
+
+    list_display = ("id","salas", "fecha", "desdeHora", "hastaHora", "estadoDisponibilidad")
+    search_fields = ("id","salas__nombre", "fecha", "desdeHora", "hastaHora", "estadoDisponibilidad")
+    # Filtrar
+    list_filter = ("id","salas", "fecha", "desdeHora", "hastaHora", "estadoDisponibilidad")
 
 
 

@@ -344,17 +344,19 @@ class DisponibilidadSalas(models.Model):
     ESTADOREG_CHOICES = [
         ('A', 'Activo'),
         ('I', 'Inactivo'), ]
-    ESTADO_SALA_CHOICES = [
-        ('L', 'Activo'),
+    ESTADO_DISPONINILIDAD_CHOICES = [
+        ('L', 'Libre'),
+        ('O', 'Ocupado'),
         ('M', 'Mantenimiento'), ]
     id = models.AutoField(primary_key=True)
-    sala =  models.ForeignKey('sitios.salas', blank=True,null= True, editable=True, on_delete=models.PROTECT)
-    año = models.IntegerField(blank=True, null=True)
-    mes= models.IntegerField(blank=True, null=True)
-    dia= models.IntegerField(blank=True, null=True)
+    salas =  models.ForeignKey('sitios.salas', blank=True,null= True, editable=True, on_delete=models.PROTECT)
+    fecha = models.DateField(default=now, editable=True)
+    #año = models.IntegerField(blank=True, null=True)
+    #mes= models.IntegerField(blank=True, null=True)
+    #dia= models.IntegerField(blank=True, null=True)
     desdeHora =	models.CharField(max_length=5,blank=True, null=True)
     hastaHora = models.CharField(max_length=5,blank=True, null=True)
-    estadoSala = models.CharField(max_length=1,choices=ESTADO_SALA_CHOICES, default='A', editable=False)
+    estadoDisponibilidad = models.CharField(max_length=1,choices=ESTADO_DISPONINILIDAD_CHOICES, default='A', editable=False)
     estadoReg = models.CharField(max_length=1,choices=ESTADOREG_CHOICES, default='L', editable=False)
 
     def __int__(self):

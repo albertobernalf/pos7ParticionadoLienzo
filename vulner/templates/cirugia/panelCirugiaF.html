@@ -125,16 +125,17 @@ function RefrescarPantalla() {
                                            <thead>
                                             <tr>    
 						<bold> 
- 						  <th>id</th>                             
+ 						                        
 					     <th>Sel</th>                                               
 					     <th>Proced</th>                                               
 						 <th>Participa</th>  
-					 <th>Material</th>                                                 
+					 <th>Material</th>    
+					  <th>id</th>                                                  
 					<th>sede</th> 
-					<th>cirugia</th> 
 					<th>tipoDoc</th>  
 					<th>documento</th> 
 					<th>paciente </th> 
+					<th>#	 </th> 
 					<th>nacimiento</th> 
 					<th>genero</th>  
 					<th>edad</th> 
@@ -789,23 +790,21 @@ function RefrescarPantalla() {
 					     <th>Opcion</th>                                               
 					     <th>id</th>
 					     <th>tipoDoc_id</th>
-					     <th>tipoNota</th>
 					     <th>abrev</th>
 					     <th>documento</th>
+					     <th>#</th>
 					     <th>paciente</th>
-					     <th>sala</th>
-					    
+					     <th>estadoProg</th>
+					     <th>sala</th>				    
 					     <th>nombreSala</th>
-					     <th>Procedimientos</th>
 					     <th>inicia</th>
 					     <th>hora</th>
 					     <th>Termina</th>
-					     <th>hora</th>
-  						<th>SelProg</th>
-  						<th>estadoProg</th>
-  						<th>SelCiru</th>
+					     <th>hora</th>						
+  						<th>Cirugias</th>
 						<th>estadoCirugia</th>
-
+    					<th>Opcion</th>                                               
+					     <th>Opcion</th>   
 					  
 				              
 					</bold>                                  
@@ -958,8 +957,7 @@ function RefrescarPantalla() {
                                             <tr>    
 						<bold>                					                                             					                                           
 					     <th>id      </th>
-					     <th>sala    </th>
-					     <th>nombre  </th>
+					     <th>salaId  </th>
 					     <th>fec.inicia </th>
 					     <th>fec.Fin    </th>
 					     <th>horaInicio </th>
@@ -1981,20 +1979,17 @@ function RefrescarPantalla() {
                                         </table>
 
 
-                                        <table  id= "tablaDisponibilidadSalasCirugia" class=" display table table-striped table-sm fs-6 nowrap" style="width: 100%";>
+                                        <table  id= "tablaDispoSalasCirugia" class=" display table table-striped table-sm fs-6 nowrap" style="width: 100%";>
                                            <thead>
                                             <tr>    
 						<bold>                
-					     <th>Opcion</th>                                               
-					     <th>Editar</th>                                               
 					     <th>Id</th>   
 					     <th>Sala</th>   
-					     <th>Nombre</th>
 					     <th>Fecha</th>
 					     <th>DesdeHora</th>
 					     <th>HastaHora</th>
 					     <th>Estado</th>	              
-					     <th>Borrar</th>                                               
+
 					</bold>                                  
 
                                             </tr>

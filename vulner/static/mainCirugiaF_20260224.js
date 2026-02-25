@@ -107,7 +107,7 @@ function arrancaCirugia(valorTabla,valorData)
 		{ className: 'centered', targets: [0, 1, 2, 3, 4, 5] },
 	    { width: '10%', targets: [2,3] },
 		{  
-                    "targets": 6
+                    "targets": 7
                }
             ],
 	 pageLength: 3,
@@ -212,7 +212,7 @@ function arrancaCirugia(valorTabla,valorData)
 		{ className: 'centered', targets: [0, 1, 2, 3, 4, 5] },
 	    { width: '10%', targets: [2,3] },
 		{  
-                    "targets": 18
+                    "targets": 17
                }
             ],
 	 pageLength: 3,
@@ -267,25 +267,29 @@ function arrancaCirugia(valorTabla,valorData)
 
 
                 { data: "fields.id"},
-                { data: "fields.tipoDoc_id"},
-// {
-//			target: 1,
-//			visible: false
-//		},
-	
+            //    { data: "fields.tipoDoc_id"},
+{
+			target: 1,
+			visible: false
+		},
+	{
+			target: 2,
+			visible: false
+		},
+
+		  // { data: "fields.tipoNota"}, 
 		   { data: "fields.abrev"}, 
                 { data: "fields.documento"},
-                { data: "fields.consecutivo"},
-                { data: "fields.paciente"},         
-     		 { data: "fields.estadoProg"},
+                { data: "fields.paciente"},
+          
                 { data: "fields.numero"},
                 { data: "fields.sala"},
+                { data: "fields.cirugias"},
+
                 { data: "fields.inicia"},
 		{ data: "fields.horaInicia"},
                 { data: "fields.Termina"},
 		 { data: "fields.horaTermina"},
-                { data: "fields.cirugias"},
-     		 { data: "fields.estadoCirugia"},
 		{
 		  "render": function ( data, type, row ) {
                 	        var btn = '';
@@ -296,6 +300,7 @@ function arrancaCirugia(valorTabla,valorData)
                     },
 		},
 
+     		 { data: "fields.estadoProg"},
 		{
 		  "render": function ( data, type, row ) {
                 	        var btn = '';
@@ -306,7 +311,7 @@ function arrancaCirugia(valorTabla,valorData)
                     },
 		},
 
-
+     		 { data: "fields.estadoCirugia"},
                         ]
             }
 
@@ -353,7 +358,7 @@ function arrancaCirugia(valorTabla,valorData)
 		{ className: 'centered', targets: [0, 1, 2, 3, 4, 5] },
 	    { width: '10%', targets: [2,3] },
 		{  
-                    "targets": 27
+                    "targets": 30
                }
             ],
 	 pageLength: 3,
@@ -430,42 +435,89 @@ function arrancaCirugia(valorTabla,valorData)
 	},
 		{ data: "fields.id"},
 		{ data: "fields.sede"},
-                { data: "fields.tipoDoc_id"},
+                { data: "fields.cirugia"},
+                { data: "fields.tipoDoc"},
                 { data: "fields.documento"},
                 { data: "fields.paciente"},
-		   { data: "fields.consecutivo"},
                 { data: "fields.nacimiento"},
                 { data: "fields.genero"},
                 { data: "fields.edad"},
                 { data: "fields.ingreso"},
-                { data: "fields.solicita"},
+                //{ data: "fields.solicita"},
+{
+			target: 10,
+			visible: false
+		},
                 { data: "fields.cama"},
                 { data: "fields.empresa"},
-                { data: "fields.telefono"},
-// {
-//			target: 13,
-//			visible: false
-//		},
+                //{ data: "fields.telefono"},
+{
+			target: 13,
+			visible: false
+		},
 
-               { data: "fields.solicitaSangre"},
+               // { data: "fields.solicitaSangre"},
+{
+			target: 14,
+			visible: false
+		},
 
-               { data: "fields.describeSangre"},
+ //               { data: "fields.describeSangre"},
+{
+			target: 15,
+			visible: false
+		},
 
-                { data: "fields.cantidadSangre"},
+               // { data: "fields.cantidadSangre"},
+{
+			target: 16,
+			visible: false
+		},
+
                 { data: "fields.solicitaCamaUci"},
-                { data: "fields.solicitaMicroscopio"},
-                 { data: "fields.solicitaRx"},
-                 { data: "fields.solicitaAutoSutura"},
+                // { data: "fields.solicitaMicroscopio"},
+{
+			target: 18,
+			visible: false
+		},
 
+                // { data: "fields.solicitaRx"},
+{
+			target: 19,
+			visible: false
+		},
 
-                 { data: "fields.solicitaOsteosintesis"},
+               // { data: "fields.solicitaAutoSutura"},
+{
+			target: 20,
+			visible: false
+		},
 
-                 { data: "fields.solicitaBiopsia"},
+                // { data: "fields.solicitaOsteosintesis"},
+{
+			target: 21,
+			visible: false
+		},
 
-                { data: "fields.solicitaMalla"},
+                // { data: "fields.solicitaBiopsia"},
+{
+			target: 22,
+			visible: false
+		},
 
-                { data: "fields.solicitaOtros"},
-	
+               // { data: "fields.solicitaMalla"},
+{
+			target: 23,
+			visible: false
+		},
+
+               // { data: "fields.solicitaOtros"},
+{
+			target: 24,
+			visible: false
+		},
+
+		
 
                 { data: "fields.estadoCir"},
                 { data: "fields.anestesia"},
@@ -1246,7 +1298,6 @@ function arrancaCirugia(valorTabla,valorData)
 
     if (valorTabla == 16)
     {
-
         let dataTableOptionsParticipantesInformeXXCirugia  ={
 	  lengthMenu: [2, 4, 15],
            processing: true,
@@ -1258,7 +1309,7 @@ function arrancaCirugia(valorTabla,valorData)
             columnDefs: [
 		{ className: 'centered', targets: [0, 1, 2, 3] },
 	    { width: '10%', targets: [2,3] },
-		{
+		{  
                     "targets": 7
                }
             ],
@@ -1320,14 +1371,16 @@ function arrancaCirugia(valorTabla,valorData)
 
   }
 
+
     if (valorTabla == 17)
     {
+
+	alert("Acabo de entrar disponibilidad");
 
         let dataTableOptionsDisponibilidadSalas  ={
  dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
             "<'row'<'col-sm-12'tr>>" +
              "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
-
   buttons: [
     {
       extend: 'excelHtml5',
@@ -1358,8 +1411,8 @@ function arrancaCirugia(valorTabla,valorData)
             columnDefs: [
 		{ className: 'centered', targets: [0, 1, 2, 3, 4, 5] },
 	    { width: '10%', targets: [2,3] },
-		{
-                    "targets": 7
+		{  
+                    "targets": 9
                }
             ],
 	 pageLength: 3,
@@ -1381,48 +1434,47 @@ function arrancaCirugia(valorTabla,valorData)
 			      previous: 'Anterior',
 		    }
 			},
-
            ajax: {
                  url:"/load_dataDisponibilidadSalas/" +  data,
                  type: "POST",
                  dataSrc: ""
             },
             columns: [
+	{
+	  "render": function ( data, type, row ) {
+                        var btn = '';
+
+		 btn = btn + " <input type='radio' name='miDisponibilidad2' class='miDisponibilidad form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
+
+
+                       return btn;
+                    },
+
+	},
+	{
+	  "render": function ( data, type, row ) {
+                        var btn = '';
+
+	     btn = btn + " <button class='miEditaDisponibilidad btn-primary ' data-pk='" + row.pk + "'>" + '<i class="fa-duotone fa-regular fa-thumbs-up"></i>' + "</button>";
+                       return btn;
+                    },
+
+	},
                 { data: "fields.id"},
+                { data: "fields.progId"},
                 { data: "fields.salaId"},
                 { data: "fields.fechaProgramacionInicia"},
                 { data: "fields.fechaProgramacionFin"},
                 { data: "fields.horaProgramacionInicia"},
                 { data: "fields.horaProgramacionFin"},
                 { data: "fields.nombrePaciente"},
-                // { data: "fields.estado"},
-     {
-		         target : 8,
-			"sWidth": "1%",
-        	           "render": function (data, type, row) {
-                console.log ('data = ', data);
-                console.log ('type = ', type);
-                console.log ('row = ', row);
-
-
-				if ( row['fields']['estado'] === 'OCUPADA')
-                {
-                    return '<i class="far fa-dot-circle" style="color:red; " >OCUPADA</i>';
-					
-					}
-
-			    if ( row['fields']['estado'] ==  'DISPONIBLE')
-				{
-		 return '<i class="far fa-dot-circle" style="color:green" >DISPONIBLE</i>';
-                    }
-	                    }
-			},
-
-                                        ]
-            }
+                { data: "fields.estado"},
+                        ]            }
 
 		   dataTable = $('#tablaDisponibilidadSalas').DataTable(dataTableOptionsDisponibilidadSalas);
+
   }
+
 
     if (valorTabla == 18)
     {
@@ -1464,7 +1516,7 @@ function arrancaCirugia(valorTabla,valorData)
 		{ className: 'centered', targets: [0, 1, 2, 3, 4, 5] },
 	    { width: '10%', targets: [2,3] },
 		{  
-                    "targets": 5
+                    "targets": 6
                }
             ],
 	 pageLength: 3,
@@ -1493,18 +1545,19 @@ function arrancaCirugia(valorTabla,valorData)
             },
             columns: [
                 { data: "fields.id"},
-                { data: "fields.nombre"},
+                { data: "fields.salaId"},
                 { data: "fields.fecha"},
-                { data: "fields.desdeHora"},
-                { data: "fields.hastaHora"},
-                { data: "fields.estadoDisponibilidad"},
-                        ]
-            		}
-		   dataTable = $('#tablaDispoSalasCirugia').DataTable(dataTableOptionsDisponibilidadSalasCirugia);
+                { data: "fields.horaInicio"},
+                { data: "fields.horaFin"},
+                { data: "fields.estado"},
+                        ]            }
+
+		   dataTable = $('#tablaDisponibilidadSalasCirugia').DataTable(dataTableOptionsDisponibilidadSalasCirugia);
 
   }
-}
 
+
+}
 
 const initDataTableProgramacionCirugia = async () => {
 	if  (dataTableProgramacionCirugiaInitialized)  {
@@ -1524,9 +1577,7 @@ const initDataTableProgramacionCirugia = async () => {
         data['username_id'] = username_id;
  	    data = JSON.stringify(data);
 
-
-        arrancaCirugia(3,data);
-	    dataTableSolicitudCirugiaInitialized = true;
+	//  alert("sede = " + sede);
 
         arrancaCirugia(2,data);
 	    dataTableProgramacionCirugiaInitialized = true;
@@ -1534,6 +1585,8 @@ const initDataTableProgramacionCirugia = async () => {
         arrancaCirugia(1,data);
 	    dataTableSalasCirugiaInitialized = true;
 
+        arrancaCirugia(3,data);
+	    dataTableSolicitudCirugiaInitialized = true;
 
 }
 
@@ -1565,10 +1618,10 @@ $('#tablaProgramacionCirugia tbody').on('click', '.miProgramacionCirugia2', func
 
 $('#tablaProgramacionCirugia tbody').on('click', '.miEditaProgramacionCirugia', function() {
 
-
+		  alert("ENTRE Editar Programacion Cirugia");
 
 	     var post_id = $(this).data('pk');
-		  alert("ENTRE Editar Programacion Cirugia = "  + post_id);
+	// alert("programacion : " + post_id);
 		
  	var sedeSeleccionada = document.getElementById("sedeSeleccionada").value;
         var username = document.getElementById("username").value;
@@ -1709,13 +1762,12 @@ $('#tablaProgramacionCirugia tbody').on('click', '.miEditaProgramacionCirugia', 
 	        data['sede'] = sede;
 	        data['username_id'] = username_id;
 			
-	        data2 = JSON.stringify(data);
+	        data = JSON.stringify(data);
 
-    	alert("voy a cargar  la disponibilidad" + data2);
+    	alert("voy a cargar  la disponibilidad");
 
-	alert("voy a cargar disponibilidad");
-	     arrancaCirugia(17,data2);
-	     		alert("acabo de mostrar la disponibilidad");
+
+	     arrancaCirugia(17,data);
 	    dataTableDisponibilidadSalasInitialized = true;
 
 		alert("acabo de mostrar la disponibilidad");
@@ -3661,22 +3713,24 @@ $(document).on('change', '#unitarioLiquidacion', function(event) {
 
 
 $('#tablaSalasCirugia tbody').on('click', '.miSalaCirugia', function() {
-		
+		 alert("Entre tablaSalasCirugia");
+
 	     	var post_id = $(this).data('pk');
 		var salaId= post_id;
 
-		 alert("Entre tablaSalasCirugia salaId = " + salaId);
-
 		var sede = document.getElementById("sede").value;
+		// var username_id = document.getElementById("Username_id").value;
 
 		var data =  {}   ;
 	        data['username'] = username;
   	        data['sedeSeleccionada'] = sedeSeleccionada;
 	        data['nombreSede'] = nombreSede;
 	        data['sede'] = sede;
+			
 		data['salaId'] =salaId;
-	        data2 = JSON.stringify(data);
+	        data = JSON.stringify(data);
 	
-	     	arrancaCirugia(18,data2);
-	    	dataTableDisponibilidadCirugiaSalasInitialized = true;    
+	     	arrancaCirugia(18,data);
+	    	dataTableDisponibilidadSalasCirugiaInitialized = true;
+     
   });

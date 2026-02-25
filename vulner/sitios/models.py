@@ -131,8 +131,9 @@ class SubServiciosSedes(models.Model):
 
     id = models.AutoField(primary_key= True)
     sedesClinica = models.ForeignKey('sitios.SedesClinica', blank=True,null= True, editable=True, on_delete=models.PROTECT)
-    serviciosSedes = ChainedForeignKey(ServiciosSedes, chained_field='sedesClinica', chained_model_field='sedesClinica',
-                                  show_all=False)
+    #serviciosSedes = ChainedForeignKey(ServiciosSedes, chained_field='sedesClinica', chained_model_field='sedesClinica',
+    #                              show_all=False)
+    serviciosSedes = models.ForeignKey('sitios.ServiciosSedes', blank=True,null= True, editable=True, on_delete=models.PROTECT)
     subServiciosSedes = models.CharField(max_length=50, default="")
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=50)

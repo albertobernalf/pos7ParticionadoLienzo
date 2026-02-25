@@ -21,6 +21,9 @@ import psycopg2
 import json
 #import datetime
 import datetime
+from datetime import datetime
+from datetime import timezone
+
 import time
 from datetime import date, timedelta
 import time
@@ -154,10 +157,8 @@ def Load_dataSalasCirugia(request, data):
 
     return HttpResponse(serialized1, content_type='application/json')
 
-
-
-def Load_dataDisponibilidadSalasCirugia(request, data):
-    print("Entre Load_dataDisponibilidadaSalasCirugia")
+def Load_dataDispoSalasCirugia(request, data):
+    print("Entre Load_dataDispoSalasCirugia")
 
     context = {}
     d = json.loads(data)
@@ -176,20 +177,21 @@ def Load_dataDisponibilidadSalasCirugia(request, data):
     curx = miConexionx.cursor()
 
 
-    detalle = 'SELECT sal.id id, sal.id salas, sal.nombre nombre, dispoSala.fecha , dispoSala."desdeHora", dispoSala."hastaHora", dispoSala."estadoSala"  FROM sitios_salas sal,  sitios_disponibilidadSalas dispoSala WHERE sal."sedesClinica_id" = ' + "'" + str(sede) + "'" + ' AND sal.id = dispoSala.salas_id AND sal.id = ' + "'" + str(salaId) + "'" + ' ORDER BY sal.numero'
+    detalle = 'SELECT sal.id id, sal.nombre nombre, dispoSala.fecha , dispoSala."desdeHora", dispoSala."hastaHora", dispoSala."estadoDisponibilidad"  FROM sitios_salas sal,  sitios_disponibilidadSalas dispoSala WHERE sal."sedesClinica_id" = ' + "'" + str(sede) + "'" + ' AND sal.id = dispoSala.salas_id AND sal.id = ' + "'" + str(salaId) + "'" + ' ORDER BY sal.numero'
 
     print(detalle)
 
     curx.execute(detalle)
 
-    for id, salas, nombre, fecha, desdeHora, hastaHora , estadoSala  in curx.fetchall():
+    for id, nombre, fecha, desdeHora, hastaHora , estadoDisponibilidad  in curx.fetchall():
         disponibilidadSalasCirugia.append(
-            {"model": "sitios.salas", "pk": id, "fields":
-                {'id': id, 'sala': sala, 'nombre': nombre, 'fecha': fecha,
-                 'desdeHora':desdeHora, 'hastaHora':hastaHora, 'estadoSala':estadoSala}})
+            {"model": "sitios.disponibilidadSalas", "pk": id, "fields":
+                {'id': id,  'nombre': nombre, 'fecha': fecha,
+                 'desdeHora':desdeHora, 'hastaHora':hastaHora, 'estadoDisponibilidad':estadoDisponibilidad}})
 
+    print("disponibilidad= " , disponibilidadSalasCirugia)
     miConexionx.close()
-    print(disponibilidadSalasCirugia)
+
 
     serialized1 = json.dumps(disponibilidadSalasCirugia, default=str)
 
@@ -348,7 +350,7 @@ def Load_dataSolicitudCirugia(request, data):
     curx = miConexionx.cursor()
 
 
-    detalle = 'SELECT cir.id id, i."sedesClinica_id" sede, u."tipoDoc_id" tipoDoc_id, u.documento documento, u.nombre paciente , i.consec consecutivo, u."fechaNacio" nacimiento,u.genero genero, age(u."fechaNacio") edad, i.id ingreso, cir."fechaSolicita" solicita, dep.nombre cama,	emp.nombre empresa	, u.telefono,cir."solicitaSangre", cir."describeSangre", "cantidadSangre","solicitaCamaUci",cir."solicitaMicroscopio","solicitaRx","solicitaAutoSutura","solicitaOsteosintesis",	"solicitaBiopsia", cir"solicitaMalla", cir"solicitaOtros", estcir.nombre estadoCir,tiposAnes.nombre anestesia FROM admisiones_ingresos i INNER JOIN  usuarios_usuarios u ON ( u."tipoDoc_id" = i."tipoDoc_id" and  u.id = i.documento_id ) INNER JOIN  cirugia_cirugias cir ON (cir."sedesClinica_id" = i."sedesClinica_id" and cir."tipoDoc_id"=i."tipoDoc_id" AND cir.documento_id = i.documento_id AND cir."consecAdmision"= i.consec) INNER JOIN sitios_dependencias dep ON (dep.id =  i."dependenciasActual_id") LEFT JOIN  facturacion_empresas emp ON (emp.id = i.empresa_id ) LEFT JOIN  sitios_serviciosadministrativos serv ON (serv.id = cir."serviciosAdministrativos_id" ) LEFT JOIN  cirugia_estadoscirugias estcir ON (estcir.id = cir."estadoCirugia_id" ) LEFT JOIN  cirugia_tiposanestesia tiposAnes ON (tiposAnes.id = cir.anestesia_id ) LEFT JOIN  cirugia_tiposcirugia tiposCiru ON (tiposCiru.id = cir."tiposCirugia_id") WHERE i."sedesClinica_id" = ' + "'" + str(sede) + "' AND " + 'cir."estadoCirugia_id" IN ( ' + "'" + str(estadoCirugiaPendiente.id) + "','" + str(estadoCirugiaConfirmada.id) + "')"
+    detalle = 'SELECT cir.id id, i."sedesClinica_id" sede, u."tipoDoc_id" tipoDoc_id, u.documento documento, u.nombre paciente , i.consec consecutivo, u."fechaNacio" nacimiento,u.genero genero, age(u."fechaNacio") edad, i.id ingreso, cir."fechaSolicita" solicita, dep.nombre cama,emp.nombre empresa	, u.telefono telefono, cir."solicitaSangre" solicitaSangre, cir."describeSangre" describeSangre, "cantidadSangre","solicitaCamaUci",cir."solicitaMicroscopio","solicitaRx","solicitaAutoSutura","solicitaOsteosintesis",	"solicitaBiopsia", cir."solicitaMalla" solicitaMalla, cir."solicitaOtros" solicitaOtros, estcir.nombre estadoCir,tiposAnes.nombre anestesia FROM admisiones_ingresos i INNER JOIN  usuarios_usuarios u ON ( u."tipoDoc_id" = i."tipoDoc_id" and  u.id = i.documento_id ) INNER JOIN  cirugia_cirugias cir ON (cir."sedesClinica_id" = i."sedesClinica_id" and cir."tipoDoc_id"=i."tipoDoc_id" AND cir.documento_id = i.documento_id AND cir."consecAdmision"= i.consec) INNER JOIN sitios_dependencias dep ON (dep.id =  i."dependenciasActual_id") LEFT JOIN  facturacion_empresas emp ON (emp.id = i.empresa_id ) LEFT JOIN  sitios_serviciosadministrativos serv ON (serv.id = cir."serviciosAdministrativos_id" ) LEFT JOIN  cirugia_estadoscirugias estcir ON (estcir.id = cir."estadoCirugia_id" ) LEFT JOIN  cirugia_tiposanestesia tiposAnes ON (tiposAnes.id = cir.anestesia_id ) LEFT JOIN  cirugia_tiposcirugia tiposCiru ON (tiposCiru.id = cir."tiposCirugia_id") WHERE i."sedesClinica_id" = ' + "'" + str(sede) + "' AND " + 'cir."estadoCirugia_id" IN ( ' + "'" + str(estadoCirugiaPendiente.id) + "','" + str(estadoCirugiaConfirmada.id) + "')"
 
     print(detalle)
 
@@ -423,6 +425,7 @@ def Load_dataIngresosCirugia(request, data):
 
 
 def Load_dataDisponibilidadSalas(request, data):
+
     print("Entre Load_dataDisponibilidadSalas")
 
     context = {}
@@ -436,9 +439,9 @@ def Load_dataDisponibilidadSalas(request, data):
     print("sede:", sede)
     print("username:", username)
     print("username_id:", username_id)
-    fecha_hoy = timezone.now()
-    fecha_hoy = fecha_hoy.strftime("%Y-%m-%d")
-    #fecha_hoy = datetime.now().date()
+    fecha_actual = datetime.now()
+    fecha_hoy = fecha_actual.strftime("%Y-%m-%d")
+    print("fecha_hoy a WORK:", fecha_hoy)
     dias_a_revisar = 5
 
     print("fecha_hoy = ", fecha_hoy)
@@ -451,6 +454,7 @@ def Load_dataDisponibilidadSalas(request, data):
     curx.execute(comando1)
 
     salas = []
+    disponibilidadAprobada = []
 
     for  id, salaId, nombreSala in curx.fetchall():
         salas.append(
@@ -462,6 +466,7 @@ def Load_dataDisponibilidadSalas(request, data):
         print("SALA No ", salaId)
 
 
+
         for i in range(dias_a_revisar + 1):
 
             print("fecha_futura  ", fecha_futura)
@@ -471,7 +476,6 @@ def Load_dataDisponibilidadSalas(request, data):
             curx.execute(comando2)
 
             salasDisponibilidad = []
-            disponibilidadAprobada = []
 
             for  id, dispoId , fecha, desdeHora, hastaHora, estadoDisponibilidad in curx.fetchall():
                 salasDisponibilidad.append(
@@ -480,26 +484,20 @@ def Load_dataDisponibilidadSalas(request, data):
 		                 'desdeHora':desdeHora, 'hastaHora':hastaHora, 'estadoDisponibilidad':estadoDisponibilidad}})
 
                 print("voy por el comando3 = ")
-                comando3 = 'SELECT prog.id, prog.id progId, prog."fechaProgramacionInicia" fechaProgramacionInicia, prog."fechaProgramacionFin" fechaProgramacionFin,	prog."horaProgramacionInicia" horaProgramacionInicia, prog."horaProgramacionFin" horaProgramacionFin , usu.nombre nombrePaciente FROM cirugia_programacioncirugias prog INNER JOIN usuarios_usuarios usu ON (usu.id = prog.documento_id ) WHERE prog.sala_id = ' + "'" + str(salaId) + "'" + ' AND prog."fechaProgramacionInicia" = ' + "'" + str(fecha_futura) + "' ORDER BY " + ' prog."horaProgramacionInicia" '
+                comando3 = 'SELECT prog.id,  prog."fechaProgramacionInicia" fechaProgramacionInicia, prog."fechaProgramacionFin" fechaProgramacionFin,	prog."horaProgramacionInicia" horaProgramacionInicia, prog."horaProgramacionFin" horaProgramacionFin , usu.nombre nombrePaciente FROM cirugia_programacioncirugias prog INNER JOIN usuarios_usuarios usu ON (usu.id = prog.documento_id ) WHERE prog.sala_id = ' + "'" + str(salaId) + "'" + ' AND prog."fechaProgramacionInicia" = ' + "'" + str(fecha_futura) + "' ORDER BY " + ' prog."horaProgramacionInicia" '
                 print("comando3 = ", comando3)
 
                 curx.execute(comando3)
                 disponibilidadCirugia = []
 
-
-                for  id, progId, fechaProgramacionInicia, fechaProgramacionFin,  horaProgramacionInicia, horaProgramacionFin , nombrePaciente in curx.fetchall():
+                for  id,  fechaProgramacionInicia, fechaProgramacionFin,  horaProgramacionInicia, horaProgramacionFin , nombrePaciente in curx.fetchall():
                         disponibilidadCirugia.append(
-                            {"model": "admisiones.disponibilidadCirugia", "pk": id, "fields":
-                                {'id':id, 'progId':progId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
+                            {"model": "cirgugia.disponibilidadCirugia", "pk": id, "fields":
+                                {'id':id, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
                                  'horaProgramacionFin': horaProgramacionFin,'nombrePaciente':nombrePaciente}})
                         print("que paso")
 
-                        fechaProgramacionIniciaAnterior = fechaProgramacionInicia
-                        fechaProgramacionFinAnterior = fechaProgramacionFin
-                        horaProgramacionIniciaAnterior = horaProgramacionInicia
-                        horaProgramacionFinAnterior = horaProgramacionFin
-
-                        print("voy a comenzar a escribir ")
+                        print("voy a comenzar a escribir = " , fecha_futura)
 
                         if (primeraIteracionDia == 'S'):
 
@@ -510,27 +508,28 @@ def Load_dataDisponibilidadSalas(request, data):
                             if (desdeHora < horaProgramacionInicia):
                                 print("entre desdeHora <  horaProgramacionInicia")
                                 # Hueco DISPONIBLE
-                                #disponibilidadAprobada.append(
-                                #            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                #            {'id':id, 'progId':dispoId, 'salaId':salaId, 'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': desdeHora,
-                                #             'horaProgramacionFin': horaProgramacionInicia,'nombrePaciente':'','estado':'DISPONIBLE'}})
+                                disponibilidadAprobada.append(
+                                            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
+                                            {'id':id, 'salaId':salaId, 'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': desdeHora,
+                                             'horaProgramacionFin': horaProgramacionInicia,'nombrePaciente':'','estado':'DISPONIBLE'}})
                                 #Ahora si la cirugia AGENDADA
                                 disponibilidadAprobada.append(
                                             {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                            {'id':id, 'progId':progId, 'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
+                                            {'id':id, 'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
                                              'horaProgramacionFin': horaProgramacionFin ,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
 
 
-                                primeraIteracionDia == 'N'
+                                primeraIteracionDia = 'N'
+                                print("primeraIteracionDia = ", primeraIteracionDia)
                                 print("disponibilidadAprobada = ", disponibilidadAprobada)
 
                             if (desdeHora == horaProgramacionInicia):
                                 # Ahora si la cirugia AGENDADA
-                                #disponibilidadAprobada.append(
-                                #            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                ##            {'id':id, 'progId':progId, 'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
-                                #             'horaProgramacionFin': horaProgramacionFin,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
-                                pass
+                                disponibilidadAprobada.append(
+                                            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
+                                            {'id':id, 'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
+                                             'horaProgramacionFin': horaProgramacionFin,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
+
 
                             primeraIteracionDia == 'N'
                             fechaProgramacionIniciaAnterior = fechaProgramacionInicia
@@ -538,41 +537,57 @@ def Load_dataDisponibilidadSalas(request, data):
                             horaProgramacionIniciaAnterior = horaProgramacionInicia
                             horaProgramacionFinAnterior = horaProgramacionFin
 
-
                         else:
                             # Por aqui No es primera iteracion
+                            print ("entre primeraIteracion = N")
+                            print("entre : horaProgramacionFinAnterior", horaProgramacionFinAnterior)
+                            print("entre : horaProgramacionInicia", horaProgramacionInicia)
 
                             if (horaProgramacionFinAnterior < horaProgramacionInicia):
                                 # Hueco DISPONIBLE
-                                #disponibilidadAprobada.append(
-                                #            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                #            {'id':id, 'progId':dispoId, 'salaId':salaId, 'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': horaProgramacionFinAnterior,
-                                #             'horaProgramacionFin': horaProgramacionInicia,'nombrePaciente':'','estado':'DISPONIBLE'}})
+                                print ("entre MENOR ")
+
+                                disponibilidadAprobada.append(
+                                            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
+                                            {'id':id,  'salaId':salaId, 'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': horaProgramacionFinAnterior,
+                                             'horaProgramacionFin': horaProgramacionInicia,'nombrePaciente':'','estado':'DISPONIBLE'}})
                                 # Ahora si la cirugia AGENDADA
-                                #disponibilidadAprobada.append(
-                                #            {"model": "cirugia_programacion", "pk": id, "fields":
-                                #            {'id':id, 'progId':progId, 'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
-                                #             'horaProgramacionFin': horaProgramacionFin ,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
-                                pass
+                                disponibilidadAprobada.append(
+                                            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
+                                            {'id':id, 'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
+                                             'horaProgramacionFin': horaProgramacionFin ,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
+
 
                             if (horaProgramacionFinAnterior == horaProgramacionInicia):
 
-                                # Ahora si la cirugia AGENDADA
-                                #disponibilidadAprobada.append(
-                                #            {"model": "cirugia.programacionAprobada", "pk": progId, "fields":
-                                #            {'id':id, 'progId':progId, 'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
-                                #             'horaProgramacionFin': horaProgramacionFin ,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
-                                pass
+                                #Ahora si la cirugia AGENDADA
+                                disponibilidadAprobada.append(
+                                            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
+                                            {'id':id,  'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
+                                             'horaProgramacionFin': horaProgramacionFin ,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
+                                
                             fechaProgramacionIniciaAnterior = fechaProgramacionInicia
                             fechaProgramacionFinAnterior = fechaProgramacionFin
                             horaProgramacionIniciaAnterior = horaProgramacionInicia
                             horaProgramacionFinAnterior = horaProgramacionFin
 
+            if (hastaHora > horaProgramacionFin):
+                disponibilidadAprobada.append(
+                   {"model": "cirugia.programacionAprobada", "pk": id, "fields":
+                   {'id':id,  'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionFinAnterior,
+                   'horaProgramacionFin': hastaHora ,'nombrePaciente': '' ,'estado':'DISPONIBLE'}})
 
-                fecha_futura = fecha_hoy + timedelta(days=i)
-                fecha_formateada = fecha_futura.strftime("%yyyy-%m-%d")
-                primeraIteracion = 'S'
+            print ("un dia con i = ", i)
+            fecha_futura = fecha_actual + timedelta(days=i+1)
+            fecha_hoy = fecha_actual.strftime("%Y-%m-%d")
+            fecha_futura = fecha_futura.strftime("%Y-%m-%d")
+            print("fecha_futura = ",fecha_futura)
+            primeraIteracion = 'S'
+            print("voy a incrementar la fecha_futura =" , fecha_futura)
+            print("primeraIteracion =", primeraIteracion)
 
+
+    print("sali me regreso con " , disponibilidadAprobada)
 
     miConexionx.close()
     print(disponibilidadAprobada)
@@ -653,10 +668,9 @@ def CrearSolicitudCirugia(request):
 
     print ("solicitaOtros =", solicitaOtros)
 
-    if 'anestesia' in request.POST:
-        anestesia = 'S'
-    else:
-        anestesia = 'N'
+
+    anestesia = request.POST["anestesia"]
+    print("anestesia =", anestesia)
 
 
     print ("anestesia =", anestesia)
@@ -760,7 +774,6 @@ def CrearSolicitudCirugia(request):
     fechaRegistro = timezone.now()
     fechaSolicita = fechaRegistro
 
-
     ingresoId = request.POST["ingresoId2"]
     print("ingresoId =", ingresoId)
 
@@ -774,7 +787,7 @@ def CrearSolicitudCirugia(request):
         miConexion3 = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",  password="123456")
         cur3 = miConexion3.cursor()
 
-        comando = 'INSERT INTO cirugia_cirugias ("consecAdmision", "fechaSolicita", "solicitaHospitalizacion", "solicitaAyudante", "solicitaTiempoQx",  "solicitaAnestesia", "solicitaSangre", "describeSangre", "cantidadSangre", "solicitaCamaUci", "solicitaMicroscopio", "solicitaRx", "solicitaAutoSutura", "solicitaOsteosintesis",  "solicitaBiopsia", "solicitaMalla", "solicitaOtros", "describeOtros", "tiempoMaxQx", "fechaRegistro", "estadoReg", anestesia_id, documento_id,  "dxPreQx_id", "dxPrinc_id", "dxRel1_id", especialidad_id, "sedesClinica_id", "tipoDoc_id", "usuarioRegistro_id", "usuarioSolicita_id", "serviciosAdministrativos_id", "estadoProgramacion_id", "tiposCirugia_id","estadoCirugia_id", anulado, convenio_id) VALUES (' + "'" + str(registroIngreso.consec) + "','" + str(fechaSolicita) + "','" + str(solicitaHospitalizacion) + "','" + str(solicitaAyudante) + "','" + str(solicitaTiempoQx) + "','"  + str(solicitaAnestesia) + "','" + str(solicitaSangre) + "','" + str(describeSangre) + "','" + str(cantidadSangre) + "','" + str(solicitaCamaUci) + "','" + str(solicitaMicroscopio) + "','" + str(solicitaRx) + "','" + str(solicitaAutoSutura) + "','" + str(solicitaOsteosintesis) + "','"  + str(solicitaBiopsia) + "','" + str(solicitaMalla) + "','" + str(solicitaOtros) + "','" + str(describeOtros) + "','" + str(tiempoMaxQx) + "','" + str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(anestesia) + "','" + str(registroIngreso.documento_id) + "','" + str(dxPreQx) + "','" + str(dxPrinc) + "','" + str(dxRel1) + "','" + str(especialidadX) + "','" + str(sedesClinica_id) + "','" + str(registroIngreso.tipoDoc_id) + "','" + str(username) + "','" + str(username) + "','" + str(serviciosAdministrativos) + "','" + str(estadoProgramacion.id) + "','" + str(tiposCirugia) + "','" + str(estadoCirugia.id) + "','N','" + str(convenioProc) + "'" + ') RETURNING id'
+        comando = 'INSERT INTO cirugia_cirugias ("consecAdmision", "fechaSolicita", "solicitaHospitalizacion", "solicitaAyudante", "solicitaTiempoQx",  "solicitaAnestesia", "solicitaSangre", "describeSangre", "cantidadSangre", "solicitaCamaUci", "solicitaMicroscopio", "solicitaRx", "solicitaAutoSutura", "solicitaOsteosintesis",  "solicitaBiopsia", "solicitaMalla", "solicitaOtros", "describeOtros", "tiempoMaxQx", "fechaRegistro", "estadoReg", anestesia_id, documento_id,  "dxPreQx_id", "dxPrinc_id", "dxRel1_id", especialidad_id, "sedesClinica_id", "tipoDoc_id", "usuarioRegistro_id", "usuarioSolicita_id", "serviciosAdministrativos_id", "estadoProgramacion_id", "tiposCirugia_id","estadoCirugia_id", anulado, convenio_id) VALUES (' + "'" + str(registroIngreso.consec) + "','" + str(fechaSolicita) + "','" + str(solicitaHospitalizacion) + "','" + str(solicitaAyudante) + "','" + str(solicitaTiempoQx) + "','"  + str(solicitaAnestesia) + "','" + str(solicitaSangre) + "','" + str(describeSangre) + "','" + str(cantidadSangre) + "','" + str(solicitaCamaUci) + "','" + str(solicitaMicroscopio) + "','" + str(solicitaRx) + "','" + str(solicitaAutoSutura) + "','" + str(solicitaOsteosintesis) + "','"  + str(solicitaBiopsia) + "','" + str(solicitaMalla) + "','" + str(solicitaOtros) + "','" + str(describeOtros) + "','" + str(tiempoMaxQx) + "','" + str(fechaRegistro) + "','" + str(estadoReg) + "'," + str(anestesia) + "," + str(registroIngreso.documento_id) + "," + str(dxPreQx) + "," + str(dxPrinc) + "," + str(dxRel1) + "," + str(especialidadX) + "," + str(sedesClinica_id) + "," + str(registroIngreso.tipoDoc_id) + "," + str(username) + "," + str(username) + "," + str(serviciosAdministrativos) + "," + str(estadoProgramacion.id) + ",'" + str(tiposCirugia) + "'," + str(estadoCirugia.id) + ",'N','" + str(convenioProc) + "') RETURNING id"
  
         print("comando = " , comando)
         resultado = cur3.execute(comando)

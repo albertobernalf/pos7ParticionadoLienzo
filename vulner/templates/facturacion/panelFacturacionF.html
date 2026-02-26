@@ -13,11 +13,16 @@
     <ul class="tabs">
 
         <li><a href="#Liquidacion"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Cuentas</a></li>
-        <li><a href="#LiquidacionDetalle"><span class="fa-solid fa-user-doctor-message"></span> <span   class="tab-text"> </span>Detalle Cuentas</a></li>
+        <li><a href="#LiquidacionDetalle"><span class="fa-solid fa-user-doctor-message"></span> <span   class="tab-text"> </span>Liquidacion</a></li>
         <li><a href="#Abonos"><span class="fa-solid fa-user-doctor-message"></span> <span  class="tab-text"> </span>Abonos</a></li>
         <li><a href="#Traslados"><span class="fa-solid fa-user-doctor-message"></span> <span  class="tab-text"> </span>Traslados</a></li>	
         <li><a href="#ReTomeFacturacion"><span class="fa-solid fa-user-doctor-message"></span> <span  class="tab-text"> </span>Refacturadas</a></li>
   
+        <li><a href="#Facturacion"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span> Facturacion </a></li>
+        <li><a href="#FacturacionDetalle"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span> Detalle Factura </a></li>      
+        <li><a href="#GeneracionJsonXml"><span class="fa-solid fa-user-doctor-message"></span> <span  class="tab-text"> </span>Json/Xml</a></li>
+        <li><a href="#Anulacion"><span  class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span> Anulacion Fac </a></li>
+        <li><a href="#Refacturar"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span> Refactura </a></li>      
 
 
     </ul>
@@ -1270,44 +1275,48 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
 
 
 
-		<div id="flex-container-totalesFactura">
-	       <div>
+		<!-- <div id="flex-container-totalesFactura">  -->
+	       <!-- <div> -->
 					
+	        <div id="flex-container-totales">     
+   			   <div">
+				
+
 			  		     
-						 <label for="RtotalCopagos" >Copagos:</label>
+						Copagos:
 						
 							  <input type="text" id="RtotalCopagos" name="RtotalCopagos" size=7 value="0" placeholder="Copagos" readonly>
 			  		    
-						 <label for="totalCuotaModeradora" >Moderadora:</label>
+						 Moderadora:
 						
 							  <input type="text" id="RtotalCuotaModeradora" name="RtotalCuotaModeradora" size=7 value="0"  placeholder="CuotaModeradora"readonly>
 			  		    
-						 <label for="RtotalProcedimientos" >Proc:</label>
+						 Proc:
 						
 							  <input type="text" id="RtotalProcedimientos" name="RProcedimientos" size=7 value="0" placeholder="Proc" readonly>
 
-					<label for="RtotalSuministros" >Suministros:</label>
+					Suministros:
 
 							  <input type="text" id="RtotalSuministros" name="RtotalSuministros" size=7  value="0" placeholder="Sum" readonly>
 
-						 <label for="RtotalFactura" >Total:</label>
+						 TotalFac:
 
 							  <input type="text" id="RtotalFactura" name="RtotalFactura" size=7 value="0" placeholder="Total" readonly>
-						 <label for="RvalorApagar" >Apagar:</label>
+						 Apagar:
 
 							  <input type="text" id="RvalorApagar" name="RvalorApagar" size=7 value="0" placeholder="Pagar" readonly>
 
-						 <label for="RtotalAnticipos" >Anticipos:</label>
+						 Anticipos:
 
 							  <input type="text" id="RtotalAnticipos" name="RtotalAnticipos" size=7 value="0" placeholder="Anticipos" readonly>
 
-						 <label for="RtotalAbonos" >Abonos:</label>
+						 Abonos:
 							  <input type="text" id="RtotalAbonos" name="RtotalAbonos" size=7 value="0" placeholder="Abonos" readonly>
 
-						 <label for="RtotalRecibido" >Recibido:</label>
+						 Recibido:
 							 <input type="text" id="RtotalRecibido" name="RtotalRecibido" size=7 value="0" placeholder="Recibido" readonly>
 
-						 <label for="RvalorAPagarLetras" >valor a Pagar en Letras:</label>
+						 valor a Pagar en Letras:
 
 							  <input type="text" id="RvalorAPagarLetras" name="RvalorAPagarLetras" size=120 value=""placeholder="En Letras..." readonly>
                                       </div>
@@ -1337,16 +1346,7 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
 
 {% block footer %}
 
-<div class="marco">
-    <ul class="tabs">
-        <li><a href="#Facturacion"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span> Facturacion </a></li>
-        <li><a href="#FacturacionDetalle"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span> Detalle Factura </a></li>      
-        <li><a href="#GeneracionJsonXml"><span class="fa-solid fa-user-doctor-message"></span> <span  class="tab-text"> </span>Generacion Json/Xml</a></li>
-        <li><a href="#Anulacion"><span  class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span> Anulacion Facturas </a></li>
-        <li><a href="#Refacturar"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span> Refactura </a></li>      
 
-    </ul>
-</div>
 
 {% endblock %}
 

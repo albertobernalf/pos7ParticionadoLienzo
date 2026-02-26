@@ -1055,6 +1055,13 @@ OJO EL 23 DE FEBRERO TRANAJAR TODO LO DE CIRUGIA Y CARTERA PENDIENTE VERIFICAR A
 	mañana crear una cirugia , ver impresion HC y facturarla, seguimiento
 	Luego si RIPS y GLOSAS
 
+Ver FEB 26:
+	no refresca localidad solo cuando se le da la gana en crear admision
+	OPS no sale la facturaciondetalle en pantalla
+	ops muy grande el datatable de facturacion
+	ops, verifica mas a fondo dispo salas cirugia en cambio de dia
+	ops CARTERA arreglar mas bonito mas fluido...
+
 	DESPUES DE TODO ESTO, comenzar Consulta Externa
 	Tablas particionadas
 	Frurips, devoluciones d farmacia

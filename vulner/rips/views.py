@@ -1336,18 +1336,18 @@ def GenerarJsonRips(request):
                 if (tipoRips == 'Factura'):
                     print("Factura = ", elemento)
                     archivo = 'Fac' + str(elemento) + '.txt'
-                    nombreCarpeta = 'C:\\EntornosPython\\Pos6\\JSONCLINICA\\' + str(archivo)
+                    nombreCarpeta = 'C:\\EntornosPython\\Pos7Particionado\\vulner\\JSONCLINICA\\' + str(archivo)
 
                 if (tipoRips == 'Glosa'):
                     print("Glosa = ", elemento)
                     archivo = 'Glo_' + str(elemento) + '_' + str(elementoOtro) + '.txt'
-                    nombreCarpeta = 'C:\\EntornosPython\\Pos6\\JSONCLINICA\\' + str(archivo)
+                    nombreCarpeta = 'C:\\EntornosPython\\Pos7Particionado\\vulner\\JSONCLINICA\\' + str(archivo)
 
 
                 if (tipoRips == 'Nota Credito'):
                     print("Nota Credito = ", elemento)
                     archivo = 'NotCre_' + str(elemento) + '_' + str(elementoOtro) + '.txt'
-                    nombreCarpeta = 'C:\\EntornosPython\\Pos6\\JSONCLINICA\\' + str(archivo)
+                    nombreCarpeta = 'C:\\EntornosPython\\Pos7Particionado\\vulner\\JSONCLINICA\\' + str(archivo)
 
 
                 print("ruta =", nombreCarpeta)
@@ -1412,7 +1412,7 @@ def GenerarJsonRips(request):
 
 
             archivo = 'Env' + str(envioRipsId) + '.txt'
-            nombreCarpeta = 'C:\\EntornosPython\\Pos6\\JSONCLINICA\\' + str(archivo)
+            nombreCarpeta = 'C:\\EntornosPython\\Pos7Particionado\\vulner\\JSONCLINICA\\' + str(archivo)
 
             for y in funcionGlobalJson[0]['dato']:
 

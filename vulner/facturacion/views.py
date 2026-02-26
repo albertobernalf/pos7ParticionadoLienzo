@@ -36,6 +36,7 @@ from cirugia.models import EstadosCirugias, EstadosProgramacion, Cirugias
 from django.db.models import F
 from sitios.models import ServiciosSedes
 from contratacion.models import Convenios
+import os
 
 def decimal_serializer(obj):
     if isinstance(obj, Decimal):
@@ -1480,7 +1481,7 @@ def FacturarCuenta(request):
         cur3.execute(comando3)
         facturacionId = cur3.fetchone()[0]
 
-        comando32 = 'update facturacion_facturacion set "valorAPagarLetras" = obtienevlrletras(cast("totalFactura" as integer)) ,  "cufeDefinitivo" = ' + "'" + str('6b7dd1910792ec82b16f5a30d83da5c8f10895b42e3a685a8ee0f0edfc9e32e087576ba23525a50091a6eeb5bd9a9c5e') + "'," + '"codigoQr" =' + "'" + str('C:\EntornosPython\Pos6\JSONCLINICA\CodigosQr\Factura_1.png')  + "'" + ' WHERE id = ' +"'" + str(facturacionId) + "'"
+        comando32 = 'update facturacion_facturacion set "valorAPagarLetras" = obtienevlrletras(cast("totalFactura" as integer)) ,  "cufeDefinitivo" = ' + "'" + str('6b7dd1910792ec82b16f5a30d83da5c8f10895b42e3a685a8ee0f0edfc9e32e087576ba23525a50091a6eeb5bd9a9c5e') + "'," + '"codigoQr" =' + "'" + str('C:/EntornosPython/Pos7Particionado/vulner/JSONCLINICA/CodigosQr/Factura_1.png')  + "'" + ' WHERE id = ' +"'" + str(facturacionId) + "'"
         cur3.execute(comando32)
 
         print ("facturacionId = ", facturacionId)
@@ -1791,7 +1792,7 @@ def load_dataFacturacion(request, data):
 
        print ("Entre por Fecha")
        #detalle = 'SELECT facturas.id id , facturas."fechaFactura" fechaFactura, tp.nombre tipoDoc,u.documento documento,u.nombre nombre,i.consec consec , i."fechaIngreso" fechaIngreso , i."fechaSalida" fechaSalida, ser.nombre servicioNombreSalida, dep.nombre camaNombreSalida , diag.nombre dxSalida , conv.nombre convenio, conv.id convenioId , i."salidaClinica" salidaClinica, facturas."estadoReg" estadoReg FROM admisiones_ingresos i INNER JOIN sitios_serviciosSedes sd ON (sd."sedesClinica_id" = i."sedesClinica_id") INNER JOIN sitios_dependencias dep ON (dep."sedesClinica_id" = i."sedesClinica_id" AND dep."serviciosSedes_id" = sd.id AND dep.id = i."dependenciasSalida_id")  INNER JOIN sitios_dependenciastipo deptip  ON (deptip.id = dep."dependenciasTipo_id") INNER JOIN usuarios_usuarios u ON (u."tipoDoc_id" =  i."tipoDoc_id" AND u.id = i."documento_id" ) INNER JOIN usuarios_tiposDocumento tp ON (tp.id = u."tipoDoc_id") INNER JOIN clinico_servicios ser  ON ( ser.id  = i."serviciosSalida_id")  INNER JOIN clinico_Diagnosticos diag ON (diag.id = i."dxSalida_id") INNER JOIN facturacion_facturacion facturas ON (facturas.documento_id = i.documento_id and facturas."tipoDoc_id" = i."tipoDoc_id" and facturas."consecAdmision" = i.consec ) LEFT JOIN contratacion_convenios conv  ON (conv.id = facturas.convenio_id ) WHERE i."fechaSalida" between ' + "'" + str(desdeFecha) + "'" + '  and ' + "'" + str(hastaFecha) + "'" + ' AND i."sedesClinica_id" = ' + "'" + str(sede) + "'" + ' AND i."fechaSalida" is not null '
-       detalle = 'SELECT facturas.id id , facturas."fechaFactura" fechaFactura, tp.nombre tipoDoc,u.documento documento,u.nombre nombre,	i.consec consec , i."fechaIngreso" fechaIngreso , i."fechaSalida" fechaSalida, ser.nombre servicioNombreSalida,	dep.nombre camaNombreSalida , diag.nombre dxSalida , conv.nombre convenio, conv.id convenioId , 	i."salidaClinica" salidaClinica, facturas."estadoReg" estadoReg, facturas.anulado FROM admisiones_ingresos i INNER JOIN sitios_serviciosSedes sd ON (sd."sedesClinica_id" = i."sedesClinica_id" and sd.id = i."serviciosSalida_id") 	INNER JOIN sitios_historialdependencias histdep ON ( histdep.dependencias_id = i."dependenciasSalida_id")  INNER JOIN sitios_dependencias dep ON (dep.id=histdep.dependencias_id) 	INNER JOIN sitios_dependenciastipo deptip  ON (deptip.id = dep."dependenciasTipo_id")  INNER JOIN usuarios_usuarios u ON (u."tipoDoc_id" =  i."tipoDoc_id" AND u.id = i."documento_id" ) INNER JOIN usuarios_tiposDocumento tp ON (tp.id = u."tipoDoc_id") 	INNER JOIN clinico_servicios ser  ON ( ser.id  = sd.servicios_id ) INNER JOIN clinico_Diagnosticos diag ON (diag.id = i."dxSalida_id") INNER JOIN facturacion_facturacion facturas ON (facturas.documento_id = i.documento_id and facturas."tipoDoc_id" = i."tipoDoc_id" and facturas."consecAdmision" = i.consec ) inner JOIN contratacion_convenios conv  ON (conv.id = facturas.convenio_id ) WHERE i."fechaSalida" between ' + "'" + str(desdeFecha) + "'" + ' and ' + "'" + str(hastaFecha) + "'" + ' AND i."sedesClinica_id" = ' + "'" + str(sede) + "'" + '  GROUP BY 	facturas.id  , facturas."fechaFactura" , tp.nombre ,u.documento ,u.nombre , i.consec , i."fechaIngreso"  , i."fechaSalida" , ser.nombre ,	dep.nombre  , diag.nombre  , conv.nombre , conv.id  , 	i."salidaClinica" , facturas."estadoReg"  UNION SELECT facturas.id id , facturas."fechaFactura" fechaFactura, tp.nombre tipoDoc,u.documento documento,u.nombre nombre, i.consec consec , i."fechaIngreso" fechaIngreso , i."fechaSalida" fechaSalida, ser.nombre servicioNombreSalida,dep.nombre camaNombreSalida , diag.nombre dxSalida , conv.nombre convenio, conv.id convenioId , i."salidaClinica" salidaClinica, facturas."estadoReg" estadoReg, facturas.anulado  FROM admisiones_ingresos i left JOIN sitios_serviciosSedes sd ON (sd."sedesClinica_id" = i."sedesClinica_id" and sd.id = i."serviciosSalida_id") left JOIN sitios_historialdependencias histdep ON ( histdep.dependencias_id = i."dependenciasSalida_id") left JOIN sitios_dependencias dep ON (dep.id=histdep.dependencias_id) 	left JOIN sitios_dependenciastipo deptip  ON (deptip.id = dep."dependenciasTipo_id") INNER JOIN usuarios_usuarios u ON (u."tipoDoc_id" =  i."tipoDoc_id" AND u.id = i."documento_id" ) INNER JOIN usuarios_tiposDocumento tp ON (tp.id = u."tipoDoc_id") inner JOIN clinico_servicios ser  ON ( ser.id  = sd.servicios_id ) INNER JOIN clinico_Diagnosticos diag ON (diag.id = i."dxSalida_id") INNER JOIN facturacion_facturacion facturas ON (facturas.documento_id = i.documento_id and facturas."tipoDoc_id" = i."tipoDoc_id" and facturas."consecAdmision" = i.consec ) inner JOIN contratacion_convenios conv  ON (conv.id = facturas.convenio_id ) inner JOIN facturacion_conveniospacienteingresos convPac  ON (convPac.convenio_id = conv.id and  convPac.factura_id =facturas.id  ) WHERE i."fechaSalida" is null AND i."sedesClinica_id" = ' + "'" + str(sede) +"'" + 'GROUP BY 	facturas.id  , facturas."fechaFactura" , tp.nombre ,u.documento ,u.nombre , i.consec , i."fechaIngreso"  , i."fechaSalida" , ser.nombre ,	dep.nombre  , diag.nombre  , conv.nombre , conv.id  , 	i."salidaClinica" , facturas."estadoReg" '
+       detalle = 'SELECT facturas.id id , facturas."fechaFactura" fechaFactura, tp.nombre tipoDoc,u.documento documento,u.nombre nombre,	i.consec consec , i."fechaIngreso" fechaIngreso , i."fechaSalida" fechaSalida, ser.nombre servicioNombreSalida,	dep.nombre camaNombreSalida , substring(diag.nombre,1,30) dxSalida , conv.nombre convenio, conv.id convenioId , 	i."salidaClinica" salidaClinica, facturas."estadoReg" estadoReg, facturas.anulado FROM admisiones_ingresos i INNER JOIN sitios_serviciosSedes sd ON (sd."sedesClinica_id" = i."sedesClinica_id" and sd.id = i."serviciosSalida_id") 	INNER JOIN sitios_historialdependencias histdep ON ( histdep.dependencias_id = i."dependenciasSalida_id")  INNER JOIN sitios_dependencias dep ON (dep.id=histdep.dependencias_id) 	INNER JOIN sitios_dependenciastipo deptip  ON (deptip.id = dep."dependenciasTipo_id")  INNER JOIN usuarios_usuarios u ON (u."tipoDoc_id" =  i."tipoDoc_id" AND u.id = i."documento_id" ) INNER JOIN usuarios_tiposDocumento tp ON (tp.id = u."tipoDoc_id") 	INNER JOIN clinico_servicios ser  ON ( ser.id  = sd.servicios_id ) INNER JOIN clinico_Diagnosticos diag ON (diag.id = i."dxSalida_id") INNER JOIN facturacion_facturacion facturas ON (facturas.documento_id = i.documento_id and facturas."tipoDoc_id" = i."tipoDoc_id" and facturas."consecAdmision" = i.consec ) inner JOIN contratacion_convenios conv  ON (conv.id = facturas.convenio_id ) WHERE i."fechaSalida" between ' + "'" + str(desdeFecha) + "'" + ' and ' + "'" + str(hastaFecha) + "'" + ' AND i."sedesClinica_id" = ' + "'" + str(sede) + "'" + '  GROUP BY 	facturas.id  , facturas."fechaFactura" , tp.nombre ,u.documento ,u.nombre , i.consec , i."fechaIngreso"  , i."fechaSalida" , ser.nombre ,	dep.nombre  , diag.nombre  , conv.nombre , conv.id  , 	i."salidaClinica" , facturas."estadoReg"  UNION SELECT facturas.id id , facturas."fechaFactura" fechaFactura, tp.nombre tipoDoc,u.documento documento,u.nombre nombre, i.consec consec , i."fechaIngreso" fechaIngreso , i."fechaSalida" fechaSalida, ser.nombre servicioNombreSalida,dep.nombre camaNombreSalida , diag.nombre dxSalida , conv.nombre convenio, conv.id convenioId , i."salidaClinica" salidaClinica, facturas."estadoReg" estadoReg, facturas.anulado  FROM admisiones_ingresos i left JOIN sitios_serviciosSedes sd ON (sd."sedesClinica_id" = i."sedesClinica_id" and sd.id = i."serviciosSalida_id") left JOIN sitios_historialdependencias histdep ON ( histdep.dependencias_id = i."dependenciasSalida_id") left JOIN sitios_dependencias dep ON (dep.id=histdep.dependencias_id) 	left JOIN sitios_dependenciastipo deptip  ON (deptip.id = dep."dependenciasTipo_id") INNER JOIN usuarios_usuarios u ON (u."tipoDoc_id" =  i."tipoDoc_id" AND u.id = i."documento_id" ) INNER JOIN usuarios_tiposDocumento tp ON (tp.id = u."tipoDoc_id") inner JOIN clinico_servicios ser  ON ( ser.id  = sd.servicios_id ) INNER JOIN clinico_Diagnosticos diag ON (diag.id = i."dxSalida_id") INNER JOIN facturacion_facturacion facturas ON (facturas.documento_id = i.documento_id and facturas."tipoDoc_id" = i."tipoDoc_id" and facturas."consecAdmision" = i.consec ) inner JOIN contratacion_convenios conv  ON (conv.id = facturas.convenio_id ) inner JOIN facturacion_conveniospacienteingresos convPac  ON (convPac.convenio_id = conv.id and  convPac.factura_id =facturas.id  ) WHERE i."fechaSalida" is null AND i."sedesClinica_id" = ' + "'" + str(sede) +"'" + 'GROUP BY 	facturas.id  , facturas."fechaFactura" , tp.nombre ,u.documento ,u.nombre , i.consec , i."fechaIngreso"  , i."fechaSalida" , ser.nombre ,	dep.nombre  , diag.nombre  , conv.nombre , conv.id  , 	i."salidaClinica" , facturas."estadoReg" '
 
 
     else:
@@ -1859,30 +1860,36 @@ def PostConsultaFacturacion(request):
     contenido_completo=''
 
     if (rutaXml == None):
-        rutaXml = 'C:\EntornosPython\Pos6\JSONCLINICA\Facturas\XML'
-
+        rutaXml = 'C:\\EntornosPython\\Pos7Particionado\\vulner\\JSONCLINICA\\Facturas\\XML\\Factura_' + str(Post_id) + '.xml'
 
     print("rutaXml", rutaXml)
 
-    try:
-        # Abre el archivo en modo lectura ('r') con codificación UTF-8
-        with open(rutaXml, 'r', encoding='utf-8') as archivo:
-            contenido_completo = archivo.read()
-            print("Contenido completo del archivo:")
-            print(contenido_completo)
+    if os.path.exists(rutaXml):
 
-    except FileNotFoundError:
-        print(f"Error: El archivo '{nombre_archivo}' no fue encontrado.")
-    except Exception as e:
-        print(f"Ocurrió un error al leer el archivo: {e}")
+        try:
+            # Abre el archivo en modo lectura ('r') con codificación UTF-8
+            with open(rutaXml, 'r', encoding='utf-8') as archivo:
+                contenido_completo = archivo.read()
+                print("Contenido completo del archivo:")
+                print(contenido_completo)
+        except FileNotFoundError:
+            print(f"Error: El archivo '{nombre_archivo}' no fue encontrado.")
+            #except Exception as e:
+            #    print(f"Ocurrió un error al leer el archivo: {e}")
 
+    else:
+        ## El archivo no existe
+        print(f"Error: The file '{rutaXml}' was not found.")
+        content = "Default content because the file was not found."
+        print("Using default content:")
+        print(content)
 
 
     return JsonResponse({'pk':facturacion[0]['id'],'id':facturacion[0]['id'], 'factura':facturacion[0]['factura'],'fechaFactura':facturacion[0]['fechaFactura'],
 		          'tipoDoc':facturacion[0]['tipoDoc'],'documento':facturacion[0]['documento'],'paciente':facturacion[0]['paciente'],  'consecAdmision':facturacion[0]['consecAdmision'],
                              'nombreConvenio':facturacion[0]['nombreConvenio'] , 
 			'totalSuministros':facturacion[0]['totalSuministros'] ,'totalProcedimientos':facturacion[0]['totalProcedimientos'] ,'totalCopagos':facturacion[0]['totalCopagos'] ,'totalCuotaModeradora':facturacion[0]['totalCuotaModeradora'] ,'totalAbonos':facturacion[0]['totalAbonos'] ,'totalRecibido':facturacion[0]['totalRecibido'] ,'totalAnticipos':facturacion[0]['totalAnticipos'] ,
-			'valorApagar':facturacion[0]['valorApagar'] ,'totalFactura':facturacion[0]['totalFactura'],
+			'valorApagar':facturacion[0]['valorApagar'] ,'totalFactura':facturacion[0]['totalFactura'],'valorAPagarLetras':facturacion[0]['valorAPagarLetras'],
                          'estadoReg': facturacion[0]['estadoReg'], 'anulado': facturacion[0]['anulado'], 'Xml': contenido_completo
        })
 

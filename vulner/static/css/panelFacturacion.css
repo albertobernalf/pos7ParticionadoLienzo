@@ -22,12 +22,12 @@ th {     font-size: 8px;       padding: 8px;     background: #b9c9fe;
     border-top: 4px solid #aabcfe;    border-bottom: 1px solid #fff; color: #039;   text-align: left; font-weight: bold;
     }
 
-td {   font-size: 12px;    padding: 8px;     background: #e8edff;    
+td {   font-size: 10px;    padding: 8px;     background: #e8edff;    
     color: #669;      text-align: left; height: 2px;
   }
 
  tr {
-  height: 1px;
+  height: 2px;
   }
 
 
@@ -279,6 +279,28 @@ input[type="datetime-local"] {
 
 .dataTables_wrapper .dataTables_footer {
     display: none;
+}
+
+/* Reduce vertical spacing */
+
+div.dataTables_wrapper div.dataTables_info {
+  padding-top: 0px;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+  padding: 4px 8px 4px 8px;
+}
+/* End Reduce vertical spacing */
+
+/* para el texto */
+
+table.dataTable td {
+font-size: 1.5em;
+}
+
+
+table.dataTable tr.dtrg-level-0 td {
+font-size: 3.1em;
 }
 
 .texto-span {

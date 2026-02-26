@@ -325,7 +325,7 @@ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la 
   lengthMenu: [2, 4, 15],
            processing: true,
             serverSide: false,
-            scrollY: '275px',
+            scrollY: '475px',
 	    scrollX: true,
 	    scrollCollapse: true,
             paging:false,
@@ -1111,7 +1111,7 @@ $.ajax({
         $('body').on('click', '.editPostFacturacion', function () {
 
           var post_id = $(this).data('pk');
-      //    alert("pk1 = " + $(this).data('pk'));
+          alert("pk1 = " + $(this).data('pk'));
        facturacionId = post_id;
 
         var sedeSeleccionada = document.getElementById("sedeSeleccionada").value;
@@ -1126,6 +1126,7 @@ $.ajax({
 	           type: 'POST',
 	           dataType : 'json',
 	  		success: function (data) {
+		alert("regreso ajax = " + JSON.stringify(data));
                   
 		$('#Afactura').val(data.factura);
 		$('#AfechaFactura').val(data.fechaFactura);
@@ -1165,7 +1166,7 @@ $('#RtotalAbonos').val(data.totalAbonos);
 $('#RtotalRecibido').val(data.totalRecibido);
 $('#RvalorApagar').val(data.valorApagar);
 $('#RtotalFactura').val(data.totalFactura);
-// alert("En letras = " + data.valorAPagarLetras );
+alert("En letras = " + data.valorAPagarLetras );
 $('#RvalorAPagarLetras').val(data.valorAPagarLetras);
 
 
@@ -1186,8 +1187,13 @@ $('#RvalorAPagarLetras').val(data.valorAPagarLetras);
 		        data2['facturacionId'] = post_id;
 		        data2 = JSON.stringify(data2);
 
-		 	 arrancaLiquidacion(5,data2);
+		alert("voy a activar detalle");
+
+
+	 	 arrancaLiquidacion(5,data2);
 		    dataTableFacturacionDetalleInitialized = true;
+
+		alert("ya active detalle");
 		
 
 		  arrancaLiquidacion(6,data2);

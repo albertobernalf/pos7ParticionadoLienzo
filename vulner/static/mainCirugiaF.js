@@ -1351,7 +1351,7 @@ function arrancaCirugia(valorTabla,valorData)
   lengthMenu: [2, 4, 15],
            processing: true,
             serverSide: false,
-            scrollY: '475px',
+            scrollY: '175px',
 	    scrollX: true,
 	    scrollCollapse: true,
             paging:false,
@@ -1359,7 +1359,7 @@ function arrancaCirugia(valorTabla,valorData)
 		{ className: 'centered', targets: [0, 1, 2, 3, 4, 5] },
 	    { width: '10%', targets: [2,3] },
 		{
-                    "targets": 7
+                    "targets": 8
                }
             ],
 	 pageLength: 3,
@@ -1390,6 +1390,7 @@ function arrancaCirugia(valorTabla,valorData)
             columns: [
                 { data: "fields.id"},
                 { data: "fields.salaId"},
+                { data: "fields.nombreSala"},
                 { data: "fields.fechaProgramacionInicia"},
                 { data: "fields.fechaProgramacionFin"},
                 { data: "fields.horaProgramacionInicia"},
@@ -1407,13 +1408,13 @@ function arrancaCirugia(valorTabla,valorData)
 
 				if ( row['fields']['estado'] === 'OCUPADA')
                 {
-                    return '<i class="far fa-dot-circle" style="color:red; " >OCUPADA</i>';
+                    return '<i  style="color:red; " >OCUPADA</i>';
 					
 					}
 
 			    if ( row['fields']['estado'] ==  'DISPONIBLE')
 				{
-		 return '<i class="far fa-dot-circle" style="color:green" >DISPONIBLE</i>';
+		 return '<i style="color:green" >DISPONIBLE</i>';
                     }
 	                    }
 			},

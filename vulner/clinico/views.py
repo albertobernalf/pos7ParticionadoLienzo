@@ -295,6 +295,12 @@ def crearHistoriaClinica(request):
             dxComplicacion = request.POST["dxComplicacion"]
             print ("dxComplicacion = " , dxComplicacion)
 
+            if (dxComplicacion == ''):
+                dxComplicacion='null'
+
+
+
+
             print ("tiposfolios Seleccionado = " , tiposFolio)
             #dependenciasRealizado = request.POST["dependenciasRealizado"]
             serviciosAdministrativos = request.POST["serviciosAdministrativos"]

@@ -31,7 +31,7 @@ class Cirugias(models.Model):
     solicitaAyudante = models.CharField(max_length=1,choices=FLAG_CHOICES, blank=True, null=True, editable=True)
     solicitaTiempoQx =  models.CharField(max_length=20, blank=True, null=True, editable=True)
     solicitatipoQx = models.CharField(max_length=20, blank=True, null=True, editable=True)
-    solicitaAnestesia = models.CharField(max_length=20, blank=True, null=True, editable=True)
+    solicitaAnestesia = models.CharField(max_length=1 ,choices=FLAG_CHOICES , blank=True, null=True, editable=True)
     solicitaSangre = models.CharField(max_length=1,choices=FLAG_CHOICES, blank=True, null=True, editable=True)
     describeSangre = models.CharField(max_length=2000, blank=True, null=True, editable=True)
     cantidadSangre = models.CharField(max_length=10, blank=True, null=True, editable=True)

@@ -253,8 +253,6 @@ def CrearProgramacionCirugia(request):
 
     # Aqui validar si las feca-hora de la sala a solicitar estan ocupadas si si enviar excepcion
 
-
-
     miConexion3 = None
     try:
 
@@ -262,7 +260,8 @@ def CrearProgramacionCirugia(request):
         cur3 = miConexion3.cursor()
 
         horarioSala = []
-        comando0 = 'SELECT count(*) id FROM cirugia_programacioncirugias cir where cir.id != ' + "'" + str(programacionId) + "'" +  ' AND sala_id =  ' + "'" + str(sala) + "'" + ' AND cir."fechaProgramacionInicia" =  date(' + "'" + str(fechaProgramacionInicia) + "')" + ' AND (cir."horaProgramacionInicia"  BETWEEN  ' + "'" + str(horaProgramacionInicia) + "'" + ' and ' + "'" + str(horaProgramacionFin) + "'" + ' OR cir."horaProgramacionFin"  BETWEEN ' + "'" + str(horaProgramacionInicia) + "' AND " + "'" + str(horaProgramacionFin) + "')"
+        #comando0 = 'SELECT count(*) id FROM cirugia_programacioncirugias cir where cir.id != ' + "'" + str(programacionId) + "'" +  ' AND sala_id =  ' + "'" + str(sala) + "'" + ' AND cir."fechaProgramacionInicia" =  date(' + "'" + str(fechaProgramacionInicia) + "')" + ' AND (cir."horaProgramacionInicia"  BETWEEN  ' + "'" + str(horaProgramacionInicia) + "'" + ' and ' + "'" + str(horaProgramacionFin) + "'" + ' OR cir."horaProgramacionFin"  BETWEEN ' + "'" + str(horaProgramacionInicia) + "' AND " + "'" + str(horaProgramacionFin) + "')"
+        comando0 = 'SELECT count(*) id FROM cirugia_programacioncirugias cir where cir.id != ' + "'" + str(programacionId) + "'" +  ' AND sala_id =  ' + "'" + str(sala) + "'" + ' AND cir."fechaProgramacionInicia" =  date(' + "'" + str(fechaProgramacionInicia) + "')" + ' AND (cir."horaProgramacionInicia"  > ' + "'" + str(horaProgramacionInicia) + "'" + ' and  cir."horaProgramacionInicia" < ' + "'" + str(horaProgramacionFin) + "'" + ' OR cir."horaProgramacionFin"  > ' + "'" + str(horaProgramacionInicia) + "'" + ' AND  cir."horaProgramacionFin" < ' + "'" + str(horaProgramacionFin) + "')"
 
         print(comando0)
         cur3.execute(comando0)
@@ -456,16 +455,16 @@ def Load_dataDisponibilidadSalas(request, data):
     salas = []
     disponibilidadAprobada = []
 
-    for  id, salaId, nombreSala in curx.fetchall():
+    fecha_futura = fecha_hoy
+
+    for id, salaId, nombreSala in curx.fetchall():
         salas.append(
             {"model": "sitios.salas", "pk": id, "fields":
                 {'id':id, 'salaId': salaId, 'nombreSala': nombreSala}})
 
-        fecha_futura = fecha_hoy
+        #fecha_futura = fecha_hoy
         primeraIteracionDia = 'S'
-        print("SALA No ", salaId)
-
-
+        print("CAMBIO SALA No ", salaId)
 
         for i in range(dias_a_revisar + 1):
 
@@ -477,7 +476,7 @@ def Load_dataDisponibilidadSalas(request, data):
 
             salasDisponibilidad = []
 
-            for  id, dispoId , fecha, desdeHora, hastaHora, estadoDisponibilidad in curx.fetchall():
+            for id, dispoId , fecha, desdeHora, hastaHora, estadoDisponibilidad in curx.fetchall():
                 salasDisponibilidad.append(
 		            {"model": "sitios.disponibilidadsalas", "pk": id, "fields":
 		                {'id': id, 'dispoId': dispoId ,'fecha': fecha,
@@ -510,12 +509,12 @@ def Load_dataDisponibilidadSalas(request, data):
                                 # Hueco DISPONIBLE
                                 disponibilidadAprobada.append(
                                             {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                            {'id':id, 'salaId':salaId, 'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': desdeHora,
+                                            {'id':id, 'salaId':salaId,'nombreSala':nombreSala, 'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': desdeHora,
                                              'horaProgramacionFin': horaProgramacionInicia,'nombrePaciente':'','estado':'DISPONIBLE'}})
                                 #Ahora si la cirugia AGENDADA
                                 disponibilidadAprobada.append(
                                             {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                            {'id':id, 'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
+                                            {'id':id, 'salaId':salaId, 'nombreSala':nombreSala,'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
                                              'horaProgramacionFin': horaProgramacionFin ,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
 
 
@@ -527,7 +526,7 @@ def Load_dataDisponibilidadSalas(request, data):
                                 # Ahora si la cirugia AGENDADA
                                 disponibilidadAprobada.append(
                                             {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                            {'id':id, 'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
+                                            {'id':id, 'salaId':salaId, 'nombreSala':nombreSala, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
                                              'horaProgramacionFin': horaProgramacionFin,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
 
 
@@ -549,12 +548,12 @@ def Load_dataDisponibilidadSalas(request, data):
 
                                 disponibilidadAprobada.append(
                                             {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                            {'id':id,  'salaId':salaId, 'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': horaProgramacionFinAnterior,
+                                            {'id':id,  'salaId':salaId, 'nombreSala':nombreSala,'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': horaProgramacionFinAnterior,
                                              'horaProgramacionFin': horaProgramacionInicia,'nombrePaciente':'','estado':'DISPONIBLE'}})
                                 # Ahora si la cirugia AGENDADA
                                 disponibilidadAprobada.append(
                                             {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                            {'id':id, 'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
+                                            {'id':id, 'salaId':salaId, 'nombreSala':nombreSala,'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
                                              'horaProgramacionFin': horaProgramacionFin ,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
 
 
@@ -563,7 +562,7 @@ def Load_dataDisponibilidadSalas(request, data):
                                 #Ahora si la cirugia AGENDADA
                                 disponibilidadAprobada.append(
                                             {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                            {'id':id,  'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
+                                            {'id':id,  'salaId':salaId,'nombreSala':nombreSala, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
                                              'horaProgramacionFin': horaProgramacionFin ,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
                                 
                             fechaProgramacionIniciaAnterior = fechaProgramacionInicia
@@ -571,11 +570,20 @@ def Load_dataDisponibilidadSalas(request, data):
                             horaProgramacionIniciaAnterior = horaProgramacionInicia
                             horaProgramacionFinAnterior = horaProgramacionFin
 
-            if (hastaHora > horaProgramacionFin):
-                disponibilidadAprobada.append(
-                   {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                   {'id':id,  'salaId':salaId, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionFinAnterior,
-                   'horaProgramacionFin': hastaHora ,'nombrePaciente': '' ,'estado':'DISPONIBLE'}})
+                        ##for BARRO LA PROGRAMACION PARA ESE DIA
+
+                        if (hastaHora > horaProgramacionFin):
+                            disponibilidadAprobada.append(
+                            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
+                            {'id': id, 'salaId': salaId, 'nombreSala': nombreSala,
+                             'fechaProgramacionInicia': fechaProgramacionInicia,
+                             'fechaProgramacionFin': fechaProgramacionFin,
+                             'horaProgramacionInicia': horaProgramacionFinAnterior,
+                             'horaProgramacionFin': hastaHora, 'nombrePaciente': '', 'estado': 'DISPONIBLE'}})
+
+                #FOR PARA ESTE DIA QUE DISPONIBILIDAD HAY EN ESA SALA
+
+            #FOR DE LOS DIAS
 
             print ("un dia con i = ", i)
             fecha_futura = fecha_actual + timedelta(days=i+1)
@@ -583,8 +591,11 @@ def Load_dataDisponibilidadSalas(request, data):
             fecha_futura = fecha_futura.strftime("%Y-%m-%d")
             print("fecha_futura = ",fecha_futura)
             primeraIteracion = 'S'
-            print("voy a incrementar la fecha_futura =" , fecha_futura)
-            print("primeraIteracion =", primeraIteracion)
+
+        #Cambio de sala
+
+        primeraIteracion = 'S'
+        fecha_hoy = fecha_actual.strftime("%Y-%m-%d")
 
 
     print("sali me regreso con " , disponibilidadAprobada)
@@ -664,10 +675,14 @@ def CrearSolicitudCirugia(request):
         solicitaOtros = 'S'
     else:
         solicitaOtros = 'N'
-
-
     print ("solicitaOtros =", solicitaOtros)
 
+
+    if 'solicitaAnestesia' in request.POST:
+        solicitaAnestesia = 'S'
+    else:
+        solicitaAnestesia = 'N'
+    print ("solicitaAnestesia =", solicitaAnestesia)
 
     anestesia = request.POST["anestesia"]
     print("anestesia =", anestesia)
@@ -788,8 +803,13 @@ def CrearSolicitudCirugia(request):
         cur3 = miConexion3.cursor()
 
         comando = 'INSERT INTO cirugia_cirugias ("consecAdmision", "fechaSolicita", "solicitaHospitalizacion", "solicitaAyudante", "solicitaTiempoQx",  "solicitaAnestesia", "solicitaSangre", "describeSangre", "cantidadSangre", "solicitaCamaUci", "solicitaMicroscopio", "solicitaRx", "solicitaAutoSutura", "solicitaOsteosintesis",  "solicitaBiopsia", "solicitaMalla", "solicitaOtros", "describeOtros", "tiempoMaxQx", "fechaRegistro", "estadoReg", anestesia_id, documento_id,  "dxPreQx_id", "dxPrinc_id", "dxRel1_id", especialidad_id, "sedesClinica_id", "tipoDoc_id", "usuarioRegistro_id", "usuarioSolicita_id", "serviciosAdministrativos_id", "estadoProgramacion_id", "tiposCirugia_id","estadoCirugia_id", anulado, convenio_id) VALUES (' + "'" + str(registroIngreso.consec) + "','" + str(fechaSolicita) + "','" + str(solicitaHospitalizacion) + "','" + str(solicitaAyudante) + "','" + str(solicitaTiempoQx) + "','"  + str(solicitaAnestesia) + "','" + str(solicitaSangre) + "','" + str(describeSangre) + "','" + str(cantidadSangre) + "','" + str(solicitaCamaUci) + "','" + str(solicitaMicroscopio) + "','" + str(solicitaRx) + "','" + str(solicitaAutoSutura) + "','" + str(solicitaOsteosintesis) + "','"  + str(solicitaBiopsia) + "','" + str(solicitaMalla) + "','" + str(solicitaOtros) + "','" + str(describeOtros) + "','" + str(tiempoMaxQx) + "','" + str(fechaRegistro) + "','" + str(estadoReg) + "'," + str(anestesia) + "," + str(registroIngreso.documento_id) + "," + str(dxPreQx) + "," + str(dxPrinc) + "," + str(dxRel1) + "," + str(especialidadX) + "," + str(sedesClinica_id) + "," + str(registroIngreso.tipoDoc_id) + "," + str(username) + "," + str(username) + "," + str(serviciosAdministrativos) + "," + str(estadoProgramacion.id) + ",'" + str(tiposCirugia) + "'," + str(estadoCirugia.id) + ",'N','" + str(convenioProc) + "') RETURNING id"
- 
+        #comando = 'INSERT INTO cirugia_cirugias ("consecAdmision", "fechaSolicita", "solicitaHospitalizacion", "solicitaAyudante", "solicitaTiempoQx") VALUES (' + "'" + str(registroIngreso.consec) + "','" + str(fechaSolicita) + "','" + str(solicitaHospitalizacion) + "','" + str(solicitaAyudante) + "','" + str(solicitaTiempoQx) + "') RETURNING id"
+        #comando = 'INSERT INTO cirugia_cirugias ("consecAdmision", "fechaSolicita", "solicitaHospitalizacion", "solicitaAyudante", "solicitaTiempoQx",  "solicitaAnestesia", "solicitaSangre", "describeSangre", "cantidadSangre", "solicitaCamaUci"  ) VALUES (' + "'" + str(registroIngreso.consec) + "','" + str(fechaSolicita) + "','" + str(solicitaHospitalizacion) + "','" + str(solicitaAyudante) + "','" + str(solicitaTiempoQx) + "','"  + str(solicitaAnestesia) + "','" + str(solicitaSangre) + "','" + str(describeSangre) + "','" + str(cantidadSangre) + "','" + str(solicitaCamaUci) + "') RETURNING id"
+
         print("comando = " , comando)
+
+
+
         resultado = cur3.execute(comando)
 
         cirugiaId = cur3.fetchone()[0]

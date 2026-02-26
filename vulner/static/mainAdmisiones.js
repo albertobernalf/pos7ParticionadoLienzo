@@ -2544,6 +2544,8 @@ $(document).on('change', '#busServicio22', function(event) {
 
 
        var serv =   $(this).val()
+	alert("codigo del servivio a buscar VERIFICAR" + serv);
+
 
         var sede =  document.getElementById("Sede").value;
        // var Sede1 = document.getElementById("FormBuscar").elements["Sede"];
@@ -2593,7 +2595,7 @@ $(document).on('change', '#busServicio22', function(event) {
 
 $(document).on('change', '#busSubServicio22', function(event) {
 
-      //  alert("Entre a cambiar el subservicio");
+        alert("Entre a cambiar el subservicio");
 
        var select = document.getElementById("busServicio22"); /*Obtener el SELECT */
        var serv = select.options[select.selectedIndex].value; /* Obtener el valor */

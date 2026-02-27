@@ -235,11 +235,18 @@ function arrancaCartera(valorTabla,valorData)
                        return btn;
                     },
 		},
-                { data: "fields.id"},
+
+              /*  { data: "fields.id"}, */
+	{
+			target: 0,
+			visible: false
+		},
+
                 { data: "fields.factura"},
+                { data: "fields.nombre"},
                 { data: "fields.fecha"},
                 { data: "fields.empresa"},
-                { data: "fields.nombre"},
+
                 { data: "fields.valor"},
                 { data: "fields.pagos"},
                 { data: "fields.saldo"},

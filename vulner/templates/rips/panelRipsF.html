@@ -19,10 +19,10 @@
     <ul class="tabs">
 
         <li><a href="#Rips"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span> Rips Pendientes </a></li>
-        <li><a href="#DetalleEnviosRips"><span class="fa-solid fa-user-doctor-message"></span> <span   class="tab-text"> </span> Detalle Rips Pendientes</a></li>
-        <li><a href="#GenerarJsonRips"><span class="fa-solid fa-user-doctor-message"></span> <span  class="tab-text"> </span> Generar Json Rips </a></li>
-        <li><a href="#RipsEnviados"><span class="fa-solid fa-user-doctor-message"></span> <span  class="tab-text"> </span>Rips Enviados </a></li>
-        <li><a href="#AuditoriaRips"><span class="fa-solid fa-user-doctor-message"></span> <span  class="tab-text"> </span>Auditoria Rips</a></li>
+        <li><a href="#DetalleEnviosRips"><span class="fa-solid fa-user-doctor-message"></span> <span   class="tab-text"> </span> Detalle Rips </a></li>
+        <li><a href="#GenerarJsonRips"><span class="fa-solid fa-user-doctor-message"></span> <span  class="tab-text"> </span> Genera Json </a></li>
+        <li><a href="#RipsEnviados"><span class="fa-solid fa-user-doctor-message"></span> <span  class="tab-text"> </span>A radicar</a></li>
+        <li><a href="#AuditoriaRips"><span class="fa-solid fa-user-doctor-message"></span> <span  class="tab-text"> </span>Auditoria </a></li>
 
 
     </ul>
@@ -140,13 +140,12 @@ function RefrescarPantalla() {
                                            <thead>
                                             <tr id= "filasEnvios">    
 						<bold>                
-                                                <th>Editar</th>                   
-                                                <th>Sel</th>                   
-                                                <th>Enviar</th>  
-                                                <th>id</th>
-                                                <th>Sede</th>  
-						  <th>TipoNota</th>                                     
-                                                 <th>Emp</th> 
+                                                <th>Selr</th>                   
+                                                <th>Ver</th>                   
+                                                <th>Envio#</th> 
+   						<th></th>  
+						 <th>TipoNota</th>   
+					       <th></th> 
                                                 <th>Empresa</th>                                    
                                                 <th>FechaEnvio</th>
                                                 <th>FechaRespuesta</th>
@@ -158,7 +157,9 @@ function RefrescarPantalla() {
 						<th>UsuarioRegistro</th>
 						<th>Registra</th>
 					        <th>NombreClinica</th> 
-				              
+				               <th>id</th>                                             					                                   
+                                          
+              
 
 						</bold>                                  
 
@@ -441,6 +442,7 @@ Envio No: <input type="text" name="envioRipsId" id="envioRipsId" readonly>
 						<bold>                                  
                                                 <th>id</th>
                                                 <th>Factura No</th>
+				              <th>Nombre</th>	
                                                 <th>GlosaId</th>
                                                 <th>NC</th>
                                                 <th>Cuv</th>
@@ -640,23 +642,27 @@ Envio No: <input type="text" name="envioRipsId" id="envioRipsId" readonly>
 </article>
 
 <article id="GenerarJsonRips">
-        	
-		  <div style="height: 70px;  width:100%; background-color:#EBEBEB;">
-		   	
 
-			     Envio No: <input type="text" name="envioRipsId1" id="envioRipsId1">  
-			     Empresa: <input type="text" name="empresaId1" id="empresaId1" >  
-			     Tipo: <input type="text" name="tipoRips1" id="tipoRips1">  
-		
-		<div class="row">
-		</div>
-		
-		<div class="row">
-		<div class="col">
-                                    <button type="button" class="btn btn-primary" id="generarJsonRips"   value="Generar" onclick="GenerarJsonRips()">Generar JSON rips </button>
-                 </div>	
+	   <div id="flex-container-generar-json-rips">
+				<div>
+<center>
+
+		<br>
+			<br>
+			<br> <center>
+				<!-- <label for id="envioRipsId1" >Envio No: </label> -->
+			     Envio No: <input type="text" name="envioRipsId1" id="envioRipsId1" readonly>  
+				<!-- <label for id="empresaId1" >Empresa: </label> -->
+			     Empresa: <input type="text" name="empresaId1" id="empresaId1"  readonly>  
+				<!-- <label for id="tipoRips1" >Tipo: </label> -->
+			     Tipo: <input type="text" name="tipoRips1" id="tipoRips1" size="10" readonly>  
+			<br>
+			<br>
+			<br>
+		            <button type="button" class="btn btn-primary" id="generarJsonRips"   value="Generar" onclick="GenerarJsonRips()">Generar JSON rips </button>
+
+			</center>
 		 </div>
-
 		 </div>
 
 </article>
@@ -975,21 +981,22 @@ Envio No: <input type="text" name="envioRipsId" id="envioRipsId" readonly>
 						<th>Sel</th>             
                                                 <th>radicar</th>  
                                                 <th>Respuesta</th>  
-                                                <th>id</th>
-                                                <th>Sede</th>  
+                                                <th></th>
+                                                <th></th>  
 						  <th>TipoNota</th>                                     
                                                  <th>Emp</th> 
                                                 <th>Empresa</th>                                    
                                                 <th>FechaEnvio</th>
-                                                <th>FechaRespuesta</th>
+                                                <th>Radicacion</th>
+                                                <th>Respuesta</th>
                                                 <th>Facturas</th>
                                                 <th>Pasaron</th>
                                                 <th>Rechazadas</th>
                                                 <th>AlMinisterio</th>
-						<th>FechaRegistro</th>
-						<th>UsuarioRegistro</th>
+						<th>Registro</th>
+						<th>Usuario</th>
 						<th>Registra</th>
-					        <th>NombreClinica</th> 
+					        <th>Clinica</th> 
 				              
 
 						</bold>                                  

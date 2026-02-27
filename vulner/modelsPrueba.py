@@ -1057,8 +1057,6 @@ OJO EL 23 DE FEBRERO TRANAJAR TODO LO DE CIRUGIA Y CARTERA PENDIENTE VERIFICAR A
 
 Ver FEB 26:
 	no refresca localidad solo cuando se le da la gana en crear admision
-	OPS no sale la facturaciondetalle en pantalla
-	ops muy grande el datatable de facturacion
 	ops, verifica mas a fondo dispo salas cirugia en cambio de dia
 	ops CARTERA arreglar mas bonito mas fluido...
 
@@ -1067,3 +1065,20 @@ Ver FEB 26:
 	Frurips, devoluciones d farmacia
 	Mejorar, crear reportes a la lata
 	Instalar Clinica*Report
+
+FEB 27:
+	ops en rips al generar y los json hay codigos quemados sera bueno verificar
+	parametrizar
+
+	Tips:
+	
+		No aceptar pagos de empresas sin rips enviados
+		Al enviar un rips que pasa ? que fecha se actualizan?
+		Una glos se acepta bsi hay una factura con rips
+		Eventos --> 1. Rips Enviado
+			    2. Factura enviada a la dyan
+			    3. Rips Radicado al Ministerio
+			    4. Rips Respuesta
+			    5. Dyan respuesta
+			    6. Recepcion de glosa
+			     7. rips de glosa

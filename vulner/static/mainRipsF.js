@@ -123,18 +123,6 @@ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la 
             },
             columns: [
 	{
-	  "render": function ( data, type, row ) {
-                        var btn = '';
-
-	     btn = btn + " <button class='miEnvioMinisterio btn-primary ' data-pk='" + row.pk + "'>" + '<i class="fa-duotone fa-regular fa-thumbs-up"></i>' + "</button>";
-
-
-                       return btn;
-                    },
-
-	},
-
-		{
 			"render": function ( data, type, row ) {
                         var btn = '';
 
@@ -148,17 +136,29 @@ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la 
 	  "render": function ( data, type, row ) {
                         var btn = '';
 
-	     btn = btn + " <button class='miEnviar btn-primary ' data-pk='" + row.pk + "'>" + '<i class="fa-duotone fa-regular fa-thumbs-up"></i>' + "</button>";
+	     btn = btn + " <button class='miEnvioMinisterio btn-primary ' data-pk='" + row.pk + "'>" + '<i class="fa-duotone fa-regular fa-thumbs-up"></i>' + "</button>";
 
 
                        return btn;
-                    }
-                   },
+                    },
+
+	},
+
+	
+
 
                 { data: "fields.id"},
-                { data: "fields.sedesClinica_id"},
+               /* { data: "fields.sedesClinica_id"}, */
+		{
+			target: 1,
+			visible: false
+		},
 		   { data: "fields.tipoNota"}, 
-                { data: "fields.empresa_id"},
+                /* { data: "fields.empresa_id"}, */
+	{
+			target: 3,
+			visible: false
+		},
                 { data: "fields.nombreEmpresa"},
                 { data: "fields.fechaEnvio"},
                 { data: "fields.fechaRespuesta"},
@@ -170,6 +170,17 @@ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la 
 		 { data: "fields.usuarioRegistro_id"},
 		 { data: "fields.nombreRegistra"},
 		  { data: "fields.nombreClinica"},
+	{
+	  "render": function ( data, type, row ) {
+                        var btn = '';
+
+	     btn = btn + " <button class='miEnviar btn-primary ' data-pk='" + row.pk + "'>" + '<i class="fa-duotone fa-regular fa-thumbs-up"></i>' + "</button>";
+
+
+                       return btn;
+                    }
+                   },
+
                         ]
             }
 	        dataTable = $('#tablaEnviosRips').DataTable(dataTableOptions);
@@ -320,7 +331,7 @@ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la 
 
                        return btn;
                     },
-                    "targets": 11
+                    "targets": 12
                }
             ],
 	 pageLength: 3,
@@ -350,6 +361,7 @@ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la 
             columns: [
 		 { data: "fields.id"},
                 { data: "fields.numeroFactura"},
+                { data: "fields.nombre"},
                 { data: "fields.glosaId"},
                 { data: "fields.notaCreditoId"},
                 { data: "fields.cuv"},
@@ -1058,7 +1070,7 @@ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la 
 	    { width: '10%', targets: [2,3] },
 	    { width: '10%', targets: [9,10] },
 		{  
-                    "targets": 15
+                    "targets": 16
                }
             ],
 	 pageLength: 3,
@@ -1115,12 +1127,28 @@ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la 
                        return btn;
                     }
                    },
-                { data: "fields.id"},
-                { data: "fields.sedesClinica_id"},
+
+            /*    { data: "fields.id"}, */
+
+{
+			target: 0,
+			visible: false
+		},
+              /*  { data: "fields.sedesClinica_id"}, */
+{
+			target: 1,
+			visible: false
+		},
 		   { data: "fields.tipoNota"}, 
-                { data: "fields.empresa_id"},
+ /*               { data: "fields.empresa_id"}, */
+{
+			target: 3,
+			visible: false
+		},
+
                 { data: "fields.nombreEmpresa"},
                 { data: "fields.fechaEnvio"},
+                { data: "fields.fechaRadicacion"},
                 { data: "fields.fechaRespuesta"},
                 { data: "fields.cantidadFacturas"},
                 { data: "fields.cantidadPasaron"},
@@ -1404,10 +1432,16 @@ $('#tablaEnviosRips tbody').on('click', '.miEnviar', function() {
         data['username_id'] = username_id;
  	    data = JSON.stringify(data);
 
-
         arrancaEnviosRips(1,data);
 	    dataTableEnviosRipsInitialized = true;
 
+		alert("voy a cargar rips enviados");
+
+
+        arrancaEnviosRips(10,data);
+	    dataTableEnviosRipsEnviadosInitialized = true;
+
+		alert("ya cargue rips enviados");
                 },
 	          error: function (data) {	      
 			document.getElementById("mensajesErrorCrearModelRipsEnvioJsons").value =   data.responseText;

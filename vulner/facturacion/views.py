@@ -2767,3 +2767,80 @@ def GenerarXml(request):
 
     return JsonResponse({'success': True, 'Mensajes': 'Factura XML generada !'})
 
+
+
+def EnvioDian(request):
+    print ("Entre a EnvioDyan" )
+
+    facturaId = request.POST["facturaDianId"]
+    print("facturaId = ", facturaId)
+
+    # Abro Conexion
+
+    miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",password="123456")
+    curx = miConexionx.cursor()
+
+    comando = 'SELECT fac.id, fac."fechaEnvioDian" , fac."fechaRespuestaDian" , fac."respuestaDian", dian.nombre estadoEnvioDian FROM facturacion_facturacion fac LEFT JOIN  facturacion_estadoEnvioDian dian   ON (dian.id=fac."estadoEnvioDian_id")  WHERE fac.id = ' + "'" + str(facturaId) + "'"
+
+    print(comando)
+
+    curx.execute(comando)
+
+    envioDian = []	
+
+    for id ,fechaEnvioDian, fechaRespuestaDian, respuestaDian, estadoEnvioDian in curx.fetchall():
+        envioDian.append(
+		{"model":"refacturacion.refacturacion","pk":id,"fields":
+			{'id':id, 'fechaEnvioDian':fechaEnvioDian, 'fechaRespuestaDian': fechaRespuestaDian, 'respuestaDian': respuestaDian,'estadoEnvioDian':estadoEnvioDian}})
+
+
+    miConexionx.close()
+
+    serialized1 = json.dumps(envioDian, default=str)
+
+    return HttpResponse(serialized1, content_type='application/json')
+
+
+
+def CrearEnvioDian(request):
+    print ("Entre a CrearEnvioDian" )
+
+    facturaId = request.POST["facturaDianId"]
+    print("facturaId = ", facturaId)
+
+    fechaEnvioDian = request.POST["fechaEnvioDian"]
+    print("fechaEnvioDian = ", fechaEnvioDian)
+
+    fechaRespuestaDian = request.POST["fechaRespuestaDian"]
+    print("fechaRespuestaDian = ", fechaRespuestaDian)
+
+    if (fechaRespuestaDian ==''):
+	    fechaRespuestaDian='null'
+
+    respuestaDian = request.POST["respuestaDian"]
+    print("respuestaDian = ", respuestaDian)
+
+    if (respuestaDian ==''):
+	    respuestaDian='null'
+
+
+    estadoEnvioDian = request.POST["estadoEnvioDian"]
+    print("estadoEnvioDian = ", estadoEnvioDian)
+
+    # Abro Conexion
+
+    miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",password="123456")
+    curx = miConexionx.cursor()
+
+    comando = 'UPDATE facturacion_facturacion SET "fechaEnvioDian" = ' + "'" + str(fechaEnvioDian) + "'," + '"fechaRespuestaDian" = ' + str(fechaRespuestaDian) + "," + ' "respuestaDian" = ' + "'" + str(respuestaDian) + "'," + '"estadoEnvioDian_id" = ' + "'" + str(estadoEnvioDian) + "'" + ' WHERE id = ' + "'" + str(facturaId) + "'"
+
+    print(comando)
+
+    curx.execute(comando)
+    miConexionx.commit()
+
+    miConexionx.close()
+
+
+    return JsonResponse({'success': True, 'Mensajes': 'Factura Actualizada !'})
+

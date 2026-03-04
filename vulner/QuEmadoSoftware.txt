@@ -1,0 +1,2 @@
+DATOS REFERENCIADO EN SOFTWARE QUEMAS
+en la tabla clinico_servicios -> 'AMBULATORIO'

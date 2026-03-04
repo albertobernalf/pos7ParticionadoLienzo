@@ -293,6 +293,9 @@ urlpatterns = [
     path('imprimirLiquidacion/', viewsFacturacionReportes.ImprimirLiquidacion),
     path('load_dataReFacturacion/<str:data>', viewsFacturacion.load_dataReFacturacion, name='loaddata_ReFacturacion'),
     path('generarXml/', viewsFacturacion.GenerarXml , name='Generar_xml'),
+    path('envioDian/', viewsFacturacion.EnvioDian , name='Envio_dian'),
+    path('imprimirPazYSalvo/', viewsFacturacionReportes.ImprimirPazYSalvo , name='Imprimir_PazYSalvo'),
+    path('crearEnvioDian/', viewsFacturacion.CrearEnvioDian , name='Crear_Envio_dian'),
 
     # Rips
 
@@ -317,6 +320,7 @@ urlpatterns = [
     path('load_tablaRipsMedicamentos/<str:data>', viewsRips.Load_tablaRipsMedicamentos,name='load_tablaRipsMedicamentos'),
     path('load_dataRipsEnviados/<str:data>', viewsRips.load_dataRipsEnviados, name='load_dataRips_Enviados'),
     path('guardarRespuestaRips/', viewsRips.GuardarRespuestaRips, name='guardarRespuestaRips'),
+    path('reversarEnvioRips/', viewsRips.ReversarEnvioRips, name='reversarEnvio_Rips'),
 
 
     # Autorizaciones
@@ -427,7 +431,7 @@ urlpatterns = [
     path('crearProgramacionCirugia/', viewsCirugia.CrearProgramacionCirugia, name='crearProgramacion_Cirugia'),
     path('load_dataSolicitudCirugia/<str:data>', viewsCirugia.Load_dataSolicitudCirugia, name='load_dataSolicitud_Cirugia'),
     path('load_dataIngresosCirugia/<str:data>', viewsCirugia.Load_dataIngresosCirugia,    name='load_dataIngresos_Cirugia'),
-    path('load_dataDisponibilidadSala/<str:data>', viewsCirugia.Load_dataDisponibilidadSala, name='load_dataDisponibilidad_Sala'),
+    path('load_dataDisponibilidadSalas/<str:data>', viewsCirugia.Load_dataDisponibilidadSalas, name='load_dataDisponibilidad_Salas'),
     path('crearSolicitudCirugia/', viewsCirugia.CrearSolicitudCirugia, name='CrearSolicitudCirugia'),
     path('load_dataTraerProcedimientosCirugia/<str:data>', viewsCirugia.Load_dataTraerProcedimientosCirugia, name='Load_dataTraerProcedimiento_Cirugia'),
     path('load_dataTraerParticipantesCirugia/<str:data>', viewsCirugia.Load_dataTraerParticipantesCirugia, name='Load_dataTraerParticipantes_Cirugia'),
@@ -437,7 +441,8 @@ urlpatterns = [
     path('buscaProgramacionCirugia/', viewsCirugia.BuscaProgramacionCirugia, name='buscaProgramacion_Cirugia'),
     path('crearMaterialCirugia/', viewsCirugia.CrearMaterialCirugia, name='CrearMaterial_Cirugia'),
     path('load_dataMaterialCirugia/<str:data>', viewsCirugia.Load_dataMaterialCirugia,  name='Load_dataMaterial_Cirugia'),
-    path('load_dataDisponibilidadSala/<str:data>', viewsCirugia.Load_dataDisponibilidadSala,name='load_dataDisponibilidad_Sala'),
+
+    path('load_dataDispoSalasCirugia/<str:data>', viewsCirugia.Load_dataDispoSalasCirugia,name='load_dataDispo_SalasCirugia'),
 
     path('load_dataTraerProcedimientosInformeCirugia/<str:data>', viewsCirugia.Load_dataTraerProcedimientosInformeCirugia,name='Load_dataTraerProcedimientoInforme_Cirugia'),
     path('load_dataTraerParticipantesInformeCirugia/<str:data>', viewsCirugia.Load_dataTraerParticipantesInformeCirugia,name='Load_dataTraerParticipantesInforme_Cirugia'),
@@ -469,8 +474,6 @@ urlpatterns = [
     path('buscarConveniosCirugiaPaciente/', viewsCirugia.BuscarConveniosCirugiaPaciente, name='BuscarConveniosCirugia_Paciente'),
     path('buscarProcedimientosParticipantesDeCirugia/', viewsCirugia.BuscarProcedimientosParticipantesDeCirugia, name='buscarProcedimientosParticipantesDe_Cirugia'),
     path('buscarProcedimientosMaterialesDeCirugia/', viewsCirugia.BuscarProcedimientosMaterialesDeCirugia,  name='buscarProcedimientosMaterialesDe_Cirugia'),
-    path('load_dataDisponibilidadSalasCirugia/<str:data>', viewsCirugia.Load_dataDisponibilidadSalasCirugia,name='load_dataDisponibilidad_salasCirugia'),
-
 
 
     # Farmacia

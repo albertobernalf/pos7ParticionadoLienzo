@@ -1858,7 +1858,7 @@ $('#tablaProgramacionCirugia tbody').on('click', '.miEditaEstadoCirugia', functi
 	   $('#cirugiaIdParaEstado2').val(info[0].id);
 
      	    document.getElementById("programacionIdParaEstado2").value = post_id;
-            $('#modelHeadingEstadoCirugia').html("Actualizar estado programacion Cirugia");
+            $('#modelHeadingEstadoCirugia').html("Actualizar estado  Cirugia");
             $('#crearModelEstadoCirugia').modal('show');      
 
 	

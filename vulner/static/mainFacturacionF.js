@@ -110,7 +110,15 @@ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la 
                        return btn;
 		}
                    },
+{
+		"render": function ( data, type, row ) {
+                        var btn = '';
 
+	  btn = btn + " <button class='ImprimirPazYSalvo btn-primary ' style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;'  data-pk='" + row.pk + "'>" + '<i class=""fa-duotone fa-solid fa-print""></i>' + "</button>";
+
+                       return btn;
+		}
+                   },
                 { data: "fields.id"},
                 { data: "fields.tipoDoc"},
                 { data: "fields.documento"},
@@ -377,6 +385,17 @@ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la 
                        return btn;
 		}
                    },
+
+	{
+		"render": function ( data, type, row ) {
+                        var btn = '';
+
+	  btn = btn + " <button class='envioDian btn-primary ' style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;'  data-pk='" + row.pk + "'>" + '<i class=""fa-duotone fa-solid fa-print""></i>' + "</button>";
+
+                       return btn;
+		}
+                   },
+
                   { data: "fields.id"},
                 { data: "fields.fechaFactura"},
                 { data: "fields.tipoDoc"},
@@ -1066,6 +1085,90 @@ $.ajax({
 });
 });
 
+
+
+        $('body').on('click', '.ImprimirPazYSalvo', function () {
+
+	          var post_id = $(this).data('pk');
+		
+
+
+
+        var sedeSeleccionada = document.getElementById("sedeSeleccionada").value;
+        var username = document.getElementById("username").value;
+        var nombreSede = document.getElementById("nombreSede").value;
+    	var sede = document.getElementById("sede").value;
+        var username_id = document.getElementById("username_id").value;
+	var ingresoId = post_id;
+
+
+$.ajax({
+    url: '/imprimirPazYSalvo/',
+ data : {ingresoId:ingresoId},
+    method: 'POST',
+    xhrFields: {
+        responseType: 'blob' // Importante: interpreta la respuesta como binario
+    },
+    success: function (data) {
+
+
+        var blob = new Blob([data], { type: 'application/pdf' });
+        var link = window.URL.createObjectURL(blob);
+        window.open(link, '_blank'); // Abre el PDF en nueva pestaña [11]
+    },
+    error: function (error) {
+      document.getElementById("mensajesError").value =  data.responseText
+    }
+});
+});
+
+
+
+
+   $('body').on('click', '.envioDian', function () {
+
+	          var post_id = $(this).data('pk');
+		 
+		// var row = $(this).closest('tr'); // Encuentra la fila
+		
+        var sedeSeleccionada = document.getElementById("sedeSeleccionada").value;
+        var username = document.getElementById("username").value;
+        var nombreSede = document.getElementById("nombreSede").value;
+    	var sede = document.getElementById("sede").value;
+        var username_id = document.getElementById("username_id").value;
+	var facturaDianId = post_id;
+	alert("factura No " + facturaDianId);
+      
+	  $.ajax({
+                
+	        url: "/envioDian/",
+		data: {'facturaDianId':facturaDianId},
+                type: "POST",
+                dataType: 'json',
+                success: function (data) {
+		            $('#post_id').val('');
+		              $('#postFormModalEnvioDyan').trigger("reset");
+		         $('#modelHeadingEnvioDyan').html("Envio Dyan");
+
+				alert("regrese con " + JSON.stringify(data));
+			
+			$('#facturaDianId').val(data[0].fields.id);
+			document.getElementById("facturaDianId").value = facturaDianId;
+			$('#fechaEnvioDian').val(data[0].fields.fechaEnvioDian);
+			$('#fechaRespuestaDian').val(data[0].fields.fechaRespuestaDian);
+			$('#respuestaDian').val(data[0].fields.respuestaDian);
+			$('#estadoEnvioDian').val(data[0].fields.estadoEnvioDian);
+
+		 $('#crearEnvioDian').modal('show');
+
+                },
+                    error: function(data){
+		       		document.getElementById("mensajesError").value =  data.responseText
+			        },
+           });
+	});
+
+
         $('body').on('click', '.ImprimirCuenta', function () {
 
 	          var post_id = $(this).data('pk');
@@ -1457,6 +1560,7 @@ $('#RvalorAPagarLetras').val(data.valorAPagarLetras);
 			        },
 
             });
+
 	LeerTotales();
         });
 
@@ -2507,5 +2611,51 @@ function GenerarXml()
 			        },
 
 	     });
+}
+
+function crearEnvioDian()
+ {
+
+	          var post_id = $(this).data('pk');
+		 
+		// var row = $(this).closest('tr'); // Encuentra la fila
+		
+        var sedeSeleccionada = document.getElementById("sedeSeleccionada").value;
+        var username = document.getElementById("username").value;
+        var nombreSede = document.getElementById("nombreSede").value;
+    	var sede = document.getElementById("sede").value;
+        var username_id = document.getElementById("username_id").value;
+	
+      	  $.ajax({
+                data: $('#postFormModalEnvioDyan').serialize(),
+	        url: "/crearEnvioDian/",
+                type: "POST",
+                dataType: 'json',
+                success: function (data) {
+		            $('#post_id').val('');
+		              $('#postFormModalEnvioDyan').trigger("reset");
+		         // $('#modelHeadingEnvioDyan').html("Envio Dyan");
+					 $('#crearEnvioDyan').modal('hide');
+
+	        var data =  {}   ;
+
+	        data['username'] = username;
+	        data['sedeSeleccionada'] = sedeSeleccionada;
+	        data['nombreSede'] = nombreSede;
+	        data['sede'] = sede;
+	        data['username_id'] = username_id;
+
+		 data2 = JSON.stringify(data);
+			 $('#crearEnvioDian').modal('hide');
+
+	             arrancaLiquidacion(3,data2);
+		    dataTableFacturacionInitialized = true;
+
+
+                },
+                    error: function(data){
+		       		document.getElementById("mensajesError").value =  data.responseText
+			        },
+           });
 }
 

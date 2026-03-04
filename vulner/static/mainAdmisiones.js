@@ -97,6 +97,11 @@ function arrancaAdmisiones(valorTabla,valorData)
              "rowClass": function( row, data, index ) {
       return 'my-row-class';
     },
+
+ // select: {
+  //          style: 'single' // o 'multi'
+  //      },
+
             columnDefs: [
             { width: '1%', targets: [0,1] },
 		{ className: 'centered', targets: [0, 1, 2, 3, 4, 5] },
@@ -201,12 +206,22 @@ function arrancaAdmisiones(valorTabla,valorData)
 		        { data: "fields.numPagos"},
 
 
-            ]
+            ] //,
+	 //initComplete: function(settings, json) {
+            // Selecciona la primera fila (índice 0)
+      //      table.row(':eq(0)'{ page: 'current' }).select();
+
+            // Alternativa: Si no usas la extensión 'select'// busca el checkbox y márcalo manualmente:
+            // table.row(0).node().querySelector('input[type="checkbox"]').checked = true;
+       // }
+
              }
 
 	        dataTable = $('#tablaDatos').DataTable(dataTableOptionsAdmisiones);
+       // dataTable.row(0).node().querySelector('input[name="ingresoId"]').checked = true;
+        // dataTable.row(0).document.querySelector('input[name=".miIngresoId"]').checked = true;
 
-       // 	$('#tablaAutorizaciones tbody tr:eq(0) .miSol').prop('checked', true);  // Checkprimera fila el checkbox creo solo javascript
+        //	$('#tablaDatos tbody tr:eq(0) .miIngresoId').prop('checked', true);  // Checkprimera fila el checkbox creo solo javascript
 
 
 
@@ -702,6 +717,8 @@ const initDataTableAdmisiones = async () => {
 
          var valor = $('input[name="ingresoId"]:checked').val();
 
+
+
 	 var sede = document.getElementById("sede").value;
 
 
@@ -718,6 +735,8 @@ const initDataTableAdmisiones = async () => {
          // var sede = document.getElementById("sede1").value;
 	//  var ingresoId= document.getElementById("ingresoId1").value;
 
+
+
           data['sede'] = sede;
         
 
@@ -725,6 +744,8 @@ const initDataTableAdmisiones = async () => {
 
         arrancaAdmisiones(1,data);
 	    dataTableAdmisionesInitialized = true;
+
+
 
         arrancaAdmisiones(5,data);
 	    dataTableCensoInitialized = true;

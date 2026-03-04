@@ -1082,3 +1082,26 @@ FEB 27:
 			    5. Dyan respuesta
 			    6. Recepcion de glosa
 			     7. rips de glosa
+
+
+luner 02 marzo
+
+	ojo probar:
+
+https://www.baulphp.com/datatables-small-size/
+https://www.google.com/search?q=como+seleccionar+la+primera+fila+con+javascript+un+checkbox+en+un+datatable+jquery+al+cargar+una+pagina&sca_esv=3d646b66db581d96&rlz=1C1CHBF_esCO999CO999&biw=1210&bih=528&ei=mwOiadL5L_aZwbkPrNSF-Q8&ved=0ahUKEwiSs7-cxvqSAxX2TDABHSxqIf8Q4dUDCBE&uact=5&oq=como+seleccionar+la+primera+fila+con+javascript+un+checkbox+en+un+datatable+jquery+al+cargar+una+pagina&gs_lp=Egxnd3Mtd2l6LXNlcnAiZ2NvbW8gc2VsZWNjaW9uYXIgbGEgcHJpbWVyYSBmaWxhIGNvbiBqYXZhc2NyaXB0IHVuIGNoZWNrYm94IGVuIHVuIGRhdGF0YWJsZSBqcXVlcnkgYWwgY2FyZ2FyIHVuYSBwYWdpbmFIAFAAWABwAHgAkAEAmAEAoAEAqgEAuAEDyAEA-AEBmAIAoAIAmAMAkgcAoAcAsgcAuAcAwgcAyAcAgAgA&sclient=gws-wiz-serp
+ojo checkbox en datattab{
+PROBAR
+
+
+marter 03 de marzo INONSIKTNAS
+
+	La disponiblidad de crugias pailas cuando no encuentra datos se alta el CURSO que pasa ?
+	La factuarcion no me carga que pasa ?
+	Los rips de una cirugia no sale la hospitalizacion, ni los procedimientos creop por otros serviicios VERIFICAR
+	La descripcion qx algo pasa con las ora mnuto segundos suas
+	
+
+	OPS cuando se crea un folio clinico automatico por una cirugia, No crea la causaExterna , ni ningun diagnostico corregir 
+
+

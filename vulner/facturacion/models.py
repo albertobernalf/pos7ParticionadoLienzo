@@ -390,9 +390,11 @@ class Facturacion(models.Model):
     nombreArchivo =  models.CharField(max_length=1000, blank=True,null= True, editable=True,)
     estado =   models.CharField(max_length=100, blank=True,null= True, editable=True,)
     fechaEnvioDian =  models.DateTimeField(editable=True, null=True, blank=True)
+    fechaRespuestaDian =  models.DateTimeField(editable=True, null=True, blank=True)
+    respuestaDian =  models.CharField(max_length=10000, blank=True,null= True, editable=True,)	
     reprocesarDian =models.CharField(max_length=1,choices=FLAG_CHOICES, blank=True,null= True, editable=True,)
-    estadoEnvioDyan =models.CharField(max_length=1,choices=FLAG_CHOICES,  blank=True,null= True, editable=True,)
-    tipoFacturaDyan = models.CharField(max_length=1,choices=FLAG_CHOICES,  blank=True,null= True, editable=True,)
+    estadoEnvioDian = models.ForeignKey('facturacion.EstadoEnvioDian',   blank=True,null= True, on_delete=models.PROTECT ,related_name ='estadoDian20192')
+    tipoFacturaDian = models.CharField(max_length=1,choices=FLAG_CHOICES,  blank=True,null= True, editable=True,)
     rutaPdf = models.CharField(max_length=100, blank=True,null= True, editable=True,)
     envioCorreo = models.CharField(max_length=1, blank=True,null= True, editable=True,)
     desbloqueada =  models.CharField(max_length=1, blank=True,null= True, editable=True,)
@@ -624,5 +626,15 @@ class Refacturacion(models.Model):
         return str(self.id)
 
 
+class EstadoEnvioDian(models.Model):
+    ESTADOREG_CHOICES = [
+        ('A', 'Activo'),
+        ('I', 'Inactivo'), ]
+    id = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=30, null=False)
+    fechaRegistro = models.DateTimeField(default=now, blank=True, null=True, editable=True, )
+    estadoReg = models.CharField(max_length=1,choices=ESTADOREG_CHOICES,  default='A', editable=False)
 
+    def __str__(self):
+        return self.nombre
 

@@ -192,6 +192,7 @@ class CausasExterna(models.Model):
         ]
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=50, null=False)
+    ripsCausaExterna = models.ForeignKey('rips.RipsCausaExterna',  blank=True, null=True, editable=True, on_delete=models.PROTECT)
     estadoReg = models.CharField(max_length=1, choices=STATUS_CHOICES,default='A', editable=False)
 
     def __str__(self):

@@ -74,10 +74,10 @@ class tiposAntecedenteAdmin(admin.ModelAdmin):
 
 @admin.register(CausasExterna)
 class causasExternaAdmin(admin.ModelAdmin):
-            list_display = ("id", "nombre")
-            search_fields = ("id", "nombre")
+            list_display = ("id", "nombre","ripsCausaExterna")
+            search_fields = ("id", "nombre" ,"ripsCausaExterna")
             # Filtrar
-            list_filter = ('nombre',)
+            list_filter = ('nombre',"ripsCausaExterna")
 
 @admin.register(ViasIngreso)
 class viasIngresoAdmin(admin.ModelAdmin):

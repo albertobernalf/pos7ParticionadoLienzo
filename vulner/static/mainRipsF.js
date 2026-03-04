@@ -1158,6 +1158,17 @@ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la 
 		 { data: "fields.usuarioRegistro_id"},
 		 { data: "fields.nombreRegistra"},
 		  { data: "fields.nombreClinica"},
+	{
+	  "render": function ( data, type, row ) {
+                        var btn = '';
+
+	     btn = btn + " <button class='miReversarEnvio btn-primary ' data-pk='" + row.pk + "'>" + '<i class="fa-duotone fa-regular fa-thumbs-up"></i>' + "</button>";
+
+                       return btn;
+                    },
+
+	},
+
                         ]
             }
 	        dataTable = $('#tablaRipsEnviados').DataTable(dataTableOptionsRipsEnviados);
@@ -1494,6 +1505,55 @@ $('#tablaRipsEnviados tbody').on('click', '.miRespuestaRips', function() {
             $('#crearModelRespuestaRips').modal('show');
       
   });
+
+
+$('#tablaRipsEnviados tbody').on('click', '.miReversarEnvio', function() {
+
+		 alert("ENTRE Reversar Envio");
+
+	     var post_id = $(this).data('pk');
+		var ripsId=post_id;
+
+	var row = $(this).closest('tr'); // Encuentra la fila
+
+	var sedeSeleccionada = document.getElementById("sedeSeleccionada").value;
+        var username = document.getElementById("username").value;
+        var nombreSede = document.getElementById("nombreSede").value;
+    	var sede = document.getElementById("sede").value;
+        var username_id = document.getElementById("username_id").value;
+
+	$.ajax({
+
+	        url: "/reversarEnvioRips/",
+                data: {'ripsId':ripsId},
+                type: "POST",
+                dataType: 'json',
+                success: function (data2) {
+	        var data =  {}   ;
+	        data['username'] = username;
+	        data['sedeSeleccionada'] = sedeSeleccionada;
+	        data['nombreSede'] = nombreSede;
+	        data['sede'] = sede;
+	        data['username_id'] = username_id;
+
+	        data = JSON.stringify(data);
+
+	       arrancaEnviosRips(1,data);
+	       dataTableEnviosRipsInitialized = true;
+
+    	       arrancaEnviosRips(10,data);
+ 	       dataTableRipsEnviadosInitialized= true;
+
+                },
+ 	          error: function (data) {	      
+			document.getElementById("mensajesError").value =   data.responseText;
+                }
+
+            });
+
+      
+  });
+
 
 
 // FIN DE LO NUEVO

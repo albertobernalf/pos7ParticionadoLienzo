@@ -601,8 +601,6 @@ def GenerarJsonRips(request):
 
             # Primero Borra RIPS URGENCIAS
 
-
-
             detalle4 = 'DELETE from rips_ripsurgenciasobservacion u where u."ripsTransaccion_id" in (select id from rips_ripstransaccion ripstra where ripstra."ripsEnvio_id" = ' + "'" + str(
                 envioRipsId) + "')"
             resultado = curx.execute(detalle4)
@@ -1252,6 +1250,18 @@ def GenerarJsonRips(request):
                 ## yo creo que hasta aquip filtrar para ERRORE PERO COMO HACER ESO ?
 
 
+        		## Aqui RIPS DE CONSULTA
+                #
+                print("Voy a Rips de CONSLTA")
+
+                if (tipoRips == 'Factura'):
+
+                    comando = 'INSERT INTO rips_ripsconsultas ( "codPrestador","fechaInicioAtencion","numAutorizacion","tipoDiagnosticoPrincipal", "numDocumentoIdentificacion","vrServicio","valorPagoModerador","numFEVPagoModerador",consecutivo, "itemFactura",  "fechaRegistro", "estadoReg","causaMotivoAtencion_id","codConsulta_id", "codDiagnosticoPrincipal_id",  "codDiagnosticoRelacionado1_id", "codDiagnosticoRelacionado2_id", "codDiagnosticoRelacionado3_id", "codServicio_id", "finalidadTecnologiaSalud_id", "grupoServicios_id",ingreso_id, "modalidadGrupoServicioTecSal_id","ripsDetalle_id","ripsTipos_id", "ripsTransaccion_id","tipoDocumentoIdentificacion_id", "usuarioRegistro_id") SELECT sed."codigoHabilitacion",i."fechaIngreso",autdet."numeroAutorizacion",dxTipo.codigo,usu.documento,	(select sum(facDet1."valorTotal") 	 FROM facturacion_facturaciondetalle facDet1 WHERE facDet1.anulado=' + "'" + str('N') + "'" + ' and facDet1."estadoRegistro"='  "'" + str('A') + "'" + ' and facDet1.facturacion_id=fac.id ) vrServicio, 	0 valorPagoModerador, 	fac.id ,row_number()  OVER(ORDER BY facdet.id), facdet."consecutivoFactura", now(),' + "'" + str('A') + "'" + ', causaExternaRips.id, facdet.examen_id, 	(select histdiag1.diagnosticos_id from clinico_historia his2 left join clinico_tiposdiagnostico tipoDiag1 ON (tipoDiag1.nombre=' + "'" + str('PRINCIPAL') + "')" + ' left join clinico_historialdiagnosticos histdiag1 on (histdiag1.historia_id =his2.id)  where his2."tipoDoc_id" = his."tipoDoc_id" AND his2.documento_id = his.documento_id and his2."consecAdmision" = his."consecAdmision" 	) principal,(select histdiag1.diagnosticos_id  from clinico_historia his2	left join clinico_tiposdiagnostico tipoDiag1 ON (tipoDiag1.nombre=' + "'" + str('RELACIONADO 1') + "')" + ' left join clinico_historialdiagnosticos histdiag1 on (histdiag1.historia_id =his2.id)  where his2."tipoDoc_id" = his."tipoDoc_id" AND his2.documento_id = his.documento_id and his2."consecAdmision" = his."consecAdmision" 	) relacionado1,	(select histdiag1.diagnosticos_id  from clinico_historia his2 	left join clinico_tiposdiagnostico tipoDiag1 ON (tipoDiag1.nombre=' + "'" + str('RELACIONADO 3') + "')" + ' left join clinico_historialdiagnosticos histdiag1 on (histdiag1.historia_id =his2.id)  where his2."tipoDoc_id" = his."tipoDoc_id" AND his2.documento_id = his.documento_id and his2."consecAdmision" = his."consecAdmision" 	) relacionado2,	(select histdiag1.diagnosticos_id  from clinico_historia his2 left join clinico_tiposdiagnostico tipoDiag1 ON (tipoDiag1.nombre=' + "'" + str('RELACIONADO 3') + "')" + ' left join clinico_historialdiagnosticos histdiag1 on (histdiag1.historia_id =his2.id) where his2."tipoDoc_id" = his."tipoDoc_id" AND his2.documento_id = his.documento_id and his2."consecAdmision" = his."consecAdmision") relacionado3, ripsServicios.id, finConsulta.id, grupoServicios.id,i.id ingreso, modalAtencion.id, detrips.id,3,null,  tipdocrips.id   ,' + "'" + str(username_id) + "'" + ' FROM sitios_sedesclinica sed inner join facturacion_facturacion fac ON (fac."sedesClinica_id" = sed.id) inner join facturacion_facturaciondetalle facdet ON (facdet.facturacion_id = fac.id and facdet.examen_id is not null and 	(facdet.anulado = ' + "'" + str('N') + "'" + ' or facdet.anulado = ' + "'" + str('R') +"')" + ' and "tipoRegistro" = ' + "'" + str('SISTEMA') + "'" + ' AND facDet.cirugia_id is not null ) inner join clinico_examenes exa ON (exa.id = facdet."examen_id") inner join admisiones_ingresos i on (i."tipoDoc_id" = fac."tipoDoc_id" and i.documento_id = fac.documento_id and i.consec = fac."consecAdmision")	 inner join rips_ripsenvios e ON (e."sedesClinica_id" = sed.id) inner join rips_ripsdetalle detrips ON (detrips."ripsEnvios_id" = e.id and detrips."numeroFactura_id" = fac.id) inner join usuarios_tiposdocumento tipdoc ON (tipdoc.id = fac."tipoDoc_id" ) left join  rips_ripstiposdocumento tipdocrips on (tipdocrips.id = tipdoc."tipoDocRips_id" ) inner join usuarios_usuarios usu ON (usu."tipoDoc_id" = fac."tipoDoc_id" and usu.id = fac.documento_id ) inner join clinico_historia his ON (his."tipoDoc_id" = i."tipoDoc_id" and his.documento_id = i.documento_id and his."consecAdmision" = i.consec ) inner  join clinico_historialcirugias hisCiru ON (hisCiru.historia_id = his.id and hisCiru.cirugia_id = facDet.cirugia_id) left join autorizaciones_autorizaciones  aut on (aut.historia_id = his.id) left join autorizaciones_autorizacionesdetalle autdet on (autdet.autorizaciones_id = aut.id and autdet.examenes_id = facdet.examen_id) INNER JOIN 	tarifarios_tiposhonorarios hono ON (hono.id= facDet."tipoHonorario_id" and hono.nombre=' + "'" + str('CIRUJANO') + "')" + ' INNER JOIN sitios_dependencias dep ON (dep.id= i."dependenciasSalida_id") INNER JOIN sitios_serviciosSedes servSedes on (servSedes.id=dep."serviciosSedes_id") INNER JOIN sitios_subServiciosSedes subServSedes on (subServSedes.id=dep."subServiciosSedes_id") INNER JOIN clinico_servicios serv on (serv.id = servSedes.servicios_id AND serv.nombre=' + "'" + str('AMBULATORIO') + "')" + ' INNER JOIN rips_ripstipodiagnosticoPrincipal dxTipo on (dxTipo.nombre=' + "'"  +  str('Impresión diagnóstica') + "')" + ' LEFT JOIN rips_ripscausaexterna causaExternaRips ON (causaExternaRips.id = i."ripsCausaMotivoAtencion_id") left join rips_ripsservicios ripsServicios ON (ripsServicios.id = i."ripsServiciosIng_id" ) left join rips_ripsfinalidadconsulta finConsulta ON (finConsulta.id = i."ripsFinalidadConsulta_id" ) left join rips_ripsgruposervicios grupoServicios ON (grupoServicios.id = i."ripsGrupoServicios_id" ) left join rips_ripsmodalidadatencion modalAtencion ON (modalAtencion.id = i."ripsmodalidadGrupoServicioTecSal_id" ) where sed.id = ' + "'" + str(sede) + "'" + ' and e.id = ' + "'" + str(envioRipsId) + "'" + ' and fac.id = ' + "'" + str(elemento) + "'"
+
+                    print("comando = ", comando)
+                    curx.execute(comando)
+
+
                 # Busco el id del estado Rips PENDIENTE CON JSON GENERADO
 
                 ripsEstados = RipsEstados.objects.get(nombre="PENDIENTE CON JSON GENERADO")
@@ -1331,7 +1341,7 @@ def GenerarJsonRips(request):
 
                 #for dato in curx.fetchall():
 
-                #    funcionJson.append({'dato': dato})
+                    #funcionJson.append({'dato': dato})
 
                 #print("funcionJson[0]", funcionJson[0])
 
@@ -2174,6 +2184,47 @@ def GuardarRespuestaRips(request):
         miConexion3.close()
 
         return JsonResponse({'success': True, 'Mensajes': 'Respuesta de Envio actualizada satisfactoriamente!'})
+
+    except psycopg2.DatabaseError as error:
+        print ("Entre por rollback" , error)
+        if miConexion3:
+            print("Entro ha hacer el Rollback")
+            miConexion3.rollback()
+
+        message_error= str(error)
+        return JsonResponse({'success': False, 'Mensajes': message_error})
+
+    finally:
+        if miConexion3:
+            cur3.close()
+            miConexion3.close()
+
+
+def ReversarEnvioRips(request):
+
+    print ("Entre ReversarEnvioRips" )
+
+
+    ripsId = request.POST['ripsId']
+    print ("ripsId =", ripsId)
+    estadoReg = 'A'
+    fechaRegistro = datetime.datetime.now()
+
+    ripsEstadosId = RipsEstados.objects.get(nombre="SOLICITUD")
+    print ("El estado es = ", ripsEstadosId.id )
+
+    miConexion3 = None
+    try:
+
+        miConexion3 = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",  password="123456")
+        cur3 = miConexion3.cursor()
+        comando = 'UPDATE rips_ripsEnvios  SET "fechaRespuesta" =  ' + "'" + str('') + "',respuesta = '',"   + '"fechaRadicacion" = ' + "'" + str('') + "'," + ' "ripsEstados_id" = ' + "'" + str(ripsEstadosId.id) + "'" + ' WHERE id =' + str(ripsId)
+        print(comando)
+        cur3.execute(comando)
+        miConexion3.commit()
+        miConexion3.close()
+
+        return JsonResponse({'success': True, 'Mensajes': 'Rips Reversado satisfactoriamente!'})
 
     except psycopg2.DatabaseError as error:
         print ("Entre por rollback" , error)

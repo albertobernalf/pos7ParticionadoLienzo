@@ -1,0 +1,170 @@
+El reporte de RIPS (Registros Individuales de Prestación de Servicios) para servicios ambulatorios, hospitalización o urgencias se realiza mediante la generación de archivos tipo JSON (según la Resolución 2275 de 2023) que incluyen datos de diagnóstico, procedimientos y facturación, validados por el Mecanismo Único de Validación (MUV) del Ministerio de Salud para obtener el CUV. 
+Doctocliq
+Doctocliq
+Detalles del Reporte RIPS (Ambulatorio, Urgencias, Hospitalización):
+Formato y Archivos: Los RIPS ahora se generan en archivos JSON que agrupan la información de facturación electrónica (FEV) y los datos de salud.
+Proceso de Envío:
+Generar el archivo JSON con la información de la atención (ambulatoria, urgencia o internación).
+Enviar a través del MUV (Mecanismo Único de Validación) del Ministerio de Salud.
+Obtener el CUV (Código Único de Validación) para asociarlo a la factura electrónica.
+Estructura de Datos (Según la norma):
+Ambulatorio (Consulta): Tipo de consulta, finalidad, causa externa, diagnósticos y procedimientos realizados.
+Urgencias: Fecha/hora de ingreso y egreso, tipo de urgencia y diagnóstico.
+Hospitalización: Fecha/hora de ingreso y egreso, vía de ingreso, diagnóstico principal y diagnósticos relacionados.
+Plazos: Se envían a más tardar el día veinte (20) del mes siguiente a la facturación de los servicios.
+Requisito Obligatorio: Todo envío debe contener el archivo de control (CT) con la información del prestador. 
+Ministerio de Salud y Protección Social
+Ministerio de Salud y Protección Social
+ +3
+La norma exige que la historia clínica esté estructurada para alimentar automáticamente estos archivos, garantizando que el diagnóstico y los procedimientos sean precisos. 
+Doctocliq
+Doctocliq
+
+
+
+
+
+El reporte de servicios ambulatorios, hospitalización y urgencias al Ministerio de Salud ha cambiado radicalmente con la Resolución 2275 de 2023. A partir del 1 de octubre de 2024, el formato estándar para el envío es JSON (en lugar de los archivos .txt separados) y se realiza mediante una validación previa integrada con la factura electrónica. 
+Ministerio de Salud y Protección Social
+Ministerio de Salud y Protección Social
+ +3
+Aquí te detallo cómo se reporta cada escenario bajo el nuevo modelo:
+1. Estructura del Reporte (JSON)
+Ya no se envían archivos individuales (AC, AP, AH, AU). Ahora se genera un único archivo JSON que agrupa bloques de datos según el tipo de atención: 
+YouTube
+YouTube
+ +1
+Servicios Ambulatorios: Se reportan principalmente en el bloque de consultas (si es cita médica) o procedimientos (si es una terapia o examen).
+Urgencias: Deben incluirse en el bloque de "Urgencias" detallando la causa externa, el diagnóstico de salida y el estado a la salida.
+Hospitalización: Se registra en el bloque específico de "Hospitalización", indicando vía de ingreso, fecha/hora de ingreso y egreso, y diagnóstico principal. 
+Ministerio de Salud y Protección Social
+Ministerio de Salud y Protección Social
+ +3
+2. Proceso de Envío al Ministerio
+Generación: Tu software de salud debe generar el archivo JSON cumpliendo los Lineamientos Técnicos del Ministerio.
+Validación Única: Antes de radicar la factura, debes cargar el archivo en el Mecanismo Único de Validación del Ministerio para obtener el CUV (Código Único de Validación).
+Facturación Electrónica: El CUV se incluye en la Factura Electrónica de Venta (FEV) que envías a la DIAN y posteriormente a la entidad pagadora (EPS). 
+Ministerio de Salud y Protección Social
+Ministerio de Salud y Protección Social
+ +4
+3. Diferencias Clave por Servicio
+Ambulatorio: Si es una consulta de control, la finalidad debe ser "diagnóstico" o "prevención" según los códigos de la resolución.
+Urgencias vs. Hospitalización: Si un paciente en urgencias supera las 6 horas y es admitido en cama, el reporte debe cambiar al bloque de Hospitalización. Si permanece en observación menos tiempo, se mantiene en el bloque de Urgencias. 
+Universidad de Antioquia
+Universidad de Antioquia
+ +1
+Para realizar este proceso, asegúrate de acceder al portal del Ministerio de Salud - SISPRO para cargar y validar tus archivos. 
+Ministerio de Salud y Protección Social
+Ministerio de Salud y Protección Social
+¿Necesitas ayuda específica con los códigos de error comunes al validar el archivo JSON o con la parametrización de algún bloque de datos en particular?
+
+
+
+
+Bajo la Resolución 2275 de 2023 y el nuevo estándar JSON, el reporte de una cirugía varía según el contexto de la atención (Hospitalización o Urgencias), aunque el procedimiento quirúrgico en sí siempre se registra en el segmento de Procedimientos. 
+Saludtools
+Saludtools
+ +1
+1. El Reporte de la Cirugía (Segmento procedimientos)
+Independientemente de si el paciente está hospitalizado o en urgencias, la cirugía se reporta en el objeto de procedimientos del archivo JSON. 
+YouTube
+YouTube
+ +1
+Código CUP: Debe corresponder al procedimiento quirúrgico realizado.
+Diagnóstico Principal: Es un campo obligatorio y específico para procedimientos quirúrgicos, codificado en CIE-10.
+Vía de Ingreso: Aquí es donde diferencias el origen. Debes marcar si la vía de ingreso fue por urgencias o por remisión a hospitalización. 
+Saludtools
+Saludtools
+ +2
+2. Diferencias según el Ámbito
+El reporte JSON es "integral", pero debes vincular el procedimiento al bloque de servicios correspondiente:
+Si es en Hospitalización:
+Se debe diligenciar el segmento de hospitalizacion, detallando la fecha de ingreso, vía de ingreso y el diagnóstico principal de egreso.
+La cirugía se relaciona como un servicio prestado durante esa estancia.
+Si es en Urgencias:
+Se debe reportar en el segmento de urgencias, el cual incluye la causa externa y el diagnóstico de salida.
+Si la cirugía fue ambulatoria tras una atención inicial, se reporta el procedimiento asociado a la factura de urgencias. 
+YouTube
+YouTube
+ +2
+3. Proceso de Envío
+Generación: Se genera el archivo JSON a partir de la Factura Electrónica de Venta (FEV) en salud.
+Validación: Debes pasar el archivo por el Mecanismo Único de Validación del Ministerio de Salud para obtener el CUV (Código Único de Validación).
+Radicación: Una vez validado, se envía junto con el XML de la factura a la entidad responsable de pago. 
+Secretaría General de la Alcaldía Mayor de Bogotá
+Secretaría General de la Alcaldía Mayor de Bogotá
+ +4
+Para una guía detallada campo a campo, puedes consultar el Manual de Interoperabilidad del Ministerio de Salud
+
+
+--------------------------------------
+-***********************************
+-*--------------------------------------
+-- OJO JSON FACTURA DIAN
+
+{
+  "tipoDocumento": "01", // 01: Factura Electrónica de Venta
+  "numero": "SETT1",
+  "fecha": "2024-03-03T10:00:00-05:00",
+  "moneda": "COP",
+  
+  // Datos del Emisor
+  "emisor": {
+    "nit": "900123456",
+    "dv": "1",
+    "nombreRazonSocial": "Empresa Ejemplo SAS",
+    "tipoPersona": "1", // 1: Jurídica, 2: Natural
+    "direccion": {
+      "codigoMunicipio": "11001",
+      "direccion": "Calle 1 # 2-3",
+      "departamento": "Bogotá"
+    }
+  },
+  
+  // Datos del Receptor
+  "receptor": {
+    "nit": "800987654",
+    "dv": "0",
+    "nombreRazonSocial": "Cliente Ejemplo",
+    "tipoPersona": "1",
+    "tipoDocumentoIdentificacion": "31", // 31: NIT, 13: CC
+    "direccion": {
+      "codigoMunicipio": "05001",
+      "direccion": "Carrera 10 # 5-4",
+      "departamento": "Antioquia"
+    }
+  },
+  
+  // Detalle de ítems (Líneas)
+  "items": [
+    {
+      "codigoProducto": "PROD001",
+      "nombreProducto": "Servicio de Consultoría",
+      "cantidad": 1.0,
+      "unidadMedida": "94", // 94: Unidad, H87: Pieza
+      "valorUnitario": 100000.00,
+      "valorTotal": 100000.00,
+      "impuestos": [
+        {
+          "tipo": "01", // 01: IVA, 04: INC
+          "porcentaje": 19.0,
+          "valor": 19000.00
+        }
+      ]
+    }
+  ],
+  
+  // Totales de la factura
+  "totales": {
+    "valorBruto": 100000.00,
+    "valorNeto": 100000.00,
+    "valorTotalImpuestos": 19000.00,
+    "valorTotal": 119000.00
+  },
+  
+  "formaPago": {
+    "tipo": "1", // 1: Contado, 2: Crédito
+    "medio": "10" // 10: Efectivo, 42: Consignación
+  }
+}
+

@@ -75,9 +75,7 @@ class PDFFacturacion(FPDF):
         self.consec = consec
         self.ingresoId = ingresoId
         self.factura = factura
-
         self.flag = flag
-
 
     def header(self):
 
@@ -104,6 +102,8 @@ class PDFFacturacion(FPDF):
                  'departamentoPrestador': departamentoPrestador,
                  'codigoDepartamentoPrestador': codigoDepartamentoPrestador, 'municipioPrestador': municipioPrestador})
 
+        print("empresa =", empresa)
+
         miConexiont.close()
 
         print("voy por peunta FLAG")
@@ -129,6 +129,8 @@ class PDFFacturacion(FPDF):
             pass
 
         print("voy por tirulos")
+
+
         self.ln(4)
         self.set_font('helvetica', 'B', 8)
         self.cell(180, 10, empresa[0]['nombreEmpresa'], 0, 0, 'C')
@@ -157,11 +159,16 @@ class PDFFacturacion(FPDF):
         self.ln(3)
         #self.cell(120, 10, 'Cufe : 6b7dd1910792ec82b16f5a30d83da5c8f10895b42e3a685a8ee0f0edfc9e32e087576ba23525a50091a6eeb5bd9a9c5e ', 0, 0, 'L')
         self.cell(7, 13,'Cufe : ', 0, 0, 'L')
+
+        print("voy pr el CUFE")
+
         if (self.flag=='F'):
 
             self.cell(120, 10, str(factura.cufeDefinitivo), 0, 0, 'L')
         else:
             pass
+
+        print("PASE CUFE")
 
         self.ln(5)
         self.set_font('helvetica', 'B', 8)
@@ -212,6 +219,7 @@ class PDFFacturacion(FPDF):
         # Dibuja el borde
         self.rect(5.0,62.0, 200.0, 7.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
+        print("voy cusor paciente")
 
         ## CURSOR PARA PACIENTE
         #
@@ -221,15 +229,20 @@ class PDFFacturacion(FPDF):
 
         if (self.flag=='F'):
 
-            comando = 'SELECT ing.id ingreso , usu.nombre, usu."primerNombre"  primerNombre, usu."segundoNombre"  segundoNombre, usu."primerApellido"  primerApellido, usu."segundoApellido" segundoApellido , tipos.abreviatura abreviatura ,usu.documento documento , round(cast(cast((cast(now() as date)  - cast(usu."fechaNacio" as date)) as text) as numeric)/365,0)   edad, ing."fechaIngreso" fechaIngreso, usu.direccion direccion, usu.telefono telefono,  ing."fechaSalida" fechaSalida, dep.nombre departamentoPaciente, mun.nombre municipioPaciente, ing.factura, emp.nombre nombreEmpresa, emp.documento nit 	FROM admisiones_ingresos ing  INNER JOIN facturacion_facturacion fac ON (fac."tipoDoc_id" = ing."tipoDoc_id" AND fac.documento_id=ing.documento_id AND fac."consecAdmision" = ing.consec) INNER JOIN usuarios_usuarios usu ON (usu."tipoDoc_id"=ing."tipoDoc_id" AND usu.id=ing.documento_id)  INNER JOIN sitios_departamentos dep ON (dep.id=usu.departamentos_id) INNER JOIN sitios_municipios mun ON (mun.id = usu.municipio_id) INNER JOIN usuarios_tiposdocumento tipos ON (tipos.id=ing."tipoDoc_id") INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id) INNER JOIN facturacion_empresas emp ON (emp.id=conv.empresa_id) WHERE ing.id = ' + "'" + str(self.ingresoId) + "'"
+            #comando = 'SELECT ing.id ingreso , usu.nombre, usu."primerNombre"  primerNombre, usu."segundoNombre"  segundoNombre, usu."primerApellido"  primerApellido, usu."segundoApellido" segundoApellido , tipos.abreviatura abreviatura ,usu.documento documento , round(cast(cast((cast(now() as date)  - cast(usu."fechaNacio" as date)) as text) as numeric)/365,0)   edad, ing."fechaIngreso" fechaIngreso, usu.direccion direccion, usu.telefono telefono,  ing."fechaSalida" fechaSalida, dep.nombre departamentoPaciente, mun.nombre municipioPaciente, ing.factura, emp.nombre nombreEmpresa, emp.documento nit 	FROM admisiones_ingresos ing  INNER JOIN facturacion_facturacion fac ON (fac."tipoDoc_id" = ing."tipoDoc_id" AND fac.documento_id=ing.documento_id AND fac."consecAdmision" = ing.consec) INNER JOIN usuarios_usuarios usu ON (usu."tipoDoc_id"=ing."tipoDoc_id" AND usu.id=ing.documento_id)  INNER JOIN sitios_departamentos dep ON (dep.id=usu.departamentos_id) INNER JOIN sitios_municipios mun ON (mun.id = usu.municipio_id) INNER JOIN usuarios_tiposdocumento tipos ON (tipos.id=ing."tipoDoc_id") INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id) INNER JOIN facturacion_empresas emp ON (emp.id=conv.empresa_id) WHERE ing.id = ' + "'" + str(self.ingresoId) + "'"
+            print ("self.factura=" , self.factura)
+            comando = 'SELECT ing.id ingreso , usu.nombre, usu."primerNombre"  primerNombre, usu."segundoNombre"  segundoNombre, usu."primerApellido"  primerApellido, usu."segundoApellido" segundoApellido , tipos.abreviatura abreviatura ,usu.documento documento , round(cast(cast((cast(now() as date)  - cast(usu."fechaNacio" as date)) as text) as numeric)/365,0)   edad, ing."fechaIngreso" fechaIngreso, usu.direccion direccion, usu.telefono telefono,  ing."fechaSalida" fechaSalida, dep.nombre departamentoPaciente, mun.nombre municipioPaciente, convIng.convenio_id, emp.nombre nombreEmpresa, emp.documento nit 	FROM admisiones_ingresos ing  INNER JOIN facturacion_facturacion fac ON (fac.id= ' + "'" + str(self.factura) + "' AND " + '        fac."tipoDoc_id" = ing."tipoDoc_id" AND fac.documento_id=ing.documento_id AND fac."consecAdmision" = ing.consec) INNER JOIN usuarios_usuarios usu ON (usu."tipoDoc_id"=ing."tipoDoc_id" AND usu.id=ing.documento_id)  INNER JOIN sitios_departamentos dep ON (dep.id=usu.departamentos_id) INNER JOIN sitios_municipios mun ON (mun.id = usu.municipio_id) INNER JOIN usuarios_tiposdocumento tipos ON (tipos.id=ing."tipoDoc_id") INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id) INNER JOIN facturacion_empresas emp ON (emp.id=conv.empresa_id) INNER JOIN facturacion_conveniospacienteingresos convIng ON (convIng.factura_id=' + "'" + str(self.factura) + "'" + ') WHERE ing.id = ' + "'" + str(self.ingresoId) + "'"
+
         else:
+            print("self.factura=", self.factura)
 
-            comando = 'SELECT ing.id ingreso , usu.nombre, usu."primerNombre"  primerNombre, usu."segundoNombre"  segundoNombre, usu."primerApellido"  primerApellido, usu."segundoApellido" segundoApellido , tipos.abreviatura abreviatura ,usu.documento documento , round(cast(cast((cast(now() as date)  - cast(usu."fechaNacio" as date)) as text) as numeric)/365,0)   edad, ing."fechaIngreso" fechaIngreso, usu.direccion direccion, usu.telefono telefono,  ing."fechaSalida" fechaSalida, dep.nombre departamentoPaciente, mun.nombre municipioPaciente, ing.factura, emp.nombre nombreEmpresa, emp.documento nit 	FROM admisiones_ingresos ing  INNER JOIN facturacion_liquidacion fac ON (fac."tipoDoc_id" = ing."tipoDoc_id" AND fac.documento_id=ing.documento_id AND fac."consecAdmision" = ing.consec) INNER JOIN usuarios_usuarios usu ON (usu."tipoDoc_id"=ing."tipoDoc_id" AND usu.id=ing.documento_id)  INNER JOIN sitios_departamentos dep ON (dep.id=usu.departamentos_id) INNER JOIN sitios_municipios mun ON (mun.id = usu.municipio_id) INNER JOIN usuarios_tiposdocumento tipos ON (tipos.id=ing."tipoDoc_id") INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id) INNER JOIN facturacion_empresas emp ON (emp.id=conv.empresa_id) WHERE ing.id = ' + "'" + str(self.ingresoId) + "'"
-
-
-        curt.execute(comando)
+            #comando = 'SELECT ing.id ingreso , usu.nombre, usu."primerNombre"  primerNombre, usu."segundoNombre"  segundoNombre, usu."primerApellido"  primerApellido, usu."segundoApellido" segundoApellido , tipos.abreviatura abreviatura ,usu.documento documento , round(cast(cast((cast(now() as date)  - cast(usu."fechaNacio" as date)) as text) as numeric)/365,0)   edad, ing."fechaIngreso" fechaIngreso, usu.direccion direccion, usu.telefono telefono,  ing."fechaSalida" fechaSalida, dep.nombre departamentoPaciente, mun.nombre municipioPaciente, ing.factura, emp.nombre nombreEmpresa, emp.documento nit 	FROM admisiones_ingresos ing  INNER JOIN facturacion_liquidacion fac ON (fac."tipoDoc_id" = ing."tipoDoc_id" AND fac.documento_id=ing.documento_id AND fac."consecAdmision" = ing.consec) INNER JOIN usuarios_usuarios usu ON (usu."tipoDoc_id"=ing."tipoDoc_id" AND usu.id=ing.documento_id)  INNER JOIN sitios_departamentos dep ON (dep.id=usu.departamentos_id) INNER JOIN sitios_municipios mun ON (mun.id = usu.municipio_id) INNER JOIN usuarios_tiposdocumento tipos ON (tipos.id=ing."tipoDoc_id") INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id) INNER JOIN facturacion_empresas emp ON (emp.id=conv.empresa_id) WHERE ing.id = ' + "'" + str(self.ingresoId) + "'"
+            comando = 'SELECT ing.id ingreso , usu.nombre, usu."primerNombre"  primerNombre, usu."segundoNombre"  segundoNombre, usu."primerApellido"  primerApellido, usu."segundoApellido" segundoApellido , tipos.abreviatura abreviatura ,usu.documento documento , round(cast(cast((cast(now() as date)  - cast(usu."fechaNacio" as date)) as text) as numeric)/365,0)   edad, ing."fechaIngreso" fechaIngreso, usu.direccion direccion, usu.telefono telefono,  ing."fechaSalida" fechaSalida, dep.nombre departamentoPaciente, mun.nombre municipioPaciente, convIng.convenio_id, emp.nombre nombreEmpresa, emp.documento nit 	FROM admisiones_ingresos ing  INNER JOIN facturacion_liquidacion fac ON (fac.id= ' + "'" + str(self.factura) + "' AND " + ' fac."tipoDoc_id" = ing."tipoDoc_id" AND fac.documento_id=ing.documento_id AND fac."consecAdmision" = ing.consec) INNER JOIN usuarios_usuarios usu ON (usu."tipoDoc_id"=ing."tipoDoc_id" AND usu.id=ing.documento_id)  INNER JOIN sitios_departamentos dep ON (dep.id=usu.departamentos_id) INNER JOIN sitios_municipios mun ON (mun.id = usu.municipio_id) INNER JOIN usuarios_tiposdocumento tipos ON (tipos.id=ing."tipoDoc_id") INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id) INNER JOIN facturacion_empresas emp ON (emp.id=conv.empresa_id) INNER JOIN facturacion_conveniospacienteingresos convIng ON (convIng."tipoDoc_id" = ing."tipoDoc_id" AND convIng.documento_id=ing.documento_id AND convIng."consecAdmision" = ing.consec and convIng.convenio_id= conv.id )  WHERE ing.id = ' + "'" + str(self.ingresoId) + "'"
 
         print(comando)
+        curt.execute(comando)
+
+
 
         paciente = []
 
@@ -241,6 +254,8 @@ class PDFFacturacion(FPDF):
              'departamentoPaciente': departamentoPaciente, 'municipioPaciente': municipioPaciente, 'factura':factura,'nombreEmpresa':nombreEmpresa, 'nit':nit})
 
         miConexiont.close()
+
+        print("PACIENTE = " , paciente)
 
         ## FIN CURSOR
         self.set_font('helvetica', 'B', 8)
@@ -280,6 +295,8 @@ class PDFFacturacion(FPDF):
         self.ln(3)
         self.set_line_width(0.4)
 
+        print("de SALIDA EN titulos")
+
         # Dibuja el borde
         #self.rect(5.0,64.0, 200.0, 5.0)  # Coordenadas x, y, ancho, alto
         self.ln(3)
@@ -295,6 +312,28 @@ class PDFFacturacion(FPDF):
         self.set_line_width(0.4)
         # Dibuja el borde
         #self.rect(5.0, 74.0, 200.0, 192.5)  # Coordenadas x, y, ancho, alto
+
+class PDFPazYSalvo(FPDF):
+    def __init__(self, tipoDocId, documentoId, consec, ingresoId1,  *args, **kwargs):
+    #def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.tipoDocId = tipoDocId
+        self.documentoId = documentoId
+        self.consec = consec
+        self.ingresoId = ingresoId1
+
+
+    def header(self):
+        # Move to the right
+        # self.cell(12)
+
+        ## CURSOR PARA LEER ENCABEZADO
+        #
+
+        # Line break
+        print("Entre clas paz y salvo")
+        self.ln(6)
+
 
 def ImprimirFactura(request):
 
@@ -1278,3 +1317,196 @@ def ImprimirLiquidacion(request):
     print ("aqui voy_4")
 
     return JsonResponse({'success': True, 'message': 'Factura impresa!'})
+
+def ImprimirPazYSalvo(request):
+
+    print("Entre imprimirPazYSalvo")
+
+    # Instantiation of inherited class
+    ingresoId1 = request.POST["ingresoId"]
+    print("ingresoId1 = ", ingresoId1)
+
+    llave = ingresoId1.split('-')
+    print("llave = ", llave)
+    print("primero=", llave[0])
+    numeroIngreso = llave[1].strip()
+    convenioId2= llave[2]
+    print("numeroIngreso = ", numeroIngreso)
+    print("convenioId2  = ", convenioId2)
+    #Variable factura es el id de la liquidacion
+    ingresoPac = Ingresos.objects.get(id=numeroIngreso)
+    facturaPaciente= Liquidacion.objects.get(tipoDoc_id=ingresoPac.tipoDoc_id, documento_id=ingresoPac.documento_id, consecAdmision=ingresoPac.consec, convenio_id=convenioId2)
+    factura=facturaPaciente.id
+
+    ingresoPaciente = Ingresos.objects.get(id=numeroIngreso)
+    tipoDocId = ingresoPaciente.tipoDoc_id
+    print("tipoDocId = ", tipoDocId)
+    documentoId = ingresoPaciente.documento_id
+    print("documentoId = ", documentoId)
+    consec = ingresoPaciente.consec
+    print("consec = ", consec)
+    pacienteId = Usuarios.objects.get(id=documentoId)
+    print("documentoPaciente = ", pacienteId.documento)
+
+    miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+                                   password="123456")
+    curt = miConexiont.cursor()
+
+    comando = 'SELECT tipo.abreviatura abrev, usu.documento documento, usu.nombre nombre, ing."fechaIngreso", ing."fechaSalida" fechaSalida,	conv.nombre asegurador, regimen.nombre regimen, tiposCotizante.nombre tiposCotizante, tiposUsuario.nombre tiposUsuario, ' + "'" + str('Paciente') + "'" + ' parentesco  FROM admisiones_ingresos ing INNER JOIN usuarios_usuarios usu ON (usu.id=ing.documento_id) INNER JOIN usuarios_tiposdocumento tipo ON (tipo.id = usu."tipoDoc_id")  LEFT JOIN clinico_regimenes regimen ON (regimen.id=ing.regimen_id) LEFT JOIN clinico_tiposcotizante tiposCotizante ON (tiposCotizante.id=ing."tiposCotizante_id") LEFT JOIN usuarios_tiposusuario tiposUsuario ON (tiposUsuario.id = usu."tiposUsuario_id") LEFT JOIN contratacion_convenios conv on (conv.id=1) WHERE ing.id= ' + "'" + str(numeroIngreso)  +"'"
+    print(comando)
+
+    curt.execute(comando)
+
+    print(comando)
+
+    pazYSalvo = []
+
+    for abrev, documento, nombre, fechaIngreso, fechaSalida, asegurador, regimen, tiposCotizante, tiposUsuario, parentesco in curt.fetchall():
+        pazYSalvo.append(
+            {'abrev': abrev, 'documento': documento, 'nombre':nombre,'fechaIngreso':fechaIngreso, 'fechasalida':fechaSalida, 
+             'asegurador': asegurador, 'regimen': regimen,
+             'tiposCotizante': tiposCotizante, 'tiposUsuario': tiposUsuario,'parentesco':parentesco})
+
+    miConexiont.close()
+    print("oazYSalvo = ", pazYSalvo)
+
+    pdf = PDFPazYSalvo(tipoDocId, documentoId, consec, ingresoId1)
+    pdf.alias_nb_pages()
+    pdf.set_margins(left=10, top=5, right=5)
+    pdf.add_page()
+    pdf.set_font('Helvetica', 'B', 8)
+    pdf.ln(4)
+
+    # Define el ancho de línea
+    pdf.set_line_width(0.4)
+    # Dibuja el borde
+    pdf.rect(7.0, 15.0, 190.0, 47.0)  # Coordenadas x, y, ancho, alto
+
+    print ("aqui toy01")
+
+    pdf.set_font('Helvetica', 'B', 8)
+    print ("aqui toy011")
+    pdf.cell(200, 10, 'PAZ Y SALVO ADMINISTRATIVO:', 0, 0, 'C')
+    print ("aqui toy01111")
+    pdf.set_font('Helvetica', 'B', 8)
+    pdf.ln(3)
+    pdf.cell(200, 10, str(pazYSalvo[0]['nombre']), 0, 0, 'C')
+    print ("aqui toy02")
+    pdf.set_font('Helvetica', '', 8)
+    pdf.ln(6)
+    pdf.set_font('Helvetica', 'B', 8)
+    pdf.cell(30, 10, 'Identificacion:', 0, 0, 'L')
+    print("aqui toy10")
+    pdf.set_font('Helvetica', '', 8)
+    pdf.cell(30, 10, str(pazYSalvo[0]['abrev']), 0, 0, 'L')
+    pdf.cell(30, 10, str(pazYSalvo[0]['documento']), 0, 0, 'L')
+    print ("aqui toy12")
+    pdf.set_font('Helvetica', 'B', 8)
+    pdf.cell(30, 10, 'Admision:', 0, 0, 'L')
+    pdf.set_font('Helvetica', '', 8)
+    pdf.cell(30, 10, str(numeroIngreso), 0, 0, 'L')
+    print("aqui toy12")
+    pdf.ln(3)
+    pdf.set_font('Helvetica', 'B', 8)
+    pdf.cell(30, 10, 'Asegurador:', 0, 0, 'L')
+    pdf.set_font('Helvetica', '', 8)
+    pdf.cell(30, 10, str(pazYSalvo[0]['asegurador']), 0, 0, 'L')
+    pdf.set_font('Helvetica', 'B', 8)
+    pdf.cell(30, 10, 'Regimen:', 0, 0, 'L')
+    pdf.set_font('Helvetica', '', 8)
+    pdf.cell(30, 10, str(pazYSalvo[0]['regimen']), 0, 0, 'L')
+    pdf.ln(3)
+    print("aqui toy20")
+    pdf.set_font('Helvetica', 'B', 8)
+    pdf.cell(30, 10, 'Usuario:', 0, 0, 'L')
+    pdf.set_font('Helvetica', '', 8)
+    pdf.cell(30, 10, str(pazYSalvo[0]['tiposCotizante']), 0, 0, 'L')
+    pdf.set_font('Helvetica', 'B', 8)
+    pdf.cell(30, 10, 'Nivel:', 0, 0, 'L')
+    pdf.set_font('Helvetica', '', 8)
+    #pdf.cell(30, 10, str(pazYSalvo[0]['nivel']), 0, 0, 'L')
+    pdf.set_font('Helvetica', 'B', 8)
+    pdf.cell(30, 10, 'poblacion Esp:', 0, 0, 'L')
+    pdf.set_font('Helvetica', '', 8)
+    pdf.cell(30, 10, str(pazYSalvo[0]['tiposUsuario']), 0, 0, 'L')
+    pdf.ln(3)
+    print("aqui toy31")
+    pdf.set_font('Helvetica', 'B', 8)
+    pdf.cell(30, 10, 'Fecha de ingreso:', 0, 0, 'L')
+    pdf.set_font('Helvetica', '', 8)
+    pdf.cell(60, 10, str(pazYSalvo[0]['fechaIngreso']), 0, 0, 'L')
+    pdf.set_font('Helvetica', 'B', 8)
+    pdf.cell(40, 10, 'Fecha de Egreso:', 0, 0, 'L')
+    pdf.set_font('Helvetica', '', 8)
+    print("aqui toy311")
+    #pdf.cell(30, 10, str(pazYSalvo[0]['fechaSalida']), 0, 0, 'L')
+    print("aqui to312")
+    pdf.ln(15)
+    pdf.set_font('Helvetica', 'B', 8)
+    pdf.cell(30, 10, 'Nombre Completo:', 0, 0, 'L')
+    pdf.set_font('Helvetica', '', 8)
+    pdf.cell(30, 10, str(pazYSalvo[0]['nombre']), 0, 0, 'L')
+    pdf.ln(3)
+    pdf.set_font('Helvetica', 'B', 8)
+    pdf.cell(30, 10, 'Identificacion:', 0, 0, 'L')
+    pdf.set_font('Helvetica', '', 8)
+    pdf.cell(30, 10, str(pazYSalvo[0]['abrev']), 0, 0, 'L')
+    pdf.cell(30, 10, str(pazYSalvo[0]['documento']), 0, 0, 'L')
+    pdf.ln(3)
+
+    pdf.set_font('Helvetica', 'B', 8)
+    pdf.cell(30, 10, 'Parentesco:', 0, 0, 'L')
+    pdf.set_font('Helvetica', '', 8)
+    pdf.cell(30, 10, str(pazYSalvo[0]['parentesco']), 0, 0, 'L')
+
+    pdf.ln(10)
+
+    texto = 'Este documento certifica que el paciente se encuentra a paz y salvo en pagos y/o documentos exigidos para la adecuada prestación del servicio. ES VÁLIDO PARA LA SALIDA'
+    pdf.multi_cell(w=180, h=3, txt=str(texto), align='C')
+    print("ya imprimi el footer")
+
+
+    carpeta = 'C:\\EntornosPython\\Pos7Particionado\\vulner\\JSONCLINICA\\HistoriasClinicas\\'
+    print("carpeta = ", carpeta)
+
+    archivo = carpeta + '' + str(pacienteId.documento) + '_' + 'PazYsalvo.pdf'
+    print("archivo =", archivo)
+
+    try:
+        # Intenta abrir el archivo directamente
+        pdf.output(archivo, "F")
+        print("archivo LISTO =", archivo)
+        #webbrowser.open(archivo)
+
+        buff = BytesIO()
+        buff.name = archivo
+        #Genera el archivo el el servidor
+
+        # 2. Abrir el archivo PDF y leerlo
+
+        print("voy a leer")
+        with open(archivo, 'rb') as f:
+            pdf_data = f.read()
+            # 3. Escribir los datos en el buffer
+            buff.write(pdf_data)
+
+        buff.seek(0)
+
+        print("voy a responder")
+
+        return FileResponse(
+            buff,
+            as_attachment=False,  # Cambiar a False para verlo en navegador
+            filename=archivo,
+            content_type='application/pdf'
+        )
+
+
+    except FileNotFoundError:
+        print(f"Error: Archivo no encontrado en {archivo}")
+    except Exception as e:
+        print(f"Error al abrir el archivo: {e}")
+
+    return JsonResponse({'success': True, 'message': 'Paz y salvo impreso!'})
+
+

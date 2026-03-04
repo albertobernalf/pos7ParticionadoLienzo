@@ -2195,6 +2195,30 @@ def escogeAcceso(request, Sede, Username, Profesional, Documento, NombreSede, es
 
     # Fin combo Indicadores
 
+   	# Combo estado envio dian
+
+        miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+                                       password="123456")
+        curt = miConexiont.cursor()
+
+        comando = "SELECT p.id id, p.nombre  nombre FROM  facturacion_estadoEnvioDian  p"
+
+        curt.execute(comando)
+        print(comando)
+
+        estadoEnvioDian = []
+
+
+        for id, nombre in curt.fetchall():
+            estadoEnvioDian.append({'id': id, 'nombre': nombre})
+
+        miConexiont.close()
+        print("estadoEnvioDian", estadoEnvioDian)
+
+        context['EstadoEnvioDian'] = estadoEnvioDian
+
+        # Fin combo estadoEnvioDian
+
 
         return render(request, "facturacion/panelFacturacionF.html", context)
 
@@ -2228,8 +2252,6 @@ def escogeAcceso(request, Sede, Username, Profesional, Documento, NombreSede, es
         context['SalasCirugia'] = salasCirugia
 
         # Fin combo salas
-
-
 
 
    	# Combo tiposAnestesia

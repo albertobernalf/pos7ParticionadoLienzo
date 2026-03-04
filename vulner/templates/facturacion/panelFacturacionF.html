@@ -100,8 +100,10 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
                                                 <th> Cuenta
 				            <img src="{% static 'img/icons8-impresora-50.png' %}" alt="Imprimir" width="20" height="20">
 						</th>
+                                                <th>PazYsalvo</th>
                                                 <th>id</th>
-						<th>Sel</th>
+					
+
                                                 <th>TipoDoc</th>
                                                 <th>Documento</th>
                                                 <th>Paciente</th>
@@ -295,6 +297,7 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
                                             <tr>
 						<th>Accion1</th>
                                                 <th>Action</th>
+						<th>Dyan</th>
                                                 <th>Factura</th>
                                                 <th>Fecha</th>
                                                 <th>TipoDoc</th>
@@ -318,6 +321,73 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
                                     
 
                                         </table>
+
+
+
+
+	  <!-- Modales Facturacion-->
+
+            <div class="modal fade" id="crearEnvioDian" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="modelHeadingEnvioDyan"></h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                            <form id="postFormModalEnvioDyan" name="postFormModalEnvioDyan" class="form-horizontal"
+                                  novalidate>
+                                {% csrf_token %}
+                                <input type="hidden" name="post_id" id="post_id">
+                                Factura:<input type="text" name="facturaDianId" id="facturaDianId">
+
+				<div class="row row-cols-8" style="height=1px;">
+				<div class="col">
+                                    FechaEnvio Dian:
+                                    <input type="date" id="fechaEnvioDian" name="fechaEnvioDian" ></input>
+                                </div>
+
+				<div class="col">
+                                    FechaRespuesta Dian:
+                                    <input type="date" id="fechaRespuestaDian" name="fechaRespuestaDian" ></input>
+
+                                </div>
+				<div class="col">
+                                    Respuesta:
+                                    <input type="text" id="respuestaDian" name="respuestaDian" ></input>
+                                </div>
+
+		             <select class="select-css"  id="estadoEnvioDian" name="estadoEnvioDian">
+                                                    {% for estadoEnvioDian in EstadoEnvioDian %}
+                                                            <option value="{{estadoEnvioDian.id}}"> {{estadoEnvioDian.nombre}}
+                                                            </option>
+                                                            {% endfor %}
+                                	            </select>
+
+
+
+                                <div class="col-sm-offset-2 col-sm-10 mt-2">
+
+		<textarea id="mensajesErrorModelEnvioDyan" name="mensajesErrorModelEnvioDyan" style="background-color: lightred; color: navy;"  rows="1" cols="60" placeholder="Mensajes..."  wrap="hard"></textarea>
+
+                           
+
+			   <input type="button" class="form-control form-control-sm" id="saveBtnCrearEnvioDian"  name="saveBtnCrearEnvioDian" value="Crear Envio Dyan" onclick="crearEnvioDian()">
+
+
+                                </div>
+                                </div> <!-- CIERRA ROW 8 COLUMNAS  -->
+
+                            </form>
+                        </div> <!-- CIERRA BODY -->
+                        </div> <!-- CIERRA MODAL CONTENTE -->
+                    </div> <!-- CIERRA MODAL DIALOG -->
+                </div>  <!-- CIERRA MODAL FADE -->
+
+     <!-- FIN Espacio Modales  -->
+
+
+
 
         </article>
 
@@ -438,6 +508,13 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
                           
 			</div>
 	      </div>
+
+
+
+
+
+
+
 </article>
 
 <article id="LiquidacionDetalle">

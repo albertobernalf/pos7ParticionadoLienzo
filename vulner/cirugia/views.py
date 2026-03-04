@@ -21,8 +21,8 @@ import psycopg2
 import json
 #import datetime
 import datetime
-from datetime import datetime
-from datetime import timezone
+from datetime import date
+#from datetime import timezone
 
 import time
 from datetime import date, timedelta
@@ -438,8 +438,10 @@ def Load_dataDisponibilidadSalas(request, data):
     print("sede:", sede)
     print("username:", username)
     print("username_id:", username_id)
+    fecha_hoy = datetime.now()
     fecha_actual = datetime.now()
-    fecha_hoy = fecha_actual.strftime("%Y-%m-%d")
+    fecha_actual = fecha_actual + timedelta(days =-1)
+    fecha_hoyM = fecha_actual.strftime("%Y-%m-%d")
     print("fecha_hoy a WORK:", fecha_hoy)
     dias_a_revisar = 5
 
@@ -455,20 +457,25 @@ def Load_dataDisponibilidadSalas(request, data):
     salas = []
     disponibilidadAprobada = []
 
-    fecha_futura = fecha_hoy
+    fecha_futura = fecha_hoyM
 
     for id, salaId, nombreSala in curx.fetchall():
         salas.append(
             {"model": "sitios.salas", "pk": id, "fields":
                 {'id':id, 'salaId': salaId, 'nombreSala': nombreSala}})
 
-        #fecha_futura = fecha_hoy
         primeraIteracionDia = 'S'
-        print("CAMBIO SALA No ", salaId)
+        print("COMIENZO CON LA SALA No ", salaId)
 
         for i in range(dias_a_revisar + 1):
 
-            print("fecha_futura  ", fecha_futura)
+
+            print("en la fecha  ", fecha_futura)
+            fecha_actual = fecha_actual + timedelta(days= +1)
+            fecha_futura = fecha_actual
+            fecha_futura = fecha_futura.strftime("%Y-%m-%d")
+            primeraIteracion = 'S'
+            print("Comienzo en el dia ", fecha_futura)
 
             comando2 = 'SELECT dispoSalas.id id , dispoSalas.id dispoId , dispoSalas.fecha, dispoSalas."desdeHora", dispoSalas."hastaHora", dispoSalas."estadoDisponibilidad" FROM sitios_disponibilidadsalas dispoSalas, sitios_salas salas WHERE salas.id = ' + "'" + str(salaId) + "' AND  salas.id = dispoSalas.salas_id  AND disposalas.fecha = " + "'" + str(fecha_futura) + "'" + ' ORDER BY "desdeHora", "hastaHora"'
             print("comando2 = ", comando2)
@@ -477,10 +484,14 @@ def Load_dataDisponibilidadSalas(request, data):
             salasDisponibilidad = []
 
             for id, dispoId , fecha, desdeHora, hastaHora, estadoDisponibilidad in curx.fetchall():
-                salasDisponibilidad.append(
-		            {"model": "sitios.disponibilidadsalas", "pk": id, "fields":
-		                {'id': id, 'dispoId': dispoId ,'fecha': fecha,
-		                 'desdeHora':desdeHora, 'hastaHora':hastaHora, 'estadoDisponibilidad':estadoDisponibilidad}})
+                salasDisponibilidad.append({"model": "sitios.disponibilidadsalas", "pk": id, "fields": {'id': id, 'dispoId': dispoId ,'fecha': fecha,'desdeHora':desdeHora, 'hastaHora':hastaHora, 'estadoDisponibilidad':estadoDisponibilidad}})
+
+                print ("Paso por salasDisponibilidad[] ", salasDisponibilidad)
+
+                if (salasDisponibilidad == '[]'):
+
+                    print ("voy en dia y SALTO", fecha_futura)
+                    continue
 
                 print("voy por el comando3 = ")
                 comando3 = 'SELECT prog.id,  prog."fechaProgramacionInicia" fechaProgramacionInicia, prog."fechaProgramacionFin" fechaProgramacionFin,	prog."horaProgramacionInicia" horaProgramacionInicia, prog."horaProgramacionFin" horaProgramacionFin , usu.nombre nombrePaciente FROM cirugia_programacioncirugias prog INNER JOIN usuarios_usuarios usu ON (usu.id = prog.documento_id ) WHERE prog.sala_id = ' + "'" + str(salaId) + "'" + ' AND prog."fechaProgramacionInicia" = ' + "'" + str(fecha_futura) + "' ORDER BY " + ' prog."horaProgramacionInicia" '
@@ -490,13 +501,23 @@ def Load_dataDisponibilidadSalas(request, data):
                 disponibilidadCirugia = []
 
                 for  id,  fechaProgramacionInicia, fechaProgramacionFin,  horaProgramacionInicia, horaProgramacionFin , nombrePaciente in curx.fetchall():
-                        disponibilidadCirugia.append(
-                            {"model": "cirgugia.disponibilidadCirugia", "pk": id, "fields":
-                                {'id':id, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
-                                 'horaProgramacionFin': horaProgramacionFin,'nombrePaciente':nombrePaciente}})
-                        print("que paso")
+
+                        disponibilidadCirugia.append({"model": "cirgugia.disponibilidadCirugia", "pk": id, "fields": {'id':id, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,'horaProgramacionFin': horaProgramacionFin,'nombrePaciente':nombrePaciente}})
+
+                        print("paso por disponibilidadCirugia =" , disponibilidadCirugia)
 
                         print("voy a comenzar a escribir = " , fecha_futura)
+
+                        if (disponibilidadCirugia=='[]'):
+
+                            print ("Es un dia sin programacion o sea sala libre")
+			                #Hueco
+                            disponibilidadAprobada.append(
+                                         {"model": "cirugia.programacionAprobada", "pk": id, "fields":
+                                         {'id':id, 'salaId':salaId,'nombreSala':nombreSala, 'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': desdeHora,
+                                         'horaProgramacionFin': hastaHora,'nombrePaciente':'','estado':'DISPONIBLE'}})
+
+                            continue
 
                         if (primeraIteracionDia == 'S'):
 
@@ -582,21 +603,33 @@ def Load_dataDisponibilidadSalas(request, data):
                              'horaProgramacionFin': hastaHora, 'nombrePaciente': '', 'estado': 'DISPONIBLE'}})
 
                 #FOR PARA ESTE DIA QUE DISPONIBILIDAD HAY EN ESA SALA
+            #  fin cambia 1 dia
 
-            #FOR DE LOS DIAS
+            #fecha_actual = fecha_actual + timedelta(days=i+1)
+            #fecha_futura = fecha_actual
+            #fecha_futura = fecha_futura.strftime("%Y-%m-%d")
+            #primeraIteracion = 'S'
 
-            print ("un dia con i = ", i)
-            fecha_futura = fecha_actual + timedelta(days=i+1)
-            fecha_hoy = fecha_actual.strftime("%Y-%m-%d")
-            fecha_futura = fecha_futura.strftime("%Y-%m-%d")
-            print("fecha_futura = ",fecha_futura)
-            primeraIteracion = 'S'
 
-        #Cambio de sala
 
+        #FIN FOR  1 SALA
+
+        print ("un dia con i = ", i)
+        fecha_actual = datetime.now()
+        fecha_actual = fecha_actual + timedelta(days = -1)
         primeraIteracion = 'S'
-        fecha_hoy = fecha_actual.strftime("%Y-%m-%d")
+        # fecha_hoy = fecha_actual.strftime("%Y-%m-%d")
+        fecha_futura = fecha_actual.strftime("%Y-%m-%d")
 
+
+    #FIn acxabo todas las salas
+    #
+    fecha_actual = datetime.now()
+    fecha_actual = fecha_actual + timedelta(days = -1)
+
+    primeraIteracion = 'S'
+    #fecha_hoy = fecha_actual.strftime("%Y-%m-%d")
+    fecha_futura = fecha_actual.strftime("%Y-%m-%d")
 
     print("sali me regreso con " , disponibilidadAprobada)
 
@@ -1868,13 +1901,24 @@ def BorraMaterialInformeCirugia(request):
 def CrearAdicionQx(request):
     print("Entre CrearAdicionQx")
 
+
     cirugiaId = request.POST.get('cirugiaIdModalAdicionarQx')
+
+    ciruIdd = Cirugias.objects.get(id=cirugiaId)
+    print("ciruIdd =", ciruIdd.id)
+    estadoConfirmadaId = EstadosCirugias.objects.get(nombre='REALIZADA')
+    print(" estadoConfirmadaId = ", estadoConfirmadaId)
+
     ingresoQuirofano = request.POST.get('ingresoQuirofano')
     print("ingresoQuirofano", ingresoQuirofano)
     horaIngresoQuirofano =  ingresoQuirofano[11:19]
     print("horaIngresoQuirofano", horaIngresoQuirofano)
+    print ("año = ", int(ingresoQuirofano[0:4]))
+    print("mes = ", ingresoQuirofano[6:7])
+    print("dia = ", ingresoQuirofano[9:11])
 
-    ingresoQuirofano =  datetime.date(int(ingresoQuirofano[0:4]), int(ingresoQuirofano[5:7]), int(ingresoQuirofano[8:11]))
+
+    ingresoQuirofano =  datetime.date(int(ingresoQuirofano[0:4]), int(ingresoQuirofano[6:7]), int(ingresoQuirofano[9:11]))
     print("ingresoQuirofano Formulado", ingresoQuirofano)
 
 
@@ -1962,6 +2006,23 @@ def CrearAdicionQx(request):
     print("sede =", sede)
 
     estadoCirugiaId = EstadosCirugias.objects.get(nombre="REALIZADA")
+    estadoRealizadaId = EstadosCirugias.objects.get(nombre='REALIZADA')
+    print(" estadoRealizadaId = ", estadoRealizadaId)
+
+    esTriage='N'
+    try:
+        with transaction.atomic():
+
+           ingreso = Ingresos.objects.get(tipoDoc_id=ciruIdd.tipoDoc_id, documento_id=ciruIdd.documento_id, consec = ciruIdd.consecAdmision)
+
+    except Exception as e:
+            # Aquí ya se hizo rollback automáticamente
+            print("Se hizo rollback por PRONO SE HACE NADA:", e)
+            triageId = Triage.objects.get(tipoDoc_id=ciruIdd.tipoDoc_id, documento_id=ciruIdd.documento_id, consecAdmision = ciruIdd.consecAdmision)
+            esTriage = 'S'
+
+    finally:
+        print("No haga nada")
 
 
     miConexion3 = None
@@ -1971,11 +2032,66 @@ def CrearAdicionQx(request):
                                            password="123456")
             cur3 = miConexion3.cursor()
 
-
             detalle = 'UPDATE cirugia_Cirugias SET "ingresoQuirofano" =  ' + "'" + str(ingresoQuirofano) + "'," + '"horaIngresoQuirofano" = ' + "'" + str(horaIngresoQuirofano) + "'," + '  "salidaQuirofano" =  ' + "'" + str(salidaQuirofano) + "'," + '"horaSalidaQuirofano" = ' + "'" + str(horaSalidaQuirofano)  + "'," + '"fechaIniAnestesia" = ' + "'" + str(fechaIniAnestesia) + "'," + '"HoraIniAnestesia" = ' + "'" + str(horaIniAnestesia) + "',"  + '"fechaQxInicial" = ' + "'" + str(fechaQxIni) + "'," + '"horaQxInicial" = ' + "'" + str(horaQxIni) + "'," + '"fechaQxFinal" = ' + "'" + str(fechaQxFin) + "'," + '"horaQxFinal" = ' + "'" + str(horaQxFin) + "'," + '"fechaFinAnestesia" = ' + "'" + str(fechaFinAnestesia) + "'," + '"horaFinAnestesia" = ' + "'" + str(horaFinAnestesia) + "'," + '"ingresoRecuperacion" = ' + "'" + str(ingresoRecuperacion) + "'," + '"horaIngresoRecuperacion" = ' + "'" + str(horaIngresoRecuperacion) + "'," + '"salidaRecuperacion" = ' + "'" + str(salidaRecuperacion) + "'," + '"horaSalidaRecuperacion" = ' + "'" + str(horaSalidaRecuperacion) + "'," + '"dxPreQx_id" = ' + str(dxPreOperatorio) + ","   + '"dxPostQx_id" = ' +  str(dxPostOperatorio) + ","  + '"impresionDx_id" = ' + str(impresionDx) + "," + '"dxComplicacion_id" = ' + str(complicacionesDx) + "," + '"formaRealiza" = ' + "'" + str(formaRealizacion) + "'," + '"patologia" = ' + "'" + str(tejidoPatologia) + "'," + '"tipofractura" = ' + "'" + str(tipoFractura) + "'," + '"intensificador" = ' + "'" + str(intensificador) + "'," + '"descripcionQx" = ' + "'" + str(descripcionQx) + "'," + '"hallazgos" = ' + "'" + str(hallazgos) + "'," + '"analisis" = ' + "'" + str(analisis) + "'," + '"planx" = ' + "'" + str(planx) + "'," + '"estadoCirugia_id" = ' + "'" + str(estadoCirugiaId.id) + "'" + ' Where id = ' + "'" + str(cirugiaId) + "'"
 
             print(detalle)
             cur3.execute(detalle)
+
+            print("estadoConfirmadaId.id = ", estadoConfirmadaId.id)
+            print("ciruIdd.estadoCirugia_id = ", ciruIdd.estadoCirugia_id)
+
+            ##OPS aqi hay problema si se reversan los estados mas de una ez
+            # mejor hacer un query u orm que cuente en clinico_historialcruiias <1 para n crear folios nuevo
+
+            if (float(ciruIdd.estadoCirugia_id) != float(estadoConfirmadaId.id)):  # Hay que crear folio
+
+                print("Pase pñrimer filtroio")
+
+                if (float(ciruIdd.estadoCirugia_id) != float(estadoConfirmadaId.id)):
+
+                    ## Desde aqui INSERT FOLIO
+
+                    # Primero buscamos el numero del folio nuevo
+
+                    print ("Entre a crear folio")
+
+                    if (esTriage == 'N'):
+
+                        ultimofolio = Historia.objects.all().filter(tipoDoc_id=ingreso.tipoDoc_id).filter(documento_id=ingreso.documento_id).aggregate(maximo=Coalesce(Max('folio'), 0))
+                    else:
+                        ultimofolio = Historia.objects.all().filter(tipoDoc_id=triageId.tipoDoc_id).filter(documento_id=triageId.documento_id).aggregate(maximo=Coalesce(Max('folio'), 0))
+
+                    print("ultimo folio = ", ultimofolio)
+                    print("ultimo folio = ", ultimofolio['maximo'])
+                    ultimofolio2 = (ultimofolio['maximo']) + 1
+                    print("ultimo folio2 = ", ultimofolio2)
+
+                    # Segundo  INSERT en clinico_historial
+
+                    if (esTriage == 'N'):
+
+                        detalle = 'INSERT INTO clinico_historia ("consecAdmision", folio, fecha, "fechaRegistro", "estadoReg", documento_id, "tipoDoc_id" , planta_id, "tiposFolio_id" , "usuarioRegistro_id", "sedesClinica_id", "serviciosAdministrativos_id" ) VALUES (' + "'" + str(
+                            ingreso.consec) + "','" + str(ultimofolio2) + "','" + str(fechaRegistro) + "','" + str(
+                            fechaRegistro) + "','" + str(estadoReg) + "','" + str(ingreso.documento_id) + "','" + str(
+                            ingreso.tipoDoc_id) + "','" + str(username_id) + "','" + str(tiposFolio.id) + "','" + str(
+                            username_id) + "','" + str(sede) + "','" + str(serviciosAdministrativos) + "') RETURNING id"
+                    else:
+                        detalle = 'INSERT INTO clinico_historia ("consecAdmision", folio, fecha, "fechaRegistro", "estadoReg", documento_id, "tipoDoc_id" , planta_id, "tiposFolio_id" , "usuarioRegistro_id", "sedesClinica_id", "serviciosAdministrativos_id" ) VALUES (' + "'" + str(
+                            triageId.consec) + "','" + str(ultimofolio2) + "','" + str(fechaRegistro) + "','" + str(
+                            fechaRegistro) + "','" + str(estadoReg) + "','" + str(triageId.documento_id) + "','" + str(
+                            triageId.tipoDoc_id) + "','" + str(username_id) + "','" + str(tiposFolio.id) + "','" + str(
+                            username_id) + "','" + str(sede) + "','" + str(serviciosAdministrativos) + "') RETURNING id"
+
+                    print(detalle)
+                    resultado = cur3.execute(detalle)
+                    historiaId = cur3.fetchone()[0]
+                    print("historiaId = ", historiaId)
+
+                    detalle = 'INSERT INTO clinico_historialcirugias ("estadoReg",cirugia_id, historia_id, "usuarioRegistro_id")  VALUES (' + "'A','" + str(cirugiaId) + "','" + str(historiaId) + "','" + str(username_id) + "')"
+                    print(detalle)
+                    cur3.execute(detalle)
+
+            print("poraqui salgo")
 
             miConexion3.commit()
             cur3.close()
@@ -2333,19 +2449,18 @@ def GuardarEstadoCirugia(request):
     print ("sede =", sede)
 
 
-    ingresoId = Ingresos.objects.get(tipoDoc_id=ciruIdd.tipoDoc_id, documento_id=ciruIdd.documento_id, consec = ciruIdd.consecAdmision)
-    print ("ingresoId =", ingresoId)
-
     esTriage='N'
     try:
         with transaction.atomic():
 
-           ingreso = Ingresos.objects.get(id=ingresoId.id)
+           #ingreso = Ingresos.objects.get(id=ingresoId.id)
+           ingreso = Ingresos.objects.get(tipoDoc_id=ciruIdd.tipoDoc_id, documento_id=ciruIdd.documento_id, consec = ciruIdd.consecAdmision)
+           print ("ingresoId =", ingreso)
 
     except Exception as e:
             # Aquí ya se hizo rollback automáticamente
             print("Se hizo rollback por PRONO SE HACE NADA:", e)
-            triageId = Triage.objects.get(id=ingresoId)
+            triageId = Triage.objects.get(tipoDoc_id=ciruIdd.tipoDoc_id, documento_id=ciruIdd.documento_id, consecAdmision = ciruIdd.consecAdmision)
             esTriage = 'S'
 
     finally:

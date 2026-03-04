@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 
 from rips.models import RipsEnvios, RipsDetalle, RipsTransaccion, RipsTipoUsuario, RipsPaises, RipsUsuarios, RipsGrupoServicios, RipsModalidadAtencion, RipsServicios, RipsCausaExterna, RipsConceptoRecaudo, RipsTiposDocumento, RipsConsultas, RipsViasIngresoSalud, RipsProcedimientos, RipsDestinoEgreso, RipsUrgenciasObservacion
-from rips.models import RipsTipoOtrosServicios,  RipsHospitalizacion, RipsRecienNacido, RipsTipoMedicamento, RipsCums, RipsUmm, RipsFormaFarmaceutica, RipsUnidadUpr, RipsMedicamentos, RipsOtrosServicios, RipsFinalidadConsulta, RipsDci, RipsTipos, RipsTiposNotas, RipsTiposPagoModerador, RipsEstados, RipsMunicipios, RipsZonaTerritorial, RipsViasAdministracion
+from rips.models import RipsTipoOtrosServicios,  RipsHospitalizacion, RipsRecienNacido, RipsTipoMedicamento, RipsCums, RipsUmm, RipsFormaFarmaceutica, RipsUnidadUpr, RipsMedicamentos, RipsOtrosServicios, RipsFinalidadConsulta, RipsDci, RipsTipos, RipsTiposNotas, RipsTiposPagoModerador, RipsEstados, RipsMunicipios, RipsZonaTerritorial, RipsViasAdministracion , RipsTipoDiagnosticoPrincipal
 
 
 @admin.register(RipsTipos)
@@ -275,4 +275,10 @@ class ripsViasAdministracionAdmin(admin.ModelAdmin):
    # Filtrar
    list_filter = ("id",  "codigo", "nombre")
 
+@admin.register(RipsTipoDiagnosticoPrincipal)
+class ripsTipoDiagnosticoPrincipalAdmin(admin.ModelAdmin):
+   list_display = ("id",  "codigo", "nombre")
+   search_fields =  ("id",  "codigo", "nombre")
+   # Filtrar
+   list_filter = ("id",  "codigo", "nombre")
 

@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from facturacion.models import Suministros, TiposEmpresa ,Empresas,  Conceptos,  ConveniosPacienteIngresos, SalariosLegales, RegimenesTipoPago, TiposSuministro,  ConceptosAfacturar,   SalariosMinimosLegales
+from facturacion.models import Suministros, TiposEmpresa ,Empresas,  Conceptos,  ConveniosPacienteIngresos, SalariosLegales, RegimenesTipoPago, TiposSuministro,  ConceptosAfacturar,   SalariosMinimosLegales, EstadoEnvioDian
 
 
 @admin.register(Empresas)
@@ -95,5 +95,12 @@ class salariosMinimosLegalesAdmin(admin.ModelAdmin):
    list_filter = ("id", "nombre", "año","valor","valorSubsidio")
 
 
+@admin.register(EstadoEnvioDian)
+class estadoEnvioDianAdmin(admin.ModelAdmin):
+
+   list_display = ("id", "nombre")
+   search_fields = ("id", "nombre")
+   # Filtrar
+   list_filter = ("id", "nombre")
 
 

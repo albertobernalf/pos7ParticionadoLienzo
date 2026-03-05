@@ -274,6 +274,7 @@ class RipsConsultas (models.Model):
     numDocumentoIdentificacion = models.CharField(max_length=20, blank=True,null= True, editable=True)
     vrServicio = models.DecimalField(max_digits=10, decimal_places=2, blank=True,null= True, editable=True)
     conceptoRecaudo  = models.ForeignKey('rips.RipsConceptoRecaudo', blank=True, null=True, editable=True, on_delete=models.PROTECT, related_name='Recau01')
+    tipoPagoModerador =  models.ForeignKey('rips.ripstipospagomoderador', blank=True, null=True, editable=True, on_delete=models.PROTECT, related_name='modera031')
     valorPagoModerador = models.DecimalField(max_digits=10, decimal_places=0, blank=True,null= True, editable=True)
     numFEVPagoModerador =  models.CharField(max_length=20, blank=True,null= True, editable=True)
     consecutivo = models.IntegerField(editable=True, null=True, blank=True)

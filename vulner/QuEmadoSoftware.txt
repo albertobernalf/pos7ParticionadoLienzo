@@ -1,2 +1,5 @@
 DATOS REFERENCIADO EN SOFTWARE QUEMAS
 en la tabla clinico_servicios -> 'AMBULATORIO'
+
+quemado en generarips otrosservicios
+--select * from tarifarios_tiposhonorarios -- tipohonorario 5 "MATERIALES DE SUTURA Y CURACIO"

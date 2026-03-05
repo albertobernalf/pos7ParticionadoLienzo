@@ -1,0 +1,65 @@
+{
+  "tipoDocumento": "01", // 01: Factura Electrónica de Venta
+  "numero": "SETT1",
+  "fecha": "2024-03-03T10:00:00-05:00",
+  "moneda": "COP",
+  
+  // Datos del Emisor
+  "emisor": {
+    "nit": "900123456",
+    "dv": "1",
+    "nombreRazonSocial": "Empresa Ejemplo SAS",
+    "tipoPersona": "1", // 1: Jurídica, 2: Natural
+    "direccion": {
+      "codigoMunicipio": "11001",
+      "direccion": "Calle 1 # 2-3",
+      "departamento": "Bogotá"
+    }
+  },
+  
+  // Datos del Receptor
+  "receptor": {
+    "nit": "800987654",
+    "dv": "0",
+    "nombreRazonSocial": "Cliente Ejemplo",
+    "tipoPersona": "1",
+    "tipoDocumentoIdentificacion": "31", // 31: NIT, 13: CC
+    "direccion": {
+      "codigoMunicipio": "05001",
+      "direccion": "Carrera 10 # 5-4",
+      "departamento": "Antioquia"
+    }
+  },
+  
+  // Detalle de ítems (Líneas)
+  "items": [
+    {
+      "codigoProducto": "PROD001",
+      "nombreProducto": "Servicio de Consultoría",
+      "cantidad": 1.0,
+      "unidadMedida": "94", // 94: Unidad, H87: Pieza
+      "valorUnitario": 100000.00,
+      "valorTotal": 100000.00,
+      "impuestos": [
+        {
+          "tipo": "01", // 01: IVA, 04: INC
+          "porcentaje": 19.0,
+          "valor": 19000.00
+        }
+      ]
+    }
+  ],
+  
+  // Totales de la factura
+  "totales": {
+    "valorBruto": 100000.00,
+    "valorNeto": 100000.00,
+    "valorTotalImpuestos": 19000.00,
+    "valorTotal": 119000.00
+  },
+  
+  "formaPago": {
+    "tipo": "1", // 1: Contado, 2: Crédito
+    "medio": "10" // 10: Efectivo, 42: Consignación
+  }
+}

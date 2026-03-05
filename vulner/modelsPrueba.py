@@ -1101,7 +1101,39 @@ marter 03 de marzo INONSIKTNAS
 	Los rips de una cirugia no sale la hospitalizacion, ni los procedimientos creop por otros serviicios VERIFICAR
 	La descripcion qx algo pasa con las ora mnuto segundos suas
 	
-
 	OPS cuando se crea un folio clinico automatico por una cirugia, No crea la causaExterna , ni ningun diagnostico corregir 
 
 
+	OPS cuando se genera el RIPS se debe colocar el codigo en ripsotrosservcicios del ripscums y ripscups en teconologiasalud_id y renconologiasaludups_id
+
+		SELECT '{"codPrestador": '|| '"' || otros."codPrestador" || '"' 
+	   ||',"numAutorizacion": '|| '"' || CASE WHEN trim(otros."numAutorizacion") is null THEN 'null' ELSE otros."numAutorizacion"  END || '"'		
+  		',"idMIPRES": ' || '"'   ||CASE WHEN trim(otros."idMIPRES") is null THEN 'null'  WHEN trim(otros."idMIPRES") = null THEN 'null' WHEN trim(otros."idMIPRES") = '' THEN 'null'  ELSE otros."idMIPRES"  END|| '"'  
+	||',"fechaSuministroTecnologia": '|| '"' || substring(cast(otros."fechaSuministroTecnologia" as text), 1,16) || '"'  
+	 	||',"tipoOs": '|| '"' ||ripsTipo.codigo || '"'	
+		--||',"codTecnologiaSalud": '|| '"' || ripsCums.cum || '"'	
+		--||',"nomTecnologiaSalud": '|| '"' ||substring(otros."nomTecnologiaSalud",1,60)  || '"'	
+	  		||',"codTecnologiaSalud": '|| '"' || case when "codTecnologiaSalud_id" is not null then  sum.cums else case when ("codTecnologiaSalud_id" is null or "codTecnologiaSalud_id" = "null" )  then exa."codigoCups" end   end  || '"'		
+		||',"nomTecnologiaSalud": '|| '"' ||case when  "nomTecnologiaSalud" is not null then  substring(otros."nomTecnologiaSalud",1,60)   when  "nomTecnologiaSaludCups" is not null then  substring(otros."nomTecnologiaSaludCups",1,60) end || '"'		   
+ 	   ||',"cantidadOS": '||  otros."cantidadOS" ||'	'
+	||',"tipoDocumentoIdentificacion": '|| '"' || ripsTiposDoc.codigo  || '"'		
+	||',"numDocumentoIdentificacion":  '|| '"' || CASE WHEN trim(otros."numDocumentoIdentificacion") is null THEN 'null' ELSE otros."numDocumentoIdentificacion"  END  || '"'		
+	||',"vrUnitOS": '|| otros."vrUnitOS"   || ''		
+	||',"vrServicio": '|| otros."vrServicio"   || ''		
+	||',"tipoPagoModerador": '|| '"' || case when modera.codigo is null then 'null' else modera.codigo end   || '"'		
+	||',"valorPagoModerador": '||  CASE WHEN trim(cast(otros."valorPagoModerador" as text)) is null THEN 0 ELSE otros."valorPagoModerador"  END  || ''
+	||',"numFEVPagoModerador": '|| '"' || otros."numFEVPagoModerador" || '"'
+	||',"consecutivo": '||  otros."consecutivo" ||'	},'
+	--INTO valorOtrosServicios
+	from rips_ripstransaccion ripstra
+	inner join rips_ripsotrosservicios otros on (otros."ripsTransaccion_id" = ripstra.id)
+	left join clinico_examenes exa on (exa.id = otros."codTecnologiaSalud_id" )
+	left join facturacion_suministros sum on (sum.id = otros."codTecnologiaSalud_id" )
+	
+	inner join rips_ripstipootrosservicios ripsTipo on (ripsTipo.id = otros."tipoOS_id" ) 
+	left join rips_ripstipospagomoderador modera on (modera.id=otros."tipoPagoModerador_id")
+	inner join rips_ripstiposdocumento ripsTiposDoc on (ripsTiposDoc.id = otros."tipoDocumentoIdentificacion_id" )
+	   where  ripstra."ripsEnvio_id" = '2' AND  ripstra."numFactura" = cast('8' as text) AND otros.consecutivo >= 1; 
+
+	OPs ojo los ripsconsultas casos son para el uso de ambulatorios aquip, faltas las de consulta externa
+ 	OPS Faltan hacer los rips d GLOSA/NOta credito de CONSULTA RIPS/RIPS OTROSSERVICIOS tanto en generajson rips y enviojsonrips

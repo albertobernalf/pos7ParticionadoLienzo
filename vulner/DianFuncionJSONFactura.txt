@@ -1,0 +1,131 @@
+-- FUNCTION: public.FacturaJsonDian()
+
+-- DROP FUNCTION IF EXISTS public.FacturaJsonDian();
+
+CREATE OR REPLACE FUNCTION public.FacturaJsonDian(
+	)
+    RETURNS character varying
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+
+	DECLARE valorJson character(50000);
+		valorFinalJson character(50000);
+   		factura integer := 0;
+
+	    valorTransaccionYusuarios character(50000);
+		contador integer := 1;
+		tabla RECORD;
+		consecutivos integer[] ;
+
+
+BEGIN
+
+	valorJson= '[{';
+
+if (tipo = 'FACTURA') then 
+
+
+-- Factura
+
+	SELECT '{"tipoDocumento":' || '"' || '01' ||'",' || '"numero":'|| '"' || fac.id || '", "fecha": ' ||  '"'|| now() || '"'|| ',"moneda": "COP"'||','
+	INTO valorJson
+	FROM facturacion_facturacion fac
+	WHERE fac.id = factura;
+
+	valorfinalJson = valorFinalJson + ' ' + valorJson
+
+-- Datos del Emisor
+
+
+	SELECT '"emisor": {"nit":	' || '"' || emp.documento  || '", "dv":' || '"' || substring(emp.documento,11,1) || '",' || '"nombreRazonSocial": ' ||'"' || emp.nombre || '",'
+	||'"tipoPersona":"1",' ||'"direccion":{"codigomunicipio":'|| '"' || mun."municipioCodigoDian" ||'","direccion":' ||'"' || emp.direccion || '",'||'"departamento":' || '"' ||
+	dep.nombre|| '"}},'
+	INTO valorJson
+	FROm facturacion_empresas emp, sitios_departamentos dep, sitios_municipios mun
+	WHERE emp.nombre ='CLINICA MEDICAL S.A.S' AND emp.departamento_id = dep.id and 
+		mun.id=emp.municipio_id
+
+
+	valorfinalJson = valorFinalJson + ' ' + valorJson
+
+
+-- Datos del Receptor
+
+
+	SELECT '"receptor": {"nit": ' || usu.documento || '", "dv" : "0", "nombreRazonSocial": ' || '"' ||usu.nombre || '","tipoPersona": "2","tipoDocumentoIdentificacion": "13","direccion" : {"codigomunicipio":' || '"' || mun."municipioCodigoDian" || '",'|| 
+     '"direccion": ' || '"' || usu.direccion || '","departamento":'|| '"' || dep.nombre||  '"' ||'}},'
+	INTO valorJson
+	from facturacion_facturacion fac
+	inner join usuarios_usuarios usu on (usu.id = fac.documento_id)
+	left join  sitios_departamentos dep ON (dep.id = usu.departamentos_id)
+	left join sitios_municipios mun ON (mun.id=usu.municipio_id)
+	where fac.id=factura
+
+	valorfinalJson = valorFinalJson + ' ' + valorJson
+
+-- Detalle de ítems (Líneas)
+
+
+SELECT '"items": [{"codigoProducto":' || exa."codigoCups" || '","nombreProducto": ' || '"'|| exa.nombre || '", "cantidad": '|| det.cantidad ||'","unidadMedida": "94", "valorUnitario":' || '"' || det."valorUnitario" || '",' || '"valorTotal":' || '"' || det."valorTotal" || '","impuestos": [{"tipo": "01", 
+          "porcentaje": 19.0,
+          "valor": 19000.00
+        }]}],'
+INTO valorJson
+from facturacion_facturacion fac
+inner join facturacion_facturaciondetalle det ON (det.facturacion_id = fac.id And det.anulado = 'N' and det."estadoRegistro" = 'A')		
+inner join clinico_examenes exa ON  (exa.id =det.examen_id)
+where fac.id=8 and det.examen_id is not null		
+UNION
+		SELECT '"items": [{"codigoProducto":' || sum.cums || '","nombreProducto": ' || '"'|| sum.nombre || '", "cantidad": '|| det.cantidad ||'","unidadMedida": "94", "valorUnitario":' || '"' || det."valorUnitario" || '",' || '"valorTotal":' || '"' || det."valorTotal" || '","impuestos": [{"tipo": "01", 
+          "porcentaje": 19.0,
+          "valor": 19000.00
+        }]}],'
+INTO valorJson
+from facturacion_facturacion fac
+inner join facturacion_facturaciondetalle det ON (det.facturacion_id = fac.id And det.anulado = 'N' and det."estadoRegistro" = 'A')		
+inner join facturacion_suministros sum ON  (sum.id =det.cums_id)
+where fac.id=8 and det.cums_id is not null
+
+
+
+	valorfinalJson = valorFinalJson + ' ' + valorJson
+
+-- Totales de la factura
+
+SELECT '"totales": {"valorBruto": ' || '"' || 	fac."totalFactura" || '","valorNeto": ' || '","valorTotalImpuestos": 0.00,"valorTotal":' || '"' || fac."valorApagar"|| '},'
+INTO valorJson
+from facturacion_facturacion fac
+where fac.id=8 
+
+	valorfinalJson = valorFinalJson + ' ' + valorJson
+
+-- FormaPgo
+
+	
+
+	valorfinalJson = valorFinalJson + ' ' + valorJson
+
+end if;
+
+
+raise notice 'Va esto en el JSON ENCABEZADO : %s' , valorJson;
+	
+RETURN 'OK'; 
+END 
+$BODY$;
+
+ALTER FUNCTION public.FacturaJsonDian()
+    OWNER TO postgres;
+
+
+
+
+
+
+
+
+
+
+

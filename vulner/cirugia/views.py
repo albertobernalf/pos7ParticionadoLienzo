@@ -19,9 +19,8 @@ from django.http import JsonResponse
 import pyodbc
 import psycopg2
 import json
-#import datetime
 import datetime
-from datetime import date
+#from datetime import date
 #from datetime import timezone
 
 import time
@@ -438,9 +437,15 @@ def Load_dataDisponibilidadSalas(request, data):
     print("sede:", sede)
     print("username:", username)
     print("username_id:", username_id)
-    fecha_hoy = datetime.now()
-    fecha_actual = datetime.now()
+    fecha_hoy = timezone.now()
+    #fecha_hoy = datetime.date.now()
+    print("fecha_hoy ", fecha_hoy)
+    #fecha_actual = datetime.now()
+
+    fecha_actual = timezone.now()
+    print("fecha_actual1", fecha_actual)
     fecha_actual = fecha_actual + timedelta(days =-1)
+    print("fecha_actual2", fecha_actual)
     fecha_hoyM = fecha_actual.strftime("%Y-%m-%d")
     print("fecha_hoy a WORK:", fecha_hoy)
     dias_a_revisar = 5
@@ -491,7 +496,8 @@ def Load_dataDisponibilidadSalas(request, data):
                 if (salasDisponibilidad == '[]'):
 
                     print ("voy en dia y SALTO", fecha_futura)
-                    continue
+                    #continue
+                    primeraIteracion = 'X'
 
                 print("voy por el comando3 = ")
                 comando3 = 'SELECT prog.id,  prog."fechaProgramacionInicia" fechaProgramacionInicia, prog."fechaProgramacionFin" fechaProgramacionFin,	prog."horaProgramacionInicia" horaProgramacionInicia, prog."horaProgramacionFin" horaProgramacionFin , usu.nombre nombrePaciente FROM cirugia_programacioncirugias prog INNER JOIN usuarios_usuarios usu ON (usu.id = prog.documento_id ) WHERE prog.sala_id = ' + "'" + str(salaId) + "'" + ' AND prog."fechaProgramacionInicia" = ' + "'" + str(fecha_futura) + "' ORDER BY " + ' prog."horaProgramacionInicia" '
@@ -517,7 +523,8 @@ def Load_dataDisponibilidadSalas(request, data):
                                          {'id':id, 'salaId':salaId,'nombreSala':nombreSala, 'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': desdeHora,
                                          'horaProgramacionFin': hastaHora,'nombrePaciente':'','estado':'DISPONIBLE'}})
 
-                            continue
+                            #continue
+                            primeraIteracion = 'X'
 
                         if (primeraIteracionDia == 'S'):
 
@@ -615,7 +622,9 @@ def Load_dataDisponibilidadSalas(request, data):
         #FIN FOR  1 SALA
 
         print ("un dia con i = ", i)
-        fecha_actual = datetime.now()
+
+        fecha_actual = timezone.now()
+        #fecha_actual = datetime.now()
         fecha_actual = fecha_actual + timedelta(days = -1)
         primeraIteracion = 'S'
         # fecha_hoy = fecha_actual.strftime("%Y-%m-%d")
@@ -624,7 +633,8 @@ def Load_dataDisponibilidadSalas(request, data):
 
     #FIn acxabo todas las salas
     #
-    fecha_actual = datetime.now()
+    fecha_actual = timezone.now()
+    #fecha_actual = datetime.now()
     fecha_actual = fecha_actual + timedelta(days = -1)
 
     primeraIteracion = 'S'

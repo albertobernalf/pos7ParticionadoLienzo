@@ -9,7 +9,7 @@ from tarifarios.models import TiposHonorarios, TiposTarifaProducto,TiposTarifa,T
 class tiposTarifaAdmin(admin.ModelAdmin):
 
    list_display = ("id", "tiposTarifaProducto","nombre","fechaRegistro")
-   search_fields = ("id", "tiposTarifaProducto", "nombre","fechaRegistro")
+   search_fields = ("id", "tiposTarifaProducto__nombre", "nombre","fechaRegistro")
    # Filtrar
    list_filter = ("id", "tiposTarifaProducto", "nombre","fechaRegistro")
 

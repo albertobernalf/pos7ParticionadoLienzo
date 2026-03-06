@@ -6,6 +6,7 @@ import cv2
 import numpy as np
 from django.core.serializers import serialize
 from django.db.models.functions import Cast, Coalesce
+from django.utils import timezone
 from django.utils.timezone import now
 from django.db.models import Avg, Max, Min, Sum
 
@@ -129,16 +130,16 @@ def Load_datatarifariosDescripcionProcedimientos(request, data):
     miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres", password="123456")
     curx = miConexionx.cursor()
    
-    detalle = 'select tiptar.id  id,tarprod.nombre tipo, tiptar.nombre tipoTarifa, tardes.columna columna, tardes.descripcion descripcion from tarifarios_tipostarifaProducto tarprod, tarifarios_tipostarifa tiptar, tarifarios_TarifariosDescripcion tardes where tarprod.id = tiptar."tiposTarifaProducto_id" and tiptar.id = tardes."tiposTarifa_id"  and tarprod.nombre like ('  + "'%PROCE%')" + '  order by tarprod.nombre '
+    detalle = 'select tardes.id id, tiptar.id  tipTarId,tarprod.nombre tipo, tiptar.nombre tipoTarifa, tardes.columna columna, tardes.descripcion descripcion from tarifarios_tipostarifaProducto tarprod, tarifarios_tipostarifa tiptar, tarifarios_TarifariosDescripcion tardes where tarprod.id = tiptar."tiposTarifaProducto_id" and tiptar.id = tardes."tiposTarifa_id"  and tarprod.nombre like ('  + "'%PROCE%')" + '  order by tarprod.nombre '
 
     print(detalle)
 
     curx.execute(detalle)
 
-    for id, tipo, tipoTarifa, columna, descripcion in curx.fetchall():
+    for id, tipo, tipTarId, tipoTarifa, columna, descripcion in curx.fetchall():
         tarifariosDescripcionProcedimientos.append(
 		{"model":"tarifarios.tarifariosDescripcion","pk":id,"fields":
-			{'id':id, 'tipo': tipo, 'tipoTarifa': tipoTarifa, 'columna': columna, 'descripcion':descripcion }})
+			{'id':id, 'tipTarId':tipTarId, 'tipo': tipo, 'tipoTarifa': tipoTarifa, 'columna': columna, 'descripcion':descripcion }})
 
     miConexionx.close()
     print(tarifariosDescripcionProcedimientos)
@@ -366,11 +367,14 @@ def AplicarTarifas(request):
 
     print ("Entre AplicarTarifas" )
 
-    post_id = request.POST.get('post_id')
+    post_id = request.POST.get('post_idProcedimientosDesc')
     print ("post_id =", post_id)
 
     tiposTarifaTarifario_id = request.POST.get('tiposTarifaTarifario_id')
     print ("tiposTarifaTarifario_id =", tiposTarifaTarifario_id)
+
+    descripcionTarifario = request.POST.get('descripcionTarifario')
+    print ("descripcionTarifario =", descripcionTarifario)
 
     tiposTarifaProducto = TiposTarifaProducto.objects.get(nombre='PROCEDIMIENTOS')
 
@@ -385,8 +389,6 @@ def AplicarTarifas(request):
     columnaAplicar = request.POST.get('columnaAplicar')
     print ("columnaAplicar =", columnaAplicar)
 
-
-
     serviciosAdministrativosO = request.POST.get('serviciosAdministrativosO')
     print ("serviciosAdministrativosO =", serviciosAdministrativosO)
 
@@ -399,48 +401,72 @@ def AplicarTarifas(request):
     if (codigoCups_id ==''):
         codigoCups_id='null'
 
+    if (valorAplicar == ''):
+        valorAplicar = 'null'
+
+    if (porcentaje == ''):
+        porcentaje = 'null'
+
     codigoCupsHasta_id = request.POST.get('codigoCupsHasta_id')
     print ("codigoCupsHasta_id =", codigoCupsHasta_id)
 
-    if (codigoCupsHasta_id ==''):
+    if (codigoCupsHasta_id == ''):
         codigoCupsHasta_id='null'
 
+    print ("Comenzamos_1")
+
     estadoReg = 'A'
-    fechaRegistro = datetime.datetime.now()
+    print("Comenzamos_2")
+    fechaRegistro = timezone.now()
 
-    conceptoId =  Conceptos.objects.get(nombre='PROCEDIMIENTOS')
+    #conceptoId =  Conceptos.objects.get(nombre='PROCEDIMIENTOS')
 
-
-    print ("Comenzamos")
+    print ("Comenzamos_3")
 
     if (codigoCups_id != '' and codigoCupsHasta_id != '' and porcentaje !='' ):
         print("Entre porcentaje a Rango de CUPS")
         comando = 'UPDATE tarifarios_tarifariosprocedimientos SET ' + '"' + str(columnaAplicar) + '"'  + ' = "colValorBase" +  "colValorBase" * ' + str(porcentaje) + '/100 WHERE "tiposTarifa_id" = ' + "'" + str(tipoTarifario.id) + "'" + ' AND "codigoCups_id" >= ' + "'" + str(codigoCups_id) + "' AND "  + ' "codigoCups_id" <= ' + "'" + str(codigoCupsHasta_id) + "'"
 
+    print ("Comenzamos_4")
     if (codigoCups_id != '' and codigoCupsHasta_id != '' and valorAplicar != ''):
         print("Entre Valor a aplicar  en rango de cups")
         comando = 'UPDATE tarifarios_tarifariosprocedimientos SET ' + '"' + str(columnaAplicar) + '"'  + ' = ' + "'" + str(valorAplicar) + "'"  + '  WHERE "tiposTarifa_id" = ' + "'" + str(tipoTarifario.id) + "' AND " + '"codigoCups_id" >= ' + "'" + str(codigoCups_id) + "' AND "  + ' "codigoCups_id" <= ' + "'" + str(codigoCupsHasta_id) + "'"
-
+    print ("Comenzamos_5")
     if ( codigoCups_id == '' and codigoCupsHasta_id == '' and porcentaje != ''):
 
 	    print ("Entre porcentaje Solito")
 	    comando = 'UPDATE tarifarios_tarifariosprocedimientos SET ' + '"' + str(columnaAplicar) + '"'  + ' = "colValorBase" +  "colValorBase" * ' + str(porcentaje) + '/100 WHERE "tiposTarifa_id" = ' + "'" + str(tipoTarifario.id) + "'"
 
-
+    print ("Comenzamos_6")
     if (codigoCups_id == '' and codigoCupsHasta_id == '' and valorAplicar != ''):
 
 	    print ("Entre valor a Aplicar Solito");
 
 	    comando = 'UPDATE tarifarios_tarifariosprocedimientos SET ' + '"' + str(columnaAplicar) + '"'  + ' = ' + "'" + str(valorAplicar) + "'" + ',"serviciosAdministrativosO" = ' + str(serviciosAdministrativosO) +  '  WHERE "tiposTarifa_id" = ' + "'" + str(tipoTarifario.id) + "'"
 
-    print(comando)
+    print ("Comenzamos_7")
 
     miConexion3 = None
     try:
-
-        miConexion3 = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",  password="123456")
+        miConexion3 = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432",
+                                       user="postgres", password="123456")
         cur3 = miConexion3.cursor()
-        cur3.execute(comando)
+
+        if ( codigoCups_id == 'null' and codigoCupsHasta_id == 'null' and porcentaje == 'null' and valorAplicar == 'null'):
+
+            print ("no hace nada")
+
+
+        else:
+            print("por aqui nop")
+            print(comando)
+            cur3.execute(comando)
+
+        print ("a gardar")
+        detalle ='UPDATE tarifarios_tarifariosdescripcion set descripcion = ' + "'" + str(descripcionTarifario) + "'," + '"serviciosAdministrativos_id" = ' + "'" + str(serviciosAdministrativosO) + "' wHERE id = " + str(post_id)
+        print("detalle = ", detalle)
+        cur3.execute(detalle)
+
         miConexion3.commit()
         cur3.close()
         miConexion3.close()

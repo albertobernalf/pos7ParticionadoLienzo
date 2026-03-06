@@ -12,8 +12,8 @@
 <div class="marco">
     <ul class="tabs">
 
-        <li><a href="#Liquidacion"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Cuentas</a></li>
-        <li><a href="#LiquidacionDetalle"><span class="fa-solid fa-user-doctor-message"></span> <span   class="tab-text"> </span>Liquidacion</a></li>
+        <li><a href="#Liquidacion"><span class="fa-solid fa-user-doctor-message"></span> <span class="tab-text"> </span>Liquidacion</a></li>
+        <li><a href="#LiquidacionDetalle"><span class="fa-solid fa-user-doctor-message"></span> <span   class="tab-text"> </span>Detalle</a></li>
         <li><a href="#Abonos"><span class="fa-solid fa-user-doctor-message"></span> <span  class="tab-text"> </span>Abonos</a></li>
         <li><a href="#Traslados"><span class="fa-solid fa-user-doctor-message"></span> <span  class="tab-text"> </span>Traslados</a></li>	
         <li><a href="#ReTomeFacturacion"><span class="fa-solid fa-user-doctor-message"></span> <span  class="tab-text"> </span>Refacturadas</a></li>
@@ -1248,56 +1248,57 @@ Ambulatorios:  <span id="amb" name="amb" style='color:red'>{{Ambulatorios}} </sp
 
 <article id="GeneracionJsonXml">
 
-       <form id="postFormGenerarXml" name="postFormGenerarXml" class="form-horizontal"
+       <form id="postFormGenerarJson" name="postFormGenerarJson" class="form-horizontal"
                                   novalidate>
 
 
 		
                                 <div class="col-12">
 					<center>
-                                    <button type="button" class="btn btn-primary" id="GenerarBotXml" name="GenerarBotXml"  value="GenerarBotXml" onclick="GenerarXml()">Crear </button>
+                                    <button type="button" class="btn btn-primary" id="GenerarBotJson" name="GenerarBotJson"  value="GenerarBotJson" onclick="GenerarJson()">Json Dian/Guardar Xml </button>
 					</center>
                                 </div>
-
+				<br>
+				<br>
 							
-				  <div class="row row-cols-10" style="height=30px;">
+				  <div class="row row-cols-10" style="height:40px;border: 2px solid #000000; width:1150px;">
 						
 					<div class="col">		  		   
 						 Fecha:
-						<span id="fechaXml" name="fechaXml"></span>
+						<span class="texto-span" id="fechaJson" name="fechaJson" size="60"></span>
                                          	                          
                                       </div>
 
 					<div class="col">		  		   
-						 Fecha:
-						<span id="facturaXml" name="facturaXml"></span>                                         	                          
+						 Factura:
+						<span class="texto-span" id="facturaJson" name="facturaJson"></span>                                         	                          
                                       </div>
 
 					<div class="col">
 						Doc:						
-							<span id="tipoDocXml" name="tipoDocXml"></span>
+							<span class="texto-span"  id="tipoDocJson" name="tipoDocJson"></span>
           	                           
                                       </div>
 					<div class="col">						
-							<span id="pdocumentoXml" name="pdocumentoXml"></span>
+							<span class="texto-span" id="pdocumentoJson" name="pdocumentoJson"></span>
           	                          
                                       </div>
 
 					<div class="col">
 					 Nombre:				
-					<span id="pacienteXml" name="pacienteXml"></span>          	                           
+					<span class="texto-span" id="pacienteJson" name="pacienteJson" size="60"></span>          	                           
                                       </div>
 
 					<div class="col">
 						 Consec:						
-						<span id="consecAdmisionXml" name="consecAdmisionXml"></span>          	                           
+						<span class="texto-span"  id="consecAdmisionJson" name="consecAdmisionJson"></span>          	                           
                                       </div>
 
 
      		  </div> <!-- Cierra ro de 8 columnas -->
 
 	</br>
-	</br>
+
 	
 
 				<div class="row row-cols-1" style="height=70px;">

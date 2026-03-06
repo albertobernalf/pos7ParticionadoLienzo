@@ -1241,13 +1241,15 @@ $.ajax({
 		$('#AestadoFactura').val(data.estadoReg);
 		$('#Aanulado').val(data.anulado);
 
-		document.getElementById("facturaXml").innerHTML = data.factura;
-		document.getElementById("fechaXml").innerHTML = data.fechaFactura;
-		document.getElementById("tipoDocXml").innerHTML = data.tipoDoc;
-		document.getElementById("pdocumentoXml").innerHTML = data.documento;
-		document.getElementById("pacienteXml").innerHTML = data.paciente;
-		document.getElementById("consecAdmisionXml").innerHTML = data.consecAdmision;
+		document.getElementById("facturaJson").innerHTML = data.factura;
+		document.getElementById("fechaJson").innerHTML = data.fechaFactura;
+		document.getElementById("tipoDocJson").innerHTML = data.tipoDoc;
+		document.getElementById("pdocumentoJson").innerHTML = data.documento;
+		document.getElementById("pacienteJson").innerHTML = data.paciente;
+		document.getElementById("consecAdmisionJson").innerHTML = data.consecAdmision;
 		document.getElementById("textoXml").value = data.Xml;
+		document.getElementById("textoJson").value = data.Json;
+
 
 
 		 $('#Rfactura').val(data.factura);
@@ -2576,24 +2578,26 @@ $(document).on('change', '#ldvalorUnitario', function(event) {
 
 
 
-function GenerarXml()
+function GenerarJson()
 {
 
 
 
- 	var facturaId = document.getElementById("facturaXml").innerHTML;
+ 	var facturaId = document.getElementById("facturaJson").innerHTML;
 	
 
  	var textoXml = document.getElementById("textoXml").value;
 
 
 		$.ajax({
-	           url: '/generarXml/',
+	           url: '/generarJson/',
 	            data :
 	            {'facturaId':facturaId,'textoXml':textoXml},
 	           type: 'POST',
 	           dataType : 'json',
 	  		success: function (data) {
+
+		alert("Ya genere JSON Factura = " + JSON.stringify(data));
 
 	if (data.success == true)
 			 {
@@ -2604,6 +2608,7 @@ function GenerarXml()
 			document.getElementById("mensajesError").valueL = data.Mensajes;
 			return;
 			}
+			document.getElementById("textoJson").value = data.ArchivoJson;
 
                   },
 	   	                    error: function(data){

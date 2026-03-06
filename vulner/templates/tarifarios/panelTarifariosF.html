@@ -138,6 +138,8 @@ function RefrescarPantalla() {
                                             <tr style="height:2px;" >    
 						<bold>                                  
                                                 <th>id</th>
+                                                <th>tipoTarId</th>
+
                                                 <th>Tipo</th>
 						<th>Tipo Tarifa</th>
                                                 <th>Columna</th>                                       
@@ -238,14 +240,9 @@ function RefrescarPantalla() {
                             </form>
 
 
-		</div>
-
-
-
+		</div>  <!-- cierra el antes del Form -->
 			<!--  Hasta Aquip -->
-
-
-   	
+  	
 
                                         <table  id= "tablaTarifariosProcedimientos" class=" display table table-striped  table-sm fs-6 nowrap" style="width: 100%";>
                                            <thead>
@@ -297,23 +294,22 @@ function RefrescarPantalla() {
 
   <div  class="modal-title" id="modelHeadingDescripcionProcedimientos" style="text-align:center;"><font gont-family="Times New roman" size=5"></font> </div>
 			 <button type="button" class="close" data-bs-dismiss="modal"  aria-label="Close"> <span aria-hidden="true">&times;</span>  </button>
-			<button type="button" class="btn btn-primary" id="saveBtnDescripcionProcedimientos" onclick="GuardarDescripcionProcedimientos()">Grabar!</button> 
+
 
                         </div>
-		<div style="width:500px; heigth:100px; ">
                         <div class="modal-body">
-                            <div class="alert alert-danger error-msg" style="display:none">
-                                <ul class="mb-0"></ul>
-                            </div>
+                         
 			
   			  <form id="postFormDescripcionProcedimientos" name="postFormDescripcionProcedimientos">
 
                                 <input type="hidden" name="post_id" id="post_id">
 
-                      <div class="row row-cols-lg-auto g-3 align-items-center mb-3">
 
-				  <div class="col-12">
-                                        <label for="serviciosAdministrativos" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SeviciosAdmon:</label>
+			<div id="flex-container-descripcionProcedimientos">
+			 <div>
+
+
+                                       <label for="serviciosAdministrativos" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SeviciosAdmon:</label>
                                         <div class="col-sm-8">
                                             <select class="select-css h-40 w-20" id="serviciosAdministrativos"  tabindex= "0"
                                                     name="serviciosAdministrativos"
@@ -322,12 +318,10 @@ function RefrescarPantalla() {
                                                 <option value="{{serviciosAdministrativos.id}}"> {{serviciosAdministrativos.nombre}}</option>
                                                 {% endfor %}
                                             </select>
-                                        </div>
-
-                                    </div>
+                        
 
 			
-				<div class="col-12">			
+			
 				<select class="select-css"  id="tiposTarifa_id"
                                                                 name="tiposTarifa_id">
                                                             {% for tiposTarifa in TiposTarifa %}
@@ -336,11 +330,10 @@ function RefrescarPantalla() {
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                </div>
+            
 
 
-                          
-				<div class="col-12">
+                
 				  <label for="columna">Columna:</label>                              
 
 						<select class="select-css"  id="columna"        name="columna">
@@ -359,37 +352,35 @@ function RefrescarPantalla() {
 
                                                         </select>			
 
-                                </div>
+              
 
 
-				<div class="col-12">
 				  <label for="descripcion">Descripcion:</label>                              
-					 <input type="text"  class="form-control form-control-sm" id="descripcion" name="descripcion" placeholder="descripcion"  >
-                                </div>
+					 <input type="text"   id="descripcion" name="descripcion" placeholder="descripcion"  >
+                        
 
 
 
-                                <div class="col-12">
 				 <label  for="estadoReg">EstadoRegistro:</label>
                                     
-                                    <input type="text" class="form-control form-control-sm" id="estadoReg" name="estadoReg" value="A" placeholder="CantidadRechazadas:"  estadoReg> </input>
-                                </div>
+                                    <input type="text"  id="estadoReg" name="estadoReg" value="A" placeholder="CantidadRechazadas:"  readonly> </input>
+          
 
 
-                                <div class="col-12">
+                   
                                     Usuario:
                                     <input type="text" id="usuarioRegistro_id" name="usuarioRegistro_id" value="{{Username_id}}" readonly > </input>
-                                </div>
+                    
 
 
-                                <div class="col-12">
+                         
                                     <center> 
 					<button type="button" class="btn btn-primary" id="saveBtnDescripcionProcedimientos"   value="create" onclick="GuardarDescripcionProcedimientos()">Guardar </button> 
 					</center> 
-                                </div>
+                      
 
-
-                                </div> <!-- CIERRA ROW 8 COLUMNAS  -->
+      					  </div>
+                                </div> <!-- CIERRA flex-container  -->
 
                             </form>
 
@@ -404,7 +395,7 @@ function RefrescarPantalla() {
 
 
 
-			</div> <!-- CIERRA DIV TAMANO -->	
+			<!-- </div>  CIERRA DIV TAMANO -->	
                         </div> <!-- CIERRA MODAL CONTENTE -->
                     </div> <!-- CIERRA MODAL DIALOG -->
                 </div>  <!-- CIERRA MODAL FADE -->           
@@ -423,9 +414,7 @@ function RefrescarPantalla() {
 		        </div>
 		<div style="width:500px; heigth:100px; ">
                         <div class="modal-body">
-                            <div class="alert alert-danger error-msg" style="display:none">
-                                <ul class="mb-0"></ul>
-                            </div>
+                       
 			
   			  <form id="postFormCrearTarifarioProcedimientos" name="postFormCrearTarifarioProcedimientos">
 
@@ -506,43 +495,40 @@ function RefrescarPantalla() {
                     <div class="modal-content">
                         <div class="modal-header">
 
-			  <div  class="modal-title" id="modelHeadingAplicarTarifario" style="text-align:center;"><font gont-family="Times New roman" size=5">Aplicar tarifario</font> </div>
+			  <div  class="modal-title" id="modelHeadingAplicarTarifario" style="text-align:center;"><font gont-family="Times New roman" size=5">Aplicar tarifarios Descripcion</font> </div>
 			  <button type="button" class="close" data-bs-dismiss="modal"  aria-label="Close"> <span aria-hidden="true">&times;</span>  </button>
- 			 <button type="button" class="btn btn-primary" id="saveBtnAplicarTarifario" onclick="AplicarTarifario()">Grabar!</button> 
+
 
                         </div>
-		<div style="width:500px; heigth:100px; ">
+		
                         <div class="modal-body">
-                            <div class="alert alert-danger error-msg" style="display:none">
-                                <ul class="mb-0"></ul>
-                            </div>
+                            
 			
   			  <form id="postFormAplicarTarifario" name="postFormAplicarTarifario">
 
-                                <input type="text" name="post_id" id="post_id">
+                                <input type="text" name="post_idProcedimientosDesc" id="post_idProcedimientosDesc" readonly >
+
 				<input type="text" name="descripcionTarifario" id="descripcionTarifario">
-				<input type="text" name="tiposTarifaTarifario_id" id="tiposTarifaTarifario_id">
+				<input type="text" name="tiposTarifaTarifario_id" id="tiposTarifaTarifario_id" readonly>
+
+              
+
+		      <div id="flex-container-descripcionProcedimientos">			
+			<div>
 
 
-                      <div class="row row-cols-lg-auto g-3 align-items-center mb-3">
-
-				  <div class="col-12">
-                                        <label for="serviciosAdministrativosO" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SeviciosAdmon:</label>
-                                        <div class="col-sm-8">
-                                            <select class="select-css h-40 w-20" id="serviciosAdministrativosO"  tabindex= "0"
-                                                    name="serviciosAdministrativosO"
+                              Servicio administrativo:
+                                            <select class="select-css" id="serviciosAdministrativosO_id"  
+                                                    name="serviciosAdministrativosO_id"
                                                     required>
                                                 {% for serviciosAdministrativos in ServiciosAdministrativos %}
                                                 <option value="{{serviciosAdministrativos.id}}"> {{serviciosAdministrativos.nombre}}</option>
                                                 {% endfor %}
                                             </select>
-                                        </div>
-
-                                    </div>
 
 				H A C I A   T A R I F A :
 
-				<div class="col-12">
+
                                     Cups Desde:
 				<select class="select-css"  id="codigoCups_id"
                                                                 name="codigoCups_id">
@@ -552,9 +538,9 @@ function RefrescarPantalla() {
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                </div>
 
-				<div class="col-12">
+
+
                                     Cups Hasta:
 				<select class="select-css"  id="codigoCupsHasta_id"
                                                                 name="codigoCupsHasta_id">
@@ -564,24 +550,20 @@ function RefrescarPantalla() {
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                </div>
 
 
 
-				<div class="col-12">
-				  <label for="porcentaje">Porcentaje:</label>                              
-					 <input type="text"  class="form-control form-control-sm" id="porcentaje" name="porcentaje" placeholder="Porcentaje"  >
-                                </div>
+				Porcentaje:
+					 <input type="text"   id="porcentaje" name="porcentaje" placeholder="Porcentaje"  size="10px" >
 
 
-				<div class="col-12">
-				  <label for="valorAplicar">Valor:</label>                              
-					 <input type="text"  class="form-control form-control-sm" id="valorAplicar" name="valorAplicar" placeholder="Valor"  >
-                                </div>
+				  Valor:
+				 <input type="text"   id="valorAplicar" name="valorAplicar" placeholder="Valor"  size="20px" >
+
 
                           
-				<div class="col-12">
-				  <label for="columna">Columna:</label>                              
+
+				  Columna:
 
 						<select class="select-css"  id="columnaAplicar"        name="columnaAplicar">
 
@@ -599,16 +581,14 @@ function RefrescarPantalla() {
 
                                                         </select>			
 
-                                </div>
-
-                                <div class="col-12">
                                     <center> 
 					<button type="button" class="btn btn-primary" id="saveBtnAplicarTarifarios"   value="create" onclick="AplicarTarifario()">Guardar </button> 
 					</center> 
-                                </div>
 
 
-                                </div> <!-- CIERRA ROW 8 COLUMNAS  -->
+
+                                </div> <!--   -->
+				</div> <!-- CIERRA FLEX-CONTAINER  -->
 
                             </form>
 
@@ -623,7 +603,7 @@ function RefrescarPantalla() {
 
 
 			</div> <!-- CIERRA DIV TAMANO -->			
-                        </div> <!-- CIERRA MODAL CONTENTE -->
+                     <!--   </div> <!-- CIERRA MODAL CONTENTE -->
                     </div> <!-- CIERRA MODAL DIALOG -->
                 </div>  <!-- CIERRA MODAL FADE -->                 
 
@@ -642,9 +622,7 @@ function RefrescarPantalla() {
                         </div>
 		<div style="width:500px; heigth:100px; ">
                         <div class="modal-body">
-                            <div class="alert alert-danger error-msg" style="display:none">
-                                <ul class="mb-0"></ul>
-                            </div>
+                          
 			
   			  <form id="postFormEditarTarifarioProcedimientos" name="postFormEditarTarifarioProcedimientos">
 

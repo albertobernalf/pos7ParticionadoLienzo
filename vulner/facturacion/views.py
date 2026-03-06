@@ -1834,7 +1834,7 @@ def PostConsultaFacturacion(request):
     miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",password="123456")
     cur = miConexionx.cursor()
 
-    comando = 'select fac.id id, fac.id factura, fac."fechaFactura" fechaFactura, tip.nombre tipoDoc, documento_id documento, usu.nombre paciente, fac."consecAdmision" consecAdmision, conv.nombre nombreConvenio,  "totalSuministros","totalProcedimientos","totalCopagos","totalCuotaModeradora","totalAbonos","totalRecibido", anticipos totalAnticipos,"valorApagar","totalFactura" , "valorAPagarLetras" , fac."estadoReg" estadoReg, fac.anulado anulado, "rutaXml" rutaXml  FROM facturacion_facturacion fac, contratacion_convenios conv, usuarios_usuarios usu, usuarios_tiposdocumento tip where fac.id = ' + "'" + str(Post_id) + "'" + '  AND  fac.convenio_id = conv.id and usu.id = fac.documento_id  and fac."tipoDoc_id" = usu."tipoDoc_id"   AND tip.id = fac."tipoDoc_id" AND fac.documento_id = usu.id  AND conv.id = fac.convenio_id '
+    comando = 'select fac.id id, fac.id factura, fac."fechaFactura" fechaFactura, tip.nombre tipoDoc, usu.documento documento, usu.nombre paciente, fac."consecAdmision" consecAdmision, conv.nombre nombreConvenio,  "totalSuministros","totalProcedimientos","totalCopagos","totalCuotaModeradora","totalAbonos","totalRecibido", anticipos totalAnticipos,"valorApagar","totalFactura" , "valorAPagarLetras" , fac."estadoReg" estadoReg, fac.anulado anulado, "rutaXml" rutaXml, "rutaJson" rutaJson, "rutaPdf" rutaPdf  FROM facturacion_facturacion fac, contratacion_convenios conv, usuarios_usuarios usu, usuarios_tiposdocumento tip where fac.id = ' + "'" + str(Post_id) + "'" + '  AND  fac.convenio_id = conv.id and usu.id = fac.documento_id  and fac."tipoDoc_id" = usu."tipoDoc_id"   AND tip.id = fac."tipoDoc_id" AND fac.documento_id = usu.id  AND conv.id = fac.convenio_id '
 
     print(comando)
 
@@ -1842,12 +1842,15 @@ def PostConsultaFacturacion(request):
 
     facturacion = []
 
-    for id,factura , fechaFactura , tipoDoc, documento, paciente, consecAdmision , nombreConvenio , totalSuministros,totalProcedimientos,totalCopagos,totalCuotaModeradora,totalAbonos,totalRecibido,totalAnticipos,valorApagar,totalFactura , valorAPagarLetras , estadoReg, anulado, rutaXml  in cur.fetchall():
+    for id,factura , fechaFactura , tipoDoc, documento, paciente, consecAdmision , nombreConvenio , totalSuministros,totalProcedimientos,totalCopagos,totalCuotaModeradora,totalAbonos,totalRecibido,totalAnticipos,valorApagar,totalFactura , valorAPagarLetras , estadoReg, anulado, rutaXml, rutaJson, rutaPdf  in cur.fetchall():
             facturacion.append( {"id": id,"factura":factura, "fechaFactura" : fechaFactura, "tipoDoc":tipoDoc, "documento":documento,
                      "paciente": paciente, "consecAdmision": consecAdmision, "nombreConvenio": nombreConvenio,'totalSuministros':totalSuministros,'totalProcedimientos':totalProcedimientos,'totalCopagos':totalCopagos,'totalCuotaModeradora':totalCuotaModeradora,'totalAbonos':totalAbonos,'totalRecibido':totalRecibido,'totalAnticipos':totalAnticipos,'valorApagar':valorApagar,'totalFactura':totalFactura, 'valorAPagarLetras':valorAPagarLetras,
-                                 'estadoReg':estadoReg, 'anulado':anulado, 'rutaXml':rutaXml
+                                 'estadoReg':estadoReg, 'anulado':anulado, 'rutaXml':rutaXml,'rutaPdf':rutaPdf, 'rutaJson':rutaJson
                                  })
             rutaXml = rutaXml
+            rutaJson = rutaJson
+            rutaPdf = rutaPdf
+
 
 
 
@@ -1858,20 +1861,36 @@ def PostConsultaFacturacion(request):
 
     #Extraigo la info del xml
     contenido_completo=''
+    contenido_completoJson = ''
+    print ("rutaXml")
+
 
     if (rutaXml == None):
         rutaXml = 'C:\\EntornosPython\\Pos7Particionado\\vulner\\JSONCLINICA\\Facturas\\XML\\Factura_' + str(Post_id) + '.xml'
 
-    print("rutaXml", rutaXml)
+    if (rutaJson == None):
+        rutaJson = 'C:\\EntornosPython\\Pos7Particionado\\vulner\\JSONCLINICA\\Facturas\\JSON\\Factura_' + str(Post_id) + '.xml'
 
-    if os.path.exists(rutaXml):
+    print("rutaXml", rutaXml)
+    print("rutaJson", rutaJson)
+
+    #if os.path.exists(rutaXml):
+    if os.path.exists(rutaJson):
 
         try:
             # Abre el archivo en modo lectura ('r') con codificación UTF-8
+            with open(rutaJson, 'r', encoding='utf-8') as archivo:
+                contenido_completoJson = archivo.read()
+                print("Contenido completo del archivo:")
+                print(contenido_completoJson)
+
             with open(rutaXml, 'r', encoding='utf-8') as archivo:
                 contenido_completo = archivo.read()
                 print("Contenido completo del archivo:")
                 print(contenido_completo)
+
+
+
         except FileNotFoundError:
             print(f"Error: El archivo '{nombre_archivo}' no fue encontrado.")
             #except Exception as e:
@@ -1885,12 +1904,14 @@ def PostConsultaFacturacion(request):
         print(content)
 
 
+
+
     return JsonResponse({'pk':facturacion[0]['id'],'id':facturacion[0]['id'], 'factura':facturacion[0]['factura'],'fechaFactura':facturacion[0]['fechaFactura'],
 		          'tipoDoc':facturacion[0]['tipoDoc'],'documento':facturacion[0]['documento'],'paciente':facturacion[0]['paciente'],  'consecAdmision':facturacion[0]['consecAdmision'],
                              'nombreConvenio':facturacion[0]['nombreConvenio'] , 
 			'totalSuministros':facturacion[0]['totalSuministros'] ,'totalProcedimientos':facturacion[0]['totalProcedimientos'] ,'totalCopagos':facturacion[0]['totalCopagos'] ,'totalCuotaModeradora':facturacion[0]['totalCuotaModeradora'] ,'totalAbonos':facturacion[0]['totalAbonos'] ,'totalRecibido':facturacion[0]['totalRecibido'] ,'totalAnticipos':facturacion[0]['totalAnticipos'] ,
 			'valorApagar':facturacion[0]['valorApagar'] ,'totalFactura':facturacion[0]['totalFactura'],'valorAPagarLetras':facturacion[0]['valorAPagarLetras'],
-                         'estadoReg': facturacion[0]['estadoReg'], 'anulado': facturacion[0]['anulado'], 'Xml': contenido_completo
+                         'estadoReg': facturacion[0]['estadoReg'], 'anulado': facturacion[0]['anulado'], 'Xml': contenido_completo , 'Json': contenido_completoJson
        })
 
 
@@ -2718,54 +2739,87 @@ def load_dataReFacturacion(request, data):
 
 
 
-def GenerarXml(request):
-    print ("Entre a GenerarXml" )
+def GenerarJson(request):
+    print ("Entre a GenerarJson" )
 
     facturaId = request.POST["facturaId"]
     textoXml = request.POST["textoXml"]
     print("facturaId = ", facturaId)
     print("textoXml = ", textoXml)
 
+    carpetaXml = 'C:\\EntornosPython\\pos7Particionado\\vulner\\JSONCLINICA\\FACTURAS\\XML\\'
+    print("carpetaXml = ", carpetaXml)
 
-    carpeta = 'C:\EntornosPython\Pos6\JSONCLINICA\Facturas/XML/'
-    print("carpeta = ", carpeta)
+    carpetaJson = 'C:\\EntornosPython\\pos7Particionado\\vulner\\JSONCLINICA\\FACTURAS\\JSON\\'
+    print("carpetaJson = ", carpetaJson)
 
-    nombre_archivo = carpeta + '' + 'Factura_' + str(facturaId) + '.xml'
+    nombre_archivo = carpetaXml + '' + 'Factura_' + str(facturaId) + '.xml'
     print("nombre_archivo =", nombre_archivo)
 
+    nombre_archivoJson = carpetaJson + '' + 'Factura_' + str(facturaId) + '.txt'
+    print("nombre_archivoJson =", nombre_archivoJson)
 
     # Abro Conexion
 
     miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",password="123456")
-    cur = miConexionx.cursor()
+    curx = miConexionx.cursor()
+    print("Aqui voy")
 
-    comando = 'UPDATE facturacion_facturacion SET "rutaXml" = ' + "'" + str(nombre_archivo) + "'" + ' WHERE id = ' + "'" + str(facturaId) + "'"
+    comando = 'UPDATE facturacion_facturacion SET "rutaXml" = ' + "'" + str(nombre_archivo) + "'" + ' WHERE id = ' + str(facturaId)
+    print("Aqui voy2")
 
     print(comando)
 
-    cur.execute(comando)
-    miConexionx.commit()
+    curx.execute(comando)
 
+    comando = 'UPDATE facturacion_facturacion SET "rutaJson" = ' + "'" + str(nombre_archivoJson) + "'" + ' WHERE id = ' + str(facturaId)
+    print("Aqui voy3")
+
+    print(comando)
+
+    curx.execute(comando)
+
+    funcionJson = []
+
+    detalle = 'SELECT FacturaJsonDian_2(' + "'" + str(facturaId) + "') dato"
+
+    print ('detalle a FacturaJsonDian_2 = ', detalle)
+
+    curx.execute(detalle)
+
+    for dato in curx.fetchall():
+            funcionJson.append({'dato': dato})
+
+    print("funcionJson[0]", funcionJson[0])
+
+    miConexionx.commit()
     miConexionx.close()
 
     try:
         with open(nombre_archivo, 'w' , encoding='utf-8') as archivo:
             # Escribir el texto en el archivo
             archivo.write(textoXml)
-        print(f"El archivo '{nombre_archivo}' se ha guardado correctamente.")
+            print(f"El archivo '{nombre_archivo}' se ha guardado correctamente.")
+            file = open(nombre_archivoJson, "w")
+            print("funcionJson[0]['dato']" , funcionJson[0]['dato'])
+            file.writelines(funcionJson[0]['dato'])
+            file.close()
+
 
     except IOError as e:
         print(f"Error al guardar el archivo: {e}")
         datosMensaje = {'success': False, 'Mensaje': 'Cerrar Archivo cargado en browser'}
         json_data = json.dumps(datosMensaje, default=str)
+
         return HttpResponse(json_data, content_type='application/json')
+
     except UnicodeEncodeError as e:
         print(f"Error encoding character: {e}")
 
     except Exception as e:
         print(f"Error al abrir el archivo: {e}")
 
-    return JsonResponse({'success': True, 'Mensajes': 'Factura XML generada !'})
+    return JsonResponse({'success': True, 'Mensajes': 'Factura JSON y/o Xml enviado generado !', 'ArchivoJson':funcionJson[0]['dato']})
 
 
 

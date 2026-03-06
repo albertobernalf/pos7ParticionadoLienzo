@@ -292,7 +292,7 @@ urlpatterns = [
     path('imprimirFactura/', viewsFacturacionReportes.ImprimirFactura),
     path('imprimirLiquidacion/', viewsFacturacionReportes.ImprimirLiquidacion),
     path('load_dataReFacturacion/<str:data>', viewsFacturacion.load_dataReFacturacion, name='loaddata_ReFacturacion'),
-    path('generarXml/', viewsFacturacion.GenerarXml , name='Generar_xml'),
+    path('generarJson/', viewsFacturacion.GenerarJson , name='Generar_json'),
     path('envioDian/', viewsFacturacion.EnvioDian , name='Envio_dian'),
     path('imprimirPazYSalvo/', viewsFacturacionReportes.ImprimirPazYSalvo , name='Imprimir_PazYSalvo'),
     path('crearEnvioDian/', viewsFacturacion.CrearEnvioDian , name='Crear_Envio_dian'),

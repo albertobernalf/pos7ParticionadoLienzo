@@ -341,7 +341,7 @@ function arrancaTarifarios(valorTabla,valorData)
 
                        return btn;
                     },
-                    "targets":5
+                    "targets":6
                }
             ],
 	 pageLength: 3,
@@ -370,6 +370,7 @@ function arrancaTarifarios(valorTabla,valorData)
             },
             columns: [
 	          { data: "fields.id"},
+	          { data: "fields.tipTarId"},
                 { data: "fields.tipo"},
                 { data: "fields.tipoTarifa"},
                 { data: "fields.columna"},
@@ -708,6 +709,7 @@ $('#tablaTarifariosDescripcionProcedimientos tbody').on('click', '.miAplicarProc
 	         $('#columnaAplicar').val(dato3.columna);
 	          $('#descripcionTarifario').val(dato3.descripcion);
 	           $('#tiposTarifaTarifario_id').val(dato3.tipoTarifa);
+		  $('#post_idProcedimientosDesc').val(dato3.id);
 
 
             $('#modelHeadingAplicarTarifario').html("Aplicar Tarifarios");
@@ -718,7 +720,10 @@ $('#tablaTarifariosDescripcionProcedimientos tbody').on('click', '.miAplicarProc
 $('#tablaTarifariosDescripcionProcedimientos tbody').on('click', '.miDescripcionProcedimiento', function() {
 
 
-        var post_id = $(this).data('pk');
+       		 var post_id = $(this).data('pk');
+
+	alert ("selecciono id descripcionProc: " + post_id);
+
 	    var row = $(this).closest('tr'); // Encuentra la fila
 	    var table = $('#tablaTarifariosDescripcionProcedimientos').DataTable();  // Inicializa el DataTable jquery
 
@@ -740,6 +745,12 @@ $('#tablaTarifariosDescripcionProcedimientos tbody').on('click', '.miDescripcion
 	        var nombreSede = document.getElementById("nombreSede").value;
 	    	var sede = document.getElementById("sede").value;
 	        var username_id = document.getElementById("username_id").value;
+
+		document.getElementById("post_idProcedimientosDesc").value = post_id;
+
+
+		alert("este dato = " + document.getElementById("post_idProcedimientosDesc").value);
+
 	         var data =  {}   ;
 	        data['username'] = username;
 	        data['sedeSeleccionada'] = sedeSeleccionada;
@@ -747,12 +758,9 @@ $('#tablaTarifariosDescripcionProcedimientos tbody').on('click', '.miDescripcion
 	        data['sede'] = sede;
 	        data['username_id'] = username_id;
 	        data['tiposTarifa_id'] = dato3.id;
-	
-
 
  		data = JSON.stringify(data);
-
-   
+  
 
         arrancaTarifarios(1,data);
 	    dataTableTarifariosProcedimientosInitialized = true;
@@ -835,18 +843,24 @@ function CrearItemTarifario()
 
 function AplicarTarifario()
 {
-	alert("Ingrese Grabar Item Tarifario");
 
+	
 
 	var post_id = document.getElementById("post_id").value ;
 	var tiposTarifaTarifario_id = document.getElementById("tiposTarifaTarifario_id").value ;
+	var porcentaje = document.getElementById("porcentaje").value ;
+	var post_idProcedimientosDesc = document.getElementById("post_idProcedimientosDesc").value ;
+	var descripcionTarifario = document.getElementById("descripcionTarifario").value ;
+
+alert("Ingrese Grabar Item Tarifario e la descripcion :" + post_id);
 
 	var porcentaje = document.getElementById("porcentaje").value ;
 	var valorAplicar = document.getElementById("valorAplicar").value ;
 	var columnaAplicar = document.getElementById("columnaAplicar").value ;
 	var codigoCups_id = document.getElementById("codigoCups_id").value ;
 	var codigoCupsHasta_id = document.getElementById("codigoCupsHasta_id").value ;
-	var serviciosAdministrativosO = document.getElementById("serviciosAdministrativosO").value ;
+
+	var serviciosAdministrativosO = document.getElementById("serviciosAdministrativosO_id").value ;
 
 
 	var sedeSeleccionada = document.getElementById("sedeSeleccionada").value;
@@ -854,13 +868,13 @@ function AplicarTarifario()
         var nombreSede = document.getElementById("nombreSede").value;
     	var sede = document.getElementById("sede").value;
         var username_id = document.getElementById("username_id").value;
-
+	alert("serviciosAdministrativosO = " +  serviciosAdministrativosO);
 
             $.ajax({
 
 	        url: "/aplicarTarifas/",
 		data: {'post_id' : post_id, 'tiposTarifaTarifario_id':tiposTarifaTarifario_id, 'porcentaje':porcentaje,'valorAplicar':valorAplicar,
-		'columnaAplicar':columnaAplicar,'codigoCupsHasta_id':codigoCupsHasta_id,'codigoCups_id':codigoCups_id,'serviciosAdministrativosO':serviciosAdministrativosO },
+		'columnaAplicar':columnaAplicar,'codigoCupsHasta_id':codigoCupsHasta_id,'codigoCups_id':codigoCups_id,'serviciosAdministrativosO':serviciosAdministrativosO ,'post_idProcedimientosDesc':post_idProcedimientosDesc,'descripcionTarifario':descripcionTarifario},
                 type: "POST",
                 dataType: 'json',
                 success: function (data2) {
@@ -878,7 +892,9 @@ function AplicarTarifario()
 		document.getElementById("mensajesError").innerHTML = data2.message;
 
 		    	  $('#crearModelAplicarTarifario').modal('hide');
-
+    
+        arrancaTarifarios(4,data);
+	    dataTableTarifariosDescripcionProcedimientosInitialized = true;
 
                          },
                error: function (request, status, error) {

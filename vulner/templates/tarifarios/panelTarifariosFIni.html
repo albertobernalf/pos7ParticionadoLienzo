@@ -52,9 +52,6 @@ div.dataTables_filter input {
 <div class="marco">
     <div class="secciones">
 
-
-
-
 <article id="TarifariosDescripcionProcedimientos">
 
 
@@ -114,20 +111,7 @@ div.dataTables_filter input {
                                             </thead>
                                             <tbody style="vertical-align:bottom; horizontal-align:left">
                                             </tbody>
-					<tfoot>
-                                            <tr >    
-						<bold>                                  
-						<th>id</th>
-                                                <th>Tipo</th>
-						<th>Tipo Tarifa</th>
-                                                <th>Columna</th>                                       
-                                                 <th>Descripcion</th>                                 
-	                                        <th>Seleccionar</th> 
-
-						</bold>                                  
-
-                                            </tr>
-                                            </tfoot>
+				
 				   </table>
 
 			</div>  <!--  Cierra el row -->
@@ -199,14 +183,9 @@ div.dataTables_filter input {
                                 </div> <!-- CIERRA ROW 8 COLUMNAS  -->
 
                             </form>
-
-
 		</div>
 
-
-
 			<!--  Hasta Aquip -->
-
 
    			<!--   <div class="row"> -->
 
@@ -239,44 +218,14 @@ div.dataTables_filter input {
                                             </thead>
                                             <tbody style="vertical-align:bottom; horizontal-align:left">
                                             </tbody>
-					<tfoot>
-                                            <tr >    
-						<bold>                                  
- 						  <th>id</th>
-				                <th>tipoTarifa</th>
-				                <th>cups</th>
-				                <th>codigoHomologado</th>
-				                <th>exaNombre</th>
-				                <th>colValorBase</th>
-				                <th>colValor1</th>
-				                <th>colValor2</th>
-				                <th>colValor3</th>
-				                <th>colValor4</th>
-				                <th>colValor5</th>
-				                <th>colValor6</th>
-				                <th>colValor7</th>
-				                <th>colValor8</th>
-				                <th>colValor9</th>
-				                <th>colValor10</th>
-	                                        <th>Seleccionar</th> 
-
-
-						</bold>                                  
-
-                                            </tr>
-                                            </tfoot>
+				
    </table>
 
 	<!--  </div>   Cierra el row  de la otra tabla -->
 
-
-
-
-
-	</div> <!--  Cierra el Div -->
+	</div> <!--  Cierra el Div  Container-->
 
             <!-- Espacio Modales  Descripcion Procedimientos -->
-
 
             <div class="modal fade" id="crearModelDescripcionProcedimientos" tabindex="-1" role="dialog"  style="overflow-y:scroll;" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document" modal-lg>
@@ -287,16 +236,14 @@ div.dataTables_filter input {
                         </div>
 		<div style="width:500px; heigth:100px; ">
                         <div class="modal-body">
-                            <div class="alert alert-danger error-msg" style="display:none">
-                                <ul class="mb-0"></ul>
-                            </div>
-			
+                          	
   			  <form id="postFormDescripcionProcedimientos" name="postFormDescripcionProcedimientos">
 
                                 <input type="hidden" name="post_id" id="post_id">
 
                       <div class="row row-cols-lg-auto g-3 align-items-center mb-3">
 
+				<div class="col-12">
 			
 				<select class="select-css"  id="tiposTarifa_id"
                                                                 name="tiposTarifa_id">
@@ -381,9 +328,7 @@ div.dataTables_filter input {
                         </div>
 		<div style="width:500px; heigth:100px; ">
                         <div class="modal-body">
-                            <div class="alert alert-danger error-msg" style="display:none">
-                                <ul class="mb-0"></ul>
-                            </div>
+                      
 			
   			  <form id="postFormCrearTarifarioProcedimientos" name="postFormCrearTarifarioProcedimientos">
 
@@ -392,7 +337,7 @@ div.dataTables_filter input {
 
                       <div class="row row-cols-lg-auto g-3 align-items-center mb-3">
 
-			
+			 <div class="col-12">
 				<select class="select-css"  id="tiposTarifa1_id"
                                                                 name="tiposTarifa1_id">
                                                             {% for tiposTarifa in TiposTarifa %}
@@ -435,9 +380,7 @@ div.dataTables_filter input {
                         </div>
 		<div style="width:500px; heigth:100px; ">
                         <div class="modal-body">
-                            <div class="alert alert-danger error-msg" style="display:none">
-                                <ul class="mb-0"></ul>
-                            </div>
+                       
 			
   			  <form id="postFormAplicarTarifario" name="postFormAplicarTarifario">
 
@@ -527,10 +470,7 @@ div.dataTables_filter input {
                         </div>
 		<div style="width:500px; heigth:100px; ">
                         <div class="modal-body">
-                            <div class="alert alert-danger error-msg" style="display:none">
-                                <ul class="mb-0"></ul>
-                            </div>
-			
+                        
   			  <form id="postFormEditarTarifarioProcedimientos" name="postFormEditarTarifarioProcedimientos">
 
                                 <input type="text" name="postEditar1_id" id="postEditar1_id">
@@ -631,11 +571,6 @@ div.dataTables_filter input {
 
 
 		<!-- Fin Otra Modal -->
-
-
-
-
-
 
      <!-- FIN Espacio Modales  -->
 

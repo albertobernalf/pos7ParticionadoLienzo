@@ -438,19 +438,15 @@ def Load_dataDisponibilidadSalas(request, data):
     print("username:", username)
     print("username_id:", username_id)
     fecha_hoy = timezone.now()
-    #fecha_hoy = datetime.date.now()
-    print("fecha_hoy ", fecha_hoy)
-    #fecha_actual = datetime.now()
-
     fecha_actual = timezone.now()
     print("fecha_actual1", fecha_actual)
     fecha_actual = fecha_actual + timedelta(days =-1)
     print("fecha_actual2", fecha_actual)
     fecha_hoyM = fecha_actual.strftime("%Y-%m-%d")
-    print("fecha_hoy a WORK:", fecha_hoy)
+    print("fecha_hoyM a WORK:", fecha_hoy)
     dias_a_revisar = 5
 
-    print("fecha_hoy = ", fecha_hoy)
+
     miConexionx = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                    password="123456")
     curx = miConexionx.cursor()
@@ -471,6 +467,7 @@ def Load_dataDisponibilidadSalas(request, data):
 
         primeraIteracionDia = 'S'
         print("COMIENZO CON LA SALA No ", salaId)
+        print ("primeraIteracionDia:" , primeraIteracionDia)
 
         for i in range(dias_a_revisar + 1):
 
@@ -483,7 +480,7 @@ def Load_dataDisponibilidadSalas(request, data):
             print("Comienzo en el dia ", fecha_futura)
 
             comando2 = 'SELECT dispoSalas.id id , dispoSalas.id dispoId , dispoSalas.fecha, dispoSalas."desdeHora", dispoSalas."hastaHora", dispoSalas."estadoDisponibilidad" FROM sitios_disponibilidadsalas dispoSalas, sitios_salas salas WHERE salas.id = ' + "'" + str(salaId) + "' AND  salas.id = dispoSalas.salas_id  AND disposalas.fecha = " + "'" + str(fecha_futura) + "'" + ' ORDER BY "desdeHora", "hastaHora"'
-            print("comando2 = ", comando2)
+            print("comando salas disponibilidad = ", comando2)
             curx.execute(comando2)
 
             salasDisponibilidad = []
@@ -495,127 +492,146 @@ def Load_dataDisponibilidadSalas(request, data):
 
                 if (salasDisponibilidad == '[]'):
 
-                    print ("voy en dia y SALTO", fecha_futura)
-                    #continue
                     primeraIteracion = 'X'
+                    print ("voy en dia y SALTO", fecha_futura)
 
-                print("voy por el comando3 = ")
-                comando3 = 'SELECT prog.id,  prog."fechaProgramacionInicia" fechaProgramacionInicia, prog."fechaProgramacionFin" fechaProgramacionFin,	prog."horaProgramacionInicia" horaProgramacionInicia, prog."horaProgramacionFin" horaProgramacionFin , usu.nombre nombrePaciente FROM cirugia_programacioncirugias prog INNER JOIN usuarios_usuarios usu ON (usu.id = prog.documento_id ) WHERE prog.sala_id = ' + "'" + str(salaId) + "'" + ' AND prog."fechaProgramacionInicia" = ' + "'" + str(fecha_futura) + "' ORDER BY " + ' prog."horaProgramacionInicia" '
-                print("comando3 = ", comando3)
+                else:
+                    print("Ensa al", salaId)
+                    print("Encontre disponibildad",fecha_futura)
 
-                curx.execute(comando3)
-                disponibilidadCirugia = []
+                    comando3 = 'SELECT prog.id,  prog."fechaProgramacionInicia" fechaProgramacionInicia, prog."fechaProgramacionFin" fechaProgramacionFin,	prog."horaProgramacionInicia" horaProgramacionInicia, prog."horaProgramacionFin" horaProgramacionFin , usu.nombre nombrePaciente FROM cirugia_programacioncirugias prog INNER JOIN usuarios_usuarios usu ON (usu.id = prog.documento_id ) WHERE prog.sala_id = ' + "'" + str(salaId) + "'" + ' AND prog."fechaProgramacionInicia" = ' + "'" + str(fecha_futura) + "' ORDER BY " + ' prog."horaProgramacionInicia" '
+                    print("comando programaciondisponibilidad = ", comando3)
 
-                for  id,  fechaProgramacionInicia, fechaProgramacionFin,  horaProgramacionInicia, horaProgramacionFin , nombrePaciente in curx.fetchall():
+                    curx.execute(comando3)
+                    disponibilidadCirugia = []
+                    print("comando programaciondisponibilidad CONFIRMADO_1 = ")
 
-                        disponibilidadCirugia.append({"model": "cirgugia.disponibilidadCirugia", "pk": id, "fields": {'id':id, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,'horaProgramacionFin': horaProgramacionFin,'nombrePaciente':nombrePaciente}})
+                    totalCirugiasDia=0
+                    totalCirugiasDia = ProgramacionCirugias.objects.filter(sala_id=salaId, fechaProgramacionInicia=fecha_futura).count()
 
-                        print("paso por disponibilidadCirugia =" , disponibilidadCirugia)
+                    print("Total cirugias del dia ", totalCirugiasDia);
 
-                        print("voy a comenzar a escribir = " , fecha_futura)
+                    if (totalCirugiasDia == 0):
 
-                        if (disponibilidadCirugia=='[]'):
-
-                            print ("Es un dia sin programacion o sea sala libre")
-			                #Hueco
-                            disponibilidadAprobada.append(
-                                         {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                         {'id':id, 'salaId':salaId,'nombreSala':nombreSala, 'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': desdeHora,
-                                         'horaProgramacionFin': hastaHora,'nombrePaciente':'','estado':'DISPONIBLE'}})
-
-                            #continue
-                            primeraIteracion = 'X'
-
-                        if (primeraIteracionDia == 'S'):
-
-                            print ("entre primera iteracion")
-                            print("desdeHora:" , desdeHora)
-                            print("horaProgramacionInicia:", horaProgramacionInicia)
-
-                            if (desdeHora < horaProgramacionInicia):
-                                print("entre desdeHora <  horaProgramacionInicia")
-                                # Hueco DISPONIBLE
-                                disponibilidadAprobada.append(
-                                            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                            {'id':id, 'salaId':salaId,'nombreSala':nombreSala, 'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': desdeHora,
-                                             'horaProgramacionFin': horaProgramacionInicia,'nombrePaciente':'','estado':'DISPONIBLE'}})
-                                #Ahora si la cirugia AGENDADA
-                                disponibilidadAprobada.append(
-                                            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                            {'id':id, 'salaId':salaId, 'nombreSala':nombreSala,'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
-                                             'horaProgramacionFin': horaProgramacionFin ,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
-
-
-                                primeraIteracionDia = 'N'
-                                print("primeraIteracionDia = ", primeraIteracionDia)
-                                print("disponibilidadAprobada = ", disponibilidadAprobada)
-
-                            if (desdeHora == horaProgramacionInicia):
-                                # Ahora si la cirugia AGENDADA
-                                disponibilidadAprobada.append(
-                                            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                            {'id':id, 'salaId':salaId, 'nombreSala':nombreSala, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
-                                             'horaProgramacionFin': horaProgramacionFin,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
-
-
-                            primeraIteracionDia == 'N'
-                            fechaProgramacionIniciaAnterior = fechaProgramacionInicia
-                            fechaProgramacionFinAnterior = fechaProgramacionFin
-                            horaProgramacionIniciaAnterior = horaProgramacionInicia
-                            horaProgramacionFinAnterior = horaProgramacionFin
-
-                        else:
-                            # Por aqui No es primera iteracion
-                            print ("entre primeraIteracion = N")
-                            print("entre : horaProgramacionFinAnterior", horaProgramacionFinAnterior)
-                            print("entre : horaProgramacionInicia", horaProgramacionInicia)
-
-                            if (horaProgramacionFinAnterior < horaProgramacionInicia):
-                                # Hueco DISPONIBLE
-                                print ("entre MENOR ")
-
-                                disponibilidadAprobada.append(
-                                            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                            {'id':id,  'salaId':salaId, 'nombreSala':nombreSala,'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': horaProgramacionFinAnterior,
-                                             'horaProgramacionFin': horaProgramacionInicia,'nombrePaciente':'','estado':'DISPONIBLE'}})
-                                # Ahora si la cirugia AGENDADA
-                                disponibilidadAprobada.append(
-                                            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                            {'id':id, 'salaId':salaId, 'nombreSala':nombreSala,'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
-                                             'horaProgramacionFin': horaProgramacionFin ,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
-
-
-                            if (horaProgramacionFinAnterior == horaProgramacionInicia):
-
-                                #Ahora si la cirugia AGENDADA
-                                disponibilidadAprobada.append(
-                                            {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                                            {'id':id,  'salaId':salaId,'nombreSala':nombreSala, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
-                                             'horaProgramacionFin': horaProgramacionFin ,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
-                                
-                            fechaProgramacionIniciaAnterior = fechaProgramacionInicia
-                            fechaProgramacionFinAnterior = fechaProgramacionFin
-                            horaProgramacionIniciaAnterior = horaProgramacionInicia
-                            horaProgramacionFinAnterior = horaProgramacionFin
-
-                        ##for BARRO LA PROGRAMACION PARA ESE DIA
-
-                        if (hastaHora > horaProgramacionFin):
-                            disponibilidadAprobada.append(
+                        disponibilidadAprobada.append(
                             {"model": "cirugia.programacionAprobada", "pk": id, "fields":
-                            {'id': id, 'salaId': salaId, 'nombreSala': nombreSala,
-                             'fechaProgramacionInicia': fechaProgramacionInicia,
-                             'fechaProgramacionFin': fechaProgramacionFin,
-                             'horaProgramacionInicia': horaProgramacionFinAnterior,
-                             'horaProgramacionFin': hastaHora, 'nombrePaciente': '', 'estado': 'DISPONIBLE'}})
+                                {'id': id, 'salaId': salaId, 'nombreSala': nombreSala,
+                                 'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura,
+                                 'horaProgramacionInicia': desdeHora,
+                                 'horaProgramacionFin': hastaHora, 'nombrePaciente': '', 'estado': 'DISPONIBLE'}})
+
+
+                    else:
+	
+                        for  id,  fechaProgramacionInicia, fechaProgramacionFin,  horaProgramacionInicia, horaProgramacionFin , nombrePaciente in curx.fetchall():
+                                print("comando programaciondisponibilidad CONFIRMADO_1.5 = ")
+                                disponibilidadCirugia.append({"model": "cirgugia.disponibilidadCirugia", "pk": id, "fields": {'id':id, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,'horaProgramacionFin': horaProgramacionFin,'nombrePaciente':nombrePaciente}})
+                                print("comando programaciondisponibilidad CONFIRMADO_2 = ")
+                                print("paso por disponibilidadCirugia =" , disponibilidadCirugia)
+
+                                if (disponibilidadCirugia=='[]'):
+
+                                    print ("Es un dia sin programacion o sea sala libre")
+
+                                    disponibilidadAprobada.append(
+                                                 {"model": "cirugia.programacionAprobada", "pk": id, "fields":
+                                                 {'id':id, 'salaId':salaId,'nombreSala':nombreSala, 'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': desdeHora,
+                                                 'horaProgramacionFin': hastaHora,'nombrePaciente':'','estado':'DISPONIBLE'}})
+
+
+                                    primeraIteracion = 'X'
+
+                                else:
+
+                                    if (primeraIteracionDia == 'S'):
+
+                                        print ("entre primera iteracion")
+                                        print("desdeHora:" , desdeHora)
+                                        print("horaProgramacionInicia:", horaProgramacionInicia)
+
+                                        if (desdeHora < horaProgramacionInicia):
+                                            print("entre desdeHora <  horaProgramacionInicia")
+                                            # Hueco DISPONIBLE
+                                            disponibilidadAprobada.append(
+                                                        {"model": "cirugia.programacionAprobada", "pk": id, "fields":
+                                                        {'id':id, 'salaId':salaId,'nombreSala':nombreSala, 'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': desdeHora,
+                                                         'horaProgramacionFin': horaProgramacionInicia,'nombrePaciente':'','estado':'DISPONIBLE'}})
+                                            #Ahora si la cirugia AGENDADA
+                                            disponibilidadAprobada.append(
+                                                        {"model": "cirugia.programacionAprobada", "pk": id, "fields":
+                                                        {'id':id, 'salaId':salaId, 'nombreSala':nombreSala,'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
+                                                         'horaProgramacionFin': horaProgramacionFin ,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
+
+
+
+                                            print("primeraIteracionDia = ", primeraIteracionDia)
+                                            print("disponibilidadAprobada = ", disponibilidadAprobada)
+
+                                        if (desdeHora == horaProgramacionInicia):
+                                            # Ahora si la cirugia AGENDADA
+                                            disponibilidadAprobada.append(
+                                                        {"model": "cirugia.programacionAprobada", "pk": id, "fields":
+                                                        {'id':id, 'salaId':salaId, 'nombreSala':nombreSala, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
+                                                         'horaProgramacionFin': horaProgramacionFin,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
+
+
+                                        primeraIteracionDia == 'N'
+                                        fechaProgramacionIniciaAnterior = fechaProgramacionInicia
+                                        fechaProgramacionFinAnterior = fechaProgramacionFin
+                                        horaProgramacionIniciaAnterior = horaProgramacionInicia
+                                        horaProgramacionFinAnterior = horaProgramacionFin
+
+                                    else:
+                                        # Por aqui No es primera iteracion
+                                        print ("entre primeraIteracion = N")
+                                        print("entre : horaProgramacionFinAnterior", horaProgramacionFinAnterior)
+                                        print("entre : horaProgramacionInicia", horaProgramacionInicia)
+
+                                        if (horaProgramacionFinAnterior < horaProgramacionInicia):
+                                            # Hueco DISPONIBLE
+                                            print ("entre MENOR ")
+
+                                            disponibilidadAprobada.append(
+                                                        {"model": "cirugia.programacionAprobada", "pk": id, "fields":
+                                                        {'id':id,  'salaId':salaId, 'nombreSala':nombreSala,'fechaProgramacionInicia': fecha_futura, 'fechaProgramacionFin': fecha_futura, 'horaProgramacionInicia': horaProgramacionFinAnterior,
+                                                         'horaProgramacionFin': horaProgramacionInicia,'nombrePaciente':'','estado':'DISPONIBLE'}})
+                                            # Ahora si la cirugia AGENDADA
+                                            disponibilidadAprobada.append(
+                                                        {"model": "cirugia.programacionAprobada", "pk": id, "fields":
+                                                        {'id':id, 'salaId':salaId, 'nombreSala':nombreSala,'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
+                                                         'horaProgramacionFin': horaProgramacionFin ,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
+
+
+                                        if (horaProgramacionFinAnterior == horaProgramacionInicia):
+
+                                            #Ahora si la cirugia AGENDADA
+                                            disponibilidadAprobada.append(
+                                                        {"model": "cirugia.programacionAprobada", "pk": id, "fields":
+                                                        {'id':id,  'salaId':salaId,'nombreSala':nombreSala, 'fechaProgramacionInicia': fechaProgramacionInicia, 'fechaProgramacionFin': fechaProgramacionFin, 'horaProgramacionInicia': horaProgramacionInicia,
+                                                         'horaProgramacionFin': horaProgramacionFin ,'nombrePaciente':nombrePaciente,'estado':'OCUPADA'}})
+
+                                        fechaProgramacionIniciaAnterior = fechaProgramacionInicia
+                                        fechaProgramacionFinAnterior = fechaProgramacionFin
+                                        horaProgramacionIniciaAnterior = horaProgramacionInicia
+                                        horaProgramacionFinAnterior = horaProgramacionFin
+
+                                ##for BARRO LA PROGRAMACION PARA ESE DIA
+                                primeraIteracion = 'S'
+
+                                if (hastaHora > horaProgramacionFin):
+                                    disponibilidadAprobada.append(
+                                    {"model": "cirugia.programacionAprobada", "pk": id, "fields":
+                                    {'id': id, 'salaId': salaId, 'nombreSala': nombreSala,
+                                     'fechaProgramacionInicia': fechaProgramacionInicia,
+                                     'fechaProgramacionFin': fechaProgramacionFin,
+                                     'horaProgramacionInicia': horaProgramacionFinAnterior,
+                                     'horaProgramacionFin': hastaHora, 'nombrePaciente': '', 'estado': 'DISPONIBLE'}})
+
 
                 #FOR PARA ESTE DIA QUE DISPONIBILIDAD HAY EN ESA SALA
-            #  fin cambia 1 dia
+                #  fin cambia 1 dia
 
-            #fecha_actual = fecha_actual + timedelta(days=i+1)
-            #fecha_futura = fecha_actual
-            #fecha_futura = fecha_futura.strftime("%Y-%m-%d")
-            #primeraIteracion = 'S'
+            primeraIteracion = 'S'
 
 
 

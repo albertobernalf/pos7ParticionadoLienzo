@@ -317,3 +317,7 @@ input[type="datetime-local"] {
   /* margin:10 */
 }
 
+#flex-container-descripcionProcedimientos label{
+  display: block;
+  width: 100%;
+}

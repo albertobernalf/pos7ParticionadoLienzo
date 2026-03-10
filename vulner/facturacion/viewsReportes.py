@@ -462,14 +462,16 @@ def ImprimirFactura(request):
 
         #pdf.cell(40, 26 + lineaConcepto, str(conceptos[0]['nombreConcepto']), 0, 0, 'C')
         pdf.ln(3)
-        pdf.set_font('helvetica', 'B', 8)
-        pdf.cell(200, 10, str('___________________________________________________________________________________________________________________________'), 0, 0, 'L')
-        pdf.ln(3)
-        pdf.cell(200, 10, str(nombreConcepto), 0, 0, 'C')
-        pdf.ln(1) 
-        pdf.cell(200, 10, str('___________________________________________________________________________________________________________________________'), 0, 0, 'L')
-        pdf.set_font('helvetica', '', 8)
-        pdf.ln(4)
+        if (nombreConcepto != 'HONORARIOS'):
+
+            pdf.set_font('helvetica', 'B', 8)
+            pdf.cell(200, 10, str('___________________________________________________________________________________________________________________________'), 0, 0, 'L')
+            pdf.ln(3)
+            pdf.cell(200, 10, str(nombreConcepto), 0, 0, 'C')
+            pdf.ln(1)
+            pdf.cell(200, 10, str('___________________________________________________________________________________________________________________________'), 0, 0, 'L')
+            pdf.set_font('helvetica', '', 8)
+            pdf.ln(4)
 
 
         ## AQUI VIENE EL CURSOR DEL DETALLE DE LA FACTURA
@@ -489,7 +491,7 @@ def ImprimirFactura(request):
 
         if (id == conceptoInsumosMedicos.id):
 
-            #comando = 'select sum.cums cups,tarSum."codigoHomologado" homologado, sum.nombre  descripcion, detFac.cantidad cantidad, 	detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_facturaciondetalle detFac INNER JOIN facturacion_facturacion fac ON (fac.id=detFac.facturacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id)  LEFT JOIN tarifarios_tarifariosdescripcion tarDesc ON (tarDesc.id=conv."tarifariosDescripcionSum_id") LEFT JOIN tarifarios_tarifariossuministros tarSum ON (tarSum."tiposTarifa_id"=tarDesc."tiposTarifa_id" AND tarSum.id = detFac.cums_id ) where detfac.facturacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" +   ' AND sum.concepto_id = ' + "'" + str(id) + "'" + ' ORDER BY sum.cums'
+            #comando = 'select sum.cums cups,tarSum."codigoHomologado" homologado, sum.nombre  descripcion, detFac.cantidad cantidad, 	detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_facturaciondetalle detFac INNER JOIN facturacion_facturacion fac ON (fac.id=detFac.facturacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id)  LEFT JOIN tarifarios_tarifariosdescripcion tarDesc ON (tarDesc.id=conv."tarifariosDescripcionSum_id") LEFT JOIN tarifarios_tarifariossuministros tarSum ON (tarSum."tiposTarifa_id"=tarDesc."tiposTarifa_id" AND tarSum."codigoCum_id" = detFac.cums_id ) where detfac.facturacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" +   ' AND sum.concepto_id = ' + "'" + str(id) + "'" + ' ORDER BY sum.cums'
             comando = 'select sum.cums cups, ' + "' '" + ' homologado, sum.nombre  descripcion, detFac.cantidad cantidad,detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_facturaciondetalle detFac INNER JOIN facturacion_facturacion fac ON (fac.id=detFac.facturacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) where detfac.facturacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" + ' AND sum.concepto_id = ' + "'" + str(conceptoInsumosMedicos.id) + "' ORDER BY sum.cums"
             print("entre iNSUMOS MEDICOS")
 
@@ -497,13 +499,13 @@ def ImprimirFactura(request):
 
         if (id ==conceptoMaterialQx.id):
 
-            #comando = 'select sum.cums cups,tarSum."codigoHomologado" homologado, sum.nombre  descripcion, detFac.cantidad cantidad, 	detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_facturaciondetalle detFac INNER JOIN facturacion_facturacion fac ON (fac.id=detFac.facturacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id)  LEFT JOIN tarifarios_tarifariosdescripcion tarDesc ON (tarDesc.id=conv."tarifariosDescripcionSum_id") LEFT JOIN tarifarios_tarifariossuministros tarSum ON (tarSum."tiposTarifa_id"=tarDesc."tiposTarifa_id" AND tarSum.id = detFac.cums_id ) where detfac.facturacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" +   ' AND sum.concepto_id = ' + "'" + str(id) + "'" + ' ORDER BY sum.cums'
+            #comando = 'select sum.cums cups,tarSum."codigoHomologado" homologado, sum.nombre  descripcion, detFac.cantidad cantidad, 	detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_facturaciondetalle detFac INNER JOIN facturacion_facturacion fac ON (fac.id=detFac.facturacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id)  LEFT JOIN tarifarios_tarifariosdescripcion tarDesc ON (tarDesc.id=conv."tarifariosDescripcionSum_id") LEFT JOIN tarifarios_tarifariossuministros tarSum ON (tarSum."tiposTarifa_id"=tarDesc."tiposTarifa_id" AND tarSum."codigoCum_id" = detFac.cums_id ) where detfac.facturacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" +   ' AND sum.concepto_id = ' + "'" + str(id) + "'" + ' ORDER BY sum.cums'
             comando = 'select sum.cums cups, ' + "' '" + ' homologado, sum.nombre  descripcion, detFac.cantidad cantidad,detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_facturaciondetalle detFac INNER JOIN facturacion_facturacion fac ON (fac.id=detFac.facturacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) where detfac.facturacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" + ' AND sum.concepto_id = ' + "'" + str(conceptoMaterialQx.id) + "' ORDER BY sum.cums"
             print("entre iNSUMOS MEDICOS")
 
         if (id == conceptoMedicamentos.id):
 
-            comando = 'select sum.cums cups,tarSum."codigoHomologado" homologado, sum.nombre  descripcion, detFac.cantidad cantidad, 	detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_facturaciondetalle detFac INNER JOIN facturacion_facturacion fac ON (fac.id=detFac.facturacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id)  LEFT JOIN tarifarios_tarifariosdescripcion tarDesc ON (tarDesc.id=conv."tarifariosDescripcionSum_id") LEFT JOIN tarifarios_tarifariossuministros tarSum ON (tarSum."tiposTarifa_id"=tarDesc."tiposTarifa_id" AND tarSum.id = detFac.cums_id ) where detfac.facturacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" +   ' AND sum.concepto_id = ' + "'" + str(id) + "'" + ' ORDER BY sum.cums'
+            comando = 'select sum.cums cups,tarSum."codigoHomologado" homologado, sum.nombre  descripcion, detFac.cantidad cantidad, 	detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_facturaciondetalle detFac INNER JOIN facturacion_facturacion fac ON (fac.id=detFac.facturacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id)  LEFT JOIN tarifarios_tarifariosdescripcion tarDesc ON (tarDesc.id=conv."tarifariosDescripcionSum_id") LEFT JOIN tarifarios_tarifariossuministros tarSum ON (tarSum."tiposTarifa_id"=tarDesc."tiposTarifa_id" AND tarSum."codigoCum_id" = detFac.cums_id ) where detfac.facturacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" +   ' AND sum.concepto_id = ' + "'" + str(id) + "'" + ' ORDER BY sum.cums'
             print("entre Medicamentos")
 
         if (id != conceptoMedicamentos.id and id != conceptoProcedimientosQx.id and id != conceptoInsumosMedicos.id and id != conceptoMaterialQx.id):
@@ -533,6 +535,9 @@ def ImprimirFactura(request):
 	                pdf.ln(3)
 
                 pdf.cell(15, 10, str(cups), 0, 0, 'L')
+                if (homologado=='NoNe'):
+                    homologado=''
+
                 pdf.cell(15, 10, str(homologado), 0, 0, 'L')
                 #pdf.cell(85, 10, str(descripcion), 0, 0, 'L')
                 #pdf.multi_cell(w=100, h=10, txt=str(descripcion),  align='J')
@@ -583,6 +588,9 @@ def ImprimirFactura(request):
                     subTotal = subTotal + float(valorTotal)
 
                     pdf.cell(15, 10, str(cups), 0, 0, 'L')
+                    if (homologado == 'NoNe'):
+                        homologado = ''
+
                     pdf.cell(15, 10, str(homologado), 0, 0, 'L')
                     pdf.cell(85, 10, str(descripcion), 0, 0, 'L')
                     pdf.cell(30, 10, str(cantidad), 0, 0, 'L')
@@ -649,6 +657,10 @@ def ImprimirFactura(request):
                     pdf.set_font('helvetica', 'B', 8)
 
                     pdf.cell(15, 10, str(cups), 0, 0, 'L')
+
+                    if (homologado=='NoNe'):
+                    	homologado=''
+
                     pdf.cell(15, 10, str(homologado), 0, 0, 'L')
                     pdf.cell(85, 10, str(descripcion), 0, 0, 'L')
                     pdf.cell(30, 10, str(cantidad), 0, 0, 'L')
@@ -704,10 +716,14 @@ def ImprimirFactura(request):
 
         pdf.ln(4)
         miConexiony.close()
-        pdf.cell(145, 10, ' ' , 0, 0, 'L')
-        pdf.cell(30, 10, 'SubTotal ' , 0, 0, 'L')
-        pdf.cell(30, 0, str(subTotal), 0, 0, 'L')
-        pdf.ln(2)
+
+        if (nombreConcepto != 'HONORARIOS'):
+
+            pdf.cell(145, 10, ' ' , 0, 0, 'L')
+            pdf.cell(30, 10, 'SubTotal ' , 0, 0, 'L')
+            pdf.cell(30, 0, str(subTotal), 0, 0, 'L')
+            pdf.ln(2)
+
         subTotal=0
 
     miConexiont.close()
@@ -948,15 +964,18 @@ def ImprimirLiquidacion(request):
             {'id': id, 'nombreConcepto': nombreConcepto})
 
         #pdf.ln(1)
-        pdf.set_font('helvetica', 'B', 8)
-        pdf.cell(200, 10, str('___________________________________________________________________________________________________________________________'), 0, 0, 'L')
-        pdf.ln(3)
-        pdf.cell(200, 10, str(nombreConcepto), 0, 0, 'C')
-        pdf.ln(1) 
-        pdf.cell(200, 10, str('___________________________________________________________________________________________________________________________'), 0, 0, 'L')
-        pdf.set_font('helvetica', '', 8)
 
-        pdf.ln(4)
+        if (nombreConcepto != 'HONORARIOS'):
+
+            pdf.set_font('helvetica', 'B', 8)
+            pdf.cell(200, 10, str('___________________________________________________________________________________________________________________________'), 0, 0, 'L')
+            pdf.ln(3)
+            pdf.cell(200, 10, str(nombreConcepto), 0, 0, 'C')
+            pdf.ln(1)
+            pdf.cell(200, 10, str('___________________________________________________________________________________________________________________________'), 0, 0, 'L')
+            pdf.set_font('helvetica', '', 8)
+
+            pdf.ln(4)
 
         ## AQUI VIENE EL CURSOR DEL DETALLE DE LA FACTURA
 
@@ -975,20 +994,20 @@ def ImprimirLiquidacion(request):
 
         if (id == conceptoInsumosMedicos.id):
 
-            #comando = 'select sum.cums cups,tarSum."codigoHomologado" homologado, sum.nombre  descripcion, detFac.cantidad cantidad, 	detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_liquidaciondetalle detFac INNER JOIN facturacion_liquidacion fac ON (fac.id=detFac.liquidacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id)  LEFT JOIN tarifarios_tarifariosdescripcion tarDesc ON (tarDesc.id=conv."tarifariosDescripcionSum_id") LEFT JOIN tarifarios_tarifariossuministros tarSum ON (tarSum."tiposTarifa_id"=tarDesc."tiposTarifa_id" AND tarSum.id = detFac.cums_id ) where detfac.liquidacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" +   ' AND sum.concepto_id = ' + "'" + str(id) + "'" + ' ORDER BY sum.cums'
+            #comando = 'select sum.cums cups,tarSum."codigoHomologado" homologado, sum.nombre  descripcion, detFac.cantidad cantidad, 	detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_liquidaciondetalle detFac INNER JOIN facturacion_liquidacion fac ON (fac.id=detFac.liquidacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id)  LEFT JOIN tarifarios_tarifariosdescripcion tarDesc ON (tarDesc.id=conv."tarifariosDescripcionSum_id") LEFT JOIN tarifarios_tarifariossuministros tarSum ON (tarSum."tiposTarifa_id"=tarDesc."tiposTarifa_id" AND tarSum."codigoCum_id" = detFac.cums_id ) where detfac.liquidacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" +   ' AND sum.concepto_id = ' + "'" + str(id) + "'" + ' ORDER BY sum.cums'
             comando = 'select sum.cums cups, ' + "' '" + ' homologado, sum.nombre  descripcion, detFac.cantidad cantidad,detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_liquidaciondetalle detFac INNER JOIN facturacion_liquidacion fac ON (fac.id=detFac.liquidacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) where detfac.liquidacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" + ' AND sum.concepto_id = ' + "'" + str(conceptoInsumosMedicos.id) + "' ORDER BY sum.cums"
             print("entre iNSUMOS MEDICOS")
 
 
         if (id ==conceptoMaterialQx.id):
 
-            #comando = 'select sum.cums cups,tarSum."codigoHomologado" homologado, sum.nombre  descripcion, detFac.cantidad cantidad, 	detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_liquidaciondetalle detFac INNER JOIN facturacion_liquidacion fac ON (fac.id=detFac.liquidacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id)  LEFT JOIN tarifarios_tarifariosdescripcion tarDesc ON (tarDesc.id=conv."tarifariosDescripcionSum_id") LEFT JOIN tarifarios_tarifariossuministros tarSum ON (tarSum."tiposTarifa_id"=tarDesc."tiposTarifa_id" AND tarSum.id = detFac.cums_id ) where detfac.liquidacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" +   ' AND sum.concepto_id = ' + "'" + str(id) + "'" + ' ORDER BY sum.cums'
+            #comando = 'select sum.cums cups,tarSum."codigoHomologado" homologado, sum.nombre  descripcion, detFac.cantidad cantidad, 	detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_liquidaciondetalle detFac INNER JOIN facturacion_liquidacion fac ON (fac.id=detFac.liquidacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id)  LEFT JOIN tarifarios_tarifariosdescripcion tarDesc ON (tarDesc.id=conv."tarifariosDescripcionSum_id") LEFT JOIN tarifarios_tarifariossuministros tarSum ON (tarSum."tiposTarifa_id"=tarDesc."tiposTarifa_id" AND tarSum."codigoCum_id" = detFac.cums_id ) where detfac.liquidacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" +   ' AND sum.concepto_id = ' + "'" + str(id) + "'" + ' ORDER BY sum.cums'
             comando = 'select sum.cums cups, ' + "' '" + ' homologado, sum.nombre  descripcion, detFac.cantidad cantidad,detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_liquidaciondetalle detFac INNER JOIN facturacion_liquidacion fac ON (fac.id=detFac.liquidacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) where detfac.liquidacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" + ' AND sum.concepto_id = ' + "'" + str(conceptoMaterialQx.id) + "' ORDER BY sum.cums"
             print("entre iNSUMOS MEDICOS")
 
         if (id == conceptoMedicamentos.id):
 
-            comando = 'select sum.cums cups,tarSum."codigoHomologado" homologado, sum.nombre  descripcion, detFac.cantidad cantidad, 	detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_liquidaciondetalle detFac INNER JOIN facturacion_liquidacion fac ON (fac.id=detFac.liquidacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id)  LEFT JOIN tarifarios_tarifariosdescripcion tarDesc ON (tarDesc.id=conv."tarifariosDescripcionSum_id") LEFT JOIN tarifarios_tarifariossuministros tarSum ON (tarSum."tiposTarifa_id"=tarDesc."tiposTarifa_id" AND tarSum.id = detFac.cums_id ) where detfac.liquidacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" +   ' AND sum.concepto_id = ' + "'" + str(id) + "'" + ' ORDER BY sum.cums'
+            comando = 'select sum.cums cups,tarSum."codigoHomologado" homologado, sum.nombre  descripcion, detFac.cantidad cantidad, 	detFac."valorUnitario" valorUnitario, detFac."valorTotal" valorTotal FROM facturacion_liquidaciondetalle detFac INNER JOIN facturacion_liquidacion fac ON (fac.id=detFac.liquidacion_id) INNER JOIN facturacion_suministros sum on (sum.id=detFac.cums_id) INNER JOIN contratacion_convenios conv ON (conv.id=fac.convenio_id)  LEFT JOIN tarifarios_tarifariosdescripcion tarDesc ON (tarDesc.id=conv."tarifariosDescripcionSum_id") LEFT JOIN tarifarios_tarifariossuministros tarSum ON (tarSum."tiposTarifa_id"=tarDesc."tiposTarifa_id" AND tarSum."codigoCum_id" = detFac.cums_id ) where detfac.liquidacion_id= ' + "'" + str(factura) + "'" + ' AND (detfac.anulado =' + "'" + str('N') + "'" + ' or detfac.anulado=' + "'" + str('R') + "')" +   ' AND sum.concepto_id = ' + "'" + str(id) + "'" + ' ORDER BY sum.cums'
             print("entre Medicamentos")
 
         if (id != conceptoMedicamentos.id and id != conceptoProcedimientosQx.id and id != conceptoInsumosMedicos.id and id != conceptoMaterialQx.id):
@@ -1020,6 +1039,10 @@ def ImprimirLiquidacion(request):
 	                pdf.ln(3)
 
                 pdf.cell(15, 10 , str(cups), 0, 0, 'L')
+
+                if (homologado=='NoNe'):
+                    homologado=''
+
                 pdf.cell(15, 10, str(homologado), 0, 0, 'L')
                 #pdf.cell(85, 10, str(descripcion), 0, 0, 'L')
                 #pdf.multi_cell(w=100, h=10, txt=str(descripcion),  align='J')
@@ -1067,6 +1090,10 @@ def ImprimirLiquidacion(request):
                     subTotal = subTotal + float(valorTotal)
 
                     pdf.cell(15, 10 , str(cups), 0, 0, 'L')
+
+                    if (homologado == 'NoNe'):
+                        homologado = ''
+
                     pdf.cell(15, 10 , str(homologado), 0, 0, 'L')
                     pdf.cell(85, 10 , str(descripcion), 0, 0, 'L')
                     pdf.cell(30, 10 , str(cantidad), 0, 0, 'L')
@@ -1134,6 +1161,10 @@ def ImprimirLiquidacion(request):
                     subTotal = subTotal + float(valorTotal)
                     pdf.set_font('helvetica', 'B', 8)
                     pdf.cell(15, 10, str(cups), 0, 0, 'L')
+
+                    if (homologado == 'NoNe'):
+                        homologado = ''
+
                     pdf.cell(15, 10, str(homologado), 0, 0, 'L')
                     pdf.cell(85, 10, str(descripcion), 0, 0, 'L')
                     pdf.cell(30, 10, str(cantidad), 0, 0, 'L')
@@ -1193,10 +1224,12 @@ def ImprimirLiquidacion(request):
 
 
         miConexiony.close()
-        pdf.cell(150, 10 , ' ' , 0, 0, 'L')
-        pdf.cell(30, 10  , 'SubTotal ' , 0, 0, 'L')
-        pdf.cell(35, 10 , str(subTotal), 0, 0, 'L')
-        pdf.ln(2)
+        if (nombreConcepto != 'HONORARIOS'):
+
+            pdf.cell(150, 10 , ' ' , 0, 0, 'L')
+            pdf.cell(30, 10  , 'SubTotal ' , 0, 0, 'L')
+            pdf.cell(35, 10 , str(subTotal), 0, 0, 'L')
+            pdf.ln(2)
         subTotal=0
 
     miConexiont.close()

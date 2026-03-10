@@ -145,8 +145,8 @@ function RefrescarPantalla() {
                                          
 
                                         </table>
-                                    </div>
-                                </div>
+                                    </div>  <!-- cierra row -->
+                                </div>  <!-- cierra row  -->
 
 	<!-- Espacio para Modales  -->
 
@@ -163,21 +163,15 @@ function RefrescarPantalla() {
                         </div>
 
                         <div class="modal-body">
-                            <div class="alert alert-danger error-msg" style="display:none">
-                                <ul class="mb-0"></ul>
-                            </div>
+                 
 			
   			  <form id="postFormEditarConvenios" name="postFormEditarConvenios">
 
                                 <input type="text" name="postConvenio_id" id="postConvenio_id">
 
-                      <div class="row row-cols-lg-auto g-3 align-items-center mb-3">
-
-				<div class="col-12">
-
- 				 <div class="col-12">
-                                        <label for="serviciosAdministrativos_id" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SeviciosAdmon:</label>
-                                        <div class="col-sm-8">
+			<div id="flex-container-editarConvenio">
+			 <div>
+                                        <label for="serviciosAdministrativos_id" class="col-sm-1 control-label">SeviciosAdmon:</label>
                                             <select class="select-css h-40 w-20" id="serviciosAdministrativos_id"  tabindex= "0"
                                                     name="serviciosAdministrativos_id"
                                                     required>
@@ -185,30 +179,25 @@ function RefrescarPantalla() {
                                                 <option value="{{serviciosAdministrativos.id}}"> {{serviciosAdministrativos.nombre}}</option>
                                                 {% endfor %}
                                             </select>
-                                        </div>
-
-                                    </div>
-                                    		
-
-
+                                   		
 				 <label  for="nombreConvenio">Convenio:</label>
-                                    <input type="text" class="form-control form-control-sm" id="nombreConvenio" name="nombreConvenio" value="0" placeholder="nombreConvenio:" readonly></input>
+                                    <input type="text" id="nombreConvenio" name="nombreConvenio" value="0" placeholder="nombreConvenio:" readonly></input>
                                 </div>
 
-				<div class="col-12">
+
 				
  				<label  for="vigenciaDesde">VigenciaDesde:</label>
                                
-					 <input type="date"  class="form-control form-control-sm" id="vigenciaDesde" name="vigenciaDesde" placeholder="vigenciaDesde"  >
-                                </div>
-				<div class="col-12">
+					 <input type="date"  id="vigenciaDesde" name="vigenciaDesde" placeholder="vigenciaDesde"  >
+
+		
 
  				<label  for="vigenciaHasta">VigenciaHasta:</label>
                                
-					 <input type="date"  class="form-control form-control-sm" id="vigenciaHasta" name="vigenciaHasta" placeholder="vigenciaHasta"  >
-                                </div>
+					 <input type="date"   id="vigenciaHasta" name="vigenciaHasta" placeholder="vigenciaHasta"  >
+                       
 
-				<div class="col-12">
+			
                                     Tarifario Procedimientos:
 				<select class="select-css"  id="tarifariosDescripcionProc_id"
                                                                 name="tarifariosDescripcionProc_id">
@@ -217,10 +206,9 @@ function RefrescarPantalla() {
                                                                 {{tarifariosDescripcionProc.nombre}}
                                                             </option>
                                                             {% endfor %}
-                                                        </select>
-                                </div>
+                                                        </select>                       
 
-				<div class="col-12">
+			
                                     Tarifario Suministros:
 				<select class="select-css"  id="tarifariosDescripcionSum_id"
                                                                 name="tarifariosDescripcionSum_id">
@@ -230,9 +218,8 @@ function RefrescarPantalla() {
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                </div>
-
-				<div class="col-12">
+                              
+			
 					    Tarifario Honorarios:
                 	           	<select class="select-css"  id="tarifariosDescripcionHono_id"
                                                                 name="tarifariosDescripcionHono_id">
@@ -242,121 +229,108 @@ function RefrescarPantalla() {
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                </div>
-
-
-
-
-
-               			<div class="col-12">
+                      
+               		
 				 <label  for="porcTarifario">porcTarifario:</label>
-                                    <input type="text" class="form-control form-control-sm" id="porcTarifario" name="porcTarifario" placeholder="porcTarifario:"></input>
-                                </div>
-				<div class="col-12">               
+                                    <input type="text"  id="porcTarifario" name="porcTarifario" placeholder="porcTarifario:"></input>
+                          
+		             
 				 <label  for="porcSuministros">porcSuministros:</label>
-                                    <input type="text" class="form-control form-control-sm" id="porcSuministros" name="porcSuministros" placeholder="porcSuministros:"></input>
-                                </div>
-				<div class="col-12">
+                                    <input type="text"  id="porcSuministros" name="porcSuministros" placeholder="porcSuministros:"></input>
+          
+			
 				 <label  for="valorOxigeno">valorOxigeno:</label>
-                                    <input type="text" class="form-control form-control-sm" id="valorOxigeno" name="valorOxigeno" placeholder="valorOxigeno:"></input>
-                                </div>
-				<div class="col-12">
+                                    <input type="text"  id="valorOxigeno" name="valorOxigeno" placeholder="valorOxigeno:"></input>
+                   
+		
 				 <label  for="porcEsterilizacion">porcEsterilizacion:</label>
-                                    <input type="text" class="form-control form-control-sm" id="porcEsterilizacion" name="porcEsterilizacion" placeholder="porcEsterilizacion:"></input>
-                                </div>
-				<div class="col-12">
+                                    <input type="text"  id="porcEsterilizacion" name="porcEsterilizacion" placeholder="porcEsterilizacion:"></input>
+                   
+			
 				 <label  for="porcMaterial">porcMaterial:</label>
-                                    <input type="text" class="form-control form-control-sm" id="porcMaterial" name="porcMaterial" placeholder="porcMaterial:"></input>
-                                </div>
-				<div class="col-12">
+                                    <input type="text"  id="porcMaterial" name="porcMaterial" placeholder="porcMaterial:"></input>
+                     
+		
 				 <label  for="hospitalario">hospitalario:</label>
-                                    <input type="text" class="form-control form-control-sm" id="hospitalario" name="hospitalario" placeholder="hospitalario:"></input>
-                                </div>
-				<div class="col-12">
+                                    <input type="text"  id="hospitalario" name="hospitalario" placeholder="hospitalario:"></input>
+                 
+		
 				 <label  for="urgencias">urgencias:</label>
-                                    <input type="text" class="form-control form-control-sm" id="urgencias" name="urgencias" placeholder="urgencias:"></input>
-                                </div>
-				<div class="col-12">
+                                    <input type="text"  id="urgencias" name="urgencias" placeholder="urgencias:"></input>
+                    
+			
 				 <label  for="ambulatorio">ambulatorio:</label>
-                                    <input type="text" class="form-control form-control-sm" id="ambulatorio" name="ambulatorio" placeholder="ambulatorio:"></input>
-                                </div>
+                                    <input type="text" id="ambulatorio" name="ambulatorio" placeholder="ambulatorio:"></input>
+                      
 
-				<div class="col-12">
 				 <label  for="consultaExterna">consultaExterna:</label>
-                                    <input type="text" class="form-control form-control-sm" id="consultaExterna" name="consultaExterna" placeholder="consultaExterna:"></input>
-                                </div>
-
-				<div class="col-12">
+                                    <input type="text"  id="consultaExterna" name="consultaExterna" placeholder="consultaExterna:"></input>
+     	
 				 <label  for="copago">copago:</label>
-                                    <input type="text" class="form-control form-control-sm" id="copago" name="copago" placeholder="copago:"></input>
-                                </div>
-
-				<div class="col-12">
+                                    <input type="text" id="copago" name="copago" placeholder="copago:"></input>
+                 
+		
 				 <label  for="moderadora">moderadora:</label>
-                                    <input type="text" class="form-control form-control-sm" id="moderadora" name="moderadora" placeholder="moderadora:"></input>
-                                </div>
-
-				<div class="col-12">
+                                    <input type="text" id="moderadora" name="moderadora" placeholder="moderadora:"></input>
+                    
+			
 				 <label  for="tipofactura">tipofactura:</label>
-                                    <input type="text" class="form-control form-control-sm" id="tipofactura" name="tipofactura" placeholder="tipofactura:"></input>
-                                </div>
+                                    <input type="text" id="tipofactura" name="tipofactura" placeholder="tipofactura:"></input>
+                      
 
-				<div class="col-12">
+			
 				 <label  for="facturacionSuministros">facturacionSuministros:</label>
                                     <input type="text" class="form-control form-control-sm" id="facturacionSuministros" name="facturacionSuministros" placeholder="facturacionSuministros:"></input>
-                                </div>
+                       
 
-				<div class="col-12">
+				
 				 <label  for="facturacionCups">facturacionCups:</label>
-                                    <input type="text" class="form-control form-control-sm" id="facturacionCups" name="facturacionCups" placeholder="facturacionCups:"></input>
-                                </div>
+                                    <input type="text"  id="facturacionCups" name="facturacionCups" placeholder="facturacionCups:"></input>
+                         
 
-				<div class="col-12">
+			
 				 <label  for="cuentaContable">cuentaContable:</label>
-                                    <input type="text" class="form-control form-control-sm" id="cuentaContable" name="cuentaContable" placeholder="cuentaContable:"></input>
-                                </div>
+                                    <input type="text"  id="cuentaContable" name="cuentaContable" placeholder="cuentaContable:"></input>
+                   
 
 
-				<div class="col-12">
 				 <label  for="requisitos">requisitos:</label>
-                                    <input type="text" class="form-control form-control-sm" id="requisitos" name="requisitos" placeholder="requisitos:"></input>
-                                </div>
+                                    <input type="text" id="requisitos" name="requisitos" placeholder="requisitos:"></input>
+     
 
 
-				<div class="col-12">
+	
 				 <label  for="fechaRegistro">fechaRegistro:</label>
-                                    <input type="text" class="form-control form-control-sm" id="fechaRegistro" name="fechaRegistro" placeholder="fechaRegistro:"></input>
-                                </div>
+                                    <input type="text" id="fechaRegistro" name="fechaRegistro" placeholder="fechaRegistro:"></input>
+          
 
 
-				<div class="col-12">
+		
 				 <label  for="estadoReg">estadoReg:</label>
-                                    <input type="text" class="form-control form-control-sm" id="estadoReg" name="estadoReg" placeholder="estadoReg:"></input>
-                                </div>
-
-				<div class="col-12">
+                                    <input type="text"  id="estadoReg" name="estadoReg" placeholder="estadoReg:"></input>
+                  
+			
 				 <label  for="empresa_id">empresa_id:</label>
-                                    <input type="text" class="form-control form-control-sm" id="empresa_id" name="empresa_id" placeholder="empresa_id:"></input>
-                                </div>
+                                    <input type="text" id="empresa_id" name="empresa_id" placeholder="empresa_id:"></input>
+                    
 
-				<div class="col-12">
+				
 				 <label  for="usuarioRegistro_id">usuarioRegistro_id:</label>
-                                    <input type="text" class="form-control form-control-sm" id="usuarioRegistro_id" name="usuarioRegistro_id" placeholder="usuarioRegistro_id:"></input>
-                                </div>
+                                    <input type="text"  id="usuarioRegistro_id" name="usuarioRegistro_id" placeholder="usuarioRegistro_id:"></input>
+                    
 
-
-				<div class="col-12">
 				 <label  for="descripcion">descripcion:</label>
-                                    <input type="text" class="form-control form-control-sm" id="descripcion" name="descripcion" placeholder="descripcion:" readonly></input>
-                                </div>
+                                    <input type="text" id="descripcion" name="descripcion" placeholder="descripcion:" readonly></input>
+                          
 
 
-				<div class="col-12">
+		
 				 <label  for="particular">Es Particular : </label>
                                     <input type="checkbox"  id="particular" name="particular"></input>
-                                </div>
 
-                                </div> <!-- CIERRA ROW 8 COLUMNAS  -->
+
+                                </div>
+                                </div> <!-- cierra flexbox -->
 
                             </form>
 
@@ -395,19 +369,19 @@ function RefrescarPantalla() {
                         </div>
 
                         <div class="modal-body">
-                            <div class="alert alert-danger error-msg" style="display:none">
-                                <ul class="mb-0"></ul>
-                            </div>
+                           
 			
   			  <form id="postFormCrearConvenios" name="postFormCrearConvenios">
 
                                 <input type="text" name="postConvenioC_id" id="postConvenioC_id" readonly>
 
-                      <div class="row row-cols-lg-auto g-3 align-items-center mb-3">
+		<div id="flex-container-crearConvenio">
+			 <div>
 
-				  <div class="col-12">
+
+
                                         <label for="serviciosAdministrativosC_id" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SeviciosAdmon:</label>
-                                        <div class="col-sm-8">
+
                                             <select class="select-css h-40 w-20" id="serviciosAdministrativosC_id"  tabindex= "0"
                                                     name="serviciosAdministrativosC_id"
                                                     required>
@@ -415,33 +389,30 @@ function RefrescarPantalla() {
                                                 <option value="{{serviciosAdministrativos.id}}"> {{serviciosAdministrativos.nombre}}</option>
                                                 {% endfor %}
                                             </select>
-                                        </div>
-
-                                    </div>
 
 
 
-				<div class="col-12">
+
+
+
+
                                     
 				 <label  for="nombreConvenio">Nombre Convenio:</label>
-                                    <input type="text" class="form-control form-control-sm" id="nombreConvenioC" name="nombreConvenioC" value="0" placeholder="nombreConvenio:" ></input>
-                                </div>
+                                    <input type="text"  id="nombreConvenioC" name="nombreConvenioC" value="0" placeholder="nombreConvenio:" ></input>
 
-				<div class="col-12">
+
+
 				
  				<label  for="vigenciaDesdeC">VigenciaDesde:</label>
                                
-					 <input type="date"  class="form-control form-control-sm" id="vigenciaDesdeC"  placeholder="vigenciaDesde" >
-                                </div>
-				<div class="col-12">
+					 <input type="date"   id="vigenciaDesdeC"  placeholder="vigenciaDesde" >
+
 
  				<label  for="vigenciaHastaC">VigenciaHasta:</label>
                                
-					 <input type="date"  class="form-control form-control-sm" id="vigenciaHastaC" placeholder="vigenciaHasta" >
-                                </div>
+					 <input type="date"   id="vigenciaHastaC" placeholder="vigenciaHasta" >
 
 
-				<div class="col-12">
                                     Empresa:
 				<select class="select-css"  id="empresaC_id"
                                                                 name="empresaC_id">
@@ -451,12 +422,9 @@ function RefrescarPantalla() {
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                </div>
 
 
 
-
-				<div class="col-12">
                                     Tarifario Procedimientos:
 				<select class="select-css"  id="tarifariosDescripcionProcC_id"
                                                                 name="tarifariosDescripcionProcC_id">
@@ -466,9 +434,9 @@ function RefrescarPantalla() {
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                </div>
 
-				<div class="col-12">
+
+
                                     Tarifario Suministros:
 				<select class="select-css"  id="tarifariosDescripcionSumC_id"
                                                                 name="tarifariosDescripcionSumC_id">
@@ -478,9 +446,8 @@ function RefrescarPantalla() {
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                </div>
 
-				<div class="col-12">
+
 					    Tarifario Honorarios:
                 	           	<select class="select-css"  id="tarifariosDescripcionHonoC_id"
                                                                 name="tarifariosDescripcionHonoC_id">
@@ -490,130 +457,112 @@ function RefrescarPantalla() {
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                </div>
 
 
 
-
-
-               			<div class="col-12">
 				 <label  for="porcTarifarioC">porcTarifario:</label>
-                                    <input type="text" class="form-control form-control-sm" id="porcTarifarioC" name="porcTarifarioC" placeholder="porcTarifario:"></input>
-                                </div>
-				<div class="col-12">               
+                                    <input type="text"  id="porcTarifarioC" name="porcTarifarioC" placeholder="porcTarifario:"></input>
+
+
 				 <label  for="porcSuministrosC">porcSuministros:</label>
-                                    <input type="text" class="form-control form-control-sm" id="porcSuministrosC" name="porcSuministrosC" placeholder="porcSuministros:"></input>
-                                </div>
-				<div class="col-12">
+                                    <input type="text" id="porcSuministrosC" name="porcSuministrosC" placeholder="porcSuministros:"></input>
+
+
 				 <label  for="valorOxigenoC">valorOxigeno:</label>
-                                    <input type="text" class="form-control form-control-sm" id="valorOxigenoC" name="valorOxigenoC" placeholder="valorOxigeno:"></input>
-                                </div>
-				<div class="col-12">
+                                    <input type="text"  id="valorOxigenoC" name="valorOxigenoC" placeholder="valorOxigeno:"></input>
+
+
 				 <label  for="porcEsterilizacionC">porcEsterilizacion:</label>
-                                    <input type="text" class="form-control form-control-sm" id="porcEsterilizacionC" name="porcEsterilizacionC" placeholder="porcEsterilizacion:"></input>
-                                </div>
-				<div class="col-12">
+                                    <input type="text"  id="porcEsterilizacionC" name="porcEsterilizacionC" placeholder="porcEsterilizacion:"></input>
+
+
 				 <label  for="porcMaterialC">porcMaterial:</label>
-                                    <input type="text" class="form-control form-control-sm" id="porcMaterialC" name="porcMaterialC" placeholder="porcMaterial:"></input>
-                                </div>
-				<div class="col-12">
+                                    <input type="text"  id="porcMaterialC" name="porcMaterialC" placeholder="porcMaterial:"></input>
+
+
 				 <label  for="hospitalarioC">hospitalario:</label>
-                                    <input type="text" class="form-control form-control-sm" id="hospitalarioC" name="hospitalarioC" placeholder="hospitalario:"></input>
-                                </div>
-				<div class="col-12">
+                                    <input type="text" id="hospitalarioC" name="hospitalarioC" placeholder="hospitalario:"></input>
+
+
 				 <label  for="urgenciasC">urgencias:</label>
-                                    <input type="text" class="form-control form-control-sm" id="urgenciasC" name="urgenciasC" placeholder="urgencias:"></input>
-                                </div>
-				<div class="col-12">
+                                    <input type="text"  id="urgenciasC" name="urgenciasC" placeholder="urgencias:"></input>
+
+
 				 <label  for="ambulatorioC">ambulatorio:</label>
-                                    <input type="text" class="form-control form-control-sm" id="ambulatorioC" name="ambulatorioC" placeholder="ambulatorio:"></input>
-                                </div>
+                                    <input type="text"  id="ambulatorioC" name="ambulatorioC" placeholder="ambulatorio:"></input>
 
-				<div class="col-12">
+
+
 				 <label  for="consultaExternaC">consultaExterna:</label>
-                                    <input type="text" class="form-control form-control-sm" id="consultaExternaC" name="consultaExternaC" placeholder="consultaExterna:"></input>
-                                </div>
+                                    <input type="text"  id="consultaExternaC" name="consultaExternaC" placeholder="consultaExterna:"></input>
 
-				<div class="col-12">
+
+
 				 <label  for="copagoC">copago:</label>
-                                    <input type="text" class="form-control form-control-sm" id="copagoC" name="copagoC" placeholder="copago:"></input>
-                                </div>
+                                    <input type="text"  id="copagoC" name="copagoC" placeholder="copago:"></input>
 
-				<div class="col-12">
 				 <label  for="moderadoraC">moderadora:</label>
-                                    <input type="text" class="form-control form-control-sm" id="moderadoraC" name="moderadoraC" placeholder="moderadora:"></input>
-                                </div>
+                                    <input type="text"  id="moderadoraC" name="moderadoraC" placeholder="moderadora:"></input>
 
-				<div class="col-12">
+
+
 				 <label  for="tipofacturaC">tipofactura:</label>
-                                    <input type="text" class="form-control form-control-sm" id="tipofacturaC" name="tipofacturaC" placeholder="tipofactura:"></input>
-                                </div>
+                                    <input type="text"  id="tipofacturaC" name="tipofacturaC" placeholder="tipofactura:"></input>
 
-				<div class="col-12">
+
+
 				 <label  for="agrupadaC">tipofactura:</label>
-                                    <input type="text" class="form-control form-control-sm" id="agrupadaC" name="agrupadaC" placeholder="agrupada:"></input>
-                                </div>
+                                    <input type="text"  id="agrupadaC" name="agrupadaC" placeholder="agrupada:"></input>
 
 
-				<div class="col-12">
 				 <label  for="facturacionSuministrosC">facturacionSuministros:</label>
-                                    <input type="text" class="form-control form-control-sm" id="facturacionSuministrosC" name="facturacionSuministrosC" placeholder="facturacionSuministros:"></input>
-                                </div>
+                                    <input type="text"  id="facturacionSuministrosC" name="facturacionSuministrosC" placeholder="facturacionSuministros:"></input>
 
-				<div class="col-12">
+
+
 				 <label  for="facturacionCupsC">facturacionCups:</label>
-                                    <input type="text" class="form-control form-control-sm" id="facturacionCupsC" name="facturacionCupsC" placeholder="facturacionCups:"></input>
-                                </div>
+                                    <input type="text"  id="facturacionCupsC" name="facturacionCupsC" placeholder="facturacionCups:"></input>
 
-				<div class="col-12">
+
 				 <label  for="cuentaContableC">cuentaContable:</label>
-                                    <input type="text" class="form-control form-control-sm" id="cuentaContableC" name="cuentaContableC" placeholder="cuentaContable:"></input>
-                                </div>
+                                    <input type="text"  id="cuentaContableC" name="cuentaContableC" placeholder="cuentaContable:"></input>
 
 
-				<div class="col-12">
 				 <label  for="requisitosC">requisitos:</label>
-                                    <input type="text" class="form-control form-control-sm" id="requisitosC" name="requisitosC" placeholder="requisitos:"></input>
-                                </div>
+                                    <input type="text" id="requisitosC" name="requisitosC" placeholder="requisitos:"></input>
 
-
-				<div class="col-12">
 				 <label  for="fechaRegistroC">fechaRegistro:</label>
-                                    <input type="text" class="form-control form-control-sm" id="fechaRegistroC" name="fechaRegistroC" placeholder="fechaRegistro:"></input>
-                                </div>
+                                    <input type="text"  id="fechaRegistroC" name="fechaRegistroC" placeholder="fechaRegistro:"></input>
 
-
-				<div class="col-12">
 				 <label  for="estadoRegC">estadoReg:</label>
-                                    <input type="text" class="form-control form-control-sm" id="estadoRegC" name="estadoRegC" placeholder="estadoReg:"></input>
-                                </div>
+                                    <input type="text"  id="estadoRegC" name="estadoRegC" placeholder="estadoReg:"></input>
+
 
 	
-				<div class="col-12">
+
 				 <label  for="usuarioRegistroC_id">usuarioRegistro_id:</label>
-                                    <input type="text" class="form-control form-control-sm" id="usuarioRegistroC_id" name="usuarioRegistroC_id" placeholder="usuarioRegistro_id:"></input>
-                                </div>
+                                    <input type="text"  id="usuarioRegistroC_id" name="usuarioRegistroC_id" placeholder="usuarioRegistro_id:"></input>
 
 
-				<div class="col-12">
+
+
 				 <label  for="descripcionC">descripcion:</label>
-                                    <input type="text" class="form-control form-control-sm" id="descripcionC" name="descripcionC" placeholder="descripcion:" ></input>
-                                </div>
+                                    <input type="text"  id="descripcionC" name="descripcionC" placeholder="descripcion:" ></input>
 
-				<div class="col-12">
+
+
 				 <label  for="particularC">Es Particular : </label>
                                     <input type="checkbox"  id="particularC" name="particularC" placeholder="particular:"></input>
-                                </div>
 
 
-                                <div class="col-12">
                                     <center> 
 					<button type="button" class="btn btn-primary" id="saveBtnCrearConvenios"   value="create" onclick="CrearGuardarConvenios()">Guardar </button> 
 					</center> 
-                                </div>
 
 
-                                </div> <!-- CIERRA ROW 8 COLUMNAS  -->
+                                </div> <!-- -->
+                                </div> <!-- CIERRA flexbox  -->
+
 
                             </form>
 

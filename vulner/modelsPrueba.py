@@ -1035,7 +1035,6 @@ FEB 16:
 	cuando uno esta creando un laboratoio no se ven las observa
         OJO HAY QUE CREAR TODA LAS FUNCIONES EN LA PARAMETRIZACION, fcaturas, rips,json etc, VER CUALES ESTAN ACTIVAS ULTIMA VERSION OJO
 	ops no me grabo lo de nota aclaratoria
-	ojo hay un error al dar salida cliica al paciente si no hay complicacion-dx no guarda NULL PROBAR
 	cuando interpreta un examen, debe blanquear la plantilla  hacer quiery a los ordenados al primero que quede en pantalla
 	La elaboracion de factura debe imprimir la factura OJO
 	
@@ -1043,7 +1042,7 @@ FEB 20:
 OJO EL 23 DE FEBRERO TRANAJAR TODO LO DE CIRUGIA Y CARTERA PENDIENTE VERIFICAR ABAJO Y ARRIBA DE ESTE DOCUMENTO
 
 	Ops no me cuadro la liquidacion de la cuenta con la ciruguia algo pasa.. VERIFICAR. Puesta a punta
-	OPS hay algo que no entiendo al realzar la cirugia primero no me creo el folio en clinico_historialcirugias y despues sip
+	
 	OPS como se ANULA una solicitud de cirugia
 	OJO con las edades me esan mamando gallo en la pantalla de solicitud
 	OPS no me dejo cancelar una programacion de cirugias
@@ -1052,7 +1051,6 @@ OJO EL 23 DE FEBRERO TRANAJAR TODO LO DE CIRUGIA Y CARTERA PENDIENTE VERIFICAR A
 	OPS en cirugia el tab Ocupacion salas muestra LIBRE buna OCUPADA CORREGIR
 	OPS LOS paraclinicos en ENFERMERIA NO MUESTRA CIRUGIAS ??
 	Terminar, probar cartera
-	mañana crear una cirugia , ver impresion HC y facturarla, seguimiento
 	Luego si RIPS y GLOSAS
 
 Ver FEB 26:
@@ -1094,17 +1092,6 @@ ojo checkbox en datattab{
 PROBAR
 
 
-marter 03 de marzo INONSIKTNAS
-
-	La disponiblidad de crugias pailas cuando no encuentra datos se alta el CURSO que pasa ?
-	La factuarcion no me carga que pasa ?
-	Los rips de una cirugia no sale la hospitalizacion, ni los procedimientos creop por otros serviicios VERIFICAR
-	La descripcion qx algo pasa con las ora mnuto segundos suas
-	
-	OPS cuando se crea un folio clinico automatico por una cirugia, No crea la causaExterna , ni ningun diagnostico corregir 
-
-
-	OPS cuando se genera el RIPS se debe colocar el codigo en ripsotrosservcicios del ripscums y ripscups en teconologiasalud_id y renconologiasaludups_id
 
 		SELECT '{"codPrestador": '|| '"' || otros."codPrestador" || '"' 
 	   ||',"numAutorizacion": '|| '"' || CASE WHEN trim(otros."numAutorizacion") is null THEN 'null' ELSE otros."numAutorizacion"  END || '"'		
@@ -1135,5 +1122,37 @@ marter 03 de marzo INONSIKTNAS
 	inner join rips_ripstiposdocumento ripsTiposDoc on (ripsTiposDoc.id = otros."tipoDocumentoIdentificacion_id" )
 	   where  ripstra."ripsEnvio_id" = '2' AND  ripstra."numFactura" = cast('8' as text) AND otros.consecutivo >= 1; 
 
+
+lunes  09 de marzo 
+
+	-- PAra resaltar toda la fila:
+
+	 $('#dataTables').dataTable( {
+            "createdRow": function( row, data, dataIndex){
+                if( data[2] ==  `someVal`){
+                    $(row).addClass('dark-background');
+                } elseif(data[2] ==  `someOtherVal`) {
+                    $(row).addClass('light-background');
+                 }
+
+            }
+        });
+
+
+
+	La descripcion qx algo pasa con las ora mnuto segundos suas
+	OPS cuando se crea un folio clinico automatico por una cirugia, No crea la causaExterna , ni ningun diagnostico corregir 
+	OPS cuando se genera el RIPS se debe colocar el codigo en ripsotrosservcicios del ripscums y ripscups en teconologiasalud_id y renconologiasaludups_id
 	OPs ojo los ripsconsultas casos son para el uso de ambulatorios aquip, faltas las de consulta externa
  	OPS Faltan hacer los rips d GLOSA/NOta credito de CONSULTA RIPS/RIPS OTROSSERVICIOS tanto en generajson rips y enviojsonrips
+        OPS En tariarios: Tarifarios Suministros cuadrar todo
+	OPS en tarifariosProcedimientos hacer un flexbox a la captura d datos que crea tariafa codhomologado, tipotarifa, cups, colvalorbase etc
+	OPS todo el modulo de contratacion VALIDAR incluir flexbox arreglar bom¿nito , entendible, controles, como hace para que lops combos muestren automaticamente la opcion seleccionada y abierto el combo 
+		INVSTIGAR google, IA eso para todo el programa creo arreglar.
+	OPS en historia clinica falta impsion de ordenes medicas, consulta de folios y/O impresion deHC de pacientes que No estan
+	OPS trabajar crearEstanciaAutmatica una vez esten tarifarios ok y ver las estancias de maria paula y alberto de acuerdo a ala tarifa
+
+	OPS la impresion de la factura y la cuenta en homologado esta sacndo NONE verificar
+	OPS OJO HAY que ajustar la tabla autorizaciones_autorizaciones agregarle el campo nro de ingreso y si es triage o admision
+  	 	cin ello me ahotro muchas coas
+	mañana terminar el query sin la autoriza de la estancia

@@ -175,6 +175,7 @@ class Dependencias(models.Model):
     fechaOcupacion = models.DateTimeField(default=now,blank=True,null= True, editable=True)
     fechaLiberacion = models.DateTimeField(default=now,blank=True,null= True, editable=True)
     disponibilidad = models.CharField(max_length=1, default='L', choices=DISPONIBILIDAD_CHOICES,  )
+    #tiposEstancias = models.ForeignKey('tarifarios.TiposEstancias', blank=True,null= True, editable=True, on_delete=models.PROTECT)
     cups = models.ForeignKey('clinico.Examenes', blank=True,null= True, editable=True, on_delete=models.PROTECT)
     fechaRegistro = models.DateTimeField(default=now, editable=False)
     estadoReg = models.CharField(max_length=1, choices=ESTADOREG_CHOICES, default='A', editable=False)

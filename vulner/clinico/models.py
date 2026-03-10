@@ -75,6 +75,7 @@ class Especialidades(models.Model):
     nombre = models.CharField(max_length=30 , null = False)
     #examen = models.ForeignKey('clinico.Examenes',  blank=True, null=True, editable=True, on_delete=models.PROTECT)
     #examenCita = models.ForeignKey('clinico.Examenes',  blank=True, null=True, editable=True, on_delete=models.PROTECT ,related_name ='cuposCita')
+    especialidadesEnEstancias = models.ForeignKey('tarifarios.EspecialidadesEnEstancias',  blank=True, null=True, editable=True, on_delete=models.PROTECT)
     interconsulta = models.CharField(max_length=1,  blank=True,null= True, editable=True,)
     cExterna    = models.CharField(max_length=1,  blank=True,null= True, editable=True,)
     quirurgica =  models.CharField(max_length=1,  blank=True,null= True, editable=True,)

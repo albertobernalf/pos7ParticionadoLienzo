@@ -290,7 +290,61 @@ input[type="datetime-local"] {
         margin: 0 auto;
         height: 100vh;
 	font-style: italic;
-	color:blue;
-	font-size: 15px !important;
+	color:black;
+	font-size: 10px !important;
 
 }
+
+
+
+#flex-container-editarConvenio{
+  display: inline-flex;
+  justify-content: left;
+}
+
+
+#flex-container-editarConvenio div{
+  width: 1200px;
+  height: 300px;
+  color: #FFF;
+  flex-wrap: wrap;
+  text-align: left;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
+
+#flex-container-editarConvenio label{
+  display: block;
+  width: 20%;
+}
+
+
+#flex-container-crearConvenio{
+  display: inline-flex;
+  justify-content: left;
+}
+
+
+#flex-container-crearConvenio div{
+  width: 800px;
+  height: 150px;
+  color: #FFF;
+  flex-wrap: wrap;
+  text-align: left;
+  line-height: 15px;
+  /* margin: 10px; */
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #9B59B6;*/
+  /* margin:10 */
+}
+
+#flex-container-crearConvenio label{
+  display: block;
+  width: 100%;
+}
+

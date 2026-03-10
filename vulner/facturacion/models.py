@@ -49,6 +49,7 @@ class Empresas (models.Model):
     id           = models.AutoField(primary_key=True)
     tipoDoc = models.ForeignKey('usuarios.TiposDocumento', blank=True,null= True, editable=True, on_delete=models.PROTECT)
     tipoEmpresa = models.ForeignKey('facturacion.TiposEmpresa', blank=True,null= True, editable=True, on_delete=models.PROTECT)
+    nivelesClinica = models.ForeignKey('clinico.NivelesClinica', blank=True,null= True, editable=True, on_delete=models.PROTECT)
     documento = models.CharField(max_length=30, blank=True,null= True, editable=True,)
     nombre = models.CharField(max_length=50, blank=True,null= True, editable=True,)
     codigoEapb = models.CharField(max_length=10, blank=True,null= True, editable=True,)

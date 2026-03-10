@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from tarifarios.models import TiposHonorarios, TiposTarifaProducto,TiposTarifa,TarifariosDescripcion,TarifariosProcedimientos,TarifariosSuministros, TarifariosProcedimientosHonorarios, TablaSalasDeCirugia,TablaMaterialSuturaCuracion,TablaHonorariosSoat,TablaHonorariosIss ,MinimosLegales, GruposQx, TarifariosDescripcionHonorarios ,TablaSalasDeCirugiaIss , TablaMaterialSuturaCuracionIss, Estancias
+from tarifarios.models import TiposHonorarios, TiposTarifaProducto,TiposTarifa,TarifariosDescripcion,TarifariosProcedimientos,TarifariosSuministros, TarifariosProcedimientosHonorarios, TablaSalasDeCirugia,TablaMaterialSuturaCuracion,TablaHonorariosSoat,TablaHonorariosIss ,MinimosLegales, GruposQx, TarifariosDescripcionHonorarios ,TablaSalasDeCirugiaIss , TablaMaterialSuturaCuracionIss, Estancias, EspecialidadesEnEstancias, NivelesEstancias, TiposEstancias
 
 
 @admin.register(TiposTarifa)
@@ -137,7 +137,33 @@ class tablaMaterialSuturaCuracionIss(admin.ModelAdmin):
 @admin.register(Estancias)
 class estanciasAdmin(admin.ModelAdmin):
 
-   list_display = ("id", "tipoEstancia", "referencia", "codigo", "descripcion", "valor")
-   search_fields = ("id", "tipoEstancia","referencia", "codigo", "descripcion", "valor")
+   list_display = ("id", "homologado", "nivelesClinica", "especialidadesEnEstancias", "nivelesClinica","cups",  "descripcion", "valor")
+   search_fields = ("id", "homologado", "nivelesClinica__nombre", "especialidadesEnEstancias__nombre","cups", "nivelesClinica__nombre", "descripcion", "valor")
    # Filtrar
-   list_filter = ("id","tipoEstancia", "referencia", "codigo", "descripcion", "valor")
+   list_filter = ("id", "homologado", "nivelesClinica", "especialidadesEnEstancias",  "nivelesClinica","cups","descripcion", "valor")
+
+
+@admin.register(NivelesEstancias)
+class nivelesEstanciasAdmin(admin.ModelAdmin):
+
+   list_display = ("id", "nombre","fechaRegistro")
+   search_fields = ("id", "nombre","fechaRegistro")
+   # Filtrar
+   list_filter = ("id", "nombre","fechaRegistro")
+
+@admin.register(EspecialidadesEnEstancias)
+class especialidadesEnEstanciasAdmin(admin.ModelAdmin):
+
+   list_display = ("id", "nombre","fechaRegistro")
+   search_fields = ("id", "nombre","fechaRegistro")
+   # Filtrar
+   list_filter = ("id", "nombre","fechaRegistro")
+
+
+@admin.register(TiposEstancias)
+class tiposEstanciasAdmin(admin.ModelAdmin):
+
+   list_display = ("id", "nombre","fechaRegistro")
+   search_fields = ("id", "nombre","fechaRegistro")
+   # Filtrar
+   list_filter = ("id", "nombre","fechaRegistro")

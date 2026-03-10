@@ -1405,16 +1405,23 @@ function arrancaCirugia(valorTabla,valorData)
                 console.log ('type = ', type);
                 console.log ('row = ', row);
 
-
 				if ( row['fields']['estado'] === 'OCUPADA')
                 {
-                    return '<i  style="color:red; " >OCUPADA</i>';
+                   // return '<i  style="color:red; " >OCUPADA</i>';
+			var color = '#d4edda'
+			var textColor= '#155727'
+			return '<span style="background-color: ' + color + '; color: ' + textColor + '; padding: 5px ; border-radius:4px ; display: block;">'+  'OCUPADA' + ' </span>';
 					
 					}
 
 			    if ( row['fields']['estado'] ==  'DISPONIBLE')
 				{
-		 return '<i style="color:green" >DISPONIBLE</i>';
+		 //  return '<i style="color:green" >DISPONIBLE</i>';
+			var color= '#8d7da'			
+			var textColor = '#721c24'
+
+			return '<span style="background-color: ' + color + '; color: ' + textColor + '; padding: 5px ; border-radius:4px ; display: block;">'+  'DISPONIBLE' + ' </span>';
+			
                     }
 	                    }
 			},

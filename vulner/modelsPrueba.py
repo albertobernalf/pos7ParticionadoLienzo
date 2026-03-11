@@ -1122,7 +1122,6 @@ PROBAR
 	inner join rips_ripstiposdocumento ripsTiposDoc on (ripsTiposDoc.id = otros."tipoDocumentoIdentificacion_id" )
 	   where  ripstra."ripsEnvio_id" = '2' AND  ripstra."numFactura" = cast('8' as text) AND otros.consecutivo >= 1; 
 
-
 lunes  09 de marzo 
 
 	-- PAra resaltar toda la fila:
@@ -1138,8 +1137,6 @@ lunes  09 de marzo
             }
         });
 
-
-
 	La descripcion qx algo pasa con las ora mnuto segundos suas
 	OPS cuando se crea un folio clinico automatico por una cirugia, No crea la causaExterna , ni ningun diagnostico corregir 
 	OPS cuando se genera el RIPS se debe colocar el codigo en ripsotrosservcicios del ripscums y ripscups en teconologiasalud_id y renconologiasaludups_id
@@ -1149,10 +1146,11 @@ lunes  09 de marzo
 	OPS en tarifariosProcedimientos hacer un flexbox a la captura d datos que crea tariafa codhomologado, tipotarifa, cups, colvalorbase etc
 	OPS todo el modulo de contratacion VALIDAR incluir flexbox arreglar bom¿nito , entendible, controles, como hace para que lops combos muestren automaticamente la opcion seleccionada y abierto el combo 
 		INVSTIGAR google, IA eso para todo el programa creo arreglar.
-	OPS en historia clinica falta impsion de ordenes medicas, consulta de folios y/O impresion deHC de pacientes que No estan
-	OPS trabajar crearEstanciaAutmatica una vez esten tarifarios ok y ver las estancias de maria paula y alberto de acuerdo a ala tarifa
+	OPS en historia clinica falta impresion de ordenes medicas, consulta de folios y/O impresion deHC de pacientes que No estan
+	OPS PENDIENTE actualzar aturizaciones.ingreso_id/triage_id . solo esta laboratorios es engorroso toca hacerlo en todos ops
+	ops no ntiendo PORQUE EN LA FUNCION AUTOMATICA DE STANCIAS NO GUARDA LOS TOTALES DE PROCED ETC 
+	OPS no entiendo por que no sale bien el panelConvenios los TABS no fncinana
+	OPS ojo que pasa con el codigo de la tarifa en la impresion de la cuenta y factura es el homologado REVISAR en PUESTA A PUNTO
 
-	OPS la impresion de la factura y la cuenta en homologado esta sacndo NONE verificar
-	OPS OJO HAY que ajustar la tabla autorizaciones_autorizaciones agregarle el campo nro de ingreso y si es triage o admision
-  	 	cin ello me ahotro muchas coas
-	mañana terminar el query sin la autoriza de la estancia
+	OPS OJO PARA PUESTA PUNTO DE CORTE . todas los query autorizaciones apunten a ingresos
+	OPS OJO PARA PUESTA PUNTO DE CORTE . todas los pagos revisar en rips ect querys de mopney , forma pago etc

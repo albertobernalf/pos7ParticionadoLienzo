@@ -436,9 +436,11 @@ table.dataTable tbody tr {
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                         </div>
-		<!-- <div style="width:500px; heigth:100px; ">    LE SOBRA -->
+		<div style="width:500px; heigth:100px; ">
                         <div class="modal-body">
-                        
+                            <div class="alert alert-danger error-msg" style="display:none">
+                                <ul class="mb-0"></ul>
+                            </div>
 			
   			  <form id="postFormGlosasDetalleRips" name="postFormGlosasDetalleRips">
                                
@@ -588,6 +590,7 @@ table.dataTable tbody tr {
                     </div> <!-- CIERRA MODAL DIALOG -->
                 </div>  <!-- CIERRA MODAL FADE -->
 
+
 	            <!-- Espacio Modal  Glosa Adicionar -->
 
             <div class="modal fade" id="crearModelGlosasAdicionar" tabindex="-1" role="dialog"  style="overflow-y:scroll;" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
@@ -596,49 +599,63 @@ table.dataTable tbody tr {
                         <div class="modal-header">
 	     <div  class="modal-title" id="exampleModalLabel" style="text-align:center;"><font gont-family="Times New roman" size=5">Adicionar Glosa a Factura</font> </div>
                                         <button type="button" class="close" data-bs-dismiss="modal"  aria-label="Close"> <span aria-hidden="true"></span>  </button>
-			
+			<button type="button" class="btn btn-primary" id="saveBtnCrearGlosasAdicionar" onclick="CrearGlosasAdicionar()">Grabar!</button> 
                         </div>
 		
                         <div class="modal-body">                         
 			
   			  <form id="postFormGlosasAdicionar" name="postFormGlosasAdicionar">
-				<div id="flex-container-detalleglosasadicionar">
-					  <div>
-					                              <input type="hidden" name="post_id" id="post_id">
 
-                  
+                                <input type="hidden" name="post_id" id="post_id">
 
-				
+                      <div class="row row-cols-lg-auto g-3 align-items-center mb-3">
+
+
+				  <div class="col-4">
 					                                   
                                     <input type="hidden" class="form-control" id="sedesClinicaAdicionar_id" name="sedesClinicaAdicionar_id"  value="{{Sede}}" readonly></input>
-                        
+                                </div>
+
+
+				<div class="col-12">
                                    	 <label class="visually-hidden" for="observacionesAdicionar">observaciones:</label>
                                
 					 <input type="text"  class="form-control" id="observacionesAdicionar" name="observacionesAdicionar" placeholder="observaciones"  >
-                             
+                                </div>
+
+
+				<div class="col-12">
                                    	 Factura:
                                
 					 <input type="text" class="form-control" id="facturaAdicionar_id" name="facturaAdicionar_id" placeholder="factura_id"  >
-                               
+                                </div>
+
+
+			
+				<div class="col-12">
                                     
 				 <label  for="totalGlosaAdicionar">valorGlosa:</label>
                                     <input type="text" class="form-control" id="totalGlosaAdicionar" name="totalGlosaAdicionar" value="0" placeholder="totalrGlosa:" ></input>
-                             
+                                </div>
+
+			
+                                <div class="col-12">
                                    
                                     <input type="hidden" id="fechaRegistroAdicionar" name="fechaRegistroAdicionar" value="" > </input>
-                               
+                                </div>
+
+                                <div class="col-12">
 				 <label  for="estadoRegAdicionar">EstadoRegistro:</label>
                                     
                                     <input type="text" class="form-control" id="estadoRegAdicionar" name="estadoRegAdicionar" value="A" placeholder="CantidadRechazadas:"  readonly> </input>
-                              
+                                </div>
+
+                                <div class="col-12">
                                     Usuario:
                                     <input type="text" id="usuarioRegistroAdicionar_id" name="usuarioRegistroAdicionar_id" value="{{Username_id}}" readonly > </input>
-                           
+                                </div>
 
-
-
-			  </div>
-			  </div>
+                                </div> <!-- CIERRA ROW 8 COLUMNAS  -->
 
                             </form>
 

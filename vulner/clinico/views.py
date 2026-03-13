@@ -525,7 +525,7 @@ def crearHistoriaClinica(request):
                         miConexion3 = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres", password="123456")
                         cur3 = miConexion3.cursor()
 
-                        comando = 'INSERT INTO clinico_Historia ("sedesClinica_id", "tipoDoc_id" , documento_id , "consecAdmision", folio ,fecha , "tiposFolio_id" ,"causasExterna_id" , "serviciosAdministrativos_id" , especialidades_id ,planta_id, motivo , subjetivo,objetivo, analisis ,plann, tratamiento ,                apache2, antibioticos, monitoreo, "movilidadLimitada", nauseas,vomito, "llenadoCapilar", neurologia, irritacion, pulsos, "retiroPuntos",             inmovilizacion, "notaAclaratoria", "fecNotaAclaratoria", "examenFisico", "noQx", observaciones, "riesgoHemodinamico", riesgos, trombocitopenia, hipotension, "indiceMortalidad", "ingestaAlcohol", "inmovilizacionObservaciones", justificacion, leucopenia, "manejoQx", "fechaRegistro", "usuarioRegistro_id", "estadoReg" , mipres,"ordenMedicaLab","ordenMedicaRad","ordenMedicaTer","ordenMedicaMed","ordenMedicaInt", "especialidadesMedicos_id", "ordenDeControl")  VALUES(' + "'" + str(sede) + "',"  + "'" +  str(tipoDocId.id) + "','" + str(documentoId.id) + "','" + str(ingresoPaciente) + "','" + str(ultimofolio2) + "','" + str(fechaRegistro) + "','"  +  str(tiposFolio) + "','" + str(causasExterna) + "'," + str(serviciosAdministrativos) + ",'" + str(especialidadId.especialidades_id) + "','" + str(plantaId.id) + "','" + str(motivo) + "','" + str(subjetivo) + "','" + str(objetivo) + "','" + str(analisis) + "','" + str(plan) + "','" + str(tratamiento)  + "','" + str(apache2) + "','" + str(antibioticos) + "','" + str(monitoreo) + "','"  + str(movilidadLimitada) + "','" + str(nauseas) + "','"  + str(vomito) + "','"  + str(llenadoCapilar) + "','" + str(neurologia) + "','"  + str(irritacion) + "','"  + str(pulsos) + "','" + str(retiroPuntos) + "','" + str(inmovilizacion) + "','" + str(notaAclaratoria) + "','"  + str(fecNotaAclaratoria) + "','" + str(examenFisico) +  "','" + str(noQx1) + "','" + str(observaciones) + "','" + str(riesgoHemodinamico) + "','" + str(riesgos) + "','" + str(trombocitopenia) + "','" + str(hipotension) + "','"  + str(indiceMortalidad) + "','" + str(ingestaAlcohol) + "','" + str(inmovilizacionObservaciones) + "','" + str(justificacion) + "','" + str(leucopenia) + "','" + str(manejoQx) + "','"  + str(fechaRegistro) + "','" + str(usuarioRegistro) + "','" + str(estadoReg) + "','" + str(mipres) + "'" +  ",'" + str(ordenMedicaLab) + "'" +  ",'" + str(ordenMedicaRad) + "'" +  ",'" + str(ordenMedicaTer) + "'"  +  ",'" + str(ordenMedicaMed) + "'"   +  ",'" + str(ordenMedicaInt) + "'," + "'" + str(espMedico) + "','" + str(ordenDeControl)  + "'"  +  ") RETURNING id ;"
+                        comando = 'INSERT INTO clinico_Historia ("sedesClinica_id", "tipoDoc_id" , documento_id , "consecAdmision", folio ,fecha , "tiposFolio_id" ,"causasExterna_id" , "serviciosAdministrativos_id" , especialidades_id ,planta_id, motivo , subjetivo,objetivo, analisis ,plann, tratamiento ,                apache2, antibioticos, monitoreo, "movilidadLimitada", nauseas,vomito, "llenadoCapilar", neurologia, irritacion, pulsos, "retiroPuntos",             inmovilizacion, "notaAclaratoria", "fecNotaAclaratoria", "examenFisico", "noQx", observaciones, "riesgoHemodinamico", riesgos, trombocitopenia, hipotension, "indiceMortalidad", "ingestaAlcohol", "inmovilizacionObservaciones", justificacion, leucopenia, "manejoQx", "fechaRegistro", "usuarioRegistro_id", "estadoReg" , "ordenMedicaLab","ordenMedicaRad","ordenMedicaTer","ordenMedicaMed","ordenMedicaInt", "especialidadesMedicos_id", "ordenDeControl")  VALUES(' + "'" + str(sede) + "',"  + "'" +  str(tipoDocId.id) + "','" + str(documentoId.id) + "','" + str(ingresoPaciente) + "','" + str(ultimofolio2) + "','" + str(fechaRegistro) + "','"  +  str(tiposFolio) + "','" + str(causasExterna) + "'," + str(serviciosAdministrativos) + ",'" + str(especialidadId.especialidades_id) + "','" + str(plantaId.id) + "','" + str(motivo) + "','" + str(subjetivo) + "','" + str(objetivo) + "','" + str(analisis) + "','" + str(plan) + "','" + str(tratamiento)  + "','" + str(apache2) + "','" + str(antibioticos) + "','" + str(monitoreo) + "','"  + str(movilidadLimitada) + "','" + str(nauseas) + "','"  + str(vomito) + "','"  + str(llenadoCapilar) + "','" + str(neurologia) + "','"  + str(irritacion) + "','"  + str(pulsos) + "','" + str(retiroPuntos) + "','" + str(inmovilizacion) + "','" + str(notaAclaratoria) + "','"  + str(fecNotaAclaratoria) + "','" + str(examenFisico) +  "','" + str(noQx1) + "','" + str(observaciones) + "','" + str(riesgoHemodinamico) + "','" + str(riesgos) + "','" + str(trombocitopenia) + "','" + str(hipotension) + "','"  + str(indiceMortalidad) + "','" + str(ingestaAlcohol) + "','" + str(inmovilizacionObservaciones) + "','" + str(justificacion) + "','" + str(leucopenia) + "','" + str(manejoQx) + "','"  + str(fechaRegistro) + "','" + str(usuarioRegistro) + "','" + str(estadoReg) + "','"  + str(ordenMedicaLab) + "'" +  ",'" + str(ordenMedicaRad) + "'" +  ",'" + str(ordenMedicaTer) + "'"  +  ",'" + str(ordenMedicaMed) + "'"   +  ",'" + str(ordenMedicaInt) + "'," + "'" + str(espMedico) + "','" + str(ordenDeControl)  + "'"  +  ") RETURNING id ;"
 
                         ## fin tentativo insert
 
@@ -804,11 +804,15 @@ def crearHistoriaClinica(request):
                             observa = key["observa"]
                             print("observa", observa)
                             estadoExamenes_id = "1"
+                            mipres = key["mipres"] 
+                            print("mipres = ", mipres)
+                            if mipres == '':
+                               mipres='null'
 
                             if cups != "":
                                 consecutivo = consecutivo + 1
                                 #codigoCupsId = Examenes.objects.get(codigoCups=cups)
-                                comando='INSERT INTO clinico_historiaexamenes ("tiposExamen_id","codigoCups", consecutivo, cantidad ,observaciones,"estadoReg","estadoExamenes_id",anulado , historia_id ,"usuaroRegistra_id","consecutivoLiquidacion") values (' + "'" + str(tiposExamen_Id) + "','" + str(cups) + "','" + str(consecutivo) + "','" + str(cantidad) + "','" + str(observa) + "','A','" + str(estadoExamenes_id) + "','N','" + str(historiaId) +"','" + str(usuarioRegistro) + "'," + str(consecLiquidacion) + ") RETURNING id"
+                                comando='INSERT INTO clinico_historiaexamenes ("tiposExamen_id","codigoCups", consecutivo, cantidad ,observaciones,"estadoReg","estadoExamenes_id",anulado , historia_id ,"usuaroRegistra_id","consecutivoLiquidacion", mipres) values (' + "'" + str(tiposExamen_Id) + "','" + str(cups) + "','" + str(consecutivo) + "','" + str(cantidad) + "','" + str(observa) + "','A','" + str(estadoExamenes_id) + "','N','" + str(historiaId) +"','" + str(usuarioRegistro) + "'," + str(consecLiquidacion) + ", '" + str(mipres) + "'" + ") RETURNING id"
                                 print("comando = ", comando)
                                 resultado = cur3.execute(comando)
                                 a = cur3.fetchone()[0]
@@ -923,7 +927,7 @@ def crearHistoriaClinica(request):
 
                                     print ("Autorizacion Final = ", autorizacionId)
 
-                                    comando = 'INSERT INTO autorizaciones_autorizacionesdetalle ("estadoAutorizacion_id", "cantidadSolicitada", "cantidadAutorizada", "fechaRegistro", "estadoReg", autorizaciones_id, "usuarioRegistro_id", "examenes_id", cums_id, "tiposExamen_id", "valorSolicitado")  VALUES (' + "'" + str(estadoAutorizacionId.id) + "'," + "'" + str(cantidad) + "'" + ' ,0, now(),' + "'" + str('A') + "','"  + str(autorizacionId) + "','" + str(usuarioRegistro)  + "'," +  "'"  + str(codigoCupsId[0].id) + "',null, " + "'" + str(tiposExamen_Id) + "'," + "'" + str(TotalTarifa)  + "'" +  ')'
+                                    comando = 'INSERT INTO autorizaciones_autorizacionesdetalle ("estadoAutorizacion_id", "cantidadSolicitada", "cantidadAutorizada", "fechaRegistro", "estadoReg", autorizaciones_id, "usuarioRegistro_id", "examenes_id", cums_id, "tiposExamen_id", "valorSolicitado", mipres)  VALUES (' + "'" + str(estadoAutorizacionId.id) + "'," + "'" + str(cantidad) + "'" + ' ,0, now(),' + "'" + str('A') + "','"  + str(autorizacionId) + "','" + str(usuarioRegistro)  + "'," +  "'"  + str(codigoCupsId[0].id) + "',null, " + "'" + str(tiposExamen_Id) + "'," + "'" + str(TotalTarifa)  + "','" + str(mipres) + "'"  ')'
 
                                     print ("comando=", comando)
 
@@ -941,7 +945,7 @@ def crearHistoriaClinica(request):
 
                                 if (codigoCupsId[0].requiereAutorizacion == 'N'):
 
-                                    comando = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo,fecha, cantidad, "valorUnitario", "valorTotal",cirugia_id,"fechaCrea", "fechaRegistro", "estadoRegistro", "examen_id",  "usuarioRegistro_id", liquidacion_id, "tipoRegistro", anulado) VALUES (' + "'" +  str(consecLiquidacion)  + "','" + str(fechaRegistro) + "','" + str(cantidad) + "','"  + str(tarifaValor) + "','" + str(TotalTarifa)  + "',null,'"  +  str(fechaRegistro) + "','" +  str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(codigoCupsId[0].id) + "','" + str(usuarioRegistro) + "'," + liquidacionId + ",'SISTEMA','N')"
+                                    comando = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo,fecha, cantidad, "valorUnitario", "valorTotal",cirugia_id,"fechaCrea", "fechaRegistro", "estadoRegistro", "examen_id",  "usuarioRegistro_id", liquidacion_id, "tipoRegistro", anulado, mipres) VALUES (' + "'" +  str(consecLiquidacion)  + "','" + str(fechaRegistro) + "','" + str(cantidad) + "','"  + str(tarifaValor) + "','" + str(TotalTarifa)  + "',null,'"  +  str(fechaRegistro) + "','" +  str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(codigoCupsId[0].id) + "','" + str(usuarioRegistro) + "'," + liquidacionId + ",'SISTEMA','N','" + str(mipres) + "')"
                                     print("comando de insercio" , comando)
                                     cur3.execute(comando)
                                     #miConexiont.commit()
@@ -1118,7 +1122,7 @@ def crearHistoriaClinica(request):
 
                                         print("comando = ", comando)
                                         cur3.execute(comando)
-                                        autorizacionId = curt.fetchone()[0]
+                                        autorizacionId = cur3.fetchone()[0]
                                         print("me_doy")
                                         #miConexiont.commit()
                                         #miConexiont.close()
@@ -1924,15 +1928,17 @@ def crearHistoriaClinica(request):
                             print("cantidadMedicamento=", cantidadMedicamento)
                             diasTratamiento = key["diasTratamiento"]
                             print("diasTratamiento=", diasTratamiento)
+                            mipres = key["mipres"]
+                            print ("mipres = ", mipres)
 
                             if medicamentos != "":
                                 conteoMed=conteoMed+1
 
-                                comando = 'INSERT INTO clinico_historiaMedicamentos ("dosisCantidad",suministro_id, frecuencia_id, "dosisUnidad_id","viaAdministracion_id" ,  "cantidadOrdenada","diasTratamiento",historia_id,"usuarioRegistro_id", "estadoReg", "fechaRegistro","consecutivoLiquidacion","consecutivoMedicamento") values (' + "'" + str(
+                                comando = 'INSERT INTO clinico_historiaMedicamentos ("dosisCantidad",suministro_id, frecuencia_id, "dosisUnidad_id","viaAdministracion_id" ,  "cantidadOrdenada","diasTratamiento",historia_id,"usuarioRegistro_id", "estadoReg", "fechaRegistro","consecutivoLiquidacion","consecutivoMedicamento",mipres) values (' + "'" + str(
                                     dosis) + "','" + str(medicamentos) + "','" + str(
                                     frecuencia) + "','" + str(uMedidaDosis) + "','" + str(vias) + "','" + str(
                                     cantidadMedicamento) + "','" + str(diasTratamiento) + "','" + str(historiaId) + "','" + str(
-                                    usuarioRegistro) + "','A','" + str(fechaRegistro) + "',0,'" + str(consecutivo)  + "') RETURNING id"
+                                    usuarioRegistro) + "','A','" + str(fechaRegistro) + "',0,'" + str(consecutivo) + "','" + str(mipres) + "') RETURNING id"
                                 print("comando = ", comando)
                                 resultado = cur3.execute(comando)
                                 i = cur3.fetchone()[0]
@@ -1992,10 +1998,10 @@ def crearHistoriaClinica(request):
                                     # Aqui Guardar FARMACIA DETALLE
                                     #
 
-                                    comando = 'INSERT INTO farmacia_farmaciadetalle (farmacia_id, "historiaMedicamentos_id", suministro_id, "dosisCantidad",  "dosisUnidad_id","viaAdministracion_id" ,  "cantidadOrdenada","fechaRegistro", "usuarioRegistro_id","estadoReg","consecutivoMedicamento", despachado) values (' + "'" + str(
+                                    comando = 'INSERT INTO farmacia_farmaciadetalle (farmacia_id, "historiaMedicamentos_id", suministro_id, "dosisCantidad",  "dosisUnidad_id","viaAdministracion_id" ,  "cantidadOrdenada","fechaRegistro", "usuarioRegistro_id","estadoReg","consecutivoMedicamento", despachado, mipres) values (' + "'" + str(
                                         f) + "','" + str(i) + "','" + str(
                                         medicamentos) + "','" + str(dosis) + "','" + str(
-                                        uMedidaDosis) + "','" + str(vias)  + "','" + str(cantidadMedicamento) + "','" + str(fechaRegistro) + "','" + str(usuarioRegistro) + "','A','"  + str(consecutivo)  + "','N') RETURNING id"
+                                        uMedidaDosis) + "','" + str(vias)  + "','" + str(cantidadMedicamento) + "','" + str(fechaRegistro) + "','" + str(usuarioRegistro) + "','A','"  + str(consecutivo)   + "','" + str(mipres) + "','N') RETURNING id"
                                     print("comando = ", comando)
                                     resultado = cur3.execute(comando)
                                     fd = cur3.fetchone()[0]
@@ -2153,7 +2159,7 @@ def crearHistoriaClinica(request):
 
 
 
-                                    comando = 'INSERT INTO autorizaciones_autorizacionesdetalle ("estadoAutorizacion_id", "cantidadSolicitada", "cantidadAutorizada", "fechaRegistro", "estadoReg", autorizaciones_id, "usuarioRegistro_id", "tipoSuministro_id", cums_id,"historiaMedicamentos_id")  VALUES (' + "'" + str(estadoAutorizacionId.id) + "'," + "'" + str(cantidadMedicamento) + "'" + ' ,0, now(),' + "'" + str('A') + "','"  + str(autorizacionId) + "','" + str(usuarioRegistro)  + "','" + str(tiposSuministroId.id) + "','" + str(medicamentos) + "','" + str(i) + "')"
+                                    comando = 'INSERT INTO autorizaciones_autorizacionesdetalle ("estadoAutorizacion_id", "cantidadSolicitada", "cantidadAutorizada", "fechaRegistro", "estadoReg", autorizaciones_id, "usuarioRegistro_id", "tipoSuministro_id", cums_id,"historiaMedicamentos_id", mipres)  VALUES (' + "'" + str(estadoAutorizacionId.id) + "'," + "'" + str(cantidadMedicamento) + "'" + ' ,0, now(),' + "'" + str('A') + "','"  + str(autorizacionId) + "','" + str(usuarioRegistro)  + "','" + str(tiposSuministroId.id) + "','" + str(medicamentos) + "','" + str(i) + "','" + str(mipres)  + "')"
 
 
                                     cur3.execute(comando)

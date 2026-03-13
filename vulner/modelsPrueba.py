@@ -1152,5 +1152,32 @@ lunes  09 de marzo
 	OPS no entiendo por que no sale bien el panelConvenios los TABS no fncinana
 	OPS ojo que pasa con el codigo de la tarifa en la impresion de la cuenta y factura es el homologado REVISAR en PUESTA A PUNTO
 
-	OPS OJO PARA PUESTA PUNTO DE CORTE . todas los query autorizaciones apunten a ingresos
+	OPS OJO PARA PUESTA PUNTO DE CORTE . todas los query autorizaciones apunten a ingresos creo en RIPS
 	OPS OJO PARA PUESTA PUNTO DE CORTE . todas los pagos revisar en rips ect querys de mopney , forma pago etc
+
+ 	Ops tengo una campo autorizaciones en la tabla admisiones_ingresos dizque para la autorizacion de la hospitalizacion o la urgencia hay que desarrollar mas estop creo ta mal
+	PS no me gusta la autorizacion de rips en medicamentos la toma de historialmedicamentos no hay que arreglar y tomarla de autorizacionesdetalle
+	OPS hice un folio de histria clinica y grabo todo pero al funalñme saco un error creo al impreimir las orden entonces la
+		pantala queda abierta  y se puede seguir guardandp lo mismo se duplica- cusruplica la info como conrolar ello ?
+	OPS sigue el error de que cuando autorizadetale todos no reresca pantalla aunque en autorizaciones si refrca pero supong es tema de selccionar la adecuada y
+	hacer el refresh en detalle
+	ops al hospitalizar desde triage un paciene resulta que seleccione otro convenio  y aunque creo el facturacion_liquiacion no creo en la tabla facturacion_conveniospacienteingresos
+	OPS cuando pase de triage a admisiones.ingresos hay un  problema hay que actualziar el ingreso_id OJOOO. LO QUE HAY QUE HACE ES QUE CUANDO PASA DE 
+		TRIAGE A ADMISON NO PEMITIR CAMBIO DE CONTRATO. EL QUE VIENE D ETRIAGE Y EN ADMISIOENS SI SE LE PUEDE CREAR EL NUEVO CONTRATO Y OBLIGAR DEDE TRIAGE AINGRESAR CONEVNIO
+
+
+	OPS pailas - pailas pailander yacasi
+	OPS cuando se despacha medicamentos viaje el mipres del medicamento a liquidaciondetalle
+	OPs cuando se fatura viaja mipres y autrizaciondetalle_id de liquidaciondetalle a facturaciondetall
+	OPS cuando se ordena medicamentos o para clinico sin autorizacion se guarda el mipres
+
+	ops ME FALTA TODO GLOSAS DESDE CEROS HACELO CON EL PACIENTE BORJA PASO A PASO SE LE VA LA OTRA SEMANA COMO LE PARECE
+	opv revisar , diagnosticos en rips
+		revisar, formular laboraorio -- autorizaion -- farmacia -- disopnsa -- liquidaciondetale -- rips, aut,mipres
+	
+	
+	MArzo 16 :
+	ojo:
+	BIEN solo hice miprez y autorizacindetalle_id de laboraorio, con autorizacion FUNCIONANDO
+	BIEN HAY QUE HACER TODO LOS DEMAS LOS MEDIAMNETOS (bueno ya adelante para que caiga en farmacia el mipres y en farmacia cuando dispense lo guarde en liquidaciondetalle , creo solo falta el fromt end agregarle campo mipres al datatable manual y lo envie para que lo grabe) D EFARMACIA Y faltan tODOS LOS PARACLINICO EXXCEPTO LABORATORIO
+	BIEN VAMOS BIE. HAY MUCHO WORK

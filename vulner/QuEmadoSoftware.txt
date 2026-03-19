@@ -9,3 +9,11 @@ esta quemado el tipo de dx  1= principal, 2 relacionado 1 3 relacionado 2: tipos
 esta quemado creo de ripsotrosservicios los nombres en algun prigama creop rips
 
 a lo mejor qumaados nomnbres de concpeots en impresion de prefactura ,factura
+select * from autorizaciones_estadosAutorizacion order by id desc PENDIENTE
+supongo tamlien os esatdo de cirugia y muchos mas estado supongo
+
+
+
+
+
+

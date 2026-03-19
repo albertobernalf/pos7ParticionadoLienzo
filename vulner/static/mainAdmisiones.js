@@ -142,7 +142,7 @@ function arrancaAdmisiones(valorTabla,valorData)
 	  "render": function ( data, type, row ) {
                         var btn = '';
 
-              btn = btn + " <input type='radio'  name='ingresoId' style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;' class='miIngresoId form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
+              btn = btn + " <input type='radio' id='ingresoId'  name='ingresoId' style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;' class='miIngresoId form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
 
 
                        return btn;
@@ -206,14 +206,11 @@ function arrancaAdmisiones(valorTabla,valorData)
 		        { data: "fields.numPagos"},
 
 
-            ] //,
-	 //initComplete: function(settings, json) {
+            ]  ,
+	  initComplete: function(settings, json) {
             // Selecciona la primera fila (índice 0)
-      //      table.row(':eq(0)'{ page: 'current' }).select();
-
-            // Alternativa: Si no usas la extensión 'select'// busca el checkbox y márcalo manualmente:
-            // table.row(0).node().querySelector('input[type="checkbox"]').checked = true;
-       // }
+            $('#tablaDatos tbody tr:eq(0) input[type="radio"]').prop('checked', true);
+        }
 
              }
 
@@ -222,9 +219,7 @@ function arrancaAdmisiones(valorTabla,valorData)
         // dataTable.row(0).document.querySelector('input[name=".miIngresoId"]').checked = true;
 
         //	$('#tablaDatos tbody tr:eq(0) .miIngresoId').prop('checked', true);  // Checkprimera fila el checkbox creo solo javascript
-
-
-
+	
   }
 
       if (valorTabla == 2)
@@ -756,7 +751,6 @@ const initDataTableAdmisiones = async () => {
         // arrancaAdmisiones(6,data);
 	//    dataTableHabitacionesInitialized = true;
 
-
 }
 
  // COMIENZA ONLOAD
@@ -764,8 +758,20 @@ const initDataTableAdmisiones = async () => {
 window.addEventListener('load', async () => {
     await  initDataTableAdmisiones();
 	 //$('#tablaDatos tbody tr:eq(0) .miIngresoId').prop('checked', true);  // Checkprimera fila el checkbox creo solo javascript
-	
+	 // $('#tablaDatos tbody tr:eq(0) input[type="radio"]').prop('checked', true);
+
+
+	alert("aqui disparo el evento click");
+	const boton = document.querySelector(".miIngresoId");
+	const evento = new MouseEvent("click", {
+	  view: window,
+	  bubbles: true,
+	  cancelable: true
+	});
+		// boton.dispatchEvent(evento);
+
 });
+
 
 
  /* FIN ONLOAD */

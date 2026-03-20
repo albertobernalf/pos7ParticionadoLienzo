@@ -1144,17 +1144,14 @@ lunes  09 de marzo
 	OPS ojo que pasa con el codigo de la tarifa en la impresion de la cuenta y factura es el homologado REVISAR en PUESTA A PUNTO
 	OPS OJO PARA PUESTA PUNTO DE CORTE . todas los pagos revisar en rips ect querys de mopney , forma pago etc
 
-	PS no me gusta la autorizacion de rips en medicamentos la toma de historialmedicamentos no hay que arreglar y tomarla de autorizacionesdetalle
 	OPS hice un folio de histria clinica y grabo todo pero al funalñme saco un error creo al impreimir las orden entonces la
 		pantala queda abierta  y se puede seguir guardandp lo mismo se duplica- cusruplica la info como conrolar ello ?
 	OPS sigue el error de que cuando autorizadetale todos no reresca pantalla aunque en autorizaciones si refrca pero supong es tema de selccionar la adecuada y
 	hacer el refresh en detalle
 	ops al hospitalizar desde triage un paciene resulta que seleccione otro convenio  y aunque creo el facturacion_liquiacion no creo en la tabla facturacion_conveniospacienteingresos
-	OPS cuando pase de triage a admisiones.ingresos hay un  problema hay que actualziar el ingreso_id OJOOO. LO QUE HAY QUE HACE ES QUE CUANDO PASA DE 
-		TRIAGE A ADMISON NO PEMITIR CAMBIO DE CONTRATO. EL QUE VIENE D ETRIAGE Y EN ADMISIOENS SI SE LE PUEDE CREAR EL NUEVO CONTRATO Y OBLIGAR DEDE TRIAGE AINGRESAR CONEVNIO
-		OJO PROBAR A VR SI SALE ERROR
+	OPS cuando pase de triage a admisiones.ingresos hay un  problema hay que actualziar el ingreso_id OJOOO. 
 		
-	ops ME FALTA TODO GLOSAS DESDE CEROS HACELO CON EL PACIENTE BORJA PASO A PASO SE LE VA LA OTRA SEMANA COMO LE PARECE
+	ops ME FALTA probar TODO GLOSAS DESDE CEROS HACELO CON EL PACIENTE BORJA PASO A PASO SE LE VA LA OTRA SEMANA COMO LE PARECE
 	opv revisar , diagnosticos en rips
 		revisar, formular laboraorio -- autorizaion -- farmacia -- disopnsa -- liquidaciondetale -- rips, aut,mipres
 	
@@ -1173,11 +1170,14 @@ lunes  09 de marzo
 	OPS se desarreglo la entrada del formulario crear admision que paso ?
 	OPS la fecha me mama mucho gallo en crear adminsiondef
 	OPS falta actualizar el id de autorizaciondetalle de la hospitalizacion en la tabla ingresoso   . hecho PROBAR   
-	OPS por que carajo en lam facturacion me sale BORJA            
+
 
 	OPS cuando uardo una autoriaciondetalle no me quita la modal y no refresca, ademas en atiruzaciones no la refresca verificar
         OPS la cantidad ordenada en el campo cantidad d efarmaciadetalle nollega esta en blanco             	
 	OPS men farmacia cuando despacho no refresca el despacho actul                                                                                      
 	Ops el programa de farmacia toca arreglarlo  mas.. mas Pero ahi va muy bien ok
 
-	ops aun no he podico levar una autorizacion hospitalaria al modulo de autoriacines NO FUNCIONA	
+	ops El modulo de citugia tiene dos problemitas  solucionr . 1. permitir hace rmas de una cirugia en un mismo ingreso
+								    2. Permitir dos o mas eces un procedimiento eu una misma cirugia
+								    y listop
+	ops la autorizacion de una estancia automatica desde donde viene o como viaja

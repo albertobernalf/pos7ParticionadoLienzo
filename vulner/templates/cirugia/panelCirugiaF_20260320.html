@@ -428,14 +428,14 @@ function RefrescarPantalla() {
 			<input type="text"  id="cirugiaIdModalProcedimientos" name="cirugiaIdModalProcedimientos"  readonly></input>
 
                                         Cups:
-                                            <select class="select-css h-40 w-20" id="cupsProc"  name="cupsProc"  required>
+                                            <select class="select-css h-40 w-20" id="cups" name="cups" required>
                                                 {% for cupsCirugia in CupsCirugia %}
                                                 <option value="{{cupsCirugia.id}}"> {{cupsCirugia.nombre}}</option>
                                                 {% endfor %}
                                             </select>
 
                                         Finalidad:
-                                            <select class="select-css h-40 w-20" id="finalidad"  tabindex= "0"  name="finalidad"  required>
+                                            <select class="select-css h-40 w-20" id="finalidad" name="finalidad" required>
                                                 {% for finalidadCirugia in FinalidadCirugia %}
                                                 <option value="{{finalidadCirugia.id}}"> {{finalidadCirugia.nombre}}</option>
                                                 {% endfor %}
@@ -448,7 +448,7 @@ function RefrescarPantalla() {
 
 			</div>
 		</div>
-			       </form>
+			
 			<!-- Aqui Data Table  -->
 				 <div class="row">
 				
@@ -478,7 +478,7 @@ function RefrescarPantalla() {
 			
                             
 
-                     
+                            </form>
 
                         </div> <!-- CIERRA BODY -->
 			<div class="modal-footer">

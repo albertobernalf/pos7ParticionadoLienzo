@@ -1566,9 +1566,8 @@ const initDataTableProgramacionCirugia = async () => {
  // COMIENZA ONLOAD
 
 window.addEventListener('load', async () => {
-
     await  initDataTableProgramacionCirugia();
-	 //$('#tablaProgramacionCirugia tbody tr:eq(0) .miSol').prop('checked', true);  // Checkprimera fila el checkbox creo solo javascript
+	 $('#tablaProgramacionCirugia tbody tr:eq(0) .miSol').prop('checked', true);  // Checkprimera fila el checkbox creo solo javascript
 
 });
 

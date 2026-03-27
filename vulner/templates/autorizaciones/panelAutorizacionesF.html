@@ -351,31 +351,17 @@ function RefrescarPantallaDetalle() {
                         <div class="modal-body">
 
 		
-                            <form id="postFormAutorizacionesDetalle" name="postFormAutorizacionesDetalle" 
-                                  novalidate>
-
-				<!--<div id="flex-container-detalleAutorizaciones"> -->
-						<!-- <div> -->
+                            <form id="postFormAutorizacionesDetalle" name="postFormAutorizacionesDetalle" style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;"   novalidate>
                      
 			 <label  for="mipres">Mipres:</label>
-   			   <input type="text" id="mipres" name="mipres" value=""  readonly> </input>
-
-
-			
-                            <!--   </div> -->
-                             <!--   </div>  --> <!-- cierra flexbox -->
-
+   			   <input type="text" id="mipres" name="mipres" size="15"  readonly> </input>
                                                           
 				<input type="hidden" id="Psede" name="Psede" value="{{Sede}}">                   
 
-   			   <input type="text" id="autorizacionDetalleId" name="autorizacionDetalleId" value=""  readonly> </input>
+   			   <input type="hidden" id="autorizacionDetalleId" name="autorizacionDetalleId" value=""  readonly> </input>
 
-
-
-			
-
-		          
-				<select class="select-css"  id="AserviciosAdministrativos"
+	          
+				<select class="select-box"  id="AserviciosAdministrativos"
                                                                 name="AserviciosAdministrativos">
                                                             {% for serviciosAdministrativos in ServiciosAdministrativos %}
                                                             <option value="{{serviciosAdministrativos.id}}">
@@ -385,6 +371,10 @@ function RefrescarPantallaDetalle() {
                                                             {% endfor %}
                                                         </select>
 
+				Convenio:
+				 <input type="hidden" id="Aconvenios" name="Aconvenios"  readonly> </input>
+
+				<!--
 				<select class="select-css"  id="Aconvenios"
                                                                 name="Aconvenios" disable>
                                                             {% for convenios in Convenios %}
@@ -393,11 +383,12 @@ function RefrescarPantallaDetalle() {
                                                             </option>
                                                             {% endfor %}
                                                         </select>
+				-->
 
-				TipoAutorizacion:
+				Tipo:
                                     <input type="text" id="tipoTipoExamen" name="tipoTipoExamen" readonly ></input>
-		          
-				<select class="select-css"  id="estadoAutorizacion"
+		          	Estado:
+				<select class="select-box"  id="estadoAutorizacion"
                                                                 name="estadoAutorizacion">
                                                             {% for estadosAutorizacion in EstadosAutorizacion %}
                                                             <option value="{{estadosAutorizacion.id}}">
@@ -409,10 +400,10 @@ function RefrescarPantallaDetalle() {
                                     <input type="text" id="numeroAutorizacion" name="numeroAutorizacion"  ></input>
                                     TipoExamen:
                                     <input type="text" id="tipNombre" name="tipNombre"  value="" ></input>
-                                    ExamenId:
-                                    <input type="text" id="exaNombre" name="exaNombre"  readonly></input>
                                     Examen:
-                                    <input type="text" id="examenes_id" name="examenes_id"  readonly></input>
+                                    <input type="text" id="exaNombre" name="exaNombre"  readonly></input>
+
+                                    <input type="hidden" id="examenes_id" name="examenes_id" ></input>
                                     CantidadSolicitada:
                                     <input type="text" id="cantidadSolicitada" name="cantidadSoclicitada" value=""  readonly></input>
                                     CantidadAutorizada:
@@ -424,11 +415,12 @@ function RefrescarPantallaDetalle() {
                                    
                                     <input type="hidden" id="fechaRegistro" name="fechaRegistro" value=""  > </input>
                                    usuarioRegistro
-                                    <input type="text" id="usuarioRegistro2_id" name="usuarioRegistro2_id" value="{{Username_id}}" readonly> </input>
+                                    <input type="hidden" id="usuarioRegistro2_id" name="usuarioRegistro2_id" value="{{Username_id}}" > </input>
 
 
-		<textarea id="mensajesErrorAutorizacionesDetalle" name="mensajesErrorAutorizacionesDetalle" style="background-color: lightred; color: navy;"  rows="1" cols="60" placeholder="Mensajes..."  wrap="hard"></textarea>
-                                    <button type="button" class="btn btn-primary" id="saveBtnActualizarAut"   value="create" onclick="ActualizarAut()">Guardar </button>
+				<button type="button" class="btn btn-primary" id="saveBtnActualizarAut"   value="create" onclick="ActualizarAut()">Guardar </button>
+				<textarea id="mensajesErrorAutorizacionesDetalle" name="mensajesErrorAutorizacionesDetalle" style="background-color: lightred; color: navy;"  rows="1" cols="60" placeholder="Mensajes..."  wrap="hard"></textarea>
+                                    
  
                             </form>
 

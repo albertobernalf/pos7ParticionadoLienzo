@@ -131,13 +131,13 @@ function RefrescarPantalla() {
                         <div class="modal-body">
 
                  	
-  			  <form id="postFormEditarConvenios" name="postFormEditarConvenios" class="form-container-editaConvenio"  style="display: flex; flex-direction: column; gap: 10px;">
+  			  <form id="postFormEditarConvenios" name="postFormEditarConvenios" class="form-container-editaConvenio"  style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;">
 
                                 <input type="text" name="postConvenio_id" id="postConvenio_id">
 	
 
                                         <label for="serviciosAdministrativos_id" >ServiciosAdmon:</label>
-                                            <select class="select-css" id="serviciosAdministrativos_id"   name="serviciosAdministrativos_id"
+                                            <select class="select-box" id="serviciosAdministrativos_id"   name="serviciosAdministrativos_id"
                                                     required>
                                                 {% for serviciosAdministrativos in ServiciosAdministrativos %}
                                                 <option value="{{serviciosAdministrativos.id}}"> {{serviciosAdministrativos.nombre}}</option>
@@ -294,16 +294,14 @@ function RefrescarPantalla() {
                         <div class="modal-body">
                            
 			
-  			  <form id="postFormCrearConvenios" name="postFormCrearConvenios" style="display: flex; flex-direction: column; gap: 10px;">
+  			  <form id="postFormCrearConvenios" name="postFormCrearConvenios" style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;">
 
                                 <input type="text" name="postConvenioC_id" id="postConvenioC_id" readonly>
 
-		<div id="flex-container-crearConvenio">
-			 <div>
 
-                                        <label for="serviciosAdministrativosC_id" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SeviciosAdmon:</label>
+                                        <label for="serviciosAdministrativosC_id" >SeviciosAdmon:</label>
 
-                                            <select class="select-css" id="serviciosAdministrativosC_id"  tabindex= "0"
+                                            <select class="select-box" id="serviciosAdministrativosC_id"  tabindex= "0"
                                                     name="serviciosAdministrativosC_id"
                                                     required>
                                                 {% for serviciosAdministrativos in ServiciosAdministrativos %}
@@ -325,7 +323,7 @@ function RefrescarPantalla() {
 
 
                                     Empresa:
-				<select class="select-css"  id="empresaC_id"
+				<select class="select-box"  id="empresaC_id"
                                                                 name="empresaC_id">
                                                             {% for empresas in Empresas%}
                                                             <option value="{{empresas.id}}">
@@ -336,7 +334,7 @@ function RefrescarPantalla() {
 
 
                                     Tarifario Procedimientos:
-				<select class="select-css"  id="tarifariosDescripcionProcC_id"
+				<select class="select-box"  id="tarifariosDescripcionProcC_id"
                                                                 name="tarifariosDescripcionProcC_id">
                                                             {% for tarifariosDescripcionProc in TarifariosDescripcionProc%}
                                                             <option value="{{tarifariosDescripcionProc.id}}">
@@ -348,7 +346,7 @@ function RefrescarPantalla() {
 
 
                                     Tarifario Suministros:
-				<select class="select-css"  id="tarifariosDescripcionSumC_id"
+				<select class="select-box"  id="tarifariosDescripcionSumC_id"
                                                                 name="tarifariosDescripcionSumC_id">
                                                             {% for tarifariosDescripcionSum in TarifariosDescripcionSum %}
                                                             <option value="{{tarifariosDescripcionSum.id}}">
@@ -359,7 +357,7 @@ function RefrescarPantalla() {
 
 
 					    Tarifario Honorarios:
-                	           	<select class="select-css"  id="tarifariosDescripcionHonoC_id"
+                	           	<select class="select-box"  id="tarifariosDescripcionHonoC_id"
                                                                 name="tarifariosDescripcionHonoC_id">
                                                             {% for tarifariosDescripcionHono in TarifariosDescripcionHono %}
                                                             <option value="{{tarifariosDescripcionHono.id}}">
@@ -452,8 +450,6 @@ function RefrescarPantalla() {
 					</center> 
 
 
-                                </div> <!-- cierra el div -->
-                                </div> <!-- CIERRA flexbox  -->
 
 
                             </form>

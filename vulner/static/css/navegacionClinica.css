@@ -476,4 +476,34 @@ flex-wrap: wrap;
   /* margin:10 */
 }
 
+.select-box {
+  width: 10%;
+  padding: 8px 8px;
+  font-size: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+ /* appearance: none;  Oculta la flecha nativa */
+/*  -webkit-appearance: none; */
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
+.select-box:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}
+
+/*
+.select-box-container::after {
+  content: '▼'; /* Puedes usar un SVG aquí */
+  font-size: 0.8rem;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Permite clic a través de la flecha */
+  color: #555;
+}
+*/

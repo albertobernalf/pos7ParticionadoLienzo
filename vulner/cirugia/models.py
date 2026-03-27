@@ -127,6 +127,7 @@ class CirugiasProcedimientos(models.Model):
         ]
     id = models.AutoField(primary_key=True)
     cirugia = models.ForeignKey('cirugia.Cirugias', blank=True, null=True, editable=True, on_delete=models.PROTECT,    related_name='cirugias12')
+    consecProcedimiento = models.IntegerField(blank=True, null=True, editable=True,)
     cups = models.ForeignKey('clinico.Examenes', blank=True, null=True, editable=True, on_delete=models.PROTECT,    related_name='Cups104')
     finalidad = models.ForeignKey('cirugia.FinalidadCirugia', blank=True, null=True, editable=True, on_delete=models.PROTECT,    related_name='Final004')
     cruento = models.CharField(max_length=1,choices=FLAG_CHOICES, blank=True, null=True ,editable=False)

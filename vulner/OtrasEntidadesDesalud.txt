@@ -1,0 +1,16 @@
+sispro no permite correos corporaticos sino personales
+hercules
+sismed:
+
+capacitacione: acceso a postman api de ellos, cuadrando usuario / sisman plazo octubre cuadrar
+pedr usuario de pruebas. Hay un periodo
+limpia recibe , limpia radica
+
+refus/retus donde dice hl7--> persona juridica
+
+sispro solicita el usuario --> 15 dias. Alguien tiene control aca
+usuario juridoc debe ar un rol a otro. alguien tiene el usauio aquip
+
+el tema de iteroperabilidad preocupa
+
+

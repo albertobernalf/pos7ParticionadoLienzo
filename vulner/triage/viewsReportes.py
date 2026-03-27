@@ -140,6 +140,7 @@ class PDFAtencionInicialUrgencias(FPDF):
 
         ## CURSOR PARA LEER ENCABEZADO
         #
+        print("Entre header PDFAtencionInicialUrgencias")
         miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
                                        password="123456")
 

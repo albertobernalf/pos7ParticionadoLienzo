@@ -226,16 +226,16 @@
 
         <div class="row row-cols-9 mt-3">
             <div class="col-sm-3">
-                                        <label for="serviciosAdministrativos" class="col-sm-1 control-label">Sevicio Admon:</label>
-                                        <div class="col-sm-8">
-                                            <select class="select-css h-40 w-20" id="serviciosAdministrativos"  tabindex= "0"
-                                                    name="serviciosAdministrativos"
+                                        <label for="serviciosAdministrativos">Servicio Admon:</label>
+                                        	sELECCION:
+                                            <select class="select-box" id="serviciosAdministrativos"  tabindex= "0"
+                                                    name="serviciosAdministrativos" style="width: 25%;"
                                                     required>
                                                 {% for serviciosAdministrativos in ServiciosAdministrativos %}
                                                 <option value="{{serviciosAdministrativos.id}}"> {{serviciosAdministrativos.nombre}}</option>
                                                 {% endfor %}
                                             </select>
-				        </div>        
+				       
 
                 </div>
 
@@ -371,37 +371,32 @@
                 </td>
                 <td>
                     <table class="table"  style=" background-color:LightGray; BORDERCOLOR=RED ; border: 8px solid black;  width:99%;">
-                        <form class="form-inline" action="/crearEnfermedadesDef/" method="POST"
-                              id="FormaEnfermedades">
+                        <form class="form-inline" action="/crearEnfermedadesDef/" method="POST" id="FormaEnfermedades" style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;">
                             <!-- INICIO TABLE DE  EL DATATABLE  -->
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="card" >
                                         <div class="card-header" style="height:4rem;">
                                             <center>
-                                                <div class="row">
-
-                                                    <div class="col-sm-4">
-                                                        <select class="select-css" id="enf" name="enf">
+                                               
+							Seleccion:
+                                                        <select class="select-box" id="enf" name="enf" style="width: 25%;">
                                                             {% for enfermedades in Enfermedades %}
                                                             <option value="{{enfermedades.id}}">
                                                                 {{enfermedades.nombre}}
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
-                                                    <div class="col-sm-5">
+
                                                         Observaciones:
                                                         <input type="text" id="observa" name="observa" value="">
-                                                    </div>
-                                                    <div class="col-sm-2">
+
                                                         <span class="text-secondary">Adicionar</span>
                                                         <a class="btn btn-success" href="javascript:void(0)"
                                                            id="BtnAdicionarEnfermedades"> <i
                                                                 class="fa fa-battery-half"></i></a>
-                                                    </div>
+
 						    
-                                                </div>
                                             </center>
                                         </div>
                                         <div class="card-body">
@@ -485,7 +480,7 @@
             <div class="form-group col-md-12">
 		 <center>
 		Seleccion:
-                    <select class="select-css" id="causasExterna" name="causasExterna">
+                    <select class="select-box" id="causasExterna" name="causasExterna" style="width: 25%;">
                         {% for causasExterna in CausasExterna %}
                         <option value="{{causasExterna.id}}"> {{causasExterna.nombre}}</option>
                         {% endfor %}
@@ -549,7 +544,7 @@
              <!-- DESDE AQUIP DATATABLE  -->
 
                     <table class="table" style=" background-color:LightGray; BORDERCOLOR=RED ; border: 8px solid black;   width:99%;">
-                        <form class="form-inline" action="/crearRevisionSistemasDef/" method="POST" id="FormaRevisionSistemas">
+                        <form class="form-inline" action="/crearRevisionSistemasDef/" method="POST" id="FormaRevisionSistemas" style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;">
                             <input type="hidden" id="sede1" name="sede1" value="{{Sede}}">
 
                             <!-- INICIO TABLE DE  EL DATATABLE  -->
@@ -559,27 +554,21 @@
                                     <div class="card">
                                         <div class="card-header" style="height:50px;">
                                             <center>
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <select class="select-css"  id="rev"  name="rev">
+                                               		Seleccion:
+                                                        <select class="select-box"  id="rev"  name="rev" style="width: 25%;">
                                                             {% for revisionSistemas in RevisionSistemas %}
                                                             <option value="{{revisionSistemas.id}}"> {{revisionSistemas.nombre}}
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
-
-                                                    <div class="col-sm-4">
+                                                   
 							Observaciones:
                                                         <input type="text" id="observa9" name="observa9" value="">
-                                                    </div>
-
-                                                    <div class="col-sm-2 text-end">
+                                                 
                                                         <span class="text-secondary">Adicionar</span>
                                                         <a class="btn btn-success" href="javascript:void(0)"
                                                            id="BtnAdicionarRevisionSistemas"> <i class="fa fa-plus"></i></a>
-                                                    </div>
-                                                </div>
+                                                
                                             </center>
                                         </div>
                                         <div class="card-body">
@@ -813,53 +802,39 @@
                 </td>
                 <td>
                     <table class="table"   background-color:LightGray; BORDERCOLOR=RED ; border: 8px solid black;   width:99%;">
-                        <form class="form-inline" action="/crearLaboratoriosDef/" method="POST"
-                              id="FormaLaboratorios">
+                        <form class="form-inline" action="/crearLaboratoriosDef/" method="POST"  id="FormaLaboratorios" style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;">
                             <!-- INICIO TABLE DE  EL DATATABLE  -->
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="card" >
                                         <div class="card-header" style="height:4rem;">
                                             <center>
-                                                <div class="row">
-
-                                                    <div class="col-sm-4">
-                                                        <select class="select-css" id="lab" name="lab">
+                                               		Seleccion:
+                                                        <select class="select-box" id="lab" name="lab" style="width: 25%;">
                                                             {% for laboratorios in Laboratorios %}
                                                             <option value="{{laboratorios.cups}}">
                                                                 {{laboratorios.nombre}}
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
-                                                    <div class="col-sm-1">
+                                                    
                                                         Cant:
-                                                        <input type="text" id="cantidad" name="cantidad" value="1">
-                                                    </div>
-                                                    <div class="col-sm-3">
+                                                        <input type="text" id="cantidad" name="cantidad" value="1" size="5">
+                                                  
                                                         Observaciones:
                                                         <input type="text" id="observa" name="observa" >
-                                                    </div>
-
-					  <div class="col-sm-1">
+                                                
                                                         Mipres:
-                                                        <input type="text" id="mipresLab" name="mipresLab">
-                                                    </div>
-
-                                                    <div class="col-sm-2">
+                                                        <input type="text" id="mipresLab" name="mipresLab" size="20">
+                                                   
                                                         Numero Orden:
-                                                        <input type="text" id="ordenMedicaLab" name="ordenMedicaLab" value="">
-                                                    </div>
-
-
-                                                    <div class="col-sm-2">
+                                                        <input type="text" id="ordenMedicaLab" name="ordenMedicaLab" value="" size="20">
+                                                   
                                                         <span class="text-secondary">Adicionar</span>
                                                         <a class="btn btn-success" href="javascript:void(0)"
                                                            id="BtnAdicionarLaboratorio"> <i
                                                                 class="fa fa-battery-half"></i></a>
-                                                    </div>
-						    
-                                                </div>
+                                                 
                                             </center>
                                         </div>
                                         <div class="card-body">
@@ -960,7 +935,7 @@
                     <table class="table"
                            style="background-color:LightGray; BORDERCOLOR=RED ; border: 8px solid black;   width:99%;">
                         <form class="form-inline" action="/crearRadiologiaDef/" method="POST"
-                              id="FormaRadiologia">
+                              id="FormaRadiologia" style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;">
                             <input type="hidden" id="sede1" name="sede1" value="{{Sede}}">
 
                             <!-- INICIO TABLE DE  EL DATATABLE  -->
@@ -970,50 +945,34 @@
                                     <div class="card">
                                         <div class="card-header" style="height:50px;">
                                             <center>
-                                                <div class="row">
-                                                    <div class="col-sm-1">
-
-                                                        <select class="select-css"  id="rad"
-                                                                name="rad">
+                                                
+							Seleccion:
+                                                        <select class="select-box"  id="rad"
+                                                                name="rad" style="width: 25%;">
                                                             {% for radiologias in Radiologias %}
                                                             <option value="{{radiologias.cups}}"> {{radiologias.nombre}}
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
-
-                                                    <div class="col-sm-1">
+                                      
                                                         Cantidad:
                                                         <input type="text" id="cantidad3" name="cantidad3" value="1">
 
 
-                                                    </div>
-
-
-                                                    <div class="col-sm-2">
+                                                  
 							Observaciones:
                                                         <input type="text" id="observa3" name="observa3" value="">
-                                                    </div>
-
-						  <div class="col-sm-1">
+                                              
                                                         Mipres:
                                                         <input type="text" id="mipresRad" name="mipresRad">
-                                                    </div>
-
-
-					  <div class="col-sm-2">
+                                            
                                                         Numero Orden:
                                                         <input type="text" id="ordenMedicaRad" name="ordenMedicaRad" value="">
-                                                    </div>
-
-
-
-                                                    <div class="col-sm-2 text-end">
+                                                
                                                         <span class="text-secondary">Adicionar</span>
                                                         <a class="btn btn-success" href="javascript:void(0)"
                                                            id="BtnAdicionarRadiologia"> <i class="fa fa-plus"></i></a>
-                                                    </div>
-                                                </div>
+                                            
                                             </center>
                                         </div>
                                         <div class="card-body">
@@ -1116,7 +1075,7 @@
                     <table class="table"
                            style="background-color:LightGray; BORDERCOLOR=RED ; border: 8px solid black;   width:99%;">
                         <form class="form-inline" action="/crearTerapiasDef/" method="POST"
-                              id="FormaTerapias">
+                              id="FormaTerapias" style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;">
 
                             <!-- INICIO TABLE DE  EL DATATABLE  -->
                             <div class="row">
@@ -1124,49 +1083,35 @@
                                     <div class="card">
                                         <div class="card-header" style="height:50px;">
                                             <center>
-                                                <div class="row">
-                                                    <div class="col-sm-4">
-                                                	
-                                                        <select class="select-css"  id="ter"
-                                                                name="ter">
+                                               
+                                                	Seleccion:
+                                                        <select class="select-box"  id="ter"
+                                                                name="ter" style="width: 25%;">
                                                             {% for terapias in Terapias %}
                                                             <option value="{{terapias.cups}}">
                                                                 {{terapias.nombre}}
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
-
-                                                    <div class="col-sm-1">
+                                                
 							Cantidad:
                                                         <input type="text" id="cantidad4" name="cantidad4" value="1">
 
 
-                                                    </div>
-
-
-                                                    <div class="col-sm-2">
+                                               
 							Observaciones:
                                                         <input type="text" id="observa4" name="observa4" value="">
-                                                    </div>
-
-						  <div class="col-sm-1">
+                                             
                                                         Mipres:
                                                         <input type="text" id="mipresTer" name="mipresTer">
-                                                    </div>
-
-					  <div class="col-sm-2">
+                                          
                                                         Numero Orden:
                                                         <input type="text" id="ordenMedicaTer" name="ordenMedicaTer" value="">
-                                                    </div>
-
-
-                                                    <div class="col-sm-2 text-end">
+                                              
                                                         <span class="text-secondary">Adicionar</span>
                                                         <a class="btn btn-success" href="javascript:void(0)"
                                                            id="BtnAdicionarTerapias"> <i class="fa fa-plus"></i></a>
-                                                    </div>
-                                                </div>
+                                               
                                             </center>
                                         </div>
                                         <div class="card-body">
@@ -1268,18 +1213,17 @@
                     <table class="table"
                            style="height: 20px; background-color:LightGray; BORDERCOLOR=RED ; border: 8px solid black; border-color: #96D4D4;  width:99%;">
                         <form class="form-inline" action="/crearFormulacionDef/" method="POST"
-                              id="FormaFormulacion">
+                              id="FormaFormulacion" style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;">
 
                             <!-- INICIO TABLE DE  EL DATATABLE  -->
-                            <div class="row" style="height: 30px;">
+                            <div class="row" style="height: 40px;">
                                 <div class="col-sm-12">
                                     <div class="card">
                                         <div class="card-header" style="height:80px;">
                                             <center>
-                                                <div class="row" style="height: 30px;">
-                                                    <div class="col-sm-1">
-                    							    Formula
-                                                        <select class="select-css"  id="medicamentos"
+                                             
+                    				Formula
+                                                        <select class="select-box"  id="medicamentos"
                                                                 name="medicamentos">
                                                             {% for medicamentos in Medicamentos %}
                                                             <option value="{{medicamentos.id}}">
@@ -1287,15 +1231,12 @@
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
-                                                    <div class="col-sm-1">
+                                                 
 					                                		Dosis:
                                                         <input type="text" id="dosis" name="dosis" value="" size="2" required>
-                                                    </div>
-
-                                                    <div class="col-sm-1">
+                                                   
  							                    U_Medida
-                                                        <select class="select-css" id="uMedidaDosis"
+                                                        <select class="select-box" id="uMedidaDosis"
                                                                 name="uMedidaDosis" required>
                                                             {% for uMedidaDosis in UMedidaDosis %}
                                                             <option value="{{uMedidaDosis.id}}">
@@ -1303,10 +1244,9 @@
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
-                                                    <div class="col-sm-2">
+                                              
 							                    Farmaceut:
-                                                        <select class="select-css" id="formaFarma"
+                                                        <select class="select-box" id="formaFarma"
                                                                 name="formaFarma" required>
                                                             {% for formaFarma in FormaFarma %}
                                                             <option value="{{formaFarma.id}}">
@@ -1314,10 +1254,9 @@
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
-                                                    <div class="col-sm-1">
+                                                 
 							                        Frecuencia
-                                                        <select class="select-css" id="frecuencia"
+                                                        <select class="select-box" id="frecuencia"
                                                                 name="frecuencia" required>
                                                             {% for frecuencia in Frecuencia %}
                                                             <option value="{{frecuencia.id}}">
@@ -1325,47 +1264,33 @@
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
-
-						                <div class="col-sm-1">
-							                        Vias
-                                                        <select class="select-css" id="vias"
-                                                                name="vias" required>
+                                                
+							      Vias
+                                                        <select class="select-box" id="vias"
+                                                                name="vias"  required>
                                                             {% for viasAdministracion in ViasAdministracion %}
                                                             <option value="{{viasAdministracion.id}}">
                                                                 {{viasAdministracion.nombre}}
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
-
-
-						                            <div class="col-sm-1">
-							                        Cantidad:
+                                              
+							        Cant:
                                                         <input type="text" id="cantidadMedicamento" name="cantidadMedicamento" value="" size="1" required>
-                                                    </div>
-						                            <div class="col-sm-1">
+                                                  
 							                            Dias:
                                                         <input type="text" id="diasTratamiento" name="diasTratamiento" value="" size="1" required>
-                                                    </div>
-
-						  <div class="col-sm-1">
+                                           
                                                         Mipres:
                                                         <input type="text" id="mipresMed" name="mipresMed" value="" size="10">
-                                                    </div>
-					
-						  <div class="col-sm-1">
+                                           
                                                         Numero Orden:
-                                                        <input type="text" id="ordenMedicaMed" name="ordenMedicaMed" value="">
-                                                    </div>
-
-
-                                                    <div class="col-sm-1 text-end">
+                                                        <input type="text" id="ordenMedicaMed" name="ordenMedicaMed" value="" size="10">
+                                                 
                                                         <span class="text-secondary">Adicionar</span>
                                                         <a class="btn btn-success" href="javascript:void(0)"
                                                            id="BtnAdicionarFormulacion"> <i class="fa fa-plus"></i></a>
-                                                    </div>
-                                                </div>
+                                              
                                             </center>
                                         </div>
                                         <div class="card-body" style="height:100px;">
@@ -1568,20 +1493,20 @@
 
                                 <div>						
 
-                                        <label for="anestesia" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Anestesia:</label>
+                                        <label for="anestesia" >Anestesia:</label>
 					Anestesia:
-                                            <select class="select-css h-40 w-20" id="anestesia"  tabindex= "0"
-                                                    name="anestesia"
+                                            <select class="select-box" id="anestesia"  tabindex= "0"
+                                                    name="anestesia" style="width: 25%;"
                                                     required>
                                                 {% for tiposAnestesia in TiposAnestesia %}
                                                 <option value="{{tiposAnestesia.id}}"> {{tiposAnestesia.nombre}}</option>
                                                 {% endfor %}
                                             </select>
 
-                                        <label for="tiposCirugia" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TipoCirugia:</label>
+                                        <label for="tiposCirugia" >TipoCirugia:</label>
                                         	Tipo Cirugia:   
-					 <select class="select-css h-40 w-20" id="tiposCirugia"  tabindex= "0"
-                                                    name="tiposCirugia"
+					 <select class="select-box" id="tiposCirugia"  tabindex= "0"
+                                                    name="tiposCirugia" style="width: 25%;"
                                                     required>
                                                 {% for tiposCirugia in TiposCirugia %}
                                                 <option value="{{tiposCirugia.id}}"> {{tiposCirugia.nombre}}</option>
@@ -1589,29 +1514,29 @@
                                             </select>
 
 
-                                        <label for="dxPreQx" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dxPreQx:</label>
+                                        <label for="dxPreQx" >dxPreQx:</label>
 						Dx-PreQx:
-                                            <select class="select-css h-40 w-20" id="dxPreQx"  tabindex= "0"
-                                                    name="dxPreQx"
+                                            <select class="select-box" id="dxPreQx"  tabindex= "0"
+                                                    name="dxPreQx" style="width: 25%;"
                                                     required>
                                                 {% for diagnosticosCirugia in DiagnosticosCirugia %}
                                                 <option value="{{diagnosticosCirugia.id}}"> {{diagnosticosCirugia.nombre}}</option>
                                                 {% endfor %}
                                             </select>
-                                        <label for="dxPrinc" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dxPrinc:</label>
+                                        <label for="dxPrinc" >dxPrinc:</label>
 						Dx-Principal:
-                                            <select class="select-css h-40 w-20" id="dxPrinc"  tabindex= "0"
-                                                    name="dxPrinc"
+                                            <select class="select-box" id="dxPrinc"  tabindex= "0"
+                                                    name="dxPrinc" style="width: 25%;"
                                                     required>
                                                 {% for diagnosticosCirugia in DiagnosticosCirugia %}
                                                 <option value="{{diagnosticosCirugia.id}}"> {{diagnosticosCirugia.nombre}}</option>
                                                 {% endfor %}
                                             </select>
 
-                                        <label for="dxRel1" class="col-sm-1 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dxRel1:</label>
+                                        <label for="dxRel1" >dxRel1:</label>
 						Dx-relacionado:
-                                            <select class="select-css h-40 w-20" id="dxRel1"  tabindex= "0"
-                                                    name="dxRel1"
+                                            <select class="select-box" id="dxRel1"  tabindex= "0"
+                                                    name="dxRel1" style="width: 25%;"
                                                     required>
                                                 {% for diagnosticosCirugia in DiagnosticosCirugia %}
                                                 <option value="{{diagnosticosCirugia.id}}"> {{diagnosticosCirugia.nombre}}</option>
@@ -1675,7 +1600,7 @@
 
                     <table class="table"
                            style="background-color:LightGray; BORDERCOLOR=RED ; border: 8px solid black;   width:99%;">
-                        <form class="form-inline" action="/crearNoQxDef/" method="POST"  id="FormaNoQx1">
+                        <form class="form-inline" action="/crearNoQxDef/" method="POST"  id="FormaNoQx1" style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;">
 
                             <!-- INICIO TABLE DE  EL DATATABLE  -->
                             <div class="row">
@@ -1683,43 +1608,31 @@
                                     <div class="card">
                                         <div class="card-header" style="height:80px;">
                                             <center>
-                                                <div class="row">
-
-                                                    <div class="col-sm-2">
-
-                                                        <select class="select-css"  id="noQx"
-                                                                name="noQx">
+                                               
+							Seleccion:
+                                                        <select class="select-box"  id="noQx"
+                                                                name="noQx" style="width: 25%;">
                                                             {% for noQx in NoQx %}
                                                             <option value="{{noQx.cups}}">
                                                                 {{noQx.nombre}}
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
-
-                                                    <div class="col-sm-2">
+                                                
 							Cantidad:
                                                         <input type="text" id="cantidad5" name="cantidad5" value="1">
 
-                                                    </div>
-
-                                                    <div class="col-sm-2">
+                                                 
 							Observaciones:
                                                         <input type="text" id="observa5" name="observa5" value="">
-                                                    </div>
-
-						  <div class="col-sm-1">
+                                               
                                                         Mipres:
                                                         <input type="text" id="mipresNoQx" name="mipresNoQx">
-                                                    </div>
-
-
-                                                    <div class="col-sm-2 text-end">
+                                            
                                                         <span class="text-secondary">Adicionar</span>
                                                         <a class="btn btn-success" href="javascript:void(0)"
                                                            id="BtnAdicionarNoQx"> <i class="fa fa-plus"></i></a>
-                                                    </div>
-                                                </div>
+                                             
                                             </center>
                                         </div>
                                         <div class="card-body">
@@ -1816,7 +1729,7 @@
                     <table class="table"
                            style="background-color:LightGray; BORDERCOLOR=RED ; border: 8px solid black;   width:99%;">
                         <form class="form-inline" action="/crearDiagnisticosDef/" method="POST"
-                              id="FormaDiagnosticos">
+                              id="FormaDiagnosticos" style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;">
 
                             <!-- INICIO TABLE DE  EL DATATABLE  -->
                             <div class="row">
@@ -1824,39 +1737,33 @@
                                     <div class="card">
                                         <div class="card-header" style="height:50px;">
                                             <center>
-                                                <div class="row">
-                                                    <div class="col-sm-2">
-                                                        <select class="select-css"  id="tiposDiagnosticos"
-                                                                name="tiposDiagnosticos">
+                                            Seleccion:
+                                                        <select class="select-box"  id="tiposDiagnosticos"
+                                                                name="tiposDiagnosticos" style="width: 25%;">
                                                             {% for tiposDiagnostico in TiposDiagnostico %}
                                                             <option value="{{tiposDiagnostico.id}}">
                                                                 {{tiposDiagnostico.nombre}}
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
-                                                    <div class="col-sm-4">
+                                                
 
-                                                        <select class="select-css" id="diagnosticos"
-                                                                name="diagnosticos">
+                                                        <select class="select-box" id="diagnosticos"
+                                                                name="diagnosticos" style="width: 25%;">
                                                             {% for diagnosticos in Diagnosticos %}
                                                             <option value="{{diagnosticos.id}}">
                                                                 {{diagnosticos.nombre}}
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
-
-                                                    <div class="col-sm-4">
+                                                
 							Observaciones:
                                                         <input type="text" id="observa7" name="observa7" value="">
-                                                   </div>
-                                                    <div class="col-sm-2 text-end">
+                                            
                                                         <span class="text-secondary">Adicionar</span>
                                                         <a class="btn btn-success" href="javascript:void(0)"
                                                            id="BtnAdicionarDiagnosticos"> <i class="fa fa-plus"></i></a>
-                                                    </div>
-                                                </div>
+                                               
                                             </center>
                                         </div>
                                         <div class="card-body">
@@ -1957,17 +1864,16 @@
                     <table class="table"
                            style="background-color:LightGray; BORDERCOLOR=RED ; border: 8px solid black;  width:70%;">
                         <form class="form-inline" action="/crearAntecedentesDef/" method="POST"
-                              id="FormaAntecedentes">
+                              id="FormaAntecedentes" style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;">
 
                             <!-- INICIO TABLE DE  EL DATATABLE  -->
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="card">
-                                        <div class="card-header" style="height:80px; width:85%;">
-                                          
-						<div id="flex-container2-antecedentes">
-                                                        <select class="select-css"  id="antecedentes"
-                                                                name="antecedentes">
+                                        
+						
+                                                        <select class="select-box"  id="antecedentes"
+                                                                name="antecedentes" style="width: 25%;">
                                                             {% for antecedentes in Antecedentes %}
                                                             <option value="{{antecedentes.id}}">
                                                                 {{antecedentes.nombre}}
@@ -1975,16 +1881,14 @@
                                                             {% endfor %}
                                                         </select>
 
-
 							Observaciones:
-                                                        <input type="text" id="observa6" name="observa6" value="" size="70px">
-
+                                                        <input type="text" id="observa6" name="observa6" value="" size="40px">
 
                                                         <span class="text-secondary">Adicionar</span>
                                                         <a class="btn btn-success" href="javascript:void(0)"
                                                            id="BtnAdicionarAntecedentes"> <i class="fa fa-plus"></i></a>
-						</div>
-                                        </div>
+
+
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-sm-12">
@@ -2036,7 +1940,7 @@
 	<!-- desde aqui resultados ya de Incapacidad del ingreso -->
 
             <!-- INICIO TABLE DE  EL DATATABLE  -->
-<br><br><br><br>
+	<br><br><br><br>
         <div class="tabla-contenedor">     
 
 				
@@ -2062,13 +1966,8 @@
 			<!-- FIN TABLE DE  EL DATATABLE  -->
 
 
-
-	<!-- <div class="container">  -->
-	<div id="flex-container2-incapacidad">
-
-
-            <form   method="POST"  id="formIncapacidades">
-		<div>
+            <form   method="POST"  id="formIncapacidades" style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;">
+		
                 Tipo Incapacidad:
                 {{IncapacidadesForm.tiposIncapacidad}}
                 Diagnostico:
@@ -2081,10 +1980,8 @@
                 {{IncapacidadesForm.numDias}}
                 Descripcion:
                 {{IncapacidadesForm.descripcion}}
-		</div>
+		
             </form>
-
-    </div>
 
 
     </article>
@@ -2141,97 +2038,72 @@
                     <table class="table"
                            style=" background-color:LightGray; BORDERCOLOR=RED ; border: 8px solid black;   width:99%;">
                         <form class="form-inline" action="/crearInterconsultassDef/" method="POST"
-                              id="FormaInterconsultas">
+                              id="FormaInterconsultas" style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;">
 
 
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="card">
                                         <div class="card-header" style="height:100px;">
-                                           <!--  <center> -->
+
                             <!-- INICIO ENCABEZADOS DE CAPTURA -->
 
-					<div id="flex-container2-interconsulta">
-                                                <!-- <div class="row">  -->
 
-                                                  <!--  <div class="col-sm-1"> -->
                                                         Tipo :
-                                                        <select class="select-css"  id="tiposInterconsulta"
-                                                                name="tiposInterconsulta">
+                                                        <select class="select-box"  id="tiposInterconsulta"
+                                                                name="tiposInterconsulta" style="width: 25%;">
                                                             {% for tiposInterconsulta in TiposInterconsulta %}
                                                             <option value="{{tiposInterconsulta.id}}">
                                                                 {{tiposInterconsulta.nombre}}
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                  <!-- </div> -->
 
-                                                   <!-- <div class="col-sm-1"> -->
                                                         Espe-consultada:</label>
-                                                        <select class="select-css"  id="especialidadConsultada"
-                                                                name="especialidadConsultada">
+                                                        <select class="select-box"  id="especialidadConsultada"
+                                                                name="especialidadConsultada" style="width: 25%;">
                                                             {% for especialidadesMedicosInterConsultas in EspecialidadesMedicosInterConsultas %}
                                                             <option value="{{especialidadesMedicosInterConsultas.id}}">
                                                                 {{especialidadesMedicosInterConsultas.nombre}}
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                   <!-- </div> -->
 
 
-                                                   <!-- <div class="col-sm-2"> -->
                                                         <label for="medicoConsultado"
                                                                class="col-sm-1 control-label">Medico consultado:</label>
-                                                        <select class="select-css" aria-label="" id="medicoConsultado" name="medicoConsultado">
+                                                        <select class="select-box" aria-label="" id="medicoConsultado" name="medicoConsultado" style="width: 25%;">
                                                             {% for medicos in Medicos %}
                                                             <option value="{{medicos.id}}">
                                                                 {{medicos.nombre}}
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                  <!--  </div> -->
-
-
-                                                   <!-- <div class="col-sm-2"> -->
+                                               
                                                         Describe:
                                                         <input type="text" id="descripcionI" name="descripcionI" value="">
-                                                   <!-- </div> -->
 
-
-
-                                                   <!-- <div class="col-sm-2"> -->
                                                         Diagnostico:
-                                                        <select class="select-css" aria-label="" id="diagnosticosI"
-                                                                name="diagnosticosI">
+                                                        <select class="select-box" aria-label="" id="diagnosticosI"
+                                                                name="diagnosticosI" style="width: 25%;">
                                                             {% for diagnosticos in Diagnosticos %}
                                                             <option value="{{diagnosticos.id}}">
                                                                 {{diagnosticos.nombre}}
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-					     <!--   </div> -->
 
-						<!--  <div class="col-sm-2"> -->
                                                         Orden:
                                                         <input type="text" id="ordenMedicaInt" name="ordenMedicaInt" value="" size="5px">
-                                                 <!--   </div> -->
+
                                             
-
-
-
-                                                  <!--  <div class="col-sm-2 text-end"> -->
                                                         <span class="text-secondary">Adicionar</span>
                                                         <a class="btn btn-success" href="javascript:void(0)"
                                                            id="BtnAdicionarInterconsultas"> <i class="fa fa-plus"></i></a>
-                                                  <!--  </div> -->
 
 
-                                               <!--  </div> -->  <!-- FIN ROW -->
 		                            <!-- FIN ENCABEZADOS DE CAPTURA -->
-					  </div> <!-- FIN DEL FLEXBOX -->
-                                          <!--  </center> -->
                                         </div> <!-- FIN HEADER -->
-
 
                                         <div class="card-body" style="height:50px;">
                                             <div class="row">
@@ -2335,7 +2207,7 @@
                 <td>
                     <table class="table"  style="background-color:LightGray; BORDERCOLOR=RED ; border: 8px solid black;   width:99%;">
                         <form class="form-inline" action="/crearNotasEnfermeriaDef/" method="POST"
-                              id="FormaNotas">
+                              id="FormaNotas" style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;">
                             <!-- INICIO TABLE DE  EL DATATABLE  -->
                             <div class="row">
                                 <div class="col-sm-12">
@@ -2404,33 +2276,27 @@
 <br><br><br><br><br>
  <h3>Salida clinica</h3></center>
 		
-	   <div class="row">
-
-                                                   <div class="col-sm-4">
+	
 							Tipo salida:
-                                                        <select class="select-css"  id="tiposSalidas"  name="tiposSalidas">
+                                                        <select class="select-box"  id="tiposSalidas"  name="tiposSalidas" style="width: 25%;">
                                                             {% for tiposSalidas in TiposSalidas %}
                                                             <option value="{{tiposSalidas.id}}">
                                                                 {{tiposSalidas.nombre}}
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
-						<div class="col-sm-4">
+                                              
 								Dx de complicacion:
-                                                        <select class="select-css"  id="dxComplicacion"  name="dxComplicacion">
+                                                        <select class="select-box"  id="dxComplicacion"  name="dxComplicacion" style="width: 25%;">
                                                             {% for dxComplicacion in DxComplicacion %}
                                                             <option value="{{dxComplicacion.id}}">
                                                                 {{dxComplicacion.nombre}}
                                                             </option>
                                                             {% endfor %}
                                                         </select>
-                                                    </div>
-			                <div class="col-sm-4">
+                                          
 						Seleccione:<input type="checkbox" id="salClinica" name="salClinica"/>
-			                 </div>
-
-	</div>
+	
 
     </article>
 

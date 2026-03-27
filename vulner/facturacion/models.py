@@ -80,7 +80,7 @@ class Conceptos(models.Model):
         ('N', 'No'),
         ]
     id = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=30, null=False)
+    nombre = models.CharField(max_length=50, null=False)
     tipoCups = models.ForeignKey('clinico.TiposExamen', blank=True, null=True, editable=True, on_delete=models.PROTECT)
     tiposSuministro = models.ForeignKey('facturacion.TiposSuministro', blank=True, null=True, editable=True, on_delete=models.PROTECT)
     #codAd = models.CharField(max_length=2, default='A', editable=False)
@@ -107,7 +107,8 @@ class TiposSuministro(models.Model):
         ('N', 'No'),
         ]
     id = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=30, blank=True, null=True, editable=True)
+    nombre = models.CharField(max_length=50, blank=True, null=True, editable=True)
+    tiposHonorarios =   models.ForeignKey('tarifarios.TiposHonorarios', blank=True,null= True, editable=True, on_delete=models.PROTECT)
     fechaRegistro = models.DateTimeField(editable=True, null=True, blank=True)
     estadoReg = models.CharField(max_length=1, choices=ESTADOREG_CHOICES, default='A', editable=False)
 
@@ -140,6 +141,7 @@ class Suministros (models.Model):
     codigoAtc  =  models.ForeignKey('clinico.Atc', blank=True,null= True, editable=True, on_delete=models.PROTECT)
     cantidadUvr =  models.CharField(max_length=10,blank=True, null=True, editable=True)
     cums =  models.CharField(max_length=50,blank=True,null= True,  editable=True )
+    cumsMaterial =  models.CharField(max_length=50,blank=True,null= True,  editable=True )
     tipoHonorario = models.ForeignKey('tarifarios.TiposHonorarios', blank=True,null= True, editable=True, on_delete=models.PROTECT)
     ripsTipoMedicamento = models.ForeignKey('rips.RipsTipoMedicamento', blank=True,null= True, editable=True, on_delete=models.PROTECT ,  related_name='RipsTipo01')
     ripsCums = models.ForeignKey('rips.RipsCums', blank=True,null= True, editable=True, on_delete=models.PROTECT,  related_name='RipsCums01')

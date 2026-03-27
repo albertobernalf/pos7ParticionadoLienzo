@@ -40,6 +40,7 @@ from contratacion import views as viewsConvenios
 from tarifarios import views as viewsTarifarios
 from rips import views as viewsRips
 from cartera import views as viewsCartera
+#from cartera import viewsReportes as viewsCarteraReportes
 from cirugia import views as viewsCirugia
 from cirugia import viewsReportes as viewsCirugiaReportes
 from farmacia import views as viewsFarmacia
@@ -369,6 +370,7 @@ urlpatterns = [
     path('load_dataPagosEmpresasDetalle/<str:data>', viewsCartera.Load_dataPagosEmpresasDetalle, name='load_data_PagosEmpresasDetalle'),
     path('load_dataCarteraDetalle/<str:data>', viewsCartera.Load_dataCarteraDetalle, name='loaddata_CarteraDetalle'),
     path('load_dataEmpresas/<str:data>', viewsCartera.Load_dataEmpresas, name='loaddata_Empresas'),
+    #path('imprimirNotasCredito/', viewsCarteraReportes.ImprimirNotasCredito , name='Imprimir_NotasCredito'),
 
     # Tarifas
 	
@@ -476,6 +478,9 @@ urlpatterns = [
     path('buscarProcedimientosParticipantesDeCirugia/', viewsCirugia.BuscarProcedimientosParticipantesDeCirugia, name='buscarProcedimientosParticipantesDe_Cirugia'),
     path('buscarProcedimientosMaterialesDeCirugia/', viewsCirugia.BuscarProcedimientosMaterialesDeCirugia,  name='buscarProcedimientosMaterialesDe_Cirugia'),
     path('imprimirConsentimientoInformado/', viewsCirugiaReportes.ImprimirConsentimientoInformado, name='imprimirConsentimiento_informado'),
+    path('crearConveniosDeCirugia/', viewsCirugia.CrearConveniosDeCirugia, name='crearConveniosDe_Cirugia'),
+    path('buscarConveniosDeCirugia/', viewsCirugia.BuscarConveniosDeCirugia, name='buscarConveniosDe_Cirugia'),
+
 
     # Farmacia
 

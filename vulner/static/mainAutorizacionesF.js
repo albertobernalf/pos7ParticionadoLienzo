@@ -393,7 +393,6 @@ function ActualizarAut()
                 success: function (data2) {
 		   $("#mensajes").html(data2.Mensaje);
                   $('#postFormAutorizacionesDetalle').trigger("reset");
-
 		
 
 	    	var sedeSeleccionada = document.getElementById("sedeSeleccionada").value;
@@ -420,9 +419,7 @@ function ActualizarAut()
 	        arrancaAutorizaciones(1,data);
 	    dataTableAutorizacionesInitialized = true;
 
-
-	
-
+		alert("Voy a esconder la ventana");
 
  		 $('#crearModelAutorizacionesDetalle').modal('hide');
 

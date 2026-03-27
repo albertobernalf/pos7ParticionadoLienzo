@@ -1130,54 +1130,65 @@ lunes  09 de marzo
             }
         });
 
-	La descripcion qx algo pasa con las ora mnuto segundos suas
 	OPS cuando se crea un folio clinico automatico por una cirugia, No crea la causaExterna , ni ningun diagnostico corregir 
 	OPS cuando se genera el RIPS se debe colocar el codigo en ripsotrosservcicios del ripscums y ripscups en teconologiasalud_id y renconologiasaludups_id
 	OPs ojo los ripsconsultas casos son para el uso de ambulatorios aquip, faltas las de consulta externa
  	OPS Faltan hacer los rips d GLOSA/NOta credito de CONSULTA RIPS/RIPS OTROSSERVICIOS tanto en generajson rips y enviojsonrips
         OPS En tariarios: Tarifarios Suministros cuadrar todo
 	OPS en tarifariosProcedimientos hacer un flexbox a la captura d datos que crea tariafa codhomologado, tipotarifa, cups, colvalorbase etc
-	OPS todo el modulo de contratacion VALIDAR incluir flexbox arreglar bom¿nito , entendible, controles, como hace para que lops combos muestren automaticamente la opcion seleccionada y abierto el combo 
-		INVSTIGAR google, IA eso para todo el programa creo arreglar.
 	OPS en historia clinica falta impresion de ordenes medicas, consulta de folios y/O impresion deHC de pacientes que No estan
-	OPS no entiendo por que no sale bien el panelConvenios los TABS no fncinana
 	OPS ojo que pasa con el codigo de la tarifa en la impresion de la cuenta y factura es el homologado REVISAR en PUESTA A PUNTO
 	OPS OJO PARA PUESTA PUNTO DE CORTE . todas los pagos revisar en rips ect querys de mopney , forma pago etc
-
-	OPS hice un folio de histria clinica y grabo todo pero al funalñme saco un error creo al impreimir las orden entonces la
+	OPS hice un folio de historia clinica y grabo todo pero al funalñme saco un error creo al impreimir las orden entonces la
 		pantala queda abierta  y se puede seguir guardandp lo mismo se duplica- cusruplica la info como conrolar ello ?
-	OPS sigue el error de que cuando autorizadetale todos no reresca pantalla aunque en autorizaciones si refrca pero supong es tema de selccionar la adecuada y
-	hacer el refresh en detalle
-	ops al hospitalizar desde triage un paciene resulta que seleccione otro convenio  y aunque creo el facturacion_liquiacion no creo en la tabla facturacion_conveniospacienteingresos
 	OPS cuando pase de triage a admisiones.ingresos hay un  problema hay que actualziar el ingreso_id OJOOO. 
-		
-	ops ME FALTA probar TODO GLOSAS DESDE CEROS HACELO CON EL PACIENTE BORJA PASO A PASO SE LE VA LA OTRA SEMANA COMO LE PARECE
-	opv revisar , diagnosticos en rips
-		revisar, formular laboraorio -- autorizaion -- farmacia -- disopnsa -- liquidaciondetale -- rips, aut,mipres
+	opv revisar , diagnosticos en rips revisar, formular laboraorio -- autorizaion -- farmacia -- disopnsa -- liquidaciondetale -- rips, aut,mipres
 	
 	BIEN OPS , YA HICE LO DE FACTURAR, REFACTURAR, TRALADO DE CONVENIOS PARA EL CAMPO MIPRE  autorizacionDetalle_id
-	VALIDAR EL LUNES
-	Es decir si pruebo todo el dia lunes . Podria comenzar glosas de borja el mismo Martes OPS Y notas credito RIPS - Rep que gueno
-	y probar seria con numeros de autorizacion d rips y miprres de hlinic
+
 	AFINAR el tema de los diagnosticos rips por ejmplo en medicamentos, otros servivios, consultas a ver como esta eso
 	La semana del 23 al 27 de marzo, podria trabajar: abonos, refacturacion, anulaciones y traslados y RIPS abonos
-	BIEN VAMOS BIE. HAY MUCHO WORK
 	OPS hay un error en hisotira clinica HC, que hay un id repetidos en un form o dos idd form algo asi hay que solucionar
-	OPs los procedimientos qx con autorizaion  No los graba POR CUA ?????
-	OPS hay que desde triage a admision hacer la solicitud a autorizaiones enviar a autorizacion_auturizacion y detalle
-                  	
-	OPS no muestra la autrrizacion de la Hospitalizacion verificar
-	OPS se desarreglo la entrada del formulario crear admision que paso ?
+	OPS hay que desde triage a admision hacer la solicitud a autorizaiones enviar a autorizacion_auturizacion y detalle                	
+	OPS no muestra la autorizacion de la Hospitalizacion verificar en donde ???
 	OPS la fecha me mama mucho gallo en crear adminsiondef
-	OPS falta actualizar el id de autorizaciondetalle de la hospitalizacion en la tabla ingresoso   . hecho PROBAR   
-
-
-	OPS cuando uardo una autoriaciondetalle no me quita la modal y no refresca, ademas en atiruzaciones no la refresca verificar
-        OPS la cantidad ordenada en el campo cantidad d efarmaciadetalle nollega esta en blanco             	
-	OPS men farmacia cuando despacho no refresca el despacho actul                                                                                      
+	OPS cuando guardo una autoriaciondetalle no me quita la modal y no refresca, ademas en autorizaciones no la refresca verificar
+        OPS la cantidad ordenada en el campo cantidad  de farmaciadetalle no llega esta en blanco             	
+	OPS en farmacia cuando despacho no refresca el despacho actual                                                                                      
 	Ops el programa de farmacia toca arreglarlo  mas.. mas Pero ahi va muy bien ok
 
-	ops El modulo de citugia tiene dos problemitas  solucionr . 1. permitir hace rmas de una cirugia en un mismo ingreso
-								    2. Permitir dos o mas eces un procedimiento eu una misma cirugia
-								    y listop
+	ops El modulo de cirugia tiene dos problemitas  solucionar .   2. Permitir dos o mas veces un procedimiento en una misma cirugia					    
 	ops la autorizacion de una estancia automatica desde donde viene o como viaja
+	OPS mañana atacar de fondo cirugias. No permitir borrar un procedimeintosqx en estado realizado VALIDAR
+	
+	DESPUES DE ALMUERCITO:
+
+	Elaborar reporte Notas Credito, Glosas, Notas debito a lo mejor
+	Realizar jemplo de cirugia (2) y po que no con dos pocemineitos una d ellas
+	ops Falta revizar la impresion de la factura y/o estado de cuenta
+		Verificar el nmero de items vs numero de items de la cirugia
+	OPS verificar, formulacion, antecedentes y cirugias combos en J¿HCLINICA
+	
+	Los materiales quirúrgicos (qx), dispositivos médicos o insumos utilizados se reportan en el archivo JSON de RIPS 
+	correspondiente a "Otros Servicios" (otrosServiciosIPS)	
+	El material quirúrgico es considerado un suministro médico o instrumental, no un examen	
+	Los dispositivos médicos se clasifican principalmente como insumos o suministros para la salud, no como exámenes en sí mismos	
+	Los materiales de sutura y curación se clasifican técnicamente como un suministro o insumo médico, no como un examen
+
+	OPS en TRIAGE la imresora no imprime nada esta GIGANTE el icono
+	OPS triage no tiene select-box
+	OPS en triage debe ser un check-box solicita autorizacion de hospitalizacion , desarrollar alli enviar a autorizaciones
+	OPS en triage cuando va a imprimir PDFAtencionInicialUrgencias se queda quieto
+	OPS los combos de laboraorio/Radiologia se pasma no estan funcinando bin
+	OPS en cirugia porque sale convenio particular de falcao ??
+
+	OPS cual es la difeencia entre Autorizacion de cirugia y/o autorizacion de procedimiento. Mirar la pantalla autorizaiondetalle el refresh todo ralo desaparece la cdecirugia dja la de cups autorizado y no desaparec
+	OPS hay un error a detectar cuando ingreso por triage se seleciono compensariss pero caundo lo hospitalizo lo dejo en particular ojo ARREGLAR
+	OPS en la programacion de cirugia me muestra todo DISPONIBLE no ageda en sala a falcao por que ????? GRAVISISSIMO es por el convenio ? o por los dos procedimientos de la cirugia ??
+
+	OPS en este caso me va a tocar hacer un traslado de cargos para que todo quede en compensarIss, vamos a intentarlo
+	OPS generar liquidacion de cirugia aiutomaica hay que revisa SOAT esta incompleta creo
+	OPS me paso la liquidacion de la cirugia en ambas cuentas erro
+	ops ESTOY SLAMENTE CON LAS PRUEBAS DE ISS EN GENERALIQUIDACION E IMRESION DE LA CUENTA -- OJO NO SOAT NO FACTURA SE HAN HEHO PRUEBAS
+	OPS OJOOOOOOOOO . cuando pasa un paciente de triage a hospital. en la pantalla no se ve la empresa/convenio y cuando guarda debe
+	coger la empresa/conveio de que vien de triage para admisiones_ingresos. recirede que admsiion no permite crear empresa/convenio

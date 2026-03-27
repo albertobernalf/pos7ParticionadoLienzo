@@ -891,7 +891,7 @@ class Grupos(models.Model):
     estadoReg = models.CharField(max_length=1, choices=ESTADOREG_CHOICES,default='A', editable=False)
 
     def __str__(self):
-        return str(self.nombred)
+        return str(self.nombre)
 
 class SubGrupos(models.Model):
     ESTADOREG_CHOICES = [

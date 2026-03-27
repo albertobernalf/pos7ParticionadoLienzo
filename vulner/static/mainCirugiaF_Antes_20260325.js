@@ -1373,7 +1373,7 @@ function arrancaCirugia(valorTabla,valorData)
   lengthMenu: [2, 4, 15],
            processing: true,
             serverSide: false,
-            scrollY: '275px',
+            scrollY: '175px',
 	    scrollX: true,
 	    scrollCollapse: true,
             paging:false,

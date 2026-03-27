@@ -314,3 +314,21 @@ input[type="datetime-local"] {
 }
 
 
+.select-box {
+  width: 150%;
+  padding: 6px 12px;
+  font-size: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  appearance: none; /* Oculta la flecha nativa */
+  -webkit-appearance: none;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.select-box:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}

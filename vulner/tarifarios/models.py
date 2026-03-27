@@ -32,7 +32,7 @@ class TiposHonorarios(models.Model):
         ('A', 'Activo'),
         ('I', 'Inactivo'), ]
     id = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=30, blank=True, null=True, editable=True)
+    nombre = models.CharField(max_length=50, blank=True, null=True, editable=True)
     ripsTipoOtrosServicios = models.ForeignKey('rips.ripstipoOtrosServicios', blank=True,null= True, editable=True, on_delete=models.PROTECT , related_name='TipooTROsERV01')
     fechaRegistro = models.DateTimeField(editable=True, null=True, blank=True)
     estadoReg = models.CharField(max_length=1,  choices=ESTADOREG_CHOICES,default='A', editable=False )

@@ -2362,8 +2362,8 @@ def escogeAcceso(request, Sede, Username, Profesional, Documento, NombreSede, es
         curt = miConexiont.cursor()
         print ("como vamos aquip2")
 
-        #comando = 'SELECT p.id id, p.nombre||' + "' '||" + '"codigoCups" nombre FROM  clinico_examenes  p WHERE p."TiposExamen_id" IN (select x.id FROM clinico_tiposexamen x WHERE x.nombre= ' + "'" + str('PROCEDIMIENTO QX') + "'" + ' order by p.nombre '
-        comando = 'SELECT p.id id, p.nombre||' + "' '||" + '"codigoCups" nombre FROM  clinico_examenes  p  order by p.nombre'
+        comando = 'SELECT p.id id, p.nombre||' + "' '||" + '"codigoCups" nombre FROM  clinico_examenes  p WHERE p."TiposExamen_id" IN (select x.id FROM clinico_tiposexamen x WHERE x.nombre= ' + "'" + str('PROCEDIMIENTOS QX') + "') order by p.nombre"
+        #comando = 'SELECT p.id id, p.nombre||' + "' '||" + '"codigoCups" nombre FROM  clinico_examenes  p  order by p.nombre'
         print ("como vamos aquip3")
         curt.execute(comando)
         print(comando)
@@ -2483,7 +2483,7 @@ def escogeAcceso(request, Sede, Username, Profesional, Documento, NombreSede, es
                                        password="123456")
         curt = miConexiont.cursor()
 
-        comando = 'SELECT p.id id, p.nombre||' + "' '||" + ' p.cums nombre FROM  facturacion_suministros  p ORDER BY nombre'
+        comando = "SELECT p.id id, concat(p.nombre,' ',p.cums," + 'p."cumsMaterial") nombre FROM  facturacion_suministros  p ORDER BY nombre'
 
         curt.execute(comando)
         print(comando)

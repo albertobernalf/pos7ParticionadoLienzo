@@ -334,8 +334,8 @@ font-size: 1.1em;
   /* margin:10 */
 }
 
-.form-container-editaConvenio { display: flex; flex-direction: column; }
-.form-container-editaConvenio input { width: 100%; box-sizing: border-box; }
+.form-container-editaConvenio { display: flex; flex-direction: row; }
+.form-container-editaConvenio input { width: 5%; box-sizing: border-box; }
 
 
 #flex-container-crearConvenio{
@@ -375,4 +375,23 @@ font-size: 1.1em;
   font-family: 'Roboto', sans-serif;
   /* background-color: #9B59B6;*/
   /* margin:10 */
+}
+
+.select-box {
+  width: 20%;
+  padding: 8px 8px;
+  font-size: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  appearance: none; /* Oculta la flecha nativa */
+  -webkit-appearance: none;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.select-box:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.5);
 }

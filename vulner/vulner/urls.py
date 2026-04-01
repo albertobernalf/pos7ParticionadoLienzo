@@ -430,11 +430,12 @@ urlpatterns = [
 
     # Cirugia
     path('load_dataProgramacionCirugia/<str:data>', viewsCirugia.Load_dataProgramacionCirugia,  name='Load_dataProgramacion_cirugia'),
-    path('load_dataSalasCirugia/<str:data>', viewsCirugia.Load_dataSalasCirugia, name='Load_dataSalas_Cirugia'),
+    path('load_dataDisponibilidadSalasCirugia/<str:data>', viewsCirugia.Load_dataDisponibilidadSalasCirugia, name='Load_dataSalasDiponibilidad_Cirugia'),
     path('crearProgramacionCirugia/', viewsCirugia.CrearProgramacionCirugia, name='crearProgramacion_Cirugia'),
     path('load_dataSolicitudCirugia/<str:data>', viewsCirugia.Load_dataSolicitudCirugia, name='load_dataSolicitud_Cirugia'),
     path('load_dataIngresosCirugia/<str:data>', viewsCirugia.Load_dataIngresosCirugia,    name='load_dataIngresos_Cirugia'),
     path('load_dataDisponibilidadSalas/<str:data>', viewsCirugia.Load_dataDisponibilidadSalas, name='load_dataDisponibilidad_Salas'),
+    path('load_dataDisponibilidadSalas2/<str:data>', viewsCirugia.Load_dataDisponibilidadSalas2, name='load_dataDisponibilidad_Salas2'),
     path('crearSolicitudCirugia/', viewsCirugia.CrearSolicitudCirugia, name='CrearSolicitudCirugia'),
     path('load_dataTraerProcedimientosCirugia/<str:data>', viewsCirugia.Load_dataTraerProcedimientosCirugia, name='Load_dataTraerProcedimiento_Cirugia'),
     path('load_dataTraerParticipantesCirugia/<str:data>', viewsCirugia.Load_dataTraerParticipantesCirugia, name='Load_dataTraerParticipantes_Cirugia'),
@@ -480,7 +481,7 @@ urlpatterns = [
     path('imprimirConsentimientoInformado/', viewsCirugiaReportes.ImprimirConsentimientoInformado, name='imprimirConsentimiento_informado'),
     path('crearConveniosDeCirugia/', viewsCirugia.CrearConveniosDeCirugia, name='crearConveniosDe_Cirugia'),
     path('buscarConveniosDeCirugia/', viewsCirugia.BuscarConveniosDeCirugia, name='buscarConveniosDe_Cirugia'),
-
+    path('crearDisponibilidadSalasCirugia/', viewsCirugia.CrearDisponibilidadSalasCirugia, name='CrearDisponibilidadSalas_Cirugia'),
 
     # Farmacia
 
@@ -499,7 +500,7 @@ urlpatterns = [
     path('recibirDevolucionDetalleFarmacia/', viewsFarmacia.RecibirDevolucionDetalleFarmacia, name='RecibirDevolucionDetalle_Farmacia'),
     path('despachadoFarmaciaDetalle/', viewsFarmacia.DespachadoFarmaciaDetalle, name='despachado_FarmaciaDetalle'),
     path('imprimirDespachoFarmacia/', viewsFarmaciaReportes.ImprimirDespacho , name='Imprimir_despacho'),
-    path('imprimirDespachoFarmacia/<str:farmaciaId>, <str:despachoId', viewsFarmaciaReportes.ImprimirDespacho , name='Imprimir_despacho'),
+    path('imprimirDespachoFarmacia/<str:farmaciaId>, <str:despachoId>', viewsFarmaciaReportes.ImprimirDespacho , name='Imprimir_despacho'),
     path('load_dataFarmaciaDetalleOrdenados/<str:data>', viewsFarmacia.Load_dataFarmaciaDetalleOrdenados, name='load_dataFarmaciaDetalleOrdenados'),
 
     #Enfermeria

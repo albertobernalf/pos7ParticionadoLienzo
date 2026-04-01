@@ -2230,6 +2230,32 @@ def escogeAcceso(request, Sede, Username, Profesional, Documento, NombreSede, es
 
         ## FIN CONTEXTO
 
+   	# Combo Tipos salas
+        #
+
+        miConexiont = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",
+                                       password="123456")
+        curt = miConexiont.cursor()
+
+        comando = 'SELECT p.id id, p.nombre  nombre FROM  sitios_tipossalas  p ' 
+
+        curt.execute(comando)
+        print(comando)
+
+        tiposSalas = []
+
+
+        for id, nombre in curt.fetchall():
+            tiposSalas.append({'id': id, 'nombre': nombre})
+
+        miConexiont.close()
+        print("tiposSalas", tiposSalas)
+
+        context['TiposSalas'] = tiposSalas
+
+        # Fin combo tiposSalas
+
+
    	# Combo salas
         #
 
@@ -2237,7 +2263,7 @@ def escogeAcceso(request, Sede, Username, Profesional, Documento, NombreSede, es
                                        password="123456")
         curt = miConexiont.cursor()
 
-        comando = "SELECT p.id id, p.nombre  nombre FROM  sitios_salas  p"
+        comando = 'SELECT p.id id, p.nombre||' + "' '||tipsal.nombre" + '  nombre FROM  sitios_salas  p, sitios_tipossalas tipSal  WHERE p."sedesClinica_id" = ' + str(sede) + ' and p."tipoSala_id" =  tipSal.id '
 
         curt.execute(comando)
         print(comando)
@@ -3669,7 +3695,7 @@ def escogeAcceso(request, Sede, Username, Profesional, Documento, NombreSede, es
         context['ViasAdministracion'] = viasAdministracion
 
         # Fin combo Vias Administracion
-
+        print("voy a cargar farmacia")
 
         ## FIN CONTEXTO
         return render(request, "farmacia/PanelFarmaciaF.html", context)

@@ -329,3 +329,17 @@ input[type="date"] {
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0,123,255,0.5);
 }
+
+
+
+.texto-span {
+     
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        height: 100vh;
+	font-style: italic;
+	color:blue;
+	font-size: 15px !important;
+
+}

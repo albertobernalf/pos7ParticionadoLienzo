@@ -24,7 +24,7 @@ from decimal import Decimal
 from admisiones.models import Ingresos
 from autorizaciones.models import AutorizacionesDetalle, Autorizaciones, EstadosAutorizacion
 import io
-from clinico.models import Historia, HistoriaMedicamentos
+from clinico.models import Historia, HistoriaMedicamentos, Examenes
 from facturacion.models import Liquidacion, LiquidacionDetalle
 from django.utils import timezone
 from farmacia.models import FarmaciaEstados
@@ -226,6 +226,9 @@ def ActualizarAutorizacionDetalle(request):
     examenId =request.POST['examenes_id']
     print("examenId:", examenId)
 
+    examen = Examenes.objects.get(id=examenId)
+    print("concepto = ", examen.concepto_id)
+
     tipoTipoExamen = request.POST['tipoTipoExamen']
     print("tipoTipoExamen:", tipoTipoExamen)
 
@@ -271,10 +274,11 @@ def ActualizarAutorizacionDetalle(request):
 	
 
     print("que pasa")
-    print("datosAut1.observaciones = ",datosAut.observaciones)
+    print("datosAut.observaciones = ",datosAut.observaciones)
     print("estadoAutorizacionAutorizado.id = ",estadoAutorizacionAutorizado.id)
+    print("aqui voy")
 
-    if (datosAut.observaciones.strip() == "AUTORIZACION HOSPITALARIA" and estadoAutorizacionAutorizado.id == int(estadoAutorizacion)):
+    if (datosAut.observaciones == "AUTORIZACION HOSPITALARIA" and float(estadoAutorizacionAutorizado.id) == float(estadoAutorizacion)):
 
         print ("es una autorizacion Hospitalaria")
         miConexiont = None
@@ -318,17 +322,18 @@ def ActualizarAutorizacionDetalle(request):
                 curt.close()
                 miConexiont.close()
 
-    if (datosAut.observaciones.strip() == "AUTORIZACION DE CIRUGIA" and estadoAutorizacionAutorizado.id == int(
-            estadoAutorizacion)):
+    print("paso medio")
+
+    if (datosAut.observaciones == "AUTORIZACION DE CIRUGIA" and estadoAutorizacionAutorizado.id == int(estadoAutorizacion)):
 
         print("es una autorizacion de cirugia")
 
         ingresoQxId = Ingresos.objects.get(id=datosAut.ingreso_id)
         print("Aquip vamos_1 ingreso  # : ", ingresoQxId.id)
 
-        cirugiaId=Cirugias.objects.get(tipoDoc_id=ingresoQxId.tipoDoc_id,documento_id=ingresoQxId.documento_id,consecAdmision=ingresoQxId.consec)
+        cirugiaId=Cirugias.objects.get(tipoDoc_id=ingresoQxId.tipoDoc_id,documento_id=ingresoQxId.documento_id,consecAdmision=ingresoQxId.consec, id=datosAut1.cirugia_id)
 
-        print("Aquip vamos_2 documeto_id : ", cirugiaId.documento_id)
+        print("Aquip vamos_2 documento_id : ", cirugiaId.documento_id)
         print("Aquip vamos_2 cirugiaId.id : ", cirugiaId.id)
         print("Aquip vamos_2 examen.id : ", examenId)
 
@@ -410,12 +415,12 @@ def ActualizarAutorizacionDetalle(request):
 
         if (tipoTipoExamen == 'CUPS'):
 
-            comando = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo,fecha, cantidad, "valorUnitario", "valorTotal",cirugia_id,"fechaCrea", "fechaRegistro", "estadoRegistro", "examen_id",  "usuarioRegistro_id", liquidacion_id, "tipoRegistro",anulado, mipres, "autorizacionDetalle_id") VALUES (' + "'" + str(
+            comando = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo,fecha, cantidad, "valorUnitario", "valorTotal",cirugia_id,"fechaCrea", "fechaRegistro", "estadoRegistro", "examen_id",  "usuarioRegistro_id", liquidacion_id, "tipoRegistro",anulado, mipres, "autorizacionDetalle_id", concepto_id) VALUES (' + "'" + str(
                 consecLiquidacion) + "','" + str(fechaRegistro) + "','" + str(cantidadAutorizada) + "','" + str(
                 valorAutorizado) + "','" + str(valorAutorizado) + "',null," + "'" + str(
                 fechaRegistro) + "','" + str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(
                 examenId) + "','" + str(usuarioRegistro_id) + "','" + str(liquidacionId) + "','" + str(
-                'SISTEMA') + "'" + ",'N','" + str(mipres)  + "','" + str(autorizacionDetalleId) + "')"
+                'SISTEMA') + "'" + ",'N','" + str(mipres)  + "','" + str(autorizacionDetalleId)  + "'," + str(examen.concepto_id) + "')"
             print("comando = ", comando)
             curt.execute(comando)
 

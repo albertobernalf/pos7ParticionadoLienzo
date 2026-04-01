@@ -353,13 +353,14 @@ class DisponibilidadSalas(models.Model):
     id = models.AutoField(primary_key=True)
     salas =  models.ForeignKey('sitios.salas', blank=True,null= True, editable=True, on_delete=models.PROTECT)
     fecha = models.DateField(default=now, editable=True)
-    #año = models.IntegerField(blank=True, null=True)
-    #mes= models.IntegerField(blank=True, null=True)
-    #dia= models.IntegerField(blank=True, null=True)
     desdeHora =	models.CharField(max_length=5,blank=True, null=True)
     hastaHora = models.CharField(max_length=5,blank=True, null=True)
     estadoDisponibilidad = models.CharField(max_length=1,choices=ESTADO_DISPONINILIDAD_CHOICES, default='A', editable=False)
     estadoReg = models.CharField(max_length=1,choices=ESTADOREG_CHOICES, default='L', editable=False)
+
+    class Meta:
+
+       unique_together = (('salas', 'fecha','desdeHora','hastaHora'),)	
 
     def __int__(self):
         return self.año

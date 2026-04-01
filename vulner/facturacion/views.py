@@ -871,12 +871,14 @@ def GuardarLiquidacionDetalle(request):
     if cups == '':
            cups="null"
            inicialSuministros =  valorTotal
+           suministroId=Suministros.objects.get(id=suministros)           
+           conceptoId=suministroId.concepto_id
 
     if suministros == '':
            suministros="null"
            inicialCups = valorTotal
-
- 
+           cupsId=Examenes.objects.get(id=cups)           
+           conceptoId=cupsId.concepto_id
 
     fechaRegistro = timezone.now()
 
@@ -920,7 +922,7 @@ def GuardarLiquidacionDetalle(request):
         miConexion3 = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",  password="123456")
         cur3 = miConexion3.cursor()
 
-        comando = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo,fecha, cantidad, "valorUnitario", "valorTotal",cirugia_id,"fechaCrea", "fechaRegistro", "estadoRegistro", "examen_id", cums_id,  "usuarioRegistro_id", liquidacion_id, "tipoRegistro", observaciones, anulado) VALUES (' + "'" +  str(consecLiquidacion)  + "','" + str(fechaRegistro) + "','" + str(cantidad) + "','"  + str(valorUnitario) + "','" + str(valorTotal)  + "',null" + ",'" +  str(fechaRegistro) + "','" +  str(fechaRegistro) + "','" + str(estadoReg) + "'," + str(cups) + "," + str(suministros) +   ",'"  + str(username_id) + "'," + liquidacionId + ",'MANUAL'," + "'"  + str(observaciones) + "','N')"
+        comando = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo,fecha, cantidad, "valorUnitario", "valorTotal",cirugia_id,"fechaCrea", "fechaRegistro", "estadoRegistro", "examen_id", cums_id,  "usuarioRegistro_id", liquidacion_id, "tipoRegistro", observaciones, anulado, concepto_id) VALUES (' + "'" +  str(consecLiquidacion)  + "','" + str(fechaRegistro) + "','" + str(cantidad) + "','"  + str(valorUnitario) + "','" + str(valorTotal)  + "',null" + ",'" +  str(fechaRegistro) + "','" +  str(fechaRegistro) + "','" + str(estadoReg) + "'," + str(cups) + "," + str(suministros) +   ",'"  + str(username_id) + "'," + liquidacionId + ",'MANUAL'," + "'"  + str(observaciones) + "','N','" + str(conceptoId) + "')"
         print(comando)
         cur3.execute(comando)
 
@@ -1156,9 +1158,14 @@ def EditarGuardarLiquidacionDetalle(request):
 
     if cups == '':
            cups="null"
+           suministroId=Suministros.objects.get(id=suministros)           
+           conceptoId=suministroId.concepto_id
 
     if suministros == '':
            suministros="null"
+           cupsId=Examenes.objects.get(id=cups)           
+           conceptoId=cupsId.concepto_id
+
 
     fechaRegistro = timezone.now()
 
@@ -1171,7 +1178,7 @@ def EditarGuardarLiquidacionDetalle(request):
 
         miConexion3 = psycopg2.connect(host="192.168.79.133", database="vulner7Particionado", port="5432", user="postgres",  password="123456")
         cur3 = miConexion3.cursor()
-        #comando = 'insert into facturacion_liquidacionDetalle ("fecha", "tipoDoc_id" , documento_id, consec,  "tipoPago_id" , "formaPago_id", valor, descripcion ,"fechaRegistro","estadoReg") values ('  + "'" + str(fechaRegistro) + "'," +  "'" + str(registroId.tipoDoc_id) + "'" + ' , ' + "'" + str(registroId.documento_id) + "'" + ', ' + "'" + str(registroId.consec) + "'" + '  , ' + "'" + str(tipoPago) + "'" + '  , ' + "'" + str(formaPago) + "'" + ', ' + "'" + str(valor) + "',"   + "'" + str(descripcion) + "','"   + str(fechaRegistro) + "'," + "'" +  str("A") + "');"
+        #comando = 'insert into facturacion_liquidacionDetalle ("fecha", "tipoDoc_id" , documento_id, consec,  "tipoPago_id" , "formaPago_id", valor, descripcion ,"fechaRegistro","estadoReg", concepto_id) values ('  + "'" + str(fechaRegistro) + "'," +  "'" + str(registroId.tipoDoc_id) + "'" + ' , ' + "'" + str(registroId.documento_id) + "'" + ', ' + "'" + str(registroId.consec) + "'" + '  , ' + "'" + str(tipoPago) + "'" + '  , ' + "'" + str(formaPago) + "'" + ', ' + "'" + str(valor) + "',"   + "'" + str(descripcion) + "','"   + str(fechaRegistro) + "'," + "'" +  str("A") + "','" + str(conceptoId) + "');"
         comando = 'UPDATE facturacion_liquidaciondetalle SET fecha = ' + "'" + str(fechaRegistro) + "', observaciones = " + "'" +  str(observaciones) + "', cantidad = "  + str(cantidad) +  ',"valorUnitario" = ' + str(valorUnitario) + ', "valorTotal" = '  +      str(valorTotal) + ',"fechaCrea" = '  + "'" + str(fechaRegistro) + "'" + ',"estadoRegistro" = ' + "'" + str(estadoReg) + "'" + ',"examen_id" = ' + str(cups) +  ', cums_id = ' + str(suministros) +  ', "usuarioRegistro_id" = ' + "'" + str(username_id) + "', liquidacion_id = " + str(registroId.liquidacion_id) + ', "tipoRegistro" = ' + "'" + str(tipoRegistro) + "' WHERE id = " + str(liquidacionDetalleId)
         print(comando)
         cur3.execute(comando)
@@ -2021,7 +2028,7 @@ def ReFacturar(request):
 
                 # Aquip hacer los INSERT A LIQUIDACIONDETALLE a partir de facturacion detalle
 
-                comando2 = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo ,  fecha ,  cantidad ,  "valorUnitario" ,  "valorTotal" ,  cirugia_id ,  "fechaCrea" ,  "fechaModifica" ,  observaciones ,  "fechaRegistro" ,  "estadoRegistro" ,  "examen_id" ,  cums_id ,  "usuarioModifica_id" ,  "usuarioRegistro_id" ,  liquidacion_id ,  "tipoHonorario_id" ,  "tipoRegistro" , anulado, "codigoHomologado", mipres ,"autorizacionDetalle_id"  ) SELECT "consecutivoFactura" ,  fecha ,  cantidad ,  "valorUnitario" ,  "valorTotal" ,  cirugia_id ,  "fechaCrea" ,  "fechaModifica" ,  observaciones ,  "fechaRegistro" , ' + "'" + str('A') + "'" + ' ,  "examen_id" ,  cums_id ,  "usuarioModifica_id" ,  "usuarioRegistro_id" , ' + "'" + str(liquidacionId) + "'" + ' ,  "tipoHonorario_id" ,  "tipoRegistro", anulado, "codigoHomologado" , mipres ,"autorizacionDetalle_id"  FROM facturacion_facturaciondetalle WHERE facturacion_id =  ' + facturacionId
+                comando2 = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo ,  fecha ,  cantidad ,  "valorUnitario" ,  "valorTotal" ,  cirugia_id ,  "fechaCrea" ,  "fechaModifica" ,  observaciones ,  "fechaRegistro" ,  "estadoRegistro" ,  "examen_id" ,  cums_id ,  "usuarioModifica_id" ,  "usuarioRegistro_id" ,  liquidacion_id ,  "tipoHonorario_id" ,  "tipoRegistro" , anulado, "codigoHomologado", mipres ,"autorizacionDetalle_id" , concepto_id ) SELECT "consecutivoFactura" ,  fecha ,  cantidad ,  "valorUnitario" ,  "valorTotal" ,  cirugia_id ,  "fechaCrea" ,  "fechaModifica" ,  observaciones ,  "fechaRegistro" , ' + "'" + str('A') + "'" + ' ,  "examen_id" ,  cums_id ,  "usuarioModifica_id" ,  "usuarioRegistro_id" , ' + "'" + str(liquidacionId) + "'" + ' ,  "tipoHonorario_id" ,  "tipoRegistro", anulado, "codigoHomologado" , mipres ,"autorizacionDetalle_id" , concepto_id  FROM facturacion_facturaciondetalle WHERE facturacion_id =  ' + facturacionId
                 print(comando2)
                 cur3.execute(comando2)
 
@@ -2386,14 +2393,14 @@ def TrasladarConvenio(request):
 
         ## Segundo busco los Cups desde y los envio Hasta
         #
-        comando3 = 'INSERT INTO facturacion_liquidaciondetalle ( consecutivo, fecha, cantidad, "valorUnitario", "valorTotal", cirugia_id, "fechaCrea", "fechaModifica", observaciones, "fechaRegistro", "estadoRegistro",examen_id,  "usuarioModifica_id", "usuarioRegistro_id", liquidacion_id, "tipoHonorario_id", "tipoRegistro", "historiaMedicamento_id",anulado,"codigoHomologado" , mipres ,"autorizacionDetalle_id" ) select  det.consecutivo, liq.fecha, cantidad, proc."' + str(columnaProcedimientos) + '"' + ', proc."' + str(columnaProcedimientos) + '"' + ' * cantidad, cirugia_id, "fechaCrea", "fechaModifica", liq.observaciones, liq."fechaRegistro", liq."estadoRegistro", examen_id, "usuarioModifica_id", liq."usuarioRegistro_id",' + "'" + str(liquidacionIdHasta.id) + "'" + ' , "tipoHonorario_id",	"tipoRegistro", "historiaMedicamento_id", ' + "'" + str('N') + "'" + ', "codigohomologado", mipres ,"autorizacionDetalle_id"  from facturacion_liquidacion liq  , facturacion_liquidaciondetalle det, contratacion_convenios conv,	  tarifarios_tarifariosdescripcion descrip, tarifarios_tipostarifa tiptar, tarifarios_tarifariosProcedimientos proc where det.liquidacion_id = liq.id and det.liquidacion_id = ' + "'" + str(liquidacionIdDesde.id) + "'" + ' and conv.id = ' + "'" + str(liquidacionIdHasta.convenio_id) + "'" + ' and det."estadoRegistro" = ' + "'" + str('A') + "'" + ' and descrip.id = conv."tarifariosDescripcionProc_id" and tiptar.id = descrip."tiposTarifa_id" and tiptar.id = proc."tiposTarifa_id" and proc."codigoCups_id" = det.examen_id'
+        comando3 = 'INSERT INTO facturacion_liquidaciondetalle ( consecutivo, fecha, cantidad, "valorUnitario", "valorTotal", cirugia_id, "fechaCrea", "fechaModifica", observaciones, "fechaRegistro", "estadoRegistro",examen_id,  "usuarioModifica_id", "usuarioRegistro_id", liquidacion_id, "tipoHonorario_id", "tipoRegistro", "historiaMedicamento_id",anulado,"codigoHomologado" , mipres ,"autorizacionDetalle_id", concepto_id ) select  det.consecutivo, liq.fecha, cantidad, proc."' + str(columnaProcedimientos) + '"' + ', proc."' + str(columnaProcedimientos) + '"' + ' * cantidad, cirugia_id, "fechaCrea", "fechaModifica", liq.observaciones, liq."fechaRegistro", liq."estadoRegistro", examen_id, "usuarioModifica_id", liq."usuarioRegistro_id",' + "'" + str(liquidacionIdHasta.id) + "'" + ' , "tipoHonorario_id",	"tipoRegistro", "historiaMedicamento_id", ' + "'" + str('N') + "'" + ', "codigohomologado", mipres ,"autorizacionDetalle_id", concepto_id  from facturacion_liquidacion liq  , facturacion_liquidaciondetalle det, contratacion_convenios conv,	  tarifarios_tarifariosdescripcion descrip, tarifarios_tipostarifa tiptar, tarifarios_tarifariosProcedimientos proc where det.liquidacion_id = liq.id and det.liquidacion_id = ' + "'" + str(liquidacionIdDesde.id) + "'" + ' and conv.id = ' + "'" + str(liquidacionIdHasta.convenio_id) + "'" + ' and det."estadoRegistro" = ' + "'" + str('A') + "'" + ' and descrip.id = conv."tarifariosDescripcionProc_id" and tiptar.id = descrip."tiposTarifa_id" and tiptar.id = proc."tiposTarifa_id" and proc."codigoCups_id" = det.examen_id'
         print("comando = ", comando3)
         curt.execute(comando3)
 
 
         ## Tercero busco los Cums desde y los envio Hasta
 
-        comando4 = 'INSERT INTO facturacion_liquidaciondetalle ( consecutivo, fecha, cantidad, "valorUnitario", "valorTotal", cirugia_id, "fechaCrea", "fechaModifica", observaciones, "fechaRegistro", "estadoRegistro",cums_id,  "usuarioModifica_id", "usuarioRegistro_id", liquidacion_id, "tipoHonorario_id", "tipoRegistro", "historiaMedicamento_id", anulado, "codigoHomologado", mipres ,"autorizacionDetalle_id" ) select  det.consecutivo, liq.fecha, cantidad, sum.' + '"' + str(columnaSuministros) + '"' + ', sum."' + str(columnaSuministros) + '"'  + ' * cantidad, cirugia_id, "fechaCrea", "fechaModifica", liq.observaciones, liq."fechaRegistro", liq."estadoRegistro", cums_id, "usuarioModifica_id", liq."usuarioRegistro_id",' + "'" + str(liquidacionIdHasta.id) + "'" + ' , "tipoHonorario_id",	"tipoRegistro", "historiaMedicamento_id", ' + "'" + str('N') + "'" + ', "codigoHomologado" , mipres,"autorizacionDetalle_id"  from facturacion_liquidacion liq  , facturacion_liquidaciondetalle det, contratacion_convenios conv,	  tarifarios_tarifariosdescripcion descrip, tarifarios_tipostarifa tiptar, tarifarios_tarifariosSuministros sum where det.liquidacion_id = liq.id and det.liquidacion_id = ' + "'" + str(liquidacionIdDesde.id) + "'" + ' and conv.id = ' + "'" + str(liquidacionIdHasta.convenio_id) + "'" + ' and det."estadoRegistro" =  ' + "'" + str('A') + "'" + ' and descrip.id = conv."tarifariosDescripcionSum_id" and tiptar.id = descrip."tiposTarifa_id" and tiptar.id = sum."tiposTarifa_id" and sum."codigoCum_id" = det.cums_id'
+        comando4 = 'INSERT INTO facturacion_liquidaciondetalle ( consecutivo, fecha, cantidad, "valorUnitario", "valorTotal", cirugia_id, "fechaCrea", "fechaModifica", observaciones, "fechaRegistro", "estadoRegistro",cums_id,  "usuarioModifica_id", "usuarioRegistro_id", liquidacion_id, "tipoHonorario_id", "tipoRegistro", "historiaMedicamento_id", anulado, "codigoHomologado", mipres ,"autorizacionDetalle_id" ) select  det.consecutivo, liq.fecha, cantidad, sum.' + '"' + str(columnaSuministros) + '"' + ', sum."' + str(columnaSuministros) + '"'  + ' * cantidad, cirugia_id, "fechaCrea", "fechaModifica", liq.observaciones, liq."fechaRegistro", liq."estadoRegistro", cums_id, "usuarioModifica_id", liq."usuarioRegistro_id",' + "'" + str(liquidacionIdHasta.id) + "'" + ' , "tipoHonorario_id",	"tipoRegistro", "historiaMedicamento_id", ' + "'" + str('N') + "'" + ', "codigoHomologado" , mipres,"autorizacionDetalle_id" , concepto_id from facturacion_liquidacion liq  , facturacion_liquidaciondetalle det, contratacion_convenios conv,	  tarifarios_tarifariosdescripcion descrip, tarifarios_tipostarifa tiptar, tarifarios_tarifariosSuministros sum where det.liquidacion_id = liq.id and det.liquidacion_id = ' + "'" + str(liquidacionIdDesde.id) + "'" + ' and conv.id = ' + "'" + str(liquidacionIdHasta.convenio_id) + "'" + ' and det."estadoRegistro" =  ' + "'" + str('A') + "'" + ' and descrip.id = conv."tarifariosDescripcionSum_id" and tiptar.id = descrip."tiposTarifa_id" and tiptar.id = sum."tiposTarifa_id" and sum."codigoCum_id" = det.cums_id'
         print("comando = ", comando4)
         curt.execute(comando4)
 

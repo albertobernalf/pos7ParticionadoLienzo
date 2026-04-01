@@ -51,10 +51,10 @@ class regimenesTipoPagoAdmin(admin.ModelAdmin):
 @admin.register(TiposSuministro)
 class tiposSuministroAdmin(admin.ModelAdmin):
 
-   list_display = ("id", "nombre")
-   search_fields = ("id", "nombre")
+   list_display = ("id", "nombre","tiposHonorarios", "concepto")
+   search_fields = ("id", "nombre","tiposHonorarios__nombre", "concepto__nombre")
    # Filtrar
-   list_filter = ("id", "nombre")
+   list_filter = ("id", "nombre","tiposHonorarios", "concepto")
 
 @admin.register(Suministros)
 class suministrosAdmin(admin.ModelAdmin):

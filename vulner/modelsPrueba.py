@@ -1174,21 +1174,54 @@ lunes  09 de marzo
 	El material quirúrgico es considerado un suministro médico o instrumental, no un examen	
 	Los dispositivos médicos se clasifican principalmente como insumos o suministros para la salud, no como exámenes en sí mismos	
 	Los materiales de sutura y curación se clasifican técnicamente como un suministro o insumo médico, no como un examen
+        Los insumos medicos tampoco tiene cums
+	A diferencia de los medicamentos, los insumos como jeringas, gasas, catéteres o prótesis se rigen por el estándar semántico y de codificación para dispositivos médicos
+	Ejemplos de insumos hospitalarios:
+	Material de curación: Gasas, vendas, apósitos y soluciones antisépticas.
+	Elementos de protección: Guantes, mascarillas, batas y caretas.
+	Insumos de administración: Jeringas, agujas y catéteres periféricos. 
+	La EPS radica las facturas. Por API consulta creo entender
+	Enviar responsable de pago.
+	Integracion con siinva/ integracion por la API ...
+	sispro, mipres-- medicos capacitacion Mipres., rda trabajando/ sispro es el software principal
+	LEER todos estos temas con INTEROPERABILIDAD se esta mviendo mucho estop
+	De mipres como conectars a un api de ellos, procesos masivos
+	1.3 teras a 1.5 tb en imagenes mensual se maneja ...
+	prueba con edem o edel o algo asi. velociodad ime descarga de imagenes
+	
+
+	LUNES 30-MARZO 
+
+	OPS LUNES MARZO 30 TODO ESTO ATACARLO
+
+	OPS OPS OPS IMPORTANTISIMO. ENTRO EN UNA FAS DISPARA MUCHAS COSAS SUELTAS D RRRO PERO NO PARAN OPEAION A LO MEJOR
+	OPS OPS OPS PACIENTCIA ANOTAR AQUI E IR SOLUCIONADO DE A POQUITO ES COMO UA PUEST A PUNTO PAPABEROL
+	OPS LO MEJOR ES CREAR UN NUEVO POS7PARTICIONADOLIENZO2 (Todas las carpetas mas la que no se tocan de lienzo OJOO. e imprante. punto critico) A PArTIR DE POS/PARTICIONADO
+
 
 	OPS en TRIAGE la imresora no imprime nada esta GIGANTE el icono
 	OPS triage no tiene select-box
 	OPS en triage debe ser un check-box solicita autorizacion de hospitalizacion , desarrollar alli enviar a autorizaciones
 	OPS en triage cuando va a imprimir PDFAtencionInicialUrgencias se queda quieto
-	OPS los combos de laboraorio/Radiologia se pasma no estan funcinando bin
+	OPS los combos de laboraorio/Radiologia EN hc se pasma no estan funcinando bin
 	OPS en cirugia porque sale convenio particular de falcao ??
 
 	OPS cual es la difeencia entre Autorizacion de cirugia y/o autorizacion de procedimiento. Mirar la pantalla autorizaiondetalle el refresh todo ralo desaparece la cdecirugia dja la de cups autorizado y no desaparec
 	OPS hay un error a detectar cuando ingreso por triage se seleciono compensariss pero caundo lo hospitalizo lo dejo en particular ojo ARREGLAR
 	OPS en la programacion de cirugia me muestra todo DISPONIBLE no ageda en sala a falcao por que ????? GRAVISISSIMO es por el convenio ? o por los dos procedimientos de la cirugia ??
 
-	OPS en este caso me va a tocar hacer un traslado de cargos para que todo quede en compensarIss, vamos a intentarlo
+	OPs volver a probar pasar una liquidacion de cirugia a facturacion de una cuenta con dos convenios
 	OPS generar liquidacion de cirugia aiutomaica hay que revisa SOAT esta incompleta creo
-	OPS me paso la liquidacion de la cirugia en ambas cuentas erro
-	ops ESTOY SLAMENTE CON LAS PRUEBAS DE ISS EN GENERALIQUIDACION E IMRESION DE LA CUENTA -- OJO NO SOAT NO FACTURA SE HAN HEHO PRUEBAS
+	OPS me paso la liquidacion de la cirugia en ambas cuentas erroR
+	ops ESTOY SOLAMENTE CON LAS PRUEBAS DE ISS EN GENERALIQUIDACION E IMRESION DE LA CUENTA -- OJO NO SOAT NO FACTURA SE HAN HEHO PRUEBAS
 	OPS OJOOOOOOOOO . cuando pasa un paciente de triage a hospital. en la pantalla no se ve la empresa/convenio y cuando guarda debe
-	coger la empresa/conveio de que vien de triage para admisiones_ingresos. recirede que admsiion no permite crear empresa/convenio
+	coger la empresa/conveNio de que vien de triage para admisiones_ingresos. recirede que admsiion no permite crear empresa/convenio
+
+	Hoy verificar:
+	Datos de la cirugia cochise como se liquidaron ayer.ver valores manual hoja d gadto
+	Areglar el cantidadUvr2
+	cambiar a uvr < 170 probar valores
+	imprimir estado de cuenta idd 2001 verificar
+	trsaladas a sat 2004
+	liquidar cirugia soat 2004
+	imprimir estado de cuenta soat

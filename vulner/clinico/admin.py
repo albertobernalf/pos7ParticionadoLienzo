@@ -51,10 +51,10 @@ class enfermedadesAdmin(admin.ModelAdmin):
 
 @admin.register(TiposExamen)
 class tiposExamenAdmin(admin.ModelAdmin):
-        list_display = ("id", "nombre")
-        search_fields = ("id", "nombre")
+        list_display = ("id", "nombre","concepto")
+        search_fields = ("id", "nombre","concepto__nombre")
         # Filtrar
-        list_filter = ('nombre',)
+        list_filter = ('nombre',"concepto")
 
 
 @admin.register(TiposFolio)

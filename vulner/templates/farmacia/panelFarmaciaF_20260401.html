@@ -542,88 +542,7 @@ function RefrescarPantalla() {
   <!-- INICIO TABLE DE  EL DATATABLE  -->
 		<div class="container my-2">
 
-		Orden :  <span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="ordenFarmaciaDE2"></span>
-			<span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;" id="nombreTipoDocDE2"></span>
-			<span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="documentoDE2"></span>
-			<span  style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;" id="pacienteDE2"></span>
-			Ing#: <span id="consecutivoAdmisionDE"></span>
-			Servicio: <span id="servicioDE"></span>
-			Hab: <span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="habitacionDE2"></span>
-			Mipres : <span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="mipresDE2"></span>
-			Autorizacion : <span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="numeroAutorizacionDE2"></span>
-			IdAut : <span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="idAutDE2"></span>
-
-			
-
-   			   <div class="row">
-
-
-				
-                                        <table  id= "tablaFarmaciaDetalle" class=" display table table-striped table-sm fs-6 nowrap" style="width: 100%">
-                                           <thead>
-                                            <tr>    
-						<bold> 
-					    	 <th>Sel</th>                                               
-					    	 <th>Dispensar</th>                                               
- 						 <th>Orden Detalle #</th>  
-						 <th>Dosis</th>  
-						 <th>UnidadDosis</th>  	                           
-						 <th>Suministro</th>                                        				
-						 <th>Via</th>                                        				
-					 <th>cantidad</th>                                                 
-					 <th>Mipres</th>                                                 
-					 <th>Autorizacion</th>                                                 
-					 <th>AutId</th>    
-					 <th>Despachado</th>  
-					</bold>                                  
-
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                     
-                                        </table>
-					
-                                        <table  id= "tablaFarmaciaDespachosDispensa" class=" display table table-striped table-sm fs-6 nowrap" style="width: 100%">
-                                           <thead>
-                                            <tr>    
-						<bold> 
-					     <th>Sel</th>                                               
- 						  <th>Despacho Detalle #</th>                             
-						 <th>despacho</th>                                        
-						 <th>suministro</th>  
-						 <th>dosis</th>  					
-					 <th>unidadDosis</th>                                                 
-					 <th>via</th>                                                 
-					 <th>cantidad</th>                                                 				                                           
-				              
-					</bold>                                  
-
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                     
-                                        </table>
-                                    </div> <!-- cierrra el row  -->
-             
-             </div>     <!-- CIERRA DIV CONTAINER ES LA TAPA EXTERIOR MAXIMA ENVUELVE LA PAGINA--> 	
-
-
-           <!-- Modales Farmacia -->
-
-	<!-- Modal Farmacia Dispensa -->
-
-   <div class="modal fade" id="crearModelDispensaFarmacia" tabindex="-1" role="dialog"  style="overflow-y:scroll;" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-                <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable  modal-dialog-center" role="document" >
-                    <div class="modal-content">
-                        <div class="modal-header" style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;">
-                             <h4 class="modal-title" id="modelHeadingDispensaFarmacia"> </h4> 
-			 
-                         <button type="button" class="close" data-bs-dismiss="modal"  aria-label="Close"> <span aria-hidden="true">&times;</span>  </button>
-
-
-				<div style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;" >
+		<div align="left" height="2px" width="150px">
 
 			Orden :  <span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="ordenFarmaciaDE"></span>
 			<span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;" id="nombreTipoDocDE"></span>
@@ -635,8 +554,8 @@ function RefrescarPantalla() {
 			Mipres : <span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="mipresDE"></span>
 			Autorizacion : <span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="numeroAutorizacionDE"></span>
 			IdAut : <span style="padding-left:10px; padding-right:3px; padding-top: 3px; display:inline-block;"  id="idAutDE"></span>
-		</div>
-		<div style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;" >
+
+			<input type="text" id="farmaciaDetalleDE" name="farmaciaDetalleDE" size="3" value="" readonly>
 
  							   Entrega:               
                                                         <select  class="select-css" id="servicioAdmonEntregaF"
@@ -679,12 +598,75 @@ function RefrescarPantalla() {
 
 				               <input type="button" style="height:30px;margin-left: 0 ; margin-bottom: 0;border-top-right-radius: 0;"  size="10px" id="BtnAdicionarDespachosDispensa"  name="BtnAdicionarDespachosDispensa" value="Dispensar" onclick= "AdicionarDespachosDispensa()" >				    
 
-					</div>
-			
-		<div style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;" >
+		</div>
 
-				    <center>
-                                                <div class="row" align="left" height="2px" width="150px">
+
+   			   <div class="row">
+				
+                                        <table  id= "tablaFarmaciaDetalle" class=" display table table-striped table-sm fs-6 nowrap" style="width: 100%">
+                                           <thead>
+                                            <tr>    
+						<bold> 
+					    	 <th>Sel</th>                                               
+ 						 <th>Orden Detalle #</th>  
+						 <th>Dosis</th>  
+						 <th>UnidadDosis</th>  	                           
+						 <th>Suministro</th>                                        				
+						 <th>Via</th>                                        				
+					 <th>cantidad</th>                                                 
+					 <th>Mipres</th>                                                 
+					 <th>Autorizacion</th>                                                 
+					 <th>AutId</th>    
+					 <th>Despachado</th>  
+					</bold>                                  
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                     
+                                        </table>
+					
+                                        <table  id= "tablaFarmaciaDespachosDispensa" class=" display table table-striped table-sm fs-6 nowrap" style="width: 100%">
+                                           <thead>
+                                            <tr>    
+						<bold> 
+					     <th>Sel</th>                                               
+ 						  <th>Despacho Detalle #</th>                             
+						 <th>despacho</th>                                        
+						 <th>suministro</th>  
+						 <th>dosis</th>  					
+					 <th>unidadDosis</th>                                                 
+					 <th>via</th>                                                 
+					 <th>cantidad</th>                                                 				                                           
+				              
+					</bold>                                  
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                     
+                                        </table>
+                                    </div> <!-- cierrra el row  -->
+               
+
+
+		<!--   estop viene de clinico -->
+           <!-- DESDE AQUIP DATATABLE  -->
+
+                    <table class="table"
+                           style="height: 5px; background-color:LightGray; BORDERCOLOR=RED ; border: 8px solid black; border-color: #96D4D4;  width:99%;">
+                        <form class="form-inline" action="/crearFormulacionDef/" method="POST"
+                              id="FormaFormulacion">
+
+                            <!-- INICIO TABLE DE  EL DATATABLE  -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header" style="height:65px;">
+                                            <center>
+                                                <div class="row">
                                                     
                                                    <div class="col-sm-3"> 
 						<!-- <label  for="medicamentos">Medicamentos:</label>   -->
@@ -714,7 +696,9 @@ function RefrescarPantalla() {
                                                             {% endfor %}
                                                         </select>
                                                    </div> 
-                                                                                                     
+                                                   
+                                                   
+
 						 <div class="col-sm-1"> 
 							                        
                                                         <select class="select-css" id="vias"
@@ -726,11 +710,22 @@ function RefrescarPantalla() {
                                                             {% endfor %}
                                                         </select>
                                                     </div> 
+
+
 						                           <div class="col-sm-1"> 
 							                        Cantidad:
                                                         <input type="text" id="cantidadMedicamento" name="cantidadMedicamento" value="" placeholder="Cantidad">
                                                    </div> 
 			                      
+					<!-- 
+						     <div class="col-sm-1"> 
+							     Mipres:
+                                                        <input type="text" id="mipres" name="mipres" value="" placeholder="mipres">
+                                                   </div> 
+ -->
+
+
+
 							 <div class="col-sm-1"> 
 								 </div> 
                                                    <div class="col-sm-1 text-end"> 
@@ -738,35 +733,14 @@ function RefrescarPantalla() {
                                                         <a class="btn btn-success" href="javascript:void(0)"
                                                            id="BtnAdicionarFormulacion"> <i class="fa fa-plus"></i></a>
                                                     </div> 
-
-</div>  <!-- ultimo div creado ->
-                                                </div>  <!-- CIERRA EX-ROW DIV  -->
+                                                </div>
                                             </center>
-
-			</div>  <!-- fin HEADER -->
-		
-                        <div class="modal-body">
-           
-			<div style="display: flex; gap: 10px; height:15px;width: 300px;">
- 					<input type="text" id="mensajesModalDispensaFarmacia"      name="mensajesModalDispensaFarmacia" style="background-color: lightgreen; color: navy;" style="width: 50%;"  placeholder=""  wrap="hard" size="75px"></input>
-					<input type="text" id="mensajesErrorModalDispensafarmacia" name="mensajesErrorModalDispensaFarmacia" style="background-color: lightgreen; color: navy;" style="width: 50%;"  placeholder=""  wrap="hard" size="75px"></input>
-
-					  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar   </button>}}}}
-				</div>
-
-  			  <form id="postFormDispensaFarmacia" name="postFormDispensaFarmacia" style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;">
-
-                                <input type="hidden" name="post_id" id="post_id">
-			     <input type="hidden" class="form-control" id="sedesClinicaModalDispensaFarmacia" name="sedesClinicaModalDispensaFarmacia"  readonly></input>
-
-			Farmacia detalle No : 
-
-			<input type="text" id="farmaciaDetalleDE" name="farmaciaDetalleDE" size="3" value="" readonly>
-     									
-			<!-- DESDE AQUI CODIGO DATAT TABLE CLINICO -->
-
+                                        </div>
+                                        <div class="card-body" style="height:5px;">
                                             <div class="row">
-                                                    <table id="tablaFormulacion" class="display nowrap table table table-bordered  tablaFormulacion table-hover table-sm dtr-inline">
+                                                <div class="col-sm-12">
+                                                    <table id="tablaFormulacion"
+                                                           class="display nowrap table table table-bordered  tablaFormulacion table-hover table-sm dtr-inline">
                                                         <thead>
                                                         <tr>
                                                             <th style="width:5%;"></th>
@@ -792,31 +766,43 @@ function RefrescarPantalla() {
                                                         </tr>
                                                         </tbody>
                                                     </table>
-	                          
 
+		<div align="left" height="10px" width="30px">
+
+		</div>
+
+                          </div>  
                          </div> <!-- cierrra el row  -->
-			<!-- HASTA AQU CODIGIO DATA TABLE CLINICO  -->
+                        </div> <!-- cierrra el body  -->
+                       </div> <!-- cierrra el card  -->
+                                </div> <!-- cierrra col   -->
+                            </div> <!-- cierrra row  -->
+                            <!-- FIN TABLE DE  EL DATATABLE  -->
+                        </form>
+                    </table>
+  
+             <!-- HASTA AQUI DATATABLE -->
 
-                            </form>
+             
+		<!-- lo borro CERRA DIV  -->
 
-                        </div> <!-- CIERRA BODY -->
-			<div class="modal-footer">
+             </div>     <!-- CIERRA DIV CONTAINER -->
 
-			                               
-				
-                                    </div>
-
-						
-                        </div> <!-- CIERRA MODAL CONTENTE -->
-                    </div> <!-- CIERRA MODAL DIALOG -->
-                </div>  <!-- CIERRA MODAL FADE -->
+		<!-- finaliza lo que viene de clinico -->      	
 
 
-	<!-- FIN Modal Farmacia Dispensa -->
+           <!-- Modales Historia CLinica -->
 
-     <!-- FIN Espacio Modales Farmacia -->
+     <!-- FIN Espacio Modales  -->
 
    </article>
+
+
+
+
+
+
+
 
 
      
@@ -825,7 +811,14 @@ function RefrescarPantalla() {
 
 {% endblock %}
 
+{% block mensajeria %}
+<div class="marco">
+	<textarea id="mensajes" name="mensajes" style="background-color: lightblue; color: navy;"  rows="1" cols="180" placeholder="Mensajes..."  wrap="hard"></textarea>
+	<textarea id="mensajesError" name="mensajesError" style="background-color: lightred; color: navy;"  rows="1" cols="180" placeholder="Mensajes..."  wrap="hard"></textarea>
 
+
+</div>
+{% endblock %}
 
 
 

@@ -606,7 +606,9 @@ def AdicionarDespachosDispensa(request):
                 cantidadMedicamento = key["cantidadMedicamento"].strip()
                 print("cantidadMedicamento=", cantidadMedicamento)
 
-
+                medicamentosId = Suministros.objects.get(id=medicamentos)
+                print ("concepto_id = ", medicamentosId.concepto_id)
+ 
                 #diasTratamiento = key["diasTratamiento"]
                 #print("diasTratamiento=", diasTratamiento)
 
@@ -738,7 +740,7 @@ def AdicionarDespachosDispensa(request):
                 # Aqui Rutina FACTURACION crea en liquidaciondetalle el registro con la tarifa, con campo cups y convenio
                 #
 
-                comando = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo,fecha, cantidad, "valorUnitario", "valorTotal",cirugia_id,"fechaCrea", "fechaRegistro", "estadoRegistro", "cums_id",  "usuarioRegistro_id", liquidacion_id, "tipoRegistro", "historiaMedicamento_id",anulado, mipres, "autorizacionDetalle_id") VALUES (' + "'" + str(consecLiquidacion) + "','" + str(fechaRegistro) + "','" + str(cantidadMedicamento) + "','" + str(tarifaValor) + "','" + str(TotalTarifa) + "',null,'" + str(fechaRegistro) + "','" + str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(medicamentos) + "','" + str(username_id) + "'," + liquidacionId + ",'SISTEMA'," + str(historiaMedicamentos.id)  + ",'N','" + str(mipres) + "',"+  str(autorizacionId) + ")"
+                comando = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo,fecha, cantidad, "valorUnitario", "valorTotal",cirugia_id,"fechaCrea", "fechaRegistro", "estadoRegistro", "cums_id",  "usuarioRegistro_id", liquidacion_id, "tipoRegistro", "historiaMedicamento_id",anulado, mipres, "autorizacionDetalle_id", concepto_id) VALUES (' + "'" + str(consecLiquidacion) + "','" + str(fechaRegistro) + "','" + str(cantidadMedicamento) + "','" + str(tarifaValor) + "','" + str(TotalTarifa) + "',null,'" + str(fechaRegistro) + "','" + str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(medicamentos) + "','" + str(username_id) + "'," + liquidacionId + ",'SISTEMA'," + str(historiaMedicamentos.id)  + ",'N','" + str(mipres) + "',"+  str(autorizacionId)  + ",'" + str(medicamentosId.concepto_id) + "')"
                 print("comando ", comando)
 
                 cur3.execute(comando)
@@ -829,7 +831,7 @@ def AdicionarDespachosDispensa(request):
         # Por ultimo imprime el Despacho
 
         print("Entre imprimir despacho salida", despachoId)
-        ImprimirDespacho(farmaciaId, despachoId)
+        #ImprimirDespacho(farmaciaId, despachoId)
 
         print("Ya imprimi orden de control")
 

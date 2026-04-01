@@ -344,7 +344,7 @@ function arrancaFarmacia(valorTabla,valorData)
   lengthMenu: [2, 4, 15],
            processing: true,
             serverSide: false,
-            scrollY: '300px',
+            scrollY: '200px',
 	    scrollX: true,
 	    scrollCollapse: true,
             paging:false,
@@ -386,16 +386,6 @@ function arrancaFarmacia(valorTabla,valorData)
                         var btn = '';
 
 		 btn = btn + " <input type='radio' name='miFarmaciaDetalle2' style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;' class='miFarmaciaDetalle form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
-
-
-                       return btn;
-                    },
-	},
-{
-	  "render": function ( data, type, row ) {
-                        var btn = '';
-
-		 btn = btn + " <input type='radio' name='miDispensaFarmacia' style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;' class='miDispensaFarmacia form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
 
 
                        return btn;
@@ -470,7 +460,7 @@ function arrancaFarmacia(valorTabla,valorData)
   lengthMenu: [2, 4, 15],
            processing: true,
             serverSide: false,
-            scrollY: '300px',
+            scrollY: '75px',
 	    scrollX: true,
 	    scrollCollapse: true,
             paging:false,
@@ -1134,14 +1124,6 @@ $('#tablaPanelFarmacia tbody').on('click', '.miSelFarmacia', function() {
 		document.getElementById("servicioDE").innerHTML = info[0].fields.servicio;
 		document.getElementById("habitacionDE").innerHTML = info[0].fields.cama;
 
-       		 document.getElementById("ordenFarmaciaDE2").innerHTML =  farmaciaId;
-		document.getElementById("nombreTipoDocDE2").innerHTML = info[0].fields.nombreTipoDoc;
-		document.getElementById("documentoDE2").innerHTML = info[0].fields.documento;
-		document.getElementById("pacienteDE2").innerHTML = info[0].fields.paciente;
-		document.getElementById("consecutivoAdmisionDE2").innerHTML = info[0].fields.consecutivoAdmision;
-		document.getElementById("servicioDE2").innerHTML = info[0].fields.servicio;
-		document.getElementById("habitacionDE2").innerHTML = info[0].fields.cama;
-
       		document.getElementById("ordenFarmaciaX").innerHTML =  farmaciaId;
 		document.getElementById("nombreTipoDocNX").innerHTML = info[0].fields.nombreTipoDoc;
 		document.getElementById("documentoNX").innerHTML = info[0].fields.documento;
@@ -1323,17 +1305,6 @@ alert("dato3.numeroAutorizacion = " +  dato3.numeroAutorizacion);
 	     arrancaFarmacia(4,data);
 		     	dataTableFarmaciaDespachosDispensaInitialized = true;
 
-
-  });
-
-
-$('#tablaFarmaciaDetalle tbody').on('click', '.miDispensaFarmacia', function() {
-
-		  alert("ENTRE miDispensaFarmacia ");
-	  	var post_id = $(this).data('pk');
-		farmaciaDetalleId =   post_id;
-		alert("farmaciaDetalleId = " +  farmaciaDetalleId);
-   $('#crearModelDispensaFarmacia').modal('show');
 
   });
 

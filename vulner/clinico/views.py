@@ -825,6 +825,7 @@ def crearHistoriaClinica(request):
                                 #
                                 codigoCupsId = Examenes.objects.filter(codigoCups=cups)
                                 print ("codigoCupsId", codigoCupsId[0].id)
+                                conceptoId = codigoCupsId[0].concepto_id
 
                                 if (columnaALeerPropia != ''):
 
@@ -945,7 +946,7 @@ def crearHistoriaClinica(request):
 
                                 if (codigoCupsId[0].requiereAutorizacion == 'N'):
 
-                                    comando = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo,fecha, cantidad, "valorUnitario", "valorTotal",cirugia_id,"fechaCrea", "fechaRegistro", "estadoRegistro", "examen_id",  "usuarioRegistro_id", liquidacion_id, "tipoRegistro", anulado, mipres) VALUES (' + "'" +  str(consecLiquidacion)  + "','" + str(fechaRegistro) + "','" + str(cantidad) + "','"  + str(tarifaValor) + "','" + str(TotalTarifa)  + "',null,'"  +  str(fechaRegistro) + "','" +  str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(codigoCupsId[0].id) + "','" + str(usuarioRegistro) + "'," + liquidacionId + ",'SISTEMA','N','" + str(mipres) + "')"
+                                    comando = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo,fecha, cantidad, "valorUnitario", "valorTotal",cirugia_id,"fechaCrea", "fechaRegistro", "estadoRegistro", "examen_id",  "usuarioRegistro_id", liquidacion_id, "tipoRegistro", anulado, mipres, concepto_id) VALUES (' + "'" +  str(consecLiquidacion)  + "','" + str(fechaRegistro) + "','" + str(cantidad) + "','"  + str(tarifaValor) + "','" + str(TotalTarifa)  + "',null,'"  +  str(fechaRegistro) + "','" +  str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(codigoCupsId[0].id) + "','" + str(usuarioRegistro) + "'," + liquidacionId + ",'SISTEMA','N','" + str(mipres) + "','" + str(conceptoId) + "')"
                                     print("comando de insercio" , comando)
                                     cur3.execute(comando)
                                     #miConexiont.commit()
@@ -1011,6 +1012,8 @@ def crearHistoriaClinica(request):
                                 codigoCupsId = Examenes.objects.filter(codigoCups=cups)
                                 print("codigoCupsId", codigoCupsId[0].id)
                                 print("liquidacionId = ", liquidacionId)
+                                conceptoId = codigoCupsId[0].concepto_id
+                                print("conceptoId = ", conceptoId)
 
                                 if (columnaALeerPropia != ''):
 
@@ -1155,7 +1158,7 @@ def crearHistoriaClinica(request):
 
                                 if (codigoCupsId[0].requiereAutorizacion == 'N'):
 
-                                    comando = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo,fecha, cantidad, "valorUnitario", "valorTotal",cirugia_id,"fechaCrea", "fechaRegistro", "estadoRegistro", "examen_id",  "usuarioRegistro_id", liquidacion_id, "tipoRegistro", anulado, mipres) VALUES (' + "'" +  str(consecLiquidacion)  + "','" + str(fechaRegistro) + "','" + str(cantidad) + "','"  + str(tarifaValor) + "','" + str(TotalTarifa)  + "',null,'" +  str(fechaRegistro) + "','" +  str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(codigoCupsId[0].id) + "','" + str(usuarioRegistro) + "'," + liquidacionId + ",'SISTEMA','N','" + str(mipres) + "')"
+                                    comando = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo,fecha, cantidad, "valorUnitario", "valorTotal",cirugia_id,"fechaCrea", "fechaRegistro", "estadoRegistro", "examen_id",  "usuarioRegistro_id", liquidacion_id, "tipoRegistro", anulado, mipres, concepto_id) VALUES (' + "'" +  str(consecLiquidacion)  + "','" + str(fechaRegistro) + "','" + str(cantidad) + "','"  + str(tarifaValor) + "','" + str(TotalTarifa)  + "',null,'" +  str(fechaRegistro) + "','" +  str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(codigoCupsId[0].id) + "','" + str(usuarioRegistro) + "'," + liquidacionId + ",'SISTEMA','N','" + str(mipres) + "','" + str(conceptoId) + "')"
                                     cur3.execute(comando)
                                     #miConexiont.commit()
                                     #miConexiont.close()
@@ -1222,6 +1225,9 @@ def crearHistoriaClinica(request):
                                   #
                                 codigoCupsId = Examenes.objects.filter(codigoCups=cups)
                                 print("codigoCupsId", codigoCupsId[0].id)
+
+                                conceptoId = codigoCupsId[0].concepto_id
+                                print("conceptoId = ", conceptoId)
 
                                 # Rutiva busca en convenio el valor de la tarifa CUPS
                                 print("liquidacionId = ", liquidacionId)
@@ -1374,7 +1380,7 @@ def crearHistoriaClinica(request):
                                 if (codigoCupsId[0].requiereAutorizacion == 'N'):
                                     print("Entre a guardar liquidaciondetalle")
 
-                                    comando = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo,fecha, cantidad, "valorUnitario", "valorTotal",cirugia_id,"fechaCrea", "fechaRegistro", "estadoRegistro", "examen_id",  "usuarioRegistro_id", liquidacion_id, "tipoRegistro", anulado, mipres) VALUES (' + "'" +  str(consecLiquidacion)  + "','" + str(fechaRegistro) + "','" + str(cantidad) + "','"  + str(tarifaValor) + "','" + str(TotalTarifa)  + "',null,'" +  str(fechaRegistro) + "','" +  str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(codigoCupsId[0].id) + "','" + str(usuarioRegistro) + "'," + liquidacionId + ",'SISTEMA','N','" + str(mipres) +  "')"
+                                    comando = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo,fecha, cantidad, "valorUnitario", "valorTotal",cirugia_id,"fechaCrea", "fechaRegistro", "estadoRegistro", "examen_id",  "usuarioRegistro_id", liquidacion_id, "tipoRegistro", anulado, mipres,concepto_id) VALUES (' + "'" +  str(consecLiquidacion)  + "','" + str(fechaRegistro) + "','" + str(cantidad) + "','"  + str(tarifaValor) + "','" + str(TotalTarifa)  + "',null,'" +  str(fechaRegistro) + "','" +  str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(codigoCupsId[0].id) + "','" + str(usuarioRegistro) + "'," + liquidacionId + ",'SISTEMA','N','" + str(mipres) + "','" + str(conceptoId) +   "')"
                                     cur3.execute(comando)
                                     #miConexiont.commit()
                                     #miConexiont.close()
@@ -1442,6 +1448,10 @@ def crearHistoriaClinica(request):
                                 #
                                   codigoCupsId = Examenes.objects.filter(codigoCups=cups)
                                   print ("codigoCupsId", codigoCupsId[0].id)
+
+                                  conceptoId = codigoCupsId[0].concepto_id
+                                  print("conceptoId = ", conceptoId)
+
 
                                   if (columnaALeerPropia != ''):
 
@@ -1591,7 +1601,7 @@ def crearHistoriaClinica(request):
                               #
                                   if (codigoCupsId[0].requiereAutorizacion == 'N'):
 
-                                    comando = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo,fecha, cantidad, "valorUnitario", "valorTotal",cirugia_id,"fechaCrea", "fechaRegistro", "estadoRegistro", "examen_id",  "usuarioRegistro_id", liquidacion_id, "tipoRegistro", anulado, mipres) VALUES (' + "'" +  str(consecLiquidacion)  + "','" + str(fechaRegistro) + "','" + str(cantidad) + "','"  + str(tarifaValor) + "','" + str(TotalTarifa)  + "',null," + "'" +  str(fechaRegistro) + "','" +  str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(codigoCupsId[0].id) + "','" + str(usuarioRegistro) + "'," + liquidacionId + ",'SISTEMA','N','" + str(mipres) + "')"
+                                    comando = 'INSERT INTO facturacion_liquidaciondetalle (consecutivo,fecha, cantidad, "valorUnitario", "valorTotal",cirugia_id,"fechaCrea", "fechaRegistro", "estadoRegistro", "examen_id",  "usuarioRegistro_id", liquidacion_id, "tipoRegistro", anulado, mipres, concepto_id) VALUES (' + "'" +  str(consecLiquidacion)  + "','" + str(fechaRegistro) + "','" + str(cantidad) + "','"  + str(tarifaValor) + "','" + str(TotalTarifa)  + "',null," + "'" +  str(fechaRegistro) + "','" +  str(fechaRegistro) + "','" + str(estadoReg) + "','" + str(codigoCupsId[0].id) + "','" + str(usuarioRegistro) + "'," + liquidacionId + ",'SISTEMA','N','" + str(mipres) + "','" + str(conceptoId) + "')"
                                     cur3.execute(comando)
                                     #miConexiont.commit()
                                     #miConexiont.close()
@@ -1981,6 +1991,10 @@ def crearHistoriaClinica(request):
                                 print("medicamentosId total", medicamentosId)
                                 print("medicamentosId", medicamentosId.id)
                                 print("requiereAutorizacion", medicamentosId.requiereAutorizacion)
+
+                                conceptoId = medicamentosId.concepto_id
+                                print("conceptoId = ", conceptoId)
+
 
                                 tiposSuministroId = TiposSuministro.objects.get(nombre='MEDICAMENTOS')
 
@@ -3094,7 +3108,7 @@ def crearHistoriaClinica(request):
                                        password="123456")
         curt = miConexiont.cursor()
 
-        comando = 'SELECT e.id id, e.nombre||' + "'" + str(' ') + "'" +  ' ||e.cums nombre  FROM facturacion_Suministros e, facturacion_tipossuministro t  where e."tipoSuministro_id" = t.id AND t.nombre = ' + "'" + str('MEDICAMENTOS') + "' ORDER BY e.nombre"
+        comando = 'SELECT e.id id, concat(e.nombre,' + "' '"  + ',e.cums,' + "' '"  + ',e."cumsMaterial") nombre  FROM facturacion_Suministros e, facturacion_tipossuministro t  where e."tipoSuministro_id" = t.id AND t.nombre IN ( ' + "'" + str('MEDICAMENTOS') + "') ORDER BY e.nombre"
 
         curt.execute(comando)
         print(comando)

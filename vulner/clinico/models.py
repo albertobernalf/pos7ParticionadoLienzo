@@ -151,6 +151,7 @@ class TiposExamen(models.Model):
     ]
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=30, null=False)
+    concepto = models.ForeignKey('facturacion.Conceptos',  blank=True, null=True, editable=True, on_delete=models.PROTECT)
     estadoReg = models.CharField(max_length=1, choices=STATUS_CHOICES, default='A', editable=False)
 
     def __str__(self):

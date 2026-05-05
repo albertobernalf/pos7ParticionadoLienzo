@@ -1,0 +1,311 @@
+   if (valorTabla == 12)
+    {
+	alert("optionNC");
+
+        let dataTableOptionsNotasCredito  ={
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
+  buttons: [
+    {
+      extend: 'excelHtml5',
+      text: '<i class="fas fa-file-excel"></i> ',
+      titleAttr: 'Exportar a Excel',
+      className: 'btn btn-success',
+    },
+    {
+      extend: 'pdfHtml5',
+      text: '<i class="fas fa-file-pdf"></i> ',
+      titleAttr: 'Exportar a PDF',
+      className: 'btn btn-danger',
+    },
+    {
+      extend: 'print',
+      text: '<i class="fa fa-print"></i> ',
+      titleAttr: 'Imprimir',
+      className: 'btn btn-info',
+    },
+  ],
+  lengthMenu: [2, 4, 15],
+           processing: true,
+            serverSide: false,
+            scrollY: '275px',
+	    scrollX: true,
+	    scrollCollapse: true,
+            paging:false,
+            columnDefs: [
+		{ className: 'centered', targets: [0, 1, 2, 3] },
+	    { width: '10%', targets: [2,3] },
+
+		{   
+                    "targets": 10
+               }
+            ],
+	 pageLength: 3,
+	  destroy: true,
+	  language: {
+		    processing: 'Procesando...',
+		    lengthMenu: 'Mostrar _MENU_ registros',
+		    zeroRecords: 'No se encontraron resultados',
+		    emptyTable: 'Ningún dato disponible en esta tabla',
+		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
+		    infoThousands: ',',
+		    loadingRecords: 'Cargando...',
+		    paginate: {
+			      first: 'Primero',
+			      last: 'Último',
+			      next: 'Siguiente',
+			      previous: 'Anterior',
+		    }
+			},
+
+
+           ajax: {
+                 url:"/load_dataNotasCredito/" +  data,
+                 type: "POST",
+                 dataSrc: ""
+            },
+            columns: [
+		{
+		  "render": function ( data, type, row ) {
+                        var btn = '';
+        		     btn = btn + " <input type='radio' name='notaCredito'  style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;' class='miNotaCredito form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
+                       return btn;
+                    },
+
+		},
+                { data: "fields.id"},
+                { data: "fields.fechaNota"},
+                { data: "fields.valorNota"},
+                { data: "fields.observaciones"},
+                { data: "fields.fechaRegistro"},
+                { data: "fields.usuarioRegistro_id"},
+                { data: "fields.estadoReg"},
+                { data: "fields.fechaRespuesta"},
+                { data: "fields.tiposNota_id"},
+                { data: "fields.ripsEnvioId"},
+		{
+		  "render": function ( data, type, row ) {
+                        var btn = '';
+        		     btn = btn + " <input type='radio' name='miEditaNotaCredito'  style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;' class='miEditaNotaCredito form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
+                       return btn;
+                    },
+
+		},
+       ]
+            }
+	     
+	        dataTable = $('#tablaNotasCredito').DataTable(dataTableOptionsNotasCredito);
+		alert("ya cargue NC tabla 12");
+
+
+  }
+
+
+
+
+
+    if (valorTabla == 13)
+    {
+        let dataTableOptionsNotasCreditoDetalle  ={
+ dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
+  buttons: [
+    {
+      extend: 'excelHtml5',
+      text: '<i class="fas fa-file-excel"></i> ',
+      titleAttr: 'Exportar a Excel',
+      className: 'btn btn-success',
+    },
+    {
+      extend: 'pdfHtml5',
+      text: '<i class="fas fa-file-pdf"></i> ',
+      titleAttr: 'Exportar a PDF',
+      className: 'btn btn-danger',
+    },
+    {
+      extend: 'print',
+      text: '<i class="fa fa-print"></i> ',
+      titleAttr: 'Imprimir',
+      className: 'btn btn-info',
+    },
+  ],
+  autoWidth: false,
+  lengthMenu: [2, 4, 15],
+           processing: true,
+            serverSide: false,
+            scrollY: '275px',
+	    scrollX: true,
+	    scrollCollapse: true,
+            paging:false,
+            columnDefs: [
+		{ className: 'centered', targets: [0, 1, 2, 3, 4, 5] },
+	    { width: '10%', targets: [2,3] },
+
+		{   
+                    "targets": 11
+               }
+            ],
+	 pageLength: 3,
+	  destroy: true,
+	  language: {
+		    processing: 'Procesando...',
+		    lengthMenu: 'Mostrar _MENU_ registros',
+		    zeroRecords: 'No se encontraron resultados',
+		    emptyTable: 'Ningún dato disponible en esta tabla',
+		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
+		    infoThousands: ',',
+		    loadingRecords: 'Cargando...',
+		    paginate: {
+			      first: 'Primero',
+			      last: 'Último',
+			      next: 'Siguiente',
+			      previous: 'Anterior',
+		    }
+			},
+
+
+           ajax: {
+                 url:"/load_dataNotasCreditoDetalle/" +  data,
+                 type: "POST",
+                 dataSrc: ""
+            },
+            columns: [
+		{
+		  "render": function ( data, type, row ) {
+                        var btn = '';
+        		     btn = btn + " <input type='radio' name='notaCreditoDetalle'  style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;' class='miNotaCreditoDetalle form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
+                       return btn;
+                    },
+
+		},
+                { data: "fields.id"},
+		 { data: "fields.notaCreditoId"},
+                { data: "fields.factura_id"},
+                { data: "fields.valorNota"},
+                { data: "fields.nombreTipoNota"},
+                { data: "fields.totalFactura"},
+                { data: "fields.totalGlosas"},
+                { data: "fields.totalNotasCredito"},
+                { data: "fields.saldoFactura"},
+                { data: "fields.fechaRegistro"},
+                { data: "fields.usuarioRegistro_id"},
+       ]
+            }
+	        dataTable = $('#tablaNotasCreditoDetalle').DataTable(dataTableOptionsNotasCreditoDetalle);
+
+  }
+
+
+    if (valorTabla == 14)
+    {
+        let dataTableOptionsNotasCreditoDetalleRips  ={
+  dom: "<'row mb-0'<'col-sm-6'f><'col-sm-4'><'col-sm-2'B>>" + // B = Botones a la izquierda, f = filtro a la derecha
+            "<'row'<'col-sm-12'tr>>" +
+             "<'row mt-0'<'col-sm-5'i><'col-sm-7'p>>",
+  buttons: [
+    {
+      extend: 'excelHtml5',
+      text: '<i class="fas fa-file-excel"></i> ',
+      titleAttr: 'Exportar a Excel',
+      className: 'btn btn-success',
+    },
+    {
+      extend: 'pdfHtml5',
+      text: '<i class="fas fa-file-pdf"></i> ',
+      titleAttr: 'Exportar a PDF',
+      className: 'btn btn-danger',
+    },
+    {
+      extend: 'print',
+      text: '<i class="fa fa-print"></i> ',
+      titleAttr: 'Imprimir',
+      className: 'btn btn-info',
+    },
+  ],
+  autoWidth: false,
+  lengthMenu: [2, 4, 15],
+           processing: true,
+            serverSide: false,
+            scrollY: '225px',
+	    scrollX: true,
+	    scrollCollapse: true,
+            paging:false,
+            columnDefs: [
+		{ className: 'centered', targets: [0, 1, 2, 3, 4, 5] },
+	    { width: '10%', targets: [2,3] },
+
+		{   
+                    "targets": 8
+               }
+            ],
+	 pageLength: 3,
+	  destroy: true,
+	  language: {
+		    processing: 'Procesando...',
+		    lengthMenu: 'Mostrar _MENU_ registros',
+		    zeroRecords: 'No se encontraron resultados',
+		    emptyTable: 'Ningún dato disponible en esta tabla',
+		    infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+		    infoFiltered: '(filtrado de un total de _MAX_ registros)',
+		    search: "<i class='fa fa-search'></i> Buscar: _INPUT_",
+		    infoThousands: ',',
+		    loadingRecords: 'Cargando...',
+		    paginate: {
+			      first: 'Primero',
+			      last: 'Último',
+			      next: 'Siguiente',
+			      previous: 'Anterior',
+		    }
+			},
+
+
+           ajax: {
+                 url:"/load_dataNotasCreditoDetalleRips/" +  data,
+                 type: "POST",
+                 dataSrc: ""
+            },
+            columns: [
+		{
+		  "render": function ( data, type, row ) {
+                        var btn = '';
+        		     btn = btn + " <input type='radio' name='notaCreditoDetalleRips'  style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: purple;' class='miNotaCreditoDetalleRips form-check-input ' data-pk='"  + row.pk + "'>" + "</input>";
+                       return btn;
+                    },
+
+		},
+
+                { data: "fields.tipo"},
+                { data: "fields.id"},
+                { data: "fields.consec"},
+                { data: "fields.itemFactura"},
+                { data: "fields.codigo"},
+                { data: "fields.nombre"},
+                { data: "fields.vrServicio"},
+                { data: "fields.valorNota"},
+	{
+		"render": function ( data, type, row ) {
+                        var btn = '';
+		 btn = btn + " <button class='miBorrarNotaCreditoDetalleRips btn-primary ' style='width:15px;height:15px;accent-color: purple;border-color: purple;background-color: red;'  data-pk='" + row.pk + "'>" + '<i class="fa-duotone fa-regular fa-thumbs-up"></i>' + "</button>";
+
+                       return btn;
+                    },
+		},
+
+
+       ]
+            }
+	        dataTable = $('#tablaNotasCreditoDetalleRips').DataTable(dataTableOptionsNotasCreditoDetalleRips);
+
+  }
+
+
+}
+
+
+

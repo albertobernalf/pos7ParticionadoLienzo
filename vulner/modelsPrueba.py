@@ -188,10 +188,6 @@ digamos el valor d ela factura inicial nop cambia y los daso de los detalle pued
       -- Radica con FEC y FEV documentos ante los pagadores  de salud (EPS-Entes territoriales, etc)
 
 
-
--- OJJO PARA SELECCIONAR LA PRIMER FILA DE UN TABLE/ PROBAR EN ADMISIONES Y HCLINICA	var $row = $(this).closest('table').children('tr:first');	
-
-
 // Selecciona el checkbox dentro de la primera fila (suponiendo que está dentro de una celda 'td')
 $(primeraFila).find('td input[type="checkbox"]').prop('checked', true);  // Marca el checkbox con jquery
 
@@ -1015,8 +1011,6 @@ Puesta a Punta :
 	
 	REVISIONES. PUESTA A PUNTO MODULOS (15 Modulos) Ademas de: Planta, Usuarios, Medicos, 
 
-	Triage-Admisiones-HistoriaClinica-Farmacia-Enfermeria-  oK
-	Contratacion-Tarifarios       				-- Verificar
 	ApoyoTerapeutico  -- Hacer
 	Facturacion-Glosas-Rips-Cirugia-Autorizaciones-Cartera -- Probar
 	ConsultaExterna (UNICO MODULO FALTANTE POR DESARROLLAR) -- No desarrollado
@@ -1041,12 +1035,9 @@ FEB 16:
 	
 	Ops no me cuadro la liquidacion de la cuenta con la ciruguia algo pasa.. VERIFICAR. Puesta a punta
 	
-	OPS como se ANULA una solicitud de cirugia
 	OJO con las edades me esan mamando gallo en la pantalla de solicitud
 	OPS no me dejo cancelar una programacion de cirugias
 	OPS creo que hay un problema de diseño al no permitir mas de una cirugia para un mismo paciente en el mismo ingreso VERIFICAR
-	OPS el convenio solo falta cunado desde HC hacen la solciitud debe haber algo para actualziar el convenio vERIFICAR
-	OPS en cirugia el tab Ocupacion salas muestra LIBRE buna OCUPADA CORREGIR
 	OPS LOS paraclinicos en ENFERMERIA NO MUESTRA CIRUGIAS ??
 
 	no refresca localidad solo cuando se le da la gana en crear admision
@@ -1144,7 +1135,6 @@ lunes  09 de marzo
 	OPS cuando pase de triage a admisiones.ingresos hay un  problema hay que actualziar el ingreso_id OJOOO. 
 	opv revisar , diagnosticos en rips revisar, formular laboraorio -- autorizaion -- farmacia -- disopnsa -- liquidaciondetale -- rips, aut,mipres
 	
-	BIEN OPS , YA HICE LO DE FACTURAR, REFACTURAR, TRALADO DE CONVENIOS PARA EL CAMPO MIPRE  autorizacionDetalle_id
 
 	AFINAR el tema de los diagnosticos rips por ejmplo en medicamentos, otros servivios, consultas a ver como esta eso
 	La semana del 23 al 27 de marzo, podria trabajar: abonos, refacturacion, anulaciones y traslados y RIPS abonos
@@ -1154,21 +1144,18 @@ lunes  09 de marzo
 	OPS la fecha me mama mucho gallo en crear adminsiondef
 	OPS cuando guardo una autoriaciondetalle no me quita la modal y no refresca, ademas en autorizaciones no la refresca verificar
         OPS la cantidad ordenada en el campo cantidad  de farmaciadetalle no llega esta en blanco             	
-	OPS en farmacia cuando despacho no refresca el despacho actual                                                                                      
-	Ops el programa de farmacia toca arreglarlo  mas.. mas Pero ahi va muy bien ok
 
 	ops El modulo de cirugia tiene dos problemitas  solucionar .   2. Permitir dos o mas veces un procedimiento en una misma cirugia					    
 	ops la autorizacion de una estancia automatica desde donde viene o como viaja
 	OPS mañana atacar de fondo cirugias. No permitir borrar un procedimeintosqx en estado realizado VALIDAR
 	
-	DESPUES DE ALMUERCITO:
-
 	Elaborar reporte Notas Credito, Glosas, Notas debito a lo mejor
 	Realizar jemplo de cirugia (2) y po que no con dos pocemineitos una d ellas
-	ops Falta revizar la impresion de la factura y/o estado de cuenta
-		Verificar el nmero de items vs numero de items de la cirugia
 	OPS verificar, formulacion, antecedentes y cirugias combos en J¿HCLINICA
 	
+	teoria de GOOGLE 
+------------------------
+
 	Los materiales quirúrgicos (qx), dispositivos médicos o insumos utilizados se reportan en el archivo JSON de RIPS 
 	correspondiente a "Otros Servicios" (otrosServiciosIPS)	
 	El material quirúrgico es considerado un suministro médico o instrumental, no un examen	
@@ -1188,40 +1175,231 @@ lunes  09 de marzo
 	De mipres como conectars a un api de ellos, procesos masivos
 	1.3 teras a 1.5 tb en imagenes mensual se maneja ...
 	prueba con edem o edel o algo asi. velociodad ime descarga de imagenes
-	
+
+	FIN TEORIA GOOGLE	
+---------------------------
 
 	LUNES 30-MARZO 
 
-	OPS LUNES MARZO 30 TODO ESTO ATACARLO
-
-	OPS OPS OPS IMPORTANTISIMO. ENTRO EN UNA FAS DISPARA MUCHAS COSAS SUELTAS D RRRO PERO NO PARAN OPEAION A LO MEJOR
-	OPS OPS OPS PACIENTCIA ANOTAR AQUI E IR SOLUCIONADO DE A POQUITO ES COMO UA PUEST A PUNTO PAPABEROL
 	OPS LO MEJOR ES CREAR UN NUEVO POS7PARTICIONADOLIENZO2 (Todas las carpetas mas la que no se tocan de lienzo OJOO. e imprante. punto critico) A PArTIR DE POS/PARTICIONADO
-
 
 	OPS en TRIAGE la imresora no imprime nada esta GIGANTE el icono
 	OPS triage no tiene select-box
 	OPS en triage debe ser un check-box solicita autorizacion de hospitalizacion , desarrollar alli enviar a autorizaciones
 	OPS en triage cuando va a imprimir PDFAtencionInicialUrgencias se queda quieto
 	OPS los combos de laboraorio/Radiologia EN hc se pasma no estan funcinando bin
-	OPS en cirugia porque sale convenio particular de falcao ??
 
 	OPS cual es la difeencia entre Autorizacion de cirugia y/o autorizacion de procedimiento. Mirar la pantalla autorizaiondetalle el refresh todo ralo desaparece la cdecirugia dja la de cups autorizado y no desaparec
 	OPS hay un error a detectar cuando ingreso por triage se seleciono compensariss pero caundo lo hospitalizo lo dejo en particular ojo ARREGLAR
-	OPS en la programacion de cirugia me muestra todo DISPONIBLE no ageda en sala a falcao por que ????? GRAVISISSIMO es por el convenio ? o por los dos procedimientos de la cirugia ??
-
-	OPs volver a probar pasar una liquidacion de cirugia a facturacion de una cuenta con dos convenios
-	OPS generar liquidacion de cirugia aiutomaica hay que revisa SOAT esta incompleta creo
 	OPS me paso la liquidacion de la cirugia en ambas cuentas erroR
-	ops ESTOY SOLAMENTE CON LAS PRUEBAS DE ISS EN GENERALIQUIDACION E IMRESION DE LA CUENTA -- OJO NO SOAT NO FACTURA SE HAN HEHO PRUEBAS
-	OPS OJOOOOOOOOO . cuando pasa un paciente de triage a hospital. en la pantalla no se ve la empresa/convenio y cuando guarda debe
-	coger la empresa/conveNio de que vien de triage para admisiones_ingresos. recirede que admsiion no permite crear empresa/convenio
 
 	Hoy verificar:
-	Datos de la cirugia cochise como se liquidaron ayer.ver valores manual hoja d gadto
-	Areglar el cantidadUvr2
-	cambiar a uvr < 170 probar valores
-	imprimir estado de cuenta idd 2001 verificar
-	trsaladas a sat 2004
-	liquidar cirugia soat 2004
-	imprimir estado de cuenta soat
+	Datos de la cirugia cochise como se liquidaron ayer.ver valores manual hoja de gadto
+	OJO cuando se realizo el traslado de ISS a SOAT, saco unos valores supongo d etarifaro_proedimientProc que NO STAN BIEn que se debe hacer?
+	Dado que la que liquida una crugia es el modulo de ciri¿ugias- ANALIZAR ESTUDIAR SOLUCIONAR
+	OPS parec ser no me liquido en SOAT el honorario: 5	"MATERIALES DE SUTURA Y CURACION QX" OJO VERIFICAR
+	OPS verificar en la Factura SOAT no imprimio los materiales de la cirugia en cambio en la liquidacion SOAT si ls imprimio Verificar
+	OPS me afecta el RIPS soat en los materiales No me los saco. Sera qui el lio de examenes vs suministros en otros servicios . OPORTNIDAD PARA CUADRAR ESTOP VERIFICAR
+
+	OPS falta facturar ISS  (impresion)
+
+	Elaborar epicrisis ( Es la HC pero del ingreso actual, facil folio desde-folio hasta), cosultas por folios (Parametrizable) e Hisoria clinica como tal completo max folio-min folio. Todo con el misomo programa
+
+	OPS QUE CHICHARRON si se maneja el numero de glosa que dice el ministerio , toca hacr arreglos varios OPS - OPS -OPS - RE-OPS
+
+
+	Lunes 13 de marzo
+
+	OPS Terminar consentimiento iformado IMPRESION...
+	A ESTA ALTURA con que seguiriamos: pendientes cirugias adicionales , mas de una cirugia o reportes o ????
+	Trabajar Notas Credito	 La otra semana, cooriana con el modulo de cartera
+	Hacer la consulta de HC por folios
+	Hacer ...
+
+	IHCE  --  > asisyencia tencica sisyemas de informacion
+	No recuerdo pero las gloas tienen problemas: las validaciones/ No debe guardar en golsasdeatlle solo VALIDAR
+                                                                       Hay cosillas ivestigar y AJUSTAR
+	Creo las Notas Debito deben ser una Fiel copia de las Notas Credito
+	ops tengo dos super error res en rips, uno cuando guarda el proced de la misma factura gon otra notacreditodetalleid diferente coloca mal este codigo
+        ops supererror me guarda dos veces en ripsProcedimientos notas credito por la anterior situacion QUE PASA ALLI ????
+	ops slo he cambiado en glosas,nc,factura se agrego el campo itemDetalle/ solo en notascredito se modfico en ripsmedica,ripsproced y ripstransac. si funcion irradiar a gloasa no mas
+	ops facturacion NO SE TOCA PARA NADA
+        ops todas las validaciones que tinen las notas credito meterlas  a las glosas
+	ops dejo ingresar e otra notacredito medicamntos mas que el servici PAILAS controlar
+	ops campo ripsID debe ser hidden en modal detalle notas credito
+
+	LUNES 20 De aBRIL. SEMANA hasta el 24 de abril
+
+	falta arreglar todo glosas a partir de nc: 1. Copiar todas las valicdaciones de nc a glosas / ver que mas faltaria
+	falta en generar jsosn verificar -- Los insert de otrosservicios de pronto medicamentos  de glosas ynotas credito hay que arreglarlos de acuerdoa ripstransaccion
+	falta hacer notas debito a partir de notas credito fiel copia con modelo, funciones, javascript, panel, datatables etc
+	hacer ejercicio de nuevo paciente con cargos medicamen,paraclinicos etc y una cirugia, factutas rips , glosar, nc. Verificar cartera, rips, glosas etc
+	hacer cirugia, vias de acceso, oros accesos, generacio liquidacion de cirugia, generacion factura iytems, liquidacion cirugia items
+
+	OPS PAILAS
+
+	Entre BorrarDetalleRips
+	el envioDetalleRipsId es =  61
+	tipo de envio = 2
+	tipo de envio en ripstiposnotas = Nota Credito
+	Voy a borrar ripsusuarios
+	ya borre RipsConsultas
+	ya borre RipsUrgenciasObservacion
+	ya borre otros servicios
+	Se hizo rollback por esto : ("Cannot delete some instances of model 'RipsTransaccion' because they are referenced through a protected foreign key: 'RipsUsuarios.ripsTransaccion'", <QuerySet [<RipsUsuarios: 1254>]>)
+
+	ISS	
+	Para facturar una cirugía con doble vía de acceso (mismo especialista, diferente vía) según el manual ISS 2001, se liquida la cirugía de mayor valor (UVR) al 100% y la segunda cirugía al 75% en honorarios (cirujano, anestesiólogo, ayudante), mientras que derechos de sala y materiales se suelen liquidar al 50% o según negociación
+
+	ISS
+	Según el Manual tarifario ISS 2001, cuando un mismo especialista realiza cirugías múltiples por diferente vía de acceso en un mismo acto, se factura: 100% de la cirugía mayor (mayor UVR) y 75% de los honorarios (cirujano, anestesiólogo, ayudante) para las subsiguientes. Los derechos de sala y materiales se liquidan al 50%. 
+	Pasos detallados para la liquidación (ISS 2001):
+	Identificación y Orden: Clasifique los procedimientos por unidades de valor relativo (UVR) de mayor a menor.
+	Cirugía Principal (Mayor UVR): Se liquida al 100% de los honorarios (Cirujano, Anestesiólogo, Ayudante) según la tabla UVR.
+	Cirugías Subsecuentes (Diferente Vía): Se liquida el 75% de los honorarios del cirujano, anestesiólogo y ayudante de cada procedimiento adicional.
+	Derechos de Sala y Materiales: Se liquidan al 50% para las cirugías adicionales.
+	Excepciones: Esta norma no aplica para ciertos procedimientos ginecológicos o abdominales específicos listados en la normativa. 
+	Asesoria y Servicios AYC
+	Asesoria y Servicios AYC
+
+	Ejemplo de liquidación:
+	Procedimiento A (Mayor UVR): 100% Honorarios + 100% Sala/Materiales.
+	Procedimiento B (Menor UVR, diferente vía): 75% Honorarios + 50% Sala/Materiales. 
+
+	SOAT
+	Identificación: Identificar los códigos SOAT de cada procedimiento y sus grupos quirúrgicos (Grupo del 1 al 13).
+	Ordenamiento: Ordenar los procedimientos de mayor a menor grupo quirúrgico.
+	Cirugía Principal: La cirugía con el mayor grupo quirúrgico se liquida al 100% de su valor (honorarios de cirujano, anestesiólogo, ayudante, materiales y sala).
+	Cirugía Secundaria (Diferente Vía): La segunda cirugía se liquida al 75% de su valor en cuanto a honorarios (cirujano, anestesiólogo, ayudante) y al 100% en derechos de sala y materiales, al tratarse de una vía de acceso diferente.
+	Tercera Cirugía (Si aplica): Si hay una tercera vía, se factura al 50% de los honorarios.
+
+	Normas Generales de Liquidación (Doble Vía):
+	Primera Cirugía (Mayor UVR): Se liquida al 100% de los honorarios (cirujano, anestesiólogo, ayudante) y derechos de sala.
+	Segunda Cirugía (Menor UVR) por diferente vía: Se liquida generalmente el 75% sobre el valor de los honorarios del cirujano y materiales, dependiendo de si la realiza el mismo especialista o uno diferente. 
+	consultorsalud
+	consultorsalud
+
+	Detalle de Liquidación por Componente:
+	Honorarios del Cirujano:
+	Si son dos vías de acceso diferentes y mismo especialista: La primera cirugía se factura al 100% y la segunda al 75% (o según lo estipulado específicamente en los artículos 49/55 del Decreto 2423 de 1996).
+	Si son especialistas diferentes: Cada uno factura el 100% de su procedimiento principal.
+	Anestesiólogo y Ayudante: La primera cirugía (mayor valor) se liquida al 100% y la segunda se factura con un porcentaje reducido (generalmente 75% o 50% según el tipo de ayuda y número de cirugías).
+	Derechos de Sala y Materiales: Se liquidan al 100% para la cirugía principal y un porcentaje inferior para la segunda, dependiendo de la vía de acceso y el uso de equipos adicionales. 
+	consultorsalud
+	consultorsalud
+
+	Consideraciones Importantes:
+	Vías de Acceso: La liquidación varía si la vía de acceso es diferente (diferente incisión) o igual.
+	Politrauma: En casos de accidente de tránsito con múltiples fracturas o traumas, la norma permite liquidaciones especiales sobre las vías de acceso.
+	Definición de Conjunto: Las cirugías se agrupan según los conjuntos quirúrgicos definidos en el manual. 
+
+	SOAT
+	Para facturar dos cirugías con doble vía de acceso por el mismo especialista bajo el manual tarifario SOAT, se identifica la de mayor grupo quirúrgico y se liquida al 100%, mientras que la segunda se liquida sobre el 70% de su valor en honorarios, según normas de facturación de Mis Cuentas Médicas. Los materiales y derechos de sala se liquidan al 100% solo para la cirugía principal. 
+	Pasos Clave para la Facturación (Diferente Vía de Acceso):
+	Identificar y Ordenar: Clasificar los procedimientos quirúrgicos por grupo UVR de mayor a menor según los códigos SOAT.
+	Primera Cirugía (Mayor UVR): Se liquida al 100% en honorarios (cirujano, anestesiólogo, ayudante), derechos de sala y materiales.
+	Segunda Cirugía (Menor UVR - Diferente Vía):
+	Honorarios (Cirujano/Anestesiólogo): Se liquida el 70% del valor correspondiente a esa cirugía según el grupo UVR (Artículo 55 SOAT, citado en).
+	Ayudante: Aplica el porcentaje correspondiente al 70% del valor del ayudante de la segunda cirugía.
+	Derechos de Sala y Materiales: Para la segunda cirugía, generalmente no se cobran derechos de sala adicionales ni materiales, o se liquidan sobre la base del 70% si el manual específico lo permite, siendo la regla general el cobro total sobre la primera intervención.
+
+	FACTURACION DIAN NUMERACION:
+
+	La numeración alfanumérica en la facturación electrónica de la DIAN es un sistema que permite identificar tus facturas no solo con números (1, 2, 3...), sino con una combinación de letras y números (prefijo + consecutivo). 
+	Esto es útil para organizar tus documentos, especialmente si tienes varias sedes, diferentes tipos de servicios, o si quieres distinguir el año de emisión. 
+	Aquí tienes una explicación detallada y un ejemplo completo:
+	1. ¿Qué componentes tiene la numeración alfanumérica?
+	Prefijo: Son letras o letras + números que identifican la serie (ej. "SEDE1", "FE", "2026").
+	Consecutivo: Son los números que van aumentando (ej. 1, 2, 3...).
+	Resolución DIAN: Es el permiso oficial que te habilita ese rango. 
+	2. Ejemplo Completo y Real
+	Imagina que eres "Tecnologías S.A.S." y tienes dos sucursales (Bogotá y Medellín). Quieres organizar tus facturas para saber de qué sucursal proviene cada una y necesitas diferenciar las de este año. 
+	Pasos en la DIAN:
+	Solicitas resolución: La DIAN te aprueba un rango con un prefijo que tú inventas.
+	Datos de la factura alfanumérica:
+	Prefijo: BOG26 (Sede Bogotá - Año 2026)
+	Rango autorizado: 1 al 1000
+	Número de factura actual: 50
+	Resultado visual en la factura electrónica:
+	Número de Factura: BOG26-50
+	Otros ejemplos:
+	FAC-001 (Factura 1)
+	MED-2026-10 (Medellín, año 2026, factura 10)
+	A100-500 (Serie A100, factura 500)
+	3. ¿Por qué se usa?
+	Organización: Ayuda a separar contablemente los documentos.
+	Identificación: Identifica rápidamente el origen de la venta (sede).
+	Seguridad: Al tener un rango aprobado (ej. BOG26-1 al BOG26-1000), la DIAN asegura que no dupliques facturas y que el consecutivo sea secuencial y lógico. 
+	4. ¿Qué es "Asociar Prefijos"?
+	Una vez la DIAN te da la autorización (el documento PDF con el código alfanumérico), debes entrar a la plataforma de la DIAN y "asociar" ese prefijo (BOG26) con tu software de facturación para que sea válido. 
+	Resumen: La numeración alfanumérica es ponerle un "apellido" a tus facturas (BOG26-) seguido del número 50 para saber exactamente qué es BOG26-50.
+
+	FIN FACTURACION DIAN NUMERACION
+
+	Hay ERRORES n la liquidacion ISS de misma via de acceso en materiales cundo son muchos, no puedo guardar los valor de cada uno para apicarle
+	el 50% a cada uno ciomos hacer estop Complejo??
+
+	ojo pailas cuando guarda de triage a admision, no cierra la ventana la bloquea sale error revizar por dios
+	ojo, cuando crea un triage creo no ciera la ventana pailas
+	ojo en la pantalla de farmacia para dispensar , colocar la posologia completa del mediamento 1 gr de acetaminofen etc m, cantiadad
+	ojo esta misma pantalla al momento de guardar no quita la modal, no refresca datatable pailas toca como refrescar, salir de nuevo y seleccionar de nuebo pailas arreglar
+	ojo la pantalla detalle de autorizaciones el tipo de examen es READONLY, ojo
+	ojo cuando ingreso a farmacia no refresca el detalle de detalle despensa ojo revizar
+	ojo entre por segunda vez a dispensar otro medicamento y mostro toda la modal con los datos de la anterior dispensacion creo fatla un trigger.reset verificar
+		Umm parece que toca a puro masa..  OPS manual todito OPS
+
+	ojo en cirugia quiero colocar un procedimiento, pero me obliga a que coloque primero la empresa pero no puedo hacerlo por que no he ingresado procedimientios aun
+		ali falta o pasas algo verificar el orden o donde mas puedo colocar la empresag
+		(ops que pasa si dentro de una cirugia se neceitan una pra el iSS y otra para el SOAT ???)
+		Traslado de cargos individuales ??? No esta hecho ??.
+
+	ojo en la historia clinica, no me subio al historialCiruias a alvaro pachon cuando el medico solicito la cirugia. QUE pudo haber pasado??
+	ojo cuando uno entra a gloaas el automaticamente selecciona la nos credito pero no me refresca las notascredito detalle
+           no coordina cuando no ay nc VERIFICAR,  ejmlo con notasde pachon sin aun hacr ingresado ninguna NC
+	ojo cuando abri por segunda vez la NC credito detalle el form de sd deatlla tiene datos, aplicar trigger.reset() javascipt	
+	ojo cuando ya hay generado un rips de glosa-nc no debe permitir adicionar o modificar items de la glosa-nc en cuestion. o si no crear
+		una nueva glosa-nc para ingresar el nuevo valor
+	ojo cuando adiciono facturas a las glosas o nc detalles no aclara los valores de las ventanas modales emplear for,.trigger.reset()
+	ojo mañana jueves 23 de abril gnero error la generacion de rips glosas-nc de otros servicios
+	
+	OPS COSAS COMPEJAS : PRUEBA A PUNTO MAX (ESTAS VERIFICACIONES HACErLAS CON LA FACTURA DE ALVAR PACHON MORALES)
+	ojo cuando se carga una autorizacion de irugia que carga na autorizacion a la ciru y otra al procedimintos alli hay algo que revizar que esta mal. HAY UN MIERDE... ALLI ACLARAR 
+		REVIZAR A FONDO ESTA PARTECITA (OJO ETO ES UN ERRO CRAZO DE LAS AUTORIZAIONES EN GENERAL)
+
+	ojo el acetaminofen que ingrese en los materiales de cirugia no salen por nunguna parte en la impresion de la factura aunque en las
+              tablas de liquidacion si aparecen.
+
+	OPS NO FUNCIONA CHAINEFOREIGNKEY PARA JUNTAR CAMPOS	
+	
+	abril 28
+	no me desaparece la ventana modal de dispensar farmacia
+	No me imprime el despacho de farmaci 
+	En historia clinica no me saco el eror de falta ingrsar consulta externa y diagnostico VERIFICAR
+        AL REFACTURAR ES lestado del reistro no puede ser INACTIVO=I verificar
+	cuando uno refactura mas de una vez solo queda en conveniospaciente ingresos la ultima las otras las borra esta bien ???
+		Cuando anulo la factura el estado del registro queda INACTIO error debe ser 'A'
+		ops pero son los cabezotes facturacion_facturacion y liquidacion-liquidacion donde quedan 'I' VERIFICAR
+	ops hacer ora ptueba de factura para ver lo del cufe
+	ops No me muestra las refacuradas
+	ops no imprime la refacturada REVIZAR
+	ops adicionar el cufe en el qr
+	faltan ampos ruta_pdf, ruta_ad, rua xml_firmado, fecha_envio, nombre_arcivo, mensaje_dian, envio-dian=ENVIADOREALIZADO
+	ojo ver como sacar el json de la factura con rownum o algo asi uno a uno y no solamente con base al ieDela factura asi no funcioa
+ 	porque el orden de proced y medicamentos no es el mismo papaberolisismo
+
+	OJO MAYO 4
+	VAMOS BIEN
+	vOY EN FEC ELECTRONICA EN UN ERROR DE ITEMS-CODIGOPRODUCTO VERIFICAR A PRIMERA HORA
+	AUN NO FUNCIONA LA LECTURA DE JSON/XML EN LA FACTUARCION, CREO SI GUARDA LA RESPUESTA . XML VERIFICAR
+	
+	ojo cuando UNO SACE DE LA COLA DE DETALLERIPS UN FACTURA/GLOSA/NC HAY QUE HACERLO PERSONALIZADO Y EL MENSAJE SE DEBE VOLVER A GENERA JSON RIPS
+		PORQUE ESTA DESACTUALZIADO, INCLUYE LA RECIEN FACTURA BORRADA
+		MEJOR DICHO PARA BBORRAR UNA RIPSDETALLE, CREO HAT QUE MIRAR EL TIPO DE NOTA : NC/GLOSA O FACTURA PARA PODER BORRAR Y
+		LOS MENSAJES DEBEN SER MAS EXPLICITOS
+
+	ojo depurar mañana rips de maria paula factura 9 en la inservion de los medicamentos
+
+	pendiente PROCESOS :
+		FACTURAR A PACIENTE POR VALOR COPAGO
+		FACTURA ELECTRONICA A PACIENTE
+		RIPS DE FACTURA A PACIENTE

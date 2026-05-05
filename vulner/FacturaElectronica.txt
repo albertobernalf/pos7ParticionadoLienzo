@@ -1,0 +1,632 @@
+import xml.etree.ElementTree as ET
+
+# Definición de namespaces obligatorios UBL 2.1
+NSMAP = {
+    'xmlns': 'urn:oasis:names:specification:ubl:schema:xsd:Invoice-2',
+    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+    'xsi': 'http://www.w3.org/2001/XMLSchema-instance'
+}
+
+# 1. Root Element con Namespaces
+root = ET.Element('Invoice', nsmap=NSMAP)
+root.set('{http://www.w3.org/2001/XMLSchema-instance}schemaLocation', 
+         'urn:oasis:names:specification:ubl:schema:xsd:Invoice-2 http://docs.oasis-open.org/ubl/os-UBL-2.1/xsd/maindoc/UBL-Invoice-2.1.xsd')
+
+# 2. Extensiones (Obligatorio para la firma digital)
+ext = ET.SubElement(root, 'ext:UBLExtensions')
+ext_item = ET.SubElement(ext, 'ext:UBLExtension')
+ET.SubElement(ext_item, 'ext:ExtensionContent')
+
+# 3. Datos Básicos obligatorios
+ET.SubElement(root, 'cbc:UBLVersionID').text = 'UBL 2.1'
+ET.SubElement(root, 'cbc:CustomizationID').text = '10' # O segun version DIAN
+ET.SubElement(root, 'cbc:ProfileID').text = 'DIAN 2.1'
+ET.SubElement(root, 'cbc:ID').text = 'SETT1' # Numero de factura
+ET.SubElement(root, 'cbc:UUID', schemeID='1', schemeName='CUFE-SHA384').text = 'Generar_CUFE_AQUI'
+ET.SubElement(root, 'cbc:IssueDate').text = '2026-04-29'
+ET.SubElement(root, 'cbc:IssueTime').text = '00:00:00-05:00'
+ET.SubElement(root, 'cbc:InvoiceTypeCode').text = '01' # 01: Factura venta
+
+# 4. Emisor (AccountingSupplierParty)
+supplier = ET.SubElement(root, 'cac:AccountingSupplierParty')
+party = ET.SubElement(supplier, 'cac:Party')
+# Agregar elementos cac:PartyIdentification, cbc:PartyName, cqc:Address etc.
+
+# 5. Receptor (AccountingCustomerParty)
+customer = ET.SubElement(root, 'cac:AccountingCustomerParty')
+party_c = ET.SubElement(customer, 'cac:Party')
+# Agregar elementos cliente
+
+# 6. Totales (LegalMonetaryTotal)
+monetary = ET.SubElement(root, 'cac:LegalMonetaryTotal')
+ET.SubElement(monetary, 'cbc:LineExtensionAmount', currencyID='COP').text = '100000.00' # Subtotal
+ET.SubElement(monetary, 'cbc:TaxExclusiveAmount', currencyID='COP').text = '100000.00'
+ET.SubElement(monetary, 'cbc:TaxInclusiveAmount', currencyID='COP').text = '119000.00' # Total
+ET.SubElement(monetary, 'cbc:PayableAmount', currencyID='COP').text = '119000.00'
+
+# Generar archivo
+tree = ET.ElementTree(root)
+tree.write('factura.
+
+
+--- ejemplo 2 de factra electronica
+--------------------------------------------
+---------------------------------------------
+
+Una factura electrónica funcional para la DIAN (Colombia) bajo el estándar UBL 2.1 debe contener nodos obligatorios como cbc:ID, cbc:UUID (CUFE), cbc:IssueDate, información del emisor (cac:AccountingSupplierParty), adquirente (cac:AccountingCustomerParty), impuestos, y totales. Se requiere firma digital posterior a la generación del XML. 
+DIAN
+DIAN
+ +1
+Aquí tienes un ejemplo completo usando xml.etree.ElementTree en Python:
+python
+import xml.etree.ElementTree as ET
+from datetime import datetime
+
+# --- DATOS DE EJEMPLO (Simulación) ---
+data = [["SETT100"]] # NumFac
+cufe = "9c2317...<hash_generado>...2414"
+fecha = datetime.now().strftime('%Y-%m-%d')
+hora = datetime.now().strftime('%H:%M:%S-05:00')
+
+# --- ESTRUCTURA RAIZ (UBL 2.1) ---
+root = ET.Element("Invoice", xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2")
+root.set("xmlns:cac", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2")
+root.set("xmlns:cbc", "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2")
+
+# --- ELEMENTOS OBLIGATORIOS BÁSICOS ---
+ET.SubElement(root, "cbc:UBLVersionID").text = "UBL 2.1"
+ET.SubElement(root, "cbc:CustomizationID").text = "10" # V 1.8.1
+ET.SubElement(root, "cbc:ProfileID").text = "DIAN 2.1"
+ET.SubElement(root, "cbc:ID").text = data[0][0] # NumFac
+ET.SubElement(root, "cbc:UUID", schemeID="1", schemeName="CUFE-SHA256").text = cufe
+ET.SubElement(root, "cbc:IssueDate").text = fecha
+ET.SubElement(root, "cbc:IssueTime").text = hora
+ET.SubElement(root, "cbc:InvoiceTypeCode").text = "01" # 01: Factura Venta
+
+# --- EMISOR (AccountingSupplierParty) ---
+supplier = ET.SubElement(root, "cac:AccountingSupplierParty")
+party = ET.SubElement(supplier, "cac:Party")
+party_tax = ET.SubElement(party, "cac:PartyTaxScheme")
+ET.SubElement(party_tax, "cbc:RegistrationName").text = "EMPRESA DE PRUEBA SAS"
+tax_scheme = ET.SubElement(party_tax, "cac:TaxScheme")
+ET.SubElement(tax_scheme, "cbc:ID").text = "01" # IVA
+
+# --- ADQUIRENTE (AccountingCustomerParty) ---
+customer = ET.SubElement(root, "cac:AccountingCustomerParty")
+customer_party = ET.SubElement(customer, "cac:Party")
+customer_tax = ET.SubElement(customer_party, "cac:PartyTaxScheme")
+ET.SubElement(customer_tax, "cbc:RegistrationName").text = "CLIENTE DE PRUEBA"
+cust_tax_scheme = ET.SubElement(customer_tax, "cac:TaxScheme")
+ET.SubElement(cust_tax_scheme, "cbc:ID").text = "01"
+
+# --- TOTALES (LegalMonetaryTotal) ---
+monetary = ET.SubElement(root, "cac:LegalMonetaryTotal")
+ET.SubElement(monetary, "cbc:LineExtensionAmount", currencyID="COP").text = "100000.00"
+ET.SubElement(monetary, "cbc:TaxExclusiveAmount", currencyID="COP").text = "100000.00"
+ET.SubElement(monetary, "cbc:TaxInclusiveAmount", currencyID="COP").text = "119000.00"
+ET.SubElement(monetary, "cbc:PayableAmount", currencyID="COP").text = "119000.00"
+
+# --- GENERAR ARCHIVO ---
+tree = ET.ElementTree(root)
+nombre_archivoXml = "factura_elec.xml"
+tree
+
+
+-- ejemplo partir de este JSON
+
+{
+  "invoice": {
+    "number": "SETT1",
+    "issueDate": "2026-04-29",
+    "issueTime": "10:00:00-05:00",
+    "invoiceTypeCode": "01",
+    "currency": "COP",
+    "supplier": {
+      "name": "EMPRESA EJEMPLO S.A.S",
+      "nit": "900123456",
+      "dv": "1",
+      "address": "Calle 10 # 5-20",
+      "city": "Bogotá"
+    },
+    "customer": {
+      "name": "CLIENTE EJEMPLO",
+      "nit": "123456789",
+      "dv": "5",
+      "address": "Carrera 15 # 10-00",
+      "city": "Medellín"
+    },
+    "items": [
+      {
+        "description": "Servicios de Software",
+        "quantity": 1,
+        "price": 100000.00,
+        "total": 100000.00,
+        "taxPercentage": 19
+      }
+    ],
+    "totals": {
+      "subtotal": 100000.00,
+      "tax": 19000.00,
+      "total": 119000.00
+    }
+  }
+}
+
+
+--------------------------------------
+-----------------------------------------
+--------------------------- ojo con este ejemplo ----------------------------------
+*--------------------------------------------------------------------------------------
+
+import xml.etree.ElementTree as ET
+from datetime import datetime
+
+def generar_xml_factura():
+    # 1. Definición de namespaces UBL 2.1
+    NSMAP = {
+        'xmlns': 'urn:oasis:names:specification:ubl:schema:xsd:Invoice-2',
+        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+        'xsi': 'http://w3.org'
+    }
+
+    # Registro de namespaces para ElementTree
+    for prefix, uri in NSMAP.items():
+        ET.register_namespace(prefix, uri)
+
+    # 2. Raíz del documento
+    root = ET.Element('{urn:oasis:names:specification:ubl:schema:xsd:Invoice-2}Invoice')
+    
+    # --- Datos Cabecera (cbc) ---
+    ET.SubElement(root, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UBLVersionID').text = 'UBL 2.1'
+    ET.SubElement(root, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CustomizationID').text = '10' # Opcional según DIAN
+    ET.SubElement(root, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ProfileID').text = 'DIAN 2.1'
+    ET.SubElement(root, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ID').text = 'SET1' # Número de factura
+    ET.SubElement(root, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID', schemeID='1').text = 'Generar CUFE aqui' # CUFE
+    ET.SubElement(root, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate').text = datetime.now().strftime('%Y-%m-%d')
+    ET.SubElement(root, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime').text = datetime.now().strftime('%H:%M:%S-05:00')
+    ET.SubElement(root, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}InvoiceTypeCode').text = '01' # 01 Factura Venta
+
+    # --- Emisor (AccountingSupplierParty) ---
+    supplier = ET.SubElement(root, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}AccountingSupplierParty')
+    party = ET.SubElement(supplier, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}Party')
+    
+    # NIT Emisor
+    party_tax = ET.SubElement(party, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}PartyTaxScheme')
+    ET.SubElement(party_tax, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}RegistrationName').text = 'EMPRESA EJEMPLO SAS'
+    ET.SubElement(party_tax, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CompanyID', schemeID='6', schemeName='31').text = '900123456' # NIT sin DV
+    
+    # --- Adquiriente (AccountingCustomerParty) ---
+    customer = ET.SubElement(root, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}AccountingCustomerParty')
+    customer_party = ET.SubElement(customer, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}Party')
+    
+    customer_tax = ET.SubElement(customer_party, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}PartyTaxScheme')
+    ET.SubElement(customer_tax, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}RegistrationName').text = 'CLIENTE FINAL'
+    ET.SubElement(customer_tax, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CompanyID', schemeID='1', schemeName='13').text = '123456789'
+
+    # --- Ítems (InvoiceLine) ---
+    for i in range(1, 3): # Ejemplo con 2 ítems
+        line = ET.SubElement(root, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}InvoiceLine')
+        ET.SubElement(line, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ID').text = str(i)
+        ET.SubElement(line, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}InvoicedQuantity', unitCode='94').text = '1'
+        ET.SubElement(line, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}LineExtensionAmount', currencyID='COP').text = '100000.00'
+        
+        # Descripción Ítem
+        item = ET.SubElement(line, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}Item')
+        ET.SubElement(item, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}Description').text = f'Producto o Servicio {i}'
+        
+        # Precio Ítem
+        price = ET.SubElement(line, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}Price')
+        ET.SubElement(price, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}PriceAmount', currencyID='COP').text = '100000.00'
+
+    # --- Totales (LegalMonetaryTotal) ---
+    total = ET.SubElement(root, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}LegalMonetaryTotal')
+    ET.SubElement(total, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}LineExtensionAmount', currencyID='COP').text = '200000.00' # Suma de ítems
+    ET.SubElement(total, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}TaxInclusiveAmount', currencyID='COP').text = '238000.00' # Total + IVA
+    ET.SubElement(total, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}PayableAmount', currencyID='COP').text = '238000.00' # Total a pagar
+
+    # --- Guardar XML ---
+    tree = ET.ElementTree(root)
+    tree.write('factura_dian.xml', encoding='UTF-8', xml_declaration=True)
+    print("XML generado exitosamente: factura_dian.xml")
+
+generar_xml_factura()
+
+----------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+
+------------------- aqui el ejmplo JSON de varios item facturacion electronic dian
+-------------------------------------------------------------------------------------
+
+{
+  "prefix": "SETT",
+  "number": "990000001",
+  "date": "2026-04-29",
+  "time": "10:00:00-05:00",
+  "resolution": "18760000001",
+  "resolution_date": "2026-01-01",
+  "type_document_id": "01",
+  "customer": {
+    "identification_id": "900123456",
+    "business_name": "EMPRESA DE PRUEBA SAS"
+  },
+  "items": [
+    {
+      "name": "Producto A",
+      "quantity": 2,
+      "unit_price": 100000.00,
+      "price_tax": 119000.00,
+      "tax_percentage": 19.00,
+      "total": 200000.00
+    },
+    {
+      "name": "Servicio B",
+      "quantity": 1,
+      "unit_price": 50000.00,
+      "price_tax": 50000.00,
+      "tax_percentage": 0.00,
+      "total": 50000.00
+    }
+  ],
+  "total_without_tax": 250000.00,
+  "total_tax": 19000.00,
+  "total": 269000.00
+}
+
+
+-------------------- otro ejemplo JSON con python creo que por aqui va a ser mi guia y adcionando el for d elos items --------------
+------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------
+
+import json
+from datetime import datetime
+
+# 1. Definir los datos de la factura
+# Basado en la estructura UBL 2.1 estándar
+factura = {
+    "typeDocument": "01",  # 01: Factura Electrónica de Venta
+    "number": "SET1",       # Prefijo + Número (Resolución)
+    "date": datetime.now().strftime("%Y-%m-%d"),
+    "time": datetime.now().strftime("%H:%M:%S-05:00"),
+    "resolutionNumber": "18760000001",
+    "resolutionDate": "2023-01-01",
+    "startDate": "2023-01-01",
+    "endDate": "2030-12-31",
+    "prefix": "SET",
+    "technicalKey": "f6277651-7365-41ef-8d69-d4c828d116c9",
+    "currency": "COP",
+    
+    # EMISOR (Tu empresa)
+    "issuer": {
+        "identificationType": "31",  # 31: NIT
+        "identification": "900123456",
+        "dv": "1",
+        "name": "MI EMPRESA SAS",
+        "tradeName": "MI EMPRESA",
+        "address": "Calle 1 # 2-3",
+        "municipality": "05001",  # Código DANE Medellín
+        "department": "05",
+        "country": "CO",
+        "postalCode": "05001",
+        "email": "facturacion@empresa.com",
+        "phone": "3001234567",
+        "regime": "04", # 04: IVA
+        "taxLevelCode": "02" # 02: Responsable de IVA
+    },
+    
+    # RECEPTOR (Cliente)
+    "receiver": {
+        "identificationType": "13",  # 13: Cédula, 31: NIT
+        "identification": "1010123456",
+        "name": "JUAN PEREZ",
+        "address": "Carrera 10 # 5-6",
+        "municipality": "11001",  # Código DANE Bogotá
+        "department": "11",
+        "country": "CO",
+        "email": "cliente@correo.com",
+        "phone": "3109876543",
+        "regime": "05" # 05: No responsable de IVA
+    },
+    
+    # LINEAS DE FACTURA (Productos/Servicios)
+    "lines": [
+        {
+            "description": "Servicio de Consultoría",
+            "quantity": 1,
+            "price": 1000000.00,
+            "total": 1000000.00,
+            "ivaPercentage": 19,
+            "ivaAmount": 190000.00,
+            "lineExtensionAmount": 1000000.00,
+            "taxed": True,
+            "unitMeasure": "94" # 94: Unidad de servicio
+        }
+    ],
+    
+    # TOTALES
+    "totals": {
+        "subtotal": 1000000.00,
+        "ivaTotal": 190000.00,
+        "total": 1190000.00
+    },
+    "payment": {
+        "method": "1", # 1: Contado, 2: Crédito
+        "means": "10" # 10: Efectivo, 42: Consignación
+    }
+}
+
+
+-- OJO EJEMPLAZO SEGUN GEMINI INTELIGENCIA ARTIFICIAL
+
+# Configuración de Namespaces (Vital para que la DIAN lo acepte)
+namespaces = {
+    '': 'urn:oasis:names:specification:ubl:schema:xsd:Invoice-2',
+    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+    'ds': 'http://www.w3.org/2000/09/xmldsig#',
+    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+    'sts': 'dian:gov:co:facturaelectronica:Structures-2-1',
+    'xades': 'http://uri.etsi.org/01903/v1.3.2#',
+    'xades141': 'http://uri.etsi.org/01903/v1.4.1#'
+}
+
+for prefix, uri in namespaces.items():
+    ET.register_namespace(prefix, uri)
+
+def crear_factura_dian():
+    # Nodo Raíz
+    invoice = ET.Element('{urn:oasis:names:specification:ubl:schema:xsd:Invoice-2}Invoice')
+    
+    # --- 1. Información General ---
+    ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}UBLVersionID').text = 'UBL 2.1'
+    ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}CustomizationID').text = '1'
+    ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}ID').text = 'SETT123' # Número de factura
+    ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}IssueDate').text = datetime.now().strftime('%Y-%m-%d')
+    ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}IssueTime').text = datetime.now().strftime('%H:%M:%S-05:00')
+    ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}InvoiceTypeCode').text = '01' # Factura de venta
+    ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}DocumentCurrencyCode').text = 'COP'
+
+    # --- 2. Items de la Factura ---
+    items = [
+        {"id": "1", "nombre": "Teclado Mecánico", "cantidad": "2.00", "precio": "150000.00", "iva": "19.00"},
+        {"id": "2", "nombre": "Mouse Óptico", "cantidad": "1.00", "precio": "80000.00", "iva": "19.00"}
+    ]
+
+    subtotal_total = 0
+    iva_total = 0
+
+    for i, item in enumerate(items, 1):
+        line_id = str(i)
+        cant = float(item['cantidad'])
+        precio = float(item['precio'])
+        iva_rate = float(item['iva'])
+        
+        base_linea = cant * precio
+        impuesto_linea = base_linea * (iva_rate / 100)
+        
+        subtotal_total += base_linea
+        iva_total += impuesto_linea
+
+        # Estructura del Item (InvoiceLine)
+        inv_line = ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents}InvoiceLine')
+        ET.SubElement(inv_line, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}ID').text = line_id
+        ET.SubElement(inv_line, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}InvoicedQuantity', unitCode="94").text = item['cantidad']
+        ET.SubElement(inv_line, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}LineExtensionAmount', currencyID="COP").text = f"{base_linea:.2f}"
+
+        # Impuesto por línea
+        tax_total = ET.SubElement(inv_line, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents}TaxTotal')
+        ET.SubElement(tax_total, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}TaxAmount', currencyID="COP").text = f"{impuesto_linea:.2f}"
+        
+        tax_subtotal = ET.SubElement(tax_total, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents}TaxSubtotal')
+        ET.SubElement(tax_subtotal, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}TaxableAmount', currencyID="COP").text = f"{base_linea:.2f}"
+        ET.SubElement(tax_subtotal, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}TaxAmount', currencyID="COP").text = f"{impuesto_linea:.2f}"
+        
+        tax_scheme = ET.SubElement(ET.SubElement(tax_subtotal, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents}TaxCategory'), '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents}TaxScheme')
+        ET.SubElement(tax_scheme, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}ID').text = "01" # 01 es IVA
+        ET.SubElement(tax_scheme, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}Name').text = "IVA"
+
+        # Detalle del producto
+        item_node = ET.SubElement(inv_line, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents}Item')
+        ET.SubElement(item_node, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}Description').text = item['nombre']
+        
+        price_node = ET.SubElement(inv_line, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents}Price')
+        ET.SubElement(price_node, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}PriceAmount', currencyID="COP").text = item['precio']
+
+    # --- 3. Totales Globales (LegalMonetaryTotal) ---
+    monetary_total = ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents}LegalMonetaryTotal')
+    ET.SubElement(monetary_total, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}LineExtensionAmount', currencyID="COP").text = f"{subtotal_total:.2f}"
+    ET.SubElement(monetary_total, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}TaxExclusiveAmount', currencyID="COP").text = f"{subtotal_total:.2f}"
+    ET.SubElement(monetary_total, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}TaxInclusiveAmount', currencyID="COP").text = f"{subtotal_total + iva_total:.2f}"
+    ET.SubElement(monetary_total, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents}PayableAmount', currencyID="COP").text = f"{subtotal_total + iva_total:.2f}"
+
+    # Generar el árbol y guardar
+    tree = ET.ElementTree(invoice)
+    ET.indent(tree, space="  ", level=0) # Para que sea legible
+    tree.write("factura_dian.xml", encoding="utf-8", xml_declaration=True)
+    print("Archivo 'factura_dian.xml' generado con éxito.")
+
+crear_factura_dian()
+
+---------------------gemini ii
+-------------------------con cabeceras
+
+# Definición de Namespaces oficiales UBL 2.1 / DIAN
+NS = {
+    '': 'urn:oasis:names:specification:ubl:schema:xsd:Invoice-2',
+    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+}
+
+for prefix, uri in NS.items():
+    ET.register_namespace(prefix, uri)
+
+def crear_xml_completo():
+    # 1. Raíz y Extensiones (Donde irá la firma después)
+    invoice = ET.Element('{urn:oasis:names:specification:ubl:schema:xsd:Invoice-2}Invoice')
+    exts = ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2}UBLExtensions')
+    ET.SubElement(exts, '{urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2}UBLExtension').append(ET.Element('{urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2}ExtensionContent'))
+
+    # 2. Información de Cabecera
+    ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UBLVersionID').text = 'UBL 2.1'
+    ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CustomizationID').text = '1'
+    ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ID').text = 'SETT12345'
+    ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate').text = datetime.now().strftime('%Y-%m-%d')
+    ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime').text = datetime.now().strftime('%H:%M:%S-05:00')
+    ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}InvoiceTypeCode').text = '01'
+    ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}DocumentCurrencyCode').text = 'COP'
+
+    # 3. EMISOR (AccountingSupplierParty)
+    supplier = ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}AccountingSupplierParty')
+    party = ET.SubElement(supplier, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}Party')
+    
+    # NIT del Emisor
+    tax_scheme = ET.SubElement(party, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}PartyTaxScheme')
+    ET.SubElement(tax_scheme, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}RegistrationName').text = "MI EMPRESA SAS"
+    ET.SubElement(tax_scheme, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CompanyID', schemeAgencyID="195", schemeID="4").text = "900123456"
+    
+    tax_scheme_info = ET.SubElement(tax_scheme, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}TaxScheme')
+    ET.SubElement(tax_scheme_info, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ID').text = "01" # 01 = IVA
+    ET.SubElement(tax_scheme_info, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}Name').text = "IVA"
+
+    # 4. RECEPTOR (AccountingCustomerParty)
+    customer = ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}AccountingCustomerParty')
+    c_party = ET.SubElement(customer, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}Party')
+    
+    c_tax_scheme = ET.SubElement(c_party, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}PartyTaxScheme')
+    ET.SubElement(c_tax_scheme, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}RegistrationName').text = "CLIENTE EJEMPLO SAS"
+    ET.SubElement(c_tax_scheme, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CompanyID', schemeAgencyID="195", schemeID="3").text = "800987654"
+    
+    # 5. PRODUCTOS E IMPUESTOS
+    productos = [
+        {"desc": "Servicio de Consultoría", "cant": 1.0, "precio": 1000000.0, "iva_rate": 19.0},
+        {"desc": "Licencia de Software", "cant": 2.0, "precio": 500000.0, "iva_rate": 19.0}
+    ]
+
+    total_base = 0
+    total_iva = 0
+
+    for i, p in enumerate(productos, 1):
+        line_base = p['cant'] * p['precio']
+        line_iva = line_base * (p['iva_rate'] / 100)
+        total_base += line_base
+        total_iva += line_iva
+
+        line = ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}InvoiceLine')
+        ET.SubElement(line, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ID').text = str(i)
+        ET.SubElement(line, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}InvoicedQuantity', unitCode="94").text = f"{p['cant']:.2f}"
+        ET.SubElement(line, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}LineExtensionAmount', currencyID="COP").text = f"{line_base:.2f}"
+
+        # Impuesto por Ítem
+        t_total = ET.SubElement(line, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}TaxTotal')
+        ET.SubElement(t_total, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}TaxAmount', currencyID="COP").text = f"{line_iva:.2f}"
+        t_sub = ET.SubElement(t_total, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}TaxSubtotal')
+        ET.SubElement(t_sub, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}TaxableAmount', currencyID="COP").text = f"{line_base:.2f}"
+        ET.SubElement(t_sub, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}TaxAmount', currencyID="COP").text = f"{line_iva:.2f}"
+        
+        t_cat = ET.SubElement(t_sub, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}TaxCategory')
+        ET.SubElement(t_cat, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}Percent').text = f"{p['iva_rate']:.2f}"
+        t_sch = ET.SubElement(t_cat, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}TaxScheme')
+        ET.SubElement(t_sch, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ID').text = "01"
+        ET.SubElement(t_sch, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}Name').text = "IVA"
+
+        item = ET.SubElement(line, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}Item')
+        ET.SubElement(item, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}Description').text = p['desc']
+        
+        price = ET.SubElement(line, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}Price')
+        ET.SubElement(price, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}PriceAmount', currencyID="COP").text = f"{p['precio']:.2f}"
+
+    # 6. TOTALES GENERALES (TaxTotal y LegalMonetaryTotal)
+    global_tax = ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}TaxTotal')
+    ET.SubElement(global_tax, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}TaxAmount', currencyID="COP").text = f"{total_iva:.2f}"
+    
+    monetary = ET.SubElement(invoice, '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}LegalMonetaryTotal')
+    ET.SubElement(monetary, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}LineExtensionAmount', currencyID="COP").text = f"{total_base:.2f}"
+    ET.SubElement(monetary, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}TaxExclusiveAmount', currencyID="COP").text = f"{total_base:.2f}"
+    ET.SubElement(monetary, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}TaxInclusiveAmount', currencyID="COP").text = f"{total_base + total_iva:.2f}"
+    ET.SubElement(monetary, '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}PayableAmount', currencyID="COP").text = f"{total_base + total_iva:.2f}"
+
+    # Guardado
+    tree = ET.ElementTree(invoice)
+    ET.indent(tree, space="  ")
+    tree.write("factura_completa_dian.xml", encoding="utf-8", xml_declaration=True)
+
+crear_xml_completo()
+
+-- fin gemini 2 con cabeceras
+
+
++------------------------------------------------------------------------1
+-- gemini para enviar con python los xml OJOOOOOOOOOOOOOOOOOOOOOOOOOO
+----------------------------------------------------------------------
+
+import os
+import zipfile
+import uuid
+import requests
+from lxml import etree
+from signxml import XMLSigner, namespaces
+
+# --- CONFIGURACIÓN SET DE PRUEBAS ---
+URL_HABILITACION = "https://vpfe-hab.dian.gov.co/WcfDianCustomerServices.svc?wsdl"
+TEST_SET_ID = "tu-test-set-id-aqui" # Lo obtienes en el portal de la DIAN
+
+def firmar_xml(xml_string, cert_path, key_path):
+    """Firma el XML bajo el estándar XAdES-EPES requerido por la DIAN"""
+    root = etree.fromstring(xml_string)
+    cert = open(cert_path).read()
+    key = open(key_path).read()
+    
+    # La DIAN requiere que la firma esté dentro de la primera UBLExtension
+    signer = XMLSigner(method=namespaces.SignedInfo.ALGORITHM_RSA_SHA256, 
+                       signature_algorithm="rsa-sha256", 
+                       digest_algorithm="sha256")
+    
+    signed_root = signer.sign(root, key=key, cert=cert)
+    return etree.tostring(signed_root, encoding='utf-8', xml_declaration=True)
+
+def enviar_a_dian(xml_firmado, nit_emisor, invoice_number):
+    """Comprime el XML y lo envía vía SOAP SendTestSetAsync"""
+    
+    # 1. Crear el ZIP en memoria o disco
+    zip_filename = f"z{nit_emisor}{invoice_number}.zip"
+    with zipfile.ZipFile(zip_filename, 'w') as z:
+        z.writestr(f"{invoice_number}.xml", xml_firmado)
+    
+    with open(zip_filename, "rb") as f:
+        zip_base64 = f.read().hex() # La DIAN a veces pide base64 o bytes según el método
+
+    # 2. Construir el Sobre SOAP (Simplificado)
+    # Importante: Debes incluir el WS-Security Header con el UsernameToken (SoftwareID)
+    soap_body = f"""
+    <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:wcf="http://wcf.dian.colombia">
+       <soap:Header/>
+       <soap:Body>
+          <wcf:SendTestSetAsync>
+             <wcf:fileName>{zip_filename}</wcf:fileName>
+             <wcf:contentFile>{zip_base64}</wcf:contentFile>
+             <wcf:testSetId>{TEST_SET_ID}</wcf:testSetId>
+          </wcf:SendTestSetAsync>
+       </soap:Body>
+    </soap:Envelope>
+    """
+    
+    headers = {'Content-Type': 'application/soap+xml;charset=UTF-8'}
+    response = requests.post(URL_HABILITACION, data=soap_body, headers=headers)
+    
+    print(f"Status: {response.status_code}")
+    print(f"Respuesta DIAN: {response.text}")
+
+# --- FLUJO DE EJECUCIÓN ---
+# 1. Generas tu XML (usa el ejemplo de la respuesta anterior)
+xml_base = """<Invoice ...> ... </Invoice>""" 
+
+# 2. Firmas el documento
+# xml_firmado = firmar_xml(xml_base, "certificado.pem", "llave_privada.pem")
+
+# 3. Envías el set de pruebas
+# enviar_a_dian(xml_firmado, "900123456", "SETT123")
+3. Lo que "duele" de la validación (Tips de Peer)

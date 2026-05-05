@@ -1,0 +1,46 @@
+Para crear un código QR para facturas electrónicas de la DIAN en Python, utiliza la librería qrcode y Pillow. Instálalas con pip install qrcode[pil], luego usa el método qrcode.make() con la URL de validación de la DIAN que contiene el CUFE (Código Único de Factura Electrónica) y guarda la imagen. 
+YouTube
+YouTube
+ +3
+Aquí tienes un ejemplo práctico paso a paso:
+1. Instalación de librerías
+Abre tu terminal y ejecuta:
+bash
+pip install qrcode[pil]
+2. Código Python para generar el QR 
+El código QR debe dirigir a la URL de validación de la DIAN, la cual usualmente sigue una estructura que incluye el CUFE de la factura. 
+ITS Contable
+ITS Contable
+python
+import qrcode
+
+# 1. La URL de la DIAN con el CUFE de la factura
+# Reemplaza esta URL con el enlace real de validación de tu factura
+url_dian = "https://catalogo-vpfe.dian.gov.co/User/DocumentValidation?Query=1234567890abcdef..."
+
+# 2. Configurar la generación del código QR
+qr = qrcode.QRCode(
+    version=1,
+    error_correction=qrcode.constants.ERROR_CORRECT_L,
+    box_size=10,
+    border=4,
+)
+
+# 3. Añadir los datos (la URL)
+qr.add_data(url_dian)
+qr.make(fit=True)
+
+# 4. Crear la imagen del QR
+img = qr.make_image(fill_color="black", back_color="white")
+
+# 5. Guardar el código QR
+img.save("codigo_qr_factura.png")
+print("Código QR generado exitosamente como 'codigo_qr_factura.png'")
+Puntos clave:
+Contenido: El código QR debe contener la URL exacta provista por el proveedor tecnológico o la DIAN que valida la factura.
+Formato: Se recomienda guardarlo en formato PNG o JPG para incluirlo en el PDF de la factura.
+Validación: Al escanearlo, debe redirigir al portal de la DIAN y mostrar el check verde de confirmación. 
+ITS Contable
+ITS Contable
+ +1
+Este video muestra cómo generar códigos QR en Python:

@@ -1,0 +1,149 @@
+sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+
+sudo systemctl start docker
+sudo systemctl enable docker
+
+Gestionar imagenes:
+
+docker pull <imagen>: Descarga una imagen desde un registro (ej. Docker Hub).
+docker images o docker image ls: Lista todas las imágenes disponibles localmente.
+docker rmi <imagen>: Elimina una o varias imágenes.
+docker build -t <nombre> .: Construye una imagen a partir de un Dockerfile en el directorio actual. 
+
+
+Gestionar contenedores:
+
+docker run <imagen>: Crea y ejecuta un nuevo contenedor.
+docker run -d <imagen>: Ejecuta el contenedor en segundo plano (modo detached).
+docker ps: Lista los contenedores en ejecución.
+docker ps -a: Lista todos los contenedores (incluidos los detenidos).
+docker stop <contenedor>: Detiene un contenedor en ejecución.
+docker start <contenedor>: Inicia un contenedor detenido.
+docker rm <contenedor>: Elimina un contenedor detenido.
+docker exec -it <contenedor> <comando>: Ejecuta un comando dentro de un contenedor en funcionamiento. 
+
+Información y Limpieza:
+docker logs <contenedor>: Muestra los registros (logs) de un contenedor.
+docker inspect <contenedor/imagen>: Muestra información detallada sobre un objeto Docker.
+docker system prune: Elimina contenedores, imágenes y redes no utilizados para liberar espacio. 
+
+Docker Compose (Gestión de múltiples contenedores) 
+docker compose up -d: Crea y arranca los servicios definidos en el archivo docker-compose.yml en segundo plano.
+docker compose down: Detiene y elimina contenedores, redes e imágenes definidos en el archivo docker-compose.yml.
+docker compose ps: Lista los contenedores gestionados por compose. 
+YouTube
+YouTube
+ +1
+
+Docker se utiliza para empaquetar y ejecutar herramientas de facturación electrónica compatibles con la DIAN, facilitando la integración de APIs, la firma digital y el envío de documentos XML (facturas, notas) sin depender del software gratuito de la DIAN. Permite desplegar entornos contenedores (Linux/Windows) para validar y enviar información. 
+www.cajageneral.com
+www.cajageneral.com
+ +2
+Soluciones Docker para Facturación DIAN
+API Favi (Caja General): Ofrece un ejecutable gratuito en Docker (y versiones de pago) para integrar la facturación electrónica en PHP, Java, C# o Node.js desde tu propia infraestructura.
+API Open Source (Soenac): Existe una API de código abierto, diseñada en PHP, que permite firma de XML, cálculo de CUFE y consumo del Web Service de la DIAN, con ejemplo de instalación mediante Docker.
+Extractores/Validadores (Python+Flask): Herramientas basadas en contenedores para procesar o extraer información de facturas. 
+www.cajageneral.com
+www.cajageneral.com
+ +2
+Pasos para implementar Docker en la Facturación DIAN
+Habilitación: Registrarse como facturador electrónico en el sitio web de la DIAN.
+Certificado Digital: Solicitar el certificado de firma digital (gratuito con la DIAN o propio).
+Configuración del Contenedor:
+Clonar el repositorio de la API seleccionada (ej. Favi o Soenac).
+Configurar los archivos de entorno (.env, docker-compose.yml) con las credenciales de la DIAN, NIT y el certificado digital.
+Despliegue: Ejecutar docker-compose up -d para poner en marcha el servidor de facturación.
+Pruebas: Realizar pruebas de set de habilitación para validar los documentos ante la DIAN. 
+DIAN
+DIAN
+ +4
+Ventajas de usar Docker
+Portabilidad: Funciona igual en cualquier servidor, ya sea local (Windows/Linux) o en la nube.
+Independencia: Evita limitaciones del software gratuito de la DIAN.
+Automatización: Facilita la firma y envío automático de documentos. 
+www.cajageneral.com
+www.cajageneral.com
+ +2
+
+
+ojoooooooooooooooooooo
+ojoooooooooooooooooo
+
+https://parseur.com/es/blog/extraer-datos-de-facturas-con-python
+
+diuro de esquemas xml facturacion electronica
+
+-------------------------- EJEMPLO COMPLETO PYTHON -------------------------------
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+
+Generar facturas electrónicas para la DIAN en Python implica tres fases: crear el XML con el estándar UBL 2.1, firmarlo digitalmente (requiere certificado), calcular el CUFE (sha384), generar el código QR y finalmente crear el PDF. La DIAN requiere obligatoriamente archivos XML firmados y la representación gráfica (PDF) con QR. 
+Dirección de Impuestos y Aduanas Nacionales - DIAN
+Dirección de Impuestos y Aduanas Nacionales - DIAN
+ +4
+Aquí tienes un ejemplo completo estructurado:
+1. Instalación de Librerías Necesarias
+Necesitarás librerías para XML, códigos QR y PDFs.
+bash
+pip install qrcode[pil] fpdf
+2. Código Python Completo (Ejemplo Base)
+Este script genera el XML, QR y PDF simulando los datos de la DIAN. Nota: La firma digital (XAdES) es un proceso complejo que requiere criptografía, aquí se estructura el XML. 
+python
+import qrcode
+from fpdf import FPDF
+import hashlib
+import xml.etree.ElementTree as ET
+from datetime import datetime
+
+# --- 1. DATOS DE LA FACTURA ---
+data = {
+    "num": "SETT1",
+    "fecha": datetime.now().strftime("%Y-%m-%d"),
+    "hora": datetime.now().strftime("%H:%M:%S-05:00"),
+    "nit_emisor": "900123456",
+    "nit_receptor": "800987654",
+    "valor_total": "100000",
+    "impuestos": "19000",
+    "moneda": "COP"
+}
+
+# --- 2. GENERAR CUFE (Algoritmo SHA-384 simplificado) ---
+# En producción se concatenan: Num + Fecha + Hora + Valor + NITs + ... + CLTecnica
+raw_cufe = f"{data['num']}{data['fecha']}{data['hora']}{data['valor_total']}01{data['impuestos']}{data['nit_emisor']}{data['nit_receptor']}"
+cufe = hashlib.sha384(raw_cufe.encode()).hexdigest()
+print(f"CUFE Generado: {cufe}")
+
+# --- 3. GENERAR CÓDIGO QR ---
+url_dian = f"https://catalogo-vpfe.dian.gov.co/document/searchqr?documentkey={cufe}"
+qr = qrcode.make(url_dian)
+qr.save("qr_factura.png")
+
+# --- 4. GENERAR XML (Estructura UBL 2.1 básica) ---
+# Nota: La firma electrónica (signature) es obligatoria en producción.
+root = ET.Element("Invoice", xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2")
+ET.SubElement(root, "cbc:ID").text = data['num']
+ET.SubElement(root, "cbc:UUID").text = cufe
+# ... más etiquetas UBL2.1 obligatorias ...
+tree = ET.ElementTree(root)
+tree.write("factura.xml", encoding="UTF-8", xml_declaration=True)
+print("XML Generado: factura.xml")
+
+# --- 5. GENERAR PDF (Representación Gráfica) ---
+class PDF(FPDF):
+    def header(self):
+        self.set_font('Arial', 'B', 12)
+        self.cell(0, 10, 'FACTURA ELECTRÓNICA DE VENTA', 0, 1, 'C')
+
+pdf = PDF()
+pdf.add_page()
+pdf.set_font("Arial", size=12)
+pdf.cell(0, 10, f"Factura No: {data['num']}", 0, 1)
+pdf.cell(0, 10, f"Fecha: {data['fecha']}", 0, 1)
+pdf.cell(0, 10, f"Total: ${data['valor_total']}", 0, 1)
+pdf.image("qr_factura.png", x=150, y=20, w=40)
+pdf.output("factura.pdf")
+print("PDF Generado: factura.pdf")
+Componentes Clave:
+CUFE (Código Único de Factura Electrónica): Se genera mediante `hash 
+

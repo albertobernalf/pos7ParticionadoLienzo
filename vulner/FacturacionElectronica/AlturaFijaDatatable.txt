@@ -1,0 +1,22 @@
+1.
+
+Para mostrar un DataTable de jQuery con altura fija y scroll vertical, utiliza la propiedad scrollY en la inicialización, definiendo la altura en píxeles (ej. '300px') o vh (ej. '50vh'). Es recomendable activar scrollCollapse: true para reducir la altura si hay pocos registros y desactivar la paginación con paging: false. 
+Stack Overflow en español
+Stack Overflow en español
+ +2
+Código de Ejemplo
+javascript
+$(document).ready(function() {
+    $('#miTabla').DataTable({
+        "scrollY": "300px",      // Altura fija (puedes usar vh: "50vh")
+        "scrollCollapse": true,  // Reduce la altura si hay menos datos
+        "paging": false,         // Desactiva la paginación
+        "scrollX": true          // Opcional: Scroll horizontal
+    });
+});
+Puntos clave:
+scrollY: Define el alto del cuerpo de la tabla (no incluye cabecera).
+scrollCollapse: Si hay pocos datos, la tabla se encoge para no dejar espacio en blanco.
+paging: false: Permite que todo el contenido cargue y se maneje con el scroll, en lugar de páginas.
+CSS: Asegúrate de que el contenedor de la tabla no tenga restricciones que rompan el estilo
+

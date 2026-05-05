@@ -1,0 +1,134 @@
+quepsa bebe
+quepsa bebe
+quepsa bebe
+
+
+            <!-- INICIO TABLE DE  EL DATATABLE  -->
+		<div class="container my-2">
+quepsa bebe
+quepsa bebe
+quepsa bebe
+		<div align="right" height="15px" width="50px">
+               <input type="button" style="height:25px;margin-left: 0 ; margin-bottom: 0;border-top-right-radius: 0;"  size="30px" id="BtnNotasCredito"  name="BtnNotasCredito" value="Adicionar" onclick= "NotasCredito()">				    
+		</div>
+   			   <div class="row">			
+                                <table id = "tablaNotas" name="tablaNotas" class=" display table table-striped table-sm fs-6 nowrap" style="width: 100%";>
+                                   <thead>
+                                     <tr>    
+					<bold>                                  
+					      	<th>id</th>
+				                <th>FechaNota</th>
+				                <th>Valor Nota</th>
+				                <th>observa</th>
+				                <th>FechaReg</th>
+				                <th>usuarioReg</th>
+				                <th>Estado</th>
+						<th>FecResp</th>
+						<th>Tipo</th>
+				                <th>ripsEnvio</th>                               
+					</bold>                                  
+                                      </tr>
+                                     </thead>
+                                     <tbody>
+                                     /tbody>                                      
+                                   </table>
+                                 </div>
+                    </div>
+
+
+	            <!-- Espacio Modales  Glosas-->
+
+            <div class="modal fade" id="crearModelNotasCredito" tabindex="-1" role="dialog"  style="overflow-y:scroll;" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+                <div class="modal-dialog modal-dialog-scrollable modal-fullscreen modal-fullscreen modal-dialog-center" role="document" modal-lg>
+                    <div class="modal-content">
+                        <div class="modal-header">
+	     <div  class="modal-title" id="exampleModalLabel" style="text-align:center;"><font gont-family="Times New roman" size=5">Crear Glosa</font> </div>
+                                        <button type="button" class="close" data-bs-dismiss="modal"  aria-label="Close"> <span aria-hidden="true">&times;</span>  </button>
+			<button type="button" class="btn btn-primary" id="saveBtnCrearNotasCredito" onclick="CrearNotasCredito()">Grabar!</button> 
+                        </div>
+		
+                        <div class="modal-body">
+
+			
+			<div style="display: flex; gap: 10px; height:15px;width: 340px;">
+				 	<input type="text" id="mensajesModalNotasCredito"      name="mensajesModalNotasCredito" style="background-color: lightgray; color: navy;" style="width: 50%;"  placeholder=""  wrap="hard" size="75px"></input>
+					<input type="text" id="mensajesErrorModalNotasCredito" name="mensajesErrorModalNotasCredito" style="background-color: lightgray; color: navy;" style="width: 50%;"  placeholder=""  wrap="hard" size="75px"></input>
+      			</div>
+
+  			  <form id="postFormNotasCredito" name="postFormNotasCredito" style="display: flex; flex-direction: row; gap: 10px;flex-wrap: wrap; text-align: left;">
+
+                                <input type="hidden" name="post_id" id="post_id">
+
+					                                   
+                                    <input type="hidden" id="sedesClinicaNotasCredito_id" name="sedesClinicaNotasCredito_id"  value="{{Sede}}" readonly></input>
+
+
+                                        <label for="serviciosAdministrativosNotasCredito_id">SeviciosAdmon:</label>
+
+                                            <select class="select-box" id="serviciosAdministrativosNotasCredito_id"  tabindex= "0"
+                                                    name="serviciosAdministrativosNotasCredito_id"
+                                                    required>
+                                                {% for serviciosAdministrativos in ServiciosAdministrativos %}
+                                                <option value="{{serviciosAdministrativos.id}}"> {{serviciosAdministrativos.nombre}}</option>
+                                                {% endfor %}
+                                            </select>
+
+
+					fechaRecepcion:
+                                   	 <label class="visually-hidden" for="fechaRecepcionNotasCredito">fechaRecepcion:</label>
+                               
+					 <input type="datetime-local"  id="fechaRecepcionNotasCredito" name="fechaRecepcionNotasCredito" placeholder="fechaRecepcion"  >
+
+                                   	 <label class="visually-hidden" for="observacionesNotasCredito">observaciones:</label>
+                               
+					 <input type="text"   id="observacionesNotasCredito" name="observacionesNotasCredito" placeholder="observaciones"  >
+
+			Fecha Respuesta:
+				 <label class="visually-hidden" for="fechaRespuestaNotasCredito">Fecha Respuesta:</label>
+                                    
+					 <input type="datetime-local"   id="fechaRespuestaNotasCredito" name="fechaRespuestaNotasCredito" placeholder="fechaRespuesta"  readonly>
+
+                                    Tipo Glosa:
+				<select class="select-box"  id="tipoNotasCredito_id"  name="tipoNotasCredito_id">
+                                                           {% for tiposNotas in TiposNotas %}
+                                                            <option value="{{tiposNotas.id}}">
+                                                                {{tiposNotas.nombre}}
+                                                            </option>
+                                                            {% endfor %}
+                                                          
+                                                        </select>
+
+                                    
+				 <label  for="totalNotasCredito">totalNotaCredito:</label>
+                                    <input type="text"  id="totalNotasCredito" name="totalNotasCredito" value="0" placeholder="totalNotaCredito:" ></input>
+
+                                    Estado Recepcion:
+				<select class="select-box"  id="estadoRecepcionNotasCredito_id"  name="estadoRecepcionNotasCredito_id">
+                                                           {% for estadosRecepcion in EstadosRecepcion %}
+                                                            <option value="{{estadosRecepcion.id}}">
+                                                                {{estadosRecepcion.nombre}}
+                                                            </option>
+                                                            {% endfor %}
+                                                          
+                                                        </select>
+                                   
+                                    <input type="hidden" id="fechaRegistroNotasCredito" name="fechaRegistroNotasCredito" value="" > </input>
+
+				 <label  for="estadoRegNotasCredito">EstadoRegistro:</label>
+                                    
+                                    <input type="text"  id="estadoRegNotasCredito" name="estadoRegNotasCredito" value="A" placeholder="Estado Registro:" > </input>
+
+                                    Usuario:
+                                    <input type="text" id="usuarioRegistroNotasCredito_id" name="usuarioRegistroNotasCredito_id" value="{{Username_id}}" readonly > </input>
+
+                            </form>
+
+                        </div> <!-- CIERRA BODY -->
+			<div class="modal-footer">
+				        
+			    </div> <!-- CIERRA FOOTER -->			
+                        </div> <!-- CIERRA MODAL CONTENTE -->
+                    </div> <!-- CIERRA MODAL DIALOG -->
+                </div>  <!-- CIERRA MODAL FADE -->
+
+     <!-- FIN Espacio Modales  -->

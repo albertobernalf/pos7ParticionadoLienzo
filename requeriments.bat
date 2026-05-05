@@ -78,3 +78,4 @@ pip install django-postgres-extra
 pip install psqlextra
 pip install fpdf
 pip install PyPDF2
+pip install xmltodict

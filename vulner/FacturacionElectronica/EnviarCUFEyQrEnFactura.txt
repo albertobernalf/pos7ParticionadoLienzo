@@ -1,0 +1,23 @@
+Para enviar el CUFE y el código QR a la DIAN, debes incluirlos dentro del archivo XML de la factura electrónica, específicamente en la sección cbc:UUID (para el CUFE) y dentro del grupo de extensiones ext:UBLExtension (para el código QR) antes de enviarlo para validación. El código QR se genera tras la validación y debe mostrarse en la representación gráfica. 
+Loggro
+Loggro
+ +4
+Aquí te detallamos los puntos clave:
+CUFE (Código Único de Factura Electrónica): Se inserta en la etiqueta <cbc:UUID schemeID="1"> (para factura electrónica) con el código alfanumérico generado.
+Código QR: Se incluye dentro de <ext:UBLExtensions>. El código QR debe contener la información detallada de la factura, el URL de la DIAN y el CUFE.
+Validación Previa: La DIAN recibe el XML con esta información para validarlo en tiempo real, tras lo cual la factura es aprobada.
+Proceso: Se utiliza el servicio web de la DIAN para el envío del archivo, o bien el facturador gratuito de la entidad que gestiona esto automáticamente. 
+Micrositios DIAN
+Micrositios DIAN
+ +5
+Estructura sugerida en el XML (UBL 2.1):
+xml
+<cbc:UUID schemeID="1">CUFE_GENERADO</cbc:UUID>
+<!-- Dentro de las extensiones -->
+<ext:UBLExtension>
+    <ext:ExtensionContent>
+        <sts:DianExtensions>
+            <sts:QRCode>DATOS_DEL_QR</sts:QRCode>
+        </sts:DianExtensions>
+    </ext:ExtensionContent>
+</ext:UBLExtension>

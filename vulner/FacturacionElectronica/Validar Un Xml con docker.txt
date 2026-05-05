@@ -1,0 +1,61 @@
+Este ejemplo demuestra cómo generar, firmar y validar un XML de factura electrónica (estándar UBL) usando Python en Docker, enfocado en pruebas de cumplimiento (set de pruebas DIAN/SAT). 
+YouTube
+YouTube
+ +1
+Estructura del Proyecto
+text
+/facturacion
+├── Dockerfile
+├── requirements.txt
+├── app.py
+├── firma.pfx
+└── schema.xsd
+1. requirements.txt
+text
+lxml==5.1.0
+cryptography==42.0.2
+signxml==3.1.0
+2. Dockerfile
+dockerfile
+FROM python:3.10-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+CMD ["python", "app.py"]
+3. app.py (Generación y Validación)
+python
+from lxml import etree
+import os
+
+def generar_xml_factura():
+    # 1. Crear estructura básica XML (UBL)
+    root = etree.Element("Invoice", xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2")
+    etree.SubElement(root, "cbc:ID").text = "SET_PRUEBA_001"
+    etree.SubElement(root, "cbc:IssueDate").text = "2026-04-13"
+    
+    # ... añadir más campos obligatorios ...
+    
+    tree = etree.ElementTree(root)
+    tree.write("factura.xml", pretty_print=True, xml_declaration=True, encoding="UTF-8")
+    print("XML generado.")
+
+def validar_xml(xml_path, xsd_path):
+    # 2. Validar contra esquema XSD (DIAN/SAT)
+    xmlschema_doc = etree.parse(xsd_path)
+    xmlschema = etree.XMLSchema(xmlschema_doc)
+    
+    doc = etree.parse(xml_path)
+    if xmlschema.validate(doc):
+        print("XML Válido: SI")
+    else:
+        print("XML Válido: NO")
+        print(xmlschema.error_log.filter_from_errors())
+
+if __name__ == "__main__":
+    generar_xml_factura()
+    # validar_xml("factura.xml", "schema.xsd") # Se requiere el XSD local
+Pasos para Ejecutar
+Construir imagen: docker build -t facturador .
+Ejecutar: docker run -it --rm -v $(pwd):/app facturador
+Este entorno genera un archivo factura.xml en su máquina local, listo para ser firmado y enviado a las APIs de validación de la autoridad tributaria. 

@@ -1,0 +1,98 @@
+Para radicar facturas electrónicas XML ante la DIAN con Python usando Docker, cree un Dockerfile basado en Python, instale librerías como requests y zeep para SOAP/API, empaquete su código, y ejecute el contenedor para gestionar el envío, asegurando haber asociado el software en el portal DIAN. 
+YouTube
+YouTube
+ +3
+Paso 1: Requisitos Previos en la DIAN
+Habilitación: Registrarse como facturador electrónico y realizar el SET de pruebas (2 facturas, 1 nota crédito, 1 nota débito).
+Credenciales: Obtener el NIT, SoftwareID y Pin del software de facturación.
+Certificado Digital: Contar con el archivo .p12 o .pfx para firmar el XML. 
+DIAN
+DIAN
+ +2
+Paso 2: Crear el Código Python (app.py)
+Utilice la librería zeep para consumir el Web Service de la DIAN (WSDL). 
+TikTok
+TikTok
+python
+# app.py (Ejemplo simplificado)
+from zeep import Client
+import requests
+
+def enviar_xml(xml_content):
+    # WSDL de pruebas DIAN
+    wsdl_url = 'https://vpfe.dian.gov.co/WcfDianCustomerServices.svc?wsdl'
+    client = Client(wsdl_url)
+    
+    # Datos de autenticidad obtenidos en la DIAN
+    token = {
+        'NIT': '123456789',
+        'SoftwareID': 'your-software-id',
+        'Pin': 'your-pin'
+    }
+    
+    # Llamada al método SendXML de la DIAN
+    # response = client.service.SendXML(token, xml_content)
+    print("XML enviado para radicación")
+    return "OK"
+
+if __name__ == "__main__":
+    # Aquí cargaría su XML generado y firmado
+    enviar_xml("<xml>...</xml>")
+Paso 3: Crear el Dockerfile
+Cree un archivo llamado Dockerfile en la misma carpeta que app.py.
+dockerfile
+# Usa una imagen oficial de Python
+FROM python:3.9-slim
+
+# Establecer directorio de trabajo
+WORKDIR /app
+
+# Copiar archivos necesarios
+COPY requirements.txt .
+COPY app.py .
+COPY factura.xml .
+
+# Instalar dependencias (zeep para SOAP)
+RUN pip install --no-cache-dir requests zeep
+
+# Ejecutar la aplicación
+CMD ["python", "app.py"]
+Paso 4: Construir y Ejecutar el Contenedor
+Crear el archivo de requerimientos (requirements.txt):
+text
+requests
+zeep
+Construir la imagen:
+bash
+docker build -t dian-facturacion .
+Ejecutar el contenedor:
+bash
+docker run --rm dian-facturacion
+Resumen de puntos clave 
+DIAN
+DIAN
+ +1
+Firmado: El XML debe ser firmado con el certificado digital antes del envío.
+Asociación: Asegúrese de asociar el software en el portal DIAN (Facturando Electrónicamente -> Configuración -> Asociar modo de operación).
+WSDL: Use el WSDL de producción o habilitación según corresponda. 
+YouTube
+YouTube
+
+
+--ojoooooooooooo
+--ojkooooooooooooo
+
+ESTE LINK ES BUENO REVISAR
+https://loggro.com/blog/articulo/formato-xml-de-la-dian-para-facturacion-electronica-loggro/
+https://loggro.com/blog/articulo/sistema-tecnico-de-control-para-facturas-electronicas/
+https://loggro.com/blog/articulo/que-es-la-firma-electronica-aspectos-generales/
+https://loggro.com/blog/articulo/requisitos-para-la-factura-de-venta-segun-el-decreto-000040-de-2020/
+https://loggro.com/blog/articulo/diferencia-entre-codigo-qr-cude-y-cufe/
+https://loggro.com/blog/articulo/como-llenar-la-glosa-de-una-factura-electronica/
+https://loggro.com/blog/articulo/que-es-la-resolucion-de-facturacion-y-todo-lo-que-debes-saber/
+https://loggro.com/blog/articulo/comprobantes-electronicos-facturas-notas-credito-y-debito/
+https://loggro.com/blog/articulo/validacion-previa-criterios-de-aceptacion-y-rechazo-1/
+
+
+--ojoooooooooooooooooo
+--ojooooooooooooooooooo

@@ -1,0 +1,62 @@
+Este ejemplo en Python utiliza la biblioteca hashlib para generar el hash SHA-384, necesario para el CUFE (Código Único de Factura Electrónica) según el anexo técnico de la DIAN. Se construye una cadena ordenada con los datos de la factura, se calcula el hash y se genera un código QR, integrando todo en un XML básico. 
+DIAN
+DIAN
+ +3
+Prerrequisitos
+Necesitas instalar la biblioteca para generar códigos QR:
+bash
+pip install qrcode[pil]
+Código Completo Python
+python
+import hashlib
+import qrcode
+from lxml import etree
+from datetime import datetime
+
+# 1. Datos de la factura (ejemplo)
+data = {
+    "numFac": "SETT1", # Número de factura
+    "fecFac": datetime.now().strftime("%Y-%m-%d"), # Fecha AAAA-MM-DD
+    "horFac": datetime.now().strftime("%H:%M:%S-05:00"), # Hora con zona horaria
+    "valFac": "100000.00", # Valor total
+    "codImp1": "01", # IVA
+    "valImp1": "19000.00",
+    "codImp2": "04", # INC (si aplica, sino 0)
+    "valImp2": "0.00",
+    "nitOfe": "900123456", # NIT Emisor
+    "tipAdq": "1", # Tipo de adquirente
+    "nitAdq": "800987654", # NIT Adquirente
+    "clvTec": "AAA-BBB-CCC", # Clave técnica de la resolución
+    "tipFac": "01" # Tipo de factura (01=venta)
+}
+
+# 2. Generar la cadena para el CUFE (orden estricto según DIAN)
+# Formato: NumFac + FecFac + HorFac + ValFac + CodImp1 + ValImp1 + CodImp2 + ValImp2 ... + NitOfe + TipAdq + NitAdq + ClvTec + TipFac
+cadena_cufe = f"{data['numFac']}{data['fecFac']}{data['horFac']}{data['valFac']}{data['codImp1']}{data['valImp1']}{data['codImp2']}{data['valImp2']}{data['nitOfe']}{data['tipAdq']}{data['nitAdq']}{data['clvTec']}{data['tipFac']}"
+
+# 3. Calcular Hash SHA-384
+cufe = hashlib.sha384(cadena_cufe.encode('utf-8')).hexdigest()
+print(f"CUFE Generado: {cufe}")
+
+# 4. Generar Código QR
+# El QR contiene la URL de verificación de la DIAN + el CUFE
+url_qr = f"https://catalogo-vpfe.dian.gov.co/Document/Search?documentKey={cufe}"
+qr = qrcode.make(url_qr)
+qr.save("codigo_qr_factura.png")
+print("Código QR guardado como codigo_qr_factura.png")
+
+# 5. Crear XML básico (UBL 2.1)
+root = etree.Element("Invoice", xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2")
+# ... (Aquí se añadirían el resto de etiquetas UBL obligatorias)
+uuid = etree.SubElement(root, "{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID", schemeID="1", schemeName="CUFE-SHA384")
+uuid.text = cufe
+
+# Guardar XML
+tree = etree.ElementTree(root)
+tree.write("factura_electronica.xml", pretty_print=True, xml_declaration=True, encoding="UTF-8")
+print("XML generado: factura_electronica.xml")
+Puntos clave del proceso
+Cadena de texto: Es crucial el orden de los datos y el formato de fecha/hora, sin espacios intermedios ni separadores, según el anexo técnico de la DIAN.
+Hash SHA-384: Se usa `hashlib.sha384(cadena.encode 
+DIAN
+DIAN

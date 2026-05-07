@@ -79,3 +79,4 @@ pip install psqlextra
 pip install fpdf
 pip install PyPDF2
 pip install xmltodict
+pip3 install lxml
